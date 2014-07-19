@@ -12,8 +12,6 @@ src/fibe/MobileAppBundle/Resources/public/mobileApp/*
 */cache/*
 web/uploads/*
 !web/uploads/livecon.png
-web/bundles/*
-vendor/*
 
 # Symfony files
 app/config/parameters.yml
