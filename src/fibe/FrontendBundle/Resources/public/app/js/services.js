@@ -4,6 +4,7 @@
 
 var liveconServices = angular.module('liveconServices', ['ngResource']);
 
+/*
 liveconServices.factory('publicationFactory', ['$resource',
   function($resource){
     return $resource('/livecon.com/web/app_dev.php/api/schedule_paper.json?id=:publicationId', {}, {
@@ -37,16 +38,16 @@ liveconServices.factory('conferenceFactory', ['$resource',
        list: {method:'GET', url :'/livecon.com/web/app_dev.php/api/schedule_event.json?id=:conferenceId', params:{}, isArray:true}
     });
   }]);
-
+*/
 
 
 liveconServices.factory('organizationFactory', ['$resource',
   function($resource){
-    return $resource('../app_dev.php/apiREST/organizations/:organizationId.json', {}, {
+    return $resource(GLOBAL_CONFIG.api.urls.organizations+':organizationId.json', {}, {
       query: {method:'GET',  isArray:false},
-      create: {method:'POST', url :'../app_dev.php/apiREST/organizations.json', params:{}, isArray:false},
+      create: {method:'POST', url: GLOBAL_CONFIG.api.urls.organizations+'.json', params:{}, isArray:false},
       show: {method:'GET', isArray:false},
-      list: {method:'GET', url :'../app_dev.php/apiREST/organizations.json', params:{}, isArray:true}
+      list: {method:'GET', url: GLOBAL_CONFIG.api.urls.organizations+'.json', params:{}, isArray:true}
     });
   }]);
 
