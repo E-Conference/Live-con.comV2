@@ -39,14 +39,13 @@ liveconServices.factory('conferenceFactory', ['$resource',
   }]);
 
 
-
 liveconServices.factory('organizationFactory', ['$resource',
   function($resource){
-    return $resource('../app_dev.php/apiREST/organizations/:organizationId.json', {}, {
+    return $resource(GLOBAL_CONFIG.api.urls.organizations+':organizationId.json', {}, {
       query: {method:'GET',  isArray:false},
-      create: {method:'POST', url :'../app_dev.php/apiREST/organizations.json', params:{}, isArray:false},
+      create: {method:'POST', url: GLOBAL_CONFIG.api.urls.organizations+'.json', params:{}, isArray:false},
       show: {method:'GET', isArray:false},
-      list: {method:'GET', url :'../app_dev.php/apiREST/organizations.json', params:{}, isArray:true}
+      list: {method:'GET', url: GLOBAL_CONFIG.api.urls.organizations+'.json', params:{}, isArray:true}
     });
   }]);
 
