@@ -4,7 +4,6 @@
 
 var liveconServices = angular.module('liveconServices', ['ngResource']);
 
-/*
 liveconServices.factory('publicationFactory', ['$resource',
   function($resource){
     return $resource('/livecon.com/web/app_dev.php/api/schedule_paper.json?id=:publicationId', {}, {
@@ -38,7 +37,6 @@ liveconServices.factory('conferenceFactory', ['$resource',
        list: {method:'GET', url :'/livecon.com/web/app_dev.php/api/schedule_event.json?id=:conferenceId', params:{}, isArray:true}
     });
   }]);
-*/
 
 
 liveconServices.factory('organizationFactory', ['$resource',
