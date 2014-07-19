@@ -1,0 +1,51 @@
+{% extends 'fibeConferenceBundle::base.html.twig' %}
+
+{% block title %}Authorization edit{% endblock title %}
+
+{% block centerPanel %}
+  {{ parent() }}
+
+  <div class="row page-top-header ">
+    <div class="page-title col-xs-5  col-sm-4 col-md-3 col-lg-2">
+      <span>Edit team</span>
+      <a class="btn btn-info" href="{{ path('documentation', { 'anchor': 'Authorization' }) }}" title="Help">
+        <i class="fa fa-question"></i>
+      </a>
+    </div>
+
+    {# <div class=" col-xs-2 col-sm-4 col-md-6 col-lg-8">
+    </div>
+    <div class="page-btn-list  col-xs-5  col-sm-4 col-md-3 col-lg-2">
+    </div> #}
+  </div>
+  <div class="row page-content">
+
+    <h1>Edit <strong>{{ entity.username }}</strong>'s permissions</h1>
+
+    <form action="{{ path('conference_teamate_update', { 'id': entity.id }) }}"
+          method="post" {{ form_enctype(edit_form) }}>
+      <div class="form-horizontal">
+        {% for confPermission in edit_form.confPermissions %}
+          {% if confPermission.vars.value.restricted == false %}
+            <div class="form-group">
+              <label class="col-sm-2 control-label">{{ confPermission.vars.value.entityLabel }}</label>
+
+              <div class="col-sm-10 choiceList">
+                {{ form_widget(confPermission.action) }}
+              </div>
+            </div>
+            {{ form_rest(confPermission) }}
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="hide">
+        {{ form_rest(edit_form) }}
+      </div>
+      <br/>
+      <button type="submit" class="btn btn-block btn-success">
+        <i class="fa fa-check"></i>
+      </button>
+    </form>
+  </div>
+{% endblock %}

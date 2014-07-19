@@ -1,0 +1,108 @@
+fibe_rest:
+    resource: "@fibeRestBundle/Controller/"
+
+frontend:
+    resource: "@FrontendBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+documentation:
+    resource: "@DocumentationBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fibe_conference:
+    resource: "@fibeConferenceBundle/Controller/"
+    type:     annotation
+    prefix:   / 
+
+fibe_home_page:
+    resource: "@fibeHomePageBundle/Controller/"
+    type:     annotation
+    prefix:   / 
+
+fibe_mobile_app:
+    resource: "@fibeMobileAppBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fibe_dashboard:
+    resource: "@fibeDashboardBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fibe_www_conf:
+    resource: "@fibeWWWConfBundle/Controller/"
+    prefix:   /schedule
+
+fibe_data:
+    resource: "@DataBundle/Controller/"
+    prefix:   /data
+
+fibe_security_www_conf:
+    resource: "@fibeSecurityBundle/Controller/"
+    type:     annotation 
+
+idci_exporter:
+    resource: "../../vendor/idci/exporter-bundle/IDCI/Bundle/ExporterBundle/Controller"
+    type:     annotation
+
+login:
+    pattern:   /login
+    defaults:  { _controller: FOSUserBundle:Security:login }
+
+login_check:
+    pattern:   /login/login_check
+
+logout:
+    pattern:   /logout
+
+# fos_user_security:
+#     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_registration:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: user/register
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: user/
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: user/profile
+
+#HWIOAuthBundle routes
+hwi_oauth_security:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix: /login
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix: /login
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+google_login:
+    pattern: /login/check-google
+
+twitter_login:
+    pattern: /login/check-twitter
+
+facebook_login:
+    pattern: /login/check-facebook
+
+linkedin_login:
+    pattern: /login/check-linkedin
+
+#REST 
+rest : 
+  type : rest 
+  resource : "routing_rest.yml"
+  prefix : /apiREST

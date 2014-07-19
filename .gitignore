@@ -1,0 +1,23 @@
+# intellij files
+*.iml
+.idea
+
+#actually not working
+composer.lock
+
+src/fibe/MobileAppBundle/Resources/public/mobileApp/*
+
+# Symfony directories
+*/logs/*
+*/cache/*
+web/uploads/*
+!web/uploads/livecon.png
+web/bundles/*
+vendor/*
+
+# Symfony files
+app/config/parameters.yml
+app/bootstrap.php.cache
+
+# gedit temp file
+*~

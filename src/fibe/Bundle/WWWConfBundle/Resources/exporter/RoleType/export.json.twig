@@ -1,0 +1,4 @@
+{
+    "id"          : "{{ entity.id }}",
+    "name"       : {% if entity.name != null %}{{entity.name|json_encode|raw()}}{% else %}""{% endif %}
+}
