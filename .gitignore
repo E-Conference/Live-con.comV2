@@ -9,6 +9,7 @@ src/fibe/MobileAppBundle/Resources/public/mobileApp/*
 
 # Symfony directories
 */logs/*
+app/cache/*
 */cache/*
 web/uploads/*
 !web/uploads/livecon.png
