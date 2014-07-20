@@ -85,7 +85,7 @@ class Paper
   protected $topics;
 
   /**
-   * Events
+   * 
    * Events related to an paper
    *
    * @ORM\ManyToMany(targetEntity="VEvent", mappedBy="papers", cascade={"persist"})
@@ -93,13 +93,13 @@ class Paper
   protected $events;
 
   /**
-   *  Conference associated to this paper
+   *  MainEvent associated to this paper
    *
    * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="papers", cascade={"persist"})
-   * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
+   * @ORM\JoinColumn(name="mainEvent_id", referencedColumnName="id")
    *
    */
-  protected $conference;
+  protected $mainEvent;
 
   /**
    * @ORM\Column(type="string", length=256, nullable=true)

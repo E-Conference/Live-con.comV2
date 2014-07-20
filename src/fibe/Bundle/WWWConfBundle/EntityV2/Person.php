@@ -82,6 +82,14 @@ class Person
   protected $age;
 
   /**
+   * MainEvents own by a person
+   *
+   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", mappedBy="owner",cascade={"persist", "remove"})
+   *
+   */
+  private $owns;
+
+  /**
    * Paper
    * Paper made by this person
    *
@@ -92,13 +100,13 @@ class Person
   /**
    * Company
    *
-   * @ORM\ManyToMany(targetEntity="Company", inversedBy="company", cascade={"remove","persist","merge"})
+   * @ORM\ManyToMany(targetEntity="Company", inversedBy="members", cascade={"remove","persist","merge"})
    * @ORM\JoinTable(name="member",
    *     joinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id", onDelete="Cascade")})
    *     inverseJoinColumns={@ORM\JoinColumn(name="company_id", referencedColumnName="id", onDelete="Cascade")},
    * @Expose
    */
-  private $company;
+  private $companies;
 
   /**
    * openId
@@ -117,12 +125,15 @@ class Person
   private $roles;
 
   /**
-   *  Topics associated to this conference
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="persons", cascade={"persist"})
-   * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
+   * @TODO : Difference avec un utilisateur Livecon ? Peut appartenir a plusieurs main events
    *
+   * @ORM\ManyToMany(targetEntity="MainEvent", inversedBy="persons", cascade={"persist"})
+   * @ORM\JoinTable(name="mainevents_persons",
+   *     joinColumns={@ORM\JoinColumn(name="mainevent_id", referencedColumnName="id")},
+   *     inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")})
+   * @Expose
    */
-  protected $conference;
+  protected $mainEvents;
 
   /**
    *

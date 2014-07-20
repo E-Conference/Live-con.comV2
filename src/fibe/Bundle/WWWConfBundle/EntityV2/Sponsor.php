@@ -65,11 +65,11 @@ class Sponsor
 
   /**
    * Sponsors associated to this conference
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainConference", inversedBy="sponsor", cascade={"persist"})
-   * @ORM\JoinColumn(name="main_conference_id", referencedColumnName="id")
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\VEvent", inversedBy="sponsor", cascade={"persist"})
+   * @ORM\JoinColumn(name="mainEvent_id", referencedColumnName="id")
    *
    */
-  protected $conference;
+  protected $mainEvent;
 
   /**
    * Events

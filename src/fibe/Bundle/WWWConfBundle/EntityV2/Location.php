@@ -1,12 +1,5 @@
 <?php
 
-/**
- *
- * @author :  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
- * @licence: GPL
- *
- */
-
 namespace fibe\Bundle\WWWConfBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -76,21 +69,22 @@ class Location
   protected $longitude;
 
   /**
-   * @TODO EVENT : vers VEvent
    *
-   * @ORM\OneToMany(targetEntity="CalendarEntity", mappedBy="location")
+   * mainEvent
+   *
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="locations", cascade={"persist"})
+   * @ORM\JoinColumn(name="mainEvent_id", referencedColumnName="id")
    */
-  protected $calendarEntities;
+  private $mainEvent;
 
   /**
-   * @TODO EVENT : à relier à MainEvent
+   * VEvents
    *
-   * conference
-   *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\WwwConf", inversedBy="locations", cascade={"persist"})
-   * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
+   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\VEvent", mappedBy="location")
    */
-  private $conference;
+  protected $VEvents;
+
+  
 
   /**
    * Constructor

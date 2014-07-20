@@ -49,19 +49,19 @@ class Company
   protected $additionalInformation;
 
   /**
-   * @ORM\ManyToMany(targetEntity="Person",  mappedBy="organizations", cascade={"persist","merge","remove"})
+   * @ORM\ManyToMany(targetEntity="Person",  mappedBy="companies", cascade={"persist","merge","remove"})
    * @Expose
    */
   protected $members;
 
   /**
-   * Topics associated to this conference
+   * Company related to a mainEvent
    *
    * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\WwwConf", inversedBy="organizations", cascade={"persist"})
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    *
    */
-  protected $conference;
+  protected $mainEvent;
 
   /**
    * @ORM\Column(type="string", length=256, nullable=true)

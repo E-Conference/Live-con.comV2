@@ -5,9 +5,8 @@ namespace fibe\Bundle\WWWConfBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use fibe\Bundle\WWWConfBundle\Entity\Event;
-use fibe\Bundle\WWWConfBundle\Entity\Person;
-use fibe\Bundle\WWWConfBundle\Entity\Paper;
+use fibe\Bundle\WWWConfBundle\Entity\VEvent;
+
 
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
@@ -18,11 +17,11 @@ use fibe\Bundle\WWWConfBundle\Util\StringTools;
 
 
 /**
- * ConfEvent
+ * Event
  *
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\ConfEventRepository")
+ * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\EventRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class Event extends VEvent
@@ -30,7 +29,7 @@ class Event extends VEvent
   /**
    * The parent of the event
    *
-   * @ORM\ManyToOne(targetEntity="VEvent", inversedBy="children", cascade={"persist","detach"})
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Event", inversedBy="children", cascade={"persist","detach"})
    * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
    * @Expose
    */
@@ -39,55 +38,19 @@ class Event extends VEvent
   /**
    * The events who are children
    *
-   * @ORM\OneToMany(targetEntity="Event", mappedBy="parent", cascade={"persist"})
+   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Event", mappedBy="parent", cascade={"persist"})
    * @Expose
    */
   protected $children;
 
   /**
-   * conference
+   * Main Event
    *
-   * @TODO EVENT relier à MainEvent
-   *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\WwwConf", inversedBy="events", cascade={"persist"})
-   * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="events", cascade={"persist"})
+   * @ORM\JoinColumn(name="mainevent_id", referencedColumnName="id")
    * @Expose
    */
-  private $conference;
-
-  /**
-   * @TODO EVENT : à mettre ailleurs... au niveau du VEvent
-   *
-   * @ORM\ManyToMany(targetEntity="Paper", inversedBy="events", cascade={"persist"})
-   * @ORM\JoinTable(name="confEvent_paper",
-   *     joinColumns={@ORM\JoinColumn(name="confEvent_id", referencedColumnName="id")},
-   *     inverseJoinColumns={@ORM\JoinColumn(name="paper_id", referencedColumnName="id")})
-   * @Expose
-   */
-  private $papers;
-
-  /**
-   * @TODO EVENT : à mettre ailleurs... au niveau du VEvent
-   *
-   * @ORM\ManyToMany(targetEntity="Topic", inversedBy="events", cascade={"persist"})
-   * @ORM\JoinTable(name="confEvent_topic",
-   *     joinColumns={@ORM\JoinColumn(name="confEvent_id", referencedColumnName="id")},
-   *     inverseJoinColumns={@ORM\JoinColumn(name="topic_id", referencedColumnName="id")})
-   * @Expose
-   */
-  private $topics;
-
-  /**
-   * @TODO EVENT : à mettre ailleurs... au niveau du VEvent
-   *
-   * roles
-   * Persons related to an event
-   *
-   * @ORM\OneToMany(targetEntity="Role", mappedBy="event",cascade={"persist","remove"})
-   * @ORM\JoinColumn( onDelete="CASCADE")
-   * @Expose
-   */
-  private $roles;
+  private $mainEvent;
 
   /**
    * Is an all day event
@@ -106,15 +69,6 @@ class Event extends VEvent
   protected $acronym;
 
   /**
-   * @TODO EVENT : à SUPPRIMER !!!!
-   *
-   * Is it a main conf event ?
-   *
-   * @ORM\Column(name="is_mainConfEvent", type="boolean")
-   */
-  private $isMainConfEvent = false;
-
-  /**
    * @ORM\Column(type="string", length=128, nullable=true)
    */
   protected $slug;
@@ -127,6 +81,29 @@ class Event extends VEvent
    * @ORM\Column(name="is_instant", type="boolean")
    */
   protected $isInstant;
+
+
+  /**
+   * Papers presented at an event
+   *
+   * @ORM\ManyToMany(targetEntity="Paper", inversedBy="events", cascade={"persist"})
+   * @ORM\JoinTable(name="event_paper",
+   *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
+   *     inverseJoinColumns={@ORM\JoinColumn(name="paper_id", referencedColumnName="id")})
+   * @Expose
+   */
+  private $papers;
+
+  /**
+   * @ORM\ManyToMany(targetEntity="Topic", inversedBy="events", cascade={"persist"})
+   * @ORM\JoinTable(name="event_topic",
+   *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
+   *     inverseJoinColumns={@ORM\JoinColumn(name="topic_id", referencedColumnName="id")})
+   * @Expose
+   */
+  private $topics;
+
+
 
   /**
    * Constructor

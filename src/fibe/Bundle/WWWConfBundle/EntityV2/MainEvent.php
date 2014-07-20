@@ -6,92 +6,95 @@
   use Doctrine\ORM\Mapping as ORM;
   use Symfony\Component\Validator\Constraints as Assert;
 
+  use fibe\Bundle\WWWConfBundle\Entity\VEvent;
+
   use fibe\SecurityBundle\Entity\User;
   use fibe\Bundle\WWWConfBundle\Entity\MappingFile;
   use fibe\Bundle\WWWConfBundle\Util\StringTools;
 
   /**
-   * WwwConf entity
+   * Main Event entity
    *
    * @ORM\Entity
-   * @ORM\Table(name="conference")
-   * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\WwwConfRepository")
+   * @ORM\Table(name="Main_Event")
+   * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\MainEventRepository")
    * @ORM\HasLifecycleCallbacks
    */
-  class MainEvent
+  class MainEvent extends extends VEvent
   {
 
-    /** @TODO EVENT faire l'entity event */
-
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="id", type="integer")
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	private $id;
+	
+  /**
+   *  Owner of this mainEvent
+   *
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Person", inversedBy="own", cascade={"persist"})
+   * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
+   *
+   */
+    private $owner;
 
 	/**
 	 * events
 	 *
-	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\ConfEvent", mappedBy="conference",cascade={"persist", "remove"})
+	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Event", mappedBy="mainEvent",cascade={"persist", "remove"})
 	 */
 	private $events;
 
 	/**
-	 * locations
-	 *
-	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Location", mappedBy="conference",cascade={"persist", "remove"})
-	 */
+	* Locations
+	*
+	* @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Location", mappedBy="mainEvent",cascade={"persist", "remove"})
+	*/
 	private $locations;
-
-	/**
-	 * Papers
-	 *
-	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Paper", mappedBy="conference",cascade={"persist", "remove"})
-	 */
+    
+	
+	/** 
+	* Papers 
+	*
+	* @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Paper", mappedBy="mainEvent",cascade={"persist", "remove"})
+	*/
 	private $papers;
-
-	/**
-	 * Persons
-	 *
-	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Person", mappedBy="conference",cascade={"persist", "remove"})
-	 */
+    
+   /**
+   * 
+   * @ORM\ManyToMany(targetEntity="Person",  mappedBy="mainEvents", cascade={"persist","merge","remove"})
+   * @Expose
+   */
 	private $persons;
-
+    
 	/**
-	 * Roles
-	 *
-	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Role", mappedBy="conference",cascade={"persist", "remove"})
-	 */
+	* Roles
+	*
+	* @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Role", mappedBy="mainEvent",cascade={"persist", "remove"})
+	*/
 	private $roles;
-
+    
+	/** 
+	* Organizations
+	*
+	* @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Company", mappedBy="mainEvent",cascade={"persist", "remove"})
+	*/
+	private $company;
+    
 	/**
-	 * Topics
-	 *
-	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Organization", mappedBy="conference",cascade={"persist", "remove"})
-	 */
-	private $organizations;
-
-	/**
-	 * Topics
-	 *
-	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Topic", mappedBy="conference",cascade={"persist", "remove"})
-	 */
+	* Topics
+	*
+    * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Topic", mappedBy="mainEvent",cascade={"persist", "remove"})
+	*/
 	private $topics;
-
+    
 	/**
-	 * Sponsors
-	 *
-	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Sponsor", mappedBy="conference",cascade={"persist", "remove"})
-	 */
+	* Sponsors
+	*
+	* @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Sponsor", mappedBy="mainEvent",cascade={"persist", "remove"})
+	*/
 	private $sponsors;
+	
 
 	/**
 	 * confManager
 	 *
-	 * @ORM\ManyToMany(targetEntity="fibe\SecurityBundle\Entity\User", mappedBy="conferences",cascade={"persist"})
+	 * @ORM\ManyToMany(targetEntity="fibe\SecurityBundle\Entity\User", mappedBy="mainEvents",cascade={"persist"})
 	 */
 	private $confManagers;
 
@@ -103,13 +106,6 @@
 	private $team;
 
 	/**
-	 * Team
-	 *
-	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Category", mappedBy="conference",cascade={"persist", "remove"})
-	 */
-	private $categories;
-
-	/**
 	 * Mobile app configurations
 	 *
 	 * @ORM\OneToOne(targetEntity="fibe\MobileAppBundle\Entity\MobileAppConfig",cascade={"persist"}) 
@@ -119,9 +115,9 @@
 	/**
 	 * mappingFiles
 	 *
-	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MappingFile", mappedBy="conference",cascade={"persist", "remove"})
+	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEventSettings", mappedBy="mainEvent",cascade={"persist", "remove"})
 	 */
-	private $mappingFiles;
+	private $settings;
 
 	/**
 	 * @ORM\OneToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Module",cascade={ "remove"})
@@ -142,11 +138,6 @@
 	 * @ORM\Column(name="logoPath", type="string", length=255,nullable=true)
 	 */
 	private $logoPath;
-
-	/**
-	 * @ORM\OneToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\ConfEvent", cascade="remove")
-	 **/
-	private $mainConfEvent;
 
 	/**
 	 * @ORM\Column(type="string", length=256, nullable=true)

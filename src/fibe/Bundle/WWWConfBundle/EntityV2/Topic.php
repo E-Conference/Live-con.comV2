@@ -40,19 +40,20 @@ class Topic
   private $papers;
 
   /**
-   * events related to this topic
+   * Events related to this topic
    *
-   * @ORM\ManyToMany(targetEntity="VEvent", mappedBy="topics", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="Event", mappedBy="topics", cascade={"persist"})
    */
   private $events;
 
   /**
-   *  Topics associated to this conference
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\WwwConf", inversedBy="topics", cascade={"persist"})
-   * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
+   * Topics associated to this conference
+   *
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="topics", cascade={"persist"})
+   * @ORM\JoinColumn(name="mainEvent_id", referencedColumnName="id")
    *
    */
-  protected $conference;
+  protected $mainEvent;
 
   /**
    * @ORM\Column(type="string", length=128, nullable=true)

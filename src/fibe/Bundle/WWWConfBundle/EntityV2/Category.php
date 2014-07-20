@@ -1,12 +1,5 @@
 <?php
 
-/**
- *
- * @author :  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
- * @licence: GPL
- *
- */
-
 namespace fibe\Bundle\WWWConfBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -54,7 +47,9 @@ class Category
   private $calendarEntities;
 
   /**
-   * @TODO EVENT ==> Lier à main event
+   * @TODO EVENT ==> Lier à main event.
+   * Rmq: Noemalement plus de lien avec un evenemet principal
+   * puisque les categories seront ajoutés et globale
    *
    * @ORM\ManyToOne(targetEntity="MainEvent", inversedBy="categories")
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")

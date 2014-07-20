@@ -1,20 +1,22 @@
 <?php
-
-/**
- *
- * @author :  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
- * @licence: GPL
- *
- */
-
 namespace fibe\Bundle\WWWConfBundle\Entity;
+
+use fibe\Bundle\WWWConfBundle\Entity\Paper;
+use fibe\Bundle\WWWConfBundle\Entity\Topic;
+use fibe\Bundle\WWWConfBundle\Entity\Category;
+use fibe\Bundle\WWWConfBundle\Entity\Location;
+
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
- * This entity is based on the "VEVENT", "VTODO", "VJOURNAL" components
+ * This entity is based on the "VEVENT" components
  * describe in the RFC2445
  *
  * Purpose: Provide a grouping of component properties that describe
@@ -27,9 +29,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorMap({
- *     "locationAwareVEvent"="LocationAwareCalendarEntity",
- *     "event"="Event",
- *     "confEvent"="ConfEvent"
+ *     "Event"="Event",
+ *     "MainEvent"="MainEvent",
  * })
  */
 class VEvent
@@ -54,27 +55,6 @@ class VEvent
   protected $label;
 
   /**
-   * topic(topics)
-   *
-   * @ORM\ManyToMany(targetEntity="Topic", inversedBy="topics", cascade={"persist"})
-   * @ORM\JoinTable(name="v_event_topic",
-   *     joinColumns={@ORM\JoinColumn(name="v_event_id", referencedColumnName="id", onDelete="Cascade")},
-   *     inverseJoinColumns={@ORM\JoinColumn(name="topic_id", referencedColumnName="id", onDelete="Cascade")})
-   */
-  protected $topics;
-
-  /**
-   * created
-   *
-   * This property specifies the date and time that the calendar
-   * information was created by the calendar user agent in the calendar
-   * store.
-   *
-   * @ORM\Column(type="datetime", name="created_at")
-   */
-  protected $createdAt;
-
-  /**
    * dtstart
    *
    * This property specifies when the calendar component begins.
@@ -94,21 +74,11 @@ class VEvent
   protected $endAt;
 
   /**
-   * last-mod
-   *
-   * The property specifies the date and time that the
-   * information associated with the calendar component was last revised
-   * in the calendar store.
-   *
-   * @ORM\Column(type="datetime", name="last_modified_at")
-   */
-  protected $lastModifiedAt;
-
-  /**
    * summary
    *
    * This property defines a short summary or subject for the
    * calendar component.
+   * !!!!!! Summary = label ?
    *
    * @ORM\Column(type="string", length=255, nullable=true)
    */
@@ -135,16 +105,6 @@ class VEvent
   protected $comment;
 
   /**
-   * url
-   *
-   * This property defines a Uniform Resource Locator (URL)
-   * associated with the iCalendar object.
-   *
-   * @ORM\Column(type="string", length=255, nullable=true)
-   */
-  protected $url;
-
-  /**
    * organizer
    *
    * Purpose: The property defines the organizer for a calendar component.
@@ -161,7 +121,7 @@ class VEvent
   protected $organizer;
 
   /**
-   * seq
+   * sequence
    *
    * This property defines the revision sequence number of the
    * calendar component within a sequence of revisions.
@@ -238,7 +198,7 @@ class VEvent
    *
    * ==>
    * @TODO EVENT : à réfléchir... Ne pas persister en base, mais déduire
-   * la propriété de manière logiqu avec la table atendee
+   * la propriété de manière logiqu avec la table attendee
    * <==
    */
   protected $contacts;
@@ -263,14 +223,10 @@ class VEvent
   /**
    * status
    *
-   *
-   *
    * @ORM\Column(type="string", length=32)
    * @Assert\Choice(choices = {"CANCELLED","CONFIRMED","TENTATIVE"}, message = "Choose a valid status.")
    */
   protected $status;
-
-
 
   /**
    * priority
@@ -291,9 +247,8 @@ class VEvent
   /**
    * location
    *
-   * @TODO EVENT : à mettre en ManyToMany, à réfléchir
    *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Location", inversedBy="VEvent")
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Location", inversedBy="VEvents")
    * @ORM\JoinColumn(name="location_id", referencedColumnName="id", onDelete="Set Null")
    */
   protected $location;
@@ -303,16 +258,69 @@ class VEvent
    *
    * This property defines the categories for a calendar component.
    *
-   *
    * @TODO EVENT : à mettre en ManyToOne, à réfléchir
    *
-   * @ORM\ManyToMany(targetEntity="Category", inversedBy="VEvent", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="Category", inversedBy="VEvents", cascade={"persist"})
    * @ORM\JoinTable(name="event_category",
    *     joinColumns={@ORM\JoinColumn(name="entity_id", referencedColumnName="id", onDelete="Cascade")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="Cascade")}
    * )
    */
   protected $categories;
+
+  /**
+   * Persons related to an event according to a role
+   *
+   * @ORM\OneToMany(targetEntity="Role", mappedBy="VEvents",cascade={"persist","remove"})
+   * @ORM\JoinColumn( onDelete="CASCADE")
+   * @Expose
+   */
+  private $roles;
+
+
+  /**
+   * Sponsors related to a VEvent
+   *
+   * @ORM\OneToMany(targetEntity="Sponsor", mappedBy="VEvents",cascade={"persist","remove"})
+   * @ORM\JoinColumn( onDelete="CASCADE")
+   * @Expose
+   */
+  private $sponsors;
+
+   /**
+   * url
+   *
+   * This property defines a Uniform Resource Locator (URL)
+   * associated with the iCalendar object.
+   *
+   * @ORM\Column(type="string", length=255, nullable=true)
+   */
+  protected $url;
+
+
+  /**
+   * created_at
+   *
+   * This property specifies the date and time that the calendar
+   * information was created by the calendar user agent in the calendar
+   * store.
+   *
+   * @ORM\Column(type="datetime", name="created_at")
+   */
+  protected $createdAt;
+
+   /**
+   * modified_at
+   *
+   * The property specifies the date and time that the
+   * information associated with the calendar component was last revised
+   * in the calendar store.
+   *
+   * @ORM\Column(type="datetime", name="modified_at")
+   */
+  protected $modifiedAt;
+
+
 
   /**
    * toString
