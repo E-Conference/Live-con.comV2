@@ -46,6 +46,16 @@
     
     <!-- <script src="{{ asset('bundles/frontend/app/js/animations.js') }}"></script> -->
 
+    <!-- community client app assets -->
+    <script src="{{ asset('bundles/frontend/app/modules/community/js/controllers.js') }}"></script>
+    <script src="{{ asset('bundles/frontend/app/modules/community/js/routes.js') }}"></script>
+    <script src="{{ asset('bundles/frontend/app/modules/community/js/services.js') }}"></script>
+
+    <!-- organization client app assets -->
+    <script src="{{ asset('bundles/frontend/app/modules/organization/js/services.js') }}"></script>
+    <script src="{{ asset('bundles/frontend/app/modules/organization/js/controllers.js') }}"></script>
+    <script src="{{ asset('bundles/frontend/app/modules/organization/js/routes.js') }}"></script>
+
     <!-- basic client app context definition -->
     <script>
         var globalConfig = {
@@ -61,12 +71,17 @@
                     img: "{{ asset('bundles/frontend/app/img') }}"
                 },
                 modules: {
-
+                    organization: {
+                        urls: {
+                            base: "{{ asset('bundles/frontend/app/modules/organization/') }}",
+                            partials: "{{ asset('bundles/frontend/app/modules/organization/partials/') }}",
+                            img: "{{ asset('bundles/frontend/app/modules/organization/img') }}"
+                        }
+                    }
                 }
             },
             language: 'EN'
         };
-        console.log(globalConfig);
         angular.module('liveconApp').value('GLOBAL_CONFIG', globalConfig);
     </script>
     {% endjavascripts %}

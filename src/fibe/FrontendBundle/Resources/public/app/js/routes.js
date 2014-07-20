@@ -30,24 +30,28 @@ liveconApp.config(['$routeProvider',
             when('/speaker/:personId', {
                 templateUrl: globalConfig.app.urls.partials+'person/person-detail.html',
                 controller: 'personCtrl'
-            }).
-            when('/organizations', {
-                templateUrl: globalConfig.app.urls.partials+'organization/organization-list.html',
-                controller: 'organizationsCtrl'
-            }).
-            when('/organization/show/:organizationId', {
+            })
+
+            .when('/organization/', {
+                redirectTo: '/organization/list'
+                //templateUrl: globalConfig.app.modules.organization.urls.partials+'organization-list.html'
+                //, controller: 'organizationMainCtrl'
+            })
+            /*
+            .when('/organization/show/:organizationId', {
                 templateUrl: globalConfig.app.urls.partials+'organization/organization-show.html',
                 controller: 'organizationCtrl'
-            }).
-            when('/organization/edit/:organizationId', {
+            })
+            .when('/organization/edit/:organizationId', {
                 templateUrl: globalConfig.app.urls.partials+'organization/organization-edit.html',
                 controller: 'organizationCtrl'
-            }).
-            when('/organization/new', {
+            })
+            .when('/organization/new', {
                 templateUrl: globalConfig.app.urls.partials+'organization/organization-new.html',
                 controller: 'organizationCtrl'
-            }).
-            when('/widget/hightlight', {
+            })
+            */
+            .when('/widget/hightlight', {
                 templateUrl: globalConfig.app.urls.partials+'widget/hightlight.html',
                 controller: 'widgetCtrl'
             }).
