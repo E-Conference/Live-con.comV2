@@ -8,34 +8,42 @@
 
     <title>livecon app'</title>
 
-    <!-- included styles -->
-    <link rel="stylesheet" href="{{ asset('bundles/frontend/app/css/bootstrap-combined.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('bundles/frontend/app/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('bundles/frontend/app/css/loading-bar.css') }}">
-    <link rel="stylesheet" href="{{ asset('bundles/frontend/app/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('bundles/frontend/app/css/animations.css') }}">
+    {% stylesheets 'bundles/frontend/app/css/bootstrap-combined.min.css' 
+                   'bundles/frontend/app/css/bootstrap.min.css' 
+                   'bundles/frontend/app/css/loading-bar.css' 
+                   'bundles/frontend/app/css/app.css' 
+                   'bundles/frontend/app/css/animations.css' 
+                    output='css/compiled/vendors.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    {% endstylesheets %}
 
+   
     <!-- included vendors -->
-    <script src="{{ asset('bundles/frontend/vendors/jquery.min.js') }}"></script>
-    <script src="{{ asset('bundles/frontend/vendors/angular.js') }}"></script>
-    <script src="{{ asset('bundles/frontend/vendors/angular-resource.js') }}"></script>
-    <script src="{{ asset('bundles/frontend/vendors/angular-route.js') }}"></script>
-    <script src="{{ asset('bundles/frontend/vendors/angular-animate.min.js') }}"></script>
-    <script src="{{ asset('bundles/frontend/vendors/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('bundles/frontend/vendors/ui-bootstrap-tpls.min.js') }}"></script>
-    <script src="{{ asset('bundles/frontend/vendors/angular-ui-router.min.js') }}"></script>
-    <script src="{{ asset('bundles/frontend/vendors/draganddrop.js') }}"></script>
-    <script src="{{ asset('bundles/frontend/vendors/loading-bar.js') }}"></script>
-    <script src="{{ asset('bundles/frontend/vendors/loadingBarModule.js') }}"></script>
+    {% javascripts 'bundles/frontend/vendors/jquery.min.js'
+               'bundles/frontend/vendors/angular.js'
+               'bundles/frontend/vendors/angular-resource.js'
+               'bundles/frontend/vendors/angular-route.js'
+               'bundles/frontend/vendors/angular-animate.min.js'
+               'bundles/frontend/vendors/bootstrap.min.js'
+               'bundles/frontend/vendors/ui-bootstrap-tpls.min.js' 
+               'bundles/frontend/vendors/angular-ui-router.min.js' 
+               'bundles/frontend/vendors/draganddrop.js' 
+               'bundles/frontend/vendors/loading-bar.js' 
+               'bundles/frontend/vendors/loadingBarModule.js'  output='js/compiled/main.js'%}
+        <script src="{{ asset_url }}" type="text/javascript"></script>
+    {% endjavascripts %}
 
     <!-- common client app assets -->
-    <script src="{{ asset('bundles/frontend/app/js/app.js') }}"></script>
-    <script src="{{ asset('bundles/frontend/app/js/controllers.js') }}"></script>
-    <script src="{{ asset('bundles/frontend/app/js/directives.js') }}"></script>
-    <script src="{{ asset('bundles/frontend/app/js/routes.js') }}"></script>
-    <script src="{{ asset('bundles/frontend/app/js/services.js') }}"></script>
-    <script src="{{ asset('bundles/frontend/app/js/filters.js') }}"></script>
+    {% javascripts 'bundles/frontend/app/js/app.js'
+               'bundles/frontend/app/js/controllers.js'
+               'bundles/frontend/app/js/directives.js'
+               'bundles/frontend/app/js/routes.js'
+               'bundles/frontend/app/js/services.js'
+               'bundles/frontend/app/js/filters.js' output='js/compiled/app.js'%}
+        <script src="{{ asset_url }}" type="text/javascript"></script>
+   
+    
     <!-- <script src="{{ asset('bundles/frontend/app/js/animations.js') }}"></script> -->
 
     <!-- basic client app context definition -->
@@ -61,7 +69,7 @@
         console.log(globalConfig);
         angular.module('liveconApp').value('GLOBAL_CONFIG', globalConfig);
     </script>
-
+    {% endjavascripts %}
 </head>
 
 <body ng-controller="mainCtrl">
