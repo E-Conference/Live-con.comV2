@@ -1,14 +1,21 @@
 'use strict';
 
-/* App Module */
+/* sub modules */
+angular.module('communityApp', []);
+angular.module('organizationApp', []);
 
+/* App Module */
 var liveconApp = angular.module('liveconApp', [
-  'ngRoute',
-  'ngAnimate',
-  'angular-loading-bar',
-  'liveconControllers',
-  'liveconFilters',
-  'liveconServices'
+    'ngRoute',
+    'ngAnimate',
+    'ngResource',
+    'ui.bootstrap',
+    'ngDragDrop',
+    'angular-loading-bar',
+    'liveconControllers',
+    'liveconFilters',
+    'liveconServices',
+    'organizationApp'
 ]);
 
 
