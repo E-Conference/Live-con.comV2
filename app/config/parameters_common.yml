@@ -1,4 +1,14 @@
 parameters: 
+
+
+    routing_dev_file:  routing_dev.yml
+
+    locale:            en
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    bootstrap_source:  http://twitter.github.com/bootstrap/assets/bootstrap.zip
+    max_per_page:      20
+
     session.storage.filesystem.class: fibe\RestBundle\Session\Storage
 
     # social account

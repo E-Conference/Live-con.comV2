@@ -1,5 +1,12 @@
 <?php
 
+/**
+ *
+ * @author :  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
+ * @licence: GPL
+ *
+ */
+
 namespace fibe\Bundle\WWWConfBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -20,27 +27,22 @@ class Location
   protected $id;
 
   /**
-   * @ORM\Column(type="string", length=255)
+   * @ORM\Column(type="string", length=128)
    */
-  protected $label;
+  protected $name;
 
   /**
-   * Capacity to welcome atendees
-   *
    * @ORM\Column(type="integer", nullable=true)
    */
   protected $capacity;
 
   /**
-   * Equipments who are in the location
    *
    * @ORM\ManyToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Equipment")
    */
   protected $equipments;
 
   /**
-   * Description of the location
-   *
    * @ORM\Column(type="text", nullable=true)
    */
   protected $description;
@@ -69,22 +71,17 @@ class Location
   protected $longitude;
 
   /**
-   *
-   * mainEvent
-   *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="locations", cascade={"persist"})
-   * @ORM\JoinColumn(name="mainEvent_id", referencedColumnName="id")
+   * @ORM\OneToMany(targetEntity="CalendarEntity", mappedBy="location")
    */
-  private $mainEvent;
+  protected $calendarEntities;
 
   /**
-   * VEvents
+   * conference
    *
-   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\VEvent", mappedBy="location")
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\WwwConf", inversedBy="locations", cascade={"persist"})
+   * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    */
-  protected $VEvents;
-
-  
+  private $conference;
 
   /**
    * Constructor
@@ -100,7 +97,7 @@ class Location
    */
   public function __toString()
   {
-    return $this->getLabel();
+    return $this->getName();
   }
 
   /**
@@ -130,9 +127,9 @@ class Location
    *
    * @return Location
    */
-  public function setLabel($label)
+  public function setName($name)
   {
-    $this->label = $label;
+    $this->name = $name;
 
     return $this;
   }
@@ -142,9 +139,9 @@ class Location
    *
    * @return string
    */
-  public function getLabel()
+  public function getName()
   {
-    return $this->label;
+    return $this->name;
   }
 
   /** Set capacity
@@ -241,7 +238,7 @@ class Location
   {
     return $this->longitude;
   }
-/*** @TODO EVENT ===> A RELIER à DES VEvent **/
+
   /**
    * Add locationAwareCalendarEntities
    *
@@ -275,7 +272,6 @@ class Location
   {
     return $this->locationAwareCalendarEntities;
   }
-/*** @TODO EVENT ===> A RELIER à DES VEvent **/
 
   /**
    * Add Equipment

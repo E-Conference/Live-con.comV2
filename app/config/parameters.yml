@@ -12,11 +12,3 @@ parameters:
     mailer_host:       smtp.gmail.com
     mailer_username:   flepeutrec
     mailer_password:   31051989
-
-    routing_dev_file:  routing_dev.yml
-
-    locale:            en
-    secret:            ThisTokenIsNotSoSecretChangeIt
-
-    bootstrap_source:  http://twitter.github.com/bootstrap/assets/bootstrap.zip
-    max_per_page:      20

@@ -28,11 +28,12 @@ class Paper
   private $id;
 
   /**
-   * label (or title of the paper)
+   * title
    *
-   * @ORM\Column(type="string")
+   *
+   * @ORM\Column(type="string", name="title")
    */
-  private $label;
+  private $title;
 
   /**
    * abstract
@@ -45,7 +46,8 @@ class Paper
   /**
    * url
    *
-   * @ORM\Column(type="string", nullable=true)
+   *
+   * @ORM\Column(type="string", nullable=true, name="url")
    */
   private $url;
 
@@ -63,12 +65,14 @@ class Paper
   /**
    * publisher
    *
+   *
    * @ORM\Column(type="string", nullable=true, name="publisher")
    */
   private $publisher;
 
   /**
    * publishDate
+   *
    *
    * @ORM\Column(type="string", nullable=true, name="publishDate")
    */
@@ -85,21 +89,20 @@ class Paper
   protected $topics;
 
   /**
-   * 
+   * confEvents
    * Events related to an paper
    *
-   * @ORM\ManyToMany(targetEntity="VEvent", mappedBy="papers", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="ConfEvent", mappedBy="papers", cascade={"persist"})
    */
   protected $events;
 
   /**
-   *  MainEvent associated to this paper
-   *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="papers", cascade={"persist"})
-   * @ORM\JoinColumn(name="mainEvent_id", referencedColumnName="id")
+   *  Conference associated to this paper
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\WwwConf", inversedBy="papers", cascade={"persist"})
+   * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    *
    */
-  protected $mainEvent;
+  protected $conference;
 
   /**
    * @ORM\Column(type="string", length=256, nullable=true)
@@ -123,7 +126,7 @@ class Paper
    */
   public function __toString()
   {
-    return $this->label;
+    return $this->title;
   }
 
   /**
@@ -132,7 +135,7 @@ class Paper
    */
   public function slugify()
   {
-    $this->setSlug(StringTools::slugify($this->getId() . $this->getLabel()));
+    $this->setSlug(StringTools::slugify($this->getId() . $this->getTitle()));
   }
 
   /**
@@ -183,27 +186,27 @@ class Paper
   }
 
   /**
-   * Set label
+   * Set title
    *
-   * @param string $label
+   * @param string $title
    *
    * @return Paper
    */
-  public function setLabel($label)
+  public function setTitle($title)
   {
-    $this->label = $label;
+    $this->title = $title;
 
     return $this;
   }
 
   /**
-   * Get label
+   * Get title
    *
    * @return string
    */
-  public function getLabel()
+  public function getTitle()
   {
-    return $this->label;
+    return $this->title;
   }
 
   /**

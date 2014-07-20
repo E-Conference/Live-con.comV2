@@ -35,7 +35,7 @@ class Role
   private $id;
 
   /**
-   * Person
+   *
    * @ORM\ManyToOne(targetEntity="Person", inversedBy="roles")
    * @Assert\NotBlank(message="You have to choose a Person")
    *
@@ -43,14 +43,14 @@ class Role
   private $person;
 
   /**
-   * VEvent
+   * Event
    * Persons related to an event
-   * @ORM\ManyToOne(targetEntity="VEvent", inversedBy="roles")
-   * @ORM\JoinColumn(name="vevent_id", referencedColumnName="id")
+   * @ORM\ManyToOne(targetEntity="ConfEvent", inversedBy="roles")
+   * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
    * @Assert\NotBlank(message="You have to choose an event")
    *
    */
-  private $VEvent;
+  private $event;
 
   /**
    * @ORM\ManyToOne(targetEntity="RoleType", inversedBy="roles")
@@ -60,11 +60,11 @@ class Role
 
   /**
    *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="roles", cascade={"persist"})
-   * @ORM\JoinColumn(name="mainEvent_id", referencedColumnName="id")
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\WwwConf", inversedBy="roles", cascade={"persist"})
+   * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    *
    */
-  private $mainEvent;
+  private $conference;
 
   /**
    * Get id

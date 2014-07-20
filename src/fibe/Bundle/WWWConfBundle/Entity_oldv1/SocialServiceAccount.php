@@ -41,7 +41,9 @@ class SocialServiceAccount
 
   /**
    *
-   * @TODO SOCIAL : Mettre en place une enum
+   * @ORM\ManyToOne(targetEntity="SocialService", inversedBy="accounts")
+   * @ORM\JoinColumn(name="socialService_id", referencedColumnName="id")
+   *
    */
   protected $socialService;
 

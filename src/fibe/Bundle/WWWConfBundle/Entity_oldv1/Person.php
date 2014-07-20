@@ -34,22 +34,13 @@ class Person
   protected $id;
 
   /**
-   * Additional Infomations of the company
-   *
-   * @ORM\OneToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\AddtionalInformations", cascade={"persist", "remove"})
-   * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id", onDelete="CASCADE")
-   *
-   */
-  protected $additionalInformation;
-
-  /**
-   * label
-   * Name of the person (Family Name + FirstName)
-   * 
-   * @ORM\Column(type="string")
+   * name
+   * A name for some thing. Name of the person
+   * / ! \  auto built with the concatenation of first and last name
+   * @ORM\Column(type="string", name="name")
    * @Expose
    */
-  protected $label;
+  protected $name;
 
   /**
    * familyName
@@ -66,6 +57,13 @@ class Person
   protected $firstName;
 
   /**
+   * based_near
+   * @ORM\Column(type="string", nullable=true,  name="based_near")
+   * @Expose
+   */
+  protected $based_near;
+
+  /**
    * description
    *
    * @ORM\Column(type="string", length=1024, nullable=true, name="description")
@@ -76,18 +74,11 @@ class Person
   /**
    * age
    *
+   *
    * @ORM\Column(type="integer", nullable=true,  name="age")
    * @Expose
    */
   protected $age;
-
-  /**
-   * MainEvents own by a person
-   *
-   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", mappedBy="owner",cascade={"persist", "remove"})
-   *
-   */
-  private $owns;
 
   /**
    * Paper
@@ -98,15 +89,23 @@ class Person
   private $papers;
 
   /**
-   * Company
+   * Organizations
    *
-   * @ORM\ManyToMany(targetEntity="Company", inversedBy="members", cascade={"remove","persist","merge"})
+   *
+   * @ORM\ManyToMany(targetEntity="Organization", inversedBy="members", cascade={"remove","persist","merge"})
    * @ORM\JoinTable(name="member",
    *     joinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id", onDelete="Cascade")})
-   *     inverseJoinColumns={@ORM\JoinColumn(name="company_id", referencedColumnName="id", onDelete="Cascade")},
+   *     inverseJoinColumns={@ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="Cascade")},
    * @Expose
    */
-  private $companies;
+  private $organizations;
+
+  /**
+   * img
+   *
+   * @ORM\Column(type="string", nullable=true,  name="img")
+   */
+  protected $img;
 
   /**
    * openId
@@ -125,15 +124,36 @@ class Person
   private $roles;
 
   /**
-   * @TODO : Difference avec un utilisateur Livecon ? Peut appartenir a plusieurs main events
+   *  Topics associated to this conference
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\WwwConf", inversedBy="persons", cascade={"persist"})
+   * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    *
-   * @ORM\ManyToMany(targetEntity="MainEvent", inversedBy="persons", cascade={"persist"})
-   * @ORM\JoinTable(name="mainevents_persons",
-   *     joinColumns={@ORM\JoinColumn(name="mainevent_id", referencedColumnName="id")},
-   *     inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")})
-   * @Expose
    */
-  protected $mainEvents;
+  protected $conference;
+
+  /**
+   * email
+   *
+   *
+   * @ORM\Column(type="string", nullable=true,  name="email")
+   */
+  protected $email;
+
+  /**
+   * emailSha1
+   *
+   *
+   * @ORM\Column(type="string", nullable=true,  name="emailSha1")
+   */
+  protected $emailSha1;
+
+  /**
+   * page
+   * person's homepage url
+   *
+   * @ORM\Column(type="string", length=255, nullable=true, name="page")
+   */
+  protected $page;
 
   /**
    *
@@ -165,7 +185,7 @@ class Person
    */
   public function __toString()
   {
-    return $this->label;
+    return $this->name;
 
   }
 
@@ -175,9 +195,9 @@ class Person
    * @ORM\PrePersist()
    * @ORM\PreUpdate()
    */
-  public function computeLabel()
+  public function computeName()
   {
-    $this->setLabel($this->firstName . " " . $this->familyName);
+    $this->setName($this->firstName . " " . $this->familyName);
   }
 
   /**
@@ -186,7 +206,7 @@ class Person
    */
   public function slugify()
   {
-    $this->setSlug(StringTools::slugify($this->getId() . $this->getLabel()));
+    $this->setSlug(StringTools::slugify($this->getId() . $this->getName()));
   }
 
   /**
@@ -237,27 +257,27 @@ class Person
   }
 
   /**
-   * Set label
+   * Set name
    *
-   * @param string $label
+   * @param string $name
    *
    * @return Person
    */
-  public function setLabel($label)
+  public function setName($name)
   {
-    $this->label = $label;
+    $this->name = $name;
 
     return $this;
   }
 
   /**
-   * Get label
+   * Get name
    *
    * @return string
    */
-  public function getlabel()
+  public function getName()
   {
-    return $this->label;
+    return $this->name;
   }
 
   /**
@@ -309,6 +329,30 @@ class Person
   }
 
   /**
+   * Set based_near
+   *
+   * @param string $basedNear
+   *
+   * @return Person
+   */
+  public function setBasedNear($basedNear)
+  {
+    $this->based_near = $basedNear;
+
+    return $this;
+  }
+
+  /**
+   * Get based_near
+   *
+   * @return string
+   */
+  public function getBasedNear()
+  {
+    return $this->based_near;
+  }
+
+  /**
    * Set description
    *
    * @param string $description
@@ -357,6 +401,30 @@ class Person
   }
 
   /**
+   * Set img
+   *
+   * @param string $img
+   *
+   * @return Person
+   */
+  public function setImg($img)
+  {
+    $this->img = $img;
+
+    return $this;
+  }
+
+  /**
+   * Get img
+   *
+   * @return string
+   */
+  public function getImg()
+  {
+    return $this->img;
+  }
+
+  /**
    * Set openId
    *
    * @param string $openId
@@ -378,6 +446,79 @@ class Person
   public function getOpenId()
   {
     return $this->openId;
+  }
+
+  /**
+   * Set email
+   *
+   * @param string $email
+   *
+   * @return Person
+   */
+  public function setEmail($email)
+  {
+    $this->email = $email;
+    $this->emailSha1 = sha1("mailto:" . $email);
+
+    return $this;
+  }
+
+  /**
+   * Get email
+   *
+   * @return string
+   */
+  public function getEmail()
+  {
+    return $this->email;
+  }
+
+  /**
+   * Set emailSha1
+   *
+   * @param string $emailSha1
+   *
+   * @return Person
+   */
+  public function setEmailSha1($emailSha1)
+  {
+    $this->emailSha1 = $emailSha1;
+
+    return $this;
+  }
+
+  /**
+   * Get emailSha1
+   *
+   * @return string
+   */
+  public function getEmailSha1()
+  {
+    return $this->emailSha1;
+  }
+
+  /**
+   * Set page
+   *
+   * @param string $page
+   *
+   * @return Person
+   */
+  public function setPage($page)
+  {
+    $this->page = $page;
+
+    return $this;
+  }
+
+  /**
+   * Get page
+   *
+   * @return string
+   */
+  public function getPage()
+  {
+    return $this->page;
   }
 
   /**
@@ -415,37 +556,37 @@ class Person
   }
 
   /**
-   * Add company
+   * Add organizations
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Organization $company
+   * @param \fibe\Bundle\WWWConfBundle\Entity\Organization $organizations
    *
    * @return Person
    */
-  public function addOrganization(\fibe\Bundle\WWWConfBundle\Entity\Organization $company)
+  public function addOrganization(\fibe\Bundle\WWWConfBundle\Entity\Organization $organizations)
   {
-    $this->company[] = $company;
+    $this->organizations[] = $organizations;
 
     return $this;
   }
 
   /**
-   * Remove company
+   * Remove organizations
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Organization $company
+   * @param \fibe\Bundle\WWWConfBundle\Entity\Organization $organizations
    */
-  public function removeOrganization(\fibe\Bundle\WWWConfBundle\Entity\Organization $company)
+  public function removeOrganization(\fibe\Bundle\WWWConfBundle\Entity\Organization $organizations)
   {
-    $this->company->removeElement($company);
+    $this->organizations->removeElement($organizations);
   }
 
   /**
-   * Get company
+   * Get organizations
    *
    * @return \Doctrine\Common\Collections\Collection
    */
-  public function getCompany()
+  public function getOrganizations()
   {
-    return $this->company;
+    return $this->organizations;
   }
 
   /**

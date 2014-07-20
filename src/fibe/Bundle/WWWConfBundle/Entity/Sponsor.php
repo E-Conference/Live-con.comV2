@@ -10,7 +10,7 @@ use fibe\Bundle\WWWConfBundle\Util\StringTools;
 
 
 /**
- * This entity define a topic
+ * This entity define a sponsor
  *
  * @ORM\Table(name="sponsor")
  * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\SponsorRepository")
@@ -29,23 +29,9 @@ class Sponsor
   /**
    * Name of the sponsor
    *
-   * @ORM\Column(type="string", name="name")
+   * @ORM\Column(type="string")
    */
-  protected $name;
-
-  /**
-   * Url of the sponsor
-   *
-   * @ORM\Column(type="string", nullable=true, name="url")
-   */
-  protected $url;
-
-  /**
-   * Message to display for the sponsor
-   *
-   * @ORM\Column(type="string", nullable=true, name="message")
-   */
-  protected $description;
+  protected $label;
 
   /**
    * @var UploadedFile
@@ -67,12 +53,31 @@ class Sponsor
   protected $slug;
 
   /**
+   * Company
+   *
+   * @ORM\OneToMany(targetEntity="Company", inversedBy="company", cascade={"remove","persist","merge"})
+   * @ORM\JoinTable(name="company",
+   *     joinColumns={@ORM\JoinColumn(name="sponsor_id", referencedColumnName="id", onDelete="Cascade")})
+   *     inverseJoinColumns={@ORM\JoinColumn(name="company_id", referencedColumnName="id", onDelete="Cascade")},
+   * @Expose
+   */
+  private $company;
+
+  /**
    * Sponsors associated to this conference
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\WwwConf", inversedBy="sponsors", cascade={"persist"})
-   * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\VEvent", inversedBy="sponsor", cascade={"persist"})
+   * @ORM\JoinColumn(name="mainEvent_id", referencedColumnName="id")
    *
    */
-  protected $conference;
+  protected $mainEvent;
+
+  /**
+   * Events
+   * Events related to an paper
+   *
+   * @ORM\ManyToMany(targetEntity="VEvent", mappedBy="papers", cascade={"persist"})
+   */
+  protected $events;
 
   /**
    * Constructor
@@ -89,7 +94,7 @@ class Sponsor
    */
   public function __toString()
   {
-    return $this->name;
+    return $this->label;
   }
 
   /**
@@ -97,7 +102,7 @@ class Sponsor
    */
   public function slugify()
   {
-    $this->setSlug(StringTools::slugify($this->getId() . $this->getName()));
+    $this->setSlug(StringTools::slugify($this->getId() . $this->getLabel()));
   }
 
   /**
@@ -146,27 +151,27 @@ class Sponsor
   }
 
   /**
-   * Set name
+   * Set Label
    *
-   * @param string $name
+   * @param string $label
    *
    * @return Topic
    */
-  public function setName($name)
+  public function setLabel($label)
   {
-    $this->name = $name;
+    $this->label = $label;
 
     return $this;
   }
 
   /**
-   * Get name
+   * Get label
    *
    * @return string
    */
-  public function getName()
+  public function getLabel()
   {
-    return $this->name;
+    return $this->label;
   }
 
   /**
@@ -298,5 +303,37 @@ class Sponsor
     $name = $this->getId() . '.' . $extension;
     $this->getLogo()->move($this->getUploadRootDir(), $name);
     $this->setLogoPath($name);
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getCompany()
+  {
+    return $this->company;
+  }
+
+  /**
+   * @param mixed $company
+   */
+  public function setCompany($company)
+  {
+    $this->company = $company;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getEvents()
+  {
+    return $this->events;
+  }
+
+  /**
+   * @param mixed $events
+   */
+  public function setEvents($events)
+  {
+    $this->events = $events;
   }
 }

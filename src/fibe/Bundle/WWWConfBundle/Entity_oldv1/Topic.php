@@ -26,11 +26,11 @@ class Topic
   protected $id;
 
   /**
-   * label
+   * name
    *
-   * @ORM\Column(type="string")
+   * @ORM\Column(type="string", name="name")
    */
-  protected $label;
+  protected $name;
 
   /**
    * Papers related to thise topic
@@ -40,20 +40,19 @@ class Topic
   private $papers;
 
   /**
-   * Events related to this topic
+   * events related to this topic
    *
-   * @ORM\ManyToMany(targetEntity="Event", mappedBy="topics", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="ConfEvent", mappedBy="topics", cascade={"persist"})
    */
   private $events;
 
   /**
-   * Topics associated to this conference
-   *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="topics", cascade={"persist"})
-   * @ORM\JoinColumn(name="mainEvent_id", referencedColumnName="id")
+   *  Topics associated to this conference
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\WwwConf", inversedBy="topics", cascade={"persist"})
+   * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    *
    */
-  protected $mainEvent;
+  protected $conference;
 
   /**
    * @ORM\Column(type="string", length=128, nullable=true)
@@ -75,7 +74,7 @@ class Topic
    */
   public function __toString()
   {
-    return $this->label;
+    return $this->name;
 
   }
 
@@ -85,7 +84,7 @@ class Topic
    */
   public function slugify()
   {
-    $this->setSlug(StringTools::slugify($this->getId() . $this->getLabel()));
+    $this->setSlug(StringTools::slugify($this->getId() . $this->getName()));
   }
 
   /**
@@ -202,27 +201,27 @@ class Topic
   }
 
   /**
-   * Set label
+   * Set name
    *
-   * @param string $label
+   * @param string $name
    *
    * @return Topic
    */
-  public function setLabel($label)
+  public function setName($name)
   {
-    $this->label = $label;
+    $this->name = $name;
 
     return $this;
   }
 
   /**
-   * Get label
+   * Get name
    *
    * @return string
    */
-  public function getLabel()
+  public function getName()
   {
-    return $this->label;
+    return $this->name;
   }
 
   /**
