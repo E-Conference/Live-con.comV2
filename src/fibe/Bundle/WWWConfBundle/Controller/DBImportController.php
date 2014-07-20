@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use fibe\Bundle\WWWConfBundle\Entity\ConfEvent as Event;
+use fibe\Bundle\WWWConfBundle\Entity\VEvent as Event;
 use fibe\Bundle\WWWConfBundle\Entity\Person;
 use fibe\Bundle\WWWConfBundle\Entity\Topic;
 use fibe\Bundle\WWWConfBundle\Entity\Organization;
@@ -46,7 +46,7 @@ class DBImportController extends Controller
   public function importAction(Request $request)
   {
     //Authorization Verification conference sched manager
-    $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'WwwConf');
+    $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'MainEvent');
 
     $JSONFile = json_decode($request->request->get('dataArray'), true);
 

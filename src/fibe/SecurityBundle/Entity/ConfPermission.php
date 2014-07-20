@@ -5,7 +5,7 @@ namespace fibe\SecurityBundle\Entity;
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
-use fibe\Bundle\WWWConfBundle\Entity\WwwConf;
+use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
 
 /**
  * plain old object used as dto for user permissions about the current conference

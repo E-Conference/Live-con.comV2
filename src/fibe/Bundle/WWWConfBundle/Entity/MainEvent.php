@@ -2,14 +2,13 @@
 
   namespace fibe\Bundle\WWWConfBundle\Entity;
 
+  use Doctrine\Common\Collections\ArrayCollection;
+  use fibe\Bundle\WWWConfBundle\Entity\Module;
+  use JMS\Serializer\Annotation\Expose;
   use Symfony\Component\HttpFoundation\File\UploadedFile;
   use Doctrine\ORM\Mapping as ORM;
   use Symfony\Component\Validator\Constraints as Assert;
 
-  use fibe\Bundle\WWWConfBundle\Entity\VEvent;
-
-  use fibe\SecurityBundle\Entity\User;
-  use fibe\Bundle\WWWConfBundle\Entity\MappingFile;
   use fibe\Bundle\WWWConfBundle\Util\StringTools;
 
   /**
@@ -20,83 +19,77 @@
    * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\MainEventRepository")
    * @ORM\HasLifecycleCallbacks
    */
-  class MainEvent extends extends VEvent
+  class MainEvent extends VEvent
   {
 
-	
   /**
-   *  Owner of this mainEvent
+   * Mobile app configurations
    *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Person", inversedBy="own", cascade={"persist"})
-   * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
-   *
+   * @ORM\OneToOne(targetEntity="fibe\MobileAppBundle\Entity\MobileAppConfig",cascade={"persist"})
    */
-    private $owner;
+  private $appConfig;
+
+  /**
+   * @ORM\OneToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Module",cascade={ "remove"})
+   */
+  private $module;
 
 	/**
-	 * events
+	 * Events
 	 *
 	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Event", mappedBy="mainEvent",cascade={"persist", "remove"})
 	 */
 	private $events;
 
 	/**
-	* Locations
-	*
-	* @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Location", mappedBy="mainEvent",cascade={"persist", "remove"})
-	*/
+	 * Locations
+	 *
+	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Location", mappedBy="mainEvent",cascade={"persist", "remove"})
+	 */
 	private $locations;
     
 	
 	/** 
-	* Papers 
-	*
-	* @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Paper", mappedBy="mainEvent",cascade={"persist", "remove"})
-	*/
+	 * Papers
+	 *
+	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Paper", mappedBy="mainEvent",cascade={"persist", "remove"})
+	 */
 	private $papers;
-    
-   /**
-   * 
-   * @ORM\ManyToMany(targetEntity="Person",  mappedBy="mainEvents", cascade={"persist","merge","remove"})
-   * @Expose
-   */
-	private $persons;
-    
+
 	/**
-	* Roles
-	*
-	* @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Role", mappedBy="mainEvent",cascade={"persist", "remove"})
-	*/
+	 * Roles
+	 *
+	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Role", mappedBy="mainEvent",cascade={"persist", "remove"})
+	 */
 	private $roles;
-    
-	/** 
-	* Organizations
-	*
-	* @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Company", mappedBy="mainEvent",cascade={"persist", "remove"})
-	*/
-	private $company;
-    
+
 	/**
-	* Topics
-	*
-    * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Topic", mappedBy="mainEvent",cascade={"persist", "remove"})
-	*/
+	 * Companies
+	 *
+	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Company", mappedBy="mainEvent",cascade={"persist", "remove"})
+	 */
+	private $companies;
+
+	/**
+	 * Topics
+	 *
+   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Topic", mappedBy="mainEvent",cascade={"persist", "remove"})
+	 */
 	private $topics;
     
 	/**
-	* Sponsors
-	*
-	* @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Sponsor", mappedBy="mainEvent",cascade={"persist", "remove"})
-	*/
-	private $sponsors;
-	
-
-	/**
-	 * confManager
+	 * Sponsors
 	 *
-	 * @ORM\ManyToMany(targetEntity="fibe\SecurityBundle\Entity\User", mappedBy="mainEvents",cascade={"persist"})
+	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Sponsor", mappedBy="mainEvent",cascade={"persist", "remove"})
 	 */
-	private $confManagers;
+	private $sponsors;
+
+  /**
+   *
+   * @ORM\ManyToMany(targetEntity="Person",  mappedBy="mainEvents", cascade={"persist","merge","remove"})
+   * @Expose
+   */
+  private $persons;
 
 	/**
 	 * Team
@@ -105,24 +98,12 @@
 	 */
 	private $team;
 
-	/**
-	 * Mobile app configurations
-	 *
-	 * @ORM\OneToOne(targetEntity="fibe\MobileAppBundle\Entity\MobileAppConfig",cascade={"persist"}) 
-	 */
-	private $appConfig;
-
-	/**
-	 * mappingFiles
-	 *
-	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEventSettings", mappedBy="mainEvent",cascade={"persist", "remove"})
-	 */
-	private $settings;
-
-	/**
-	 * @ORM\OneToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Module",cascade={ "remove"})
-	 **/
-	private $module;
+  /**
+   * mappingFiles
+   *
+   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEventSettings", mappedBy="mainEvent",cascade={"persist", "remove"})
+   */
+  private $settings;
 
 	/**
 	 * @var UploadedFile
@@ -149,7 +130,7 @@
 	 */
 	public function __toString()
 	{
-	  return ($this->mainConfEvent ? $this->mainConfEvent->getSummary() : "");
+	  return $this->getSummary();
 
 	}
 
@@ -159,7 +140,7 @@
 	 */
 	public function slugify()
 	{
-	  $this->setSlug(StringTools::slugify($this->getId() . $this->getConfName()));
+	  $this->setSlug(StringTools::slugify($this->getId() . $this->getSummary()));
 
 	}
 
@@ -179,7 +160,7 @@
 	 *
 	 * @param string $slug
 	 *
-	 * @return ConfEvent
+	 * @return $this
 	 */
 	public function setSlug($slug)
 	{
@@ -209,58 +190,13 @@
 	  return $this->id;
 	}
 
-	/**
-	 * Return the name of the conference
-	 *
-	 * @return string
-	 */
-	public function getConfName()
-	{
-	  return ($this->mainConfEvent ? $this->mainConfEvent->getSummary() : "");
-	}
 
-
-	/**
-	 * Add a conference manager
-	 *
-	 * @param User $confManager
-	 *
-	 * @return $this
-	 */
-	public function addConfManager(\fibe\SecurityBundle\Entity\User $confManager = null)
-	{
-	  $this->confManagers[] = $confManager;
-
-	  return $this;
-	}
-
-	/**
-	 * Remove a conference manager
-	 *
-	 * @param User $confManager
-	 */
-	public function removeConfManager(\fibe\SecurityBundle\Entity\User $confManager)
-	{
-	  $this->confManagers->removeElement($confManager);
-	}
-
-
-	/**
-	 * Return all conference managers
-	 *
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getConfManagers()
-	{
-	  return $this->confManagers;
-	}
-
-
-	/**
-	 * Sets file.
-	 *
-	 * @param UploadedFile $file
-	 */
+    /**
+     * Sets file.
+     *
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $logo
+     * @return $this
+     */
 	public function setLogo(UploadedFile $logo = null)
 	{
 	  $this->logo = $logo;
@@ -308,19 +244,25 @@
 	 */
 	public function __construct()
 	{
-	  $this->events = new \Doctrine\Common\Collections\ArrayCollection();
-	  $this->confManagers = new \Doctrine\Common\Collections\ArrayCollection();
-	  $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
+	  $this->events = new ArrayCollection();
+	  $this->confManagers = new ArrayCollection();
+	  $this->roles = new ArrayCollection();
+	  $this->locations = new ArrayCollection();
+	  $this->papers = new ArrayCollection();
+	  $this->persons= new ArrayCollection();
+	  $this->topics= new ArrayCollection();
+	  $this->sponsors= new ArrayCollection();
+	  $this->companies= new ArrayCollection();
 	}
 
 	/**
 	 * Add locations
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\Location $locations
+	 * @param Location $locations
 	 *
-	 * @return WwwConf
+	 * @return $this
 	 */
-	public function addLocation(\fibe\Bundle\WWWConfBundle\Entity\Location $locations)
+	public function addLocation(Location $locations)
 	{
 	  $this->locations[] = $locations;
 
@@ -330,9 +272,9 @@
 	/**
 	 * Remove locations
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\Location $locations
+	 * @param Location $locations
 	 */
-	public function removeLocation(\fibe\Bundle\WWWConfBundle\Entity\Location $locations)
+	public function removeLocation(Location $locations)
 	{
 	  $this->locations->removeElement($locations);
 	}
@@ -350,11 +292,11 @@
 	/**
 	 * Add papers
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\Paper $papers
+	 * @param Paper $papers
 	 *
-	 * @return WwwConf
+	 * @return $this
 	 */
-	public function addPaper(\fibe\Bundle\WWWConfBundle\Entity\Paper $papers)
+	public function addPaper(Paper $papers)
 	{
 	  $this->papers[] = $papers;
 
@@ -364,9 +306,9 @@
 	/**
 	 * Remove papers
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\Paper $papers
+	 * @param Paper $papers
 	 */
-	public function removePaper(\fibe\Bundle\WWWConfBundle\Entity\Paper $papers)
+	public function removePaper(Paper $papers)
 	{
 	  $this->papers->removeElement($papers);
 	}
@@ -384,11 +326,11 @@
 	/**
 	 * Add persons
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\Person $persons
+	 * @param Person $persons
 	 *
-	 * @return WwwConf
+	 * @return $this
 	 */
-	public function addPerson(\fibe\Bundle\WWWConfBundle\Entity\Person $persons)
+	public function addPerson(Person $persons)
 	{
 	  $this->persons[] = $persons;
 
@@ -398,9 +340,9 @@
 	/**
 	 * Remove persons
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\Person $persons
+	 * @param Person $persons
 	 */
-	public function removePerson(\fibe\Bundle\WWWConfBundle\Entity\Person $persons)
+	public function removePerson(Person $persons)
 	{
 	  $this->persons->removeElement($persons);
 	}
@@ -419,7 +361,7 @@
 	 *
 	 * @param \fibe\SecurityBundle\Entity\Team $team
 	 *
-	 * @return WwwConf
+	 * @return $this
 	 */
 	public function setTeam($team)
 	{
@@ -436,18 +378,18 @@
 	  return $this->team;
 	}
 
-	/**
-	 * Add app config
-	 *
-	 * @param \fibe\MobileAppBundle\Entity\MobileAppConfig $AppConfig
-	 *
-	 * @return WwwConf
-	 */
+    /**
+     * Add app config
+     *
+     * @param \fibe\MobileAppBundle\Entity\MobileAppConfig $AppConfig
+     *
+     * @return $this
+     */
 	public function setAppConfig($AppConfig)
 	{
   	if($AppConfig)
   	{
-      $AppConfig->setConference($this);
+      $AppConfig->setMainEvent($this);
     }
 	  $this->appConfig = $AppConfig;
 
@@ -463,11 +405,11 @@
 	/**
 	 * Add topics
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\Topic $topics
+	 * @param Topic $topics
 	 *
-	 * @return WwwConf
+	 * @return $this
 	 */
-	public function addTopic(\fibe\Bundle\WWWConfBundle\Entity\Topic $topics)
+	public function addTopic(Topic $topics)
 	{
 	  $this->topics[] = $topics;
 
@@ -477,9 +419,9 @@
 	/**
 	 * Remove topics
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\Topic $topics
+	 * @param Topic $topics
 	 */
-	public function removeTopic(\fibe\Bundle\WWWConfBundle\Entity\Topic $topics)
+	public function removeTopic(Topic $topics)
 	{
 	  $this->topics->removeElement($topics);
 	}
@@ -494,16 +436,17 @@
 	  return $this->topics;
 	}
 
-	/**
-	 * Add sponsors
-	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\Sponsor $sponsors
-	 *
-	 * @return WwwConf
-	 */
-	public function addSponsor(\fibe\Bundle\WWWConfBundle\Entity\Topic $sponsors)
+  /**
+   * Add sponsors
+   *
+   * @param Sponsor $sponsor
+   * @internal param \fibe\Bundle\WWWConfBundle\Entity\Sponsor $sponsors
+   *
+   * @return $this
+   */
+	public function addSponsor(Sponsor $sponsor)
 	{
-	  $this->sponsors[] = $sponsors;
+	  $this->sponsors[] = $sponsor;
 
 	  return $this;
 	}
@@ -511,11 +454,11 @@
 	/**
 	 * Remove sponsors
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\Sponsor $sponsors
+	 * @param \fibe\Bundle\WWWConfBundle\Entity\Sponsor $sponsor
 	 */
-	public function removeSponsor(\fibe\Bundle\WWWConfBundle\Entity\Topic $sponsors)
+	public function removeSponsor(Sponsor $sponsor)
 	{
-	  $this->sponsors->removeElement($sponsors);
+	  $this->sponsors->removeElement($sponsor);
 	}
 
 	/**
@@ -528,72 +471,48 @@
 	  return $this->sponsors;
 	}
 
-	/**
-	 * Add organizations
-	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\Organization $organizations
-	 *
-	 * @return WwwConf
-	 */
-	public function addOrganization(\fibe\Bundle\WWWConfBundle\Entity\Organization $organizations)
+    /**
+     * Add organizations
+     *
+     * @param Company $companies
+     *
+     * @return $this
+     */
+	public function addCompany(Company $companies)
 	{
-	  $this->organizations[] = $organizations;
+	  $this->companies[] = $companies;
 
 	  return $this;
 	}
 
 	/**
-	 * Remove organizations
+	 * Remove companies
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\Organization $organizations
+	 * @param Company $companies
 	 */
-	public function removeOrganization(\fibe\Bundle\WWWConfBundle\Entity\Organization $organizations)
+	public function removeCompany(Company $companies)
 	{
-	  $this->organizations->removeElement($organizations);
+	  $this->companies->removeElement($companies);
 	}
 
 	/**
-	 * Get organizations
+	 * Get companies
 	 *
 	 * @return \Doctrine\Common\Collections\Collection
 	 */
-	public function getOrganizations()
+	public function getCompanies()
 	{
-	  return $this->organizations;
-	}
-
-	/**
-	 * Set mainConfEvent
-	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\ConfEvent $mainConfEvent
-	 *
-	 * @return WwwConf
-	 */
-	public function setMainConfEvent(\fibe\Bundle\WWWConfBundle\Entity\ConfEvent $mainConfEvent = null)
-	{
-	  $this->mainConfEvent = $mainConfEvent;
-
-	  return $this;
-	}
-
-	/**
-	 * Get mainConfEvent
-	 *
-	 * @return \fibe\Bundle\WWWConfBundle\Entity\ConfEvent
-	 */
-	public function getMainConfEvent()
-	{
-	  return $this->mainConfEvent;
+	  return $this->companies;
 	}
 
 	/**
 	 * Add events
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events
+	 * @param VEvent $events
 	 *
-	 * @return WwwConf
+	 * @return $this
 	 */
-	public function addEvent(\fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events)
+	public function addEvent(VEvent $events)
 	{
 	  $this->events[] = $events;
 
@@ -603,9 +522,9 @@
 	/**
 	 * Remove events
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events
+	 * @param VEvent $events
 	 */
-	public function removeEvent(\fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events)
+	public function removeEvent(VEvent $events)
 	{
 	  $this->events->removeElement($events);
 	}
@@ -696,11 +615,11 @@
 	 */
 	public function isEmpty()
 	{
-	return  (count($this->events)        <= 1)
+	return  (count($this->events)      <= 1)
 		and (count($this->locations)     <= 1)
 		and (count($this->papers)        == 0)
 		and (count($this->persons)       == 0)
-		and (count($this->organizations) == 0)
+		and (count($this->companies)     == 0)
 		and (count($this->topics)        == 0);
 
 	}
@@ -708,11 +627,11 @@
 	/**
 	 * Add mappingFiles
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\MappingFile $mappingFiles
+	 * @param MappingFile $mappingFiles
 	 *
-	 * @return WwwConf
+	 * @return $this
 	 */
-	public function addMappingFile(\fibe\Bundle\WWWConfBundle\Entity\MappingFile $mappingFiles)
+	public function addMappingFile(MappingFile $mappingFiles)
 	{
 	  $this->mappingFiles[] = $mappingFiles;
 
@@ -722,9 +641,9 @@
 	/**
 	 * Remove mappingFiles
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\MappingFile $mappingFiles
+	 * @param MappingFile $mappingFiles
 	 */
-	public function removeMappingFile(\fibe\Bundle\WWWConfBundle\Entity\MappingFile $mappingFiles)
+	public function removeMappingFile(MappingFile $mappingFiles)
 	{
 	  $this->mappingFiles->removeElement($mappingFiles);
 	}
@@ -740,14 +659,14 @@
 	}
 
 
-	/**
-	 * Set module
-	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\ConfEvent $module
-	 *
-	 * @return WwwConf
-	 */
-	public function setModule(\fibe\Bundle\WWWConfBundle\Entity\Module $module = null)
+    /**
+     * Set module
+     *
+     * @param Module $module
+     *
+     * @return $this
+     */
+	public function setModule(Module $module = null)
 	{
 	  $this->module = $module;
 
@@ -757,7 +676,7 @@
 	/**
 	 * Get module
 	 *
-	 * @return \fibe\Bundle\WWWConfBundle\Entity\ConfEvent
+	 * @return VEvent
 	 */
 	public function getModule()
 	{

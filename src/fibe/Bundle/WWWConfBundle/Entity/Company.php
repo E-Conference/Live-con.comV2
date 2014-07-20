@@ -2,7 +2,10 @@
 
 namespace fibe\Bundle\WWWConfBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+
+
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
@@ -12,8 +15,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use fibe\Bundle\WWWConfBundle\Util\StringTools;
 
 /**
- * This entity define a role for a person in an event
- *
  *
  * @ORM\Table(name="organization")
  * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\OrganizationRepository")
@@ -40,9 +41,16 @@ class Company
   protected $label;
 
   /**
+   * Sponsors
+   *
+   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Sponsor", mappedBy="sponsors",cascade={"persist", "remove"})
+   */
+  private $sponsors;
+
+  /**
    * Additional Infomations of the company
    *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\AddtionalInformations", inversedBy="Company", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\AdditionalInformations", inversedBy="Company", cascade={"persist"})
    * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id")
    *
    */
@@ -57,7 +65,7 @@ class Company
   /**
    * Company related to a mainEvent
    *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\WwwConf", inversedBy="organizations", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="organizations", cascade={"persist"})
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    *
    */
@@ -73,7 +81,8 @@ class Company
    */
   public function __construct()
   {
-    $this->members = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->members = new ArrayCollection();
+    $this->sponsors = new ArrayCollection();
   }
 
 
@@ -107,7 +116,7 @@ class Company
    *
    * @param string $slug
    *
-   * @return ConfEvent
+   * @return $this
    */
   public function setSlug($slug)
   {
@@ -143,7 +152,7 @@ class Company
    *
    * @param string $label
    *
-   * @return Organization
+   * @return $this
    */
   public function setLabel($label)
   {
@@ -165,11 +174,11 @@ class Company
   /**
    * Add members
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Person $members
+   * @param Person $members
    *
-   * @return Organization
+   * @return $this
    */
-  public function addMember(\fibe\Bundle\WWWConfBundle\Entity\Person $members)
+  public function addMember(Person $members)
   {
     $this->members[] = $members;
 
@@ -179,9 +188,9 @@ class Company
   /**
    * Remove members
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Person $members
+   * @param Person $members
    */
-  public function removeMember(\fibe\Bundle\WWWConfBundle\Entity\Person $members)
+  public function removeMember(Person $members)
   {
     $this->members->removeElement($members);
   }
@@ -197,15 +206,12 @@ class Company
   }
 
   /**
-   * Set conference
-   *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference
-   *
-   * @return Organization
+   * @param MainEvent $mainEvent
+   * @return $this
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference = null)
+  public function setConference(MainEvent $mainEvent)
   {
-    $this->conference = $conference;
+    $this->mainEvent = $mainEvent;
 
     return $this;
   }
@@ -213,11 +219,11 @@ class Company
   /**
    * Get conference
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\WwwConf
+   * @return MainEvent
    */
-  public function getConference()
+  public function getMainEvent()
   {
-    return $this->conference;
+    return $this->mainEvent;
   }
 
   /**

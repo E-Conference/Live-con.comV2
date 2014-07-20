@@ -11,8 +11,8 @@
 idci_exporter:
     api_route: "/api/{entity_reference}.{_format}"
     entities:
-        WwwConf:
-            class: "fibe\\Bundle\\WWWConfBundle\\Entity\\WwwConf"
+        MainEvent:
+            class: "fibe\\Bundle\\WWWConfBundle\\Entity\\MainEvent"
             formats:
                 xml:
                     transformer:

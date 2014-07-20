@@ -4,8 +4,8 @@ services:
 
 idci_exporter:
     entities:
-        WwwConf:
-            class: "fibe\\Bundle\\WWWConfBundle\\Entity\\WwwConf"
+        MainEvent:
+            class: "fibe\\Bundle\\WWWConfBundle\\Entity\\MainEvent"
             formats:
                 xml:
                     transformer:

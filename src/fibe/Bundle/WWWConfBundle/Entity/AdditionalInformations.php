@@ -11,8 +11,23 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 use fibe\Bundle\WWWConfBundle\Util\StringTools;
 
-class AddtionalInformations
+/**
+ * This entity define relation between a paper and a person
+ *
+ *
+ * @ORM\Table(name="additional_informations")
+ * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\AdditionalInformationsRepository")
+ *
+ */
+class AdditionalInformations
 {
+  /**
+   * @ORM\Id
+   * @ORM\Column(type="integer")
+   * @ORM\GeneratedValue(strategy="AUTO")
+   */
+  private $id;
+
   /**
    * Url of the website
    *
@@ -22,7 +37,7 @@ class AddtionalInformations
   protected $website;
 
   /**
-   * @TODO I18N : Grosse Enum/CodeInfo/JS/...
+   * @TODO Enum : I18N (CodeInfo/JS/...)
    *
    * country
    *
@@ -43,6 +58,16 @@ class AddtionalInformations
    * @ORM\Column(type="string", nullable=true,  name="email")
    */
   protected $email;
+
+  /**
+   * Get id
+   *
+   * @return integer
+   */
+  public function getId()
+  {
+    return $this->id;
+  }
 
   /**
    * @return mixed

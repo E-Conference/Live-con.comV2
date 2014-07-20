@@ -1,14 +1,14 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Entity;
+namespace fibe\Bundle\WWWConfBundle\Entity_oldv1;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-use fibe\Bundle\WWWConfBundle\Entity\SocialService;
-use fibe\Bundle\WWWConfBundle\Entity\Person;
-use fibe\Bundle\WWWConfBundle\Entity\WwwConf;
+use fibe\Bundle\WWWConfBundle\Entity_oldv1\SocialService;
+use fibe\Bundle\WWWConfBundle\Entity_oldv1\Person;
+use fibe\Bundle\WWWConfBundle\Entity_oldv1\MainEvent;
 
 
 /**

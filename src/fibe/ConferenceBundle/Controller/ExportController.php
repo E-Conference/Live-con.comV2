@@ -28,7 +28,7 @@ class ExportController extends Controller
   public function indexAction()
   {
     $wwwConf = $this->getUser()->getCurrentConf();
-    $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'WwwConf',$wwwConf);
+    $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'MainEvent',$wwwConf);
 
     $export_form = $this->createFormBuilder()
       ->add(
@@ -60,7 +60,7 @@ class ExportController extends Controller
    */
   public function processAction(Request $request)
   {
-    $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'WwwConf');
+    $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'MainEvent');
     $export_form = $this->createFormBuilder()
       ->add(
         'export_format',

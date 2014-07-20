@@ -2,7 +2,9 @@
 
 namespace fibe\Bundle\WWWConfBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
 use Symfony\Component\Validator\Constraints as Assert;
 use fibe\Bundle\WWWConfBundle\Entity\Equipment;
 
@@ -91,6 +93,7 @@ class Location
    */
   public function __construct()
   {
+    $this->equipments = new ArrayCollection();
   }
 
   /**
@@ -282,7 +285,7 @@ class Location
    *
    * @param \fibe\Bundle\WWWConfBundle\Entity\Equipment $equipments
    *
-   * @return ConfEvent
+   * @return $this
    */
   public function addEquipment(\fibe\Bundle\WWWConfBundle\Entity\Equipment $equipments)
   {
@@ -314,11 +317,11 @@ class Location
   /**
    * Set conference
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference
+   * @param MainEvent $conference
    *
-   * @return ConfEvent
+   * @return $this
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference)
+  public function setConference(MainEvent $conference)
   {
     $this->conference = $conference;
 
@@ -328,7 +331,7 @@ class Location
   /**
    * Get conference
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\WwwConf
+   * @return MainEvent
    */
   public function getConference()
   {

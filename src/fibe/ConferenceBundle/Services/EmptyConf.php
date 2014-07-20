@@ -4,7 +4,7 @@
 
   use fibe\Bundle\WWWConfBundle\Entity\Location;
 
-  use fibe\Bundle\WWWConfBundle\Entity\ConfEvent as Event;
+  use fibe\Bundle\WWWConfBundle\Entity\VEvent as Event;
 
   /**
    * Class EmptyConf

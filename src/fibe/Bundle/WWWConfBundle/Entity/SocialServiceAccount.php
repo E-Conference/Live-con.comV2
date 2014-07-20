@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 use fibe\Bundle\WWWConfBundle\Entity\SocialService;
 use fibe\Bundle\WWWConfBundle\Entity\Person;
-use fibe\Bundle\WWWConfBundle\Entity\WwwConf;
+use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
 
 
 /**
@@ -20,6 +20,12 @@ use fibe\Bundle\WWWConfBundle\Entity\WwwConf;
  */
 class SocialServiceAccount
 {
+
+  // Status values for "EVENT"
+  const STATUS_FACEBOOK = "FACEBOOK"; // Indicates event was cancelled.
+  const STATUS_TWITTER = "TWITTER"; // Indicates event is definite.
+  const STATUS_LINKEDIN = "LINKEDIN"; // Indicates event is tentative.
+
   /**
    * @ORM\Id
    * @ORM\Column(type="integer")
@@ -41,7 +47,8 @@ class SocialServiceAccount
 
   /**
    *
-   * @TODO SOCIAL : Mettre en place une enum
+   * @ORM\Column(type="string", length=32)
+   * @Assert\Choice(multiple=false, choices = {"Facebook","Twitter","LinkedIn"},  message = "Choose a valid social service.")
    */
   protected $socialService;
 

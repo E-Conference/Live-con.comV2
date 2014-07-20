@@ -5,7 +5,7 @@ namespace fibe\Bundle\WWWConfBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use fibe\Bundle\WWWConfBundle\Entity\ConfEvent;
+use fibe\Bundle\WWWConfBundle\Entity\VEent;
 use fibe\Bundle\WWWConfBundle\Entity\Location;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;

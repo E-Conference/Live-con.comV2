@@ -7,7 +7,7 @@
  *
  */
 
-namespace fibe\Bundle\WWWConfBundle\Entity;
+namespace fibe\Bundle\WWWConfBundle\Entity_oldv1;
 
 use Doctrine\ORM\Mapping as ORM;
 use fibe\Bundle\WWWConfBundle\Util\StringTools;
@@ -83,7 +83,7 @@ class Category
     private $calendarEntities;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WwwConf", inversedBy="categories")
+     * @ORM\ManyToOne(targetEntity="MainEvent", inversedBy="categories")
      * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
      */
     protected $conference;
@@ -461,10 +461,10 @@ class Category
     /**
      * Set conference
      *
-     * @param \fibe\Bundle\WWWConfBundle\Entity\WwwConf $wwwConf
+     * @param \fibe\Bundle\WWWConfBundle\Entity\MainEvent $wwwConf
      * @return Category
      */
-    public function setConference(\fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference = null)
+    public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference = null)
     {
         $this->conference = $conference;
     
@@ -474,7 +474,7 @@ class Category
     /**
      * Get conference
      *
-     * @return \fibe\Bundle\WWWConfBundle\Entity\WwwConf 
+     * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
      */
     public function getConference()
     {

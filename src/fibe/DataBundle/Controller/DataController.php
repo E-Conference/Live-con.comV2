@@ -68,7 +68,7 @@ class DataController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
 
-    $entities = $em->getRepository('fibeWWWConfBundle:WwwConf')->findAll();
+    $entities = $em->getRepository('fibeWWWConfBundle:MainEvent')->findAll();
 
 
     return $this->render('DataBundle:Conference:conferences.html.twig', array(
@@ -88,11 +88,11 @@ class DataController extends Controller
 
     if (!empty($name))
     {
-      $entities = $em->getRepository('fibeWWWConfBundle:WwwConf')->findByName($name);
+      $entities = $em->getRepository('fibeWWWConfBundle:MainEvent')->findByName($name);
     }
     else
     {
-      $entities = $em->getRepository('fibeWWWConfBundle:WwwConf')->findAll();
+      $entities = $em->getRepository('fibeWWWConfBundle:MainEvent')->findAll();
     }
 
 

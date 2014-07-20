@@ -3,7 +3,6 @@
 
   use fibe\Bundle\WWWConfBundle\Entity\Equipment;
   use fibe\Bundle\WWWConfBundle\Entity\RoleType;
-  use fibe\Bundle\WWWConfBundle\Entity\SocialService;
   use fibe\Bundle\WWWConfBundle\Entity\Category;
   use fibe\Bundle\WWWConfBundle\Entity\Status;
   use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -47,22 +46,6 @@
 
       $em = $this->getContainer()->get('doctrine')->getManager('default');
 
-      $status = new Status();
-      $status->setValue('TENTATIVE')
-        ->setDiscr('TENTATIVE');
-      $em->persist($status);
-
-      $status = new Status();
-      $status->setValue('CONFIRMED')
-        ->setDiscr('CONFIRMED');
-      $em->persist($status);
-
-      $status = new Status();
-      $status->setValue('CANCELLED')
-        ->setDiscr('CANCELLED');
-      $em->persist($status);
-
-
       //RoleType
       $roleType = new RoleType();
       $roleType->setName("Delegate");
@@ -83,19 +66,6 @@
       $roleType->setName("ProgrammeCommitteeMember");
       $roleType->setLabel("Programme Committee Member");
       $em->persist($roleType);
-
-      //Social Service
-      $socialService = new SocialService();
-      $socialService->setName("Facebook");
-      $em->persist($socialService);
-
-      $socialService = new SocialService();
-      $socialService->setName("Twitter");
-      $em->persist($socialService);
-
-      $socialService = new SocialService();
-      $socialService->setName("LinkedIn");
-      $em->persist($socialService);
 
       //Equipments
       $equipment = new Equipment();

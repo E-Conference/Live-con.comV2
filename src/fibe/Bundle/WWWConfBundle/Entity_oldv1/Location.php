@@ -7,11 +7,11 @@
  *
  */
 
-namespace fibe\Bundle\WWWConfBundle\Entity;
+namespace fibe\Bundle\WWWConfBundle\Entity_oldv1;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use fibe\Bundle\WWWConfBundle\Entity\Equipment;
+use fibe\Bundle\WWWConfBundle\Entity_oldv1\Equipment;
 
 /**
  * @ORM\Table(name="location")
@@ -78,7 +78,7 @@ class Location
   /**
    * conference
    *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\WwwConf", inversedBy="locations", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="locations", cascade={"persist"})
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    */
   private $conference;
@@ -310,11 +310,11 @@ class Location
   /**
    * Set conference
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference
+   * @param \fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference
    *
    * @return ConfEvent
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference)
+  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference)
   {
     $this->conference = $conference;
 
@@ -324,7 +324,7 @@ class Location
   /**
    * Get conference
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\WwwConf
+   * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
    */
   public function getConference()
   {

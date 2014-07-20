@@ -1,24 +1,24 @@
 <?php
 
-  namespace fibe\Bundle\WWWConfBundle\Entity;
+  namespace fibe\Bundle\WWWConfBundle\Entity_oldv1;
 
   use Symfony\Component\HttpFoundation\File\UploadedFile;
   use Doctrine\ORM\Mapping as ORM;
   use Symfony\Component\Validator\Constraints as Assert;
 
   use fibe\SecurityBundle\Entity\User;
-  use fibe\Bundle\WWWConfBundle\Entity\MappingFile;
+  use fibe\Bundle\WWWConfBundle\Entity_oldv1\MappingFile;
   use fibe\Bundle\WWWConfBundle\Util\StringTools;
 
   /**
-   * WwwConf entity
+   * MainEvent entity
    *
    * @ORM\Entity
    * @ORM\Table(name="conference")
    * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\WwwConfRepository")
    * @ORM\HasLifecycleCallbacks
    */
-  class WwwConf
+  class MainEvent
   {
 	/**
 	 * @var integer
@@ -32,7 +32,7 @@
 	/**
 	 * events
 	 *
-	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\ConfEvent", mappedBy="conference",cascade={"persist", "remove"})
+	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\VEvent", mappedBy="conference",cascade={"persist", "remove"})
 	 */
 	private $events;
 
@@ -143,7 +143,7 @@
 	private $logoPath;
 
 	/**
-	 * @ORM\OneToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\ConfEvent", cascade="remove")
+	 * @ORM\OneToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\VEvent", cascade="remove")
 	 **/
 	private $mainConfEvent;
 
@@ -327,7 +327,7 @@
 	 *
 	 * @param \fibe\Bundle\WWWConfBundle\Entity\Location $locations
 	 *
-	 * @return WwwConf
+	 * @return MainEvent
 	 */
 	public function addLocation(\fibe\Bundle\WWWConfBundle\Entity\Location $locations)
 	{
@@ -361,7 +361,7 @@
 	 *
 	 * @param \fibe\Bundle\WWWConfBundle\Entity\Paper $papers
 	 *
-	 * @return WwwConf
+	 * @return MainEvent
 	 */
 	public function addPaper(\fibe\Bundle\WWWConfBundle\Entity\Paper $papers)
 	{
@@ -395,7 +395,7 @@
 	 *
 	 * @param \fibe\Bundle\WWWConfBundle\Entity\Person $persons
 	 *
-	 * @return WwwConf
+	 * @return MainEvent
 	 */
 	public function addPerson(\fibe\Bundle\WWWConfBundle\Entity\Person $persons)
 	{
@@ -428,7 +428,7 @@
 	 *
 	 * @param \fibe\SecurityBundle\Entity\Team $team
 	 *
-	 * @return WwwConf
+	 * @return MainEvent
 	 */
 	public function setTeam($team)
 	{
@@ -450,7 +450,7 @@
 	 *
 	 * @param \fibe\MobileAppBundle\Entity\MobileAppConfig $AppConfig
 	 *
-	 * @return WwwConf
+	 * @return MainEvent
 	 */
 	public function setAppConfig($AppConfig)
 	{
@@ -474,7 +474,7 @@
 	 *
 	 * @param \fibe\Bundle\WWWConfBundle\Entity\Topic $topics
 	 *
-	 * @return WwwConf
+	 * @return MainEvent
 	 */
 	public function addTopic(\fibe\Bundle\WWWConfBundle\Entity\Topic $topics)
 	{
@@ -508,7 +508,7 @@
 	 *
 	 * @param \fibe\Bundle\WWWConfBundle\Entity\Sponsor $sponsors
 	 *
-	 * @return WwwConf
+	 * @return MainEvent
 	 */
 	public function addSponsor(\fibe\Bundle\WWWConfBundle\Entity\Topic $sponsors)
 	{
@@ -542,7 +542,7 @@
 	 *
 	 * @param \fibe\Bundle\WWWConfBundle\Entity\Organization $organizations
 	 *
-	 * @return WwwConf
+	 * @return MainEvent
 	 */
 	public function addOrganization(\fibe\Bundle\WWWConfBundle\Entity\Organization $organizations)
 	{
@@ -574,11 +574,11 @@
 	/**
 	 * Set mainConfEvent
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\ConfEvent $mainConfEvent
+	 * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $mainConfEvent
 	 *
-	 * @return WwwConf
+	 * @return MainEvent
 	 */
-	public function setMainConfEvent(\fibe\Bundle\WWWConfBundle\Entity\ConfEvent $mainConfEvent = null)
+	public function setMainConfEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $mainConfEvent = null)
 	{
 	  $this->mainConfEvent = $mainConfEvent;
 
@@ -588,7 +588,7 @@
 	/**
 	 * Get mainConfEvent
 	 *
-	 * @return \fibe\Bundle\WWWConfBundle\Entity\ConfEvent
+	 * @return \fibe\Bundle\WWWConfBundle\Entity\VEvent
 	 */
 	public function getMainConfEvent()
 	{
@@ -598,11 +598,11 @@
 	/**
 	 * Add events
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events
+	 * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $events
 	 *
-	 * @return WwwConf
+	 * @return MainEvent
 	 */
-	public function addEvent(\fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events)
+	public function addEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $events)
 	{
 	  $this->events[] = $events;
 
@@ -612,9 +612,9 @@
 	/**
 	 * Remove events
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events
+	 * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $events
 	 */
-	public function removeEvent(\fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events)
+	public function removeEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $events)
 	{
 	  $this->events->removeElement($events);
 	}
@@ -719,7 +719,7 @@
 	 *
 	 * @param \fibe\Bundle\WWWConfBundle\Entity\MappingFile $mappingFiles
 	 *
-	 * @return WwwConf
+	 * @return MainEvent
 	 */
 	public function addMappingFile(\fibe\Bundle\WWWConfBundle\Entity\MappingFile $mappingFiles)
 	{
@@ -752,9 +752,9 @@
 	/**
 	 * Set module
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\ConfEvent $module
+	 * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $module
 	 *
-	 * @return WwwConf
+	 * @return MainEvent
 	 */
 	public function setModule(\fibe\Bundle\WWWConfBundle\Entity\Module $module = null)
 	{
@@ -766,7 +766,7 @@
 	/**
 	 * Get module
 	 *
-	 * @return \fibe\Bundle\WWWConfBundle\Entity\ConfEvent
+	 * @return \fibe\Bundle\WWWConfBundle\Entity\VEvent
 	 */
 	public function getModule()
 	{

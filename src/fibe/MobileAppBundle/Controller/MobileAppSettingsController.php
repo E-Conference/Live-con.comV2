@@ -30,7 +30,7 @@ class MobileAppSettingsController extends Controller
 
     //Authorization Verification conference sched manager
     $user = $this->getUser();
-    $granted = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('VIEW', 'WwwConf');
+    $granted = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('VIEW', 'MainEvent');
     $mobile_app_config = $user->getCurrentConf()->getAppConfig();
     $mobile_app_form = $this->createForm(new MobileAppConfigType(), $mobile_app_config);
 

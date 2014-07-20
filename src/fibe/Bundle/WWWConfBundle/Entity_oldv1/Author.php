@@ -1,12 +1,12 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Entity;
+namespace fibe\Bundle\WWWConfBundle\Entity_oldv1;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use fibe\Bundle\WWWConfBundle\Entity\Person;
-use fibe\Bundle\WWWConfBundle\Entity\Paper;
+use fibe\Bundle\WWWConfBundle\Entity_oldv1\Person;
+use fibe\Bundle\WWWConfBundle\Entity_oldv1\Paper;
 
 
 /**
@@ -52,11 +52,11 @@ class Author
   /**
    * Set person
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Person $person
+   * @param \fibe\Bundle\WWWConfBundle\Entity_oldv1\Person $person
    *
    * @return Author
    */
-  public function setPerson(\fibe\Bundle\WWWConfBundle\Entity\Person $person = null)
+  public function setPerson(\fibe\Bundle\WWWConfBundle\Entity_oldv1\Person $person = null)
   {
     $this->person = $person;
 
@@ -66,7 +66,7 @@ class Author
   /**
    * Get person
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\Person
+   * @return \fibe\Bundle\WWWConfBundle\Entity_oldv1\Person
    */
   public function getPerson()
   {
@@ -76,11 +76,11 @@ class Author
   /**
    * Set paper
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Paper $paper
+   * @param \fibe\Bundle\WWWConfBundle\Entity_oldv1\Paper $paper
    *
    * @return Author
    */
-  public function setPaper(\fibe\Bundle\WWWConfBundle\Entity\Paper $paper = null)
+  public function setPaper(\fibe\Bundle\WWWConfBundle\Entity_oldv1\Paper $paper = null)
   {
     $this->paper = $paper;
 
@@ -90,7 +90,7 @@ class Author
   /**
    * Get paper
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\Paper
+   * @return \fibe\Bundle\WWWConfBundle\Entity_oldv1\Paper
    */
   public function getPaper()
   {

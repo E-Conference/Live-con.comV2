@@ -61,7 +61,7 @@
 
       $entity = $currentConf;
       $newManagerDefaultAction = 'EDIT';
-      $repositoryName = 'WwwConf';
+      $repositoryName = 'MainEvent';
       $entityLabel = 'Conference';
       $confPermission=$this->newConfPermission($user,$restrictForm,$formAllowed,$noManager,$manager,$entity,$newManagerDefaultAction,$repositoryName,$entityLabel);
       $userConfPermission->addConfPermission($confPermission);

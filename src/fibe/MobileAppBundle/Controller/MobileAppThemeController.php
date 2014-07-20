@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use fibe\MobileAppBundle\Entity\MobileAppConfig;
 use fibe\MobileAppBundle\Form\MobileAppWwwConfType;
 
-use fibe\Bundle\WWWConfBundle\Entity\WwwConf;
+use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
 use fibe\Bundle\WWWConfBundle\Form\WwwConfType;
 use fibe\Bundle\WWWConfBundle\Form\MobileAppConfigType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -40,7 +40,7 @@ class MobileAppThemeController extends Controller
       $user = $this->getUser();
      
 
-    $granted = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('VIEW', 'WwwConf');
+    $granted = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('VIEW', 'MainEvent');
     $user = $this->getUser();
 
 

@@ -3,6 +3,7 @@
 namespace fibe\Bundle\WWWConfBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Expose;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -53,23 +54,22 @@ class Sponsor
   protected $slug;
 
   /**
-   * Company
+   * company
    *
-   * @ORM\OneToMany(targetEntity="Company", inversedBy="company", cascade={"remove","persist","merge"})
-   * @ORM\JoinTable(name="company",
-   *     joinColumns={@ORM\JoinColumn(name="sponsor_id", referencedColumnName="id", onDelete="Cascade")})
-   *     inverseJoinColumns={@ORM\JoinColumn(name="company_id", referencedColumnName="id", onDelete="Cascade")},
-   * @Expose
+   *
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Company", inversedBy="sponsors")
+   * @ORM\JoinColumn(name="company_id", referencedColumnName="id", onDelete="Set Null")
    */
-  private $company;
+  protected $company;
 
   /**
-   * Sponsors associated to this conference
+   * @TODO : manytomany with vevent
+   * sponsored event
    * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\VEvent", inversedBy="sponsor", cascade={"persist"})
    * @ORM\JoinColumn(name="mainEvent_id", referencedColumnName="id")
    *
    */
-  protected $mainEvent;
+  protected $event;
 
   /**
    * Events
@@ -78,14 +78,6 @@ class Sponsor
    * @ORM\ManyToMany(targetEntity="VEvent", mappedBy="papers", cascade={"persist"})
    */
   protected $events;
-
-  /**
-   * Constructor
-   */
-  public function __construct()
-  {
-
-  }
 
   /**
    * __toString method
@@ -121,7 +113,7 @@ class Sponsor
    *
    * @param string $slug
    *
-   * @return ConfEvent
+   * @return $this
    */
   public function setSlug($slug)
   {
@@ -172,26 +164,6 @@ class Sponsor
   public function getLabel()
   {
     return $this->label;
-  }
-
-  /**
-   * get the url of the sponsor
-   *
-   * @return mixed
-   */
-  public function getUrl()
-  {
-    return $this->url;
-  }
-
-  /**
-   * set the url of the sponsor
-   *
-   * @param mixed $url
-   */
-  public function setUrl($url)
-  {
-    $this->url = $url;
   }
 
   /**

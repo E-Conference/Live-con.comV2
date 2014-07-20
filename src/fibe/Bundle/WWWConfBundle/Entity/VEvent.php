@@ -1,10 +1,7 @@
 <?php
 namespace fibe\Bundle\WWWConfBundle\Entity;
 
-use fibe\Bundle\WWWConfBundle\Entity\Paper;
-use fibe\Bundle\WWWConfBundle\Entity\Topic;
-use fibe\Bundle\WWWConfBundle\Entity\Category;
-use fibe\Bundle\WWWConfBundle\Entity\Location;
+use Doctrine\Common\Collections\ArrayCollection;
 
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
@@ -224,7 +221,7 @@ class VEvent
    * status
    *
    * @ORM\Column(type="string", length=32)
-   * @Assert\Choice(choices = {"CANCELLED","CONFIRMED","TENTATIVE"}, message = "Choose a valid status.")
+   * @Assert\Choice(multiple=false, choices = {"CANCELLED","CONFIRMED","TENTATIVE"},  message = "Choose a valid status.")
    */
   protected $status;
 
@@ -316,11 +313,18 @@ class VEvent
    * information associated with the calendar component was last revised
    * in the calendar store.
    *
-   * @ORM\Column(type="datetime", name="modified_at")
+   * @ORM\Column(type="datetime", name="last_modified_at")
    */
-  protected $modifiedAt;
+  protected $lastModifiedAt;
 
-
+  /**
+   * constructor
+   */
+  public function __construct()
+  {
+    $this->roles = new ArrayCollection();
+    $this->setRevisionSequence($this->getRevisionSequence() + 1);
+  }
 
   /**
    * toString
@@ -334,14 +338,6 @@ class VEvent
       $this->getStartAt()->format('Y-m-d'),
       $this->getSummary()
     );
-  }
-
-  /**
-   * upRevisionSequence
-   */
-  public function upRevisionSequence()
-  {
-    $this->setRevisionSequence($this->getRevisionSequence() + 1);
   }
 
   /**
@@ -455,15 +451,6 @@ class VEvent
   }
 
   /**
-   * Constructor
-   */
-  public function __construct()
-  {
-    $this->VEvent = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
-  }
-
-  /**
    * Get id
    *
    * @return integer
@@ -478,7 +465,7 @@ class VEvent
    *
    * @param \DateTime $createdAt
    *
-   * @return CalendarEntity
+   * @return $this
    */
   public function setCreatedAt($createdAt)
   {
@@ -502,7 +489,7 @@ class VEvent
    *
    * @param \DateTime $startAt
    *
-   * @return CalendarEntity
+   * @return $this
    */
   public function setStartAt($startAt)
   {
@@ -526,9 +513,9 @@ class VEvent
    *
    * @param \DateTime $lastModifiedAt
    *
-   * @return CalendarEntity
+   * @return $this
    */
-  public function setLastModifiedAt($lastModifiedAt)
+  public function setLastModifiedAt(DateTime $lastModifiedAt)
   {
     $this->lastModifiedAt = $lastModifiedAt;
 
@@ -550,7 +537,7 @@ class VEvent
    *
    * @param string $summary
    *
-   * @return CalendarEntity
+   * @return $this
    */
   public function setSummary($summary)
   {
@@ -574,7 +561,7 @@ class VEvent
    *
    * @param string $description
    *
-   * @return CalendarEntity
+   * @return $this
    */
   public function setDescription($description)
   {
@@ -598,7 +585,7 @@ class VEvent
    *
    * @param string $comment
    *
-   * @return CalendarEntity
+   * @return $this
    */
   public function setComment($comment)
   {
@@ -622,7 +609,7 @@ class VEvent
    *
    * @param string $url
    *
-   * @return CalendarEntity
+   * @return $this
    */
   public function setUrl($url)
   {
@@ -646,7 +633,7 @@ class VEvent
    *
    * @param string $organizer
    *
-   * @return CalendarEntity
+   * @return $this
    */
   public function setOrganizer($organizer)
   {
@@ -670,7 +657,7 @@ class VEvent
    *
    * @param integer $revisionSequence
    *
-   * @return CalendarEntity
+   * @return $this
    */
   public function setRevisionSequence($revisionSequence)
   {
@@ -694,7 +681,7 @@ class VEvent
    *
    * @param string $attendees
    *
-   * @return CalendarEntity
+   * @return $this
    */
   public function setAttendees($attendees)
   {
@@ -718,7 +705,7 @@ class VEvent
    *
    * @param string $contacts
    *
-   * @return CalendarEntity
+   * @return $this
    */
   public function setContacts($contacts)
   {
@@ -742,7 +729,7 @@ class VEvent
    *
    * @param string $classification
    *
-   * @return CalendarEntity
+   * @return $this
    */
   public function setClassification($classification)
   {
@@ -764,11 +751,11 @@ class VEvent
   /**
    * Set status
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Status $status
+   * @param String $status
    *
-   * @return CalendarEntity
+   * @return $this
    */
-  public function setStatus(\fibe\Bundle\WWWConfBundle\Entity\Status $status = null)
+  public function setStatus($status)
   {
     $this->status = $status;
 
@@ -778,7 +765,7 @@ class VEvent
   /**
    * Get status
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\Status
+   * @return String
    */
   public function getStatus()
   {
@@ -788,11 +775,11 @@ class VEvent
   /**
    * Set location
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Location $location
+   * @param Location $location
    *
-   * @return LocationAwareCalendarEntity
+   * @return $this
    */
-  public function setLocation(\fibe\Bundle\WWWConfBundle\Entity\Location $location = null)
+  public function setLocation(Location $location = null)
   {
     $this->location = $location;
 
@@ -802,35 +789,45 @@ class VEvent
   /**
    * Get location
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\Location
+   * @return Location
    */
   public function getLocation()
   {
     return $this->location;
   }
 
-  /**topic
-   * Add categories
+  /**
+   * Add roles
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Category $categories
+   * @param Role $role
    *
-   * @return CalendarEntity
+   * @return $this
    */
-  public function addCategorie(\fibe\Bundle\WWWConfBundle\Entity\Category $categories)
+  public function addRole(Role $role)
   {
-    $this->categories[] = $categories;
+    $this->roles[] = $role;
 
     return $this;
   }
 
   /**
-   * Remove categories
+   * Remove roles
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Category $categories
+   * @param Role $role
    */
-  public function removeCategorie(\fibe\Bundle\WWWConfBundle\Entity\Category $categories)
+  public function removeRole(Role $role)
   {
-    $this->categories->removeElement($categories);
+    $this->roles->removeElement($role);
+  }
+
+  /**
+   * Get roles
+   *
+   * @return \Doctrine\Common\Collections\Collection
+   */
+  public function getRoles()
+  {
+    return $this->roles;
   }
 
   /**

@@ -12,7 +12,7 @@
   use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
   use fibe\MobileAppBundle\Entity\MobileAppConfig;
-  use fibe\Bundle\WWWConfBundle\Entity\WwwConf;
+  use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
 
   /**
    * Mobile app controller.
@@ -29,7 +29,7 @@
     {
       $em = $this->getDoctrine()->getManager();
 
-    	$conference = $em->getRepository('fibeWWWConfBundle:WwwConf')->findOneBySlug($slug);
+    	$conference = $em->getRepository('fibeWWWConfBundle:MainEvent')->findOneBySlug($slug);
     	$mobile_app_config = $conference->getAppConfig();
         $apiUri = $this->get('router')->generate('idci_exporter_api_homeapi');
         $apiType = "rest";
@@ -53,7 +53,7 @@
     {
         $em = $this->getDoctrine()->getManager();
 
-        $conference = $em->getRepository('fibeWWWConfBundle:WwwConf')->findOneBySlug($slug);
+        $conference = $em->getRepository('fibeWWWConfBundle:MainEvent')->findOneBySlug($slug);
 
         if($conference == null) {
             throw new NotFoundHttpException();
@@ -78,7 +78,7 @@
         /*
         $em = $this->getDoctrine()->getManager();
 
-        $conference = $em->getRepository('fibeWWWConfBundle:WwwConf')->findOneBySlug($slug);
+        $conference = $em->getRepository('fibeWWWConfBundle:MainEvent')->findOneBySlug($slug);
         if(!$conference){
             throw new NotFoundHttpException();
         }

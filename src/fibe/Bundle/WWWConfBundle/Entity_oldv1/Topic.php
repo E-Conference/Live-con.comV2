@@ -1,6 +1,6 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Entity;
+namespace fibe\Bundle\WWWConfBundle\Entity_oldv1;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -48,7 +48,7 @@ class Topic
 
   /**
    *  Topics associated to this conference
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\WwwConf", inversedBy="topics", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="topics", cascade={"persist"})
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    *
    */
@@ -169,11 +169,11 @@ class Topic
   /**
    * Add events
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events
+   * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $events
    *
    * @return Topic
    */
-  public function addEvent(\fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events)
+  public function addEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $events)
   {
     $this->events[] = $events;
 
@@ -183,9 +183,9 @@ class Topic
   /**
    * Remove events
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events
+   * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $events
    */
-  public function removeEvent(\fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events)
+  public function removeEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $events)
   {
     $this->events->removeElement($events);
   }
@@ -227,11 +227,11 @@ class Topic
   /**
    * Set conference
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference
+   * @param \fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference
    *
    * @return Topic
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference = null)
+  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference = null)
   {
     $this->conference = $conference;
 
@@ -241,7 +241,7 @@ class Topic
   /**
    * Get conference
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\WwwConf
+   * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
    */
   public function getConference()
   {

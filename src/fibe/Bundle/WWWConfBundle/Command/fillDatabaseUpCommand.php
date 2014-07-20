@@ -1,7 +1,7 @@
 <?php
   namespace fibe\Bundle\WWWConfBundle\Command;
 
-  use fibe\Bundle\WWWConfBundle\Entity\ConfEvent;
+  use fibe\Bundle\WWWConfBundle\Entity\VEvent;
   use fibe\MobileAppBundle\Entity\MobileAppConfig;
   use fibe\Bundle\WWWConfBundle\Entity\Module;
   use fibe\Bundle\WWWConfBundle\Entity\Organization;
@@ -10,7 +10,7 @@
   use fibe\Bundle\WWWConfBundle\Entity\Role;
   use fibe\Bundle\WWWConfBundle\Entity\RoleType;
   use fibe\Bundle\WWWConfBundle\Entity\Topic;
-  use fibe\Bundle\WWWConfBundle\Entity\WwwConf;
+  use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
   use fibe\Bundle\WWWConfBundle\Entity\Location;
   use fibe\Bundle\WWWConfBundle\Form\WwwConfType;
   use fibe\Bundle\WWWConfBundle\Form\WwwConfEventType;
@@ -277,7 +277,7 @@
       $output->writeln("conference " . $counter . " started");
       $em = $this->getContainer()->get('doctrine')->getManager('default');
       //Create the default conference
-      $conference = new WwwConf();
+      $conference = new MainEvent();
       $conference->setLogoPath("livecon.png");
       $em->persist($conference);
 

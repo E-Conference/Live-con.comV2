@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 //On insere l'entity Event  de simple schedule
 
-use fibe\Bundle\WWWConfBundle\Entity\ConfEvent as Event;
+use fibe\Bundle\WWWConfBundle\Entity\VEvent as Event;
 use fibe\Bundle\WWWConfBundle\Entity\XProperty;
 use fibe\Bundle\WWWConfBundle\Entity\Location;
 use fibe\Bundle\WWWConfBundle\Entity\Role;
@@ -39,8 +39,8 @@ class ScheduleController extends Controller
    */
   public function scheduleAction()
   {
-    // Si on peut récupérer un objet WwwConf, l'utilisateur à le droit...
-    $granted = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'WwwConf');
+    // Si on peut récupérer un objet MainEvent, l'utilisateur à le droit...
+    $granted = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'MainEvent');
 
     $user = $this->getUser();
     $em = $this->getDoctrine();
@@ -68,7 +68,7 @@ class ScheduleController extends Controller
   public function getEventsAction(Request $request)
   {
     //Authorization Verification conference sched manager
-    if ($this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'WwwConf') == null)
+    if ($this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'MainEvent') == null)
     {
       throw new AccessDeniedException('Action not authorized !');
     }
@@ -199,7 +199,7 @@ class ScheduleController extends Controller
    */
   public function scheduleEditAction(Request $request)
   {
-    $granted = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'WwwConf');
+    $granted = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'MainEvent');
     if (!isset($granted))
     {
       throw new AccessDeniedException('Action not authorized !');
@@ -276,7 +276,7 @@ class ScheduleController extends Controller
    * //   */
 //  public function scheduleUpdateAction(Request $request, $id)
 //  {
-//    $granted = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'WwwConf');
+//    $granted = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'MainEvent');
 //    if (!isset($granted))
 //    {
 //      throw new AccessDeniedException('Action not authorized !');

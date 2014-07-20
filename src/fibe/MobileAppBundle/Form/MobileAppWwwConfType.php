@@ -47,7 +47,7 @@
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
       $resolver->setDefaults(array(
-        'data_class'         => 'fibe\Bundle\WWWConfBundle\Entity\WwwConf',
+        'data_class'         => 'fibe\Bundle\WWWConfBundle\Entity\MainEvent',
         'cascade_validation' => true,
       ));
     }

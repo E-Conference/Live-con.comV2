@@ -170,11 +170,11 @@ class Topic
   /**
    * Add events
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events
+   * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $events
    *
    * @return Topic
    */
-  public function addEvent(\fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events)
+  public function addEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $events)
   {
     $this->events[] = $events;
 
@@ -184,9 +184,9 @@ class Topic
   /**
    * Remove events
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events
+   * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $events
    */
-  public function removeEvent(\fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events)
+  public function removeEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $events)
   {
     $this->events->removeElement($events);
   }
@@ -228,11 +228,11 @@ class Topic
   /**
    * Set conference
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference
+   * @param \fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference
    *
    * @return Topic
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference = null)
+  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference = null)
   {
     $this->conference = $conference;
 
@@ -242,7 +242,7 @@ class Topic
   /**
    * Get conference
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\WwwConf
+   * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
    */
   public function getConference()
   {

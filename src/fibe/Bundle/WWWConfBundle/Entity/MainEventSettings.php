@@ -5,7 +5,7 @@ namespace fibe\Bundle\WWWConfBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use fibe\Bundle\WWWConfBundle\Entity\WwwConf;
+use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
@@ -13,8 +13,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * This entity define actives module for a conference
  *
  *
- * @ORM\Table(name="module")
- * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\ModuleRepository")
+ * @ORM\Table(name="main_event_settings")
+ * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\MainEventSettingsRepository")
  *
  */
 class MainEventSettings

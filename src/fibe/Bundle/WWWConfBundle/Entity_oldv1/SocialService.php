@@ -1,12 +1,12 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Entity;
+namespace fibe\Bundle\WWWConfBundle\Entity_oldv1;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-use fibe\Bundle\WWWConfBundle\Entity\SocialServiceAccount;
+use fibe\Bundle\WWWConfBundle\Entity_oldv1\SocialServiceAccount;
 
 
 /**

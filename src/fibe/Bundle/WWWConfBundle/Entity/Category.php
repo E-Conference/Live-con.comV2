@@ -2,7 +2,9 @@
 
 namespace fibe\Bundle\WWWConfBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
 use fibe\Bundle\WWWConfBundle\Util\StringTools;
 
 /**
@@ -48,13 +50,11 @@ class Category
 
   /**
    * @TODO EVENT ==> Lier à main event.
-   * Rmq: Noemalement plus de lien avec un evenemet principal
-   * puisque les categories seront ajoutés et globale
    *
    * @ORM\ManyToOne(targetEntity="MainEvent", inversedBy="categories")
-   * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
+   * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    */
-  protected $conference;
+  protected $mainEvent;
 
   /**
    * toString
@@ -71,8 +71,8 @@ class Category
    */
   public function __construct()
   {
-    $this->childs = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->calendarEntities = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->childs = new ArrayCollection();
+    $this->calendarEntities = new ArrayCollection();
   }
 
   /**
@@ -105,11 +105,11 @@ class Category
   }
 
   /**
-   * Set name
+   * Set label
    *
-   * @param string $name
+   * @param $label
    *
-   * @return Category
+   * @return $this
    */
   public function setLabel($label)
   {
@@ -133,7 +133,7 @@ class Category
    *
    * @param string $slug
    *
-   * @return Category
+   * @return $this
    */
   public function setSlug($slug)
   {
@@ -157,7 +157,7 @@ class Category
    *
    * @param string $description
    *
-   * @return Category
+   * @return $this
    */
   public function setDescription($description)
   {
@@ -181,7 +181,7 @@ class Category
    *
    * @param string $color
    *
-   * @return Category
+   * @return $this
    */
   public function setColor($color)
   {
@@ -210,7 +210,7 @@ class Category
    *
    * @param \fibe\Bundle\WWWConfBundle\Entity\CalendarEntity $calendarEntities
    *
-   * @return Category
+   * @return $this
    */
   public function addCalendarEntitie(\fibe\Bundle\WWWConfBundle\Entity\CalendarEntity $calendarEntities)
   {
@@ -240,27 +240,27 @@ class Category
   }
 
   /**
-   * Set conference
+   * Set mainEvent
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\WwwConf $wwwConf
+   * @param MainEvent $mainEvent
    *
-   * @return Category
+   * @return $this
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference = null)
+  public function setMainEvent(MainEvent $mainEvent = null)
   {
-    $this->conference = $conference;
+    $this->mainEvent = $mainEvent;
 
     return $this;
   }
 
   /**
-   * Get conference
+   * Get mainEvent
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\WwwConf
+   * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
    */
   public function getConference()
   {
-    return $this->conference;
+    return $this->mainEvent;
   }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Entity;
+namespace fibe\Bundle\WWWConfBundle\Entity_oldv1;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
@@ -63,7 +63,7 @@ class Organization
 
   /**
    *  Topics associated to this conference
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\WwwConf", inversedBy="organizations", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="organizations", cascade={"persist"})
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    *
    */
@@ -253,11 +253,11 @@ class Organization
   /**
    * Set conference
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference
+   * @param \fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference
    *
    * @return Organization
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference = null)
+  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference = null)
   {
     $this->conference = $conference;
 
@@ -267,7 +267,7 @@ class Organization
   /**
    * Get conference
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\WwwConf
+   * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
    */
   public function getConference()
   {

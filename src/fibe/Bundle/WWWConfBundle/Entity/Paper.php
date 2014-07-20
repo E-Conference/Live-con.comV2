@@ -5,8 +5,8 @@ namespace fibe\Bundle\WWWConfBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use fibe\Bundle\WWWConfBundle\Entity\wwwConf;
-use fibe\Bundle\WWWConfBundle\Entity\ConfEvent;
+use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
+use fibe\Bundle\WWWConfBundle\Entity\VEvent;
 use fibe\Bundle\WWWConfBundle\Util\StringTools;
 
 /**
@@ -373,11 +373,11 @@ class Paper
   /**
    * Add events
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events
+   * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $events
    *
    * @return Paper
    */
-  public function addEvent(\fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events)
+  public function addEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $events)
   {
     $this->events[] = $events;
 
@@ -387,9 +387,9 @@ class Paper
   /**
    * Remove events
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events
+   * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $events
    */
-  public function removeEvent(\fibe\Bundle\WWWConfBundle\Entity\ConfEvent $events)
+  public function removeEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $events)
   {
     $this->events->removeElement($events);
   }
@@ -407,11 +407,11 @@ class Paper
   /**
    * Set conference
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference
+   * @param \fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference
    *
    * @return Paper
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference = null)
+  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference = null)
   {
     $this->conference = $conference;
 
@@ -421,7 +421,7 @@ class Paper
   /**
    * Get conference
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\WwwConf
+   * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
    */
   public function getConference()
   {

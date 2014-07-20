@@ -28,14 +28,12 @@ class MappingFile
   /**
    * mapping
    *
-   *
    * @ORM\Column(type="text", name="mapping", nullable=false)
    */
   private $mapping;
 
   /**
-   * abstract
-   * events in datasets may don't have abstract
+   * @TODO comment
    *
    * @ORM\Column(type="string", name="type", nullable=false)
    */
@@ -43,7 +41,7 @@ class MappingFile
 
   /**
    *  Conference associated to this mappingFile
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\WwwConf", inversedBy="mappingFiles", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="mappingFiles", cascade={"persist"})
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    *
    */
@@ -110,11 +108,11 @@ class MappingFile
   /**
    * Set conference
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference
+   * @param \fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference
    *
    * @return MappingFile
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference = null)
+  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference = null)
   {
     $this->conference = $conference;
 
@@ -124,7 +122,7 @@ class MappingFile
   /**
    * Get conference
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\WwwConf
+   * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
    */
   public function getConference()
   {

@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-use fibe\Bundle\WWWConfBundle\Entity\ConfEvent;
+use fibe\Bundle\WWWConfBundle\Entity\VEvent;
 use fibe\Bundle\WWWConfBundle\Form\ConfEventType;
 use fibe\Bundle\WWWConfBundle\Entity\Role;
 use fibe\Bundle\WWWConfBundle\Entity\Topic;

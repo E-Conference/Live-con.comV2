@@ -113,7 +113,6 @@ class Event extends VEvent
     parent::__construct();
     $this->papers = new \Doctrine\Common\Collections\ArrayCollection();
     $this->topics = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
     $this->children = new \Doctrine\Common\Collections\ArrayCollection();
     $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
   }
@@ -267,11 +266,11 @@ class Event extends VEvent
   /**
    * Set conference
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference
+   * @param \fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference
    *
    * @return ConfEvent
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference)
+  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference)
   {
     $this->conference = $conference;
 
@@ -281,7 +280,7 @@ class Event extends VEvent
   /**
    * Get conference
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\WwwConf
+   * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
    */
   public function getConference()
   {
@@ -354,40 +353,6 @@ class Event extends VEvent
   public function getTopics()
   {
     return $this->topics;
-  }
-
-  /**
-   * Add roles
-   *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Role $roles
-   *
-   * @return ConfEvent
-   */
-  public function addRole(\fibe\Bundle\WWWConfBundle\Entity\Role $roles)
-  {
-    $this->roles[] = $roles;
-
-    return $this;
-  }
-
-  /**
-   * Remove roles
-   *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Role $roles
-   */
-  public function removeRole(\fibe\Bundle\WWWConfBundle\Entity\Role $roles)
-  {
-    $this->roles->removeElement($roles);
-  }
-
-  /**
-   * Get roles
-   *
-   * @return \Doctrine\Common\Collections\Collection
-   */
-  public function getRoles()
-  {
-    return $this->roles;
   }
 
   /**

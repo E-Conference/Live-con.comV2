@@ -103,11 +103,11 @@ class Role
   /**
    * Set event
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\ConfEvent $event
+   * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $event
    *
    * @return Role
    */
-  public function setEvent(\fibe\Bundle\WWWConfBundle\Entity\ConfEvent $event = null)
+  public function setEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $event = null)
   {
     $this->event = $event;
 
@@ -117,7 +117,7 @@ class Role
   /**
    * Get event
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\ConfEvent
+   * @return \fibe\Bundle\WWWConfBundle\Entity\VEvent
    */
   public function getEvent()
   {
@@ -151,11 +151,11 @@ class Role
   /**
    * Set conference
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\WwwConf $conf
+   * @param \fibe\Bundle\WWWConfBundle\Entity\MainEvent $conf
    *
    * @return Role
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\WwwConf $conf)
+  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conf)
   {
     $this->conference = $conf;
 
@@ -165,7 +165,7 @@ class Role
   /**
    * Get conference
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\WwwConf
+   * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
    */
   public function getConference()
   {

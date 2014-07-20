@@ -2,14 +2,16 @@
 
 namespace fibe\Bundle\WWWConfBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\UserInterface;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use fibe\Bundle\WWWConfBundle\Entity\ConfEvent;
+use fibe\Bundle\WWWConfBundle\Entity\VEvent;
 
 use fibe\Bundle\WWWConfBundle\Util\StringTools;
 
@@ -36,11 +38,20 @@ class Person
   /**
    * Additional Infomations of the company
    *
-   * @ORM\OneToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\AddtionalInformations", cascade={"persist", "remove"})
+   * @ORM\OneToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\AdditionalInformations", cascade={"persist", "remove"})
    * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id", onDelete="CASCADE")
    *
    */
   protected $additionalInformation;
+
+  /**
+   * technical user
+   *
+   * @ORM\OneToOne(targetEntity="fibe\SecurityBundle\Entity\User", cascade={"persist", "remove"})
+   * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
+   *
+   */
+  protected $user;
 
   /**
    * label
@@ -152,10 +163,11 @@ class Person
    */
   public function __construct()
   {
-    $this->papers = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->organization = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->accounts = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->papers = new ArrayCollection();
+    $this->companies = new ArrayCollection();
+    $this->roles = new ArrayCollection();
+    $this->accounts = new ArrayCollection();
+    $this->$mainEvents = new ArrayCollection();
   }
 
   /**
@@ -205,7 +217,7 @@ class Person
    *
    * @param string $slug
    *
-   * @return ConfEvent
+   * @return $this
    */
   public function setSlug($slug)
   {
@@ -241,7 +253,7 @@ class Person
    *
    * @param string $label
    *
-   * @return Person
+   * @return $this
    */
   public function setLabel($label)
   {
@@ -265,7 +277,7 @@ class Person
    *
    * @param string $familyName
    *
-   * @return Person
+   * @return $this
    */
   public function setFamilyName($familyName)
   {
@@ -289,7 +301,7 @@ class Person
    *
    * @param string $firstName
    *
-   * @return Person
+   * @return $this
    */
   public function setFirstName($firstName)
   {
@@ -313,7 +325,7 @@ class Person
    *
    * @param string $description
    *
-   * @return Person
+   * @return $this
    */
   public function setDescription($description)
   {
@@ -337,7 +349,7 @@ class Person
    *
    * @param integer $age
    *
-   * @return Person
+   * @return $this
    */
   public function setAge($age)
   {
@@ -361,7 +373,7 @@ class Person
    *
    * @param string $openId
    *
-   * @return Person
+   * @return $this
    */
   public function setOpenId($openId)
   {
@@ -383,11 +395,11 @@ class Person
   /**
    * Add papers
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Paper $papers
+   * @param Paper $papers
    *
-   * @return Person
+   * @return $this
    */
-  public function addPaper(\fibe\Bundle\WWWConfBundle\Entity\Paper $papers)
+  public function addPaper(Paper $papers)
   {
     $this->papers[] = $papers;
 
@@ -397,9 +409,9 @@ class Person
   /**
    * Remove papers
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Paper $papers
+   * @param Paper $papers
    */
-  public function removePaper(\fibe\Bundle\WWWConfBundle\Entity\Paper $papers)
+  public function removePaper(Paper $papers)
   {
     $this->papers->removeElement($papers);
   }
@@ -417,13 +429,13 @@ class Person
   /**
    * Add company
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Organization $company
+   * @param Company $company
    *
-   * @return Person
+   * @return $this
    */
-  public function addOrganization(\fibe\Bundle\WWWConfBundle\Entity\Organization $company)
+  public function addCompany(Company $company)
   {
-    $this->company[] = $company;
+    $this->companies[] = $company;
 
     return $this;
   }
@@ -431,11 +443,11 @@ class Person
   /**
    * Remove company
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Organization $company
+   * @param Company $company
    */
-  public function removeOrganization(\fibe\Bundle\WWWConfBundle\Entity\Organization $company)
+  public function removeCompany(Company $company)
   {
-    $this->company->removeElement($company);
+    $this->companies->removeElement($company);
   }
 
   /**
@@ -445,17 +457,17 @@ class Person
    */
   public function getCompany()
   {
-    return $this->company;
+    return $this->companies;
   }
 
   /**
    * Add roles
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Role $roles
+   * @param Role $roles
    *
-   * @return Person
+   * @return $this
    */
-  public function addRole(\fibe\Bundle\WWWConfBundle\Entity\Role $roles)
+  public function addRole(Role $roles)
   {
     $this->roles[] = $roles;
 
@@ -465,9 +477,9 @@ class Person
   /**
    * Remove roles
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Role $roles
+   * @param Role $roles
    */
-  public function removeRole(\fibe\Bundle\WWWConfBundle\Entity\Role $roles)
+  public function removeRole(Role $roles)
   {
     $this->roles->removeElement($roles);
   }
@@ -483,37 +495,36 @@ class Person
   }
 
   /**
-   * Set conference
+   * Set mainEvents
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference
-   *
-   * @return Person
+   * @param ArrayCollection $mainEvents
+   * @return $this
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference = null)
+  public function setMainEvent(ArrayCollection $mainEvents)
   {
-    $this->conference = $conference;
+    $this->mainEvents = $mainEvents;
 
     return $this;
   }
 
   /**
-   * Get conference
+   * Get mainEvents
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\WwwConf
+   * @return ArrayCollection
    */
-  public function getConference()
+  public function getMainEvents()
   {
-    return $this->conference;
+    return $this->mainEvents;
   }
 
   /**
    * Add accounts
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\SocialServiceAccount $accounts
+   * @param SocialServiceAccount $accounts
    *
-   * @return Person
+   * @return $this
    */
-  public function addAccount(\fibe\Bundle\WWWConfBundle\Entity\SocialServiceAccount $accounts)
+  public function addAccount(SocialServiceAccount $accounts)
   {
     $this->accounts[] = $accounts;
 
@@ -523,9 +534,9 @@ class Person
   /**
    * Remove accounts
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\SocialServiceAccount $accounts
+   * @param SocialServiceAccount $accounts
    */
-  public function removeAccount(\fibe\Bundle\WWWConfBundle\Entity\SocialServiceAccount $accounts)
+  public function removeAccount(SocialServiceAccount $accounts)
   {
     $this->accounts->removeElement($accounts);
   }
@@ -538,5 +549,21 @@ class Person
   public function getAccounts()
   {
     return $this->accounts;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getUser()
+  {
+    return $this->user;
+  }
+
+  /**
+   * @param UserInterface $user
+   */
+  public function setUser(UserInterface $user)
+  {
+    $this->user = $user;
   }
 }

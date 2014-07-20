@@ -8,8 +8,8 @@
   use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
   use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-  use fibe\Bundle\WWWConfBundle\Entity\WwwConf;
-  use fibe\Bundle\WWWConfBundle\Entity\ConfEvent;
+  use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
+  use fibe\Bundle\WWWConfBundle\Entity\VEvent;
   use fibe\Bundle\WWWConfBundle\Entity\Category;
   use fibe\MobileAppBundle\Entity\MobileAppConfig;
   use fibe\Bundle\WWWConfBundle\Form\WwwConfType;
@@ -44,7 +44,7 @@
      */
     public function showAction(Request $request)
     {
-      $conference = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW','WwwConf',$this->getUser()->getCurrentConf());
+      $conference = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW','MainEvent',$this->getUser()->getCurrentConf());
       
       $mainConfEvent = $conference->getMainConfEvent();
       $form = $this->createForm(new WwwConfType($this->getUser()), $conference);
@@ -92,7 +92,7 @@
     {
       $em = $this->getDoctrine()->getManager();
 
-      $conference = $this->get('fibe_security.acl_entity_helper')->getEntityACL('DELETE','WwwConf',$this->getUser()->getCurrentConf());
+      $conference = $this->get('fibe_security.acl_entity_helper')->getEntityACL('DELETE','MainEvent',$this->getUser()->getCurrentConf());
 
       //TODO CSRF TOKEN
       // $csrf = $this->get('form.csrf_provider'); //Symfony\Component\Form\Extension\Csrf\CsrfProvider\SessionCsrfProvider 
@@ -121,7 +121,7 @@
       $em = $this->getDoctrine()->getManager();
 
       //Create the default conference
-      $entity = new WwwConf();
+      $entity = new MainEvent();
       $entity->setLogoPath("livecon.png");
       $em->persist($entity);
 
@@ -383,7 +383,7 @@
       $em = $this->getDoctrine()->getManager();
       $user = $this->getUser();
 
-      $conference = $this->get('fibe_security.acl_entity_helper')->getEntityACL('DELETE','WwwConf',$id);
+      $conference = $this->get('fibe_security.acl_entity_helper')->getEntityACL('DELETE','MainEvent',$id);
 
       //Change User current Conf
       $user->setCurrentConf(null);

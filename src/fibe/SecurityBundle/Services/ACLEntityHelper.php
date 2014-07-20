@@ -23,11 +23,11 @@ use fibe\SecurityBundle\Entity\UserConfPermission;
 class ACLEntityHelper extends ACLHelper
 {
 
-  const LINK_WITH = 'WwwConf';
+  const LINK_WITH = 'MainEvent';
 
   /** @const */
   public static $ACLEntityNameArray = array(
-    'WwwConf' => array(
+    'MainEvent' => array(
       'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
     ),
     'Team' => array(
@@ -88,7 +88,7 @@ class ACLEntityHelper extends ACLHelper
       'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
     ),
     'RoleType' => array(
-      'parent'    => 'WwwConf',
+      'parent'    => 'MainEvent',
       'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
     )
   );
@@ -125,7 +125,7 @@ class ACLEntityHelper extends ACLHelper
 
   /**
    * get entities link with the current conf with their foreign key "conference" = current_conf_id
-   * get every WwwConf when repositoryName param is = "WwwConf"
+   * get every MainEvent when repositoryName param is = "MainEvent"
    * i.e.
    * $entities = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('EDIT','Topic');
    * TODO : perf improvments

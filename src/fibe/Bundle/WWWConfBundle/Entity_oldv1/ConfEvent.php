@@ -1,13 +1,13 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Entity;
+namespace fibe\Bundle\WWWConfBundle\Entity_oldv1;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use fibe\Bundle\WWWConfBundle\Entity\Event;
-use fibe\Bundle\WWWConfBundle\Entity\Person;
-use fibe\Bundle\WWWConfBundle\Entity\Paper;
+use fibe\Bundle\WWWConfBundle\Entity_oldv1\Event;
+use fibe\Bundle\WWWConfBundle\Entity_oldv1\Person;
+use fibe\Bundle\WWWConfBundle\Entity_oldv1\Paper;
 
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
@@ -54,7 +54,7 @@ class ConfEvent extends Event
   /**
    * conference
    *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\WwwConf", inversedBy="events", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="events", cascade={"persist"})
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    * @Expose
    */
@@ -359,11 +359,11 @@ class ConfEvent extends Event
   /**
    * Set conference
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference
+   * @param \fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference
    *
    * @return ConfEvent
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\WwwConf $conference)
+  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference)
   {
     $this->conference = $conference;
 
@@ -373,7 +373,7 @@ class ConfEvent extends Event
   /**
    * Get conference
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\WwwConf
+   * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
    */
   public function getConference()
   {
