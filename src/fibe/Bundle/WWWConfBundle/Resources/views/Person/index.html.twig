@@ -1,64 +1,53 @@
-{% extends 'fibeWWWConfBundle::base.html.twig' %}
+{% extends '::base.html.twig' %}
 
-{% block title %}Person{% endblock title %}
+{% block body -%}
+    <h1>Person list</h1>
 
-{% block centerPanel %}
-  {{ parent() }}
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Label</th>
+                <th>Familyname</th>
+                <th>Firstname</th>
+                <th>Description</th>
+                <th>Age</th>
+                <th>Openid</th>
+                <th>Slug</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('person_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.label }}</td>
+                <td>{{ entity.familyName }}</td>
+                <td>{{ entity.firstName }}</td>
+                <td>{{ entity.description }}</td>
+                <td>{{ entity.age }}</td>
+                <td>{{ entity.openId }}</td>
+                <td>{{ entity.slug }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('person_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('person_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-  <div class="row page-top-header ">
-    <div class="page-title  col-xs-5  col-sm-4 col-md-3 col-lg-2">
-      <span>Person list</span>
-      <a class="btn btn-info" href="{{ path('documentation', { 'anchor': 'Person' }) }}" target="_blank" title="Help">
-        <i class="fa fa-question"></i>
-      </a>
-    </div>
-
-    <div class=" col-xs-2 col-sm-4 col-md-6 col-lg-8">
-    </div>
-    {% if is_granted('CREATE', app.user.getCurrentConf()) %}
-      <div class="page-btn-list  col-xs-5  col-sm-4 col-md-3 col-lg-2">
-        <a class="btn btn-info btn-create create" href="{{ path('schedule_person_new') }}" title="Add a person">
-          <i class="fa fa-plus"></i> New person
-        </a>
-      </div>
-    {% endif %}
-  </div>
-  <div class="row page-content">
-
-    {% include "fibeWWWConfBundle:Filters:filters.html.twig" %}
-
-    <div id="person_list" class="table-responsive">
-      {% include "fibeWWWConfBundle:Person:list.html.twig" %}
-    </div>
-  </div>
-
-{% endblock %}
-
-{% block javascripts_page %}
-  <script type="text/javascript">
-    $(document).ready(function ()
-    {
-      $("#resultsFound").hide();
-    });
-
-    function filter()
-    {
-      $datas = $("#filter_form").serialize();
-
-      //start send the post request
-      $.post("{{path('schedule_person_filter')}}",
-          $datas,
-          function (response)
-          {
-            $('#person_list').html(response);
-            $("#resultsFound").show();
-
-          }, "html");
-      return false;
-    }
-    ;
-  </script>
-
-{% endblock javascripts_page %}
-
-
+        <ul>
+        <li>
+            <a href="{{ path('person_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

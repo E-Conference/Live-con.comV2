@@ -19,7 +19,7 @@ class PersonControllerTest extends WebTestCase
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'fibe_bundle_wwwconfbundle_persontype[field_name]'  => 'Test',
+            'fibe_bundle_wwwconfbundle_person[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -32,8 +32,8 @@ class PersonControllerTest extends WebTestCase
         // Edit the entity
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
-        $form = $crawler->selectButton('Edit')->form(array(
-            'fibe_bundle_wwwconfbundle_persontype[field_name]'  => 'Foo',
+        $form = $crawler->selectButton('Update')->form(array(
+            'fibe_bundle_wwwconfbundle_person[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 

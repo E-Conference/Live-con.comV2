@@ -1,5 +1,4 @@
 <?php
-
 namespace fibe\Bundle\WWWConfBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;

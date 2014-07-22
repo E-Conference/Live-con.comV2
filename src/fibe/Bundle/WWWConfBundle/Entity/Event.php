@@ -21,6 +21,7 @@ use fibe\Bundle\WWWConfBundle\Util\StringTools;
  *
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
+ * @ORM\Table(name="Event")
  * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\EventRepository")
  * @ORM\HasLifecycleCallbacks
  */

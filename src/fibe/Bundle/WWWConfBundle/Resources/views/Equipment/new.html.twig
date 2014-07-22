@@ -1,29 +1,15 @@
-{% extends 'fibeWWWConfBundle::base.html.twig' %}
+{% extends '::base.html.twig' %}
 
+{% block body -%}
+    <h1>Equipment creation</h1>
 
-{% block title %}New equipment{% endblock title %}
+    {{ form(form) }}
 
-{% block centerPanel %}
-  {{ parent() }}
-  <div class="container">
-    <div class="row center">
-      <h1>Equipment creation</h1>
-
-      <form action="{{ path('schedule_equipment_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form) }}
-        <p>
-          <button type="submit" class="btn btn-default"><span class="fa fa-check"></span></button>
-        </p>
-      </form>
-
-      <ul class="record_actions">
-
+        <ul class="record_actions">
+    <li>
         <a href="{{ path('equipment') }}">
-          <a class="btn btn-warning" href="{{ path('schedule_equipment_new') }}">
-            <span class="icon-list glyphicon-white"></span>
-          </a>
+            Back to the list
         </a>
-      </ul>
-    </div>
-  </div>
+    </li>
+</ul>
 {% endblock %}
