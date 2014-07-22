@@ -26,9 +26,9 @@
      * Conference
      *
      * @ORM\OneToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent",cascade={"persist","remove"})
-     * @ORM\JoinColumn(name="conference", referencedColumnName="id",onDelete="CASCADE")
+     * @ORM\JoinColumn(name="main_event", referencedColumnName="id",onDelete="CASCADE")
      */
-    private $conference;
+    private $mainEvent;
     
     /**
      * BGContent
@@ -165,27 +165,27 @@
     }
 
     /**
-     * Set conference
+     * Set mainEvent
      *
-     * @param boolean $conference
+     * @param boolean $mainEvent
      *
      * @return MobileAppConfig
      */
-    public function setConference($conference)
+    public function setMainEvent($mainEvent)
     {
-      $this->conference = $conference;
+      $this->mainEvent = $mainEvent;
 
       return $this;
     }
 
     /**
-     * Get conference
+     * Get mainEvent
      *
      * @return boolean
      */
-    public function getConference()
+    public function getMainEvent()
     {
-      return $this->conference;
+      return $this->mainEvent;
     }
 
     /**

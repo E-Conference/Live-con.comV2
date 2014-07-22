@@ -36,7 +36,7 @@
         ->add('logo', 'file', array('required' => false,
                                     'label'    => 'Logo (jpeg - png - 2MO)',
                                     'attr'     => array('placeholder' => 'logoPath')))
-        ->add('mainConfEvent', new MobileAppWwwConfEventType($this->user, $this->entity), array(
+        ->add('mainEvent', new MobileAppWwwConfEventType($this->user, $this->entity), array(
           'label' => 'Conference event',
           'attr'  => array('class' => 'well')));
     }

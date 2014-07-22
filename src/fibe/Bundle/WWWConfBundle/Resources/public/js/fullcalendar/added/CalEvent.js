@@ -21,7 +21,7 @@ var CalEvent = function(event){ //constructor
                                 event.is_mainconfevent ==="true" ;
     if( this["is_mainconfevent"])
     {
-      mainConfEvent = this;
+      mainEvent = this;
       this["parent"] = "#";
     }
 
@@ -89,8 +89,8 @@ var CalEvent = function(event){ //constructor
 //        if(EventCollection.isLoginPage(response))return;
 //        bootstrapAlert("success","event <b>"+toSend['title']+"</b> has been well "+ (add=== true ? "added" : "updated"));
 //        // console.log(toSend.id+" persisted",toSend);
-//        if(response.mainConfEvent){
-//            EventCollection.updateMainConfEvent(response.mainConfEvent.start,response.mainConfEvent.end);
+//        if(response.mainEvent){
+//            EventCollection.updateMainConfEvent(response.mainEvent.start,response.mainEvent.end);
 //            EventCollection.refetchEvents();
 //        }
 //      },
@@ -370,7 +370,7 @@ CalEvent.prototype.addFCUi = function (element)
 //      if (authorized) {
 //
 //        //the main conf self isnt resizable
-//        if(self.id==mainConfEvent.id){
+//        if(self.id==mainEvent.id){
 //          element.find(".ui-resizable-handle").remove();
 //        }
 //      }//end if authorized
@@ -801,7 +801,7 @@ function getProp(elem){
 // };
 
 // CalEvent.prototype.isBroOf = function (bro){
-//     if(this.id == mainConfEvent.id)return false;
+//     if(this.id == mainEvent.id)return false;
 //     var brosOfBroId = bro.getBrosId();
 //     for(var i in brosOfBroId){
 //       if(brosOfBroId[i] === this.id)
@@ -811,13 +811,13 @@ function getProp(elem){
 // };
 
 // CalEvent.prototype.getBros = function (){
-//     if(this.id == mainConfEvent.id)
+//     if(this.id == mainEvent.id)
 //         return [];
 
 //     return EventCollection.getChildren(Events[this.parent], {recursive:false,concat:false, onlyEvent:true, noSidebar : true})
 // };
 // CalEvent.prototype.getBrosId = function (){
-//     if(this.id == mainConfEvent.id)
+//     if(this.id == mainEvent.id)
 //         return [];
 //     var id = this.id;
 //     // console.log("children of"+this.id,Events[this.parent].children)
@@ -826,7 +826,7 @@ function getProp(elem){
 //     // return $(Events[this.parent].children).map(function(key,value){return value.id!=this.id?value.id:undefined;})
 // };
 // CalEvent.prototype.getNonAllDayBrosId = function (){
-//     if(this.id == mainConfEvent.id)
+//     if(this.id == mainEvent.id)
 //         return [];
 //     var parent = Events[this.parent];
 //     var rtn = [];
@@ -851,7 +851,7 @@ function getProp(elem){
 //     return rtn;
 // };
 // CalEvent.prototype.getNonAllDayBros = function (){
-//     if(this.id == mainConfEvent.id)
+//     if(this.id == mainEvent.id)
 //         return [];
 //     var brosId = this.getNonAllDayBrosId();
 //     var rtn = [];

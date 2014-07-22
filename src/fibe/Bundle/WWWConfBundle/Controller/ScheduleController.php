@@ -82,7 +82,7 @@ class ScheduleController extends Controller
     $postData = $request->request->all();
 
     $conf = $this->getUser()->getCurrentConf();
-    $mainConfEvent = $conf->getMainConfEvent();
+    $mainEvent = $conf->getMainConfEvent();
 
     $event = null;
     if ($methodParam == "add")
@@ -143,11 +143,11 @@ class ScheduleController extends Controller
       $event->setParent($parent);
     }else
     {
-      $event->setParent($mainConfEvent);
+      $event->setParent($mainEvent);
     }
     $event->setSummary($postData['title']);
     $event->setIsAllDay($postData['allDay'] == "true");
-    $mainConfEvent->setParent(null);
+    $mainEvent->setParent(null);
 
     $em->persist($event);
     $em->flush();
@@ -157,14 +157,14 @@ class ScheduleController extends Controller
     $JSONArray['IsSuccess'] = true;
     $JSONArray['Msg'] = $methodParam . " success";
 
-    //update mainConfEvent
-    if ($mainConfEvent->fitChildrenDate() == true)
+    //update mainEvent
+    if ($mainEvent->fitChildrenDate() == true)
     {
-      $mainConfEvent->setParent(null);
-      $em->persist($mainConfEvent);
-      $JSONArray['mainConfEvent'] = array(
-        "start" => $mainConfEvent->getStartAt()->format(\DateTime::ISO8601),
-        "end"   => $mainConfEvent->getEndAt()->format(\DateTime::ISO8601)
+      $mainEvent->setParent(null);
+      $em->persist($mainEvent);
+      $JSONArray['mainEvent'] = array(
+        "start" => $mainEvent->getStartAt()->format(\DateTime::ISO8601),
+        "end"   => $mainEvent->getEndAt()->format(\DateTime::ISO8601)
       );
     }
     $em->flush();

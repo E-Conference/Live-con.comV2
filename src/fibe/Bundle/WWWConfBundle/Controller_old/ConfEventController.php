@@ -296,8 +296,8 @@ class ConfEventController extends Controller
     {
       $em = $this->getDoctrine()->getManager();
 
-      $mainConfEvent = $this->getUser()->getCurrentConf()->getMainConfEvent();
-      if ($mainConfEvent->getId() == $entity->getId())
+      $mainEvent = $this->getUser()->getCurrentConf()->getMainConfEvent();
+      if ($mainEvent->getId() == $entity->getId())
       {
         $this->container->get('session')->getFlashBag()->add(
           'error',
@@ -312,7 +312,7 @@ class ConfEventController extends Controller
                as
                $child)
       {
-        $child->setParent($mainConfEvent);
+        $child->setParent($mainEvent);
         $em->persist($child);
       }
       $this->container->get('session')->getFlashBag()->add(

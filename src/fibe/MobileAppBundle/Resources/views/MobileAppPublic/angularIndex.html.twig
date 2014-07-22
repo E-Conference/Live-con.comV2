@@ -32,7 +32,7 @@
       liveconLogoPath : "{{ asset('img/livecon.png') }}",
       baseUrl: '{{ api_uri }}',
       conferenceId: '{{ conference.id |json_encode|raw }}',
-      conferenceEventId: '{{ conference.mainConfEvent.id |json_encode|raw }}',
+      conferenceEventId: '{{ conference.mainEvent.id |json_encode|raw }}',
       conferenceLogoPath : "{{ asset('uploads/')}}{{conference.logoPath}}",
       lang: 'EN'
 

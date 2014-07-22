@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-    <title>{{ conference.mainConfEvent.summary |json_encode|raw  }}</title>
+    <title>{{ conference.mainEvent.summary |json_encode|raw  }}</title>
     <link rel="shortcut icon" type="image/x-icon" href="http://liris.cnrs.fr/dataconf/images/Logo_DataConf_ico.png">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -107,12 +107,12 @@
         configuration.app.liveconLogo = "{{ asset('img/liveconApp.png') }}";
         configuration.conference.baseUri = "{{ conference_baseUri }}";
         // configuration.conference.baseUri = "http://data.live-con.com/resource/conference/1/1iswc3013";
-        configuration.conference.name = {{ conference.mainConfEvent.summary |json_encode|raw }};
-        configuration.conference.acronym = {{ conference.mainConfEvent.acronym |json_encode|raw }};
+        configuration.conference.name = {{ conference.mainEvent.summary |json_encode|raw }};
+        configuration.conference.acronym = {{ conference.mainEvent.acronym |json_encode|raw }};
         configuration.conference.id = {{ conference.id |json_encode|raw }};
-        configuration.conference.eventId = {{ conference.mainConfEvent.id |json_encode|raw }};
+        configuration.conference.eventId = {{ conference.mainEvent.id |json_encode|raw }};
         configuration.conference.logoUri = "{{ asset('uploads/')}}{{conference.logoPath}}";
-        configuration.routes.Home.title = {{ conference.mainConfEvent.acronym |json_encode|raw }};
+        configuration.routes.Home.title = {{ conference.mainEvent.acronym |json_encode|raw }};
         tpl.uri = "{{ asset('bundles/fibemobileapp/mobileApp/templates/') }}";
         
         //Language configuration

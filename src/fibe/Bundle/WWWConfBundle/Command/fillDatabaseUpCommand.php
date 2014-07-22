@@ -2,6 +2,7 @@
   namespace fibe\Bundle\WWWConfBundle\Command;
 
   use fibe\Bundle\WWWConfBundle\Entity\VEvent;
+  use fibe\Bundle\WWWConfBundle\Entity_oldv1\ConfEvent;
   use fibe\MobileAppBundle\Entity\MobileAppConfig;
   use fibe\Bundle\WWWConfBundle\Entity\Module;
   use fibe\Bundle\WWWConfBundle\Entity\Organization;
@@ -30,7 +31,7 @@
     protected function configure()
     {
       $this
-        ->setName('livecon:database:full')
+        ->setLabel('livecon:database:full')
         ->setDescription('Insert lots of data in the database');
     }
 
@@ -58,36 +59,36 @@
 
       //RoleType
       $roleType = new RoleType();
-      $roleType->setName("Delegate");
+      $roleType->setLabel("Delegate");
       $roleType->setLabel("Delegate");
       $em->persist($roleType);
 
       $roleTypeChair = new RoleType();
-      $roleTypeChair->setName("Chair");
+      $roleTypeChair->setLabel("Chair");
       $roleTypeChair->setLabel("Chair");
       $em->persist($roleTypeChair);
 
       $roleTypePresenter = new RoleType();
-      $roleTypePresenter->setName("Presenter");
+      $roleTypePresenter->setLabel("Presenter");
       $roleTypePresenter->setLabel("Presenter");
       $em->persist($roleTypePresenter);
 
       $roleType = new RoleType();
-      $roleType->setName("ProgrammeCommitteeMember");
+      $roleType->setLabel("ProgrammeCommitteeMember");
       $roleType->setLabel("Programme Committee Member");
       $em->persist($roleType);
 
       //Social Service
       // $socialService = new SocialService();
-      // $socialService->setName("Facebook");
+      // $socialService->setLabel("Facebook");
       // $em->persist($socialService);
 
       // $socialService = new SocialService();
-      // $socialService->setName("Twitter");
+      // $socialService->setLabel("Twitter");
       // $em->persist($socialService);
 
       // $socialService = new SocialService();
-      // $socialService->setName("LinkedIn");
+      // $socialService->setLabel("LinkedIn");
       // $em->persist($socialService);
 
       // //Equipments
@@ -123,23 +124,23 @@
 
       //Topic
       /* $topic = new Topic();
-       $topic->setName("Business");
+       $topic->setLabel("Business");
        $em->persist($topic);
 
        $topic = new Topic();
-       $topic->setName("Design");
+       $topic->setLabel("Design");
        $em->persist($topic);
 
        $topic = new Topic();
-       $topic->setName("Marketing");
+       $topic->setLabel("Marketing");
        $em->persist($topic);
 
        $topic = new Topic();
-       $topic->setName("Recherche");
+       $topic->setLabel("Recherche");
        $em->persist($topic);
 
        $topic = new Topic();
-       $topic->setName("Tech");
+       $topic->setLabel("Tech");
        $em->persist($topic);*/
 
 
@@ -148,24 +149,24 @@
 
       //abstract category
       // $OrganisedEvent = new Category();
-      // $OrganisedEvent->setName("OrganisedEvent")
+      // $OrganisedEvent->setLabel("OrganisedEvent")
       //          ->setColor("#0EFF74") ;
       // $em->persist($OrganisedEvent);
 
       // $NonAcademicEvent = new Category();
-      // $NonAcademicEvent->setName("NonAcademicEvent")
+      // $NonAcademicEvent->setLabel("NonAcademicEvent")
       //                 ->setColor("#A6FF88")
       //                 ->setParent($OrganisedEvent);
       // $em->persist($NonAcademicEvent);
 
       // $AcademicEvent = new Category();
-      // $AcademicEvent->setName("AcademicEvent")
+      // $AcademicEvent->setLabel("AcademicEvent")
       //               ->setColor("#57A5C9")
       //               ->setParent($OrganisedEvent);
       // $em->persist($AcademicEvent);
       // non academic
       // $SocialEvent = new Category();
-      // $SocialEvent->setName("SocialEvent");
+      // $SocialEvent->setLabel("SocialEvent");
       //  $SocialEvent->setLabel("Social event")
       //              ->setColor("#B186D7")
       //             // ->setParent($NonAcademicEvent)
@@ -173,7 +174,7 @@
       // $em->persist($SocialEvent);
 
       // $MealEvent = new Category();
-      // $MealEvent->setName("MealEvent");
+      // $MealEvent->setLabel("MealEvent");
       // $MealEvent->setLabel("Meal Event")
       //           ->setColor("#00a2e0")
       //           // ->setParent($NonAcademicEvent)
@@ -181,7 +182,6 @@
       // $em->persist($MealEvent);
 
       // $BreakEvent = new Category();
-      // $BreakEvent->setName("BreakEvent");
       // $BreakEvent->setLabel("Break event")
       //           ->setColor("#00a2e0")
       //           // ->setParent($NonAcademicEvent)
@@ -191,7 +191,6 @@
       // // academic
 
       // $KeynoteEvent = new Category();
-      // $KeynoteEvent->setName("KeynoteEvent");
       // $KeynoteEvent->setLabel("Keynote event")
       //          ->setColor("#afcbe0")
       //           // ->setParent($AcademicEvent)
@@ -199,7 +198,6 @@
       // $em->persist($KeynoteEvent);
 
       // $TrackEvent = new Category();
-      // $TrackEvent->setName("TrackEvent");
       // $TrackEvent->setLabel("Track event")
       //           ->setColor("#afcbe0")
       //           // ->setParent($AcademicEvent)
@@ -207,7 +205,7 @@
       // $em->persist($TrackEvent);
 
       // $PanelEvent = new Category();
-      // $PanelEvent->setName("PanelEvent");
+      // $PanelEvent->setLabel("PanelEvent");
       // $PanelEvent->setLabel("Panel event")
       //           ->setColor("#e7431e")
       //           // ->setParent($AcademicEvent)
@@ -215,7 +213,6 @@
       // $em->persist($PanelEvent);
 
       // $ConferenceEvent = new Category();
-      // $ConferenceEvent->setName("ConferenceEvent");
       // $ConferenceEvent->setLabel("Conference event")
       //           ->setColor("#b0ca0f")
       //           // ->setParent($AcademicEvent)
@@ -223,7 +220,6 @@
       // $em->persist($ConferenceEvent);
 
       // $WorkshopEvent = new Category();
-      // $WorkshopEvent->setName("WorkshopEvent");
       //  $WorkshopEvent->setLabel("Workshop event")
       //           ->setColor("#EBD94E")
       //           // ->setParent($AcademicEvent)
@@ -231,7 +227,6 @@
       // $em->persist($WorkshopEvent);
 
       // $SessionEvent = new Category();
-      // $SessionEvent->setName("SessionEvent");
       //  $SessionEvent->setLabel("Session event")
       //           ->setColor("#8F00FF")
       //           // ->setParent($AcademicEvent)
@@ -239,7 +234,6 @@
       // $em->persist($SessionEvent);
 
       // $TalkEvent = new Category();
-      // $TalkEvent->setName("TalkEvent");
       // $TalkEvent->setLabel("Talk event")
       //           ->setColor("#FF5A45")
       // ->setParent($AcademicEvent)
@@ -315,26 +309,26 @@
 
 
       //Main conf event
-      $mainConfEvent = new ConfEvent();
-      $mainConfEvent->setSummary("Big Livecon Conference" . $counter);
-      $mainConfEvent->setIsMainConfEvent(true);
-      $mainConfEvent->setStartAt(new \DateTime('now'));
+      $mainEvent = new ConfEvent();
+      $mainEvent->setSummary("Big Livecon Conference" . $counter);
+      $mainEvent->setIsMainConfEvent(true);
+      $mainEvent->setStartAt(new \DateTime('now'));
       $end = new \DateTime('now');
-      $mainConfEvent->setEndAt($end->add(new \DateInterval('P2D')));
-      $mainConfEvent->setConference($conference);
-      $mainConfEvent->setComment("Livecon Conference " . $counter . " comment");
-      $mainConfEvent->setUrl("http://liveconconference" . $counter);
-      $em->persist($mainConfEvent);
+      $mainEvent->setEndAt($end->add(new \DateInterval('P2D')));
+      $mainEvent->setConference($conference);
+      $mainEvent->setComment("Livecon Conference " . $counter . " comment");
+      $mainEvent->setUrl("http://liveconconference" . $counter);
+      $em->persist($mainEvent);
 
 
       // conference location
-      $mainConfEventLocation = new Location();
-      $mainConfEventLocation->setName("Conference's location");
-      $mainConfEventLocation->addLocationAwareCalendarEntitie($mainConfEvent);
-      $mainConfEventLocation->setConference($conference);
-      $em->persist($mainConfEventLocation);
-      $mainConfEvent->setLocation($mainConfEventLocation);
-      $em->persist($mainConfEvent);
+      $mainEventLocation = new Location();
+      $mainEventLocation->setLabel("Conference's location");
+      $mainEventLocation->addVEvent($mainEvent);
+      $mainEventLocation->setMainEvent($conference);
+      $em->persist($mainEventLocation);
+      $mainEvent->setLocation($mainEventLocation);
+      $em->persist($mainEvent);
 
       //Create authorization
       $creatorAuthorization = new Authorization();
@@ -347,7 +341,7 @@
 
       //Linking app config to conference
       $conference->setAppConfig($defaultAppConfig);
-      $conference->setMainConfEvent($mainConfEvent);
+      $conference->setMainConfEvent($mainEvent);
       $conference->setModule($defaultModule);
 
       //Add conference to current manager
@@ -366,7 +360,7 @@
       {
 
         $location = new Location();
-        $location->setName("location" . $counterLoc);
+        $location->setLabel("location" . $counterLoc);
         $em->persist($location);
       }
       $em->flush();
@@ -377,7 +371,7 @@
         $person->setConference($conference);
         $person->setFamilyName("person" . $counterEnt);
         $person->setFirstName("person" . $counterEnt);
-        $person->setName("person" . $counterEnt);
+        $person->setLabel("person" . $counterEnt);
         $person->setDescription("person " . $counterEnt . " description descriptiondescription description description description description description description description description description description ");
         $person->setImg("http://png-4.findicons.com/files/icons/61/dragon_soft/128/user.png");
         $person->setEmail("email@lol.fr");
@@ -386,14 +380,14 @@
 
         $organization = new Organization();
         $organization->setConference($conference);
-        $organization->setName("organization" . $counterEnt);
+        $organization->setLabel("organization" . $counterEnt);
         $organization->setPage("organization page" . $counterEnt);
         $organization->setCountry("organization country" . $counterEnt);
         $person->addOrganization($organization);
         $organization->addMember($person);
 
         $topic = new Topic();
-        $topic->setName("topic" . $counterEnt);
+        $topic->setLabel("topic" . $counterEnt);
         $topic->setConference($conference);
 
         $paper = new Paper();

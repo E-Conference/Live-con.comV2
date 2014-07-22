@@ -3,6 +3,7 @@
 namespace fibe\Bundle\WWWConfBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -108,11 +109,11 @@ class MappingFile
   /**
    * Set conference
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference
+   * @param MainEvent $conference
    *
    * @return MappingFile
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference = null)
+  public function setConference(MainEvent $conference = null)
   {
     $this->conference = $conference;
 
@@ -122,7 +123,7 @@ class MappingFile
   /**
    * Get conference
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
+   * @return MainEvent
    */
   public function getConference()
   {

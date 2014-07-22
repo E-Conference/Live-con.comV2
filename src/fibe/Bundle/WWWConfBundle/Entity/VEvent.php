@@ -37,6 +37,10 @@ class VEvent
   const STATUS_EVENT_CONFIRMED = "CONFIRMED"; // Indicates event is definite.
   const STATUS_EVENT_TENTATIVE = "TENTATIVE"; // Indicates event is tentative.
 
+  const CLASSIFICATION_PUBLIC = "PUBLIC";
+  const CLASSIFICATION_PRIVATE = "PRIVATE";
+  const CLASSIFICATION_CONFIDENTIAL = "CONFIDENTIAL";
+
   /**
    * @ORM\Id
    * @ORM\Column(type="integer")
@@ -212,7 +216,7 @@ class VEvent
    *
    * ==>
    * @TODO EVENT : à réfléchir... Ne pas persister en base, mais déduire
-   * la propriété de manière logiqu avec la table atendee
+   * la propriété de manière logique avec la table atendee
    * <==
    */
   protected $classification = self::CLASSIFICATION_PUBLIC;
@@ -223,7 +227,7 @@ class VEvent
    * @ORM\Column(type="string", length=32)
    * @Assert\Choice(multiple=false, choices = {"CANCELLED","CONFIRMED","TENTATIVE"},  message = "Choose a valid status.")
    */
-  protected $status;
+  protected $status = self::CLASSIFICATION_PUBLIC;
 
   /**
    * priority
@@ -249,21 +253,6 @@ class VEvent
    * @ORM\JoinColumn(name="location_id", referencedColumnName="id", onDelete="Set Null")
    */
   protected $location;
-
-  /**
-   * categories
-   *
-   * This property defines the categories for a calendar component.
-   *
-   * @TODO EVENT : à mettre en ManyToOne, à réfléchir
-   *
-   * @ORM\ManyToMany(targetEntity="Category", inversedBy="VEvents", cascade={"persist"})
-   * @ORM\JoinTable(name="event_category",
-   *     joinColumns={@ORM\JoinColumn(name="entity_id", referencedColumnName="id", onDelete="Cascade")},
-   *     inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="Cascade")}
-   * )
-   */
-  protected $categories;
 
   /**
    * Persons related to an event according to a role
@@ -323,6 +312,8 @@ class VEvent
   public function __construct()
   {
     $this->roles = new ArrayCollection();
+    $this->sponsors = new ArrayCollection();
+    $this->sponsors = new ArrayCollection();
     $this->setRevisionSequence($this->getRevisionSequence() + 1);
   }
 
@@ -363,22 +354,15 @@ class VEvent
    */
   public function computeEndAt()
   {
-    if ($this->getEndAt())
-    {
-      $this->setDuration($this->getEndAt()->diff($this->getStartAt())->format('P%aDT%HH%IM%SS'));
-    }
-    else if ($this->getStartAt())
+    if (!$this->getEndAt() && $this->getStartAt())
     {
       $endAt = clone $this->getStartAt();
-      $endAt->modify(sprintf(
-        '+ %d minutes',
-        self::durationInTime($this->getDuration(), 'minute')
-      ));
+      $endAt->modify('+1 hour');
       $this->setEndAt($endAt);
     }
-    else
+    else if(!$this->getStartAt())
     {
-      $this->setEndAt(new \DateTime("now"));
+      $this->setEndAt((new \DateTime("now"))->modify('+1 hour'));
       $this->setStartAt(new \DateTime("now"));
     }
   }
@@ -393,7 +377,6 @@ class VEvent
     $now = new \DateTime('now');
 
     $this->setLastModifiedAt($now);
-    $this->upRevisionSequence();
   }
 
   /**
@@ -421,9 +404,9 @@ class VEvent
    * identifier can guarantee the uniqueness of the left hand side within
    * the scope of that domain.
    *
-   * @param string The server domain name or ip address
+   * @param String $domain the server domain name or ip address
    *
-   * @return string A unique UID
+   * @return String A unique UID
    */
   public function getUID($domain = 'default')
   {
@@ -437,10 +420,10 @@ class VEvent
   /**
    * getFormatedStartAt
    *
-   * @param string The datetime format
-   * @param string The timezone name
+   * @param $format String the datetime format
+   * @param $timezone String the timezone name
    *
-   * @return string The formated datetime
+   * @return String the formated datetime
    */
   public function getFormatedStartAt($format = \DateTime::RFC1123, $timezone = 'Europe/Paris')
   {
@@ -512,10 +495,9 @@ class VEvent
    * Set lastModifiedAt
    *
    * @param \DateTime $lastModifiedAt
-   *
    * @return $this
    */
-  public function setLastModifiedAt(DateTime $lastModifiedAt)
+  public function setLastModifiedAt(\DateTime $lastModifiedAt)
   {
     $this->lastModifiedAt = $lastModifiedAt;
 
@@ -831,13 +813,71 @@ class VEvent
   }
 
   /**
-   * Get categories
+   * Add sponsors
+   *
+   * @param Sponsor $sponsor
+   *
+   * @return $this
+   */
+  public function addSponsor(Sponsor $sponsor)
+  {
+    $this->sponsors[] = $sponsor;
+
+    return $this;
+  }
+
+  /**
+   * Remove sponsors
+   *
+   * @param Sponsor $sponsor
+   */
+  public function removeSponsor(Sponsor $sponsor)
+  {
+    $this->sponsors->removeElement($sponsor);
+  }
+
+  /**
+   * Get sponsors
    *
    * @return \Doctrine\Common\Collections\Collection
    */
-  public function getCategories()
+  public function getSponsors()
   {
-    return $this->categories;
+    return $this->sponsors;
+  }
+
+  /**
+   * Add topics
+   *
+   * @param Topic $topic
+   *
+   * @return $this
+   */
+  public function addTopic(Topic $topic)
+  {
+    $this->topics[] = $topic;
+
+    return $this;
+  }
+
+  /**
+   * Remove topics
+   *
+   * @param Topic $topic
+   */
+  public function removeTopic(Topic $topic)
+  {
+    $this->topics->removeElement($topic);
+  }
+
+  /**
+   * Get topics
+   *
+   * @return \Doctrine\Common\Collections\Collection
+   */
+  public function getTopics()
+  {
+    return $this->topics;
   }
 
   /**
@@ -886,21 +926,5 @@ class VEvent
   public function setPriority($priority)
   {
     $this->priority = $priority;
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getTopics()
-  {
-    return $this->topics;
-  }
-
-  /**
-   * @param mixed $topics
-   */
-  public function setTopics($topics)
-  {
-    $this->topics = $topics;
   }
 }

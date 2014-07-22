@@ -2,6 +2,7 @@
 
 namespace fibe\Bundle\WWWConfBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -74,15 +75,6 @@ class Event extends VEvent
    */
   protected $slug;
 
-  /**
-   * if an event has dtend = dtstart (is instant...)
-   *
-   * @TODO EVENT : ne pas persisté... ?
-   *
-   * @ORM\Column(name="is_instant", type="boolean")
-   */
-  protected $isInstant;
-
 
   /**
    * Papers presented at an event
@@ -95,15 +87,6 @@ class Event extends VEvent
    */
   private $papers;
 
-  /**
-   * @ORM\ManyToMany(targetEntity="Topic", inversedBy="events", cascade={"persist"})
-   * @ORM\JoinTable(name="event_topic",
-   *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
-   *     inverseJoinColumns={@ORM\JoinColumn(name="topic_id", referencedColumnName="id")})
-   * @Expose
-   */
-  private $topics;
-
 
 
   /**
@@ -112,10 +95,9 @@ class Event extends VEvent
   public function __construct()
   {
     parent::__construct();
-    $this->papers = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->topics = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->children = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->papers = new ArrayCollection();
+    $this->children = new ArrayCollection();
+    $this->categories = new ArrayCollection();
   }
 
   /**

@@ -351,16 +351,16 @@
     <NamedIndividual rdf:about="http://data.live-con.com/page/conference/{{ entity.id }}/{{ entity.slug }}">
         <rdf:type rdf:resource="&swc;ConferenceEvent"/>
         <rdfs:label>{{ entity.confName }}</rdfs:label>
-        <ical:dtstart rdf:datatype="&xsd;date">{{ entity.mainConfEvent.startAt| date('Y-m-d H:i')}}</ical:dtstart>
-        <ical:dtend rdf:datatype="&xsd;date">{{ entity.mainConfEvent.endAt| date('Y-m-d H:i')}}</ical:dtend>
-        <swc:hasAcronym>{{ entity.mainConfEvent.acronym}}</swc:hasAcronym>
-        <foaf:homepage rdf:resource="{{ entity.mainConfEvent.url }}"/>
-        {% for role in entity.mainConfEvent.roles %}
-        <swc:hasRole rdf:resource="http://data.live-con.com/page/role/{{entity.mainConfEvent.id}}/{{role.type.name}}"/>
+        <ical:dtstart rdf:datatype="&xsd;date">{{ entity.mainEvent.startAt| date('Y-m-d H:i')}}</ical:dtstart>
+        <ical:dtend rdf:datatype="&xsd;date">{{ entity.mainEvent.endAt| date('Y-m-d H:i')}}</ical:dtend>
+        <swc:hasAcronym>{{ entity.mainEvent.acronym}}</swc:hasAcronym>
+        <foaf:homepage rdf:resource="{{ entity.mainEvent.url }}"/>
+        {% for role in entity.mainEvent.roles %}
+        <swc:hasRole rdf:resource="http://data.live-con.com/page/role/{{entity.mainEvent.id}}/{{role.type.name}}"/>
         {% endfor %}
         <swc:hasLogo rdf:resource="{{ entity.logoPath }}"/>
-        {% if entity.mainConfEvent.location %}
-            <swc:hasLocation rdf:resource="http://data.live-con.com/page/location/{{entity.mainConfEvent.location.id}}/{{entity.mainConfEvent.location.slug}}"/>
+        {% if entity.mainEvent.location %}
+            <swc:hasLocation rdf:resource="http://data.live-con.com/page/location/{{entity.mainEvent.location.id}}/{{entity.mainEvent.location.slug}}"/>
         {% endif %}
         <swc:hasRelatedDocument rdf:resource="http://data.live-con.com/page/conference/{{ entity.id }}/{{ entity.slug }}/proceedings"/>
         {% for event in entity.events %}
@@ -372,44 +372,44 @@
 
  
 
-    <NamedIndividual rdf:about="http://data.live-con.com/page/role/{{entity.mainConfEvent.id}}/Delegate">
+    <NamedIndividual rdf:about="http://data.live-con.com/page/role/{{entity.mainEvent.id}}/Delegate">
         <rdf:type rdf:resource="&swc;Delegate"/>
         <rdfs:label>{{ entity.confName }}  delegate</rdfs:label>
         <swc:isRoleAt rdf:resource="http://data.live-con.com/page/conference/{{ entity.id }}/{{ entity.slug }}"/>
-        {% for role in entity.mainConfEvent.roles %}
+        {% for role in entity.mainEvent.roles %}
             {% if role.type =="Delegate" %}
                 <swc:heldBy rdf:resource="http://data.live-con.com/page/person/{{role.person.id}}/{{role.person.slug}}"/>
             {% endif %}
         {% endfor %}
     </NamedIndividual>
 
-    <NamedIndividual rdf:about="http://data.live-con.com/page/role/{{entity.mainConfEvent.id}}/Chair">
+    <NamedIndividual rdf:about="http://data.live-con.com/page/role/{{entity.mainEvent.id}}/Chair">
         <rdf:type rdf:resource="&swc;Chair"/>
         <rdfs:label>{{ entity.confName }}  chair</rdfs:label>
         <swc:isRoleAt rdf:resource="http://data.live-con.com/page/conference/{{ entity.id }}/{{ entity.slug }}"/>
-        {% for role in entity.mainConfEvent.roles %}
+        {% for role in entity.mainEvent.roles %}
             {% if role.type =="Chair" %}
                 <swc:heldBy rdf:resource="http://data.live-con.com/page/person/{{role.person.id}}/{{role.person.slug}}"/>
             {% endif %}
         {% endfor %}
     </NamedIndividual>
 
-    <NamedIndividual rdf:about="http://data.live-con.com/page/role/{{entity.mainConfEvent.id}}/Presenter">
+    <NamedIndividual rdf:about="http://data.live-con.com/page/role/{{entity.mainEvent.id}}/Presenter">
         <rdf:type rdf:resource="&swc;Presenter"/>
         <rdfs:label>{{ entity.confName }}  presenter</rdfs:label>
         <swc:isRoleAt rdf:resource="http://data.live-con.com/page/conference/{{ entity.id }}/{{ entity.slug }}"/>
-        {% for role in entity.mainConfEvent.roles %}
+        {% for role in entity.mainEvent.roles %}
             {% if role.type =="Presenter" %}
                 <swc:heldBy rdf:resource="http://data.live-con.com/page/person/{{role.person.id}}/{{role.person.slug}}"/>
             {% endif %}
         {% endfor %}
     </NamedIndividual>
 
-    <NamedIndividual rdf:about="http://data.live-con.com/page/role/{{entity.mainConfEvent.id}}/ProgrammeCommitteeMember">
+    <NamedIndividual rdf:about="http://data.live-con.com/page/role/{{entity.mainEvent.id}}/ProgrammeCommitteeMember">
         <rdf:type rdf:resource="&swc;ProgrammeCommitteeMember"/>
         <rdfs:label>{{ entity.confName }} programme committee member</rdfs:label>
         <swc:isRoleAt rdf:resource="http://data.live-con.com/page/conference/{{ entity.id }}/{{ entity.slug }}"/>
-        {% for role in entity.mainConfEvent.roles %}
+        {% for role in entity.mainEvent.roles %}
             {% if role.type =="ProgrammeCommitteeMember" %}
                 <swc:heldBy rdf:resource="http://data.live-con.com/page/person/{{role.person.id}}/{{role.person.slug}}"/>
             {% endif %}

@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  *
  */
-class WwwConfRepository extends EntityRepository
+class MainEventRepository extends VEventRepository
 {
   /**
    * getOrderedQueryBuilder
@@ -21,7 +21,7 @@ class WwwConfRepository extends EntityRepository
   public function getOrderedQueryBuilder()
   {
     $qb = $this->createQueryBuilder('conf');
-    $qb->orderBy('conf.mainConfEvent.startAt', 'DESC');
+    $qb->orderBy('conf.startAt', 'DESC');
 
     return $qb;
   }
@@ -62,8 +62,7 @@ class WwwConfRepository extends EntityRepository
     $qb = $this->createQueryBuilder('conf');
 
     $qb
-      ->leftJoin('conf.mainConfEvent', 'ev')
-      ->where($qb->expr()->like('ev.summary', $qb->expr()->literal('%' . $name . '%')));
+      ->where($qb->expr()->like('conf.summary', $qb->expr()->literal('%' . $name . '%')));
 
     $query = $qb->getQuery();
 
@@ -81,8 +80,7 @@ class WwwConfRepository extends EntityRepository
     $qb = $this->createQueryBuilder('conf');
 
     $qb
-      ->leftJoin('conf.mainConfEvent', 'ev')
-      ->orderBy('ev.startAt', 'DESC');
+      ->orderBy('conf.startAt', 'DESC');
 
     $query = $qb->getQuery();
 

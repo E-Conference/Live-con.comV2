@@ -546,9 +546,10 @@
 	 */
 	public function getSubEvents()
 	{
-	  $sub_events[] = $this->events;
-	  $sub_events->removeElement($this->mainConfEvent);
-	  return $sub_events;
+	  return $this->events;
+//	  $sub_events[] = $this->events;
+//	  $sub_events->removeElement($this->mainEvent);
+//	  return $sub_events;
 	}
 
 

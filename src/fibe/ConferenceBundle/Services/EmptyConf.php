@@ -71,7 +71,7 @@
         $em->remove($person);
       }
 
-      $mainConfEvent = $conference->getMainConfEvent();
+      $mainEvent = $conference->getMainConfEvent();
 
       $newMainConfEvent = new Event();
       $newMainConfEvent->setIsMainConfEvent(true);
@@ -84,14 +84,14 @@
       $conference->setMainConfEvent($newMainConfEvent);
 
       // conference location
-      $mainConfEventLocation = new Location();
-      $mainConfEventLocation->setName("Conference's location");
-      $newMainConfEvent->setLocation($mainConfEventLocation);
-      $mainConfEventLocation->setConference($conference);
-      $em->persist($mainConfEventLocation);
+      $mainEventLocation = new Location();
+      $mainEventLocation->setName("Conference's location");
+      $newMainConfEvent->setLocation($mainEventLocation);
+      $mainEventLocation->setMainEvent($conference);
+      $em->persist($mainEventLocation);
 
       $em->persist($newMainConfEvent);
-      $em->remove($mainConfEvent);
+      $em->remove($mainEvent);
 
       $em->persist($conference);
 
@@ -209,11 +209,11 @@
       }
 
       //main conf event
-      $mainConfEvent = $conference->getMainConfEvent();
-      if($mainConfEvent){
+      $mainEvent = $conference->getMainConfEvent();
+      if($mainEvent){
         $conference->setMainConfEvent(null);
         $em->flush();
-        $em->remove($mainConfEvent);
+        $em->remove($mainEvent);
       } 
       $em->flush();
 

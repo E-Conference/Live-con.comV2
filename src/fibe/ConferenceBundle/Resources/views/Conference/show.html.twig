@@ -11,7 +11,7 @@
         <div class="col-lg-4">
           <img src="{{ asset('uploads/') }}{{ conference.logoPath }}" style="max-height:100px;max-width:100%;"/>
 
-          <h1>{{ conference.mainConfEvent.summary }}</h1>
+          <h1>{{ conference.summary }}</h1>
           <ul>
             <li> {{ conference.events|length }} events</li>
             <li> {{ conference.papers|length }} papers</li>
@@ -28,7 +28,7 @@
         </div>
       </div>
       <br/>
-      {% if is_granted('EDIT', conference.mainConfEvent) %}
+      {% if is_granted('EDIT', conference) %}
         <a id="showConfForm" class="btn btn-warning">
           <i class="fa fa-pencil-square-o"></i> Edit conference
         </a>
@@ -133,9 +133,9 @@
       var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 15, attribution: osmAttrib});
       map.addLayer(osm);
 
-      {% if (conference.mainConfEvent.location.latitude is not empty) and (conference.mainConfEvent.location.longitude is not empty) %}
-      map.setView(new L.LatLng({{conference.mainConfEvent.location.latitude}}, {{conference.mainConfEvent.location.longitude}}), 13);
-      marker = L.marker([{{conference.mainConfEvent.location.latitude}}, {{conference.mainConfEvent.location.longitude}}]).addTo(map);
+      {% if (conference.location.latitude is not empty) and (conference.location.longitude is not empty) %}
+      map.setView(new L.LatLng({{conference.location.latitude}}, {{conference.location.longitude}}), 13);
+      marker = L.marker([{{conference.location.latitude}}, {{conference.location.longitude}}]).addTo(map);
       {% else %}
       map.setView(new L.LatLng(40, 10), 1);
       $.get("http://ipinfo.io", function (response)
@@ -185,8 +185,8 @@
             console.log(e.latlng);
             marker = new L.marker(e.latlng).addTo(map);
             //UPDATE FIELDS
-            $('#fibe_bundle_wwwconfbundle_wwwconftype_mainConfEvent_location_latitude').val(e.latlng.lat);
-            $('#fibe_bundle_wwwconfbundle_wwwconftype_mainConfEvent_location_longitude').val(e.latlng.lng);
+            $('#fibe_bundle_wwwconfbundle_wwwconftype_mainEvent_location_latitude').val(e.latlng.lat);
+            $('#fibe_bundle_wwwconfbundle_wwwconftype_mainEvent_location_longitude').val(e.latlng.lng);
           });
         } catch (err)
         {

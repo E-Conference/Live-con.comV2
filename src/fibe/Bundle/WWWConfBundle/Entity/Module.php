@@ -68,11 +68,11 @@ class Module
   /**
    * Set conference
    *
-   * @param boolean $conference
+   * @param MainEvent $conference
    *
-   * @return MobileAppConfig
+   * @return $this
    */
-  public function setConference($conference)
+  public function setMainEvent($conference)
   {
     $this->conference = $conference;
 
@@ -82,7 +82,7 @@ class Module
   /**
    * Get conference
    *
-   * @return boolean
+   * @return MainEvent
    */
   public function getConference()
   {

@@ -145,7 +145,7 @@
 	/**
 	 * @ORM\OneToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\VEvent", cascade="remove")
 	 **/
-	private $mainConfEvent;
+	private $mainEvent;
 
 	/**
 	 * @ORM\Column(type="string", length=256, nullable=true)
@@ -158,7 +158,7 @@
 	 */
 	public function __toString()
 	{
-	  return ($this->mainConfEvent ? $this->mainConfEvent->getSummary() : "");
+	  return ($this->mainEvent ? $this->mainEvent->getSummary() : "");
 
 	}
 
@@ -225,7 +225,7 @@
 	 */
 	public function getConfName()
 	{
-	  return ($this->mainConfEvent ? $this->mainConfEvent->getSummary() : "");
+	  return ($this->mainEvent ? $this->mainEvent->getSummary() : "");
 	}
 
 
@@ -572,27 +572,27 @@
 	}
 
 	/**
-	 * Set mainConfEvent
+	 * Set mainEvent
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $mainConfEvent
+	 * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $mainEvent
 	 *
 	 * @return MainEvent
 	 */
-	public function setMainConfEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $mainConfEvent = null)
+	public function setMainConfEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $mainEvent = null)
 	{
-	  $this->mainConfEvent = $mainConfEvent;
+	  $this->mainEvent = $mainEvent;
 
 	  return $this;
 	}
 
 	/**
-	 * Get mainConfEvent
+	 * Get mainEvent
 	 *
 	 * @return \fibe\Bundle\WWWConfBundle\Entity\VEvent
 	 */
 	public function getMainConfEvent()
 	{
-	  return $this->mainConfEvent;
+	  return $this->mainEvent;
 	}
 
 	/**
@@ -637,7 +637,7 @@
 	public function getSubEvents()
 	{
 	  $sub_events[] = $this->events;
-	  $sub_events->removeElement($this->mainConfEvent);
+	  $sub_events->removeElement($this->mainEvent);
 	  return $sub_events;
 	}
 

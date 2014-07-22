@@ -417,7 +417,7 @@ function Importer()
             if(objInd.array == "conference")
             {
                 // deleteKey(); 
-                // console.log("parent is mainConfEvent",objectMap[fk.entity][fk.setter]);
+                // console.log("parent is mainEvent",objectMap[fk.entity][fk.setter]);
                 return;
             }
             if(fk.fkSetter){
@@ -440,7 +440,7 @@ function Importer()
             // }
         }
 
-        //compute at the same time the mainConfEvent date
+        //compute at the same time the mainEvent date
         function doStartAtLess(){
             var earliestStart = moment('6000-10-10');
             var latestEnd = moment('1000-10-10');

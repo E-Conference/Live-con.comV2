@@ -58,7 +58,7 @@ class DBImportController extends Controller
     $entity = null;
 
 
-    $mainConfEvent = $this->conference->getMainConfEvent();
+    $mainEvent = $this->conference->getMainConfEvent();
 
     $defaultCategory = $this->getDoctrine()
       ->getRepository('fibeWWWConfBundle:Category')
@@ -114,7 +114,7 @@ class DBImportController extends Controller
 
           call_user_func_array(array($entity, $setter), array($value));
         }
-        $entity->setConference($this->conference);
+        $entity->setMainEvent($this->conference);
         $em->persist($entity);
         array_push($this->locationEntities, $entity);
       }
@@ -273,7 +273,7 @@ class DBImportController extends Controller
 
           call_user_func_array(array($entity, $setter), array($value));
         }
-        $entity->setConference($this->conference);
+        $entity->setMainEvent($this->conference);
         $em->persist($entity);
         array_push($this->categoryEntities, $entity);
 
@@ -282,13 +282,13 @@ class DBImportController extends Controller
     }
 
 
-    ////////////////////// mainConfEvent //////////////////////
+    ////////////////////// mainEvent //////////////////////
     if (isset($JSONFile['conference']))
     {
 
       $this->conferenceData = $JSONFile['conference'];
-      $this->doEvent($mainConfEvent, $this->conferenceData, true);
-      $em->persist($mainConfEvent);
+      $this->doEvent($mainEvent, $this->conferenceData, true);
+      $em->persist($mainEvent);
     }
 
 
@@ -314,17 +314,17 @@ class DBImportController extends Controller
         if (isset($current["mainConferenceEvent"]))
         {
           $isMainConfEvent = true;
-          // echo "mainConfEvent FOUND";
+          // echo "mainEvent FOUND";
           // var_dump($current);
           // echo "\n";
-          $entity = $mainConfEvent;
+          $entity = $mainEvent;
           // $this->conference->setMainConfEvent($entity);
           // $entity->setIsMainConfEvent(true);
-          // $em->remove($mainConfEvent);
-          // $mainConfEvent = $entity;
+          // $em->remove($mainEvent);
+          // $mainEvent = $entity;
         }
         $this->doEvent($entity, $current, $isMainConfEvent);
-        $em->persist($mainConfEvent);
+        $em->persist($mainEvent);
       }
 
       //parent / child relationship
@@ -344,7 +344,7 @@ class DBImportController extends Controller
         }
         if (!$hasParent)
         {
-          $entity->setParent($mainConfEvent);
+          $entity->setParent($mainEvent);
         }
         $entity->setConference($this->conference);
         $em->persist($entity);
@@ -374,8 +374,8 @@ class DBImportController extends Controller
     //     }
     // }
 
-    $mainConfEvent->setParent(null);
-    $em->persist($mainConfEvent);
+    $mainEvent->setParent(null);
+    $em->persist($mainEvent);
     $em->persist($this->conference);
 
     //finally, make sure every events are at least child of the main conf event
@@ -385,12 +385,12 @@ class DBImportController extends Controller
     {
       if (!$event->getParent())
       {
-        $event->setParent($mainConfEvent);
+        $event->setParent($mainEvent);
         $em->persist($event);
       }
     }
-    $mainConfEvent->setParent(null);
-    $em->persist($mainConfEvent);
+    $mainEvent->setParent(null);
+    $em->persist($mainEvent);
 
     $em->flush();
 
@@ -447,12 +447,12 @@ class DBImportController extends Controller
 
       // if($setter=="mainConferenceEvent"){
 
-      //     // echo "mainConfEvent replaced";
+      //     // echo "mainEvent replaced";
       //     // $this->conference->setMainConfEvent($entity);
       //     // $entity->setIsMainConfEvent(true);
-      //     // $this->conference->removeEvent($mainConfEvent);
-      //     // $em->remove($mainConfEvent);
-      //     // $mainConfEvent = $entity;
+      //     // $this->conference->removeEvent($mainEvent);
+      //     // $em->remove($mainEvent);
+      //     // $mainEvent = $entity;
       //     continue;
       // }
 

@@ -79,7 +79,7 @@ var EventManager = function(){
       views[i].filter(ids);
     }
 //
-//    // ids.push(mainConfEvent.id);
+//    // ids.push(mainEvent.id);
 //    var calEvents = $calendar.fullCalendar('clientEvents');
 //    var eventsToShow = [];
 //    //hide/show filtered event
@@ -139,7 +139,7 @@ var EventManager = function(){
           events[event.id] = event;
 
           if(event.mainconfevent){
-            mainConfEvent = event;
+            mainEvent = event;
           }
 
           i++;
@@ -243,11 +243,11 @@ var EventManager = function(){
           events[ev.id] = ev;
           renderViews();
 
-//          ev.setParent(mainConfEvent.id);
+//          ev.setParent(mainEvent.id);
 //          ev.renderForRefetch();
           // ev.computeCountRange({allBrosInDay:true});
-//          if(response.mainConfEvent){
-//            EventCollection.updateMainConfEvent(response.mainConfEvent.start, response.mainConfEvent.end);
+//          if(response.mainEvent){
+//            EventCollection.updateMainConfEvent(response.mainEvent.start, response.mainEvent.end);
 //          }
 //          EventCollection.refetchEvents();
         },
@@ -361,7 +361,7 @@ var EventManager = function(){
 //        // function doWork() {
 //
 //
-//          // mainConfEvent.renderForRefetch();
+//          // mainEvent.renderForRefetch();
 //
 //          // updateBroCountRange();
 //        stopRender = false;
@@ -481,7 +481,7 @@ var EventManager = function(){
 //
 //    filterIds : function (ids)
 //    {
-//      // ids.push(mainConfEvent.id);
+//      // ids.push(mainEvent.id);
 //      var calEvents = $calendar.fullCalendar('clientEvents');
 //      var eventsToShow = [];
 //      //hide/show filtered event
@@ -517,16 +517,16 @@ var EventManager = function(){
 //    }j
 
 //    updateMainConfEvent : function (newStartjnewEnd){
-//      if (moment(mainConfEvent.start).dayOfYear() !== moment(newStart).dayOfYear() ||
-//       moment(mainConfEvent.end).dayOfYear() !== moment(newEnd).dayOfYear()){
-//         console.log("mainConfEvent changedj rendering...");
+//      if (moment(mainEvent.start).dayOfYear() !== moment(newStart).dayOfYear() ||
+//       moment(mainEvent.end).dayOfYear() !== moment(newEnd).dayOfYear()){
+//         console.log("mainEvent changedj rendering...");
 //         stopRender = true;
-//         mainConfEvent.start = moment(newStartj "YYYY-MM-DD HH:mmZ").format();
-//         mainConfEvent.end = moment(newEndj "YYYY-MM-DD HH:mmZ").format();
+//         mainEvent.start = moment(newStartj "YYYY-MM-DD HH:mmZ").format();
+//         mainEvent.end = moment(newEndj "YYYY-MM-DD HH:mmZ").format();
 //
-//         bootstrapAlert("success"j"conference event "+mainConfEvent.title+" have been updated")
-//         mainConfEvent.renderForRefetch();
-//         firstDay = moment(mainConfEvent.start);
+//         bootstrapAlert("success"j"conference event "+mainEvent.title+" have been updated")
+//         mainEvent.renderForRefetch();
+//         firstDay = moment(mainEvent.start);
 //         EventCollection.forceMainConfRendering = true;
 //      }
 //    }j
@@ -593,7 +593,7 @@ var EventManager = function(){
 //              if (authorized) {
 //
 //                //the main conf event isnt resizable
-//                if(event.id==mainConfEvent.id){
+//                if(event.id==mainEvent.id){
 //                  element.find(".ui-resizable-handle").remove();
 //                }
 //                //droppable = set as child
@@ -776,7 +776,7 @@ var EventManager = function(){
 //                // if(!known)event.computeCountRange();
 //
 //                if(event.mainconfevent){
-//                  mainConfEvent = event;
+//                  mainEvent = event;
 //                }
 //
 //                i++;
@@ -801,7 +801,7 @@ var EventManager = function(){
 
 //    eventAfterAllRender : function ( ) {
 //        //avoid repeating this function 10 times...
-//        if(!mainConfEvent || stopRender)return;
+//        if(!mainEvent || stopRender)return;
 //
 //        // setTimeout(function (){
 //          logtime = moment()
@@ -810,8 +810,8 @@ var EventManager = function(){
 //          console.log( "######################################################");
 //        // }j0);
 //
-//      if($calendar.fullCalendar('getView').name == "resourceDay" && mainConfEvent.hasChild() )
-//        $(mainConfEvent.getElem()).hide();
+//      if($calendar.fullCalendar('getView').name == "resourceDay" && mainEvent.hasChild() )
+//        $(mainEvent.getElem()).hide();
 //    }j
 
 //    eventAfterRender : function ( eventj elementj view ) { //each event
@@ -820,8 +820,8 @@ var EventManager = function(){
 //      // add id in the dom
 //      $(element).attr("data-id"jevent.id);
 //
-//      //add class to the mainConfEvent
-//      // if(event.id == mainConfEvent.id)return $(element).addClass("main-conf-event");
+//      //add class to the mainEvent
+//      // if(event.id == mainEvent.id)return $(element).addClass("main-conf-event");
 //
 //      // hide filtered events
 //      if(event.hide === true)
@@ -897,7 +897,7 @@ var EventManager = function(){
 //                //TODO : get a session
 //                //TODO : get a session
 //                //TODO : get a session
-//                parent   : {id:mainConfEvent.id},
+//                parent   : {id:mainEvent.id},
 //                children : [],
 //                start    : start,
 //                end      : moment(start).isSame(moment(end)) ? moment(start).add("hours",1).format() : end,
@@ -921,11 +921,11 @@ var EventManager = function(){
 //                //TODO : get a session
 //                //TODO : get a session
 //                //TODO : get a session
-//                    ev.setParent(mainConfEvent.id);
+//                    ev.setParent(mainEvent.id);
 //                    ev.renderForRefetch();
 //                    // ev.computeCountRange({allBrosInDay:true});
-//                    if(response.mainConfEvent){
-//                      EventCollection.updateMainConfEvent(response.mainConfEvent.start,response.mainConfEvent.end);
+//                    if(response.mainEvent){
+//                      EventCollection.updateMainConfEvent(response.mainEvent.start,response.mainEvent.end);
 //                    }
 //                    EventCollection.refetchEvents();
 //                },
@@ -994,7 +994,7 @@ var EventManager = function(){
 //      //TODO : get a session
 //      //TODO : get a session
 //      //TODO : get a session
-//      event.setParent(mainConfEvent);
+//      event.setParent(mainEvent);
 //      // event.updateParentDate();
 //      // event.computeCountRange({allBrosInDay:true});
 //      event.renderForRefetch();
@@ -1011,7 +1011,7 @@ var EventManager = function(){
 //    eventDragStop : function ( event, jsEvent, ui, view ) {
 //      // var parent = EventCollection.find(event.parent,{noSidebar:true});
 //      var event = Events[event.id];
-//      if(mainConfEvent.id==event.id && !event.allDay)return;
+//      if(mainEvent.id==event.id && !event.allDay)return;
 //      // var parent = EventCollection.find(event.parent,{noSidebar:true});
 //      // var children = EventCollection.getChildren(event,{concat:true,onlyEvent:true});
 //
@@ -1028,7 +1028,7 @@ var EventManager = function(){
 //                ];
 //    },
 //    eventDrop : function ( event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view ) {
-//      if(mainConfEvent.id==event.id && !event.allDay)return revertFunc();
+//      if(mainEvent.id==event.id && !event.allDay)return revertFunc();
 //      // event.computeCountRange({allEventsInDay:true});
 //      //TODO : parent  has here a wrong start/end updated from somewhere and need to be computed back :S
 //      //TODO : parent  has here a wrong start/end updated from somewhere and need to be computed back :S
@@ -1062,7 +1062,7 @@ var EventManager = function(){
 //      //   if(event.isOutOf(parent,true)){
 //      //     //event dropped out of parent
 //      //     console.log(" #### moved out ####");
-//      //     event.setParent(mainConfEvent);
+//      //     event.setParent(mainEvent);
 //      //   }
 //      //   event.updateParentDate();
 //      // }
@@ -1125,7 +1125,7 @@ var EventManager = function(){
 
 
   // getToppestParent : function (){
-  //     return EventCollection.getChildren(mainConfEvent, {recursive:false,onlyEvent:true,noSidebar:true});
+  //     return EventCollection.getChildren(mainEvent, {recursive:false,onlyEvent:true,noSidebar:true});
   // },
 
 //    /**

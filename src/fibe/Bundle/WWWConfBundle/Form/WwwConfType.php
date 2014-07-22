@@ -32,7 +32,7 @@
         ->add('logo', 'file', array('required' => false,
                                     'label'    => 'Logo (jpeg - png - 2MO)',
                                     'attr'     => array('placeholder' => 'logoPath')))
-        ->add('mainConfEvent', new WwwConfEventType($this->user), array(
+        ->add('mainEvent', new WwwConfEventType($this->user), array(
           'label' => 'Conference event',
           'attr'  => array('class' => 'well')));
     }

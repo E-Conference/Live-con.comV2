@@ -112,7 +112,7 @@ class ConfEvent extends Event
    *
    * Is it a main conf event ?
    *
-   * @ORM\Column(name="is_mainConfEvent", type="boolean")
+   * @ORM\Column(name="is_mainEvent", type="boolean")
    */
   private $isMainConfEvent = false;
 

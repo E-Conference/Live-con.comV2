@@ -5,7 +5,7 @@
  *
  */
 
-namespace fibe\Bundle\WWWConfBundle\Repository;
+namespace fibe\Bundle\WWWConfBundle\Repository_old;
 
 use Doctrine\ORM\EntityRepository;
 

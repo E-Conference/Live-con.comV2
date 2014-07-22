@@ -195,14 +195,14 @@
   var Events = {}, // every events hashmap (calendar and sidebar)
 //      calendar_events = [], //calendar evnt array
 //      calendar_events_indexes = {},  // calendar event indexes
-//      mainConfEvent, // the main conf event
+//      mainEvent, // the main conf event
 //      dragged = null, //the last dragged object
 //      $sidebar, //$div containing the sidebar
       $calendar, //$div containing the calendar
       stopRender = false,
 //      fetched = false, // are the event fresh in memory ? if not we need a fetch request
 //      firstWeekDay = 1, // avoid first day to be sunday
-      firstDay = moment('{{currentConf.mainConfEvent.startAt|date("Y-m-d")}}'), //first mainconfevent day
+      firstDay = moment('{{currentConf.mainEvent.startAt|date("Y-m-d")}}'), //first mainconfevent day
       authorized = {% if authorized == 1 %}true{% else %}false{% endif %},
       filter, // filter.js
       sidebar, //sidebar.js

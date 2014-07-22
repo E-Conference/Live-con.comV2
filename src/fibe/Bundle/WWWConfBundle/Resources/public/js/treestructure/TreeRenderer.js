@@ -290,7 +290,7 @@
         .bind("loaded.jstree", $.proxy(function (e, data)
         {
             //TODO show only a default session at initialisation
-            data.instance.select_node(mainConfEvent.id,false,true);
+            data.instance.select_node(mainEvent.id,false,true);
           
         }))
         .bind("changed.jstree", $.proxy(function (e, data)

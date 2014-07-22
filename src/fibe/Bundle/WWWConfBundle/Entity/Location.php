@@ -4,9 +4,7 @@ namespace fibe\Bundle\WWWConfBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
 use Symfony\Component\Validator\Constraints as Assert;
-use fibe\Bundle\WWWConfBundle\Entity\Equipment;
 
 /**
  * @ORM\Table(name="location")
@@ -77,16 +75,16 @@ class Location
    * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="locations", cascade={"persist"})
    * @ORM\JoinColumn(name="mainEvent_id", referencedColumnName="id")
    */
-  private $mainEvent;
+  protected $mainEvent;
 
   /**
-   * VEvents
+   * Events
    *
-   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\VEvent", mappedBy="location")
+   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Event", mappedBy="location")
    */
-  protected $VEvents;
+  protected $events;
 
-  
+
 
   /**
    * Constructor
@@ -94,6 +92,7 @@ class Location
   public function __construct()
   {
     $this->equipments = new ArrayCollection();
+    $this->events = new ArrayCollection();
   }
 
   /**
@@ -129,8 +128,7 @@ class Location
   /**
    * Set name
    *
-   * @param string $name
-   *
+   * @param $label
    * @return Location
    */
   public function setLabel($label)
@@ -244,50 +242,49 @@ class Location
   {
     return $this->longitude;
   }
-/*** @TODO EVENT ===> A RELIER à DES VEvent **/
   /**
-   * Add locationAwareCalendarEntities
+   * Add event
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\LocationAwareCalendarEntity $locationAwareCalendarEntities
+   * @param Event $event
    *
    * @return Location
    */
-  public function addLocationAwareCalendarEntitie(\fibe\Bundle\WWWConfBundle\Entity\LocationAwareCalendarEntity $locationAwareCalendarEntities)
+  public function addEvent(Event $event)
   {
-    $this->locationAwareCalendarEntities[] = $locationAwareCalendarEntities;
+    $this->events[] = $event;
 
     return $this;
   }
 
   /**
-   * Remove locationAwareCalendarEntities
+   * Remove event
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\LocationAwareCalendarEntity $locationAwareCalendarEntities
+   * @param Event $event
    */
-  public function removeLocationAwareCalendarEntitie(\fibe\Bundle\WWWConfBundle\Entity\LocationAwareCalendarEntity $locationAwareCalendarEntities)
+  public function removeEvent(Event $event)
   {
-    $this->locationAwareCalendarEntities->removeElement($locationAwareCalendarEntities);
+    $this->events->removeElement($event);
   }
 
   /**
-   * Get locationAwareCalendarEntities
+   * Get event
    *
    * @return \Doctrine\Common\Collections\Collection
    */
-  public function getLocationAwareCalendarEntities()
+  public function getEvents()
   {
-    return $this->locationAwareCalendarEntities;
+    return $this->events;
   }
-/*** @TODO EVENT ===> A RELIER à DES VEvent **/
+/*** @TODO EVENT ===> A RELIER à DES Event **/
 
   /**
    * Add Equipment
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Equipment $equipments
+   * @param Equipment $equipments
    *
    * @return $this
    */
-  public function addEquipment(\fibe\Bundle\WWWConfBundle\Entity\Equipment $equipments)
+  public function addEquipment(Equipment $equipments)
   {
     $this->equipments[] = $equipments;
 
@@ -297,9 +294,9 @@ class Location
   /**
    * Remove Equipment
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Equipment $equipments
+   * @param Equipment $equipments
    */
-  public function removeEquipment(\fibe\Bundle\WWWConfBundle\Entity\Equipment $equipments)
+  public function removeEquipment(Equipment $equipments)
   {
     $this->equipments->removeElement($equipments);
   }
@@ -315,26 +312,26 @@ class Location
   }
 
   /**
-   * Set conference
+   * Set mainEvent
    *
-   * @param MainEvent $conference
+   * @param MainEvent $mainEvent
    *
    * @return $this
    */
-  public function setConference(MainEvent $conference)
+  public function setMainEvent(MainEvent $mainEvent)
   {
-    $this->conference = $conference;
+    $this->mainEvent = $mainEvent;
 
     return $this;
   }
 
   /**
-   * Get conference
+   * Get mainEvent
    *
    * @return MainEvent
    */
-  public function getConference()
+  public function getMainEvent()
   {
-    return $this->conference;
+    return $this->mainEvent;
   }
 }
