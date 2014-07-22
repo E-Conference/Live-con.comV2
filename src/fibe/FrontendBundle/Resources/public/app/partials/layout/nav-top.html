@@ -9,14 +9,24 @@
             <i class="fa fa-bars fa-1x"></i>
            </button>
             
-           <a  href="#" title="Go back to Index" > <img style="height:45px; width:auto;" src="{{liveconLogoPath}}"/></a>
-         
+          <a  href="#" title="Go back to Index"  style="float:left"> <img style="height:45px; width:auto;" src="{{GLOBAL_CONFIG.app.urls.img+'livecon.png'}}"/></a>
+          <div style="float:left">
+          <div ng-repeat="local in locals">
+            <a href="" ng-click="changeLocal(local)"><img src="{{local.src}}"/></a>
+          </div>
+          <div style="float:left">
+           <a  class="btn btn-info"  href="#login" title="login">login</a>
+            <a  class="btn btn-info"  href="#register" title="login">register</a>
+          </div>
+
+        </div>
       </div>
+        <!-- internationalization dropdown -->
       <form class="navbar-form navbar-right" role="search">
          <div class="form-group">
-
-              <input type="text" class="form-control" placeholder="Search" ng-model="query">
+              <input type="text" class="form-control" placeholder="Search" ng-model="query"/>
           </div>
+         
       </form>
        <!-- <h3 id="title" class="navbar-text navbar-right">{{title}}</h3> -->
       

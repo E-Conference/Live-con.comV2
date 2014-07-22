@@ -23,6 +23,7 @@
     {% javascripts 'bundles/frontend/vendors/jquery.min.js'
                'bundles/frontend/vendors/angular.js'
                'bundles/frontend/vendors/angular-resource.js'
+               'bundles/frontend/vendors/angular-translate.js'
                'bundles/frontend/vendors/angular-route.js'
                'bundles/frontend/vendors/angular-animate.min.js'
                'bundles/frontend/vendors/bootstrap.min.js'
@@ -56,19 +57,26 @@
     <script src="{{ asset('bundles/frontend/app/modules/organization/js/controllers.js') }}"></script>
     <script src="{{ asset('bundles/frontend/app/modules/organization/js/routes.js') }}"></script>
 
+     <!-- authentification client app assets -->
+    <script src="{{ asset('bundles/frontend/app/modules/authentification/js/services.js') }}"></script>
+    <script src="{{ asset('bundles/frontend/app/modules/authentification/js/controllers.js') }}"></script>
+    <script src="{{ asset('bundles/frontend/app/modules/authentification/js/routes.js') }}"></script>
+
     <!-- basic client app context definition -->
     <script>
         var globalConfig = {
             api: {
                 urls: {
-                    organizations: "{{ path('apiREST_get_organizations') }}"
+                    organizations: "{{ path('apiREST_get_organizations') }}",
+                    login: "{{ path('login') }}",
+                    registration: "{{ path('apiREST_get_organizations') }}"
                 }
             },
             app: {
                 urls: {
                     base: "{{ asset('bundles/frontend/app/') }}",
                     partials: "{{ asset('bundles/frontend/app/partials/') }}",
-                    img: "{{ asset('bundles/frontend/app/img') }}"
+                    img: "{{ asset('bundles/frontend/app/img/') }}"
                 },
                 modules: {
                     organization: {
@@ -76,6 +84,13 @@
                             base: "{{ asset('bundles/frontend/app/modules/organization/') }}",
                             partials: "{{ asset('bundles/frontend/app/modules/organization/partials/') }}",
                             img: "{{ asset('bundles/frontend/app/modules/organization/img') }}"
+                        }
+                    },
+                    authentification: {
+                        urls: {
+                            base: "{{ asset('bundles/frontend/app/modules/authentification/') }}",
+                            partials: "{{ asset('bundles/frontend/app/modules/authentification/partials/') }}",
+                            img: "{{ asset('bundles/frontend/app/modules/authentification/img') }}"
                         }
                     }
                 }

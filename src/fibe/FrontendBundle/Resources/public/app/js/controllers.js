@@ -21,14 +21,20 @@ liveconControllers.controller('navRightCtrl', ['$scope', '$routeParams',
     function ($scope, $routeParams) {
     }]);
 
-liveconControllers.controller('navTopCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG',
-    function ($scope, $routeParams, GLOBAL_CONFIG) {
-        $scope.liveconLogoPath = GLOBAL_CONFIG.liveconLogoPath;
+liveconControllers.controller('navTopCtrl', ['$translate','$scope', '$routeParams', 'GLOBAL_CONFIG',
+    function ($translate, $scope, $routeParams, GLOBAL_CONFIG) {
+        $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
         $scope.toggleNavLeft = function () {
             $("#wrapper").removeClass("active-right");
             $("#wrapper").toggleClass("active-left");
-
         };
+
+        $scope.locals = [{ label : 'EN', code : 'en_US', src: GLOBAL_CONFIG.app.urls.img+'/english-flag.png'},{ label : 'FR', code : 'fr_FR',  src: GLOBAL_CONFIG.app.urls.img+'/french-flag.png'}]
+        $scope.changeLocal = function(local) {
+            $translate.use(local.code);
+            return local;
+        };
+
     }]);
 
 /*********************************** PUBLICATIONS **********************************************/

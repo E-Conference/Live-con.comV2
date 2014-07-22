@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-    <script type="text/javascript" src="/livecon/web/js/jquery.js"></script>
+    <script type="text/javascript" src="/live-con.comV2/web/js/jquery.js"></script>
       <title>Livecon upgrade your conference</title>
 
-        <script type="text/javascript" src="/livecon/web/js/jquery.js"></script>
+        <script type="text/javascript" src="/live-con.comV2/web/js/jquery.js"></script>
         <script type="text/javascript">
 $(function(){
 
