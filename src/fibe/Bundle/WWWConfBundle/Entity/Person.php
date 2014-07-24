@@ -95,7 +95,7 @@ class Person
   /**
    * MainEvents own by a person
    *
-   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", mappedBy="owner",cascade={"persist", "remove"})
+   * @ORM\OneToMany(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", mappedBy="owner",cascade={"persist", "remove"})
    *
    */
   private $owns;
@@ -138,7 +138,7 @@ class Person
   /**
    * @TODO : Difference avec un utilisateur Livecon ? Peut appartenir a plusieurs main events
    *
-   * @ORM\ManyToMany(targetEntity="MainEvent", inversedBy="persons", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="persons", cascade={"persist"})
    * @ORM\JoinTable(name="mainevents_persons",
    *     joinColumns={@ORM\JoinColumn(name="mainevent_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")})

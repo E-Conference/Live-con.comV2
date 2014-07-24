@@ -12,7 +12,7 @@
   use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
   use fibe\MobileAppBundle\Entity\MobileAppConfig;
-  use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
+  use fibe\ConferenceBundle\Entity\MainEvent;
 
   /**
    * Mobile app controller.

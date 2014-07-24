@@ -3,6 +3,7 @@
   namespace fibe\MobileAppBundle\Entity;
 
   use Doctrine\ORM\Mapping as ORM;
+  use fibe\ConferenceBundle\Entity\MainEvent;
 
   /**
    * This entity define a topic
@@ -25,7 +26,7 @@
     /**
      * Conference
      *
-     * @ORM\OneToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent",cascade={"persist","remove"})
+     * @ORM\OneToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent",cascade={"persist","remove"})
      * @ORM\JoinColumn(name="main_event", referencedColumnName="id",onDelete="CASCADE")
      */
     private $mainEvent;
@@ -167,11 +168,11 @@
     /**
      * Set mainEvent
      *
-     * @param boolean $mainEvent
+     * @param MainEvent $mainEvent
      *
      * @return MobileAppConfig
      */
-    public function setMainEvent($mainEvent)
+    public function setMainEvent(MainEvent $mainEvent)
     {
       $this->mainEvent = $mainEvent;
 
@@ -181,7 +182,7 @@
     /**
      * Get mainEvent
      *
-     * @return boolean
+     * @return MainEvent
      */
     public function getMainEvent()
     {

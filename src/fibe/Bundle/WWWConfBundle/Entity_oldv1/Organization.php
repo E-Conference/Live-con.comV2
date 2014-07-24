@@ -63,7 +63,7 @@ class Organization
 
   /**
    *  Topics associated to this conference
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="organizations", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="organizations", cascade={"persist"})
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    *
    */
@@ -253,11 +253,11 @@ class Organization
   /**
    * Set conference
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference
+   * @param \fibe\ConferenceBundle\Entity\MainEvent $conference
    *
    * @return Organization
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference = null)
+  public function setConference(\fibe\ConferenceBundle\Entity\MainEvent $conference = null)
   {
     $this->conference = $conference;
 
@@ -267,7 +267,7 @@ class Organization
   /**
    * Get conference
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
+   * @return \fibe\ConferenceBundle\Entity\MainEvent
    */
   public function getConference()
   {

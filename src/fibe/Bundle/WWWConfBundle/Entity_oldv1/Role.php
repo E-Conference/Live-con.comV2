@@ -60,7 +60,7 @@ class Role
 
   /**
    *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="roles", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="roles", cascade={"persist"})
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    *
    */
@@ -151,11 +151,11 @@ class Role
   /**
    * Set conference
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\MainEvent $conf
+   * @param \fibe\ConferenceBundle\Entity\MainEvent $conf
    *
    * @return Role
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conf)
+  public function setConference(\fibe\ConferenceBundle\Entity\MainEvent $conf)
   {
     $this->conference = $conf;
 
@@ -165,7 +165,7 @@ class Role
   /**
    * Get conference
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
+   * @return \fibe\ConferenceBundle\Entity\MainEvent
    */
   public function getConference()
   {

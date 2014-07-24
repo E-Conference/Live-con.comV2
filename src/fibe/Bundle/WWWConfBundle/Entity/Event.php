@@ -48,7 +48,7 @@ class Event extends VEvent
   /**
    * Main Event
    *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="events", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="events", cascade={"persist"})
    * @ORM\JoinColumn(name="mainevent_id", referencedColumnName="id")
    * @Expose
    */
@@ -249,11 +249,11 @@ class Event extends VEvent
   /**
    * Set conference
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference
+   * @param \fibe\ConferenceBundle\Entity\MainEvent $conference
    *
    * @return ConfEvent
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference)
+  public function setConference(\fibe\ConferenceBundle\Entity\MainEvent $conference)
   {
     $this->conference = $conference;
 
@@ -263,7 +263,7 @@ class Event extends VEvent
   /**
    * Get conference
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
+   * @return \fibe\ConferenceBundle\Entity\MainEvent
    */
   public function getConference()
   {

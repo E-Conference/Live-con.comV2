@@ -27,7 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorMap({
  *     "Event"="Event",
- *     "MainEvent"="MainEvent",
+ *     "MainEvent"="fibe\ConferenceBundle\Entity\MainEvent",
  * })
  */
 class VEvent

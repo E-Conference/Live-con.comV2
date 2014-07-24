@@ -29,7 +29,7 @@ class MainEventSettingsType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'fibe\Bundle\WWWConfBundle\Entity\MainEventSettings'
+            'data_class' => 'fibe\ConferenceBundle\Entity\MainEventSettings'
         ));
     }
 

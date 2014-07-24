@@ -10,10 +10,10 @@
 
 
   /**
-   * Class MobileAppWwwConfType
+   * Class MobileAppMainEventType
    * @package fibe\MobileAppBundle\Form
    */
-  class MobileAppWwwConfType extends AbstractType
+  class MobileAppMainEventType extends AbstractType
   {
     private $user;
 
@@ -47,7 +47,7 @@
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
       $resolver->setDefaults(array(
-        'data_class'         => 'fibe\Bundle\WWWConfBundle\Entity\MainEvent',
+        'data_class'         => 'fibe\ConferenceBundle\Entity\MainEvent',
         'cascade_validation' => true,
       ));
     }

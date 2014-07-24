@@ -7,7 +7,7 @@
   use FOS\UserBundle\Entity\User as BaseUser;
   use Doctrine\ORM\Mapping as ORM;
 
-  use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
+  use fibe\ConferenceBundle\Entity\MainEvent;
   use FOS\UserBundle\Model\UserInterface;
   use JMS\Serializer\Annotation\Type;
   use JMS\Serializer\Annotation\ExclusionPolicy;
@@ -55,7 +55,7 @@
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent")
+     * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent")
      * @ORM\JoinColumn(name="currentConf", referencedColumnName="id")
      */
     protected $currentConf;

@@ -4,7 +4,7 @@ namespace fibe\Bundle\WWWConfBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
+use fibe\ConferenceBundle\Entity\MainEvent;
 use fibe\Bundle\WWWConfBundle\Util\StringTools;
 
 /**
@@ -256,7 +256,7 @@ class Category
   /**
    * Get mainEvent
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
+   * @return \fibe\ConferenceBundle\Entity\MainEvent
    */
   public function getConference()
   {

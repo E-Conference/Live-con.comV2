@@ -3,7 +3,7 @@
 namespace fibe\Bundle\WWWConfBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
+use fibe\ConferenceBundle\Entity\MainEvent;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -42,7 +42,7 @@ class MappingFile
 
   /**
    *  Conference associated to this mappingFile
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="mappingFiles", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="mappingFiles", cascade={"persist"})
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    *
    */

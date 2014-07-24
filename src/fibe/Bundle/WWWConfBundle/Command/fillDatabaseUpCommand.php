@@ -1,20 +1,15 @@
 <?php
   namespace fibe\Bundle\WWWConfBundle\Command;
 
-  use fibe\Bundle\WWWConfBundle\Entity\VEvent;
-  use fibe\Bundle\WWWConfBundle\Entity_oldv1\ConfEvent;
   use fibe\MobileAppBundle\Entity\MobileAppConfig;
   use fibe\Bundle\WWWConfBundle\Entity\Module;
-  use fibe\Bundle\WWWConfBundle\Entity\Organization;
   use fibe\Bundle\WWWConfBundle\Entity\Paper;
   use fibe\Bundle\WWWConfBundle\Entity\Person;
   use fibe\Bundle\WWWConfBundle\Entity\Role;
   use fibe\Bundle\WWWConfBundle\Entity\RoleType;
   use fibe\Bundle\WWWConfBundle\Entity\Topic;
-  use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
+  use fibe\ConferenceBundle\Entity\MainEvent;
   use fibe\Bundle\WWWConfBundle\Entity\Location;
-  use fibe\Bundle\WWWConfBundle\Form\WwwConfType;
-  use fibe\Bundle\WWWConfBundle\Form\WwwConfEventType;
   use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
   use Symfony\Component\Console\Input\InputInterface;
   use Symfony\Component\Console\Output\OutputInterface;

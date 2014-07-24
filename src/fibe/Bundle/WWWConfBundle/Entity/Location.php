@@ -72,7 +72,7 @@ class Location
    *
    * mainEvent
    *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="locations", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="locations", cascade={"persist"})
    * @ORM\JoinColumn(name="mainEvent_id", referencedColumnName="id")
    */
   protected $mainEvent;

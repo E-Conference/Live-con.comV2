@@ -5,7 +5,7 @@ namespace fibe\Bundle\WWWConfBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
+use fibe\ConferenceBundle\Entity\MainEvent;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
@@ -29,7 +29,7 @@ class Module
   /**
    * Conference
    *
-   * @ORM\OneToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent",cascade={"persist","remove"})
+   * @ORM\OneToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent",cascade={"persist","remove"})
    * @ORM\JoinColumn(name="conference", referencedColumnName="id",onDelete="CASCADE")
    */
   private $conference;

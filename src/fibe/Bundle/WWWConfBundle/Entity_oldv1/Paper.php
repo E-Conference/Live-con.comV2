@@ -98,7 +98,7 @@ class Paper
 
   /**
    *  Conference associated to this paper
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="papers", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="papers", cascade={"persist"})
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    *
    */
@@ -410,11 +410,11 @@ class Paper
   /**
    * Set conference
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference
+   * @param \fibe\ConferenceBundle\Entity\MainEvent $conference
    *
    * @return Paper
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference = null)
+  public function setConference(\fibe\ConferenceBundle\Entity\MainEvent $conference = null)
   {
     $this->conference = $conference;
 
@@ -424,7 +424,7 @@ class Paper
   /**
    * Get conference
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
+   * @return \fibe\ConferenceBundle\Entity\MainEvent
    */
   public function getConference()
   {

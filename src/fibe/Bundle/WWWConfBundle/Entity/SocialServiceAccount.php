@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 use fibe\Bundle\WWWConfBundle\Entity\SocialService;
 use fibe\Bundle\WWWConfBundle\Entity\Person;
-use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
+use fibe\ConferenceBundle\Entity\MainEvent;
 
 
 /**

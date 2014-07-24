@@ -5,7 +5,7 @@ namespace fibe\Bundle\WWWConfBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
+use fibe\ConferenceBundle\Entity\MainEvent;
 use fibe\Bundle\WWWConfBundle\Entity\VEvent;
 use fibe\Bundle\WWWConfBundle\Util\StringTools;
 
@@ -95,7 +95,7 @@ class Paper
   /**
    *  MainEvent associated to this paper
    *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="papers", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="papers", cascade={"persist"})
    * @ORM\JoinColumn(name="mainEvent_id", referencedColumnName="id")
    *
    */
@@ -407,11 +407,11 @@ class Paper
   /**
    * Set conference
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference
+   * @param \fibe\ConferenceBundle\Entity\MainEvent $conference
    *
    * @return Paper
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference = null)
+  public function setConference(\fibe\ConferenceBundle\Entity\MainEvent $conference = null)
   {
     $this->conference = $conference;
 
@@ -421,7 +421,7 @@ class Paper
   /**
    * Get conference
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
+   * @return \fibe\ConferenceBundle\Entity\MainEvent
    */
   public function getConference()
   {

@@ -78,7 +78,7 @@ class Location
   /**
    * conference
    *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="locations", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="locations", cascade={"persist"})
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    */
   private $conference;
@@ -310,11 +310,11 @@ class Location
   /**
    * Set conference
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference
+   * @param \fibe\ConferenceBundle\Entity\MainEvent $conference
    *
    * @return ConfEvent
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference)
+  public function setConference(\fibe\ConferenceBundle\Entity\MainEvent $conference)
   {
     $this->conference = $conference;
 
@@ -324,7 +324,7 @@ class Location
   /**
    * Get conference
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
+   * @return \fibe\ConferenceBundle\Entity\MainEvent
    */
   public function getConference()
   {

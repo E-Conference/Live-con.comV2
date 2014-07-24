@@ -2,6 +2,8 @@
 namespace fibe\Bundle\WWWConfBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use fibe\ConferenceBundle\Entity\MainEvent;
+use fibe\Bundle\WWWConfBundle\Entity\VEvent;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use fibe\Bundle\WWWConfBundle\Entity\Person;
@@ -59,7 +61,7 @@ class Role
 
   /**
    *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent", inversedBy="roles", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="roles", cascade={"persist"})
    * @ORM\JoinColumn(name="mainEvent_id", referencedColumnName="id")
    *
    */
@@ -102,11 +104,11 @@ class Role
   /**
    * Set event
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $event
+   * @param VEvent $event
    *
    * @return Role
    */
-  public function setEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $event = null)
+  public function setEvent(VEvent $event = null)
   {
     $this->event = $event;
 
@@ -116,7 +118,7 @@ class Role
   /**
    * Get event
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\VEvent
+   * @return VEvent
    */
   public function getEvent()
   {
@@ -126,11 +128,11 @@ class Role
   /**
    * Set type
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\RoleType $type
+   * @param RoleType $type
    *
    * @return Role
    */
-  public function setType(\fibe\Bundle\WWWConfBundle\Entity\RoleType $type = null)
+  public function setType(RoleType $type = null)
   {
     $this->type = $type;
 
@@ -140,7 +142,7 @@ class Role
   /**
    * Get type
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\RoleType
+   * @return RoleType
    */
   public function getType()
   {
@@ -148,26 +150,26 @@ class Role
   }
 
   /**
-   * Set conference
+   * Set mainEvent
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\MainEvent $conf
+   * @param MainEvent $mainEvent
    *
    * @return Role
    */
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conf)
+  public function setMainEvent(MainEvent $mainEvent)
   {
-    $this->conference = $conf;
+    $this->mainEvent = $mainEvent;
 
     return $this;
   }
 
   /**
-   * Get conference
+   * Get mainEvent
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
+   * @return MainEvent
    */
-  public function getConference()
+  public function getMainEvent()
   {
-    return $this->conference;
+    return $this->mainEvent;
   }
 }

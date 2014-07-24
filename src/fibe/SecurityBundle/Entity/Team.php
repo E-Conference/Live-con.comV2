@@ -27,7 +27,7 @@ class Team
   /**
    * Conference
    *
-   * @ORM\OneToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\MainEvent",cascade={"persist","remove"})
+   * @ORM\OneToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent",cascade={"persist","remove"})
    * @ORM\JoinColumn(name="conference", referencedColumnName="id",onDelete="CASCADE")
    */
   private $conference;
@@ -54,7 +54,7 @@ class Team
   }
 
 
-  public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference = null)
+  public function setConference(\fibe\ConferenceBundle\Entity\MainEvent $conference = null)
   {
     $this->conference = $conference;
 

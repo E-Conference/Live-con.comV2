@@ -11,10 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use fibe\MobileAppBundle\Entity\MobileAppConfig;
-use fibe\MobileAppBundle\Form\MobileAppWwwConfType;
+use fibe\MobileAppBundle\Form\MobileAppMainEventType;
 
-use fibe\Bundle\WWWConfBundle\Entity\MainEvent;
-use fibe\Bundle\WWWConfBundle\Form\WwwConfType;
+use fibe\ConferenceBundle\Entity\MainEvent;
+use fibe\Bundle\WWWConfBundle\Form\MainEventType;
 use fibe\Bundle\WWWConfBundle\Form\MobileAppConfigType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 

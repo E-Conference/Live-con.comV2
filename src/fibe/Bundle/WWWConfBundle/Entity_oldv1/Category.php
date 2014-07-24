@@ -461,10 +461,10 @@ class Category
     /**
      * Set conference
      *
-     * @param \fibe\Bundle\WWWConfBundle\Entity\MainEvent $wwwConf
+     * @param \fibe\ConferenceBundle\Entity\MainEvent $wwwConf
      * @return Category
      */
-    public function setConference(\fibe\Bundle\WWWConfBundle\Entity\MainEvent $conference = null)
+    public function setConference(\fibe\ConferenceBundle\Entity\MainEvent $conference = null)
     {
         $this->conference = $conference;
     
@@ -474,7 +474,7 @@ class Category
     /**
      * Get conference
      *
-     * @return \fibe\Bundle\WWWConfBundle\Entity\MainEvent
+     * @return \fibe\ConferenceBundle\Entity\MainEvent
      */
     public function getConference()
     {

@@ -1,6 +1,7 @@
 services:
-    emptyConf:
-        class:  fibe\ConferenceBundle\Services\EmptyConf
+    mainEventService:
+        class:  fibe\ConferenceBundle\Services\MainEventService
+        arguments: ["@doctrine.orm.entity_manager"]
 
 idci_exporter:
     entities:
