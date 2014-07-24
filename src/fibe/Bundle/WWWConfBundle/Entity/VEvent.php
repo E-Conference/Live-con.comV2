@@ -20,11 +20,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  * a schedulable element.
  *
  * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\CalendarEntityRepository")
- * @ORM\Table(name="VEvent", indexes={
+ * @ORM\Table(name="vevent", indexes={
  *    @ORM\Index(name="start_at_idx", columns={"start_at"})
  * })
  * @ORM\HasLifecycleCallbacks
- * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorMap({
  *     "Event"="Event",
  *     "MainEvent"="fibe\ConferenceBundle\Entity\MainEvent",
@@ -39,7 +39,8 @@ class VEvent
 
   const CLASSIFICATION_PUBLIC = "PUBLIC";
   const CLASSIFICATION_PRIVATE = "PRIVATE";
-  const CLASSIFICATION_CONFIDENTIAL = "CONFIDENTIAL";
+
+  const DEFAULT_EVENT_DURATION = '+2 hour';
 
   /**
    * @ORM\Id
@@ -283,6 +284,24 @@ class VEvent
    */
   protected $url;
 
+  /**
+   * Is an all day event
+   * Used for ui representation in the calendar view
+   *
+   * @ORM\Column(name="is_all_day", type="boolean")
+   * @Expose
+   */
+  private $isAllDay = false;
+
+  /**
+   * Is an all day event
+   * Used for ui representation in the calendar view
+   *
+   * @ORM\Column(name="is_instant", type="boolean")
+   * @Expose
+   */
+  private $isInstant;
+
 
   /**
    * created_at
@@ -332,19 +351,6 @@ class VEvent
   }
 
   /**
-   * onCreation
-   *
-   * @ORM\PrePersist()
-   */
-  public function onCreation()
-  {
-    $now = new \DateTime('now');
-
-    $this->setCreatedAt($now);
-    $this->setLastModifiedAt($now);
-  }
-
-  /**
    * computeEndAt
    *
    * @TODO EVENT : à corriger
@@ -357,14 +363,35 @@ class VEvent
     if (!$this->getEndAt() && $this->getStartAt())
     {
       $endAt = clone $this->getStartAt();
-      $endAt->modify('+1 hour');
+      $endAt->modify(self::DEFAULT_EVENT_DURATION);
       $this->setEndAt($endAt);
+      $this->setIsInstant(false);
     }
     else if(!$this->getStartAt())
     {
-      $this->setEndAt((new \DateTime("now"))->modify('+1 hour'));
+      $this->setEndAt((new \DateTime("now"))->modify(self::DEFAULT_EVENT_DURATION));
       $this->setStartAt(new \DateTime("now"));
+      $this->setIsInstant(false);
+    }else if($this->getStartAt() == $this->getEndAt())
+    {
+      $this->setIsInstant(true);
+    }else
+    {
+      $this->setIsInstant(false);
     }
+  }
+
+  /**
+   * onCreation
+   *
+   * @ORM\PrePersist()
+   */
+  public function onCreation()
+  {
+    $now = new \DateTime('now');
+
+    $this->setCreatedAt($now);
+    $this->setLastModifiedAt($now);
   }
 
   /**
@@ -584,6 +611,54 @@ class VEvent
   public function getComment()
   {
     return $this->comment;
+  }
+
+  /**
+   * Set isAllDay
+   *
+   * @param string $isAllDay
+   *
+   * @return VEvent
+   */
+  public function setIsAllDay($isAllDay)
+  {
+    $this->isAllDay = $isAllDay;
+
+    return $this;
+  }
+
+  /**
+   * Get isAllDay
+   *
+   * @return string
+   */
+  public function getIsAllDay()
+  {
+    return $this->isAllDay;
+  }
+
+  /**
+   * Set isInstant
+   *
+   * @param string $isInstant
+   *
+   * @return VEvent
+   */
+  public function setIsInstant($isInstant)
+  {
+    $this->isInstant = $isInstant;
+
+    return $this;
+  }
+
+  /**
+   * Get isInstant
+   *
+   * @return string
+   */
+  public function getIsInstant()
+  {
+    return $this->isInstant;
   }
 
   /**

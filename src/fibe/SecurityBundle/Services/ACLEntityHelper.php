@@ -19,13 +19,13 @@ class ACLEntityHelper extends ACLHelper
 {
 
   const LINK_WITH = 'MainEvent';
-  const DEFAULT_REPOSITORY = 'fibeWWWConfBundle';
+  const DEFAULT_REPOSITORY_BUNDLE = 'fibeWWWConfBundle';
 
   /** @const */
   public static $ACLEntityNameArray = array(
     'MainEvent' => array(
       'classpath' => 'fibe\\ConferenceBundle\\Entity',
-      'repositoryName' => 'fibeConferenceBundle'
+      'repositoryBundle' => 'fibeConferenceBundle'
     ),
     'Team' => array(
       'classpath' => 'fibe\\SecurityBundle\\Entity',
@@ -37,7 +37,7 @@ class ACLEntityHelper extends ACLHelper
       'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
     ),
 
-    'ConfEvent' => array(
+    'Event' => array(
       'parent'    => 'getConference',
       'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
     ),
@@ -138,9 +138,9 @@ class ACLEntityHelper extends ACLHelper
   {
     // $ids = $this->aclProvider->getAllowedEntitiesIds($this->getClassNameByRepositoryName($repositoryName), $action);
     $repositoryFullName = (
-      isset(self::$ACLEntityNameArray[$repositoryName]["repositoryName"])
-        ? self::$ACLEntityNameArray[$repositoryName]["repositoryName"]
-        : self::DEFAULT_REPOSITORY
+      isset(self::$ACLEntityNameArray[$repositoryName]["repositoryBundle"])
+        ? self::$ACLEntityNameArray[$repositoryName]["repositoryBundle"]
+        : self::DEFAULT_REPOSITORY_BUNDLE
       ) . ':' . $repositoryName
     ;
     $queryBuilder = $this->entityManager->getRepository($repositoryFullName)->createQueryBuilder(

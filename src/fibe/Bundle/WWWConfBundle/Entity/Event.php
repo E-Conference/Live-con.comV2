@@ -22,7 +22,7 @@ use fibe\Bundle\WWWConfBundle\Util\StringTools;
  *
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
- * @ORM\Table(name="Event")
+ * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\EventRepository")
  * @ORM\HasLifecycleCallbacks
  */
@@ -53,15 +53,6 @@ class Event extends VEvent
    * @Expose
    */
   private $mainEvent;
-
-  /**
-   * Is an all day event
-   * Used for ui representation in the calendar view
-   *
-   * @ORM\Column(name="is_allday", type="boolean")
-   * @Expose
-   */
-  private $isAllDay;
 
   /**
    * @ORM\Column(type="string", length=128, nullable=true)
@@ -120,7 +111,7 @@ class Event extends VEvent
     }
 
     //ensure main conf has correct properties
-    if ($this->isMainConfEvent) //@TODO EVENT
+    if ($this->isMainVEvent) //@TODO EVENT
     {
       $this->fitChildrenDate(true);
       if ($this->getEndAt()->getTimestamp() <= $this->getStartAt()->getTimestamp())
@@ -181,7 +172,7 @@ class Event extends VEvent
    *
    * @param string $slug
    *
-   * @return ConfEvent
+   * @return VEvent
    */
   public function setSlug($slug)
   {
@@ -209,7 +200,7 @@ class Event extends VEvent
    */
   public function computeIsAllDay()
   {
-    if ($this->isMainConfEvent) //@TODO EVENT
+    if ($this->isMainVEvent) //@TODO EVENT
     {
       $this->setIsAllDay(true);
     }
@@ -220,7 +211,7 @@ class Event extends VEvent
    *
    * @param string $url
    *
-   * @return ConfEvent
+   * @return VEvent
    */
   public function setUrl($url)
   {
@@ -244,7 +235,7 @@ class Event extends VEvent
    *
    * @param \fibe\ConferenceBundle\Entity\MainEvent $conference
    *
-   * @return ConfEvent
+   * @return VEvent
    */
   public function setConference(\fibe\ConferenceBundle\Entity\MainEvent $conference)
   {
@@ -268,7 +259,7 @@ class Event extends VEvent
    *
    * @param \fibe\Bundle\WWWConfBundle\Entity\Paper $papers
    *
-   * @return ConfEvent
+   * @return VEvent
    */
   public function addPaper(\fibe\Bundle\WWWConfBundle\Entity\Paper $papers)
   {
@@ -302,7 +293,7 @@ class Event extends VEvent
    *
    * @param \fibe\Bundle\WWWConfBundle\Entity\Topic $topics
    *
-   * @return ConfEvent
+   * @return VEvent
    */
   public function addTopic(\fibe\Bundle\WWWConfBundle\Entity\Topic $topics)
   {
@@ -332,85 +323,13 @@ class Event extends VEvent
   }
 
   /**
-   * Set isAllDay
-   *
-   * @param string $isAllDay
-   *
-   * @return ConfEvent
-   */
-  public function setIsAllDay($isAllDay)
-  {
-    $this->isAllDay = $isAllDay;
-
-    return $this;
-  }
-
-  /**
-   * Get isAllDay
-   *
-   * @return string
-   */
-  public function getIsAllDay()
-  {
-    return $this->isAllDay;
-  }
-
-  /**
-   * Set isMainConfEvent
-   *
-   * @param string $isMainConfEvent
-   *
-   * @return ConfEvent
-   */
-  public function setIsMainConfEvent($isMainConfEvent)
-  {
-    $this->isMainConfEvent = $isMainConfEvent;
-
-    return $this;
-  }
-
-  /**
-   * Get isMainConfEvent
-   *
-   * @return string
-   */
-  public function getIsMainConfEvent()
-  {
-    return $this->isMainConfEvent;
-  }
-
-  /**
-   * Set isInstant
-   *
-   * @param string $isInstant
-   *
-   * @return ConfEvent
-   */
-  public function setIsInstant($isInstant)
-  {
-    $this->isInstant = $isInstant;
-
-    return $this;
-  }
-
-  /**
-   * Get isInstant
-   *
-   * @return string
-   */
-  public function getIsInstant()
-  {
-    return $this->isInstant;
-  }
-
-  /**
    * Set parent
    *
-   * @param ConfEvent $parent
+   * @param VEvent $parent
    *
-   * @return ConfEvent
+   * @return VEvent
    */
-  public function setParent(ConfEvent $parent = null)
+  public function setParent(VEvent $parent = null)
   {
     $this->parent = $parent;
 
@@ -420,7 +339,7 @@ class Event extends VEvent
   /**
    * Get parent
    *
-   * @return ConfEvent
+   * @return VEvent
    */
   public function getParent()
   {
@@ -430,11 +349,11 @@ class Event extends VEvent
   /**
    * Add children
    *
-   * @param ConfEvent $children
+   * @param VEvent $children
    *
-   * @return ConfEvent
+   * @return VEvent
    */
-  public function addChildren(ConfEvent $children)
+  public function addChildren(VEvent $children)
   {
     $this->children[] = $children;
 
@@ -444,9 +363,9 @@ class Event extends VEvent
   /**
    * Remove children
    *
-   * @param ConfEvent $children
+   * @param VEvent $children
    */
-  public function removeChildren(ConfEvent $children)
+  public function removeChildren(VEvent $children)
   {
     $this->children->removeElement($children);
   }

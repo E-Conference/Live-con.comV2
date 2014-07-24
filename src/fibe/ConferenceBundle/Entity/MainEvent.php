@@ -22,7 +22,7 @@ use fibe\Bundle\WWWConfBundle\Util\StringTools;
  * Main Event entity
  *
  * @ORM\Entity
- * @ORM\Table(name="Main_Event")
+ * @ORM\Table(name="main_event")
  * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\MainEventRepository")
  * @ORM\HasLifecycleCallbacks
  */
