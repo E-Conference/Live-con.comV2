@@ -4,6 +4,7 @@ namespace fibe\Bundle\WWWConfBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use fibe\ConferenceBundle\Entity\MainEvent;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -73,7 +74,7 @@ class Location
    * mainEvent
    *
    * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="locations", cascade={"persist"})
-   * @ORM\JoinColumn(name="mainEvent_id", referencedColumnName="id")
+   * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    */
   protected $mainEvent;
 

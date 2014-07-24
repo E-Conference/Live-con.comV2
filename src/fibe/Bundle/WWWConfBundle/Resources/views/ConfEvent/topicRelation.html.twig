@@ -34,7 +34,7 @@
       var id_topic = $(this).attr('id');
       $('#loader_topics').show();
       //start send the post request
-      $.post("{{path('schedule_confevent_deleteTopic')}}",
+      $.post("{{path('schedule_event_deleteTopic')}}",
           {id_topic: id_topic, id_entity: "{{ entity.id }}"},
           function (response)
           {

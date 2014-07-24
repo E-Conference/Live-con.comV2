@@ -11,10 +11,10 @@
   /**
    * @TODO comment
    *
-   * Class ConfEventFilterType
+   * Class EventFilterType
    * @package fibe\Bundle\WWWConfBundle\Form\Filters
    */
-  class ConfEventFilterType extends AbstractType
+  class EventFilterType extends AbstractType
   {
 
     private $user;

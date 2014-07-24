@@ -83,7 +83,7 @@ class Category
     private $calendarEntities;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MainEvent", inversedBy="categories")
+     * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="categories")
      * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
      */
     protected $conference;

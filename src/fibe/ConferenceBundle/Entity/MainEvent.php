@@ -133,6 +133,12 @@ class MainEvent extends VEvent
   protected $slug;
 
   /**
+   *
+   * @ORM\Column(type="string", length=128, nullable=true)
+   */
+  protected $acronym;
+
+  /**
    * @return string
    */
   public function __toString()
@@ -655,5 +661,29 @@ class MainEvent extends VEvent
   public function getModule()
   {
     return $this->module;
+  }
+
+  /**
+   * Set acronym
+   *
+   * @param string $acronym
+   *
+   * @return ConfEvent
+   */
+  public function setAcronym($acronym)
+  {
+    $this->acronym = $acronym;
+
+    return $this;
+  }
+
+  /**
+   * Get acronym
+   *
+   * @return string
+   */
+  public function getAcronym()
+  {
+    return $this->acronym;
   }
 }

@@ -19,7 +19,7 @@ use fibe\Bundle\WWWConfBundle\Entity\Topic;
 use fibe\Bundle\WWWConfBundle\Form\RoleType as RoleType;
 use fibe\Bundle\WWWConfBundle\Form\TopicType as TopicType;
 //Filter type form
-use fibe\Bundle\WWWConfBundle\Form\Filters\ConfEventFilterType;
+use fibe\Bundle\WWWConfBundle\Form\Filters\EventFilterType;
 
 use fibe\Bundle\WWWConfBundle\Entity\XProperty;
 
@@ -37,7 +37,7 @@ class ConfEventController extends Controller
 {
   /**
    * Lists all ConfEvent entities.
-   * @Route("/",name="schedule_confevent")
+   * @Route("/",name="schedule_event")
    * @Template()
    */
   public function indexAction(Request $request)
@@ -57,7 +57,7 @@ class ConfEventController extends Controller
     }
 
     //Form Filter
-    $filters = $this->createForm(new ConfEventFilterType($this->getUser()));
+    $filters = $this->createForm(new EventFilterType($this->getUser()));
 
     return array(
       'pager'        => $pager,
@@ -67,7 +67,7 @@ class ConfEventController extends Controller
 
   /**
    * Filter confevent
-   * @Route("/filter", name="schedule_confevent_filter")
+   * @Route("/filter", name="schedule_event_filter")
    */
   public function filterAction(Request $request)
   {
@@ -76,7 +76,7 @@ class ConfEventController extends Controller
 
     $conf = $this->getUser()->getCurrentConf();
     //Filters
-    $filters = $this->createForm(new ConfEventFilterType($this->getUser()));
+    $filters = $this->createForm(new EventFilterType($this->getUser()));
     $filters->submit($request);
 
     if ($filters->isValid())
@@ -110,7 +110,7 @@ class ConfEventController extends Controller
 
   /**
    * Creates a new ConfEvent entity.
-   * @Route("/create", name="schedule_confevent_create")
+   * @Route("/create", name="schedule_event_create")
    */
   public function createAction(Request $request)
   {
@@ -136,7 +136,7 @@ class ConfEventController extends Controller
 
       //$this->get('fibe_security.acl_entity_helper')->createACL($entity,MaskBuilder::MASK_OWNER);
 
-      return $this->redirect($this->generateUrl('schedule_confevent_show', array('id' => $entity->getId())));
+      return $this->redirect($this->generateUrl('schedule_event_show', array('id' => $entity->getId())));
     }
 
     return $this->render(
@@ -150,7 +150,7 @@ class ConfEventController extends Controller
 
   /**
    * Displays a form to create a new ConfEvent entity.
-   * @Route("/new",name="schedule_confevent_new")
+   * @Route("/new",name="schedule_event_new")
    * @Template()
    */
   public function newAction()
@@ -170,7 +170,7 @@ class ConfEventController extends Controller
 
   /**
    * Finds and displays a ConfEvent entity.
-   * @Route("/{id}/show", name="schedule_confevent_show")
+   * @Route("/{id}/show", name="schedule_event_show")
    * @Template()
    */
 
@@ -192,7 +192,7 @@ class ConfEventController extends Controller
 
   /**
    * Displays a form to edit an existing ConfEvent entity.
-   * @Route("/{id}/edit", name="schedule_confevent_edit")
+   * @Route("/{id}/edit", name="schedule_event_edit")
    * @Template()
    */
   public function editAction($id)
@@ -251,7 +251,7 @@ class ConfEventController extends Controller
 
   /**
    * Edits an existing ConfEvent entity.
-   * @Route("/{id}/update", name="schedule_confevent_update")
+   * @Route("/{id}/update", name="schedule_event_update")
    * @Template("fibeWWWConfBundle:ConfEvent:edit.html.twig")
    */
   public function updateAction(Request $request, $id)
@@ -277,12 +277,12 @@ class ConfEventController extends Controller
       $em->flush();
     }
 
-    return $this->redirect($this->generateUrl('schedule_confevent_show', array('id' => $id)));
+    return $this->redirect($this->generateUrl('schedule_event_show', array('id' => $id)));
   }
 
   /**
    * Deletes a ConfEvent entity.
-   * @Route("/{id}/delete", name="schedule_confevent_delete")
+   * @Route("/{id}/delete", name="schedule_event_delete")
    * @Method({"DELETE","POST"})
    */
   public function deleteAction(Request $request, $id)
@@ -304,7 +304,7 @@ class ConfEventController extends Controller
           'You cannot delete the Conference Event'
         );
 
-        return $this->redirect($this->generateUrl('schedule_confevent_edit', array('id' => $entity->getId())));
+        return $this->redirect($this->generateUrl('schedule_event_edit', array('id' => $entity->getId())));
       }
       // set orphan children as children of main conf event
       $children = $entity->getChildren();
@@ -324,7 +324,7 @@ class ConfEventController extends Controller
       $em->flush();
     }
 
-    return $this->redirect($this->generateUrl('schedule_confevent'));
+    return $this->redirect($this->generateUrl('schedule_event'));
   }
 
   /**
@@ -353,7 +353,7 @@ class ConfEventController extends Controller
 
   /**
    * Add topic to a confEvent
-   * @Route("/addTopic", name="schedule_confevent_addTopic")
+   * @Route("/addTopic", name="schedule_event_addTopic")
    * @Method("POST")
    *
    */
@@ -383,7 +383,7 @@ class ConfEventController extends Controller
 
   /**
    * Delete topic of a confEvent
-   * @Route("/deleteTopic", name="schedule_confevent_deleteTopic")
+   * @Route("/deleteTopic", name="schedule_event_deleteTopic")
    * @Method("POST")
    *
    */
@@ -415,7 +415,7 @@ class ConfEventController extends Controller
 
   /**
    * Add paper to the confEvent
-   * @Route("/addPaper", name="schedule_confevent_addPaper")
+   * @Route("/addPaper", name="schedule_event_addPaper")
    * @Method("POST")
    *
    */
@@ -444,7 +444,7 @@ class ConfEventController extends Controller
 
   /**
    * Delete paper to a confEvent
-   * @Route("/deletePaper", name="schedule_confevent_deletePaper")
+   * @Route("/deletePaper", name="schedule_event_deletePaper")
    * @Method({"DELETE","POST"})
    *
    */
@@ -476,7 +476,7 @@ class ConfEventController extends Controller
   /**
    * Add person to the confEvent
    *
-   * @Route( "/addPerson",name="schedule_confevent_addPerson")
+   * @Route( "/addPerson",name="schedule_event_addPerson")
    * @Method("POST")
    *
    */
@@ -521,7 +521,7 @@ class ConfEventController extends Controller
 
   /**
    * Delete person  to a confEvent
-   * @Route("/deletePerson", name="schedule_confevent_deletePerson")
+   * @Route("/deletePerson", name="schedule_event_deletePerson")
    * @Method("POST")
    *
    */

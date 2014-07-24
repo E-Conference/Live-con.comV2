@@ -17,231 +17,275 @@ use fibe\Bundle\WWWConfBundle\Form\CompanyType;
  */
 class CompanyController extends Controller
 {
+  /**
+   * Lists all Organization entities.
+   *
+   * @Route("/", name="schedule_company_index")
+   * @Method("GET")
+   * @Template()
+   */
+  public function indexAction(Request $request)
+  {
+    $entities = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('VIEW', 'Organization');
+    // $entities = $this->getUser()->getCurrentConf()->getOrganizations()->toArray();
 
-    /**
-     * Lists all Company entities.
-     *
-     * @Route("/", name="company")
-     * @Method("GET")
-     * @Template()
-     */
-    public function indexAction()
+    $adapter = new ArrayAdapter($entities);
+    $pager = new PagerFanta($adapter);
+    $pager->setMaxPerPage($this->container->getParameter('max_per_page'));
+
+    try
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('fibeWWWConfBundle:Company')->findAll();
-
-        return array(
-            'entities' => $entities,
-        );
-    }
-    /**
-     * Creates a new Company entity.
-     *
-     * @Route("/", name="company_create")
-     * @Method("POST")
-     * @Template("fibeWWWConfBundle:Company:new.html.twig")
-     */
-    public function createAction(Request $request)
+      $pager->setCurrentPage($request->query->get('page', 1));
+    } catch (NotValidCurrentPageException $e)
     {
-        $entity = new Company();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('company_show', array('id' => $entity->getId())));
-        }
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
+      throw new NotFoundHttpException();
     }
 
-    /**
-     * Creates a form to create a Company entity.
-     *
-     * @param Company $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Company $entity)
+    //Filters Form
+    $filters = $this->createForm(new OrganizationFilterType($this->getUser()));
+
+    return array(
+      'pager'        => $pager,
+      'filters_form' => $filters->createView(),
+    );
+  }
+
+  /**
+   * Filter organization index list
+   * @Route("/filter", name="schedule_company_filter")
+   */
+  public function filterAction(Request $request)
+  {
+
+    $em = $this->getDoctrine()->getManager();
+
+    $conf = $this->getUser()->getCurrentConf();
+    //Filters
+    $filters = $this->createForm(new OrganizationFilterType($this->getUser()));
+    $filters->submit($request);
+
+    if ($filters->isValid())
     {
-        $form = $this->createForm(new CompanyType(), $entity, array(
-            'action' => $this->generateUrl('company_create'),
-            'method' => 'POST',
-        ));
+      // bind values from the request
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+      $entities = $em->getRepository('fibeWWWConfBundle:Organization')->filtering($filters->getData(), $conf);
+      $nbResult = count($entities);
 
-        return $form;
+      //Pager
+      $adapter = new ArrayAdapter($entities);
+      $pager = new PagerFanta($adapter);
+      $pager->setMaxPerPage($this->container->getParameter('max_per_page'));
+      try
+      {
+        $pager->setCurrentPage($request->query->get('page', 1));
+      } catch (NotValidCurrentPageException $e)
+      {
+        throw new NotFoundHttpException();
+      }
+
+      return $this->render(
+        'fibeWWWConfBundle:Organization:list.html.twig',
+        array(
+          'pager'    => $pager,
+          'nbResult' => $nbResult,
+        )
+      );
     }
 
-    /**
-     * Displays a form to create a new Company entity.
-     *
-     * @Route("/new", name="company_new")
-     * @Method("GET")
-     * @Template()
-     */
-    public function newAction()
-    {
-        $entity = new Company();
-        $form   = $this->createCreateForm($entity);
+  }
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
+  /**
+   * Creates a new Organization entity.
+   *
+   * @Route("/create", name="schedule_company_create")
+   * @Method("POST")
+   * @Template("fibeWWWConfBundle:Organization:new.html.twig")
+   */
+  public function createAction(Request $request)
+  {
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Organization');
+    $form = $this->createForm(new OrganizationType($this->getUser()), $entity);
+    $form->bind($request);
+
+    if ($form->isValid())
+    {
+      $em = $this->getDoctrine()->getManager();
+      $entity->setConference($this->getUser()->getCurrentConf());
+
+      foreach ($entity->getMembers()
+               as
+               $person)
+      {
+        $person->addOrganization($entity);
+        //$entity->addMember($person);
+        $em->persist($person);
+      }
+
+      $em->persist($entity);
+      $em->flush();
+
+      //$this->get('fibe_security.acl_entity_helper')->createACL($entity,MaskBuilder::MASK_OWNER);
+
+      return $this->redirect($this->generateUrl('schedule_company_index'));
     }
 
-    /**
-     * Finds and displays a Company entity.
-     *
-     * @Route("/{id}", name="company_show")
-     * @Method("GET")
-     * @Template()
-     */
-    public function showAction($id)
+    return array(
+      'entity' => $entity,
+      'form'   => $form->createView()
+    );
+  }
+
+  /**
+   * Displays a form to create a new Organization entity.
+   *
+   * @Route("/new", name="schedule_company_new")
+   * @Method("GET")
+   * @Template()
+   */
+  public function newAction()
+  {
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Organization');
+    $form = $this->createForm(new OrganizationType($this->getUser()), $entity);
+
+    return array(
+      'entity' => $entity,
+      'form'   => $form->createView()
+    );
+  }
+
+  /**
+   * Finds and displays a Organization entity.
+   *
+   * @Route("/{id}/show", name="schedule_company_show")
+   * @Method("GET")
+   * @Template()
+   */
+  public function showAction($id)
+  {
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'Organization', $id);
+
+    $deleteForm = $this->createDeleteForm($id);
+
+    return array(
+      'entity'      => $entity,
+      'delete_form' => $deleteForm->createView()
+    );
+  }
+
+  /**
+   * Displays a form to edit an existing Organization entity.
+   *
+   * @Route("/{id}/edit", name="schedule_company_edit")
+   * @Method("GET")
+   * @Template()
+   */
+  public function editAction($id)
+  {
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT', 'Organization', $id);
+
+    $editForm = $this->createForm(new OrganizationType($this->getUser()), $entity);
+    $deleteForm = $this->createDeleteForm($id);
+
+    return array(
+      'entity'      => $entity,
+      'edit_form'   => $editForm->createView(),
+      'delete_form' => $deleteForm->createView()
+    );
+  }
+
+  /**
+   * Edits an existing Organization entity.
+   *
+   * @Route("/{id}/update", name="schedule_company_update")
+   * @Method("PUT")
+   * @Template("fibeWWWConfBundle:Organization:edit.html.twig")
+   */
+  public function updateAction(Request $request, $id)
+  {
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT', 'Organization', $id);
+
+    $deleteForm = $this->createDeleteForm($id);
+    $editForm = $this->createForm(new OrganizationType($this->getUser()), $entity);
+
+    $em = $this->getDoctrine()->getManager();
+
+    $personToRemove = $entity->getMembers();
+    foreach ($personToRemove
+             as
+             $person)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('fibeWWWConfBundle:Company')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Company entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        );
+      $person->removeOrganization($entity);
+      $entity->removeMember($person);
+      $em->persist($person);
     }
 
-    /**
-     * Displays a form to edit an existing Company entity.
-     *
-     * @Route("/{id}/edit", name="company_edit")
-     * @Method("GET")
-     * @Template()
-     */
-    public function editAction($id)
+    $editForm->bind($request);
+    $personToAdd = $entity->getMembers();
+    if ($editForm->isValid())
     {
-        $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('fibeWWWConfBundle:Company')->find($id);
+      //Add members selected in forms to the current organization thank to the woning sir
+      foreach ($personToAdd
+               as
+               $person)
+      {
+        $person->addOrganization($entity);
+        //$entity->addMember($person);
+        $em->persist($person);
+      }
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Company entity.');
-        }
+      $em->persist($entity);
+      $em->flush();
 
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+      return $this->redirect($this->generateUrl('schedule_company_index'));
     }
 
-    /**
-    * Creates a form to edit a Company entity.
-    *
-    * @param Company $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Company $entity)
+    return array(
+      'entity'      => $entity,
+      'edit_form'   => $editForm->createView(),
+      'delete_form' => $deleteForm->createView()
+    );
+  }
+
+  /**
+   * Deletes a Organization entity.
+   *
+   * @Route("/{id}/delete", name="schedule_company_delete")
+   * @Method({"POST", "DELETE"})
+   */
+  public function deleteAction(Request $request, $id)
+  {
+    $form = $this->createDeleteForm($id);
+    $form->bind($request);
+
+    if ($form->isValid())
     {
-        $form = $this->createForm(new CompanyType(), $entity, array(
-            'action' => $this->generateUrl('company_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
-        return $form;
-    }
-    /**
-     * Edits an existing Company entity.
-     *
-     * @Route("/{id}", name="company_update")
-     * @Method("PUT")
-     * @Template("fibeWWWConfBundle:Company:edit.html.twig")
-     */
-    public function updateAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('fibeWWWConfBundle:Company')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Company entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isValid()) {
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('company_edit', array('id' => $id)));
-        }
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
-    /**
-     * Deletes a Company entity.
-     *
-     * @Route("/{id}", name="company_delete")
-     * @Method("DELETE")
-     */
-    public function deleteAction(Request $request, $id)
-    {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('fibeWWWConfBundle:Company')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Company entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
-        }
-
-        return $this->redirect($this->generateUrl('company'));
+      $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('DELETE', 'Organization', $id);
+      $em = $this->getDoctrine()->getManager();
+      //The object must belong to the current conf
+      $currentConf = $this->getUser()->getCurrentConf();
+      $em->remove($entity);
+      $em->flush();
+      $this->container->get('session')->getFlashBag()->add(
+        'success',
+        'Organization successfully deleted !'
+      );
     }
 
-    /**
-     * Creates a form to delete a Company entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('company_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
-    }
+    return $this->redirect($this->generateUrl('schedule_company_index'));
+  }
+
+  /**
+   * Creates a form to delete a Organization entity by id.
+   *
+   * @param mixed $id The entity id
+   *
+   * @return Form The form
+   */
+  private function createDeleteForm($id)
+  {
+    return $this->createFormBuilder(array('id' => $id))
+      ->add('id', 'hidden')
+      ->getForm();
+  }
 }

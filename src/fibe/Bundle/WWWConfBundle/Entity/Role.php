@@ -62,7 +62,7 @@ class Role
   /**
    *
    * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="roles", cascade={"persist"})
-   * @ORM\JoinColumn(name="mainEvent_id", referencedColumnName="id")
+   * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    *
    */
   private $mainEvent;

@@ -29,7 +29,7 @@
     {
       $em = $this->getDoctrine()->getManager();
 
-    	$conference = $em->getRepository('fibeWWWConfBundle:MainEvent')->findOneBySlug($slug);
+    	$conference = $em->getRepository('fibeConferenceBundle:MainEvent')->findOneBySlug($slug);
     	$mobile_app_config = $conference->getAppConfig();
         $apiUri = $this->get('router')->generate('idci_exporter_api_homeapi');
         $apiType = "rest";
@@ -53,7 +53,7 @@
     {
         $em = $this->getDoctrine()->getManager();
 
-        $conference = $em->getRepository('fibeWWWConfBundle:MainEvent')->findOneBySlug($slug);
+        $conference = $em->getRepository('fibeConferenceBundle:MainEvent')->findOneBySlug($slug);
 
         if($conference == null) {
             throw new NotFoundHttpException();
@@ -78,7 +78,7 @@
         /*
         $em = $this->getDoctrine()->getManager();
 
-        $conference = $em->getRepository('fibeWWWConfBundle:MainEvent')->findOneBySlug($slug);
+        $conference = $em->getRepository('fibeConferenceBundle:MainEvent')->findOneBySlug($slug);
         if(!$conference){
             throw new NotFoundHttpException();
         }

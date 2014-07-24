@@ -2,7 +2,7 @@
 
   namespace fibe\ConferenceBundle\Controller;
 
-  use fibe\Bundle\ConferenceBundle\Form\MainEventType;
+  use fibe\ConferenceBundle\Form\MainEventType;
   use Symfony\Bundle\FrameworkBundle\Controller\Controller;
   use Symfony\Component\HttpFoundation\Request;
   use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

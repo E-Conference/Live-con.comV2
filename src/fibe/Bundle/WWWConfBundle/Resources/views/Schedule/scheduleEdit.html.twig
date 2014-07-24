@@ -1,12 +1,12 @@
 <div class="row page-top-header " style="margin-top:-1.5em;position: relative;">
 
   <div class="page-btn-list  col-xs-5  col-sm-4 col-md-3 col-lg-2" style="float: right;margin-right: -35px;">
-    <a type="button" target="_blank" href="{{ path('schedule_confevent_edit', { 'id': entity.id }) }}"
+    <a type="button" target="_blank" href="{{ path('schedule_event_edit', { 'id': entity.id }) }}"
        class="btn btn-warning">
       <i class="fa fa-search"></i>
     </a>
 
-    <form id="delete-event-form" action="{{ path('schedule_confevent_delete', { 'id': entity.id }) }}" method="post">
+    <form id="delete-event-form" action="{{ path('schedule_event_delete', { 'id': entity.id }) }}" method="post">
       <input type="hidden" name="_method" value="DELETE"/>
       {{ form_widget(delete_form) }}
       <button type="submit" class="btn btn-danger">
@@ -18,7 +18,7 @@
 <div class="row page-content">
 
 
-  <form id="eventForm" action="{{ path('schedule_confevent_update', { 'id': entity.id }) }}"
+  <form id="eventForm" action="{{ path('schedule_event_update', { 'id': entity.id }) }}"
         method="post" {{ form_enctype(edit_form) }}>
     <input type="hidden" name="_method" value="PUT"/>
 
@@ -85,7 +85,7 @@
       {% include "fibeWWWConfBundle:ConfEvent:personRelation.html.twig" %}
     </div>
 
-    <form id="role_form" action="{{ path('schedule_confevent_addPerson') }}"
+    <form id="role_form" action="{{ path('schedule_event_addPerson') }}"
           method="post" {{ form_enctype(role_form) }}>
       {{ form_widget(role_form) }}
       {{ form_errors(role_form) }}
@@ -107,7 +107,7 @@
   var ajaxForms = [
     {
       formId: "#eventForm",
-      route: '{{path("schedule_confevent_update", { "id": entity.id }) }}',
+      route: '{{path("schedule_event_update", { "id": entity.id }) }}',
       callback: function (response)
       {
         bootstrapAlert("success", "Event updated");
@@ -115,7 +115,7 @@
     },
     {
       formId: "#delete-event-form",
-      route: "{{ path('schedule_confevent_delete', { 'id': entity.id }) }}",
+      route: "{{ path('schedule_event_delete', { 'id': entity.id }) }}",
       callback: function (response)
       {
         bootstrapAlert("success", "Event deleted");
@@ -149,7 +149,7 @@
       var id_paper = $(this).val();
       $('#loader_papers').show();
       //start send the post request
-      $.post('{{path("schedule_confevent_addPaper") }}',
+      $.post('{{path("schedule_event_addPaper") }}',
           {id_entity: '{{entity.id}}', id_paper: id_paper},
           function (response)
           {
@@ -166,7 +166,7 @@
       var id_topic = $(this).val();
       $('#loader_topics').show();
       //start send the post request
-      $.post('{{path("schedule_confevent_addTopic") }}',
+      $.post('{{path("schedule_event_addTopic") }}',
           {id_entity: '{{entity.id}}', id_topic: id_topic},
           function (response)
           {
@@ -182,7 +182,7 @@
       var id_type = $('#fibe_bundle_wwwconfbundle_roletype_type').val();
       $('#loader_persons').show();
       //start send the post request
-      $.post("{{path('schedule_confevent_addPerson')}}",
+      $.post("{{path('schedule_event_addPerson')}}",
           {id_person: id_person, id_type: id_type, id_entity: "{{entity.id }}"},
           function (response)
           {

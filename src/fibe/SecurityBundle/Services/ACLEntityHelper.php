@@ -19,11 +19,13 @@ class ACLEntityHelper extends ACLHelper
 {
 
   const LINK_WITH = 'MainEvent';
+  const DEFAULT_REPOSITORY = 'fibeWWWConfBundle';
 
   /** @const */
   public static $ACLEntityNameArray = array(
     'MainEvent' => array(
       'classpath' => 'fibe\\ConferenceBundle\\Entity',
+      'repositoryName' => 'fibeConferenceBundle'
     ),
     'Team' => array(
       'classpath' => 'fibe\\SecurityBundle\\Entity',
@@ -95,8 +97,8 @@ class ACLEntityHelper extends ACLHelper
    *
    * @param String $action VIEW|EDIT|CREATE|DELETE|OPERATOR|OWNER|MASTER
    * @param String $repositoryName the class name
-   * @param Entity $entity the entity to get
-   * @return Entity the entity to get
+   * @param mixed $entity the entity to get
+   * @return mixed the entity to get
    * @throws AccessDeniedException
    *
    */
@@ -133,16 +135,17 @@ class ACLEntityHelper extends ACLHelper
    * @return array(Entity) entities to get
    */
   public function getEntitiesACL($action, $repositoryName)
-  { 
+  {
     // $ids = $this->aclProvider->getAllowedEntitiesIds($this->getClassNameByRepositoryName($repositoryName), $action);
-    $queryBuilder = $this->entityManager->getRepository('fibeWWWConfBundle:' . $repositoryName)->createQueryBuilder(
+    $repositoryFullName = (
+      isset(self::$ACLEntityNameArray[$repositoryName]["repositoryName"])
+        ? self::$ACLEntityNameArray[$repositoryName]["repositoryName"]
+        : self::DEFAULT_REPOSITORY
+      ) . ':' . $repositoryName
+    ;
+    $queryBuilder = $this->entityManager->getRepository($repositoryFullName)->createQueryBuilder(
       'entity'
     );
-
-    if (is_null($queryBuilder))
-    {
-      return array();
-    }
 
     if ($repositoryName != ACLEntityHelper::LINK_WITH)
     {

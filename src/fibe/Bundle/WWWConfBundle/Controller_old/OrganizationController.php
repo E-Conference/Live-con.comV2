@@ -32,7 +32,7 @@ class OrganizationController extends Controller
   /**
    * Lists all Organization entities.
    *
-   * @Route("/", name="schedule_organization_index")
+   * @Route("/", name="schedule_company_index")
    * @Method("GET")
    * @Template()
    */
@@ -64,7 +64,7 @@ class OrganizationController extends Controller
 
   /**
    * Filter organization index list
-   * @Route("/filter", name="schedule_organization_filter")
+   * @Route("/filter", name="schedule_company_filter")
    */
   public function filterAction(Request $request)
   {
@@ -109,7 +109,7 @@ class OrganizationController extends Controller
   /**
    * Creates a new Organization entity.
    *
-   * @Route("/create", name="schedule_organization_create")
+   * @Route("/create", name="schedule_company_create")
    * @Method("POST")
    * @Template("fibeWWWConfBundle:Organization:new.html.twig")
    */
@@ -138,7 +138,7 @@ class OrganizationController extends Controller
 
       //$this->get('fibe_security.acl_entity_helper')->createACL($entity,MaskBuilder::MASK_OWNER);
 
-      return $this->redirect($this->generateUrl('schedule_organization_index'));
+      return $this->redirect($this->generateUrl('schedule_company_index'));
     }
 
     return array(
@@ -150,7 +150,7 @@ class OrganizationController extends Controller
   /**
    * Displays a form to create a new Organization entity.
    *
-   * @Route("/new", name="schedule_organization_new")
+   * @Route("/new", name="schedule_company_new")
    * @Method("GET")
    * @Template()
    */
@@ -168,7 +168,7 @@ class OrganizationController extends Controller
   /**
    * Finds and displays a Organization entity.
    *
-   * @Route("/{id}/show", name="schedule_organization_show")
+   * @Route("/{id}/show", name="schedule_company_show")
    * @Method("GET")
    * @Template()
    */
@@ -187,7 +187,7 @@ class OrganizationController extends Controller
   /**
    * Displays a form to edit an existing Organization entity.
    *
-   * @Route("/{id}/edit", name="schedule_organization_edit")
+   * @Route("/{id}/edit", name="schedule_company_edit")
    * @Method("GET")
    * @Template()
    */
@@ -208,7 +208,7 @@ class OrganizationController extends Controller
   /**
    * Edits an existing Organization entity.
    *
-   * @Route("/{id}/update", name="schedule_organization_update")
+   * @Route("/{id}/update", name="schedule_company_update")
    * @Method("PUT")
    * @Template("fibeWWWConfBundle:Organization:edit.html.twig")
    */
@@ -249,7 +249,7 @@ class OrganizationController extends Controller
       $em->persist($entity);
       $em->flush();
 
-      return $this->redirect($this->generateUrl('schedule_organization_index'));
+      return $this->redirect($this->generateUrl('schedule_company_index'));
     }
 
     return array(
@@ -262,7 +262,7 @@ class OrganizationController extends Controller
   /**
    * Deletes a Organization entity.
    *
-   * @Route("/{id}/delete", name="schedule_organization_delete")
+   * @Route("/{id}/delete", name="schedule_company_delete")
    * @Method({"POST", "DELETE"})
    */
   public function deleteAction(Request $request, $id)
@@ -284,7 +284,7 @@ class OrganizationController extends Controller
       );
     }
 
-    return $this->redirect($this->generateUrl('schedule_organization_index'));
+    return $this->redirect($this->generateUrl('schedule_company_index'));
   }
 
   /**

@@ -28,7 +28,7 @@ class MainEventSettingsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('fibeWWWConfBundle:MainEventSettings')->findAll();
+        $entities = $em->getRepository('fibeConferenceBundle:MainEventSettings')->findAll();
 
         return array(
             'entities' => $entities,
@@ -39,7 +39,7 @@ class MainEventSettingsController extends Controller
      *
      * @Route("/", name="maineventsettings_create")
      * @Method("POST")
-     * @Template("fibeWWWConfBundle:MainEventSettings:new.html.twig")
+     * @Template("fibeConferenceBundle:MainEventSettings:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -109,7 +109,7 @@ class MainEventSettingsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('fibeWWWConfBundle:MainEventSettings')->find($id);
+        $entity = $em->getRepository('fibeConferenceBundle:MainEventSettings')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find MainEventSettings entity.');
@@ -134,7 +134,7 @@ class MainEventSettingsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('fibeWWWConfBundle:MainEventSettings')->find($id);
+        $entity = $em->getRepository('fibeConferenceBundle:MainEventSettings')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find MainEventSettings entity.');
@@ -173,13 +173,13 @@ class MainEventSettingsController extends Controller
      *
      * @Route("/{id}", name="maineventsettings_update")
      * @Method("PUT")
-     * @Template("fibeWWWConfBundle:MainEventSettings:edit.html.twig")
+     * @Template("fibeConferenceBundle:MainEventSettings:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('fibeWWWConfBundle:MainEventSettings')->find($id);
+        $entity = $em->getRepository('fibeConferenceBundle:MainEventSettings')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find MainEventSettings entity.');
@@ -214,7 +214,7 @@ class MainEventSettingsController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('fibeWWWConfBundle:MainEventSettings')->find($id);
+            $entity = $em->getRepository('fibeConferenceBundle:MainEventSettings')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find MainEventSettings entity.');

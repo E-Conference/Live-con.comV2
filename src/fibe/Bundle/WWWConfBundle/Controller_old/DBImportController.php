@@ -41,7 +41,7 @@ class DBImportController extends Controller
   private $conference;
 
   /**
-   * @Route("/", name="schedule_admin_DBimport")
+   * @Route("/", name="schedule_import")
    */
   public function importAction(Request $request)
   {

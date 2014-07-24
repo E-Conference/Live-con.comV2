@@ -67,7 +67,7 @@
           <ul class="dropdown-menu">
 
             <li>
-              <a style="padding-right:5px;" href="{{ path('schedule_confevent') }}">
+              <a style="padding-right:5px;" href="{{ path('schedule_event') }}">
                 <i class="fa fa-calendar-o fa-3x"></i> Events
               </a>
 
@@ -82,7 +82,7 @@
               {% endif %}
 
               {% if app.user.getCurrentConf().getModule().getOrganizationModule()== true %}
-                <a style="padding-right:5px;" href="{{ path('schedule_organization_index') }}">
+                <a style="padding-right:5px;" href="{{ path('schedule_company_index') }}">
                   <i class="fa fa-users fa-3x"></i> Organizations
                 </a>
               {% endif %}

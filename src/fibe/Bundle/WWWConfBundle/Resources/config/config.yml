@@ -50,7 +50,7 @@ idci_exporter:
 #                            template_path:
                             template_name_format: "export.json.twig"
 
-        schedule_organization:
+        schedule_company:
             class: "fibe\\Bundle\\WWWConfBundle\\Entity\\Organization"
             formats:
                 jsonp:

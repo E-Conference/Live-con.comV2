@@ -293,7 +293,7 @@
                     $.ajax({ 
                         type: "POST",
                         cache: false,  
-                        url: "{{ path('schedule_admin_DBimport') }}",
+                        url: "{{ path('schedule_import') }}",
                         data: data,
                         success:function(a,b,c)
                         {
@@ -307,9 +307,9 @@
                         error:function(a,b,c)
                         {
                             bootstrapAlert("warning",'import failed because : '+c);
-                            console.log(a)
-                            console.log(b)
-                            console.log(c) 
+                            console.log(a);
+                            console.log(b);
+                            console.log(c);
                         }
                     });
                 }

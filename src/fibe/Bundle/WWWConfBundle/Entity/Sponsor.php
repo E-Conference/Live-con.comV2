@@ -66,7 +66,7 @@ class Sponsor
    * @TODO : manytomany with vevent
    * sponsored event
    * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\VEvent", inversedBy="sponsor", cascade={"persist"})
-   * @ORM\JoinColumn(name="mainEvent_id", referencedColumnName="id")
+   * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    *
    */
   protected $event;

@@ -64,13 +64,6 @@ class Event extends VEvent
   private $isAllDay;
 
   /**
-   * @TODO EVENT : à mettre dans MainEvent
-   *
-   * @ORM\Column(type="string", length=128, nullable=true)
-   */
-  protected $acronym;
-
-  /**
    * @ORM\Column(type="string", length=128, nullable=true)
    */
   protected $slug;
@@ -408,30 +401,6 @@ class Event extends VEvent
   public function getIsInstant()
   {
     return $this->isInstant;
-  }
-
-  /**
-   * Set acronym
-   *
-   * @param string $acronym
-   *
-   * @return ConfEvent
-   */
-  public function setAcronym($acronym)
-  {
-    $this->acronym = $acronym;
-
-    return $this;
-  }
-
-  /**
-   * Get acronym
-   *
-   * @return string
-   */
-  public function getAcronym()
-  {
-    return $this->acronym;
   }
 
   /**

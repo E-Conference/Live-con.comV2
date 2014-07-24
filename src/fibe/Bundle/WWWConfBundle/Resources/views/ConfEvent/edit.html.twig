@@ -19,11 +19,11 @@
     <div class=" col-xs-2 col-sm-4 col-md-6 col-lg-8">
     </div>
     <div class="page-btn-list  col-xs-5  col-sm-4 col-md-3 col-lg-2">
-      <a type="button" href="{{ path('schedule_confevent') }}" class="btn btn-warning">
+      <a type="button" href="{{ path('schedule_event') }}" class="btn btn-warning">
         <i class="fa fa-list"></i>
       </a>
       {% if is_granted('DELETE', entity) %}
-        <form action="{{ path('schedule_confevent_delete', { 'id': entity.id }) }}" method="post">
+        <form action="{{ path('schedule_event_delete', { 'id': entity.id }) }}" method="post">
           <input type="hidden" name="_method" value="DELETE"/>
           {{ form_widget(delete_form) }}
           <button type="submit" class="btn btn-danger">
@@ -36,7 +36,7 @@
   <div class="row page-content">
 
 
-    <form action="{{ path('schedule_confevent_update', { 'id': entity.id }) }}"
+    <form action="{{ path('schedule_event_update', { 'id': entity.id }) }}"
           method="post" {{ form_enctype(edit_form) }}>
       <input type="hidden" name="_method" value="PUT"/>
 
@@ -120,7 +120,7 @@
           {% include "fibeWWWConfBundle:ConfEvent:personRelation.html.twig" %}
         </div>
 
-        <form id="role_form" action="{{ path('schedule_confevent_addPerson') }}"
+        <form id="role_form" action="{{ path('schedule_event_addPerson') }}"
               method="post" {{ form_enctype(role_form) }}>
           {{ form_errors(role_form) }}
           {{ form_widget(role_form) }}
@@ -151,7 +151,7 @@
         //get the url for the form
         var id_paper = $(this).val();
         //start send the post request
-        $.post('{{path("schedule_confevent_addPaper") }}',
+        $.post('{{path("schedule_event_addPaper") }}',
             {id_entity: '{{entity.id}}', id_paper: id_paper},
             function (response)
             {
@@ -166,7 +166,7 @@
         //get the url for the form
         var id_topic = $(this).val();
         //start send the post request
-        $.post('{{path("schedule_confevent_addTopic") }}',
+        $.post('{{path("schedule_event_addTopic") }}',
             {id_entity: '{{entity.id}}', id_topic: id_topic},
             function (response)
             {
@@ -180,7 +180,7 @@
         var id_person = $('#fibe_bundle_wwwconfbundle_roletype_person').val();
         var id_type = $('#fibe_bundle_wwwconfbundle_roletype_type').val();
         //start send the post request
-        $.post("{{path('schedule_confevent_addPerson')}}",
+        $.post("{{path('schedule_event_addPerson')}}",
             {id_person: id_person, id_type: id_type, id_entity: "{{entity.id }}"},
             function (response)
             {

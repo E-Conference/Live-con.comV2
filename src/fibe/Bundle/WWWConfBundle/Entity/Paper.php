@@ -96,7 +96,7 @@ class Paper
    *  MainEvent associated to this paper
    *
    * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="papers", cascade={"persist"})
-   * @ORM\JoinColumn(name="mainEvent_id", referencedColumnName="id")
+   * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    *
    */
   protected $mainEvent;

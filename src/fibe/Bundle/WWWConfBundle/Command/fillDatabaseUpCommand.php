@@ -26,7 +26,7 @@
     protected function configure()
     {
       $this
-        ->setLabel('livecon:database:full')
+        ->setName('livecon:database:full')
         ->setDescription('Insert lots of data in the database');
     }
 
@@ -324,15 +324,6 @@
       $em->persist($mainEventLocation);
       $mainEvent->setLocation($mainEventLocation);
       $em->persist($mainEvent);
-
-      //Create authorization
-      $creatorAuthorization = new Authorization();
-      $creatorAuthorization->setConference($conference);
-      $creatorAuthorization->setFlagApp(1);
-      $creatorAuthorization->setFlagSched(1);
-      $creatorAuthorization->setFlagconfDatas(1);
-      $creatorAuthorization->setFlagTeam(1);
-      $em->persist($creatorAuthorization);
 
       //Linking app config to conference
       $conference->setAppConfig($defaultAppConfig);

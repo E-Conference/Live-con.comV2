@@ -50,7 +50,7 @@ class Topic
    * Topics associated to this conference
    *
    * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="topics", cascade={"persist"})
-   * @ORM\JoinColumn(name="mainEvent_id", referencedColumnName="id")
+   * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    *
    */
   protected $mainEvent;

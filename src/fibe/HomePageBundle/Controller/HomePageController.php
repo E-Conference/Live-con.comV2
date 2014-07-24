@@ -26,7 +26,7 @@ class HomePageController extends Controller
     $form = $this->createForm(new ContactType());
 
     $em = $this->getDoctrine()->getManager();
-    $conferences = $em->getRepository('fibeWWWConfBundle:MainEvent')->findOrderByDate();
+    $conferences = $em->getRepository('fibeConferenceBundle:MainEvent')->findOrderByDate();
 
     if ($request->isMethod('POST'))
     {

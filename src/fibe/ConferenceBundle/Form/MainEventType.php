@@ -1,6 +1,6 @@
 <?php
 
-namespace fibe\Bundle\ConferenceBundle\Form;
+namespace fibe\ConferenceBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,10 +30,6 @@ class MainEventType extends AbstractType
         ->add('logo', 'file', array('required' => false,
           'label'    => 'Logo (jpeg - png - 2MO)',
           'attr'     => array('placeholder' => 'logoPath')))
-        ->remove('categories')
-        ->add('location', new LocationLatLngType(), array(
-          'label' => 'Conference location (click on the map)',
-          'attr'  => array('class' => 'well')))
         ->add('label')
         ->add('startAt')
         ->add('endAt')
@@ -46,12 +42,8 @@ class MainEventType extends AbstractType
         ->add('url')
         ->add('createdAt')
         ->add('lastModifiedAt')
-        ->add('appConfig')
-        ->add('module')
         ->add('persons')
-        ->add('team')
         ->add('location')
-        ->add('categories')
       ;
     }
     

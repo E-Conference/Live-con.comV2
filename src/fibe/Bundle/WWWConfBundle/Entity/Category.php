@@ -46,12 +46,12 @@ class Category
    *
    * @ORM\ManyToMany(targetEntity="VEvent", mappedBy="categories", cascade={"persist"})
    */
-  private $calendarEntities;
+  private $VEvent;
 
   /**
    * @TODO EVENT ==> Lier à main event.
    *
-   * @ORM\ManyToOne(targetEntity="MainEvent", inversedBy="categories")
+   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="categories")
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    */
   protected $mainEvent;
@@ -72,7 +72,7 @@ class Category
   public function __construct()
   {
     $this->childs = new ArrayCollection();
-    $this->calendarEntities = new ArrayCollection();
+    $this->VEvent = new ArrayCollection();
   }
 
   /**
@@ -197,46 +197,41 @@ class Category
    */
   public function getColor()
   {
-    if (null === $this->color && $this->hasParent())
-    {
-      return $this->getParent()->getColor();
-    }
-
     return $this->color;
   }
 
   /**
-   * Add calendarEntities
+   * Add VEvent
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\CalendarEntity $calendarEntities
+   * @param VEvent $VEvent
    *
    * @return $this
    */
-  public function addCalendarEntitie(\fibe\Bundle\WWWConfBundle\Entity\CalendarEntity $calendarEntities)
+  public function addVEvent(VEvent $VEvent)
   {
-    $this->calendarEntities[] = $calendarEntities;
+    $this->VEvent[] = $VEvent;
 
     return $this;
   }
 
   /**
-   * Remove calendarEntities
+   * Remove VEvent
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\CalendarEntity $calendarEntities
+   * @param VEvent $VEvent
    */
-  public function removeCalendarEntitie(\fibe\Bundle\WWWConfBundle\Entity\CalendarEntity $calendarEntities)
+  public function removeVEvent(VEvent $VEvent)
   {
-    $this->calendarEntities->removeElement($calendarEntities);
+    $this->VEvent->removeElement($VEvent);
   }
 
   /**
-   * Get calendarEntities
+   * Get VEvent
    *
    * @return \Doctrine\Common\Collections\Collection
    */
-  public function getCalendarEntities()
+  public function getVEvents()
   {
-    return $this->calendarEntities;
+    return $this->VEvent;
   }
 
   /**
