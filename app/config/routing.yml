@@ -1,5 +1,5 @@
-fibe_comunity:
-    resource: "@fibeComunityBundle/Controller/"
+fibe_community:
+    resource: "@fibeCommunityBundle/Controller/"
     type:     annotation
     prefix:   /
 

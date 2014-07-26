@@ -33,9 +33,9 @@ class AppKernel extends Kernel
       new JMS\SerializerBundle\JMSSerializerBundle(),
       new FOS\RestBundle\FOSRestBundle(),
       new fibe\FrontendBundle\FrontendBundle(),
-            new fibe\EventBundle\fibeEventBundle(),
-            new fibe\ContentBundle\fibeContentBundle(),
-            new fibe\ComunityBundle\fibeComunityBundle(),
+      new fibe\EventBundle\fibeEventBundle(),
+      new fibe\ContentBundle\fibeContentBundle(),
+      new fibe\CommunityBundle\fibeCommunityBundle(),
     );
 
     if (in_array($this->getEnvironment(), array('dev', 'test')))
