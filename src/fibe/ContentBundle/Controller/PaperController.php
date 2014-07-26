@@ -1,6 +1,6 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Controller;
+namespace fibe\ContentBundle\Controller;
 
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -9,9 +9,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-use fibe\Bundle\WWWConfBundle\Entity\Paper;
-use fibe\Bundle\WWWConfBundle\Form\PaperType;
-use fibe\Bundle\WWWConfBundle\Form\Filters\PaperFilterType;
+use fibe\ContentBundle\Entity\Paper;
+use fibe\ContentBundle\Form\PaperType;
+use fibe\ContentBundle\Form\Filters\PaperFilterType;
 
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;

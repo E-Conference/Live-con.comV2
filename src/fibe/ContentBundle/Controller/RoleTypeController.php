@@ -1,6 +1,6 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Controller;
+namespace fibe\ContentBundle\Controller;
 
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -8,8 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use fibe\Bundle\WWWConfBundle\Entity\RoleType;
-use fibe\Bundle\WWWConfBundle\Form\RoleTypeType;
+use fibe\ContentBundle\Entity\RoleType;
+use fibe\ContentBundle\Form\RoleTypeType;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 

@@ -1,17 +1,17 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Controller;
-
+namespace fibe\ContentBundle\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use fibe\Bundle\WWWConfBundle\Entity\Topic;
-use fibe\Bundle\WWWConfBundle\Form\TopicType;
+
+use fibe\ContentBundle\Entity\Sponsor;
+use fibe\ContentBundle\Form\Filters\SponsorFilterType;
+use fibe\ContentBundle\Form\SponsorType;
 //Filter form type
-use fibe\Bundle\WWWConfBundle\Form\Filters\TopicFilterType;
 
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
@@ -19,25 +19,24 @@ use Pagerfanta\Exception\NotValidCurrentPageException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-
 /**
  * Topic controller.
  *
- * @Route("/topic")
+ * @Route("/sponsor")
  */
-class TopicController extends Controller
+class SponsorController extends Controller
 {
   /**
-   * Lists all Topic entities.
+   * Lists all Sponsor entities.
    *
-   * @Route("/", name="schedule_topic")
+   * @Route("/", name="schedule_sponsor")
    * @Method("GET")
    * @Template()
    */
   public function indexAction(Request $request)
   {
-    $entities = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('VIEW', 'Topic');
-    // $entities = $this->getUser()->getCurrentMainEvent()->getTopics()->toArray();
+    //Authorization Verification conference datas manager
+    $entities = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('VIEW', 'Sponsor');
 
     $adapter = new ArrayAdapter($entities);
     $pager = new PagerFanta($adapter);
@@ -51,31 +50,34 @@ class TopicController extends Controller
       throw new NotFoundHttpException();
     }
 
-    $filters = $this->createForm(new TopicFilterType($this->getUser()));
+    $filters = $this->createForm(new SponsorFilterType($this->getUser()));
 
-    return array(
+    return [
       'pager'        => $pager,
       'filters_form' => $filters->createView(),
-    );
+    ];
   }
 
 
   /**
    * Filter paper index list
-   * @Route("/filter", name="schedule_topic_filter")
+   * @Route("/filter", name="schedule_sponsor_filter")
    */
   public function filterAction(Request $request)
   {
+    $em = $this->getDoctrine()->getManager();
+
     $conf = $this->getUser()->getCurrentMainEvent();
     //Filters
-    $filters = $this->createForm(new TopicFilterType($this->getUser()));
-    $filters->submit($request);
+    $filters = $this->createForm(new SponsorFilterType($this->getUser()));
+
+    $filters->submit($this->get('request'));
 
     if ($filters->isValid())
     {
       // bind values from the request
-      $em = $this->getDoctrine()->getManager();
-      $entities = $em->getRepository('fibeWWWConfBundle:Topic')->filtering($filters->getData(), $conf);
+
+      $entities = $em->getRepository('fibeWWWConfBundle:Sponsor')->filtering($filters->getData(), $conf);
       $nbResult = count($entities);
 
       //Pager
@@ -91,26 +93,27 @@ class TopicController extends Controller
       }
 
       return $this->render(
-        'fibeWWWConfBundle:Topic:list.html.twig',
-        array(
+        'fibeWWWConfBundle:Sponsor:list.html.twig',
+        [
           'pager'    => $pager,
           'nbResult' => $nbResult,
-        )
+        ]
       );
     }
+
   }
 
   /**
-   * Creates a new Topic entity.
+   * Creates a new Sponsor entity.
    *
-   * @Route("/", name="schedule_topic_create")
+   * @Route("/", name="schedule_sponsor_create")
    * @Method("POST")
-   * @Template("fibeWWWConfBundle:Topic:new.html.twig")
+   * @Template("fibeWWWConfBundle:Sponsor:new.html.twig")
    */
   public function createAction(Request $request)
   {
-    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Topic');
-    $form = $this->createForm(new TopicType(), $entity);
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Sponsor');
+    $form = $this->createForm(new SponsorType(), $entity);
     $form->bind($request);
 
     if ($form->isValid())
@@ -118,130 +121,151 @@ class TopicController extends Controller
       $em = $this->getDoctrine()->getManager();
       $entity->setConference($this->getUser()->getCurrentMainEvent());
       $em->persist($entity);
+      $entity->uploadLogo();
       $em->flush();
 
-      //$this->get('fibe_security.acl_entity_helper')->createACL($entity,MaskBuilder::MASK_OWNER);
-
-      return $this->redirect($this->generateUrl('schedule_topic'));
+      return $this->redirect($this->generateUrl('schedule_sponsor'));
     }
 
-    return array(
+    return [
       'entity' => $entity,
       'form'   => $form->createView()
-    );
+    ];
   }
 
   /**
-   * Displays a form to create a new Topic entity.
+   * Displays a form to create a new Sponsor entity.
    *
-   * @Route("/new", name="schedule_topic_new")
+   * @Route("/new", name="schedule_sponsor_new")
    * @Method("GET")
    * @Template()
    */
   public function newAction()
   {
-    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Topic');
-    $form = $this->createForm(new TopicType(), $entity);
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Sponsor');
+    $form = $this->createForm(new SponsorType(), $entity);
 
-    return array(
+    return [
       'entity' => $entity,
       'form'   => $form->createView()
-    );
+    ];
   }
 
   /**
-   * Finds and displays a Topic entity.
+   * Finds and displays a Sponsor entity.
    *
-   * @Route("/{id}", name="schedule_topic_show")
+   * @Route("/{id}", name="schedule_sponsor_show")
    * @Method("GET")
    * @Template()
    */
   public function showAction($id)
   {
-    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'Topic', $id);
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'Sponsor', $id);
+
+    if (!$entity)
+    {
+      throw $this->createNotFoundException('Unable to find Topic entity.');
+    }
 
     $deleteForm = $this->createDeleteForm($id);
 
-    return array(
+    return [
       'entity'      => $entity,
       'delete_form' => $deleteForm->createView()
-    );
+    ];
   }
 
   /**
-   * Displays a form to edit an existing Topic entity.
+   * Displays a form to edit an existing Sponsor entity.
    *
-   * @Route("/{id}/edit", name="schedule_topic_edit")
+   * @Route("/{id}/edit", name="schedule_sponsor_edit")
    * @Method("GET")
    * @Template()
    */
   public function editAction($id)
   {
-    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT', 'Topic', $id);
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT', 'Sponsor', $id);
+    if (!$entity)
+    {
+      throw $this->createNotFoundException('Unable to find Topic entity.');
+    }
 
-    $editForm = $this->createForm(new TopicType(), $entity);
+    $editForm = $this->createForm(new SponsorType(), $entity);
     $deleteForm = $this->createDeleteForm($id);
 
-    return array(
+    return [
       'entity'      => $entity,
       'edit_form'   => $editForm->createView(),
       'delete_form' => $deleteForm->createView()
-    );
+    ];
   }
 
   /**
-   * Edits an existing Topic entity.
+   * Edits an existing Sponsor entity.
    *
-   * @Route("/{id}", name="schedule_topic_update")
+   * @Route("/{id}", name="schedule_sponsor_update")
    * @Method("PUT")
-   * @Template("fibeWWWConfBundle:Topic:edit.html.twig")
+   * @Template("fibeWWWConfBundle:Sponsor:edit.html.twig")
    */
   public function updateAction(Request $request, $id)
   {
-    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT', 'Topic', $id);
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT', 'Sponsor', $id);
+    if (!$entity)
+    {
+      throw $this->createNotFoundException('Unable to find Topic entity.');
+    }
 
-    $editForm = $this->createForm(new TopicType(), $entity);
+    $em = $this->getDoctrine()->getManager();
+
+    $deleteForm = $this->createDeleteForm($id);
+    $editForm = $this->createForm(new SponsorType(), $entity);
     $editForm->bind($request);
 
     if ($editForm->isValid())
     {
-      $em = $this->getDoctrine()->getManager();
+      $entity->uploadLogo();
       $em->persist($entity);
       $em->flush();
+
+      return $this->redirect($this->generateUrl('schedule_sponsor'));
     }
 
-    return $this->redirect($this->generateUrl('schedule_topic_show', array('id' => $id)));
+    return [
+      'entity'      => $entity,
+      'edit_form'   => $editForm->createView(),
+      'delete_form' => $deleteForm->createView()
+    ];
   }
 
   /**
-   * Deletes a Topic entity.
+   * Deletes a Sponsor entity.
    *
-   * @Route("/{id}", name="schedule_topic_delete")
+   * @Route("/{id}", name="schedule_sponsor_delete")
    * @Method({"POST", "DELETE"})
    */
   public function deleteAction(Request $request, $id)
   {
-    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('DELETE', 'Topic', $id);
-
     $form = $this->createDeleteForm($id);
     $form->bind($request);
 
     if ($form->isValid())
     {
       $em = $this->getDoctrine()->getManager();
+      $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('DELETE', 'Sponsor', $id);
+      if (!$entity)
+      {
+        throw $this->createNotFoundException('Unable to find Topic entity.');
+      }
+
       $em->remove($entity);
       $em->flush();
-      $this->container->get('session')->getFlashBag()->add(
-        'success',
-        'Topic successfully deleted !'
-      );
     }
 
-    return $this->redirect($this->generateUrl('schedule_topic'));
+    return $this->redirect($this->generateUrl('schedule_sponsor'));
   }
 
   /**
-   * Creates a form to delete a Topic entity by id.
+   * Creates a form to delete a Sponsor entity by id.
    *
    * @param mixed $id The entity id
    *
@@ -249,7 +273,7 @@ class TopicController extends Controller
    */
   private function createDeleteForm($id)
   {
-    return $this->createFormBuilder(array('id' => $id))
+    return $this->createFormBuilder(['id' => $id])
       ->add('id', 'hidden')
       ->getForm();
   }

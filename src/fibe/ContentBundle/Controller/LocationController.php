@@ -7,19 +7,19 @@
  *
  */
 
-namespace fibe\Bundle\WWWConfBundle\Controller;
+namespace fibe\ContentBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use fibe\Bundle\WWWConfBundle\Entity\Location;
-use fibe\Bundle\WWWConfBundle\Form\LocationType;
-use fibe\Bundle\WWWConfBundle\Entity\Equipment;
+use fibe\ContentBundle\Entity\Location;
+use fibe\ContentBundle\Form\LocationType;
+use fibe\ContentBundle\Entity\Equipment;
 
 // Filter Form
-use fibe\Bundle\WWWConfBundle\Form\Filters\LocationFilterType;
+use fibe\ContentBundle\Form\Filters\LocationFilterType;
 
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;

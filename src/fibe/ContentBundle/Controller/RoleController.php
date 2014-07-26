@@ -1,14 +1,14 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Controller;
+namespace fibe\ContentBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use fibe\Bundle\WWWConfBundle\Entity\Role;
-use fibe\Bundle\WWWConfBundle\Form\RoleType;
+use fibe\ContentBundle\Entity\Role;
+use fibe\ContentBundle\Form\RoleType;
 
 /**
  * Role controller.

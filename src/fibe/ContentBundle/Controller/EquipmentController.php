@@ -1,6 +1,6 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Controller;
+namespace fibe\ContentBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
@@ -10,8 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-use fibe\Bundle\WWWConfBundle\Entity\Equipment;
-use fibe\Bundle\WWWConfBundle\Form\EquipmentType;
+use fibe\ContentBundle\Entity\Equipment;
+use fibe\ContentBundle\Form\EquipmentType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
