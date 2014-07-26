@@ -34,7 +34,10 @@ class appDevDebugProjectContainer extends Container
         $this->scopes = array('request' => 'container');
         $this->scopeChildren = array('request' => array());
         $this->methodMap = array(
-            'a81d29f8f1f08a179e01ebf3b0739d6c84fe2ad71cf936c545d38ce53a6ac011_1' => 'getA81d29f8f1f08a179e01ebf3b0739d6c84fe2ad71cf936c545d38ce53a6ac0111Service',
+            '0f201e5092dc5d95d25c4d35cfab28f3566c5b3c0903086ab523ce9ba860b0df_1' => 'get0f201e5092dc5d95d25c4d35cfab28f3566c5b3c0903086ab523ce9ba860b0df1Service',
+            '0f201e5092dc5d95d25c4d35cfab28f3566c5b3c0903086ab523ce9ba860b0df_2' => 'get0f201e5092dc5d95d25c4d35cfab28f3566c5b3c0903086ab523ce9ba860b0df2Service',
+            '0f201e5092dc5d95d25c4d35cfab28f3566c5b3c0903086ab523ce9ba860b0df_3' => 'get0f201e5092dc5d95d25c4d35cfab28f3566c5b3c0903086ab523ce9ba860b0df3Service',
+            '34f093494c2d1232377cf56c65e242ce9666da963f850485d22c3a74a57f9128_1' => 'get34f093494c2d1232377cf56c65e242ce9666da963f850485d22c3a74a57f91281Service',
             'annotation_reader' => 'getAnnotationReaderService',
             'assetic.asset_factory' => 'getAssetic_AssetFactoryService',
             'assetic.asset_manager' => 'getAssetic_AssetManagerService',
@@ -43,9 +46,6 @@ class appDevDebugProjectContainer extends Container
             'assetic.filter.cssrewrite' => 'getAssetic_Filter_CssrewriteService',
             'assetic.filter_manager' => 'getAssetic_FilterManagerService',
             'assetic.request_listener' => 'getAssetic_RequestListenerService',
-            'b994f3e500b9c4e4009d27b34d089eb83b3bf29192466ad2ee39c96d3e7eab85_1' => 'getB994f3e500b9c4e4009d27b34d089eb83b3bf29192466ad2ee39c96d3e7eab851Service',
-            'b994f3e500b9c4e4009d27b34d089eb83b3bf29192466ad2ee39c96d3e7eab85_2' => 'getB994f3e500b9c4e4009d27b34d089eb83b3bf29192466ad2ee39c96d3e7eab852Service',
-            'b994f3e500b9c4e4009d27b34d089eb83b3bf29192466ad2ee39c96d3e7eab85_3' => 'getB994f3e500b9c4e4009d27b34d089eb83b3bf29192466ad2ee39c96d3e7eab853Service',
             'cache_clearer' => 'getCacheClearerService',
             'cache_warmer' => 'getCacheWarmerService',
             'captcha.type' => 'getCaptcha_TypeService',
@@ -417,16 +417,55 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
-     * Gets the 'a81d29f8f1f08a179e01ebf3b0739d6c84fe2ad71cf936c545d38ce53a6ac011_1' service.
+     * Gets the '0f201e5092dc5d95d25c4d35cfab28f3566c5b3c0903086ab523ce9ba860b0df_1' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Swift_Transport_Esmtp_Auth_CramMd5Authenticator A Swift_Transport_Esmtp_Auth_CramMd5Authenticator instance.
+     */
+    protected function get0f201e5092dc5d95d25c4d35cfab28f3566c5b3c0903086ab523ce9ba860b0df1Service()
+    {
+        return $this->services['0f201e5092dc5d95d25c4d35cfab28f3566c5b3c0903086ab523ce9ba860b0df_1'] = new \Swift_Transport_Esmtp_Auth_CramMd5Authenticator();
+    }
+
+    /**
+     * Gets the '0f201e5092dc5d95d25c4d35cfab28f3566c5b3c0903086ab523ce9ba860b0df_2' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Swift_Transport_Esmtp_Auth_LoginAuthenticator A Swift_Transport_Esmtp_Auth_LoginAuthenticator instance.
+     */
+    protected function get0f201e5092dc5d95d25c4d35cfab28f3566c5b3c0903086ab523ce9ba860b0df2Service()
+    {
+        return $this->services['0f201e5092dc5d95d25c4d35cfab28f3566c5b3c0903086ab523ce9ba860b0df_2'] = new \Swift_Transport_Esmtp_Auth_LoginAuthenticator();
+    }
+
+    /**
+     * Gets the '0f201e5092dc5d95d25c4d35cfab28f3566c5b3c0903086ab523ce9ba860b0df_3' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Swift_Transport_Esmtp_Auth_PlainAuthenticator A Swift_Transport_Esmtp_Auth_PlainAuthenticator instance.
+     */
+    protected function get0f201e5092dc5d95d25c4d35cfab28f3566c5b3c0903086ab523ce9ba860b0df3Service()
+    {
+        return $this->services['0f201e5092dc5d95d25c4d35cfab28f3566c5b3c0903086ab523ce9ba860b0df_3'] = new \Swift_Transport_Esmtp_Auth_PlainAuthenticator();
+    }
+
+    /**
+     * Gets the '34f093494c2d1232377cf56c65e242ce9666da963f850485d22c3a74a57f9128_1' service.
      *
      * This service is shared.
      * This method always returns the same instance of the service.
      *
      * @return Symfony\Component\Form\ResolvedFormTypeFactory A Symfony\Component\Form\ResolvedFormTypeFactory instance.
      */
-    protected function getA81d29f8f1f08a179e01ebf3b0739d6c84fe2ad71cf936c545d38ce53a6ac0111Service()
+    protected function get34f093494c2d1232377cf56c65e242ce9666da963f850485d22c3a74a57f91281Service()
     {
-        return $this->services['a81d29f8f1f08a179e01ebf3b0739d6c84fe2ad71cf936c545d38ce53a6ac011_1'] = new \Symfony\Component\Form\ResolvedFormTypeFactory();
+        return $this->services['34f093494c2d1232377cf56c65e242ce9666da963f850485d22c3a74a57f9128_1'] = new \Symfony\Component\Form\ResolvedFormTypeFactory();
     }
 
     /**
@@ -439,7 +478,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getAnnotationReaderService()
     {
-        return $this->services['annotation_reader'] = new \Doctrine\Common\Annotations\FileCacheReader(new \Doctrine\Common\Annotations\AnnotationReader(), '/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/annotations', true);
+        return $this->services['annotation_reader'] = new \Doctrine\Common\Annotations\FileCacheReader(new \Doctrine\Common\Annotations\AnnotationReader(), '/home/vinz/projets/Live-con.comV2/app/cache/dev/annotations', true);
     }
 
     /**
@@ -452,9 +491,9 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getAssetic_AssetManagerService()
     {
-        $this->services['assetic.asset_manager'] = $instance = new \Assetic\Factory\LazyAssetManager($this->get('assetic.asset_factory'), array('twig' => new \Assetic\Factory\Loader\CachedFormulaLoader(new \Assetic\Extension\Twig\TwigFormulaLoader($this->get('twig'), $this->get('monolog.logger.assetic', ContainerInterface::NULL_ON_INVALID_REFERENCE)), new \Assetic\Cache\ConfigCache('/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/assetic/config'), true)));
+        $this->services['assetic.asset_manager'] = $instance = new \Assetic\Factory\LazyAssetManager($this->get('assetic.asset_factory'), array('twig' => new \Assetic\Factory\Loader\CachedFormulaLoader(new \Assetic\Extension\Twig\TwigFormulaLoader($this->get('twig'), $this->get('monolog.logger.assetic', ContainerInterface::NULL_ON_INVALID_REFERENCE)), new \Assetic\Cache\ConfigCache('/home/vinz/projets/Live-con.comV2/app/cache/dev/assetic/config'), true)));
 
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($this->get('templating.loader'), '', '/opt/lampp/htdocs/www/LiveconV2.0/app/Resources/views', '/\\.[^.]+\\.twig$/'), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($this->get('templating.loader'), '', '/home/vinz/projets/Live-con.comV2/app/Resources/views', '/\\.[^.]+\\.twig$/'), 'twig');
 
         return $instance;
     }
@@ -509,45 +548,6 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
-     * Gets the 'b994f3e500b9c4e4009d27b34d089eb83b3bf29192466ad2ee39c96d3e7eab85_1' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return Swift_Transport_Esmtp_Auth_CramMd5Authenticator A Swift_Transport_Esmtp_Auth_CramMd5Authenticator instance.
-     */
-    protected function getB994f3e500b9c4e4009d27b34d089eb83b3bf29192466ad2ee39c96d3e7eab851Service()
-    {
-        return $this->services['b994f3e500b9c4e4009d27b34d089eb83b3bf29192466ad2ee39c96d3e7eab85_1'] = new \Swift_Transport_Esmtp_Auth_CramMd5Authenticator();
-    }
-
-    /**
-     * Gets the 'b994f3e500b9c4e4009d27b34d089eb83b3bf29192466ad2ee39c96d3e7eab85_2' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return Swift_Transport_Esmtp_Auth_LoginAuthenticator A Swift_Transport_Esmtp_Auth_LoginAuthenticator instance.
-     */
-    protected function getB994f3e500b9c4e4009d27b34d089eb83b3bf29192466ad2ee39c96d3e7eab852Service()
-    {
-        return $this->services['b994f3e500b9c4e4009d27b34d089eb83b3bf29192466ad2ee39c96d3e7eab85_2'] = new \Swift_Transport_Esmtp_Auth_LoginAuthenticator();
-    }
-
-    /**
-     * Gets the 'b994f3e500b9c4e4009d27b34d089eb83b3bf29192466ad2ee39c96d3e7eab85_3' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return Swift_Transport_Esmtp_Auth_PlainAuthenticator A Swift_Transport_Esmtp_Auth_PlainAuthenticator instance.
-     */
-    protected function getB994f3e500b9c4e4009d27b34d089eb83b3bf29192466ad2ee39c96d3e7eab853Service()
-    {
-        return $this->services['b994f3e500b9c4e4009d27b34d089eb83b3bf29192466ad2ee39c96d3e7eab85_3'] = new \Swift_Transport_Esmtp_Auth_PlainAuthenticator();
-    }
-
-    /**
      * Gets the 'cache_clearer' service.
      *
      * This service is shared.
@@ -573,7 +573,7 @@ class appDevDebugProjectContainer extends Container
         $a = $this->get('kernel');
         $b = $this->get('templating.filename_parser');
 
-        $c = new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder($a, $b, '/opt/lampp/htdocs/www/LiveconV2.0/app/Resources');
+        $c = new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder($a, $b, '/home/vinz/projets/Live-con.comV2/app/Resources');
 
         return $this->services['cache_warmer'] = new \Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerAggregate(array(0 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplatePathsCacheWarmer($c, $this->get('templating.locator')), 1 => new \Symfony\Bundle\AsseticBundle\CacheWarmer\AssetManagerCacheWarmer($this), 2 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer($this->get('router')), 3 => new \Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheCacheWarmer($this, $c), 4 => new \Symfony\Bridge\Doctrine\CacheWarmer\ProxyCacheWarmer($this->get('doctrine')), 5 => new \JMS\DiExtraBundle\HttpKernel\ControllerInjectorsWarmer($a, $this->get('jms_di_extra.controller_resolver'), array())));
     }
@@ -588,7 +588,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCaptcha_TypeService()
     {
-        return $this->services['captcha.type'] = new \Gregwar\CaptchaBundle\Type\CaptchaType($this->get('session'), $this->get('gregwar_captcha.generator'), $this->get('translator.default'), array('length' => 5, 'width' => 130, 'height' => 50, 'font' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/DependencyInjection/../Generator/Font/captcha.ttf', 'keep_value' => false, 'charset' => 'abcdefhjkmnprstuvwxyz23456789', 'as_file' => false, 'as_url' => false, 'reload' => false, 'image_folder' => 'captcha', 'web_path' => '/opt/lampp/htdocs/www/LiveconV2.0/app/../web', 'gc_freq' => 100, 'expiration' => 60, 'quality' => 30, 'invalid_message' => 'Bad code value', 'bypass_code' => NULL, 'whitelist_key' => 'captcha_whitelist_key', 'humanity' => 0, 'distortion' => true, 'max_front_lines' => NULL, 'max_behind_lines' => NULL, 'interpolation' => true, 'text_color' => array(), 'background_color' => array(), 'disabled' => false));
+        return $this->services['captcha.type'] = new \Gregwar\CaptchaBundle\Type\CaptchaType($this->get('session'), $this->get('gregwar_captcha.generator'), $this->get('translator.default'), array('length' => 5, 'width' => 130, 'height' => 50, 'font' => '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/DependencyInjection/../Generator/Font/captcha.ttf', 'keep_value' => false, 'charset' => 'abcdefhjkmnprstuvwxyz23456789', 'as_file' => false, 'as_url' => false, 'reload' => false, 'image_folder' => 'captcha', 'web_path' => '/home/vinz/projets/Live-con.comV2/app/../web', 'gc_freq' => 100, 'expiration' => 60, 'quality' => 30, 'invalid_message' => 'Bad code value', 'bypass_code' => NULL, 'whitelist_key' => 'captcha_whitelist_key', 'humanity' => 0, 'distortion' => true, 'max_front_lines' => NULL, 'max_behind_lines' => NULL, 'interpolation' => true, 'text_color' => array(), 'background_color' => array(), 'disabled' => false));
     }
 
     /**
@@ -858,26 +858,26 @@ class appDevDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return EntityManager53d3c1e36727b_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager53d3c1e36727b_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
+     * @return EntityManager53d3fb391f5e3_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager A EntityManager53d3fb391f5e3_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager instance.
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once '/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/jms_diextra/doctrine/EntityManager_53d3c1e36727b.php';
+        require_once '/home/vinz/projets/Live-con.comV2/app/cache/dev/jms_diextra/doctrine/EntityManager_53d3fb391f5e3.php';
 
         $a = $this->get('annotation_reader');
 
         $b = new \Doctrine\Common\Cache\ArrayCache();
-        $b->setNamespace('sf2orm_default_df8d08d8faf89053cc93a2a62a004214063aa9fcf779030435fae024daa0561b');
+        $b->setNamespace('sf2orm_default_c5b7612f732854ad981be4007bbba17d9857cec6a752be1f55147668f0c6b2a2');
 
         $c = new \Doctrine\Common\Cache\ArrayCache();
-        $c->setNamespace('sf2orm_default_df8d08d8faf89053cc93a2a62a004214063aa9fcf779030435fae024daa0561b');
+        $c->setNamespace('sf2orm_default_c5b7612f732854ad981be4007bbba17d9857cec6a752be1f55147668f0c6b2a2');
 
         $d = new \Doctrine\Common\Cache\ArrayCache();
-        $d->setNamespace('sf2orm_default_df8d08d8faf89053cc93a2a62a004214063aa9fcf779030435fae024daa0561b');
+        $d->setNamespace('sf2orm_default_c5b7612f732854ad981be4007bbba17d9857cec6a752be1f55147668f0c6b2a2');
 
-        $e = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($a, array(0 => '/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/Bundle/WWWConfBundle/Entity', 1 => '/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/SecurityBundle/Entity', 2 => '/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/MobileAppBundle/Entity', 3 => '/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/ConferenceBundle/Entity'));
+        $e = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($a, array(0 => '/home/vinz/projets/Live-con.comV2/src/fibe/Bundle/WWWConfBundle/Entity', 1 => '/home/vinz/projets/Live-con.comV2/src/fibe/SecurityBundle/Entity', 2 => '/home/vinz/projets/Live-con.comV2/src/fibe/MobileAppBundle/Entity', 3 => '/home/vinz/projets/Live-con.comV2/src/fibe/ConferenceBundle/Entity'));
 
-        $f = new \Doctrine\ORM\Mapping\Driver\SimplifiedXmlDriver(array('/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/config/doctrine' => 'FOS\\UserBundle\\Entity'));
+        $f = new \Doctrine\ORM\Mapping\Driver\SimplifiedXmlDriver(array('/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/config/doctrine' => 'FOS\\UserBundle\\Entity'));
         $f->setGlobalBasename('mapping');
 
         $g = new \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain();
@@ -893,7 +893,7 @@ class appDevDebugProjectContainer extends Container
         $h->setQueryCacheImpl($c);
         $h->setResultCacheImpl($d);
         $h->setMetadataDriverImpl($g);
-        $h->setProxyDir('/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/doctrine/orm/Proxies');
+        $h->setProxyDir('/home/vinz/projets/Live-con.comV2/app/cache/dev/doctrine/orm/Proxies');
         $h->setProxyNamespace('Proxies');
         $h->setAutoGenerateProxyClasses(true);
         $h->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
@@ -904,7 +904,7 @@ class appDevDebugProjectContainer extends Container
         $i = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.default_connection'), $h);
         $this->get('doctrine.orm.default_manager_configurator')->configure($i);
 
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager53d3c1e36727b_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($i, $this);
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager53d3fb391f5e3_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($i, $this);
     }
 
     /**
@@ -1047,7 +1047,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getFileLocatorService()
     {
-        return $this->services['file_locator'] = new \Symfony\Component\HttpKernel\Config\FileLocator($this->get('kernel'), '/opt/lampp/htdocs/www/LiveconV2.0/app/Resources');
+        return $this->services['file_locator'] = new \Symfony\Component\HttpKernel\Config\FileLocator($this->get('kernel'), '/home/vinz/projets/Live-con.comV2/app/Resources');
     }
 
     /**
@@ -1112,7 +1112,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getForm_ResolvedTypeFactoryService()
     {
-        return $this->services['form.resolved_type_factory'] = new \Symfony\Component\Form\Extension\DataCollector\Proxy\ResolvedTypeFactoryDataCollectorProxy($this->get('a81d29f8f1f08a179e01ebf3b0739d6c84fe2ad71cf936c545d38ce53a6ac011_1'), $this->get('data_collector.form'));
+        return $this->services['form.resolved_type_factory'] = new \Symfony\Component\Form\Extension\DataCollector\Proxy\ResolvedTypeFactoryDataCollectorProxy($this->get('34f093494c2d1232377cf56c65e242ce9666da963f850485d22c3a74a57f9128_1'), $this->get('data_collector.form'));
     }
 
     /**
@@ -2317,7 +2317,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getGregwarCaptcha_ImageFileHandlerService()
     {
-        return $this->services['gregwar_captcha.image_file_handler'] = new \Gregwar\CaptchaBundle\Generator\ImageFileHandler('captcha', '/opt/lampp/htdocs/www/LiveconV2.0/app/../web', 100, 60);
+        return $this->services['gregwar_captcha.image_file_handler'] = new \Gregwar\CaptchaBundle\Generator\ImageFileHandler('captcha', '/home/vinz/projets/Live-con.comV2/app/../web', 100, 60);
     }
 
     /**
@@ -2575,7 +2575,7 @@ class appDevDebugProjectContainer extends Container
     {
         $this->services['jms_di_extra.metadata.metadata_factory'] = $instance = new \Metadata\MetadataFactory(new \Metadata\Driver\LazyLoadingDriver($this, 'jms_di_extra.metadata_driver'), 'Metadata\\ClassHierarchyMetadata', true);
 
-        $instance->setCache(new \Metadata\Cache\FileCache('/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/jms_diextra/metadata'));
+        $instance->setCache(new \Metadata\Cache\FileCache('/home/vinz/projets/Live-con.comV2/app/cache/dev/jms_diextra/metadata'));
 
         return $instance;
     }
@@ -2604,7 +2604,7 @@ class appDevDebugProjectContainer extends Container
     protected function getJmsSerializerService()
     {
         $a = new \Metadata\MetadataFactory(new \Metadata\Driver\LazyLoadingDriver($this, 'jms_serializer.metadata_driver'), 'Metadata\\ClassHierarchyMetadata', true);
-        $a->setCache(new \Metadata\Cache\FileCache('/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/jms_serializer'));
+        $a->setCache(new \Metadata\Cache\FileCache('/home/vinz/projets/Live-con.comV2/app/cache/dev/jms_serializer'));
 
         $b = new \JMS\Serializer\EventDispatcher\LazyEventDispatcher($this);
         $b->setListeners(array('serializer.pre_serialize' => array(0 => array(0 => array(0 => 'jms_serializer.stopwatch_subscriber', 1 => 'onPreSerialize'), 1 => NULL, 2 => NULL), 1 => array(0 => array(0 => 'jms_serializer.doctrine_proxy_subscriber', 1 => 'onPreSerialize'), 1 => NULL, 2 => NULL)), 'serializer.post_serialize' => array(0 => array(0 => array(0 => 'jms_serializer.stopwatch_subscriber', 1 => 'onPostSerialize'), 1 => NULL, 2 => NULL))));
@@ -2648,7 +2648,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getJmsSerializer_DatetimeHandlerService()
     {
-        return $this->services['jms_serializer.datetime_handler'] = new \JMS\Serializer\Handler\DateHandler('Y-m-d\\TH:i:sO', 'Europe/Berlin', true);
+        return $this->services['jms_serializer.datetime_handler'] = new \JMS\Serializer\Handler\DateHandler('Y-m-d\\TH:i:sO', 'Europe/Paris', true);
     }
 
     /**
@@ -2730,7 +2730,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getJmsSerializer_MetadataDriverService()
     {
-        $a = new \Metadata\Driver\FileLocator(array('Symfony\\Bundle\\FrameworkBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/config/serializer', 'Symfony\\Bundle\\SecurityBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle/Resources/config/serializer', 'Symfony\\Bundle\\TwigBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/config/serializer', 'Symfony\\Bundle\\MonologBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/monolog-bundle/Resources/config/serializer', 'Symfony\\Bundle\\SwiftmailerBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/swiftmailer-bundle/Symfony/Bundle/SwiftmailerBundle/Resources/config/serializer', 'Symfony\\Bundle\\AsseticBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/assetic-bundle/Resources/config/serializer', 'Doctrine\\Bundle\\DoctrineBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/doctrine/doctrine-bundle/Doctrine/Bundle/DoctrineBundle/Resources/config/serializer', 'Sensio\\Bundle\\FrameworkExtraBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/sensio/framework-extra-bundle/Sensio/Bundle/FrameworkExtraBundle/Resources/config/serializer', 'JMS\\AopBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/jms/aop-bundle/JMS/AopBundle/Resources/config/serializer', 'JMS\\DiExtraBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/jms/di-extra-bundle/JMS/DiExtraBundle/Resources/config/serializer', 'JMS\\SecurityExtraBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/jms/security-extra-bundle/JMS/SecurityExtraBundle/Resources/config/serializer', 'WhiteOctober\\PagerfantaBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/config/serializer', 'IDCI\\Bundle\\ExporterBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/idci/exporter-bundle/IDCI/Bundle/ExporterBundle/Resources/config/serializer', 'fibe\\Bundle\\WWWConfBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/Bundle/WWWConfBundle/Resources/config/serializer', 'fibe\\SecurityBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/SecurityBundle/Resources/config/serializer', 'fibe\\MobileAppBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/MobileAppBundle/Resources/config/serializer', 'fibe\\DashboardBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/DashboardBundle/Resources/config/serializer', 'fibe\\HomePageBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/HomePageBundle/Resources/config/serializer', 'fibe\\RestBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/RestBundle/Resources/config/serializer', 'fibe\\DataBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/DataBundle/Resources/config/serializer', 'fibe\\ConferenceBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/ConferenceBundle/Resources/config/serializer', 'fibe\\DocumentationBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/DocumentationBundle/Resources/config/serializer', 'FOS\\UserBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/config/serializer', 'Gregwar\\CaptchaBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/config/serializer', 'Lexik\\Bundle\\FormFilterBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/lexik/form-filter-bundle/Lexik/Bundle/FormFilterBundle/Resources/config/serializer', 'HWI\\Bundle\\OAuthBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/config/serializer', 'JMS\\SerializerBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/jms/serializer-bundle/JMS/SerializerBundle/Resources/config/serializer', 'FOS\\RestBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/rest-bundle/FOS/RestBundle/Resources/config/serializer', 'fibe\\FrontendBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/FrontendBundle/Resources/config/serializer', 'Symfony\\Bundle\\WebProfilerBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/config/serializer', 'Sensio\\Bundle\\DistributionBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/config/serializer', 'Sensio\\Bundle\\GeneratorBundle' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/sensio/generator-bundle/Sensio/Bundle/GeneratorBundle/Resources/config/serializer'));
+        $a = new \Metadata\Driver\FileLocator(array('Symfony\\Bundle\\FrameworkBundle' => '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/config/serializer', 'Symfony\\Bundle\\SecurityBundle' => '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle/Resources/config/serializer', 'Symfony\\Bundle\\TwigBundle' => '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/config/serializer', 'Symfony\\Bundle\\MonologBundle' => '/home/vinz/projets/Live-con.comV2/vendor/symfony/monolog-bundle/Resources/config/serializer', 'Symfony\\Bundle\\SwiftmailerBundle' => '/home/vinz/projets/Live-con.comV2/vendor/symfony/swiftmailer-bundle/Symfony/Bundle/SwiftmailerBundle/Resources/config/serializer', 'Symfony\\Bundle\\AsseticBundle' => '/home/vinz/projets/Live-con.comV2/vendor/symfony/assetic-bundle/Resources/config/serializer', 'Doctrine\\Bundle\\DoctrineBundle' => '/home/vinz/projets/Live-con.comV2/vendor/doctrine/doctrine-bundle/Doctrine/Bundle/DoctrineBundle/Resources/config/serializer', 'Sensio\\Bundle\\FrameworkExtraBundle' => '/home/vinz/projets/Live-con.comV2/vendor/sensio/framework-extra-bundle/Sensio/Bundle/FrameworkExtraBundle/Resources/config/serializer', 'JMS\\AopBundle' => '/home/vinz/projets/Live-con.comV2/vendor/jms/aop-bundle/JMS/AopBundle/Resources/config/serializer', 'JMS\\DiExtraBundle' => '/home/vinz/projets/Live-con.comV2/vendor/jms/di-extra-bundle/JMS/DiExtraBundle/Resources/config/serializer', 'JMS\\SecurityExtraBundle' => '/home/vinz/projets/Live-con.comV2/vendor/jms/security-extra-bundle/JMS/SecurityExtraBundle/Resources/config/serializer', 'WhiteOctober\\PagerfantaBundle' => '/home/vinz/projets/Live-con.comV2/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/config/serializer', 'IDCI\\Bundle\\ExporterBundle' => '/home/vinz/projets/Live-con.comV2/vendor/idci/exporter-bundle/IDCI/Bundle/ExporterBundle/Resources/config/serializer', 'fibe\\Bundle\\WWWConfBundle' => '/home/vinz/projets/Live-con.comV2/src/fibe/Bundle/WWWConfBundle/Resources/config/serializer', 'fibe\\SecurityBundle' => '/home/vinz/projets/Live-con.comV2/src/fibe/SecurityBundle/Resources/config/serializer', 'fibe\\MobileAppBundle' => '/home/vinz/projets/Live-con.comV2/src/fibe/MobileAppBundle/Resources/config/serializer', 'fibe\\DashboardBundle' => '/home/vinz/projets/Live-con.comV2/src/fibe/DashboardBundle/Resources/config/serializer', 'fibe\\HomePageBundle' => '/home/vinz/projets/Live-con.comV2/src/fibe/HomePageBundle/Resources/config/serializer', 'fibe\\RestBundle' => '/home/vinz/projets/Live-con.comV2/src/fibe/RestBundle/Resources/config/serializer', 'fibe\\DataBundle' => '/home/vinz/projets/Live-con.comV2/src/fibe/DataBundle/Resources/config/serializer', 'fibe\\ConferenceBundle' => '/home/vinz/projets/Live-con.comV2/src/fibe/ConferenceBundle/Resources/config/serializer', 'fibe\\DocumentationBundle' => '/home/vinz/projets/Live-con.comV2/src/fibe/DocumentationBundle/Resources/config/serializer', 'FOS\\UserBundle' => '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/config/serializer', 'Gregwar\\CaptchaBundle' => '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/config/serializer', 'Lexik\\Bundle\\FormFilterBundle' => '/home/vinz/projets/Live-con.comV2/vendor/lexik/form-filter-bundle/Lexik/Bundle/FormFilterBundle/Resources/config/serializer', 'HWI\\Bundle\\OAuthBundle' => '/home/vinz/projets/Live-con.comV2/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/config/serializer', 'JMS\\SerializerBundle' => '/home/vinz/projets/Live-con.comV2/vendor/jms/serializer-bundle/JMS/SerializerBundle/Resources/config/serializer', 'FOS\\RestBundle' => '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/rest-bundle/FOS/RestBundle/Resources/config/serializer', 'fibe\\FrontendBundle' => '/home/vinz/projets/Live-con.comV2/src/fibe/FrontendBundle/Resources/config/serializer', 'Symfony\\Bundle\\WebProfilerBundle' => '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/config/serializer', 'Sensio\\Bundle\\DistributionBundle' => '/home/vinz/projets/Live-con.comV2/vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/config/serializer', 'Sensio\\Bundle\\GeneratorBundle' => '/home/vinz/projets/Live-con.comV2/vendor/sensio/generator-bundle/Sensio/Bundle/GeneratorBundle/Resources/config/serializer'));
 
         return $this->services['jms_serializer.metadata_driver'] = new \JMS\Serializer\Metadata\Driver\DoctrineTypeDriver(new \Metadata\Driver\DriverChain(array(0 => new \JMS\Serializer\Metadata\Driver\YamlDriver($a), 1 => new \JMS\Serializer\Metadata\Driver\XmlDriver($a), 2 => new \JMS\Serializer\Metadata\Driver\PhpDriver($a), 3 => new \JMS\Serializer\Metadata\Driver\AnnotationDriver($this->get('annotation_reader')))), $this->get('doctrine'));
     }
@@ -3230,7 +3230,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getMonolog_Handler_MainService()
     {
-        return $this->services['monolog.handler.main'] = new \Monolog\Handler\StreamHandler('/opt/lampp/htdocs/www/LiveconV2.0/app/logs/dev.log', 100, true);
+        return $this->services['monolog.handler.main'] = new \Monolog\Handler\StreamHandler('/home/vinz/projets/Live-con.comV2/app/logs/dev.log', 100, true);
     }
 
     /**
@@ -3514,7 +3514,7 @@ class appDevDebugProjectContainer extends Container
         $d = new \Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector($this->get('doctrine'));
         $d->addLogger('default', $this->get('doctrine.dbal.logger.profiling.default'));
 
-        $this->services['profiler'] = $instance = new \Symfony\Component\HttpKernel\Profiler\Profiler(new \Symfony\Component\HttpKernel\Profiler\FileProfilerStorage('file:/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/profiler', '', '', 86400), $a);
+        $this->services['profiler'] = $instance = new \Symfony\Component\HttpKernel\Profiler\Profiler(new \Symfony\Component\HttpKernel\Profiler\FileProfilerStorage('file:/home/vinz/projets/Live-con.comV2/app/cache/dev/profiler', '', '', 86400), $a);
 
         $instance->add($c);
         $instance->add($this->get('data_collector.request'));
@@ -3612,7 +3612,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getRouterService()
     {
-        return $this->services['router'] = new \Symfony\Bundle\FrameworkBundle\Routing\Router($this, '/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/assetic/routing.yml', array('cache_dir' => '/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev', 'debug' => true, 'generator_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_base_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_dumper_class' => 'Symfony\\Component\\Routing\\Generator\\Dumper\\PhpGeneratorDumper', 'generator_cache_class' => 'appDevUrlGenerator', 'matcher_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_base_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_dumper_class' => 'Symfony\\Component\\Routing\\Matcher\\Dumper\\PhpMatcherDumper', 'matcher_cache_class' => 'appDevUrlMatcher', 'strict_requirements' => true, 'resource_type' => 'yaml'), $this->get('router.request_context', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('monolog.logger.router', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['router'] = new \Symfony\Bundle\FrameworkBundle\Routing\Router($this, '/home/vinz/projets/Live-con.comV2/app/cache/dev/assetic/routing.yml', array('cache_dir' => '/home/vinz/projets/Live-con.comV2/app/cache/dev', 'debug' => true, 'generator_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_base_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_dumper_class' => 'Symfony\\Component\\Routing\\Generator\\Dumper\\PhpGeneratorDumper', 'generator_cache_class' => 'appDevUrlGenerator', 'matcher_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_base_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_dumper_class' => 'Symfony\\Component\\Routing\\Matcher\\Dumper\\PhpMatcherDumper', 'matcher_cache_class' => 'appDevUrlMatcher', 'strict_requirements' => true, 'resource_type' => 'yaml'), $this->get('router.request_context', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('monolog.logger.router', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -3678,7 +3678,7 @@ class appDevDebugProjectContainer extends Container
 
         $h = new \JMS\SecurityExtraBundle\Security\Authorization\Expression\LazyLoadingExpressionVoter($this->get('security.expressions.handler'), $e);
         $h->setLazyCompiler($this, 'security.expressions.compiler');
-        $h->setCacheDir('/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/jms_security/expressions');
+        $h->setCacheDir('/home/vinz/projets/Live-con.comV2/app/cache/dev/jms_security/expressions');
 
         return $this->services['security.access.decision_manager'] = new \JMS\SecurityExtraBundle\Security\Authorization\RememberingAccessDecisionManager(new \Symfony\Component\Security\Core\Authorization\AccessDecisionManager(array(0 => new \fibe\SecurityBundle\Voter\ACLInheritanceVoter($a, $b, $c, $d, $e), 1 => $h, 2 => new \Symfony\Component\Security\Core\Authorization\Voter\ExpressionVoter(new \Symfony\Component\Security\Core\Authorization\ExpressionLanguage(), $f, $g), 3 => new \Symfony\Component\Security\Core\Authorization\Voter\RoleHierarchyVoter($g), 4 => new \Symfony\Component\Security\Core\Authorization\Voter\AuthenticatedVoter($f), 5 => new \JMS\SecurityExtraBundle\Security\Acl\Voter\AclVoter($a, $b, $c, $d, $e, true)), 'affirmative', false, true));
     }
@@ -3891,7 +3891,7 @@ class appDevDebugProjectContainer extends Container
         $a = $this->get('security.context');
         $b = $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE);
 
-        return $this->services['security.firewall.map.context.api'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('fos_user.user_manager')), 'api', $b, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '53d3c1e350520', $b), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'api', NULL, NULL, NULL, $b));
+        return $this->services['security.firewall.map.context.api'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('fos_user.user_manager')), 'api', $b, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '53d3fb3900683', $b), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'api', NULL, NULL, NULL, $b));
     }
 
     /**
@@ -3907,7 +3907,7 @@ class appDevDebugProjectContainer extends Container
         $a = $this->get('security.context');
         $b = $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE);
 
-        return $this->services['security.firewall.map.context.data'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('fos_user.user_manager')), 'data', $b, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '53d3c1e350520', $b), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'data', NULL, NULL, NULL, $b));
+        return $this->services['security.firewall.map.context.data'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('fos_user.user_manager')), 'data', $b, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '53d3fb3900683', $b), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'data', NULL, NULL, NULL, $b));
     }
 
     /**
@@ -3936,7 +3936,7 @@ class appDevDebugProjectContainer extends Container
         $a = $this->get('security.context');
         $b = $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE);
 
-        return $this->services['security.firewall.map.context.login'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('fos_user.user_manager')), 'login', $b, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '53d3c1e350520', $b), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'login', NULL, NULL, NULL, $b));
+        return $this->services['security.firewall.map.context.login'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('fos_user.user_manager')), 'login', $b, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '53d3fb3900683', $b), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'login', NULL, NULL, NULL, $b));
     }
 
     /**
@@ -3994,7 +3994,7 @@ class appDevDebugProjectContainer extends Container
         $a = $this->get('security.context');
         $b = $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE);
 
-        return $this->services['security.firewall.map.context.main_homepage'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('fos_user.user_manager')), 'main_homepage', $b, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '53d3c1e350520', $b), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'main_homepage', NULL, NULL, NULL, $b));
+        return $this->services['security.firewall.map.context.main_homepage'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('fos_user.user_manager')), 'main_homepage', $b, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '53d3fb3900683', $b), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'main_homepage', NULL, NULL, NULL, $b));
     }
 
     /**
@@ -4010,7 +4010,7 @@ class appDevDebugProjectContainer extends Container
         $a = $this->get('security.context');
         $b = $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE);
 
-        return $this->services['security.firewall.map.context.main_login'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('fos_user.user_manager')), 'main_login', $b, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '53d3c1e350520', $b), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'main_login', NULL, NULL, NULL, $b));
+        return $this->services['security.firewall.map.context.main_login'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('fos_user.user_manager')), 'main_login', $b, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '53d3fb3900683', $b), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'main_login', NULL, NULL, NULL, $b));
     }
 
     /**
@@ -4026,7 +4026,7 @@ class appDevDebugProjectContainer extends Container
         $a = $this->get('security.context');
         $b = $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE);
 
-        return $this->services['security.firewall.map.context.public_apps'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('fos_user.user_manager')), 'public_apps', $b, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '53d3c1e350520', $b), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'public_apps', NULL, NULL, NULL, $b));
+        return $this->services['security.firewall.map.context.public_apps'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('fos_user.user_manager')), 'public_apps', $b, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '53d3fb3900683', $b), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'public_apps', NULL, NULL, NULL, $b));
     }
 
     /**
@@ -4042,7 +4042,7 @@ class appDevDebugProjectContainer extends Container
         $a = $this->get('security.context');
         $b = $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE);
 
-        return $this->services['security.firewall.map.context.register'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('fos_user.user_manager')), 'register', $b, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '53d3c1e350520', $b), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'register', NULL, NULL, NULL, $b));
+        return $this->services['security.firewall.map.context.register'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('fos_user.user_manager')), 'register', $b, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '53d3fb3900683', $b), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'register', NULL, NULL, NULL, $b));
     }
 
     /**
@@ -4081,7 +4081,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_SecureRandomService()
     {
-        return $this->services['security.secure_random'] = new \Symfony\Component\Security\Core\Util\SecureRandom('/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/secure_random.seed', $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['security.secure_random'] = new \Symfony\Component\Security\Core\Util\SecureRandom('/home/vinz/projets/Live-con.comV2/app/cache/dev/secure_random.seed', $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -4107,7 +4107,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSensioDistribution_WebconfiguratorService()
     {
-        return $this->services['sensio_distribution.webconfigurator'] = new \Sensio\Bundle\DistributionBundle\Configurator\Configurator('/opt/lampp/htdocs/www/LiveconV2.0/app');
+        return $this->services['sensio_distribution.webconfigurator'] = new \Sensio\Bundle\DistributionBundle\Configurator\Configurator('/home/vinz/projets/Live-con.comV2/app');
     }
 
     /**
@@ -4269,7 +4269,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSession_Storage_FilesystemService()
     {
-        return $this->services['session.storage.filesystem'] = new \Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage('/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/sessions', 'MOCKSESSID', $this->get('session.storage.metadata_bag'));
+        return $this->services['session.storage.filesystem'] = new \Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage('/home/vinz/projets/Live-con.comV2/app/cache/dev/sessions', 'MOCKSESSID', $this->get('session.storage.metadata_bag'));
     }
 
     /**
@@ -4373,7 +4373,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSwiftmailer_Mailer_Default_TransportService()
     {
-        $a = new \Swift_Transport_Esmtp_AuthHandler(array(0 => $this->get('b994f3e500b9c4e4009d27b34d089eb83b3bf29192466ad2ee39c96d3e7eab85_1'), 1 => $this->get('b994f3e500b9c4e4009d27b34d089eb83b3bf29192466ad2ee39c96d3e7eab85_2'), 2 => $this->get('b994f3e500b9c4e4009d27b34d089eb83b3bf29192466ad2ee39c96d3e7eab85_3')));
+        $a = new \Swift_Transport_Esmtp_AuthHandler(array(0 => $this->get('0f201e5092dc5d95d25c4d35cfab28f3566c5b3c0903086ab523ce9ba860b0df_1'), 1 => $this->get('0f201e5092dc5d95d25c4d35cfab28f3566c5b3c0903086ab523ce9ba860b0df_2'), 2 => $this->get('0f201e5092dc5d95d25c4d35cfab28f3566c5b3c0903086ab523ce9ba860b0df_3')));
         $a->setUsername('flepeutrec');
         $a->setPassword(31051989);
         $a->setAuthMode('login');
@@ -4488,7 +4488,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getTemplating_Helper_CodeService()
     {
-        return $this->services['templating.helper.code'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\CodeHelper(NULL, '/opt/lampp/htdocs/www/LiveconV2.0/app', 'UTF-8');
+        return $this->services['templating.helper.code'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\CodeHelper(NULL, '/home/vinz/projets/Live-con.comV2/app', 'UTF-8');
     }
 
     /**
@@ -5008,244 +5008,244 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getTranslator_DefaultService()
     {
-        $this->services['translator.default'] = $instance = new \Symfony\Bundle\FrameworkBundle\Translation\Translator($this, new \Symfony\Component\Translation\MessageSelector(), array('translation.loader.php' => array(0 => 'php'), 'translation.loader.yml' => array(0 => 'yml'), 'translation.loader.xliff' => array(0 => 'xlf', 1 => 'xliff'), 'translation.loader.po' => array(0 => 'po'), 'translation.loader.mo' => array(0 => 'mo'), 'translation.loader.qt' => array(0 => 'ts'), 'translation.loader.csv' => array(0 => 'csv'), 'translation.loader.res' => array(0 => 'res'), 'translation.loader.dat' => array(0 => 'dat'), 'translation.loader.ini' => array(0 => 'ini'), 'translation.loader.json' => array(0 => 'json')), array('cache_dir' => '/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/translations', 'debug' => true));
+        $this->services['translator.default'] = $instance = new \Symfony\Bundle\FrameworkBundle\Translation\Translator($this, new \Symfony\Component\Translation\MessageSelector(), array('translation.loader.php' => array(0 => 'php'), 'translation.loader.yml' => array(0 => 'yml'), 'translation.loader.xliff' => array(0 => 'xlf', 1 => 'xliff'), 'translation.loader.po' => array(0 => 'po'), 'translation.loader.mo' => array(0 => 'mo'), 'translation.loader.qt' => array(0 => 'ts'), 'translation.loader.csv' => array(0 => 'csv'), 'translation.loader.res' => array(0 => 'res'), 'translation.loader.dat' => array(0 => 'dat'), 'translation.loader.ini' => array(0 => 'ini'), 'translation.loader.json' => array(0 => 'json')), array('cache_dir' => '/home/vinz/projets/Live-con.comV2/app/cache/dev/translations', 'debug' => true));
 
         $instance->setFallbackLocales(array(0 => 'en'));
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ca.xlf', 'ca', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sr_Latn.xlf', 'sr_Latn', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pt.xlf', 'pt', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fi.xlf', 'fi', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.en.xlf', 'en', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.es.xlf', 'es', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.tr.xlf', 'tr', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.eu.xlf', 'eu', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hy.xlf', 'hy', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.th.xlf', 'th', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.da.xlf', 'da', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sk.xlf', 'sk', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.bg.xlf', 'bg', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sl.xlf', 'sl', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sq.xlf', 'sq', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hr.xlf', 'hr', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.mn.xlf', 'mn', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sr_Cyrl.xlf', 'sr_Cyrl', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.lt.xlf', 'lt', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ja.xlf', 'ja', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pl.xlf', 'pl', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.vi.xlf', 'vi', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fr.xlf', 'fr', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.id.xlf', 'id', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.he.xlf', 'he', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.af.xlf', 'af', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.de.xlf', 'de', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.cs.xlf', 'cs', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.et.xlf', 'et', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.zh_TW.xlf', 'zh_TW', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hu.xlf', 'hu', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.nb.xlf', 'nb', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ro.xlf', 'ro', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.nl.xlf', 'nl', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pt_BR.xlf', 'pt_BR', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ru.xlf', 'ru', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.no.xlf', 'no', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.zh_CN.xlf', 'zh_CN', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.gl.xlf', 'gl', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.it.xlf', 'it', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fa.xlf', 'fa', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.cy.xlf', 'cy', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.uk.xlf', 'uk', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ar.xlf', 'ar', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sv.xlf', 'sv', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.lb.xlf', 'lb', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.el.xlf', 'el', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ca.xlf', 'ca', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sr_Latn.xlf', 'sr_Latn', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pt.xlf', 'pt', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fi.xlf', 'fi', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.en.xlf', 'en', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.es.xlf', 'es', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.eu.xlf', 'eu', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hy.xlf', 'hy', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.da.xlf', 'da', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sk.xlf', 'sk', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.bg.xlf', 'bg', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sl.xlf', 'sl', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hr.xlf', 'hr', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.mn.xlf', 'mn', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sr_Cyrl.xlf', 'sr_Cyrl', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lt.xlf', 'lt', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ja.xlf', 'ja', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pl.xlf', 'pl', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fr.xlf', 'fr', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.id.xlf', 'id', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.he.xlf', 'he', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.de.xlf', 'de', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.cs.xlf', 'cs', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.et.xlf', 'et', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hu.xlf', 'hu', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.nb.xlf', 'nb', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ro.xlf', 'ro', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.nl.xlf', 'nl', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pt_BR.xlf', 'pt_BR', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ru.xlf', 'ru', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.zh_CN.xlf', 'zh_CN', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.gl.xlf', 'gl', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.it.xlf', 'it', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fa.xlf', 'fa', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.uk.xlf', 'uk', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lv.xlf', 'lv', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ar.xlf', 'ar', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sv.xlf', 'sv', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lb.xlf', 'lb', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.el.xlf', 'el', 'validators');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.en.xlf', 'en', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.pl.xlf', 'pl', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.ro.xlf', 'ro', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.es.xlf', 'es', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.nl.xlf', 'nl', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.da.xlf', 'da', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.sr_Cyrl.xlf', 'sr_Cyrl', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.ca.xlf', 'ca', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.it.xlf', 'it', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.sk.xlf', 'sk', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.ar.xlf', 'ar', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.no.xlf', 'no', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.pt_BR.xlf', 'pt_BR', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.lb.xlf', 'lb', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.sv.xlf', 'sv', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.cs.xlf', 'cs', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.hu.xlf', 'hu', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.fr.xlf', 'fr', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.sl.xlf', 'sl', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.tr.xlf', 'tr', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.de.xlf', 'de', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.pt_PT.xlf', 'pt_PT', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.el.xlf', 'el', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.gl.xlf', 'gl', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.ru.xlf', 'ru', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.fa.xlf', 'fa', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.sr_Latn.xlf', 'sr_Latn', 'security');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.ua.xlf', 'ua', 'security');
-        $instance->addResource('xliff', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.az.xliff', 'az', 'pagerfanta');
-        $instance->addResource('xliff', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.sr_Cyrl.xliff', 'sr_Cyrl', 'pagerfanta');
-        $instance->addResource('xliff', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.ca.xliff', 'ca', 'pagerfanta');
-        $instance->addResource('xliff', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.pl.xliff', 'pl', 'pagerfanta');
-        $instance->addResource('xliff', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.sr_Latn.xliff', 'sr_Latn', 'pagerfanta');
-        $instance->addResource('xliff', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.es.xliff', 'es', 'pagerfanta');
-        $instance->addResource('xliff', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.zh_CN.xliff', 'zh_CN', 'pagerfanta');
-        $instance->addResource('xliff', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.ar.xliff', 'ar', 'pagerfanta');
-        $instance->addResource('xliff', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.pt.xliff', 'pt', 'pagerfanta');
-        $instance->addResource('xliff', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.cs.xliff', 'cs', 'pagerfanta');
-        $instance->addResource('xliff', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.fr.xliff', 'fr', 'pagerfanta');
-        $instance->addResource('xliff', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.ru.xliff', 'ru', 'pagerfanta');
-        $instance->addResource('xliff', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.en.xliff', 'en', 'pagerfanta');
-        $instance->addResource('xliff', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.nl.xliff', 'nl', 'pagerfanta');
-        $instance->addResource('xliff', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.tr.xliff', 'tr', 'pagerfanta');
-        $instance->addResource('xliff', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.de.xliff', 'de', 'pagerfanta');
-        $instance->addResource('xliff', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.it.xliff', 'it', 'pagerfanta');
-        $instance->addResource('xliff', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.da.xliff', 'da', 'pagerfanta');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/Bundle/WWWConfBundle/Resources/translations/messages.fr.xlf', 'fr', 'messages');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/SecurityBundle/Resources/translations/messages.fr.xlf', 'fr', 'messages');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/ConferenceBundle/Resources/translations/messages.fr.xlf', 'fr', 'messages');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/DocumentationBundle/Resources/translations/messages.fr.xlf', 'fr', 'messages');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.hu.yml', 'hu', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.fi.yml', 'fi', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.en.yml', 'en', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.et.yml', 'et', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.ja.yml', 'ja', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.sl.yml', 'sl', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.lt.yml', 'lt', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.nl.yml', 'nl', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.sv.yml', 'sv', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.sv.yml', 'sv', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.bg.yml', 'bg', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.ru.yml', 'ru', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.ca.yml', 'ca', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.tr.yml', 'tr', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.lv.yml', 'lv', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.ro.yml', 'ro', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.pl.yml', 'pl', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.sr_Latn.yml', 'sr_Latn', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.lv.yml', 'lv', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.zh_CN.yml', 'zh_CN', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.uk.yml', 'uk', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.uk.yml', 'uk', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.fi.yml', 'fi', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.ja.yml', 'ja', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.fa.yml', 'fa', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.es.yml', 'es', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.zh_CN.yml', 'zh_CN', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.lb.yml', 'lb', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.hr.yml', 'hr', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.da.yml', 'da', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.pt_BR.yml', 'pt_BR', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.it.yml', 'it', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.fr.yml', 'fr', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.sl.yml', 'sl', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.da.yml', 'da', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.cs.yml', 'cs', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.fr.yml', 'fr', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.bg.yml', 'bg', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.sr_Latn.yml', 'sr_Latn', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.es.yml', 'es', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.pt_PT.yml', 'pt_PT', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.pl.yml', 'pl', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.de.yml', 'de', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.pt_BR.yml', 'pt_BR', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.sk.yml', 'sk', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.en.yml', 'en', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.lt.yml', 'lt', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.de.yml', 'de', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.fa.yml', 'fa', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.pt.yml', 'pt', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.tr.yml', 'tr', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.nl.yml', 'nl', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.ru.yml', 'ru', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.it.yml', 'it', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.cs.yml', 'cs', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.sk.yml', 'sk', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.hr.yml', 'hr', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.hu.yml', 'hu', 'FOSUserBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.pt_BR.yml', 'pt_BR', 'gregwar_captcha');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.nl.yml', 'nl', 'gregwar_captcha');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.es.yml', 'es', 'gregwar_captcha');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.ro.yml', 'ro', 'gregwar_captcha');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.pl.yml', 'pl', 'gregwar_captcha');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.cs.yml', 'cs', 'gregwar_captcha');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.de.yml', 'de', 'gregwar_captcha');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.pl.yml', 'pl', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.ru.yml', 'ru', 'gregwar_captcha');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.zh_CN.yml', 'zh_CN', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.fr.yml', 'fr', 'gregwar_captcha');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.it.yml', 'it', 'gregwar_captcha');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.zh_CN.yml', 'zh_CN', 'gregwar_captcha');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.fr.yml', 'fr', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.en.yml', 'en', 'gregwar_captcha');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.es.yml', 'es', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.de.yml', 'de', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.pt_BR.yml', 'pt_BR', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.en.yml', 'en', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.nl.yml', 'nl', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.ru.yml', 'ru', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.it.yml', 'it', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.cs.yml', 'cs', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.ro.yml', 'ro', 'validators');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/lexik/form-filter-bundle/Lexik/Bundle/FormFilterBundle/Resources/translations/LexikFormFilterBundle.en.yml', 'en', 'LexikFormFilterBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/lexik/form-filter-bundle/Lexik/Bundle/FormFilterBundle/Resources/translations/LexikFormFilterBundle.fr.yml', 'fr', 'LexikFormFilterBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/lexik/form-filter-bundle/Lexik/Bundle/FormFilterBundle/Resources/translations/LexikFormFilterBundle.es.yml', 'es', 'LexikFormFilterBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/lexik/form-filter-bundle/Lexik/Bundle/FormFilterBundle/Resources/translations/LexikFormFilterBundle.nl.yml', 'nl', 'LexikFormFilterBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/lexik/form-filter-bundle/Lexik/Bundle/FormFilterBundle/Resources/translations/LexikFormFilterBundle.de.yml', 'de', 'LexikFormFilterBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/lexik/form-filter-bundle/Lexik/Bundle/FormFilterBundle/Resources/translations/LexikFormFilterBundle.it.yml', 'it', 'LexikFormFilterBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/translations/HWIOAuthBundle.de.yml', 'de', 'HWIOAuthBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/translations/HWIOAuthBundle.pl.yml', 'pl', 'HWIOAuthBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/translations/HWIOAuthBundle.es.yml', 'es', 'HWIOAuthBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/translations/HWIOAuthBundle.nl.yml', 'nl', 'HWIOAuthBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/translations/HWIOAuthBundle.it.yml', 'it', 'HWIOAuthBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/translations/HWIOAuthBundle.ru.yml', 'ru', 'HWIOAuthBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/translations/HWIOAuthBundle.tr.yml', 'tr', 'HWIOAuthBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/translations/HWIOAuthBundle.en.yml', 'en', 'HWIOAuthBundle');
-        $instance->addResource('yml', '/opt/lampp/htdocs/www/LiveconV2.0/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/translations/HWIOAuthBundle.fr.yml', 'fr', 'HWIOAuthBundle');
-        $instance->addResource('xlf', '/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/FrontendBundle/Resources/translations/messages.fr.xlf', 'fr', 'messages');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.da.xlf', 'da', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hy.xlf', 'hy', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ca.xlf', 'ca', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.mn.xlf', 'mn', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.he.xlf', 'he', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.de.xlf', 'de', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.nb.xlf', 'nb', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fa.xlf', 'fa', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ru.xlf', 'ru', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.vi.xlf', 'vi', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fi.xlf', 'fi', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sr_Cyrl.xlf', 'sr_Cyrl', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ja.xlf', 'ja', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.gl.xlf', 'gl', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.cy.xlf', 'cy', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.en.xlf', 'en', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.tr.xlf', 'tr', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pt_BR.xlf', 'pt_BR', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sl.xlf', 'sl', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.nl.xlf', 'nl', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hu.xlf', 'hu', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ar.xlf', 'ar', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.eu.xlf', 'eu', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.uk.xlf', 'uk', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.hr.xlf', 'hr', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pl.xlf', 'pl', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.th.xlf', 'th', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.el.xlf', 'el', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.no.xlf', 'no', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.lb.xlf', 'lb', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.es.xlf', 'es', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sq.xlf', 'sq', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.fr.xlf', 'fr', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.id.xlf', 'id', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.pt.xlf', 'pt', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sr_Latn.xlf', 'sr_Latn', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.cs.xlf', 'cs', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.af.xlf', 'af', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.zh_CN.xlf', 'zh_CN', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.bg.xlf', 'bg', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.zh_TW.xlf', 'zh_TW', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.ro.xlf', 'ro', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.et.xlf', 'et', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.it.xlf', 'it', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sv.xlf', 'sv', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.lt.xlf', 'lt', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Validator/Resources/translations/validators.sk.xlf', 'sk', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.da.xlf', 'da', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hy.xlf', 'hy', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ca.xlf', 'ca', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.mn.xlf', 'mn', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.he.xlf', 'he', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.de.xlf', 'de', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.nb.xlf', 'nb', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fa.xlf', 'fa', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ru.xlf', 'ru', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fi.xlf', 'fi', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sr_Cyrl.xlf', 'sr_Cyrl', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ja.xlf', 'ja', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.gl.xlf', 'gl', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.en.xlf', 'en', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pt_BR.xlf', 'pt_BR', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sl.xlf', 'sl', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.nl.xlf', 'nl', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hu.xlf', 'hu', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ar.xlf', 'ar', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.eu.xlf', 'eu', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.uk.xlf', 'uk', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.hr.xlf', 'hr', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pl.xlf', 'pl', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.el.xlf', 'el', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lb.xlf', 'lb', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.es.xlf', 'es', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.fr.xlf', 'fr', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.id.xlf', 'id', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.pt.xlf', 'pt', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sr_Latn.xlf', 'sr_Latn', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.cs.xlf', 'cs', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.zh_CN.xlf', 'zh_CN', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.bg.xlf', 'bg', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.ro.xlf', 'ro', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.et.xlf', 'et', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.it.xlf', 'it', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sv.xlf', 'sv', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lv.xlf', 'lv', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.lt.xlf', 'lt', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/translations/validators.sk.xlf', 'sk', 'validators');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.de.xlf', 'de', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.no.xlf', 'no', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.pl.xlf', 'pl', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.ru.xlf', 'ru', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.fa.xlf', 'fa', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.it.xlf', 'it', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.ro.xlf', 'ro', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.nl.xlf', 'nl', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.sv.xlf', 'sv', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.sr_Cyrl.xlf', 'sr_Cyrl', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.hu.xlf', 'hu', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.sk.xlf', 'sk', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.pt_BR.xlf', 'pt_BR', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.da.xlf', 'da', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.es.xlf', 'es', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.lb.xlf', 'lb', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.fr.xlf', 'fr', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.el.xlf', 'el', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.ua.xlf', 'ua', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.gl.xlf', 'gl', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.cs.xlf', 'cs', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.pt_PT.xlf', 'pt_PT', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.tr.xlf', 'tr', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.ar.xlf', 'ar', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.sr_Latn.xlf', 'sr_Latn', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.sl.xlf', 'sl', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.en.xlf', 'en', 'security');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/../Resources/translations/security.ca.xlf', 'ca', 'security');
+        $instance->addResource('xliff', '/home/vinz/projets/Live-con.comV2/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.de.xliff', 'de', 'pagerfanta');
+        $instance->addResource('xliff', '/home/vinz/projets/Live-con.comV2/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.tr.xliff', 'tr', 'pagerfanta');
+        $instance->addResource('xliff', '/home/vinz/projets/Live-con.comV2/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.fr.xliff', 'fr', 'pagerfanta');
+        $instance->addResource('xliff', '/home/vinz/projets/Live-con.comV2/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.it.xliff', 'it', 'pagerfanta');
+        $instance->addResource('xliff', '/home/vinz/projets/Live-con.comV2/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.pt.xliff', 'pt', 'pagerfanta');
+        $instance->addResource('xliff', '/home/vinz/projets/Live-con.comV2/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.cs.xliff', 'cs', 'pagerfanta');
+        $instance->addResource('xliff', '/home/vinz/projets/Live-con.comV2/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.ca.xliff', 'ca', 'pagerfanta');
+        $instance->addResource('xliff', '/home/vinz/projets/Live-con.comV2/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.da.xliff', 'da', 'pagerfanta');
+        $instance->addResource('xliff', '/home/vinz/projets/Live-con.comV2/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.en.xliff', 'en', 'pagerfanta');
+        $instance->addResource('xliff', '/home/vinz/projets/Live-con.comV2/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.nl.xliff', 'nl', 'pagerfanta');
+        $instance->addResource('xliff', '/home/vinz/projets/Live-con.comV2/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.pl.xliff', 'pl', 'pagerfanta');
+        $instance->addResource('xliff', '/home/vinz/projets/Live-con.comV2/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.az.xliff', 'az', 'pagerfanta');
+        $instance->addResource('xliff', '/home/vinz/projets/Live-con.comV2/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.zh_CN.xliff', 'zh_CN', 'pagerfanta');
+        $instance->addResource('xliff', '/home/vinz/projets/Live-con.comV2/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.es.xliff', 'es', 'pagerfanta');
+        $instance->addResource('xliff', '/home/vinz/projets/Live-con.comV2/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.ar.xliff', 'ar', 'pagerfanta');
+        $instance->addResource('xliff', '/home/vinz/projets/Live-con.comV2/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.ru.xliff', 'ru', 'pagerfanta');
+        $instance->addResource('xliff', '/home/vinz/projets/Live-con.comV2/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.sr_Latn.xliff', 'sr_Latn', 'pagerfanta');
+        $instance->addResource('xliff', '/home/vinz/projets/Live-con.comV2/vendor/white-october/pagerfanta-bundle/WhiteOctober/PagerfantaBundle/Resources/translations/pagerfanta.sr_Cyrl.xliff', 'sr_Cyrl', 'pagerfanta');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/src/fibe/Bundle/WWWConfBundle/Resources/translations/messages.fr.xlf', 'fr', 'messages');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/src/fibe/SecurityBundle/Resources/translations/messages.fr.xlf', 'fr', 'messages');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/src/fibe/ConferenceBundle/Resources/translations/messages.fr.xlf', 'fr', 'messages');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/src/fibe/DocumentationBundle/Resources/translations/messages.fr.xlf', 'fr', 'messages');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.hr.yml', 'hr', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.cs.yml', 'cs', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.bg.yml', 'bg', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.lv.yml', 'lv', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.fa.yml', 'fa', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.hu.yml', 'hu', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.ja.yml', 'ja', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.it.yml', 'it', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.fi.yml', 'fi', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.pl.yml', 'pl', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.ja.yml', 'ja', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.lt.yml', 'lt', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.it.yml', 'it', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.lt.yml', 'lt', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.sk.yml', 'sk', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.ru.yml', 'ru', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.uk.yml', 'uk', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.et.yml', 'et', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.lb.yml', 'lb', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.da.yml', 'da', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.de.yml', 'de', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.pl.yml', 'pl', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.sl.yml', 'sl', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.nl.yml', 'nl', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.ro.yml', 'ro', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.fr.yml', 'fr', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.cs.yml', 'cs', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.sv.yml', 'sv', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.zh_CN.yml', 'zh_CN', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.en.yml', 'en', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.sr_Latn.yml', 'sr_Latn', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.nl.yml', 'nl', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.lv.yml', 'lv', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.pt_BR.yml', 'pt_BR', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.ru.yml', 'ru', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.pt_BR.yml', 'pt_BR', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.sl.yml', 'sl', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.es.yml', 'es', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.tr.yml', 'tr', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.hu.yml', 'hu', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.tr.yml', 'tr', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.en.yml', 'en', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.pt_PT.yml', 'pt_PT', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.sr_Latn.yml', 'sr_Latn', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.ca.yml', 'ca', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.bg.yml', 'bg', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.es.yml', 'es', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.fa.yml', 'fa', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.hr.yml', 'hr', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.da.yml', 'da', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.sk.yml', 'sk', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.fi.yml', 'fi', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.fr.yml', 'fr', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.sv.yml', 'sv', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.zh_CN.yml', 'zh_CN', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.uk.yml', 'uk', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/FOSUserBundle.de.yml', 'de', 'FOSUserBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/translations/validators.pt.yml', 'pt', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.cs.yml', 'cs', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.en.yml', 'en', 'gregwar_captcha');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.cs.yml', 'cs', 'gregwar_captcha');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.pl.yml', 'pl', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.it.yml', 'it', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.de.yml', 'de', 'gregwar_captcha');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.ru.yml', 'ru', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.ro.yml', 'ro', 'gregwar_captcha');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.fr.yml', 'fr', 'gregwar_captcha');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.ro.yml', 'ro', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.de.yml', 'de', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.pl.yml', 'pl', 'gregwar_captcha');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.zh_CN.yml', 'zh_CN', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.nl.yml', 'nl', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.pt_BR.yml', 'pt_BR', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.nl.yml', 'nl', 'gregwar_captcha');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.en.yml', 'en', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.es.yml', 'es', 'gregwar_captcha');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.zh_CN.yml', 'zh_CN', 'gregwar_captcha');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.pt_BR.yml', 'pt_BR', 'gregwar_captcha');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.es.yml', 'es', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.it.yml', 'it', 'gregwar_captcha');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/validators.fr.yml', 'fr', 'validators');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/translations/gregwar_captcha.ru.yml', 'ru', 'gregwar_captcha');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/lexik/form-filter-bundle/Lexik/Bundle/FormFilterBundle/Resources/translations/LexikFormFilterBundle.fr.yml', 'fr', 'LexikFormFilterBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/lexik/form-filter-bundle/Lexik/Bundle/FormFilterBundle/Resources/translations/LexikFormFilterBundle.it.yml', 'it', 'LexikFormFilterBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/lexik/form-filter-bundle/Lexik/Bundle/FormFilterBundle/Resources/translations/LexikFormFilterBundle.nl.yml', 'nl', 'LexikFormFilterBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/lexik/form-filter-bundle/Lexik/Bundle/FormFilterBundle/Resources/translations/LexikFormFilterBundle.es.yml', 'es', 'LexikFormFilterBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/lexik/form-filter-bundle/Lexik/Bundle/FormFilterBundle/Resources/translations/LexikFormFilterBundle.en.yml', 'en', 'LexikFormFilterBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/lexik/form-filter-bundle/Lexik/Bundle/FormFilterBundle/Resources/translations/LexikFormFilterBundle.de.yml', 'de', 'LexikFormFilterBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/translations/HWIOAuthBundle.en.yml', 'en', 'HWIOAuthBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/translations/HWIOAuthBundle.de.yml', 'de', 'HWIOAuthBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/translations/HWIOAuthBundle.fr.yml', 'fr', 'HWIOAuthBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/translations/HWIOAuthBundle.es.yml', 'es', 'HWIOAuthBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/translations/HWIOAuthBundle.it.yml', 'it', 'HWIOAuthBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/translations/HWIOAuthBundle.tr.yml', 'tr', 'HWIOAuthBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/translations/HWIOAuthBundle.pl.yml', 'pl', 'HWIOAuthBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/translations/HWIOAuthBundle.nl.yml', 'nl', 'HWIOAuthBundle');
+        $instance->addResource('yml', '/home/vinz/projets/Live-con.comV2/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/translations/HWIOAuthBundle.ru.yml', 'ru', 'HWIOAuthBundle');
+        $instance->addResource('xlf', '/home/vinz/projets/Live-con.comV2/src/fibe/FrontendBundle/Resources/translations/messages.fr.xlf', 'fr', 'messages');
 
         return $instance;
     }
@@ -5262,14 +5262,14 @@ class appDevDebugProjectContainer extends Container
     {
         $a = $this->get('security.context');
 
-        $this->services['twig'] = $instance = new \Twig_Environment($this->get('twig.loader'), array('debug' => true, 'exception_controller' => 'twig.controller.exception:showAction', 'autoescape_service' => NULL, 'autoescape_service_method' => NULL, 'cache' => '/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig', 'charset' => 'UTF-8', 'paths' => array()));
+        $this->services['twig'] = $instance = new \Twig_Environment($this->get('twig.loader'), array('debug' => true, 'exception_controller' => 'twig.controller.exception:showAction', 'autoescape_service' => NULL, 'autoescape_service_method' => NULL, 'cache' => '/home/vinz/projets/Live-con.comV2/app/cache/dev/twig', 'charset' => 'UTF-8', 'paths' => array()));
 
         $instance->addExtension(new \Symfony\Bundle\SecurityBundle\Twig\Extension\LogoutUrlExtension($this->get('templating.helper.logout_url')));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\SecurityExtension($a));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\TranslationExtension($this->get('translator.default')));
         $instance->addExtension(new \Symfony\Bundle\TwigBundle\Extension\AssetsExtension($this, $this->get('router.request_context')));
         $instance->addExtension(new \Symfony\Bundle\TwigBundle\Extension\ActionsExtension($this));
-        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\CodeExtension(NULL, '/opt/lampp/htdocs/www/LiveconV2.0/app', 'UTF-8'));
+        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\CodeExtension(NULL, '/home/vinz/projets/Live-con.comV2/app', 'UTF-8'));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\RoutingExtension($this->get('router')));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\YamlExtension());
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\StopwatchExtension($this->get('debug.stopwatch', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
@@ -5327,30 +5327,30 @@ class appDevDebugProjectContainer extends Container
     {
         $this->services['twig.loader'] = $instance = new \Symfony\Bundle\TwigBundle\Loader\FilesystemLoader($this->get('templating.locator'), $this->get('templating.name_parser'));
 
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views', 'Framework');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle/Resources/views', 'Security');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/views', 'Twig');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/swiftmailer-bundle/Symfony/Bundle/SwiftmailerBundle/Resources/views', 'Swiftmailer');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/vendor/doctrine/doctrine-bundle/Doctrine/Bundle/DoctrineBundle/Resources/views', 'Doctrine');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/app/Resources/fibeWWWConfBundle/views', 'fibeWWWConf');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/Bundle/WWWConfBundle/Resources/views', 'fibeWWWConf');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/SecurityBundle/Resources/views', 'fibeSecurity');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/MobileAppBundle/Resources/views', 'fibeMobileApp');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/DashboardBundle/Resources/views', 'fibeDashboard');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/HomePageBundle/Resources/views', 'fibeHomePage');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/DataBundle/Resources/views', 'Data');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/ConferenceBundle/Resources/views', 'fibeConference');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/DocumentationBundle/Resources/views', 'Documentation');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/app/Resources/FOSUserBundle/views', 'FOSUser');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/views', 'FOSUser');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/views', 'GregwarCaptcha');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/vendor/lexik/form-filter-bundle/Lexik/Bundle/FormFilterBundle/Resources/views', 'LexikFormFilter');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/views', 'HWIOAuth');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/FrontendBundle/Resources/views', 'Frontend');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views', 'WebProfiler');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/views', 'SensioDistribution');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/app/Resources/views');
-        $instance->addPath('/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Bridge/Twig/Resources/views/Form');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views', 'Framework');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle/Resources/views', 'Security');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/views', 'Twig');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/vendor/symfony/swiftmailer-bundle/Symfony/Bundle/SwiftmailerBundle/Resources/views', 'Swiftmailer');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/vendor/doctrine/doctrine-bundle/Doctrine/Bundle/DoctrineBundle/Resources/views', 'Doctrine');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/app/Resources/fibeWWWConfBundle/views', 'fibeWWWConf');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/src/fibe/Bundle/WWWConfBundle/Resources/views', 'fibeWWWConf');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/src/fibe/SecurityBundle/Resources/views', 'fibeSecurity');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/src/fibe/MobileAppBundle/Resources/views', 'fibeMobileApp');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/src/fibe/DashboardBundle/Resources/views', 'fibeDashboard');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/src/fibe/HomePageBundle/Resources/views', 'fibeHomePage');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/src/fibe/DataBundle/Resources/views', 'Data');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/src/fibe/ConferenceBundle/Resources/views', 'fibeConference');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/src/fibe/DocumentationBundle/Resources/views', 'Documentation');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/app/Resources/FOSUserBundle/views', 'FOSUser');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/views', 'FOSUser');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/Resources/views', 'GregwarCaptcha');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/vendor/lexik/form-filter-bundle/Lexik/Bundle/FormFilterBundle/Resources/views', 'LexikFormFilter');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/vendor/hwi/oauth-bundle/HWI/Bundle/OAuthBundle/Resources/views', 'HWIOAuth');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/src/fibe/FrontendBundle/Resources/views', 'Frontend');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views', 'WebProfiler');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/views', 'SensioDistribution');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/app/Resources/views');
+        $instance->addPath('/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Bridge/Twig/Resources/views/Form');
 
         return $instance;
     }
@@ -5409,11 +5409,11 @@ class appDevDebugProjectContainer extends Container
         $instance->setConstraintValidatorFactory(new \Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory($this, array('validator.expression' => 'validator.expression', 'Symfony\\Component\\Validator\\Constraints\\EmailValidator' => 'validator.email', 'security.validator.user_password' => 'security.validator.user_password', 'doctrine.orm.validator.unique' => 'doctrine.orm.validator.unique')));
         $instance->setTranslator($this->get('translator.default'));
         $instance->setTranslationDomain('validators');
-        $instance->addXmlMappings(array(0 => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/config/validation.xml', 1 => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/config/validation.xml'));
+        $instance->addXmlMappings(array(0 => '/home/vinz/projets/Live-con.comV2/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/config/validation.xml', 1 => '/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/config/validation.xml'));
         $instance->enableAnnotationMapping($this->get('annotation_reader'));
         $instance->addMethodMapping('loadValidatorMetadata');
         $instance->addObjectInitializers(array(0 => $this->get('doctrine.orm.validator_initializer'), 1 => new \FOS\UserBundle\Validator\Initializer($this->get('fos_user.user_manager'))));
-        $instance->addXmlMapping('/opt/lampp/htdocs/www/LiveconV2.0/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/DependencyInjection/Compiler/../../Resources/config/validation/orm.xml');
+        $instance->addXmlMapping('/home/vinz/projets/Live-con.comV2/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/DependencyInjection/Compiler/../../Resources/config/validation/orm.xml');
 
         return $instance;
     }
@@ -5545,7 +5545,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getAssetic_AssetFactoryService()
     {
-        $this->services['assetic.asset_factory'] = $instance = new \Symfony\Bundle\AsseticBundle\Factory\AssetFactory($this->get('kernel'), $this, $this->getParameterBag(), '/opt/lampp/htdocs/www/LiveconV2.0/app/../web', true);
+        $this->services['assetic.asset_factory'] = $instance = new \Symfony\Bundle\AsseticBundle\Factory\AssetFactory($this->get('kernel'), $this, $this->getParameterBag(), '/home/vinz/projets/Live-con.comV2/app/../web', true);
 
         $instance->addWorker(new \Symfony\Bundle\AsseticBundle\Factory\Worker\UseControllerWorker());
 
@@ -5566,7 +5566,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getAssetic_CacheService()
     {
-        return $this->services['assetic.cache'] = new \Assetic\Cache\FilesystemCache('/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/assetic/assets');
+        return $this->services['assetic.cache'] = new \Assetic\Cache\FilesystemCache('/home/vinz/projets/Live-con.comV2/app/cache/dev/assetic/assets');
     }
 
     /**
@@ -5796,7 +5796,7 @@ class appDevDebugProjectContainer extends Container
     {
         $a = $this->get('hwi_oauth.user_checker');
 
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53d3c1e350520'), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53d3c1e350520'), 2 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53d3c1e350520'), 3 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53d3c1e350520'), 4 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53d3c1e350520'), 5 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53d3c1e350520'), 6 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53d3c1e350520'), 7 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('fos_user.user_manager'), $a, 'main', $this->get('security.encoder_factory'), true), 8 => new \HWI\Bundle\OAuthBundle\Security\Core\Authentication\Provider\OAuthProvider($this->get('my_user_provider'), $this->get('hwi_oauth.resource_ownermap.main'), $a), 9 => new \Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider($a, 'ThisTokenIsNotSoSecretChangeIt', 'main')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53d3fb3900683'), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53d3fb3900683'), 2 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53d3fb3900683'), 3 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53d3fb3900683'), 4 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53d3fb3900683'), 5 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53d3fb3900683'), 6 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('53d3fb3900683'), 7 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('fos_user.user_manager'), $a, 'main', $this->get('security.encoder_factory'), true), 8 => new \HWI\Bundle\OAuthBundle\Security\Core\Authentication\Provider\OAuthProvider($this->get('my_user_provider'), $this->get('hwi_oauth.resource_ownermap.main'), $a), 9 => new \Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider($a, 'ThisTokenIsNotSoSecretChangeIt', 'main')), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 
@@ -5868,7 +5868,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Extra_MetadataFactoryService()
     {
-        $this->services['security.extra.metadata_factory'] = $instance = new \Metadata\MetadataFactory(new \Metadata\Driver\LazyLoadingDriver($this, 'security.extra.metadata_driver'), new \Metadata\Cache\FileCache('/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/jms_security', true));
+        $this->services['security.extra.metadata_factory'] = $instance = new \Metadata\MetadataFactory(new \Metadata\Driver\LazyLoadingDriver($this, 'security.extra.metadata_driver'), new \Metadata\Cache\FileCache('/home/vinz/projets/Live-con.comV2/app/cache/dev/jms_security', true));
 
         $instance->setIncludeInterfaces(true);
 
@@ -5925,7 +5925,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getTemplating_LocatorService()
     {
-        return $this->services['templating.locator'] = new \Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator($this->get('file_locator'), '/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev');
+        return $this->services['templating.locator'] = new \Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator($this->get('file_locator'), '/home/vinz/projets/Live-con.comV2/app/cache/dev');
     }
 
     /**
@@ -5979,12 +5979,12 @@ class appDevDebugProjectContainer extends Container
     protected function getDefaultParameters()
     {
         return array(
-            'kernel.root_dir' => '/opt/lampp/htdocs/www/LiveconV2.0/app',
+            'kernel.root_dir' => '/home/vinz/projets/Live-con.comV2/app',
             'kernel.environment' => 'dev',
             'kernel.debug' => true,
             'kernel.name' => 'app',
-            'kernel.cache_dir' => '/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev',
-            'kernel.logs_dir' => '/opt/lampp/htdocs/www/LiveconV2.0/app/logs',
+            'kernel.cache_dir' => '/home/vinz/projets/Live-con.comV2/app/cache/dev',
+            'kernel.logs_dir' => '/home/vinz/projets/Live-con.comV2/app/logs',
             'kernel.bundles' => array(
                 'FrameworkBundle' => 'Symfony\\Bundle\\FrameworkBundle\\FrameworkBundle',
                 'SecurityBundle' => 'Symfony\\Bundle\\SecurityBundle\\SecurityBundle',
@@ -6118,7 +6118,7 @@ class appDevDebugProjectContainer extends Container
             'debug.errors_logger_listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\ErrorsLoggerListener',
             'debug.event_dispatcher.class' => 'Symfony\\Component\\HttpKernel\\Debug\\TraceableEventDispatcher',
             'debug.stopwatch.class' => 'Symfony\\Component\\Stopwatch\\Stopwatch',
-            'debug.container.dump' => '/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/appDevDebugProjectContainer.xml',
+            'debug.container.dump' => '/home/vinz/projets/Live-con.comV2/app/cache/dev/appDevDebugProjectContainer.xml',
             'debug.controller_resolver.class' => 'Symfony\\Component\\HttpKernel\\Controller\\TraceableControllerResolver',
             'debug.debug_handlers_listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\DebugHandlersListener',
             'kernel.secret' => 'ThisTokenIsNotSoSecretChangeIt',
@@ -6144,7 +6144,7 @@ class appDevDebugProjectContainer extends Container
             'session.storage.options' => array(
                 'gc_probability' => 1,
             ),
-            'session.save_path' => '/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/sessions',
+            'session.save_path' => '/home/vinz/projets/Live-con.comV2/app/cache/dev/sessions',
             'session.metadata.update_threshold' => '0',
             'security.secure_random.class' => 'Symfony\\Component\\Security\\Core\\Util\\SecureRandom',
             'form.resolved_type_factory.class' => 'Symfony\\Component\\Form\\ResolvedFormTypeFactory',
@@ -6219,7 +6219,7 @@ class appDevDebugProjectContainer extends Container
             'data_collector.form.extractor.class' => 'Symfony\\Component\\Form\\Extension\\DataCollector\\FormDataExtractor',
             'profiler_listener.only_exceptions' => false,
             'profiler_listener.only_master_requests' => false,
-            'profiler.storage.dsn' => 'file:/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/profiler',
+            'profiler.storage.dsn' => 'file:/home/vinz/projets/Live-con.comV2/app/cache/dev/profiler',
             'profiler.storage.username' => '',
             'profiler.storage.password' => '',
             'profiler.storage.lifetime' => 86400,
@@ -6243,7 +6243,7 @@ class appDevDebugProjectContainer extends Container
             'router.request_context.host' => 'localhost',
             'router.request_context.scheme' => 'http',
             'router.request_context.base_url' => '',
-            'router.resource' => '/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/assetic/routing.yml',
+            'router.resource' => '/home/vinz/projets/Live-con.comV2/app/cache/dev/assetic/routing.yml',
             'router.cache_class_prefix' => 'appDev',
             'request_listener.http_port' => 80,
             'request_listener.https_port' => 443,
@@ -6381,7 +6381,7 @@ class appDevDebugProjectContainer extends Container
                 'exception_controller' => 'twig.controller.exception:showAction',
                 'autoescape_service' => NULL,
                 'autoescape_service_method' => NULL,
-                'cache' => '/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig',
+                'cache' => '/home/vinz/projets/Live-con.comV2/app/cache/dev/twig',
                 'charset' => 'UTF-8',
                 'paths' => array(
 
@@ -6482,7 +6482,7 @@ class appDevDebugProjectContainer extends Container
             'assetic.node.paths' => array(
 
             ),
-            'assetic.cache_dir' => '/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/assetic',
+            'assetic.cache_dir' => '/home/vinz/projets/Live-con.comV2/app/cache/dev/assetic',
             'assetic.bundles' => array(
 
             ),
@@ -6494,8 +6494,8 @@ class appDevDebugProjectContainer extends Container
             'assetic.debug' => true,
             'assetic.use_controller' => true,
             'assetic.enable_profiler' => false,
-            'assetic.read_from' => '/opt/lampp/htdocs/www/LiveconV2.0/app/../web',
-            'assetic.write_to' => '/opt/lampp/htdocs/www/LiveconV2.0/app/../web',
+            'assetic.read_from' => '/home/vinz/projets/Live-con.comV2/app/../web',
+            'assetic.write_to' => '/home/vinz/projets/Live-con.comV2/app/../web',
             'assetic.variables' => array(
 
             ),
@@ -6577,7 +6577,7 @@ class appDevDebugProjectContainer extends Container
             'doctrine.orm.second_level_cache.cache_configuration.class' => 'Doctrine\\ORM\\Cache\\CacheConfiguration',
             'doctrine.orm.second_level_cache.regions_configuration.class' => 'Doctrine\\ORM\\Cache\\RegionsConfiguration',
             'doctrine.orm.auto_generate_proxy_classes' => true,
-            'doctrine.orm.proxy_dir' => '/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/doctrine/orm/Proxies',
+            'doctrine.orm.proxy_dir' => '/home/vinz/projets/Live-con.comV2/app/cache/dev/doctrine/orm/Proxies',
             'doctrine.orm.proxy_namespace' => 'Proxies',
             'sensio_framework_extra.view.guesser.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Templating\\TemplateGuesser',
             'sensio_framework_extra.controller.listener.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\ControllerListener',
@@ -6588,7 +6588,7 @@ class appDevDebugProjectContainer extends Container
             'sensio_framework_extra.converter.manager.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Request\\ParamConverter\\ParamConverterManager',
             'sensio_framework_extra.converter.doctrine.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Request\\ParamConverter\\DoctrineParamConverter',
             'sensio_framework_extra.converter.datetime.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Request\\ParamConverter\\DateTimeParamConverter',
-            'jms_aop.cache_dir' => '/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/jms_aop',
+            'jms_aop.cache_dir' => '/home/vinz/projets/Live-con.comV2/app/cache/dev/jms_aop',
             'jms_aop.interceptor_loader.class' => 'JMS\\AopBundle\\Aop\\InterceptorLoader',
             'jms_di_extra.metadata.driver.annotation_driver.class' => 'JMS\\DiExtraBundle\\Metadata\\Driver\\AnnotationDriver',
             'jms_di_extra.metadata.driver.configured_controller_injections.class' => 'JMS\\DiExtraBundle\\Metadata\\Driver\\ConfiguredControllerInjectionsDriver',
@@ -6605,14 +6605,14 @@ class appDevDebugProjectContainer extends Container
             'jms_di_extra.directories' => array(
 
             ),
-            'jms_di_extra.cache_dir' => '/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/jms_diextra',
+            'jms_di_extra.cache_dir' => '/home/vinz/projets/Live-con.comV2/app/cache/dev/jms_diextra',
             'jms_di_extra.disable_grep' => false,
             'jms_di_extra.doctrine_integration' => true,
             'jms_di_extra.cache_warmer.controller_file_blacklist' => array(
 
             ),
-            'jms_di_extra.doctrine_integration.entity_manager.file' => '/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/jms_diextra/doctrine/EntityManager_53d3c1e36727b.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager53d3c1e36727b_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => '/home/vinz/projets/Live-con.comV2/app/cache/dev/jms_diextra/doctrine/EntityManager_53d3fb391f5e3.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager53d3fb391f5e3_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'security.secured_services' => array(
 
             ),
@@ -6634,7 +6634,7 @@ class appDevDebugProjectContainer extends Container
             'security.extra.annotation_driver.class' => 'JMS\\SecurityExtraBundle\\Metadata\\Driver\\AnnotationDriver',
             'security.extra.file_cache.class' => 'Metadata\\Cache\\FileCache',
             'security.access.secure_all_services' => false,
-            'security.extra.cache_dir' => '/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/jms_security',
+            'security.extra.cache_dir' => '/home/vinz/projets/Live-con.comV2/app/cache/dev/jms_security',
             'security.acl.permission_evaluator.class' => 'JMS\\SecurityExtraBundle\\Security\\Acl\\Expression\\PermissionEvaluator',
             'security.acl.has_permission_compiler.class' => 'JMS\\SecurityExtraBundle\\Security\\Acl\\Expression\\HasPermissionFunctionCompiler',
             'security.expressions.voter.class' => 'JMS\\SecurityExtraBundle\\Security\\Authorization\\Expression\\LazyLoadingExpressionVoter',
@@ -6853,14 +6853,14 @@ class appDevDebugProjectContainer extends Container
                 'length' => 5,
                 'width' => 130,
                 'height' => 50,
-                'font' => '/opt/lampp/htdocs/www/LiveconV2.0/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/DependencyInjection/../Generator/Font/captcha.ttf',
+                'font' => '/home/vinz/projets/Live-con.comV2/vendor/gregwar/captcha-bundle/Gregwar/CaptchaBundle/DependencyInjection/../Generator/Font/captcha.ttf',
                 'keep_value' => false,
                 'charset' => 'abcdefhjkmnprstuvwxyz23456789',
                 'as_file' => false,
                 'as_url' => false,
                 'reload' => false,
                 'image_folder' => 'captcha',
-                'web_path' => '/opt/lampp/htdocs/www/LiveconV2.0/app/../web',
+                'web_path' => '/home/vinz/projets/Live-con.comV2/app/../web',
                 'gc_freq' => 100,
                 'expiration' => 60,
                 'quality' => 30,
@@ -6881,7 +6881,7 @@ class appDevDebugProjectContainer extends Container
                 'disabled' => false,
             ),
             'gregwar_captcha.config.image_folder' => 'captcha',
-            'gregwar_captcha.config.web_path' => '/opt/lampp/htdocs/www/LiveconV2.0/app/../web',
+            'gregwar_captcha.config.web_path' => '/home/vinz/projets/Live-con.comV2/app/../web',
             'gregwar_captcha.config.gc_freq' => 100,
             'gregwar_captcha.config.expiration' => 60,
             'gregwar_captcha.config.whitelist_key' => 'captcha_whitelist_key',
@@ -7029,7 +7029,7 @@ class appDevDebugProjectContainer extends Container
             'fos_rest.request.param_fetcher.reader.class' => 'FOS\\RestBundle\\Request\\ParamReader',
             'fos_rest.form.extension.csrf_disable.class' => 'FOS\\RestBundle\\Form\\Extension\\DisableCSRFExtension',
             'fos_rest.disable_csrf_role' => 'ROLE_API',
-            'fos_rest.cache_dir' => '/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/fos_rest',
+            'fos_rest.cache_dir' => '/home/vinz/projets/Live-con.comV2/app/cache/dev/fos_rest',
             'fos_rest.serializer.serialize_null' => false,
             'fos_rest.formats' => array(
                 'json' => false,

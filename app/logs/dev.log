@@ -2955,3 +2955,6 @@
 [2014-07-26 17:36:44] doctrine.DEBUG: ALTER TABLE main_event_settings DROP FOREIGN KEY FK_2DA5025F47F967DA [] []
 [2014-07-26 17:36:44] doctrine.DEBUG: ALTER TABLE main_event_settings ADD CONSTRAINT FK_2DA5025F47F967DA FOREIGN KEY (mainEvent) REFERENCES vevent (id) ON DELETE CASCADE [] []
 [2014-07-26 17:36:45] event.DEBUG: Notified event "console.terminate" to listener "Symfony\Bundle\SwiftmailerBundle\EventListener\EmailSenderListener::onTerminate". [] []
+[2014-07-26 21:02:16] event.DEBUG: Notified event "console.terminate" to listener "Symfony\Bundle\SwiftmailerBundle\EventListener\EmailSenderListener::onTerminate". [] []
+[2014-07-26 21:02:19] event.DEBUG: Notified event "console.terminate" to listener "Symfony\Bundle\SwiftmailerBundle\EventListener\EmailSenderListener::onTerminate". [] []
+[2014-07-26 21:06:57] event.DEBUG: Notified event "console.terminate" to listener "Symfony\Bundle\SwiftmailerBundle\EventListener\EmailSenderListener::onTerminate". [] []

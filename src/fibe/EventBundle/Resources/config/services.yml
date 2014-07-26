@@ -1,0 +1,16 @@
+services:
+    mainEventService:
+        class:  fibe\EventBundle\Services\MainEventService
+        arguments: ["@doctrine.orm.entity_manager"]
+
+idci_exporter:
+    entities:
+        MainEvent:
+            class: "fibe\\Bundle\\EventBundle\\Entity\\MainEvent"
+            formats:
+                xml:
+                    transformer:
+                        service: "idci_exporter.transformer_twig"
+                        options: 
+                            template_name_format: "export.xml.twig"
+
