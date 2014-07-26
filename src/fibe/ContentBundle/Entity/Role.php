@@ -2,18 +2,17 @@
 namespace fibe\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use fibe\EventBundle\Entity\MainEvent;
 use fibe\EventBundle\Entity\VEvent;
-use Symfony\Component\Validator\Constraints as Assert;
 
 use fibe\CommunityBundle\Entity\Person;
 use fibe\ContentBundle\Entity\RoleType;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
- * This entity define relation between person and an event
- *
+ * The Role entity
  *
  * @ORM\Table(name="role")
  * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\RoleRepository")
@@ -36,7 +35,8 @@ class Role
   private $id;
 
   /**
-   * Person
+   * Person : the person who has this role
+   *
    * @ORM\ManyToOne(targetEntity="Person", inversedBy="roles")
    * @Assert\NotBlank(message="You have to choose a Person")
    *
@@ -44,8 +44,8 @@ class Role
   private $person;
 
   /**
-   * VEvent
-   * Persons related to an event
+   * VEvent : Persons related to an event
+   *
    * @ORM\ManyToOne(targetEntity="VEvent", inversedBy="roles")
    * @ORM\JoinColumn(name="vevent_id", referencedColumnName="id")
    * @Assert\NotBlank(message="You have to choose an event")
@@ -54,16 +54,18 @@ class Role
   private $VEvent;
 
   /**
+   * The RoleType associated
+   *
    * @ORM\ManyToOne(targetEntity="RoleType", inversedBy="roles")
-   * @Assert\NotBlank(message="You have to choose an type")
+   * @Assert\NotBlank(message="You have to choose a type")
    */
   private $type;
 
   /**
+   * The mainEvent associated
    *
    * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="roles", cascade={"persist"})
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
-   *
    */
   private $mainEvent;
 

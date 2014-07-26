@@ -4,11 +4,15 @@ namespace fibe\ContentBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use fibe\EventBundle\Entity\VEvent;
-use fibe\EventBundle\Entity\MainEvent;
+
 use Symfony\Component\Validator\Constraints as Assert;
 
+use fibe\EventBundle\Entity\VEvent;
+use fibe\EventBundle\Entity\MainEvent;
+
 /**
+ * Location entity
+ *
  * @ORM\Table(name="location")
  * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\LocationRepository")
  */

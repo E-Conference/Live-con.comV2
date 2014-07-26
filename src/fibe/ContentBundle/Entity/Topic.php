@@ -14,7 +14,6 @@ use fibe\ContentBundle\Util\StringTools;
  * @ORM\Table(name="topic")
  * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\TopicRepository")
  * @ORM\HasLifecycleCallbacks
- *
  */
 class Topic
 {

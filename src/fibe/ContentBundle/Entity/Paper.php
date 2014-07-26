@@ -6,14 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use fibe\EventBundle\Entity\MainEvent;
+use fibe\EventBundle\Entity\VEvent;
 use fibe\CommunityBundle\Entity\Person;
 use fibe\ContentBundle\Entity\Topic;
-use fibe\EventBundle\Entity\VEvent;
 use fibe\ContentBundle\Util\StringTools;
 
 /**
- * This entity define a paper of a conference
- *
+ * Paper entity
  *
  * @ORM\Table(name="paper")
  * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\PaperRepository")
@@ -45,15 +44,14 @@ class Paper
   private $abstract;
 
   /**
-   * url
+   * Url for the paper
    *
    * @ORM\Column(type="string", nullable=true)
    */
   private $url;
 
   /**
-   * authors
-   * Persons related to an event
+   * Authors : Persons related to an event
    *
    * @ORM\ManyToMany(targetEntity="Person", inversedBy="paper", cascade={"persist", "merge"})
    * @ORM\JoinTable(
@@ -63,21 +61,21 @@ class Paper
   protected $authors;
 
   /**
-   * publisher
+   * The label of the publisher
    *
    * @ORM\Column(type="string", nullable=true, name="publisher")
    */
   private $publisher;
 
   /**
-   * publishDate
+   * The date of the publication
    *
    * @ORM\Column(type="string", nullable=true, name="publishDate")
    */
   private $publishDate;
 
   /**
-   * topic(topics)
+   * The topics of the paper
    *
    * @ORM\ManyToMany(targetEntity="Topic", inversedBy="paper", cascade={"persist"})
    * @ORM\JoinTable(name="paper_topic",
@@ -87,8 +85,7 @@ class Paper
   protected $topics;
 
   /**
-   * 
-   * Events related to an paper
+   * Events related to the paper
    *
    * @ORM\ManyToMany(targetEntity="VEvent", mappedBy="paper", cascade={"persist"})
    */
@@ -130,6 +127,7 @@ class Paper
 
   /**
    * Slugify
+   *
    * @ORM\PrePersist()
    */
   public function slugify()

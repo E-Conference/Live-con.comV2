@@ -4,17 +4,14 @@ namespace fibe\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use fibe\EventBundle\Entity\VEvent;
 use fibe\ContentBundle\Entity\Location;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-
-
 /**
- *
- *
  * This class define an Equipment for a location.
+ *
  * @ORM\Table(name="equipment")
  * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\EquipmentRepository")
  * @ORM\HasLifecycleCallbacks

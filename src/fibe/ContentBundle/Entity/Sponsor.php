@@ -35,6 +35,8 @@ class Sponsor
   protected $label;
 
   /**
+   * The name of the logo file
+   *
    * @var UploadedFile
    * @Assert\File(maxSize="2M",
    * mimeTypes = {"image/jpeg", "image/png", "image/gif", "image/jpg"},
@@ -43,6 +45,8 @@ class Sponsor
   private $logo;
 
   /**
+   * The path of the logo file
+   *
    * @var String
    * @ORM\Column(name="logoPath", type="string", length=255,nullable=true)
    */
@@ -54,8 +58,7 @@ class Sponsor
   protected $slug;
 
   /**
-   * company
-   *
+   * Company who is the sponsor
    *
    * @ORM\ManyToOne(targetEntity="fibe\CommunityBundle\Entity\Company", inversedBy="sponsors")
    * @ORM\JoinColumn(name="company_id", referencedColumnName="id", onDelete="Set Null")
@@ -67,13 +70,11 @@ class Sponsor
    * sponsored event
    * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\VEvent", inversedBy="sponsor", cascade={"persist"})
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
-   *
    */
   protected $event;
 
   /**
-   * Events
-   * Events related to an paper
+   * Events related to a paper
    *
    * @ORM\ManyToMany(targetEntity="VEvent", mappedBy="papers", cascade={"persist"})
    */

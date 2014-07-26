@@ -5,7 +5,6 @@ namespace fibe\ContentBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
  * This entity define a role for a person in an event
  *
@@ -24,16 +23,7 @@ class RoleType
   protected $id;
 
   /**
-   * name
-   *
-   *
-   * @ORM\Column(type="string", name="name", nullable=false)
-   */
-  protected $name;
-
-  /**
    * label
-   *
    *
    * @ORM\Column(type="string", name="label", nullable=false)
    */
@@ -106,31 +96,7 @@ class RoleType
    */
   public function __toString()
   {
-    return $this->name;
-  }
-
-  /**
-   * Set name
-   *
-   * @param string $name
-   *
-   * @return RoleType
-   */
-  public function setName($name)
-  {
-    $this->name = $name;
-
-    return $this;
-  }
-
-  /**
-   * Get name
-   *
-   * @return string
-   */
-  public function getName()
-  {
-    return $this->name;
+    return $this->label;
   }
 
   /**
