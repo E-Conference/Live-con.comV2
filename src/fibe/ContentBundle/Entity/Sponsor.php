@@ -1,20 +1,20 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Entity;
+namespace fibe\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Expose;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use fibe\Bundle\WWWConfBundle\Util\StringTools;
+use fibe\ContentBundle\Util\StringTools;
 
 
 /**
  * This entity define a sponsor
  *
  * @ORM\Table(name="sponsor")
- * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\SponsorRepository")
+ * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\SponsorRepository")
  * @ORM\HasLifecycleCallbacks
  *
  */
@@ -57,7 +57,7 @@ class Sponsor
    * company
    *
    *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Company", inversedBy="sponsors")
+   * @ORM\ManyToOne(targetEntity="fibe\CommunityBundle\Entity\Company", inversedBy="sponsors")
    * @ORM\JoinColumn(name="company_id", referencedColumnName="id", onDelete="Set Null")
    */
   protected $company;
@@ -65,7 +65,7 @@ class Sponsor
   /**
    * @TODO : manytomany with vevent
    * sponsored event
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\VEvent", inversedBy="sponsor", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\VEvent", inversedBy="sponsor", cascade={"persist"})
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    *
    */

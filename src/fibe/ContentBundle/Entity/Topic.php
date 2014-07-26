@@ -1,18 +1,18 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Entity;
+namespace fibe\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use fibe\Bundle\WWWConfBundle\Util\StringTools;
+use fibe\ContentBundle\Util\StringTools;
 
 
 /**
  * This entity define a topic
  *
  * @ORM\Table(name="topic")
- * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\TopicRepository")
+ * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\TopicRepository")
  * @ORM\HasLifecycleCallbacks
  *
  */
@@ -49,7 +49,7 @@ class Topic
   /**
    * Topics associated to this conference
    *
-   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="topics", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="topics", cascade={"persist"})
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    *
    */
@@ -136,11 +136,11 @@ class Topic
   /**
    * Add papers
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Paper $papers
+   * @param \fibe\ContentBundle\Entity\Paper $papers
    *
    * @return Topic
    */
-  public function addPaper(\fibe\Bundle\WWWConfBundle\Entity\Paper $papers)
+  public function addPaper(\fibe\ContentBundle\Entity\Paper $papers)
   {
     $this->papers[] = $papers;
 
@@ -150,9 +150,9 @@ class Topic
   /**
    * Remove papers
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Paper $papers
+   * @param \fibe\ContentBundle\Entity\Paper $papers
    */
-  public function removePaper(\fibe\Bundle\WWWConfBundle\Entity\Paper $papers)
+  public function removePaper(\fibe\ContentBundle\Entity\Paper $papers)
   {
     $this->papers->removeElement($papers);
   }
@@ -170,11 +170,11 @@ class Topic
   /**
    * Add events
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $events
+   * @param \fibe\EventBundle\Entity\VEvent $events
    *
    * @return Topic
    */
-  public function addEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $events)
+  public function addEvent(\fibe\EventBundle\Entity\VEvent $events)
   {
     $this->events[] = $events;
 
@@ -184,9 +184,9 @@ class Topic
   /**
    * Remove events
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $events
+   * @param \fibe\EventBundle\Entity\VEvent $events
    */
-  public function removeEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $events)
+  public function removeEvent(\fibe\ContentBundle\Entity\VEvent $events)
   {
     $this->events->removeElement($events);
   }
@@ -228,11 +228,11 @@ class Topic
   /**
    * Set conference
    *
-   * @param \fibe\ConferenceBundle\Entity\MainEvent $conference
+   * @param \fibe\EventBundle\Entity\MainEvent $conference
    *
    * @return Topic
    */
-  public function setConference(\fibe\ConferenceBundle\Entity\MainEvent $conference = null)
+  public function setConference(\fibe\EventBundle\Entity\MainEvent $conference = null)
   {
     $this->conference = $conference;
 
@@ -242,7 +242,7 @@ class Topic
   /**
    * Get conference
    *
-   * @return \fibe\ConferenceBundle\Entity\MainEvent
+   * @return \fibe\EventBundle\Entity\MainEvent
    */
   public function getConference()
   {

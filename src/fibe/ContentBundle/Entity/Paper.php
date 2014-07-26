@@ -1,20 +1,22 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Entity;
+namespace fibe\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use fibe\ConferenceBundle\Entity\MainEvent;
-use fibe\Bundle\WWWConfBundle\Entity\VEvent;
-use fibe\Bundle\WWWConfBundle\Util\StringTools;
+use fibe\EventBundle\Entity\MainEvent;
+use fibe\CommunityBundle\Entity\Person;
+use fibe\ContentBundle\Entity\Topic;
+use fibe\EventBundle\Entity\VEvent;
+use fibe\ContentBundle\Util\StringTools;
 
 /**
  * This entity define a paper of a conference
  *
  *
  * @ORM\Table(name="paper")
- * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\PaperRepository")
+ * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\PaperRepository")
  * @ORM\HasLifecycleCallbacks
  *
  */
@@ -53,7 +55,7 @@ class Paper
    * authors
    * Persons related to an event
    *
-   * @ORM\ManyToMany(targetEntity="Person", inversedBy="papers", cascade={"persist", "merge"})
+   * @ORM\ManyToMany(targetEntity="Person", inversedBy="paper", cascade={"persist", "merge"})
    * @ORM\JoinTable(
    *     joinColumns={@ORM\JoinColumn(name="paper_id", referencedColumnName="id", onDelete="Cascade")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id", onDelete="Cascade")})
@@ -77,7 +79,7 @@ class Paper
   /**
    * topic(topics)
    *
-   * @ORM\ManyToMany(targetEntity="Topic", inversedBy="papers", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="Topic", inversedBy="paper", cascade={"persist"})
    * @ORM\JoinTable(name="paper_topic",
    *     joinColumns={@ORM\JoinColumn(name="paper_id", referencedColumnName="id", onDelete="Cascade")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="topic_id", referencedColumnName="id", onDelete="Cascade")})
@@ -88,14 +90,14 @@ class Paper
    * 
    * Events related to an paper
    *
-   * @ORM\ManyToMany(targetEntity="VEvent", mappedBy="papers", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="VEvent", mappedBy="paper", cascade={"persist"})
    */
   protected $events;
 
   /**
    *  MainEvent associated to this paper
    *
-   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="papers", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="paper", cascade={"persist"})
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    *
    */
@@ -151,7 +153,7 @@ class Paper
    *
    * @param string $slug
    *
-   * @return ConfEvent
+   * @return string
    */
   public function setSlug($slug)
   {
@@ -305,11 +307,11 @@ class Paper
   /**
    * Add authors
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Person $authors
+   * @param \fibe\CommunityBundle\Entity\Person $authors
    *
    * @return Paper
    */
-  public function addAuthor(\fibe\Bundle\WWWConfBundle\Entity\Person $authors)
+  public function addAuthor(\fibe\CommunityBundle\Entity\Person $authors)
   {
     $this->authors[] = $authors;
 
@@ -319,9 +321,9 @@ class Paper
   /**
    * Remove authors
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Person $authors
+   * @param \fibe\CommunityBundle\Entity\Person $authors
    */
-  public function removeAuthor(\fibe\Bundle\WWWConfBundle\Entity\Person $authors)
+  public function removeAuthor(\fibe\Bundle\CommunityBundle\Entity\Person $authors)
   {
     $this->authors->removeElement($authors);
   }
@@ -339,11 +341,11 @@ class Paper
   /**
    * Add topics
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Topic $topics
+   * @param \fibe\ContentBundle\Entity\Topic $topics
    *
    * @return Paper
    */
-  public function addTopic(\fibe\Bundle\WWWConfBundle\Entity\Topic $topics)
+  public function addTopic(\fibe\ContentBundle\Entity\Topic $topics)
   {
     $this->topics[] = $topics;
 
@@ -353,9 +355,9 @@ class Paper
   /**
    * Remove topics
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Topic $topics
+   * @param \fibe\ContentBundle\Entity\Topic $topics
    */
-  public function removeTopic(\fibe\Bundle\WWWConfBundle\Entity\Topic $topics)
+  public function removeTopic(\fibe\ContentBundle\Entity\Topic $topics)
   {
     $this->topics->removeElement($topics);
   }
@@ -373,11 +375,11 @@ class Paper
   /**
    * Add events
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $events
+   * @param \fibe\EventBundle\Entity\VEvent $events
    *
    * @return Paper
    */
-  public function addEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $events)
+  public function addEvent(\fibe\EventBundle\Entity\VEvent $events)
   {
     $this->events[] = $events;
 
@@ -387,9 +389,9 @@ class Paper
   /**
    * Remove events
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $events
+   * @param \fibe\EventBundle\Entity\VEvent $events
    */
-  public function removeEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $events)
+  public function removeEvent(\fibe\EventBundle\Entity\VEvent $events)
   {
     $this->events->removeElement($events);
   }
@@ -407,11 +409,11 @@ class Paper
   /**
    * Set conference
    *
-   * @param \fibe\ConferenceBundle\Entity\MainEvent $conference
+   * @param \fibe\EventBundle\Entity\MainEvent $conference
    *
    * @return Paper
    */
-  public function setConference(\fibe\ConferenceBundle\Entity\MainEvent $conference = null)
+  public function setConference(\fibe\EventBundle\Entity\MainEvent $conference = null)
   {
     $this->conference = $conference;
 
@@ -421,7 +423,7 @@ class Paper
   /**
    * Get conference
    *
-   * @return \fibe\ConferenceBundle\Entity\MainEvent
+   * @return \fibe\EventBundle\Entity\MainEvent
    */
   public function getConference()
   {

@@ -1,15 +1,16 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Entity;
+namespace fibe\ContentBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use fibe\ConferenceBundle\Entity\MainEvent;
+use fibe\WWWConfBundle\Entity\VEvent;
+use fibe\EventBundle\Entity\MainEvent;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="location")
- * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\LocationRepository")
+ * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\LocationRepository")
  */
 class Location
 {
@@ -35,7 +36,7 @@ class Location
   /**
    * Equipments who are in the location
    *
-   * @ORM\ManyToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Equipment")
+   * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Equipment")
    */
   protected $equipments;
 
@@ -73,7 +74,7 @@ class Location
    *
    * mainEvent
    *
-   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="locations", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="locations", cascade={"persist"})
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    */
   protected $mainEvent;
@@ -81,7 +82,7 @@ class Location
   /**
    * Events
    *
-   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Event", mappedBy="location")
+   * @ORM\OneToMany(targetEntity="fibe\EventBundle\Entity\VEvent", mappedBy="location")
    */
   protected $events;
 
@@ -246,11 +247,11 @@ class Location
   /**
    * Add event
    *
-   * @param Event $event
+   * @param VEvent $event
    *
    * @return Location
    */
-  public function addEvent(Event $event)
+  public function addEvent(VEvent $event)
   {
     $this->events[] = $event;
 
@@ -260,9 +261,9 @@ class Location
   /**
    * Remove event
    *
-   * @param Event $event
+   * @param VEvent $event
    */
-  public function removeEvent(Event $event)
+  public function removeEvent(VEvent $event)
   {
     $this->events->removeElement($event);
   }
@@ -276,7 +277,6 @@ class Location
   {
     return $this->events;
   }
-/*** @TODO EVENT ===> A RELIER à DES Event **/
 
   /**
    * Add Equipment

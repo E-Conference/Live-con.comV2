@@ -1,13 +1,13 @@
 <?php
-namespace fibe\Bundle\WWWConfBundle\Entity;
+namespace fibe\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use fibe\ConferenceBundle\Entity\MainEvent;
-use fibe\Bundle\WWWConfBundle\Entity\VEvent;
+use fibe\EventBundle\Entity\MainEvent;
+use fibe\EventBundle\Entity\VEvent;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use fibe\Bundle\WWWConfBundle\Entity\Person;
-use fibe\Bundle\WWWConfBundle\Entity\RoleType;
+use fibe\CommunityBundle\Entity\Person;
+use fibe\ContentBundle\Entity\RoleType;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
@@ -16,7 +16,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  *
  * @ORM\Table(name="role")
- * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\RoleRepository")
+ * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\RoleRepository")
  *
  *  Don't seem to work with ajax form
  * @UniqueEntity(
@@ -61,7 +61,7 @@ class Role
 
   /**
    *
-   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="roles", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="roles", cascade={"persist"})
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    *
    */
@@ -80,11 +80,11 @@ class Role
   /**
    * Set person
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Person $person
+   * @param \fibe\CommunityBundle\Entity\Person $person
    *
    * @return Role
    */
-  public function setPerson(\fibe\Bundle\WWWConfBundle\Entity\Person $person = null)
+  public function setPerson(\fibe\CommunityBundle\Entity\Person $person = null)
   {
     $this->person = $person;
 
@@ -94,7 +94,7 @@ class Role
   /**
    * Get person
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\Person
+   * @return \fibe\CommunityBundle\Entity\Person
    */
   public function getPerson()
   {

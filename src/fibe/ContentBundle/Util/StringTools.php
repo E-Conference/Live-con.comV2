@@ -7,7 +7,7 @@
  *
  */
 
-namespace fibe\Bundle\WWWConfBundle\Util;
+namespace fibe\ContentBundle\Util;
 
 class StringTools
 {

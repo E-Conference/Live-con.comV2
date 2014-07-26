@@ -1,6 +1,6 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Entity;
+namespace fibe\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  *
  * @ORM\Table(name="role_type")
- * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\RoleTypeRepository")
+ * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\RoleTypeRepository")
  *
  */
 class RoleType
@@ -68,11 +68,11 @@ class RoleType
   /**
    * Add role
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Role $role
+   * @param \fibe\ContentBundle\Entity\Role $role
    *
    * @return RoleType
    */
-  public function addRole(\fibe\Bundle\WWWConfBundle\Entity\Role $role)
+  public function addRole(\fibe\ContentBundle\Entity\Role $role)
   {
     $this->role[] = $role;
 
@@ -82,9 +82,9 @@ class RoleType
   /**
    * Remove role
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Role $role
+   * @param \fibe\ContentBundle\Entity\Role $role
    */
-  public function removeRole(\fibe\Bundle\WWWConfBundle\Entity\Role $role)
+  public function removeRole(\fibe\ContentBundle\Entity\Role $role)
   {
     $this->role->removeElement($role);
   }
