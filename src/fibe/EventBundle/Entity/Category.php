@@ -26,6 +26,11 @@ class Category
   protected $label;
 
   /**
+   * @ORM\Column(type="integer")
+   */
+  protected $level;
+
+  /**
    * @ORM\Column(type="string", length=128)
    */
   protected $slug;

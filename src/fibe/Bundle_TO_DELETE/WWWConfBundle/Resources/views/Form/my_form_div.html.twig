@@ -27,7 +27,7 @@
 {% endblock form_widget_datetimepicker %}
 
 
-{% block form_widget_compound %}
+{% block form_widget_compound
   {% spaceless %}
     <div {{ block('widget_container_attributes') }}>
       {% if form.parent is empty %}

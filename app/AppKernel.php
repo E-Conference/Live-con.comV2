@@ -21,7 +21,6 @@ class AppKernel extends Kernel
       new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
       new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
       new IDCI\Bundle\ExporterBundle\IDCIExporterBundle(),
-      new fibe\Bundle\WWWConfBundle\fibeWWWConfBundle(),
       new fibe\SecurityBundle\fibeSecurityBundle(),
       new fibe\HomePageBundle\fibeHomePageBundle(),
       new fibe\RestBundle\fibeRestBundle(),
@@ -36,6 +35,7 @@ class AppKernel extends Kernel
       new fibe\EventBundle\fibeEventBundle(),
       new fibe\ContentBundle\fibeContentBundle(),
       new fibe\CommunityBundle\fibeCommunityBundle(),
+
     );
 
     if (in_array($this->getEnvironment(), array('dev', 'test')))
