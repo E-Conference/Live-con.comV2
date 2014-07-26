@@ -7,7 +7,7 @@
  *
  */
 
-namespace fibe\Bundle\WWWConfBundle\Form\EventListener;
+namespace fibe\EventBundle\Form\EventListener;
 
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;

@@ -3,97 +3,84 @@
 namespace fibe\EventBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use fibe\Bundle\WWWConfBundle\Entity\Company;
-use fibe\Bundle\WWWConfBundle\Entity\Location;
-use fibe\Bundle\WWWConfBundle\Entity\Module;
-use fibe\Bundle\WWWConfBundle\Entity\Paper;
-use fibe\Bundle\WWWConfBundle\Entity\Person;
-use fibe\Bundle\WWWConfBundle\Entity\Sponsor;
-use fibe\Bundle\WWWConfBundle\Entity\Topic;
-use fibe\Bundle\WWWConfBundle\Entity\VEvent;
+
+use fibe\EventBundle\Entity\VEvent;
 use JMS\Serializer\Annotation\Expose;
+
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use fibe\Bundle\WWWConfBundle\Util\StringTools;
+use fibe\EventBundle\Util\StringTools;
 
 /**
  * Main Event entity
  *
  * @ORM\Entity
- * @ORM\Table(name="main_event")
- * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\MainEventRepository")
+ * @ORM\Table(name="mainEvent")
+ * @ORM\Entity(repositoryClass="fibe\EventBundle\Repository\MainEventRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class MainEvent extends VEvent
 {
 
   /**
-   * Mobile app configurations
-   *
-   * @ORM\OneToOne(targetEntity="fibe\MobileAppBundle\Entity\MobileAppConfig",cascade={"persist"})
-   */
-  private $appConfig;
-
-  /**
-   * @ORM\OneToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Module",cascade={ "remove"})
+   * @ORM\OneToOne(targetEntity="fibe\ContentBundle\Entity\Module",cascade={ "remove"})
    */
   private $module;
 
   /**
    * Events
    *
-   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Event", mappedBy="mainEvent",cascade={"persist", "remove"})
+   * @ORM\OneToMany(targetEntity="fibe\EventBundle\Entity\Event", mappedBy="mainEvent",cascade={"persist", "remove"})
    */
   private $events;
 
   /**
    * Locations
    *
-   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Location", mappedBy="mainEvent",cascade={"persist", "remove"})
+   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Location", mappedBy="mainEvent",cascade={"persist", "remove"})
    */
   private $locations;
-
 
   /**
    * Papers
    *
-   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Paper", mappedBy="mainEvent",cascade={"persist", "remove"})
+   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Paper", mappedBy="mainEvent",cascade={"persist", "remove"})
    */
   private $papers;
 
   /**
    * Roles
    *
-   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Role", mappedBy="mainEvent",cascade={"persist", "remove"})
+   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Role", mappedBy="mainEvent",cascade={"persist", "remove"})
    */
   private $roles;
 
   /**
    * Companies
    *
-   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Company", mappedBy="mainEvent",cascade={"persist", "remove"})
+   * @ORM\OneToMany(targetEntity="fibe\CommunityBundle\Entity\Company", mappedBy="mainEvent",cascade={"persist", "remove"})
    */
   private $companies;
 
   /**
    * Topics
    *
-   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Topic", mappedBy="mainEvent",cascade={"persist", "remove"})
+   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Topic", mappedBy="mainEvent",cascade={"persist", "remove"})
    */
   private $topics;
 
   /**
    * Sponsors
    *
-   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Sponsor", mappedBy="mainEvent",cascade={"persist", "remove"})
+   * @ORM\OneToMany(targetEntity="fibe\CommunityBundle\Entity\Sponsor", mappedBy="mainEvent",cascade={"persist", "remove"})
    */
   private $sponsors;
 
   /**
    *
-   * @ORM\ManyToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Person",  mappedBy="mainEvents", cascade={"persist","merge","remove"})
+   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\Person",  mappedBy="mainEvents", cascade={"persist","merge","remove"})
    * @Expose
    */
   private $persons;
@@ -108,7 +95,7 @@ class MainEvent extends VEvent
   /**
    * mappingFiles
    *
-   * @ORM\OneToMany(targetEntity="fibe\ConferenceBundle\Entity\MainEventSettings", mappedBy="mainEvent",cascade={"persist", "remove"})
+   * @ORM\OneToMany(targetEntity="fibe\EventBundle\Entity\MainEventSettings", mappedBy="mainEvent",cascade={"persist", "remove"})
    */
   private $settings;
 
@@ -453,7 +440,7 @@ class MainEvent extends VEvent
    * Add sponsors
    *
    * @param Sponsor $sponsor
-   * @internal param \fibe\Bundle\WWWConfBundle\Entity\Sponsor $sponsors
+   * @internal param \fibe\EventBundle\Entity\Sponsor $sponsors
    *
    * @return $this
    */
@@ -467,7 +454,7 @@ class MainEvent extends VEvent
   /**
    * Remove sponsors
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Sponsor $sponsor
+   * @param \fibe\EventBundle\Entity\Sponsor $sponsor
    */
   public function removeSponsor(Sponsor $sponsor)
   {

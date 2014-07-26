@@ -1,15 +1,14 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Entity;
+namespace fibe\EventBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use fibe\ConferenceBundle\Entity\MainEvent;
 use fibe\Bundle\WWWConfBundle\Util\StringTools;
 
 /**
  * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\CategoryRepository")
+ * @ORM\Entity(repositoryClass="fibe\EventBundle\Repository\CategoryRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class Category
@@ -42,19 +41,14 @@ class Category
   protected $color;
 
   /**
-   * @TODO EVENT ==> A mettre en oneToMany !!!
+   * VEvents related to an category
    *
-   * @ORM\ManyToMany(targetEntity="VEvent", mappedBy="categories", cascade={"persist"})
+   * @ORM\OneToMany(targetEntity="VEvent", mappedBy="category",cascade={"persist","remove"})
+   * @ORM\JoinColumn( onDelete="CASCADE")
+   * @Expose
    */
-  private $VEvent;
+  private $VEvents;
 
-  /**
-   * @TODO EVENT ==> Lier à main event.
-   *
-   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="categories")
-   * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
-   */
-  protected $mainEvent;
 
   /**
    * toString

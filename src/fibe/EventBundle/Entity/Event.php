@@ -1,12 +1,12 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Entity;
+namespace fibe\EventBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use fibe\Bundle\WWWConfBundle\Entity\VEvent;
+use fibe\EventBundle\Entity\VEvent;
 
 
 use JMS\Serializer\Annotation\ExclusionPolicy;
@@ -23,7 +23,7 @@ use fibe\Bundle\WWWConfBundle\Util\StringTools;
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  * @ORM\Table(name="event")
- * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\EventRepository")
+ * @ORM\Entity(repositoryClass="fibe\EventBundle\Repository\EventRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class Event extends VEvent
@@ -31,7 +31,7 @@ class Event extends VEvent
   /**
    * The parent of the event
    *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Event", inversedBy="children", cascade={"persist","detach"})
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\Event", inversedBy="children", cascade={"persist","detach"})
    * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
    * @Expose
    */
@@ -40,7 +40,7 @@ class Event extends VEvent
   /**
    * The events who are children
    *
-   * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Event", mappedBy="parent", cascade={"persist"})
+   * @ORM\OneToMany(targetEntity="fibe\EventBundle\Entity\Event", mappedBy="parent", cascade={"persist"})
    * @Expose
    */
   protected $children;
@@ -257,11 +257,11 @@ class Event extends VEvent
   /**
    * Add papers
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Paper $papers
+   * @param \fibe\EventBundle\Entity\Paper $papers
    *
    * @return VEvent
    */
-  public function addPaper(\fibe\Bundle\WWWConfBundle\Entity\Paper $papers)
+  public function addPaper(\fibe\EventBundle\Entity\Paper $papers)
   {
     $this->papers[] = $papers;
 
@@ -271,9 +271,9 @@ class Event extends VEvent
   /**
    * Remove papers
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Paper $papers
+   * @param \fibe\EventBundle\Entity\Paper $papers
    */
-  public function removePaper(\fibe\Bundle\WWWConfBundle\Entity\Paper $papers)
+  public function removePaper(\fibe\EventBundle\Entity\Paper $papers)
   {
     $this->papers->removeElement($papers);
   }
@@ -291,11 +291,11 @@ class Event extends VEvent
   /**
    * Add topics
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Topic $topics
+   * @param \fibe\EventBundle\Entity\Topic $topics
    *
    * @return VEvent
    */
-  public function addTopic(\fibe\Bundle\WWWConfBundle\Entity\Topic $topics)
+  public function addTopic(\fibe\EventBundle\Entity\Topic $topics)
   {
     $this->topics[] = $topics;
 
@@ -305,9 +305,9 @@ class Event extends VEvent
   /**
    * Remove topics
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Topic $topics
+   * @param \fibe\EventBundle\Entity\Topic $topics
    */
-  public function removeTopic(\fibe\Bundle\WWWConfBundle\Entity\Topic $topics)
+  public function removeTopic(\fibe\EventBundle\Entity\Topic $topics)
   {
     $this->topics->removeElement($topics);
   }

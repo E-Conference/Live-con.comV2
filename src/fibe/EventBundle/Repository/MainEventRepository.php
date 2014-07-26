@@ -1,6 +1,6 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Repository;
+namespace fibe\EventBundle\Repository;
 
 /**
  * MainEventRepository
@@ -18,8 +18,8 @@ class MainEventRepository extends VEventRepository
    */
   public function getOrderedQueryBuilder()
   {
-    $qb = $this->createQueryBuilder('conf');
-    $qb->orderBy('conf.startAt', 'DESC');
+    $qb = $this->createQueryBuilder('me');
+    $qb->orderBy('me.startAt', 'DESC');
 
     return $qb;
   }
@@ -57,10 +57,10 @@ class MainEventRepository extends VEventRepository
    */
   public function findByName($name)
   {
-    $qb = $this->createQueryBuilder('conf');
+    $qb = $this->createQueryBuilder('me');
 
     $qb
-      ->where($qb->expr()->like('conf.summary', $qb->expr()->literal('%' . $name . '%')));
+      ->where($qb->expr()->like('me.summary', $qb->expr()->literal('%' . $name . '%')));
 
     $query = $qb->getQuery();
 
@@ -75,10 +75,10 @@ class MainEventRepository extends VEventRepository
   public function findOrderByDate()
   {
 
-    $qb = $this->createQueryBuilder('conf');
+    $qb = $this->createQueryBuilder('me');
 
     $qb
-      ->orderBy('conf.startAt', 'DESC');
+      ->orderBy('me.startAt', 'DESC');
 
     $query = $qb->getQuery();
 

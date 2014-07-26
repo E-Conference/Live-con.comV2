@@ -1,6 +1,6 @@
 <?php
 
-  namespace fibe\Bundle\WWWConfBundle\Form\Filters;
+  namespace fibe\EventBundle\Form\Filters;
 
   use Symfony\Component\Form\AbstractType;
   use Symfony\Component\Form\FormBuilderInterface;
@@ -12,7 +12,7 @@
    * @TODO comment
    *
    * Class EventFilterType
-   * @package fibe\Bundle\WWWConfBundle\Form\Filters
+   * @package fibe\EventBundle\Form\Filters
    */
   class EventFilterType extends AbstractType
   {
@@ -36,14 +36,14 @@
     {
       $builder
         ->add('summary', 'entity', array(
-          'class'    => 'fibeWWWConfBundle:ConfEvent',
+          'class'    => 'fibeEventBundle:VEvent',
           'label'    => 'Name',
           'choices'  => $this->user->getCurrentMainEvent()->getEvents()->toArray(),
           'required' => false,
           'attr'     => array('placeholder' => 'Summary')
         ))
         ->add('location', 'entity', array(
-          'class'      => 'fibeWWWConfBundle:Location',
+          'class'      => 'fibeContentBundle:Location',
           'label'      => 'Location',
           'choices'    => $this->user->getCurrentMainEvent()->getLocations()->toArray(),
           'empty_data' => null,
@@ -51,7 +51,7 @@
           'attr'       => array('placeholder' => 'Location')
         ))
         ->add('category', 'entity', array(
-          'class'         => 'fibeWWWConfBundle:Category',
+          'class'         => 'fibeEventBundle:Category',
           'label'         => 'Category',
           'query_builder' => function (EntityRepository $er)
             {
@@ -82,6 +82,6 @@
      */
     public function getName()
     {
-      return 'fibe_bundle_wwwconfbundle_confeventfiltertype';
+      return 'fibe_eventbundle_eventfiltertype';
     }
   }

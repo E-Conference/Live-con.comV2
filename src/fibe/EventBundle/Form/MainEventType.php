@@ -53,7 +53,7 @@ class MainEventType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'fibe\ConferenceBundle\Entity\MainEvent'
+            'data_class' => 'fibe\EventBundle\Entity\MainEvent'
         ));
     }
 
@@ -62,6 +62,6 @@ class MainEventType extends AbstractType
      */
     public function getName()
     {
-        return 'fibe_bundle_wwwconfbundle_mainevent';
+        return 'fibe_eventbundle_mainevent';
     }
 }

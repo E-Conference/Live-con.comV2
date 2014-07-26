@@ -1,16 +1,9 @@
 <?php
 
-/**
- *
- * @author :  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
- * @licence: GPL
- *
- */
-
-namespace fibe\Bundle\WWWConfBundle\Repository;
+namespace fibe\EventBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use fibe\Bundle\WWWConfBundle\Entity\Category;
+use fibe\EventBundle\Entity\Category;
 
 /**
  * CategoryRepository

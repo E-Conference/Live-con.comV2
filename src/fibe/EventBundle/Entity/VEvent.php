@@ -1,5 +1,5 @@
 <?php
-namespace fibe\Bundle\WWWConfBundle\Entity;
+namespace fibe\EventBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Purpose: Provide a grouping of component properties that describe
  * a schedulable element.
  *
- * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\CalendarEntityRepository")
+ * @ORM\Entity(repositoryClass="fibe\EventBundle\Repository\VEventRepository")
  * @ORM\Table(name="vevent", indexes={
  *    @ORM\Index(name="start_at_idx", columns={"start_at"})
  * })
@@ -27,7 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorMap({
  *     "Event"="Event",
- *     "MainEvent"="fibe\ConferenceBundle\Entity\MainEvent",
+ *     "MainEvent"="MainEvent",
  * })
  */
 class VEvent
@@ -74,7 +74,6 @@ class VEvent
    *
    * This property defines a short summary or subject for the
    * calendar component.
-   * !!!!!! Summary = label ?
    *
    * @ORM\Column(type="string", length=255, nullable=true)
    */
@@ -244,15 +243,23 @@ class VEvent
    * location
    *
    *
-   * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\Location", inversedBy="VEvents")
+   * @ORM\ManyToOne(targetEntity="fibe\ContentBundle\Entity\Location", inversedBy="VEvents")
    * @ORM\JoinColumn(name="location_id", referencedColumnName="id", onDelete="Set Null")
    */
   protected $location;
 
   /**
+   * Category
+   *
+   * @ORM\ManyToOne(targetEntity="Category", inversedBy="VEvents")
+   * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="Set Null")
+   */
+  protected $category;
+
+  /**
    * Persons related to an event according to a role
    *
-   * @ORM\OneToMany(targetEntity="Role", mappedBy="VEvents",cascade={"persist","remove"})
+   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Role", mappedBy="VEvents",cascade={"persist","remove"})
    * @ORM\JoinColumn( onDelete="CASCADE")
    * @Expose
    */
@@ -262,7 +269,7 @@ class VEvent
   /**
    * Sponsors related to a VEvent
    *
-   * @ORM\OneToMany(targetEntity="Sponsor", mappedBy="VEvents",cascade={"persist","remove"})
+   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Sponsor", mappedBy="VEvents",cascade={"persist","remove"})
    * @ORM\JoinColumn( onDelete="CASCADE")
    * @Expose
    */

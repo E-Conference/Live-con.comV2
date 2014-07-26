@@ -1,19 +1,12 @@
 <?php
 
-/**
- * 
- * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
- * @licence: GPL
- *
- */
-
-namespace fibe\Bundle\WWWConfBundle\Form\Type;
+namespace fibe\EventBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use fibe\Bundle\WWWConfBundle\Form\DataTransformer\ArrayToStringTransformer;
+use fibe\EventBundle\Form\DataTransformer\ArrayToStringTransformer;
 // use fibe\Bundle\WWWConfBundle\Entity\Recur;
 
 class WeekDayType extends AbstractType

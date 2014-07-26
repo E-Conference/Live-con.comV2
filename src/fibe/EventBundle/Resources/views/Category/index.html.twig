@@ -1,47 +1,33 @@
-{% extends '::base.html.twig' %}
+{% extends 'fibeWWWConfBundle::base.html.twig' %}
 
-{% block body -%}
-    <h1>Category list</h1>
+{% block title %}Categories{% endblock title %}
 
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Label</th>
-                <th>Slug</th>
-                <th>Description</th>
-                <th>Color</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('category_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.label }}</td>
-                <td>{{ entity.slug }}</td>
-                <td>{{ entity.description }}</td>
-                <td>{{ entity.color }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('category_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('category_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{% block centerPanel %}
+  {{ parent() }}
 
-        <ul>
-        <li>
-            <a href="{{ path('category_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+  <div class="row page-top-header ">
+    <div class="page-title  col-xs-5  col-sm-4 col-md-3 col-lg-2">
+      <span>Category list</span>
+      <a class="btn btn-info" href="{{ path('documentation', { 'anchor': 'Category' }) }}" target="_blank" title="Help">
+        <i class="fa fa-question"></i>
+      </a>
+    </div>
+
+    <div class=" col-xs-2 col-sm-4 col-md-6 col-lg-8">
+    </div>
+    {% if is_granted('CREATE', app.user.getCurrentConf()) %}
+      <div class="page-btn-list  col-xs-5  col-sm-4 col-md-3 col-lg-2">
+        <a class="btn btn-info btn-create create" href="{{ path('schedule_category_new') }}" title="Add a category">
+          <i class="fa fa-plus"></i> New Category
+        </a>
+      </div>
+    {% endif %}
+
+  </div>
+  <div class="row page-content">
+    <div id="category_list" class="table-responsive">
+      {% include "fibeWWWConfBundle:Category:list.html.twig" %}
+    </div>
+  </div>
+
+{% endblock %}
