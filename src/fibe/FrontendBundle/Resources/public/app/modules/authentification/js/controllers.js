@@ -1,15 +1,16 @@
 
-angular.module('authentificationApp').controller('loginCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'userFactory',
-function ($scope, $routeParams, GLOBAL_CONFIG, userFactory) {
+angular.module('authentificationApp').controller('loginCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG', 'userFactory',
+function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, userFactory) {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
-    $scope.user = {'login' : '', 'password' : ''};
+    $scope.user = {login: '', password:''};
     $scope.loginAction = function(user){
-    	debugger;
-    	userFactory.login({}, {username: user.login, password: user.password},function (user) {
-    		debugger;
-            $scope.user = user;
-           
-        });
+        userFactory.login({},{"username" : $scope.user.login, "password": $scope.user.password}, function(error, args) {$scope.success(error, args)},  function(success, args) {$scope.error(success, args)});
+    }
+    $scope.error = function(error, args){
+        $rootScope.$broadcast('AlertCtrl:addAlert', {code:'Login_error', type:'error'});
+    }
+    $scope.success = function(success){
+        $scope.$broadcast('AlertCtrl:addAlert', {code:'Login_success', type:'success'});
     }
 }]);
 

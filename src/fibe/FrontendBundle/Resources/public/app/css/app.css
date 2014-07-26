@@ -26,11 +26,22 @@ ul{
   padding-left: 0px !important;
 }
 
-
+/*************************** ALERT BOX ***************************/
+#alertBox {
+    position: fixed;
+    top: 1em;
+    right: 1em;
+    max-width: 60em;
+    max-height: 20em;
+    z-index: 3001;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
 /*************************** NAV'S***************************/
 
 
-/******************************** nav top ****************************/
+/******************************** NAV TOP ****************************/
 
 
 .navbar-fixed-top{
@@ -216,7 +227,7 @@ ul{
 }
 
 
-}
+
 
 
 

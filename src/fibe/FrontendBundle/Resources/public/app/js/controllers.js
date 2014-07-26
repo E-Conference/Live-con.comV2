@@ -5,6 +5,23 @@
 var liveconControllers = angular.module('liveconControllers', []);
 
 /*********************************** NAVS **********************************************/
+liveconControllers.controller('AlertCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG',
+    function ($scope, $routeParams, GLOBAL_CONFIG) {
+        $scope.alerts = [];
+
+        $scope.$on('AlertCtrl:addAlert',function(event, args) {$scope.addAlert(args)});
+
+        $scope.addAlert = function(alert) {
+            debugger;
+            $scope.alerts.push(alert);
+        };
+
+        $scope.closeAlert = function(index) {
+            $scope.alerts.splice(index, 1);
+        };
+    }]);
+
+/*********************************** NAVS **********************************************/
 liveconControllers.controller('mainCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG',
     function ($scope, $routeParams, GLOBAL_CONFIG) {
         $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;

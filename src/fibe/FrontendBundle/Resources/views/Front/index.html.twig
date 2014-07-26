@@ -68,7 +68,7 @@
             api: {
                 urls: {
                     organizations: "{{ path('apiREST_get_organizations') }}",
-                    login: "{{ path('login') }}",
+                    login: "{{ path('api_user_login', {_format: 'json'}) }}",
                     registration: "{{ path('apiREST_get_organizations') }}"
                 }
             },
@@ -107,7 +107,9 @@
     <div class="navTop" ng-include="GLOBAL_CONFIG.app.urls.partials+'layout/nav-top.html'"
          ng-controller="navTopCtrl">
     </div>
-
+    <div ng-controller="AlertCtrl" id="alertBox">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.code}}{# {{alert.code | translate}} #}</alert>
+    </div>
     <div id="wrapper">
 
         <div class="navLeft" ng-include="GLOBAL_CONFIG.app.urls.partials+'layout/nav-left.html'"

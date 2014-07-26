@@ -34,7 +34,9 @@ liveconApp.config(['$translateProvider', function ($translateProvider) {
         'Search_event': 'Search an event',
         'Search_publication': 'Search an publication',
         'Search_person': 'Search a person',
-        'Search_organization': 'Search an organization'
+        'Search_organization': 'Search an organization',
+        'Login_success': 'Welcome to live-con.com',
+        'Login_error': 'Bad credentials'
     });   
 
      // Simply register translation table as object hash
@@ -43,7 +45,9 @@ liveconApp.config(['$translateProvider', function ($translateProvider) {
         'Search_event': 'Rechercher un evenement',
         'Search_publication': 'Rechercher une publication',
         'Search_person': 'Rechercher une personne',
-        'Search_organization': 'Rechercher une organization'
+        'Search_organization': 'Rechercher une organization',
+        'Login_success': 'Bienvenue sur live-con.com',
+        'Login_error': 'Login impossible'
     });   
 
     $translateProvider.preferredLanguage('en_US');
