@@ -36,21 +36,21 @@
         ->add('id', 'entity', array(
           'class'    => 'fibeWWWConfBundle:Paper',
           'label'    => 'Title',
-          'choices'  => $this->user->getCurrentConf()->getPapers()->toArray(),
+          'choices'  => $this->user->getCurrentMainEvent()->getPapers()->toArray(),
           'required' => false,
           'attr'     => array('placeholder' => 'Title')
         ))
         ->add('author', 'entity', array(
           'class'    => 'fibeWWWConfBundle:Person',
           'label'    => 'Author',
-          'choices'  => $this->user->getCurrentConf()->getPersons()->toArray(),
+          'choices'  => $this->user->getCurrentMainEvent()->getPersons()->toArray(),
           'required' => false,
           'attr'     => array('placeholder' => 'Author')
         ))
         ->add('topic', 'entity', array(
           'class'    => 'fibeWWWConfBundle:Topic',
           'label'    => 'Subject',
-          'choices'  => $this->user->getCurrentConf()->getTopics()->toArray(),
+          'choices'  => $this->user->getCurrentMainEvent()->getTopics()->toArray(),
           'required' => false,
           'attr'     => array('placeholder' => 'Topic')
 

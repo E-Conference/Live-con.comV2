@@ -36,17 +36,17 @@
         ->add('id', 'entity', array(
           'class'    => 'fibeWWWConfBundle:Topic',
           'label'    => 'Name',
-          'choices'  => $this->user->getCurrentConf()->getTopics()->toArray(),
+          'choices'  => $this->user->getCurrentMainEvent()->getTopics()->toArray(),
           'required' => false,
           'attr'     => array('placeholder' => 'Label')
         ));
-      if ($this->user->getCurrentConf()->getModule()->getPaperModule() == 1)
+      if ($this->user->getCurrentMainEvent()->getModule()->getPaperModule() == 1)
       {
         $builder
           ->add('paper', 'entity', array(
             'class'    => 'fibeWWWConfBundle:Paper',
             'label'    => 'Paper',
-            'choices'  => $this->user->getCurrentConf()->getPapers()->toArray(),
+            'choices'  => $this->user->getCurrentMainEvent()->getPapers()->toArray(),
             'required' => false,
             'attr'     => array('placeholder' => 'Publication')
           ));

@@ -56,9 +56,9 @@
     /**
      *
      * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent")
-     * @ORM\JoinColumn(name="currentConf", referencedColumnName="id")
+     * @ORM\JoinColumn(name="current_main_event", referencedColumnName="id")
      */
-    protected $currentConf;
+    protected $currentMainEvent;
 
     /**
      * @TODO : put it in person with a technical role
@@ -205,27 +205,27 @@
     }
 
     /**
-     * Set currentConf
+     * Set currentMainEvent
      *
-     * @param MainEvent $currentConf
+     * @param MainEvent $currentMainEvent
      *
      * @return User
      */
-    public function setCurrentConf(MainEvent $currentConf = null)
+    public function setCurrentMainEvent(MainEvent $currentMainEvent = null)
     {
-      $this->currentConf = $currentConf;
+      $this->currentMainEvent = $currentMainEvent;
 
       return $this;
     }
 
     /**
-     * Get currentConf
+     * Get currentMainEvent
      *
      * @return MainEvent
      */
-    public function getCurrentConf()
+    public function getCurrentMainEvent()
     {
-      return $this->currentConf;
+      return $this->currentMainEvent;
     }
 
     public function getName()

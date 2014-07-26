@@ -52,7 +52,7 @@ class DBImportController extends Controller
 
     $em = $this->getDoctrine()->getManager();
 
-    $this->conference = $this->getUser()->getCurrentConf();
+    $this->conference = $this->getUser()->getCurrentMainEvent();
 
 
     $entity = null;
@@ -480,7 +480,7 @@ class DBImportController extends Controller
             $val->setType($chairRoleType);
             $val->setPerson($this->personEntities[$chair]);
             $val->setEvent($entity);
-            $val->setConference($this->getUser()->getCurrentConf());
+            $val->setConference($this->getUser()->getCurrentMainEvent());
             $entity->addRole($val);
 
           }
@@ -494,7 +494,7 @@ class DBImportController extends Controller
             $val->setType($presenterRoleType);
             $val->setPerson($this->personEntities[$presenter]);
             $val->setEvent($entity);
-            $val->setConference($this->getUser()->getCurrentConf());
+            $val->setConference($this->getUser()->getCurrentMainEvent());
             $entity->addRole($val);
           }
         }

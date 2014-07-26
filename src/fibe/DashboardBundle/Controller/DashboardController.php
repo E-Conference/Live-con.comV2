@@ -40,7 +40,7 @@ class DashboardController extends Controller
     $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'MainEvent', $id);
 
     $user = $this->getUser();
-    $user->setCurrentConf($entity);
+    $user->setMainEvent($entity);
     $em->persist($user);
     $em->flush();
 

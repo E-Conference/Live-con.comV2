@@ -38,14 +38,14 @@
         ->add('topics', 'entity', array(
           'class'    => 'fibeWWWConfBundle:Topic',
           'label'    => 'Topics',
-          'choices'  => $this->user->getCurrentConf()->getTopics()->toArray(),
+          'choices'  => $this->user->getCurrentMainEvent()->getTopics()->toArray(),
           'multiple' => true,
           'required' => false
         ))
         ->add('authors', 'entity', array(
           'class'    => 'fibeWWWConfBundle:Person',
           'label'    => 'Authors',
-          'choices'  => $this->user->getCurrentConf()->getPersons()->toArray(),
+          'choices'  => $this->user->getCurrentMainEvent()->getPersons()->toArray(),
           'multiple' => true,
           'required' => false
         ));

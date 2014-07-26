@@ -36,14 +36,14 @@
         ->add('id', 'entity', array(
           'class'    => 'fibeWWWConfBundle:Organization',
           'label'    => 'Name',
-          'choices'  => $this->user->getCurrentConf()->getOrganizations()->toArray(),
+          'choices'  => $this->user->getCurrentMainEvent()->getOrganizations()->toArray(),
           'required' => false,
           'attr'     => array('placeholder' => 'Name')
         ))
         ->add('member', 'entity', array(
           'class'    => 'fibeWWWConfBundle:Person',
           'label'    => 'Member',
-          'choices'  => $this->user->getCurrentConf()->getPersons()->toArray(),
+          'choices'  => $this->user->getCurrentMainEvent()->getPersons()->toArray(),
           'required' => false,
           'attr'     => array('placeholder' => 'Member')
         ))

@@ -52,7 +52,7 @@
     </div>
   </div>
 
-  {%  app.user.getFlagByConferenceId(app.user.getCurrentConf().getId(),'team')==1 %}
+  {%  app.user.getFlagByConferenceId(app.user.getCurrentMainEvent().getId(),'team')==1 %}
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">

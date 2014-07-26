@@ -36,7 +36,7 @@
         ->add('id', 'entity', [
           'class'    => 'fibeWWWConfBundle:Sponsor',
           'label'    => 'Name',
-          'choices'  => $this->user->getCurrentConf()->getSponsors()->toArray(),
+          'choices'  => $this->user->getCurrentMainEvent()->getSponsors()->toArray(),
           'required' => false,
           'attr'     => ['placeholder' => 'Label']
         ]);

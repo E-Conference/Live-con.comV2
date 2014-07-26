@@ -38,14 +38,14 @@
         ->add('summary', 'entity', array(
           'class'    => 'fibeWWWConfBundle:ConfEvent',
           'label'    => 'Name',
-          'choices'  => $this->user->getCurrentConf()->getEvents()->toArray(),
+          'choices'  => $this->user->getCurrentMainEvent()->getEvents()->toArray(),
           'required' => false,
           'attr'     => array('placeholder' => 'Summary')
         ))
         ->add('location', 'entity', array(
           'class'      => 'fibeWWWConfBundle:Location',
           'label'      => 'Location',
-          'choices'    => $this->user->getCurrentConf()->getLocations()->toArray(),
+          'choices'    => $this->user->getCurrentMainEvent()->getLocations()->toArray(),
           'empty_data' => null,
           'required'   => false,
           'attr'       => array('placeholder' => 'Location')

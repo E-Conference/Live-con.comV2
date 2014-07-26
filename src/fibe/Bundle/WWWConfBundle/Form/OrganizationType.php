@@ -37,7 +37,7 @@
           'class'    => 'fibeWWWConfBundle:Person',
           'label'    => 'Members',
           'multiple' => true,
-          'choices'  => $this->user->getCurrentConf()->getPersons()->toArray(),
+          'choices'  => $this->user->getCurrentMainEvent()->getPersons()->toArray(),
           'required' => false
         ));
     }

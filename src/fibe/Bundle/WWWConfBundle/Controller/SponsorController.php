@@ -67,7 +67,7 @@ class SponsorController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
 
-    $conf = $this->getUser()->getCurrentConf();
+    $conf = $this->getUser()->getCurrentMainEvent();
     //Filters
     $filters = $this->createForm(new SponsorFilterType($this->getUser()));
 
@@ -119,7 +119,7 @@ class SponsorController extends Controller
     if ($form->isValid())
     {
       $em = $this->getDoctrine()->getManager();
-      $entity->setConference($this->getUser()->getCurrentConf());
+      $entity->setConference($this->getUser()->getCurrentMainEvent());
       $em->persist($entity);
       $entity->uploadLogo();
       $em->flush();

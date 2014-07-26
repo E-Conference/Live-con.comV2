@@ -33,7 +33,7 @@
         ->add('person', 'entity', array(
           'class'       => 'fibeWWWConfBundle:Person',
           'label'       => 'Select Person',
-          'choices'     => $this->user->getCurrentConf()->getPersons()->toArray(),
+          'choices'     => $this->user->getCurrentMainEvent()->getPersons()->toArray(),
           'required'    => true,
           'empty_value' => '',
         ))

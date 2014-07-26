@@ -44,10 +44,10 @@ class MobileAppThemeController extends Controller
     $user = $this->getUser();
 
 
-    $mobile_app_config = $user->getCurrentConf()->getAppConfig();
+    $mobile_app_config = $user->getCurrentMainEvent()->getAppConfig();
     $mobile_app_form = $this->createForm(new MobileAppConfigType(), $mobile_app_config);
 
-    $conference = $user->getCurrentConf();
+    $conference = $user->getCurrentMainEvent();
 
     return $this->render(
       'fibeMobileAppBundle:MobileAppTheme:index.html.twig',

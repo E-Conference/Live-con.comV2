@@ -34,7 +34,7 @@ class PersonFilterType extends AbstractType
             ->add('id', 'entity', array(
                 'class' => 'fibeWWWConfBundle:Person',
                 'label'   => 'Name',
-                'choices'=> $this->user->getCurrentConf()->getPersons()->toArray(),
+                'choices'=> $this->user->getCurrentMainEvent()->getPersons()->toArray(),
                 'required' => false,
                 'attr'  => array('placeholder'  => 'Name')
 
@@ -43,27 +43,27 @@ class PersonFilterType extends AbstractType
                 'class' => 'fibeWWWConfBundle:Person',
                 'label'   => 'Email',
                 'property' => 'email',
-                'choices'=> $this->user->getCurrentConf()->getPersons()->toArray(),
+                'choices'=> $this->user->getCurrentMainEvent()->getPersons()->toArray(),
                 'required' => false,
                  'attr'  => array('placeholder'  => 'Email')
             ));
 
-        if($this->user->getCurrentConf()->getModule()->getOrganizationModule()==1){
+        if($this->user->getCurrentMainEvent()->getModule()->getOrganizationModule()==1){
             $builder
             ->add('organization', 'entity', array(
                 'class' => 'fibeWWWConfBundle:Organization',
                 'label'   => 'Organization',
-                'choices'=> $this->user->getCurrentConf()->getOrganizations()->toArray(),
+                'choices'=> $this->user->getCurrentMainEvent()->getOrganizations()->toArray(),
                 'required' => false,
                 'attr'  => array('placeholder'  => 'Organization')
             ));
         }
-        if($this->user->getCurrentConf()->getModule()->getPaperModule()==1){
+        if($this->user->getCurrentMainEvent()->getModule()->getPaperModule()==1){
             $builder
             ->add('paper', 'entity', array(
                 'class' => 'fibeWWWConfBundle:Paper',
                 'label'   => 'Publication',
-                'choices'=> $this->user->getCurrentConf()->getPapers()->toArray(),
+                'choices'=> $this->user->getCurrentMainEvent()->getPapers()->toArray(),
                 'required' => false,
                 'attr'  => array('placeholder'  => 'Publication')
             ));
