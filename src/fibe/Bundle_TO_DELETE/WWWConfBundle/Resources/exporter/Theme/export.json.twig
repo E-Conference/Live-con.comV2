@@ -1,4 +1,0 @@
-{
-    "id": "{{ entity.id }}",
-    "libelle": {% if entity.libelle != null %}{{entity.libelle|json_encode|raw()}}{% else %}""{% endif %}
-}
