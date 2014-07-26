@@ -23,12 +23,8 @@ class AppKernel extends Kernel
       new IDCI\Bundle\ExporterBundle\IDCIExporterBundle(),
       new fibe\Bundle\WWWConfBundle\fibeWWWConfBundle(),
       new fibe\SecurityBundle\fibeSecurityBundle(),
-      new fibe\MobileAppBundle\fibeMobileAppBundle(),
-      new fibe\DashboardBundle\fibeDashboardBundle(),
       new fibe\HomePageBundle\fibeHomePageBundle(),
       new fibe\RestBundle\fibeRestBundle(),
-      new fibe\DataBundle\DataBundle(), 
-      new fibe\ConferenceBundle\fibeConferenceBundle(),
       new fibe\DocumentationBundle\DocumentationBundle(),
       new FOS\UserBundle\FOSUserBundle(),
       new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
@@ -38,6 +34,8 @@ class AppKernel extends Kernel
       new FOS\RestBundle\FOSRestBundle(),
       new fibe\FrontendBundle\FrontendBundle(),
             new fibe\EventBundle\fibeEventBundle(),
+            new fibe\ContentBundle\fibeContentBundle(),
+            new fibe\ComunityBundle\fibeComunityBundle(),
     );
 
     if (in_array($this->getEnvironment(), array('dev', 'test')))

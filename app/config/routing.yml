@@ -1,3 +1,13 @@
+fibe_comunity:
+    resource: "@fibeComunityBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fibe_content:
+    resource: "@fibeContentBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 fibe_event:
     resource: "@fibeEventBundle/Controller/"
     type:     annotation
