@@ -54,7 +54,7 @@ class ConfEvent extends Event
   /**
    * conference
    *
-   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="events", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="events", cascade={"persist"})
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    * @Expose
    */
@@ -359,11 +359,11 @@ class ConfEvent extends Event
   /**
    * Set conference
    *
-   * @param \fibe\ConferenceBundle\Entity\MainEvent $conference
+   * @param \fibe\EventBundle\Entity\MainEvent $conference
    *
    * @return ConfEvent
    */
-  public function setConference(\fibe\ConferenceBundle\Entity\MainEvent $conference)
+  public function setConference(\fibe\EventBundle\Entity\MainEvent $conference)
   {
     $this->conference = $conference;
 
@@ -373,7 +373,7 @@ class ConfEvent extends Event
   /**
    * Get conference
    *
-   * @return \fibe\ConferenceBundle\Entity\MainEvent
+   * @return \fibe\EventBundle\Entity\MainEvent
    */
   public function getConference()
   {

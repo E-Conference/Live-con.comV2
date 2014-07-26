@@ -65,7 +65,7 @@ class Company
   /**
    * Company related to a mainEvent
    *
-   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="organizations", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="organizations", cascade={"persist"})
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    *
    */

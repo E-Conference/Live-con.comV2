@@ -1,14 +1,13 @@
 <?php
   namespace fibe\Bundle\WWWConfBundle\Command;
 
-  use fibe\MobileAppBundle\Entity\MobileAppConfig;
   use fibe\Bundle\WWWConfBundle\Entity\Module;
   use fibe\Bundle\WWWConfBundle\Entity\Paper;
-  use fibe\Bundle\WWWConfBundle\Entity\Person;
   use fibe\Bundle\WWWConfBundle\Entity\Role;
   use fibe\Bundle\WWWConfBundle\Entity\RoleType;
   use fibe\Bundle\WWWConfBundle\Entity\Topic;
-  use fibe\ConferenceBundle\Entity\MainEvent;
+  use fibe\CommunityBundle\Entity\Person;
+  use fibe\EventBundle\Entity\MainEvent;
   use fibe\Bundle\WWWConfBundle\Entity\Location;
   use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
   use Symfony\Component\Console\Input\InputInterface;
@@ -260,7 +259,7 @@
      * @param $roleTypeChair     @TODO comment
      * @param $roleTypePresenter @TODO comment
      */
-    function createConf($counter, $limit, $output, $roleType, $roleTypeChair, $roleTypePresenter)
+    function createConf($counter, $limit,OutputInterface $output, $roleType, $roleTypeChair, $roleTypePresenter)
     {
 
       $output->writeln("conference " . $counter . " started");
@@ -280,54 +279,54 @@
       $defaultAppConfig = new MobileAppConfig();
 
       //header color
-      $defaultAppConfig->setBGColorHeader("#f2f2f2");
-      $defaultAppConfig->setTitleColorHeader("#000000");
-      //navBar color
-      $defaultAppConfig->setBGColorNavBar("#305c6b");
-      $defaultAppConfig->setTitleColorNavBar("#f3f6f6");
-      //content color
-      $defaultAppConfig->setBGColorContent("#f3f6f6");
-      $defaultAppConfig->setTitleColorContent("#8c949c");
-      //buttons color
-      $defaultAppConfig->setBGColorButton("#f3f6f6");
-      $defaultAppConfig->setTitleColorButton("#000000");
-      //footer color
-      $defaultAppConfig->setBGColorfooter("#305c6b");
-      $defaultAppConfig->setTitleColorFooter("#f3f6f6");
-      $defaultAppConfig->setIsPublished(true);
-      $defaultAppConfig->setDblpDatasource(true);
-      $defaultAppConfig->setGoogleDatasource(true);
-      $defaultAppConfig->setDuckduckgoDatasource(true);
-      $defaultAppConfig->setLang("EN");
-
-      $em->persist($defaultAppConfig);
-
-
-      //Main conf event
-      $mainEvent = new ConfEvent();
-      $mainEvent->setSummary("Big Livecon Conference" . $counter);
-      $mainEvent->setIsMainConfEvent(true);
-      $mainEvent->setStartAt(new \DateTime('now'));
-      $end = new \DateTime('now');
-      $mainEvent->setEndAt($end->add(new \DateInterval('P2D')));
-      $mainEvent->setConference($conference);
-      $mainEvent->setComment("Livecon Conference " . $counter . " comment");
-      $mainEvent->setUrl("http://liveconconference" . $counter);
-      $em->persist($mainEvent);
-
-
-      // conference location
-      $mainEventLocation = new Location();
-      $mainEventLocation->setLabel("Conference's location");
-      $mainEventLocation->addVEvent($mainEvent);
-      $mainEventLocation->setMainEvent($conference);
-      $em->persist($mainEventLocation);
-      $mainEvent->setLocation($mainEventLocation);
-      $em->persist($mainEvent);
-
-      //Linking app config to conference
-      $conference->setAppConfig($defaultAppConfig);
-      $conference->setMainConfEvent($mainEvent);
+//      $defaultAppConfig->setBGColorHeader("#f2f2f2");
+//      $defaultAppConfig->setTitleColorHeader("#000000");
+//      //navBar color
+//      $defaultAppConfig->setBGColorNavBar("#305c6b");
+//      $defaultAppConfig->setTitleColorNavBar("#f3f6f6");
+//      //content color
+//      $defaultAppConfig->setBGColorContent("#f3f6f6");
+//      $defaultAppConfig->setTitleColorContent("#8c949c");
+//      //buttons color
+//      $defaultAppConfig->setBGColorButton("#f3f6f6");
+//      $defaultAppConfig->setTitleColorButton("#000000");
+//      //footer color
+//      $defaultAppConfig->setBGColorfooter("#305c6b");
+//      $defaultAppConfig->setTitleColorFooter("#f3f6f6");
+//      $defaultAppConfig->setIsPublished(true);
+//      $defaultAppConfig->setDblpDatasource(true);
+//      $defaultAppConfig->setGoogleDatasource(true);
+//      $defaultAppConfig->setDuckduckgoDatasource(true);
+//      $defaultAppConfig->setLang("EN");
+//
+//      $em->persist($defaultAppConfig);
+//
+//
+//      //Main conf event
+//      $mainEvent = new ConfEvent();
+//      $mainEvent->setSummary("Big Livecon Conference" . $counter);
+//      $mainEvent->setIsMainConfEvent(true);
+//      $mainEvent->setStartAt(new \DateTime('now'));
+//      $end = new \DateTime('now');
+//      $mainEvent->setEndAt($end->add(new \DateInterval('P2D')));
+//      $mainEvent->setConference($conference);
+//      $mainEvent->setComment("Livecon Conference " . $counter . " comment");
+//      $mainEvent->setUrl("http://liveconconference" . $counter);
+//      $em->persist($mainEvent);
+//
+//
+//      // conference location
+//      $mainEventLocation = new Location();
+//      $mainEventLocation->setLabel("Conference's location");
+//      $mainEventLocation->addVEvent($mainEvent);
+//      $mainEventLocation->setMainEvent($conference);
+//      $em->persist($mainEventLocation);
+//      $mainEvent->setLocation($mainEventLocation);
+//      $em->persist($mainEvent);
+//
+//      //Linking app config to conference
+//      $conference->setAppConfig($defaultAppConfig);
+//      $conference->setMainConfEvent($mainEvent);
       $conference->setModule($defaultModule);
 
       //Add conference to current manager

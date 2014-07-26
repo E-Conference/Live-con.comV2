@@ -125,7 +125,7 @@ class Person
 
   /**
    *  Topics associated to this conference
-   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="persons", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="persons", cascade={"persist"})
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    *
    */
@@ -626,11 +626,11 @@ class Person
   /**
    * Set conference
    *
-   * @param \fibe\ConferenceBundle\Entity\MainEvent $conference
+   * @param \fibe\EventBundle\Entity\MainEvent $conference
    *
    * @return Person
    */
-  public function setConference(\fibe\ConferenceBundle\Entity\MainEvent $conference = null)
+  public function setConference(\fibe\EventBundle\Entity\MainEvent $conference = null)
   {
     $this->conference = $conference;
 
@@ -640,7 +640,7 @@ class Person
   /**
    * Get conference
    *
-   * @return \fibe\ConferenceBundle\Entity\MainEvent
+   * @return \fibe\EventBundle\Entity\MainEvent
    */
   public function getConference()
   {

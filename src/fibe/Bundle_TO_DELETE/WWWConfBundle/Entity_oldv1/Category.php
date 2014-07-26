@@ -83,7 +83,7 @@ class Category
     private $calendarEntities;
 
     /**
-     * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="categories")
+     * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="categories")
      * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
      */
     protected $conference;
@@ -461,10 +461,10 @@ class Category
     /**
      * Set conference
      *
-     * @param \fibe\ConferenceBundle\Entity\MainEvent $wwwConf
+     * @param \fibe\EventBundle\Entity\MainEvent $wwwConf
      * @return Category
      */
-    public function setConference(\fibe\ConferenceBundle\Entity\MainEvent $conference = null)
+    public function setConference(\fibe\EventBundle\Entity\MainEvent $conference = null)
     {
         $this->conference = $conference;
     
@@ -474,7 +474,7 @@ class Category
     /**
      * Get conference
      *
-     * @return \fibe\ConferenceBundle\Entity\MainEvent
+     * @return \fibe\EventBundle\Entity\MainEvent
      */
     public function getConference()
     {

@@ -4,9 +4,9 @@ namespace fibe\EventBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use fibe\ContentBundle\Util\StringTools;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use fibe\EventBundle\Entity\VEvent;
 
 
 use JMS\Serializer\Annotation\ExclusionPolicy;
@@ -14,7 +14,6 @@ use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
 
-use fibe\Bundle\WWWConfBundle\Util\StringTools;
 
 
 /**
@@ -48,7 +47,7 @@ class Event extends VEvent
   /**
    * Main Event
    *
-   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="events", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="events", cascade={"persist"})
    * @ORM\JoinColumn(name="mainevent_id", referencedColumnName="id")
    * @Expose
    */
@@ -63,7 +62,7 @@ class Event extends VEvent
   /**
    * Papers presented at an event
    *
-   * @ORM\ManyToMany(targetEntity="Paper", inversedBy="events", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Paper", inversedBy="events", cascade={"persist"})
    * @ORM\JoinTable(name="event_paper",
    *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="paper_id", referencedColumnName="id")})
@@ -111,16 +110,16 @@ class Event extends VEvent
     }
 
     //ensure main conf has correct properties
-    if ($this->isMainVEvent) //@TODO EVENT
-    {
-      $this->fitChildrenDate(true);
-      if ($this->getEndAt()->getTimestamp() <= $this->getStartAt()->getTimestamp())
-      {
-        $endAt = clone $this->getStartAt();
-        $this->setEndAt($endAt->add(new \DateInterval('P1D')));
-      }
-      $this->setIsInstant(false);
-    }
+//    if ($this->isMainVEvent) //@TODO EVENT
+//    {
+//      $this->fitChildrenDate(true);
+//      if ($this->getEndAt()->getTimestamp() <= $this->getStartAt()->getTimestamp())
+//      {
+//        $endAt = clone $this->getStartAt();
+//        $this->setEndAt($endAt->add(new \DateInterval('P1D')));
+//      }
+//      $this->setIsInstant(false);
+//    }
   }
 
 

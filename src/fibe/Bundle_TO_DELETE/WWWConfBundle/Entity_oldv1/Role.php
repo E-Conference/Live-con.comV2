@@ -60,7 +60,7 @@ class Role
 
   /**
    *
-   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="roles", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="roles", cascade={"persist"})
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    *
    */
@@ -103,11 +103,11 @@ class Role
   /**
    * Set event
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $event
+   * @param \fibe\EventBundle\Entity\VEvent $event
    *
    * @return Role
    */
-  public function setEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $event = null)
+  public function setEvent(\fibe\EventBundle\Entity\VEvent $event = null)
   {
     $this->event = $event;
 
@@ -117,7 +117,7 @@ class Role
   /**
    * Get event
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\VEvent
+   * @return \fibe\EventBundle\Entity\VEvent
    */
   public function getEvent()
   {
@@ -151,11 +151,11 @@ class Role
   /**
    * Set conference
    *
-   * @param \fibe\ConferenceBundle\Entity\MainEvent $conf
+   * @param \fibe\EventBundle\Entity\MainEvent $conf
    *
    * @return Role
    */
-  public function setConference(\fibe\ConferenceBundle\Entity\MainEvent $conf)
+  public function setConference(\fibe\EventBundle\Entity\MainEvent $conf)
   {
     $this->conference = $conf;
 
@@ -165,7 +165,7 @@ class Role
   /**
    * Get conference
    *
-   * @return \fibe\ConferenceBundle\Entity\MainEvent
+   * @return \fibe\EventBundle\Entity\MainEvent
    */
   public function getConference()
   {

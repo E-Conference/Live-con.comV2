@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 //On insere l'entity Event  de simple schedule
 
-use fibe\Bundle\WWWConfBundle\Entity\VEvent as Event;
+use fibe\EventBundle\Entity\VEvent as Event;
 use fibe\Bundle\WWWConfBundle\Entity\Location;
 use fibe\Bundle\WWWConfBundle\Entity\Role;
 
@@ -43,7 +43,7 @@ class TreeStructureController extends Controller
 
       $serializer = JMS\Serializer\SerializerBuilder::create()->build();
 
-      $event = $serializer->deserialize($request->getContent(), ' fibe\Bundle\WWWConfBundle\Entity\VEvent', 'json');
+      $event = $serializer->deserialize($request->getContent(), ' fibe\EventBundle\Entity\VEvent', 'json');
 
       $origin = $em->getRepository('fibeWWWConfBundle:ConfEvent')->find($event->getId());
 

@@ -4,6 +4,9 @@ namespace fibe\CommunityBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use fibe\ContentBundle\Entity\Paper;
+use fibe\ContentBundle\Entity\Role;
+use fibe\ContentBundle\Util\StringTools;
 use FOS\UserBundle\Model\UserInterface;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
@@ -11,9 +14,7 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use fibe\Bundle\WWWConfBundle\Entity\VEvent;
 
-use fibe\Bundle\WWWConfBundle\Util\StringTools;
 
 /**
  * This entity is based on the specification FOAF.
@@ -38,11 +39,43 @@ class Person
   /**
    * Additional Infomations of the company
    *
-   * @ORM\OneToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\AdditionalInformations", cascade={"persist", "remove"})
+   * @ORM\OneToOne(targetEntity="AdditionalInformations", cascade={"persist", "remove"})
    * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id", onDelete="CASCADE")
    *
    */
   protected $additionalInformation;
+
+  /**
+   * @return AdditionalInformations
+   */
+  public function getAdditionalInformation()
+  {
+    return $this->additionalInformation;
+  }
+
+  /**
+   * @param AdditionalInformations $additionalInformation
+   */
+  public function setAdditionalInformation(AdditionalInformations $additionalInformation)
+  {
+    $this->additionalInformation = $additionalInformation;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getCompanies()
+  {
+    return $this->companies;
+  }
+
+  /**
+   * @param mixed $companies
+   */
+  public function setCompanies($companies)
+  {
+    $this->companies = $companies;
+  }
 
   /**
    * technical user
@@ -93,18 +126,10 @@ class Person
   protected $age;
 
   /**
-   * MainEvents own by a person
-   *
-   * @ORM\OneToMany(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", mappedBy="owner",cascade={"persist", "remove"})
-   *
-   */
-  private $owns;
-
-  /**
    * Paper
    * Paper made by this person
    *
-   * @ORM\ManyToMany(targetEntity="Paper",  mappedBy="authors", cascade={"remove","persist","merge"})
+   * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Paper",  mappedBy="authors", cascade={"remove","persist","merge"})
    */
   private $papers;
 
@@ -129,7 +154,7 @@ class Person
 
   /**
    *
-   * @ORM\OneToMany(targetEntity="Role",  mappedBy="person",cascade={"persist","remove"})
+   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Role",  mappedBy="person",cascade={"persist","remove"})
    * @ORM\JoinColumn(onDelete="CASCADE")
    *
    */
@@ -138,7 +163,7 @@ class Person
   /**
    * @TODO : Difference avec un utilisateur Livecon ? Peut appartenir a plusieurs main events
    *
-   * @ORM\ManyToMany(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="persons", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="persons", cascade={"persist"})
    * @ORM\JoinTable(name="mainevents_persons",
    *     joinColumns={@ORM\JoinColumn(name="mainevent_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")})

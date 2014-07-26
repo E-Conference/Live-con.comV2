@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use fibe\Bundle\WWWConfBundle\Entity\VEvent as Event;
+use fibe\EventBundle\Entity\VEvent as Event;
 use fibe\Bundle\WWWConfBundle\Entity\Person;
 use fibe\Bundle\WWWConfBundle\Entity\Topic;
 use fibe\Bundle\WWWConfBundle\Entity\Organization;

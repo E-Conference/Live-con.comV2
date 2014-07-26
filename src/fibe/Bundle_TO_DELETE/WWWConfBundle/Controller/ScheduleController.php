@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 //On insere l'entity Event  de simple schedule
 
-use fibe\Bundle\WWWConfBundle\Entity\VEvent as Event;
+use fibe\EventBundle\Entity\VEvent as Event;
 use fibe\Bundle\WWWConfBundle\Entity\XProperty;
 use fibe\Bundle\WWWConfBundle\Entity\Location;
 use fibe\Bundle\WWWConfBundle\Entity\Role;

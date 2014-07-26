@@ -38,7 +38,7 @@
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
       $resolver->setDefaults(array(
-        'data_class' => 'fibe\Bundle\WWWConfBundle\Entity\VEvent'
+        'data_class' => 'fibe\EventBundle\Entity\VEvent'
       ));
     }
 

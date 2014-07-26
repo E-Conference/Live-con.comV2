@@ -85,11 +85,11 @@ class Theme
   /**
    * Add confEvents
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $confEvents
+   * @param \fibe\EventBundle\Entity\VEvent $confEvents
    *
    * @return Theme
    */
-  public function addConfEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $confEvents)
+  public function addConfEvent(\fibe\EventBundle\Entity\VEvent $confEvents)
   {
     $this->confEvents[] = $confEvents;
 
@@ -99,9 +99,9 @@ class Theme
   /**
    * Remove confEvents
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $confEvents
+   * @param \fibe\EventBundle\Entity\VEvent $confEvents
    */
-  public function removeConfEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $confEvents)
+  public function removeConfEvent(\fibe\EventBundle\Entity\VEvent $confEvents)
   {
     $this->confEvents->removeElement($confEvents);
   }

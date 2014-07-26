@@ -2,7 +2,9 @@
 
 namespace fibe\SecurityBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use fibe\EventBundle\Entity\MainEvent;
 
 /**
  * This entity define a team
@@ -27,7 +29,7 @@ class Team
   /**
    * Conference
    *
-   * @ORM\OneToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent",cascade={"persist","remove"})
+   * @ORM\OneToOne(targetEntity="fibe\EventBundle\Entity\MainEvent",cascade={"persist","remove"})
    * @ORM\JoinColumn(name="conference", referencedColumnName="id",onDelete="CASCADE")
    */
   private $conference;
@@ -42,7 +44,7 @@ class Team
 
   public function __construct()
   {
-    $this->confManagers = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->confManagers = new ArrayCollection();
   }
 
   /**
@@ -54,7 +56,7 @@ class Team
   }
 
 
-  public function setConference(\fibe\ConferenceBundle\Entity\MainEvent $conference = null)
+  public function setConference(MainEvent $conference = null)
   {
     $this->conference = $conference;
 
@@ -74,7 +76,7 @@ class Team
    *
    * @return $this
    */
-  public function addConfManager(\fibe\SecurityBundle\Entity\User $confManager = null)
+  public function addConfManager(User $confManager = null)
   {
     $this->confManagers[] = $confManager;
 
@@ -86,7 +88,7 @@ class Team
    *
    * @param User $confManager
    */
-  public function removeConfManager(\fibe\SecurityBundle\Entity\User $confManager)
+  public function removeConfManager(User $confManager)
   {
     $this->confManagers->removeElement($confManager);
   }
@@ -95,7 +97,7 @@ class Team
   /**
    * Return all conference managers
    *
-   * @return \Doctrine\Common\Collections\ArrayCollection
+   * @return ArrayCollection
    */
   public function getConfManagers()
   {

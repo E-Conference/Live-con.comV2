@@ -4,6 +4,7 @@ namespace fibe\EventBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
+use fibe\Bundle\WWWConfBundle\Entity\Module;
 use fibe\EventBundle\Entity\VEvent;
 use JMS\Serializer\Annotation\Expose;
 
@@ -23,11 +24,6 @@ use fibe\EventBundle\Util\StringTools;
  */
 class MainEvent extends VEvent
 {
-
-  /**
-   * @ORM\OneToOne(targetEntity="fibe\ContentBundle\Entity\Module",cascade={ "remove"})
-   */
-  private $module;
 
   /**
    * Events
@@ -80,7 +76,7 @@ class MainEvent extends VEvent
 
   /**
    *
-   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\Person",  mappedBy="mainEvents", cascade={"persist","merge","remove"})
+   * @ORM\ManyToMany(targetEntity="fibe\CommunityBundle\Entity\Person",  mappedBy="mainEvents", cascade={"persist","merge","remove"})
    * @Expose
    */
   private $persons;
@@ -623,31 +619,6 @@ class MainEvent extends VEvent
     and (count($this->companies)     == 0)
     and (count($this->topics)        == 0);
 
-  }
-
-
-  /**
-   * Set module
-   *
-   * @param Module $module
-   *
-   * @return $this
-   */
-  public function setModule(Module $module = null)
-  {
-    $this->module = $module;
-
-    return $this;
-  }
-
-  /**
-   * Get module
-   *
-   * @return VEvent
-   */
-  public function getModule()
-  {
-    return $this->module;
   }
 
   /**

@@ -3,12 +3,11 @@
 namespace fibe\CommunityBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use fibe\Bundle\WWWConfBundle\Entity_oldv1\SocialService;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-use fibe\Bundle\WWWConfBundle\Entity\SocialService;
-use fibe\Bundle\WWWConfBundle\Entity\Person;
-use fibe\ConferenceBundle\Entity\MainEvent;
+use fibe\EventBundle\Entity\MainEvent;
 
 
 /**
@@ -89,11 +88,11 @@ class SocialServiceAccount
   /**
    * Set owner
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\Person $owner
+   * @param Person $owner
    *
    * @return SocialServiceAccount
    */
-  public function setOwner(\fibe\Bundle\WWWConfBundle\Entity\Person $owner = null)
+  public function setOwner(Person $owner = null)
   {
     $this->owner = $owner;
 
@@ -103,7 +102,7 @@ class SocialServiceAccount
   /**
    * Get owner
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\Person
+   * @return Person
    */
   public function getOwner()
   {
@@ -113,11 +112,11 @@ class SocialServiceAccount
   /**
    * Set socialService
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\SocialService $socialService
+   * @param SocialService $socialService
    *
    * @return SocialServiceAccount
    */
-  public function setSocialService(\fibe\Bundle\WWWConfBundle\Entity\SocialService $socialService = null)
+  public function setSocialService(SocialService $socialService = null)
   {
     $this->socialService = $socialService;
 
@@ -127,7 +126,7 @@ class SocialServiceAccount
   /**
    * Get socialService
    *
-   * @return \fibe\Bundle\WWWConfBundle\Entity\SocialService
+   * @return SocialService
    */
   public function getSocialService()
   {

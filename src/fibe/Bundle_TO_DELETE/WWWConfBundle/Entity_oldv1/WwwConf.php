@@ -32,7 +32,7 @@
 	/**
 	 * events
 	 *
-	 * @ORM\OneToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\VEvent", mappedBy="conference",cascade={"persist", "remove"})
+	 * @ORM\OneToMany(targetEntity="fibe\EventBundle\Entity\VEvent", mappedBy="conference",cascade={"persist", "remove"})
 	 */
 	private $events;
 
@@ -143,7 +143,7 @@
 	private $logoPath;
 
 	/**
-	 * @ORM\OneToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\VEvent", cascade="remove")
+	 * @ORM\OneToOne(targetEntity="fibe\EventBundle\Entity\VEvent", cascade="remove")
 	 **/
 	private $mainEvent;
 
@@ -574,11 +574,11 @@
 	/**
 	 * Set mainEvent
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $mainEvent
+	 * @param \fibe\EventBundle\Entity\VEvent $mainEvent
 	 *
 	 * @return MainEvent
 	 */
-	public function setMainConfEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $mainEvent = null)
+	public function setMainConfEvent(\fibe\EventBundle\Entity\VEvent $mainEvent = null)
 	{
 	  $this->mainEvent = $mainEvent;
 
@@ -588,7 +588,7 @@
 	/**
 	 * Get mainEvent
 	 *
-	 * @return \fibe\Bundle\WWWConfBundle\Entity\VEvent
+	 * @return \fibe\EventBundle\Entity\VEvent
 	 */
 	public function getMainConfEvent()
 	{
@@ -598,11 +598,11 @@
 	/**
 	 * Add events
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $events
+	 * @param \fibe\EventBundle\Entity\VEvent $events
 	 *
 	 * @return MainEvent
 	 */
-	public function addEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $events)
+	public function addEvent(\fibe\EventBundle\Entity\VEvent $events)
 	{
 	  $this->events[] = $events;
 
@@ -612,9 +612,9 @@
 	/**
 	 * Remove events
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $events
+	 * @param \fibe\EventBundle\Entity\VEvent $events
 	 */
-	public function removeEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $events)
+	public function removeEvent(\fibe\EventBundle\Entity\VEvent $events)
 	{
 	  $this->events->removeElement($events);
 	}
@@ -752,7 +752,7 @@
 	/**
 	 * Set module
 	 *
-	 * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $module
+	 * @param \fibe\EventBundle\Entity\VEvent $module
 	 *
 	 * @return MainEvent
 	 */
@@ -766,7 +766,7 @@
 	/**
 	 * Get module
 	 *
-	 * @return \fibe\Bundle\WWWConfBundle\Entity\VEvent
+	 * @return \fibe\EventBundle\Entity\VEvent
 	 */
 	public function getModule()
 	{

@@ -6,7 +6,7 @@
   use fibe\Bundle\WWWConfBundle\Entity\Category;
   use fibe\Bundle\WWWConfBundle\Entity\Location;
 
-  use fibe\ConferenceBundle\Entity\MainEvent;
+  use fibe\EventBundle\Entity\MainEvent;
   use fibe\Bundle\WWWConfBundle\Entity\Module;
   use fibe\MobileAppBundle\Entity\MobileAppConfig;
   use fibe\SecurityBundle\Entity\Team;
@@ -37,42 +37,6 @@
       $end = new \DateTime('now');
       $mainEvent->setEndAt($end->add(new \DateInterval('P2D')));
       $this->entityManager->persist($mainEvent);
-      $this->entityManager->persist($mainEvent);
-
-
-      //Module
-      $defaultModule = new Module();
-      $defaultModule->setPaperModule(1);
-      $defaultModule->setOrganizationModule(1);
-      $defaultModule->setSponsorModule(1);
-      $defaultModule->setMainEvent($mainEvent);
-      $this->entityManager->persist($defaultModule);
-
-      //Create new App config for the conference
-      $defaultAppConfig = new MobileAppConfig();
-
-      //header color
-      $defaultAppConfig->setBGColorHeader("#f2f2f2");
-      $defaultAppConfig->setTitleColorHeader("#000000");
-      //navBar color
-      $defaultAppConfig->setBGColorNavBar("#305c6b");
-      $defaultAppConfig->setTitleColorNavBar("#f3f6f6");
-      //content color
-      $defaultAppConfig->setBGColorContent("#f3f6f6");
-      $defaultAppConfig->setTitleColorContent("#8c949c");
-      //buttons color
-      $defaultAppConfig->setBGColorButton("#f3f6f6");
-      $defaultAppConfig->setTitleColorButton("#000000");
-      //footer color
-      $defaultAppConfig->setBGColorfooter("#305c6b");
-      $defaultAppConfig->setTitleColorFooter("#f3f6f6");
-      $defaultAppConfig->setIsPublished(true);
-      $defaultAppConfig->setDblpDatasource(true);
-      $defaultAppConfig->setGoogleDatasource(true);
-      $defaultAppConfig->setDuckduckgoDatasource(true);
-      $defaultAppConfig->setLang("EN");
-
-      $this->entityManager->persist($defaultAppConfig);
 
       //Main conf event
       $mainEvent = new MainEvent();

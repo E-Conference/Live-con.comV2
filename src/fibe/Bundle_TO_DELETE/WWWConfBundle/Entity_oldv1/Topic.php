@@ -48,7 +48,7 @@ class Topic
 
   /**
    *  Topics associated to this conference
-   * @ORM\ManyToOne(targetEntity="fibe\ConferenceBundle\Entity\MainEvent", inversedBy="topics", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="topics", cascade={"persist"})
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    *
    */
@@ -169,11 +169,11 @@ class Topic
   /**
    * Add events
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $events
+   * @param \fibe\EventBundle\Entity\VEvent $events
    *
    * @return Topic
    */
-  public function addEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $events)
+  public function addEvent(\fibe\EventBundle\Entity\VEvent $events)
   {
     $this->events[] = $events;
 
@@ -183,9 +183,9 @@ class Topic
   /**
    * Remove events
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\VEvent $events
+   * @param \fibe\EventBundle\Entity\VEvent $events
    */
-  public function removeEvent(\fibe\Bundle\WWWConfBundle\Entity\VEvent $events)
+  public function removeEvent(\fibe\EventBundle\Entity\VEvent $events)
   {
     $this->events->removeElement($events);
   }
@@ -227,11 +227,11 @@ class Topic
   /**
    * Set conference
    *
-   * @param \fibe\ConferenceBundle\Entity\MainEvent $conference
+   * @param \fibe\EventBundle\Entity\MainEvent $conference
    *
    * @return Topic
    */
-  public function setConference(\fibe\ConferenceBundle\Entity\MainEvent $conference = null)
+  public function setConference(\fibe\EventBundle\Entity\MainEvent $conference = null)
   {
     $this->conference = $conference;
 
@@ -241,7 +241,7 @@ class Topic
   /**
    * Get conference
    *
-   * @return \fibe\ConferenceBundle\Entity\MainEvent
+   * @return \fibe\EventBundle\Entity\MainEvent
    */
   public function getConference()
   {
