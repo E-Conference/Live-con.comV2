@@ -14,7 +14,7 @@
   /**
    * Link controller.
    *
-   * @Route("/admin/conference")
+   * @Route("/admin/mainEvent")
    */
   class MainEventController extends Controller
   {
@@ -27,7 +27,7 @@
     public function showAction(Request $request)
     {
       $mainEvent = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'MainEvent');
-      // TODO form
+      $currentMainEvent = $this->getUser()->getCurrentConf();
       $form = $this->createForm(new MainEventType($this->getUser()), $mainEvent);
 
       $request = $this->get('request');
@@ -59,8 +59,9 @@
       }
 
       return array(
-        'mainEvent' => $mainEvent,
-        'form'       => $form->createView(), 
+        'currentMainEvent' => $currentMainEvent,
+        'form'      => $form->createView(), 
+
       );
 
     } 

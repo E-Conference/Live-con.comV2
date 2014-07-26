@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *    @ORM\Index(name="start_at_idx", columns={"start_at"})
  * })
  * @ORM\HasLifecycleCallbacks
- * @ORM\InheritanceType("JOINED")
+ * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorMap({
  *     "Event"="Event",
  *     "MainEvent"="fibe\ConferenceBundle\Entity\MainEvent",
@@ -49,12 +49,6 @@ class VEvent
    */
   protected $id;
 
-  /**
-   * label
-   *
-   * @ORM\Column(type="string", length=255, nullable=true)
-   */
-  protected $label;
 
   /**
    * dtstart

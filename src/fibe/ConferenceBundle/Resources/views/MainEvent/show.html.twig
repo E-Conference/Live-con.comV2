@@ -1,6 +1,6 @@
 {% extends 'fibeConferenceBundle::base.html.twig' %}
 
-{% block title %}Edit conference{{ parent() }}{% endblock title %}
+{% block title %}Edit Main Event{{ parent() }}{% endblock title %}
 
 {% block centerPanel %}
   {{ parent() }}
@@ -9,17 +9,17 @@
 
       <div class="row">
         <div class="col-lg-4">
-          <img src="{{ asset('uploads/') }}{{ conference.logoPath }}" style="max-height:100px;max-width:100%;"/>
+          <img src="{{ asset('uploads/') }}{{ currentMainEvent.logoPath }}" style="max-height:100px;max-width:100%;"/>
 
-          <h1>{{ conference.summary }}</h1>
+          <h1>{{ currentMainEvent.summary }}</h1>
           <ul>
-            <li> {{ conference.events|length }} events</li>
-            <li> {{ conference.papers|length }} papers</li>
-            <li> {{ conference.locations|length }} locations</li>
-            <li> {{ conference.persons|length }} persons</li>
-            <li> {{ conference.topics|length }} topics</li>
-            <li> {{ conference.organizations|length }} organizations</li>
-            <li> {{ conference.confManagers|length }} confManagers</li>
+            <li> {{ currentMainEvent.events|length }} events</li>
+            <li> {{ currentMainEvent.papers|length }} papers</li>
+            <li> {{ currentMainEvent.locations|length }} locations</li>
+            <li> {{ currentMainEvent.persons|length }} persons</li>
+            <li> {{ currentMainEvent.topics|length }} topics</li>
+            <li> {{ currentMainEvent.companies|length }} organizations</li>
+            <li> {{ currentMainEvent.confManagers|length }} confManagers</li>
           </ul>
         </div>
         <div class="col-lg-8">
