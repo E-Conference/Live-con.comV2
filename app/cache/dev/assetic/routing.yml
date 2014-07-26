@@ -1,5 +1,0 @@
-_assetic:
-    resource: .
-    type: assetic
-_app:
-    resource: /home/vinz/projets/Live-con.comV2/app/config/routing_dev.yml
