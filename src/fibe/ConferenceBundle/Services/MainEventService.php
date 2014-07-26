@@ -198,7 +198,7 @@
 //      $mainEvent->addCategory($ConferenceEvent);
 
       //Add conference to current manager
-      $user->setCurrentConf($mainEvent);
+      $user->setCurrentMainEvent($mainEvent);
       $user->addConference($mainEvent);
 
       $this->entityManager->persist($user);

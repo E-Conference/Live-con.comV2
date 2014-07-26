@@ -61,7 +61,7 @@ class EventController extends Controller
 
     $em = $this->getDoctrine()->getManager();
 
-    $conf = $this->getUser()->getCurrentConf();
+    $conf = $this->getUser()->getCurrentMainEvent();
     //Filters
     $filters = $this->createForm(new EventFilterType($this->getUser()));
     $filters->submit($request);
@@ -109,7 +109,7 @@ class EventController extends Controller
     if ($form->isValid())
     {
       $em = $this->getDoctrine()->getManager();
-      $entity->setConference($this->getUser()->getCurrentConf());
+      $entity->setConference($this->getUser()->getCurrentMainEvent());
       $em->persist($entity);
 
       // $xprop= new XProperty();
@@ -189,9 +189,9 @@ class EventController extends Controller
     $editForm = $this->createForm(new EventType($this->getUser()), $entity);
     $deleteForm = $this->createDeleteForm($id);
 
-    $currentConf = $this->getUser()->getCurrentConf();
+    $currentMainEvent = $this->getUser()->getCurrentMainEvent();
     $form_role = $this->createForm(new RoleType($this->getUser()), new Role());
-    $papersForSelect = $currentConf->getPapers()->toArray();
+    $papersForSelect = $currentMainEvent->getPapers()->toArray();
     $form_paper = $this->createFormBuilder($entity)
       ->add(
         'papers',
@@ -207,7 +207,7 @@ class EventController extends Controller
       )
       ->getForm();
 
-    $topicsForSelect = $currentConf->getTopics()->toArray();
+    $topicsForSelect = $currentMainEvent->getTopics()->toArray();
     $form_topic = $this->createFormBuilder($entity)
       ->add(
         'topics',
@@ -283,7 +283,7 @@ class EventController extends Controller
     {
       $em = $this->getDoctrine()->getManager();
 
-      $mainEvent = $this->getUser()->getCurrentConf()->getMainEvent();
+      $mainEvent = $this->getUser()->getCurrentMainEvent()->getMainEvent();
       if ($mainEvent->getId() == $entity->getId())
       {
         $this->container->get('session')->getFlashBag()->add(
@@ -489,7 +489,7 @@ class EventController extends Controller
     $role->setPerson($person);
     $role->setType($type);
     $role->setEvent($entity);
-    $role->setConference($this->getUser()->getCurrentConf());
+    $role->setConference($this->getUser()->getCurrentMainEvent());
     $em->persist($role);
 
     //Add paper to the confEvent
@@ -521,7 +521,7 @@ class EventController extends Controller
 
     $id_role = $request->request->get('id_role');
     $role = $em->getRepository('fibeWWWConfBundle:Role')->findOneBy(
-      array('conference' => $this->getUser()->getCurrentConf(), 'id' => $id_role)
+      array('conference' => $this->getUser()->getCurrentMainEvent(), 'id' => $id_role)
     );
 
     $em = $this->getDoctrine()->getManager();

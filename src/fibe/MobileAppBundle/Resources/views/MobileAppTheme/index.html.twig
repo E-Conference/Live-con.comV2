@@ -41,7 +41,7 @@
                         </div>
                          <a href="#" id="generateTheme" class="edit btn btn-success" style="width:100%"><i class="fa fa-magic"></i>  Generate theme</a>
                       </div>
-                    {% if is_granted('EDIT', app.user.currentConf.appConfig) %}
+                    {% if is_granted('EDIT', app.user.currentMainEvent.appConfig) %}
                         {% include "fibeMobileAppBundle:MobileAppTheme:edit.html.twig" %}
                     {% endif %}
                    </div>

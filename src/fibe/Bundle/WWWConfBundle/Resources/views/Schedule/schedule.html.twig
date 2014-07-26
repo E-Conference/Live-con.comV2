@@ -202,7 +202,7 @@
       stopRender = false,
 //      fetched = false, // are the event fresh in memory ? if not we need a fetch request
 //      firstWeekDay = 1, // avoid first day to be sunday
-      firstDay = moment('{{currentConf.mainEvent.startAt|date("Y-m-d")}}'), //first mainconfevent day
+      firstDay = moment('{{currentMainEvent.mainEvent.startAt|date("Y-m-d")}}'), //first mainconfevent day
       authorized = {% if authorized == 1 %}true{% else %}false{% endif %},
       filter, // filter.js
       sidebar, //sidebar.js
@@ -216,8 +216,8 @@
   //url
       DATA_FEED_URL = "{{ path('schedule_view_event_get') }}",
       op = {
-        getOrderedUrl: "{{ path('exporter_api', { 'entityReference': 'schedule_event','_format': 'json' }) }}?conference_id={{currentConf.id}}",
-        getDatalessUrl: "{{ path('exporter_api', { 'entityReference': 'schedule_event','_format': 'json' }) }}?only_instant=whatever&conference_id={{currentConf.id}}",
+        getOrderedUrl: "{{ path('exporter_api', { 'entityReference': 'schedule_event','_format': 'json' }) }}?conference_id={{currentMainEvent.id}}",
+        getDatalessUrl: "{{ path('exporter_api', { 'entityReference': 'schedule_event','_format': 'json' }) }}?only_instant=whatever&conference_id={{currentMainEvent.id}}",
         updateUrl: "{{ path('schedule_view_event_edit') }}", //event modal form
         quickAddUrl: DATA_FEED_URL + "?method=add",
         quickUpdateUrl: DATA_FEED_URL + "?method=update",
@@ -344,7 +344,7 @@
     /*----------------------------------------------------------------------------------------*/
     /*var resConfig = {
       location: {
-        url: "{{ path('exporter_api', { 'entityReference': 'schedule_location','_format': 'json' }) }}?conference_id={{currentConf.id}}",
+        url: "{{ path('exporter_api', { 'entityReference': 'schedule_location','_format': 'json' }) }}?conference_id={{currentMainEvent.id}}",
         parse: function (e)
         {
           if (e.location && e.location.id != "")
@@ -357,7 +357,7 @@
           }
         }
       }, category: {
-        url: "{{ path('exporter_api', { 'entityReference': 'schedule_category','_format': 'json' }) }}?conference_id={{currentConf.id}}",
+        url: "{{ path('exporter_api', { 'entityReference': 'schedule_category','_format': 'json' }) }}?conference_id={{currentMainEvent.id}}",
         parse: function (e)
         {
           console.log(e)

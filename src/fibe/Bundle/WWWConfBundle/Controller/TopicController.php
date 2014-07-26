@@ -37,7 +37,7 @@ class TopicController extends Controller
   public function indexAction(Request $request)
   {
     $entities = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('VIEW', 'Topic');
-    // $entities = $this->getUser()->getCurrentConf()->getTopics()->toArray();
+    // $entities = $this->getUser()->getCurrentMainEvent()->getTopics()->toArray();
 
     $adapter = new ArrayAdapter($entities);
     $pager = new PagerFanta($adapter);
@@ -66,7 +66,7 @@ class TopicController extends Controller
    */
   public function filterAction(Request $request)
   {
-    $conf = $this->getUser()->getCurrentConf();
+    $conf = $this->getUser()->getCurrentMainEvent();
     //Filters
     $filters = $this->createForm(new TopicFilterType($this->getUser()));
     $filters->submit($request);
@@ -116,7 +116,7 @@ class TopicController extends Controller
     if ($form->isValid())
     {
       $em = $this->getDoctrine()->getManager();
-      $entity->setConference($this->getUser()->getCurrentConf());
+      $entity->setConference($this->getUser()->getCurrentMainEvent());
       $em->persist($entity);
       $em->flush();
 

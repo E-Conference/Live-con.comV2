@@ -39,7 +39,7 @@ class OrganizationController extends Controller
   public function indexAction(Request $request)
   {
     $entities = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('VIEW', 'Organization');
-    // $entities = $this->getUser()->getCurrentConf()->getOrganizations()->toArray();
+    // $entities = $this->getUser()->getCurrentMainEvent()->getOrganizations()->toArray();
 
     $adapter = new ArrayAdapter($entities);
     $pager = new PagerFanta($adapter);
@@ -71,7 +71,7 @@ class OrganizationController extends Controller
 
     $em = $this->getDoctrine()->getManager();
 
-    $conf = $this->getUser()->getCurrentConf();
+    $conf = $this->getUser()->getCurrentMainEvent();
     //Filters
     $filters = $this->createForm(new OrganizationFilterType($this->getUser()));
     $filters->submit($request);
@@ -122,7 +122,7 @@ class OrganizationController extends Controller
     if ($form->isValid())
     {
       $em = $this->getDoctrine()->getManager();
-      $entity->setConference($this->getUser()->getCurrentConf());
+      $entity->setConference($this->getUser()->getCurrentMainEvent());
 
       foreach ($entity->getMembers()
                as
@@ -275,7 +275,7 @@ class OrganizationController extends Controller
       $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('DELETE', 'Organization', $id);
       $em = $this->getDoctrine()->getManager();
       //The object must belong to the current conf
-      $currentConf = $this->getUser()->getCurrentConf();
+      $currentMainEvent = $this->getUser()->getCurrentMainEvent();
       $em->remove($entity);
       $em->flush();
       $this->container->get('session')->getFlashBag()->add(

@@ -26,7 +26,7 @@ abstract class LocationAwareCalendarEntityType extends CalendarEntityType
                 $event->getForm()->add('location', 'entity', array(
                     'class'    => 'fibeWWWConfBundle:Location',
                     'label'    => 'Location',
-                    'choices'  => $this->user->getCurrentConf()->getLocations()->toArray(),
+                    'choices'  => $this->user->getCurrentMainEvent()->getLocations()->toArray(),
                     'multiple' => false,
                     'required' => false
                 ));

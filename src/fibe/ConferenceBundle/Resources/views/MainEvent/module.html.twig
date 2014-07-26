@@ -16,7 +16,7 @@
   </div>
   <div class="row page-content">
 
-    <form action="{{ path('schedule_module_update', { 'id': module.id }) }}" method="post" class="form-inline"
+    <form action="{{ path('schedule_module_update') }}" method="post" class="form-inline"
           role="form" {{ form_enctype(module_form) }}>
       <input type="hidden" name="_method" value="PUT"/>
 

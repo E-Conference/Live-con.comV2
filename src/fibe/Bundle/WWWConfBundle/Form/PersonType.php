@@ -43,14 +43,14 @@
         ->add('organizations', 'entity', array(
           'class'    => 'fibeWWWConfBundle:Organization',
           'label'    => 'Organizations',
-          'choices'  => $this->user->getCurrentConf()->getOrganizations()->toArray(),
+          'choices'  => $this->user->getCurrentMainEvent()->getOrganizations()->toArray(),
           'required' => false,
           'multiple' => true
         ))
         ->add('papers', 'entity', array(
           'class'    => 'fibeWWWConfBundle:Paper',
           'label'    => 'Publications',
-          'choices'  => $this->user->getCurrentConf()->getPapers()->toArray(),
+          'choices'  => $this->user->getCurrentMainEvent()->getPapers()->toArray(),
           'required' => false,
           'multiple' => true
         ))

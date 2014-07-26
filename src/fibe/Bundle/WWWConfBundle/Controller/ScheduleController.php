@@ -44,15 +44,15 @@ class ScheduleController extends Controller
 
     $user = $this->getUser();
     $em = $this->getDoctrine();
-    $conf = $this->getUser()->getCurrentConf();
+    $conf = $this->getUser()->getCurrentMainEvent();
 
     //filters
     $categories = $em->getRepository('fibeWWWConfBundle:Category')->getOrdered();
-    $locations = $user->getCurrentConf()->getLocations();
-    $topics = $user->getCurrentConf()->getTopics();
+    $locations = $user->getCurrentMainEvent()->getLocations();
+    $topics = $user->getCurrentMainEvent()->getTopics();
 
     return array(
-      'currentConf' => $conf,
+      'currentMainEvent' => $conf,
       'authorized'  => isset($granted), // Si il existe une conference
       'categories'  => $categories,
       'locations'   => $locations,
@@ -81,7 +81,7 @@ class ScheduleController extends Controller
     $methodParam = $getData->get('method', '');
     $postData = $request->request->all();
 
-    $conf = $this->getUser()->getCurrentConf();
+    $conf = $this->getUser()->getCurrentMainEvent();
     $mainEvent = $conf->getMainConfEvent();
 
     $event = null;
@@ -210,7 +210,7 @@ class ScheduleController extends Controller
 
     $em = $this->getDoctrine()->getManager();
     //The object must belong to the current conf
-    $conf = $this->getUser()->getCurrentConf();
+    $conf = $this->getUser()->getCurrentMainEvent();
     $entity = $em->getRepository('fibeWWWConfBundle:ConfEvent')->findOneBy(array('conference' => $conf, 'id' => $id));
     if (!$entity)
     {
@@ -221,7 +221,7 @@ class ScheduleController extends Controller
     $roleForm = $this->createForm(new RoleType($this->getUser()), $role);
     $editForm = $this->createForm(new ConfEventType($this->getUser(), $entity), $entity);
 
-    $papersForSelect = $this->getUser()->getCurrentConf()->getPapers()->toArray();
+    $papersForSelect = $this->getUser()->getCurrentMainEvent()->getPapers()->toArray();
     $form_paper = $this->createFormBuilder($entity)
       ->add(
         'papers',
@@ -236,7 +236,7 @@ class ScheduleController extends Controller
       )
       ->getForm();
 
-    $topicsForSelect = $this->getUser()->getCurrentConf()->getTopics()->toArray();
+    $topicsForSelect = $this->getUser()->getCurrentMainEvent()->getTopics()->toArray();
     $form_topic = $this->createFormBuilder($entity)
       ->add(
         'topics',
@@ -291,7 +291,7 @@ class ScheduleController extends Controller
 //    $JSONArray = array();
 //
 //    //The object must belong to the current conf
-//    $conf = $this->getUser()->getCurrentConf();
+//    $conf = $this->getUser()->getCurrentMainEvent();
 //    $entity = $em->getRepository('fibeWWWConfBundle:ConfEvent')->findOneBy(
 //      array('conference' => $conf, 'id' => $id)
 //    ); //@TODO error

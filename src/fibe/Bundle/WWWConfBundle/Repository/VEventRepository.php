@@ -12,12 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class VEventRepository extends EntityRepository
 {
-  public function filtering($params, $currentConf)
+  public function filtering($params, $currentMainEvent)
   {
     $qb = $this->getAllOrderByStartAtQueryBuilder();
     $qb
       ->where('confevent.conference = :conference_id')
-      ->setParameter('conference_id', $currentConf->getId());
+      ->setParameter('conference_id', $currentMainEvent->getId());
 
     if (isset($params['only_instant']))
     {

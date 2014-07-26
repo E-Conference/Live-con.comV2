@@ -69,20 +69,20 @@ class ACLHelper
     $this->throwNotFoundHttpException($repositoryName, $id);
   }
 
-  protected function getCurrentConf()
+  protected function getCurrentMainEvent()
   {
-    if (!$currentConf = $this->getUser()->getCurrentConf())
+    if (!$currentMainEvent = $this->getUser()->getCurrentMainEvent())
     {
       //TODO redirect to the dashboard with parameter if the conf doesn't exist
       $this->throwNotFoundHttpException("current conference");
     }
 
-    return $currentConf;
+    return $currentMainEvent;
   }
 
   protected function restrictQueryBuilderByConferenceId(QueryBuilder $queryBuilder)
   {
-    $queryBuilder->andWhere("entity.main_event = " . $this->getCurrentConf()->getId());
+    $queryBuilder->andWhere("entity.main_event = " . $this->getCurrentMainEvent()->getId());
   }
 
   protected function restrictQueryBuilderByIds(QueryBuilder $queryBuilder, $ids)

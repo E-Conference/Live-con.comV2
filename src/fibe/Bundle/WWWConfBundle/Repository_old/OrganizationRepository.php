@@ -122,16 +122,16 @@ class OrganizationRepository extends EntityRepository
    * filtering function
    *
    * @param $params
-   * @param $currentConf
+   * @param $currentMainEvent
    *
    * @return mixed
    */
-  public function filtering($params, $currentConf)
+  public function filtering($params, $currentMainEvent)
   {
     $qb = $this->createQueryBuilder('org');
     $qb
       ->where('org.conference = :conference_id')
-      ->setParameter('conference_id', $currentConf->getId());
+      ->setParameter('conference_id', $currentMainEvent->getId());
 
     if (isset($params['id']))
     {

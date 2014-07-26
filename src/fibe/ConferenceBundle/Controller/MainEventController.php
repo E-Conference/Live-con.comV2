@@ -74,7 +74,7 @@
     {
       $em = $this->getDoctrine()->getManager();
 
-      $conference = $this->get('fibe_security.acl_entity_helper')->getEntityACL('DELETE','MainEvent',$this->getUser()->getCurrentConf());
+      $conference = $this->get('fibe_security.acl_entity_helper')->getEntityACL('DELETE','MainEvent',$this->getUser()->getCurrentMainEvent());
 
       //TODO CSRF TOKEN
       // $csrf = $this->get('form.csrf_provider'); //Symfony\Component\Form\Extension\Csrf\CsrfProvider\SessionCsrfProvider 
@@ -116,7 +116,7 @@
       $conference = $this->get('fibe_security.acl_entity_helper')->getEntityACL('DELETE','MainEvent',$id);
 
       //Change User current Conf
-      $user->setCurrentConf(null);
+      $user->setcurrentMainEvent(null);
       $em->persist($user);
 
       $this->get('mainEventService')->delete($conference);
@@ -137,7 +137,7 @@
      */
     public function moduleAction(Request $request)
     { 
-      $module = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT','Module',$this->getUser()->getCurrentConf()->getModule());
+      $module = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT','Module',$this->getUser()->getCurrentMainEvent()->getModule());
 
       $moduleForm = $this->createForm(new ModuleType(), $module); 
 
@@ -151,7 +151,7 @@
 
   /**
    * Edits an existing Module entity.
-   * @Route("{id}/module", name="schedule_module_update")
+   * @Route("/module", name="schedule_module_update")
    *
    * @param Request $request
    * @param         $id
@@ -159,10 +159,10 @@
    * @return \Symfony\Component\HttpFoundation\RedirectResponse
    * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
    */
-  public function updateModuleAction(Request $request, $id)
+  public function updateModuleAction(Request $request)
   {
 
-    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT','Module',$this->getUser()->getCurrentConf()->getModule());
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT','Module',$this->getUser()->getCurrentMainEvent()->getModule());
  
     $editForm = $this->createForm(new ModuleType(), $entity);
     $editForm->bind($request);

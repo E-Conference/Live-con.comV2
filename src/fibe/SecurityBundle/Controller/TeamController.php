@@ -33,11 +33,11 @@ class TeamController extends Controller
   public function indexAction()
   {
 
-    $currentConf = $this->getUser()->getcurrentConf();
+    $currentMainEvent = $this->getUser()->getcurrentMainEvent();
 
     $ACLService = $this->get('fibe_security.acl_user_permission_helper');
     //here the access control is on the team and not on the teamate himself
-    $team = $ACLService->getEntityACL('VIEW', 'Team', $currentConf->getTeam());
+    $team = $ACLService->getEntityACL('VIEW', 'Team', $currentMainEvent->getTeam());
 
     $managers = $team->getConfManagers();
 
@@ -70,7 +70,7 @@ class TeamController extends Controller
       'current_manager_conf_authorizations' => $userConfPermission,
       // 'update_forms'                     => $update_forms,
       'add_teamate_form'                    => $addTeamateForm->createView(),
-      'currentConf'                         => $currentConf,
+      'currentMainEvent'                         => $currentMainEvent,
       'authorized'                          => true
     );
   }
@@ -84,9 +84,9 @@ class TeamController extends Controller
   public function addTeamateAction(Request $request)
   {
 
-    $currentConf = $this->getUser()->getcurrentConf();
+    $currentMainEvent = $this->getUser()->getcurrentMainEvent();
     $ACLService = $this->get('fibe_security.acl_user_permission_helper');
-    $team = $ACLService->getEntityACL('CREATE', 'Team', $currentConf->getTeam()->getId());
+    $team = $ACLService->getEntityACL('CREATE', 'Team', $currentMainEvent->getTeam()->getId());
 
     $userConfPermission = $ACLService->getUserConfPermission();
     $form = $this->createForm(new UserConfPermissionType($this->getUser()), $userConfPermission);
@@ -100,7 +100,7 @@ class TeamController extends Controller
       $teamate->addTeam($team);
       $em->persist($teamate);
       $em->persist($team);
-      $em->persist($currentConf);
+      $em->persist($currentMainEvent);
 
       $ACLService->updateUserConfPermission($userConfPermission);
 
@@ -129,9 +129,9 @@ class TeamController extends Controller
    */
   public function editAction($id)
   {
-    $currentConf = $this->getUser()->getCurrentConf();
+    $currentMainEvent = $this->getUser()->getCurrentMainEvent();
     $ACLService = $this->get('fibe_security.acl_user_permission_helper');
-    $team = $ACLService->getEntityACL('VIEW', 'Team', $currentConf->getTeam()->getId());
+    $team = $ACLService->getEntityACL('VIEW', 'Team', $currentMainEvent->getTeam()->getId());
 
     $em = $this->getDoctrine()->getManager();
     $entity = $em->getRepository('fibeSecurityBundle:User')->find($id);
@@ -151,9 +151,9 @@ class TeamController extends Controller
    */
   public function updateAction(Request $request, $id)
   {
-    $currentConf = $this->getUser()->getCurrentConf();
+    $currentMainEvent = $this->getUser()->getCurrentMainEvent();
     $ACLService = $this->get('fibe_security.acl_user_permission_helper');
-    $team = $ACLService->getEntityACL('VIEW', 'Team', $currentConf->getTeam()->getId());
+    $team = $ACLService->getEntityACL('VIEW', 'Team', $currentMainEvent->getTeam()->getId());
 
     $em = $this->getDoctrine()->getManager();
     $entity = $em->getRepository('fibeSecurityBundle:User')->find($id);
@@ -206,9 +206,9 @@ class TeamController extends Controller
       {
         $manager = $em->getRepository('fibeSecurityBundle:User')->find($id);
         //cannot delete owner
-        $currentConf = $this->getUser()->getcurrentConf();
+        $currentMainEvent = $this->getUser()->getcurrentMainEvent();
         $ACLService = $this->get('fibe_security.acl_user_permission_helper');
-        $team = $ACLService->getEntityACL('DELETE', 'Team', $currentConf->getTeam());
+        $team = $ACLService->getEntityACL('DELETE', 'Team', $currentMainEvent->getTeam());
         if ("OWNER" == $ACLService->getACEByEntity($team, $manager))
         {
           throw new AccessDeniedHttpException("cannot remove the owner");

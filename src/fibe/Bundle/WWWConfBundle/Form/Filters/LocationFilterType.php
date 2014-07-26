@@ -22,7 +22,7 @@ class LocationFilterType extends AbstractType
            ->add('id', 'entity', array(
                 'class' => 'fibeWWWConfBundle:Location',
                 'label'   => 'Name',
-                'choices'=> $this->user->getCurrentConf()->getLocations()->toArray(),
+                'choices'=> $this->user->getCurrentMainEvent()->getLocations()->toArray(),
                 'required' => false,
                 'attr'  => array('placeholder'  => 'Label')
             ))

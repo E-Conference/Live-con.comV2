@@ -102,16 +102,16 @@ class SponsorRepository extends EntityRepository
    * Filtre
    *
    * @param $params
-   * @param $currentConf
+   * @param $currentMainEvent
    *
    * @return mixed
    */
-  public function filtering($params, $currentConf)
+  public function filtering($params, $currentMainEvent)
   {
     $qb = $this->createQueryBuilder('t');
     $qb
       ->where('t.conference = :conference_id')
-      ->setParameter('conference_id', $currentConf->getId());
+      ->setParameter('conference_id', $currentMainEvent->getId());
 
     if (isset($params['id']))
     {

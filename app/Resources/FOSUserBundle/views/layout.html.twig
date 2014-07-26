@@ -75,7 +75,7 @@
   {% endfor %}
 
   <!-- Hide module not used in the conference -->
-  {% if app.user.getCurrentConf().getModule().getPaperModule() == 0 %}
+  {% if app.user.getCurrentMainEvent().getModule().getPaperModule() == 0 %}
     <script type="text/javascript">
       $(document).ready(function ()
       {

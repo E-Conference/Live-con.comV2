@@ -27,7 +27,7 @@ class ExportController extends Controller
    */
   public function indexAction()
   {
-    $wwwConf = $this->getUser()->getCurrentConf();
+    $wwwConf = $this->getUser()->getCurrentMainEvent();
     $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'MainEvent',$wwwConf);
 
     $export_form = $this->createFormBuilder()
@@ -77,7 +77,7 @@ class ExportController extends Controller
     {
       $format = $export_form["export_format"]->getData();
 
-      $conference = $this->getUser()->getCurrentConf();
+      $conference = $this->getUser()->getCurrentMainEvent();
       $conferenceArr = new \Doctrine\Common\Collections\ArrayCollection();
       $conferenceArr->add($conference);
 

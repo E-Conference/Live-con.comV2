@@ -74,7 +74,7 @@
   {% endfor %}
 
   <!-- Hide module not used in the conference -->
-  {% if app.user.getCurrentConf().getModule().getPaperModule() == 0 %}
+  {% if app.user.getCurrentMainEvent().getModule().getPaperModule() == 0 %}
     <script type="text/javascript">
       $(document).ready(function ()
       {
@@ -94,7 +94,7 @@
   {% endblock navBar %}
 
 
-  {% if app.user.getCurrentConf() %}
+  {% if app.user.getCurrentMainEvent() %}
     {% block menuNavBar %}
       {% include "::menuNavBar.html.twig" %}
     {% endblock menuNavBar %}
@@ -113,22 +113,22 @@
               <li class="schedule_conference_show col-xs-2 col-sm-2  col-mg-2 col-lg-2"><a
                     href="{{ path('schedule_conference_show') }}" class='ellipsis'><i
                       class="fa  fa-search-plus fa-1x"></i><span> Overview </span></a></li>
-              {% if is_granted('EDIT', app.user.currentConf.module) %}
+              {% if is_granted('EDIT', app.user.currentMainEvent.module) %}
                 <li class="schedule_conference_module col-xs-2 col-sm-2  col-mg-2 col-lg-2"><a
                       href="{{ path('schedule_conference_module') }}" class='ellipsis'> <i
                         class="fa fa-inbox fa-1x"></i><span> Modules  </span></a></li>
               {% endif %}
-              {% if is_granted('VIEW', app.user.currentConf.team) %}
+              {% if is_granted('VIEW', app.user.currentMainEvent.team) %}
                 <li class="conference_team_index col-xs-2 col-sm-2  col-mg-2 col-lg-2"><a
                       href="{{ path('conference_team_index') }}" class='ellipsis'><i
                         class="fa fa-users fa-1x"></i><span> Team   </span></a></li>
               {% endif %}
-              {% if is_granted('OPERATOR', app.user.currentConf) %}
+              {% if is_granted('OPERATOR', app.user.currentMainEvent) %}
                 <li class="externalization_import_index col-xs-2 col-sm-2 col-mg-2 col-lg-2"><a
                       href="{{ path('externalization_import_index') }}" class='ellipsis'><i
                         class="fa fa-exchange fa-1x"></i><span> Import </span></a></li>
               {% endif %}
-              {% if is_granted('VIEW', app.user.currentConf) %}
+              {% if is_granted('VIEW', app.user.currentMainEvent) %}
                 <li class="externalization_export_index col-xs-2 col-sm-2 col-mg-2 col-lg-2"><a
                       href="{{ path('externalization_export_index') }}" class='ellipsis'><i
                         class="fa fa-download fa-1x"></i><span> Export </span></a></li>

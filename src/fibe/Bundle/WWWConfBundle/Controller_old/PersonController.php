@@ -39,7 +39,7 @@ class PersonController extends Controller
   public function indexAction(Request $request)
   {
     $entities = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('VIEW', 'Person');
-    // $entities = $this->getUser()->getCurrentConf()->getPersons()->toArray();
+    // $entities = $this->getUser()->getCurrentMainEvent()->getPersons()->toArray();
 
     $adapter = new ArrayAdapter($entities);
     $pager = new PagerFanta($adapter);
@@ -72,7 +72,7 @@ class PersonController extends Controller
 
     $em = $this->getDoctrine()->getManager();
 
-    $conf = $this->getUser()->getCurrentConf();
+    $conf = $this->getUser()->getCurrentMainEvent();
     //Filters
     $filters = $this->createForm(new PersonFilterType($this->getUser()));
     $filters->submit($request);
@@ -121,7 +121,7 @@ class PersonController extends Controller
     if ($form->isValid())
     {
       $em = $this->getDoctrine()->getManager();
-      $entity->setConference($this->getUser()->getCurrentConf());
+      $entity->setConference($this->getUser()->getCurrentMainEvent());
 
       foreach ($entity->getPapers()
                as
