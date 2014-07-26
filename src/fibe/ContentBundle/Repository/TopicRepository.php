@@ -1,8 +1,9 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Repository;
+namespace fibe\ContentBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use fibe\EventBundle\Entity\MainEvent;
 
 /**
  * TopicRepository
@@ -15,7 +16,7 @@ class TopicRepository extends EntityRepository
   /**
    * getOrderedQueryBuilder
    *
-   * @return QueryBuilder
+   * @return \Doctrine\ORM\QueryBuilder
    */
   public function getOrderedQueryBuilder()
   {
@@ -28,7 +29,7 @@ class TopicRepository extends EntityRepository
   /**
    * getOrderedQuery
    *
-   * @return Query
+   * @return \Doctrine\ORM\Query|\Doctrine\ORM\QueryBuilder
    */
   public function getOrderedQuery()
   {
@@ -40,7 +41,7 @@ class TopicRepository extends EntityRepository
   /**
    * getOrdered
    *
-   * @return DoctrineCollection
+   * @return array
    */
   public function getOrdered()
   {
@@ -54,7 +55,7 @@ class TopicRepository extends EntityRepository
    *
    * @param array $params
    *
-   * @return QueryBuilder
+   * @return \Doctrine\ORM\QueryBuilder
    */
   public function extractQueryBuilder($params)
   {
@@ -90,7 +91,7 @@ class TopicRepository extends EntityRepository
    *
    * @param array $params
    *
-   * @return Query
+   * @return \Doctrine\ORM\Query|\Doctrine\ORM\QueryBuilder
    */
   public function extractQuery($params)
   {
@@ -104,7 +105,7 @@ class TopicRepository extends EntityRepository
    *
    * @param array $params
    *
-   * @return DoctrineCollection
+   * @return array
    */
   public function extract($params)
   {
@@ -117,7 +118,7 @@ class TopicRepository extends EntityRepository
    * Filtering method
    *
    * @param $params
-   * @param $currentMainEvent
+   * @param MainEvent $currentMainEvent
    *
    * @return mixed
    */

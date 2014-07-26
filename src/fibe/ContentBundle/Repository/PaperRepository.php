@@ -1,14 +1,11 @@
 <?php
 
-/**
- *
- *
- */
-
-namespace fibe\Bundle\WWWConfBundle\Repository;
+namespace fibe\ContentBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Common\Collections\Criteria;
+use fibe\ContentBundle\Entity\Paper;
+use fibe\EventBundle\Entity\MainEvent;
 
 /**
  * PaperRepository
@@ -18,12 +15,10 @@ use Doctrine\Common\Collections\Criteria;
  */
 class PaperRepository extends EntityRepository
 {
-
-
   /**
    * Get papers for the selected entity
    *
-   * @param null $entity
+   * @param MainEvent $entity
    *
    * @return mixed
    */
@@ -35,6 +30,7 @@ class PaperRepository extends EntityRepository
     {
       foreach ($entity->getPapers() as $paper)
       {
+        /** @var Paper $paper */
         array_push($papers_id, $paper->getId());
       }
     }
@@ -48,12 +44,11 @@ class PaperRepository extends EntityRepository
     return $papers;
   }
 
-
   /**
    * filtering method
    *
    * @param $params
-   * @param $currentMainEvent
+   * @param MainEvent $currentMainEvent
    *
    * @return mixed
    */

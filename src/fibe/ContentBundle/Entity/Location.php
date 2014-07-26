@@ -4,7 +4,7 @@ namespace fibe\ContentBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use fibe\WWWConfBundle\Entity\VEvent;
+use fibe\EventBundle\Entity\VEvent;
 use fibe\EventBundle\Entity\MainEvent;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -281,11 +281,11 @@ class Location
   /**
    * Add Equipment
    *
-   * @param Equipment $equipments
+   * @param $equipments
    *
    * @return $this
    */
-  public function addEquipment(Equipment $equipments)
+  public function addEquipment($equipments)
   {
     $this->equipments[] = $equipments;
 

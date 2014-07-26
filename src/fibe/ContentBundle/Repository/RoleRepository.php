@@ -1,6 +1,6 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Repository;
+namespace fibe\ContentBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
