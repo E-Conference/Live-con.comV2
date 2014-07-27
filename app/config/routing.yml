@@ -31,19 +31,6 @@ fibe_home_page:
     type:     annotation
     prefix:   / 
 
-fibe_dashboard:
-    resource: "@fibeDashboardBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-fibe_www_conf:
-    resource: "@fibeWWWConfBundle/Controller/"
-    prefix:   /schedule
-
-fibe_data:
-    resource: "@DataBundle/Controller/"
-    prefix:   /data
-
 fibe_security_www_conf:
     resource: "@fibeSecurityBundle/Controller/"
     type:     annotation 
