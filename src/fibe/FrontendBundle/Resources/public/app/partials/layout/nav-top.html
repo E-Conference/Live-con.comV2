@@ -12,7 +12,7 @@
           <a  href="#" title="Go back to Index"  style="float:left"> <img style="height:45px; width:auto;" src="{{GLOBAL_CONFIG.app.urls.img+'livecon.png'}}"/></a>
           <div style="float:left">
           <div ng-repeat="local in locals">
-            <a href="" ng-click="changeLocal(local)"><img src="{{local.src}}"/></a>
+              <img ng-src="{{ local.src }}" ng-click="changeLocal(local)"/>
           </div>
           <div style="float:left">
            <a  class="btn btn-info"  href="#login" title="login">login</a>

@@ -2,6 +2,22 @@ angular.module('organizationApp').controller('organizationMainCtrl', [function (
 
 }]);
 
-angular.module('organizationApp').controller('organizationListCtrl', ['$scope', 'Organization', function ($scope, Organization) {
+angular.module('organizationApp').controller('organizationListCtrl', ['$scope', 'Organization', '$cachedResource', function ($scope, Organization, $cachedResource) {
     $scope.organizations = Organization.list();
+
+    $scope.reload = function(){
+       // $scope.organizations = Organization.list();
+        $scope.organizations.$promise.then(function() {
+            console.log('From cache:', $scope.organizations);
+        });
+        //console.log($scope.organizations);
+    }
+    /*
+    var Org = $cachedResource('org', globalConfig.api.urls.organizations+'/:organizationId.json', {id: "@id"});
+    $scope.organizations = Org.query();
+    $scope.organizations.$promise.then(function(data) {
+        console.log($scope.organizations);
+       console.log($scope.organizations.length);
+    });*/
+    //$scope.organizations = $cachedResource();
 }]);

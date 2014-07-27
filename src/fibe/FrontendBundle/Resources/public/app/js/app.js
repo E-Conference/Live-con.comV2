@@ -14,6 +14,7 @@ var liveconApp = angular.module('liveconApp', [
     'ui.bootstrap',
     'ngDragDrop',
     'angular-loading-bar',
+    'ngCachedResource',
     'liveconControllers',
     'liveconFilters',
     'liveconServices',
