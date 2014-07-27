@@ -3,12 +3,10 @@
   namespace fibe\EventBundle\Services;
 
   use Doctrine\ORM\EntityManager;
-  use fibe\Bundle\WWWConfBundle\Entity\Category;
-  use fibe\Bundle\WWWConfBundle\Entity\Location;
 
+  use fibe\ContentBundle\Entity\Location;
+  use fibe\EventBundle\Entity\Category;
   use fibe\EventBundle\Entity\MainEvent;
-  use fibe\Bundle\WWWConfBundle\Entity\Module;
-  use fibe\MobileAppBundle\Entity\MobileAppConfig;
   use fibe\SecurityBundle\Entity\Team;
   use fibe\SecurityBundle\Entity\User;
 
@@ -156,11 +154,6 @@
       $mainEvent->setTeam($defaultTeam);
       $this->entityManager->persist($defaultTeam);
 
-      //Linking app config to conference
-      $mainEvent->setAppConfig($defaultAppConfig);
-      $mainEvent->setModule($defaultModule);
-//      $mainEvent->addCategory($ConferenceEvent);
-
       //Add conference to current manager
       $user->setCurrentMainEvent($mainEvent);
       $user->addConference($mainEvent);
@@ -210,16 +203,6 @@
     public function delete(MainEvent $mainEvent)
     {
       $this->removeObjects($mainEvent);
-
-      // module
-      $module = $mainEvent->getModule();
-      $mainEvent->setModule(null);
-      if($module)
-      { 
-        $this->entityManager->flush();
-        $this->entityManager->remove($module);
-        $this->entityManager->flush();
-      }
  
       //appConfig
       $appConfig = $mainEvent->getAppConfig();
@@ -239,13 +222,6 @@
         $this->entityManager->flush();
         $this->entityManager->remove($team);
         $this->entityManager->flush();
-      }
-
-      //Remove link between manager and conference
-      $managers = $mainEvent->getConfManagers();
-      foreach ($managers as $manager)
-      {
-        $mainEvent->removeConfManager($manager);
       }
 
       $this->entityManager->flush();

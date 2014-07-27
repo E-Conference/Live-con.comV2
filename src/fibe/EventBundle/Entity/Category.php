@@ -4,7 +4,7 @@ namespace fibe\EventBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use fibe\Bundle\WWWConfBundle\Util\StringTools;
+use fibe\ContentBundle\Util\StringTools;
 use JMS\Serializer\Annotation\Expose;
 
 /**
