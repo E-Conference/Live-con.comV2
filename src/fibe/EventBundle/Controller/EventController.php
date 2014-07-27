@@ -104,7 +104,7 @@ class EventController extends Controller
   {
     $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Event');
 
-    $form = $this->createForm(new EventType($this->getUser(), $entity);
+    $form = $this->createForm(new EventType($this->getUser(), $entity));
     $form->bind($request);
 
     if ($form->isValid())
