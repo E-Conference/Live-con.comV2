@@ -2,6 +2,7 @@
 
 namespace fibe\Bundle\WWWConfBundle\Controller;
 
+use fibe\EventBundle\Entity\MainEventSettings;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -28,7 +29,7 @@ class MainEventSettingsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('fibeConferenceBundle:MainEventSettings')->findAll();
+        $entities = $em->getRepository('fibeEventBundle:MainEventSettings')->findAll();
 
         return array(
             'entities' => $entities,
@@ -39,7 +40,7 @@ class MainEventSettingsController extends Controller
      *
      * @Route("/", name="maineventsettings_create")
      * @Method("POST")
-     * @Template("fibeConferenceBundle:MainEventSettings:new.html.twig")
+     * @Template("fibeEventBundle:MainEventSettings:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -109,7 +110,7 @@ class MainEventSettingsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('fibeConferenceBundle:MainEventSettings')->find($id);
+        $entity = $em->getRepository('fibeEventBundle:MainEventSettings')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find MainEventSettings entity.');
@@ -134,7 +135,7 @@ class MainEventSettingsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('fibeConferenceBundle:MainEventSettings')->find($id);
+        $entity = $em->getRepository('fibeEventBundle:MainEventSettings')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find MainEventSettings entity.');
@@ -173,13 +174,13 @@ class MainEventSettingsController extends Controller
      *
      * @Route("/{id}", name="maineventsettings_update")
      * @Method("PUT")
-     * @Template("fibeConferenceBundle:MainEventSettings:edit.html.twig")
+     * @Template("fibeEventBundle:MainEventSettings:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('fibeConferenceBundle:MainEventSettings')->find($id);
+        $entity = $em->getRepository('fibeEventBundle:MainEventSettings')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find MainEventSettings entity.');
@@ -214,7 +215,7 @@ class MainEventSettingsController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('fibeConferenceBundle:MainEventSettings')->find($id);
+            $entity = $em->getRepository('fibeEventBundle:MainEventSettings')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find MainEventSettings entity.');

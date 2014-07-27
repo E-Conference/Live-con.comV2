@@ -26,11 +26,6 @@ documentation:
     type:     annotation
     prefix:   /
 
-fibe_conference:
-    resource: "@fibeConferenceBundle/Controller/"
-    type:     annotation
-    prefix:   / 
-
 fibe_home_page:
     resource: "@fibeHomePageBundle/Controller/"
     type:     annotation
