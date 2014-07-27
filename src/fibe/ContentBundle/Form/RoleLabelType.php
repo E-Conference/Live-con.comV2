@@ -11,7 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @package fibe\ContentBundle\Form
  */
-class RoleTypeType extends AbstractType
+class RoleLabelType extends AbstractType
 {
   /**
    * {@inheritdoc}

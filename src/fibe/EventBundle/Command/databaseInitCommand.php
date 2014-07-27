@@ -1,10 +1,8 @@
 <?php
   namespace fibe\EventBundle\Command;
 
-  use fibe\Bundle\ContentBundle\Entity\Equipment;
-  use fibe\Bundle\ContentBundle\Entity\RoleType;
-  use fibe\Bundle\EventBundle\Entity\Category;
-  use fibe\Bundle\EventBundle\Entity\Status;
+  use fibe\ContentBundle\Entity\Equipment;
+  use fibe\ContentBundle\Entity\RoleLabel;
   use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
   use Symfony\Component\Console\Input\InputInterface;
   use Symfony\Component\Console\Output\OutputInterface;
@@ -47,23 +45,23 @@
       $em = $this->getContainer()->get('doctrine')->getManager('default');
 
       //RoleType
-      $roleType = new RoleType();
-      $roleType->setName("Delegate");
+      $roleType = new RoleLabel();
+      $roleType->setLabel("Delegate");
       $roleType->setLabel("Delegate");
       $em->persist($roleType);
 
-      $roleType = new RoleType();
-      $roleType->setName("Chair");
+      $roleType = new RoleLabel();
+      $roleType->setLabel("Chair");
       $roleType->setLabel("Chair");
       $em->persist($roleType);
 
-      $roleType = new RoleType();
-      $roleType->setName("Presenter");
+      $roleType = new RoleLabel();
+      $roleType->setLabel("Presenter");
       $roleType->setLabel("Presenter");
       $em->persist($roleType);
 
-      $roleType = new RoleType();
-      $roleType->setName("ProgrammeCommitteeMember");
+      $roleType = new RoleLabel();
+      $roleType->setLabel("ProgrammeCommitteeMember");
       $roleType->setLabel("Programme Committee Member");
       $em->persist($roleType);
 

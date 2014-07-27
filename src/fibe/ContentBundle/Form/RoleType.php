@@ -38,7 +38,7 @@ class RoleType extends AbstractType
         'required'    => true,
         'empty_value' => '',
       ))
-      ->add('type', null, array(
+      ->add('label', null, array(
         'required'    => true,
         'label'       => 'Select role',
         'empty_value' => '',

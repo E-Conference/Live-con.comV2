@@ -37,16 +37,15 @@ class Role
   /**
    * Person : the person who has this role
    *
-   * @ORM\ManyToOne(targetEntity="Person", inversedBy="roles")
+   * @ORM\ManyToOne(targetEntity="fibe\CommunityBundle\Entity\Person", inversedBy="roles")
    * @Assert\NotBlank(message="You have to choose a Person")
    *
    */
   private $person;
 
   /**
-   * VEvent : Persons related to an event
    *
-   * @ORM\ManyToOne(targetEntity="VEvent", inversedBy="roles")
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\VEvent", inversedBy="roles")
    * @ORM\JoinColumn(name="vevent_id", referencedColumnName="id")
    * @Assert\NotBlank(message="You have to choose an event")
    *
@@ -56,10 +55,10 @@ class Role
   /**
    * The RoleType associated
    *
-   * @ORM\ManyToOne(targetEntity="RoleType", inversedBy="roles")
+   * @ORM\ManyToOne(targetEntity="RoleLabel", inversedBy="roles")
    * @Assert\NotBlank(message="You have to choose a type")
    */
-  private $type;
+  private $label;
 
   /**
    * The mainEvent associated
@@ -112,7 +111,7 @@ class Role
    */
   public function setEvent(VEvent $event = null)
   {
-    $this->event = $event;
+    $this->$VEvent = $event;
 
     return $this;
   }
@@ -124,19 +123,19 @@ class Role
    */
   public function getEvent()
   {
-    return $this->event;
+    return $this->$VEvent;
   }
 
   /**
    * Set type
    *
-   * @param RoleType $type
+   * @param RoleLabel $type
    *
    * @return Role
    */
-  public function setType(RoleType $type = null)
+  public function setLabel(RoleLabel $type = null)
   {
-    $this->type = $type;
+    $this->label = $type;
 
     return $this;
   }
@@ -144,11 +143,11 @@ class Role
   /**
    * Get type
    *
-   * @return RoleType
+   * @return RoleLabel
    */
-  public function getType()
+  public function getLabel()
   {
-    return $this->type;
+    return $this->label;
   }
 
   /**

@@ -76,7 +76,7 @@ class Sponsor
   /**
    * Events related to a paper
    *
-   * @ORM\ManyToMany(targetEntity="VEvent", mappedBy="papers", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\VEvent", mappedBy="papers", cascade={"persist"})
    */
   protected $events;
 

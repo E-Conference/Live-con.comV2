@@ -53,7 +53,7 @@ class Paper
   /**
    * Authors : Persons related to an event
    *
-   * @ORM\ManyToMany(targetEntity="Person", inversedBy="paper", cascade={"persist", "merge"})
+   * @ORM\ManyToMany(targetEntity="fibe\CommunityBundle\Entity\Person", inversedBy="paper", cascade={"persist", "merge"})
    * @ORM\JoinTable(
    *     joinColumns={@ORM\JoinColumn(name="paper_id", referencedColumnName="id", onDelete="Cascade")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id", onDelete="Cascade")})
@@ -87,7 +87,7 @@ class Paper
   /**
    * Events related to the paper
    *
-   * @ORM\ManyToMany(targetEntity="VEvent", mappedBy="paper", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\VEvent", mappedBy="paper", cascade={"persist"})
    */
   protected $events;
 

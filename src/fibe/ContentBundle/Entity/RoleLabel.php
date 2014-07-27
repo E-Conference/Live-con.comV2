@@ -2,6 +2,7 @@
 
 namespace fibe\ContentBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -13,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\RoleTypeRepository")
  *
  */
-class RoleType
+class RoleLabel
 {
   /**
    * @ORM\Id
@@ -31,9 +32,9 @@ class RoleType
 
   /**
    * role
-   * Role how have this type
+   * Role who have this type
    *
-   * @ORM\OneToMany(targetEntity="Role", mappedBy="type")
+   * @ORM\OneToMany(targetEntity="Role", mappedBy="label")
    */
   private $roles;
 
@@ -42,7 +43,7 @@ class RoleType
    */
   public function __construct()
   {
-    $this->role = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->role = new ArrayCollection();
   }
 
   /**
@@ -58,11 +59,11 @@ class RoleType
   /**
    * Add role
    *
-   * @param \fibe\ContentBundle\Entity\Role $role
+   * @param Role $role
    *
-   * @return RoleType
+   * @return Role
    */
-  public function addRole(\fibe\ContentBundle\Entity\Role $role)
+  public function addRole(Role $role)
   {
     $this->role[] = $role;
 
@@ -72,9 +73,9 @@ class RoleType
   /**
    * Remove role
    *
-   * @param \fibe\ContentBundle\Entity\Role $role
+   * @param Role $role
    */
-  public function removeRole(\fibe\ContentBundle\Entity\Role $role)
+  public function removeRole(Role $role)
   {
     $this->role->removeElement($role);
   }
@@ -104,7 +105,7 @@ class RoleType
    *
    * @param string $label
    *
-   * @return RoleType
+   * @return String
    */
   public function setLabel($label)
   {
