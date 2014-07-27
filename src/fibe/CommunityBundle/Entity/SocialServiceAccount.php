@@ -9,7 +9,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 use fibe\EventBundle\Entity\MainEvent;
 
-
 /**
  * @TODO comment
  *
@@ -19,7 +18,6 @@ use fibe\EventBundle\Entity\MainEvent;
  */
 class SocialServiceAccount
 {
-
   // Status values for "EVENT"
   const STATUS_FACEBOOK = "FACEBOOK"; // Indicates event was cancelled.
   const STATUS_TWITTER = "TWITTER"; // Indicates event is definite.

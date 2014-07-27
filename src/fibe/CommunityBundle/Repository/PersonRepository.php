@@ -20,7 +20,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class PersonRepository extends EntityRepository
 {
-
   /**
    * Return the author of the paper
    *

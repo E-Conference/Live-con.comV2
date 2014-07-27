@@ -1,13 +1,7 @@
 <?php
 
-/**
- * 
- * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
- * @licence: GPL
- *
- */
 
-namespace fibe\Bundle\WWWConfBundle\Form;
+namespace fibe\EventBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,7 +12,7 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('label')
             ->add('description')
             ->add('color')
         ;
@@ -27,12 +21,12 @@ class CategoryType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'fibe\Bundle\WWWConfBundle\Entity\Category'
+            'data_class' => 'fibe\EventBundle\Entity\Category'
         ));
     }
 
     public function getName()
     {
-        return 'fibe_bundle_wwwconfbundle_category_type'; 
+        return 'fibe_eventbundle_category_type'; 
     }
 }

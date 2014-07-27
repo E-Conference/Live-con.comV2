@@ -12,7 +12,6 @@ use JMS\Serializer\Annotation\VirtualProperty;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
  * This entity is based on the "VEVENT" components
  * describe in the RFC2445
@@ -49,7 +48,6 @@ class VEvent
    * @ORM\GeneratedValue(strategy="AUTO")
    */
   protected $id;
-
 
   /**
    * dtstart
@@ -266,7 +264,6 @@ class VEvent
    */
   private $roles;
 
-
   /**
    * Sponsors related to a VEvent
    *
@@ -276,7 +273,7 @@ class VEvent
    */
   private $sponsors;
 
-   /**
+  /**
    * url
    *
    * This property defines a Uniform Resource Locator (URL)
@@ -304,7 +301,6 @@ class VEvent
    */
   private $isInstant;
 
-
   /**
    * created_at
    *
@@ -316,7 +312,7 @@ class VEvent
    */
   protected $createdAt;
 
-   /**
+  /**
    * modified_at
    *
    * The property specifies the date and time that the
@@ -369,15 +365,17 @@ class VEvent
       $this->setEndAt($endAt);
       $this->setIsInstant(false);
     }
-    else if(!$this->getStartAt())
+    else if (!$this->getStartAt())
     {
       $this->setEndAt((new \DateTime("now"))->modify(self::DEFAULT_EVENT_DURATION));
       $this->setStartAt(new \DateTime("now"));
       $this->setIsInstant(false);
-    }else if($this->getStartAt() == $this->getEndAt())
+    }
+    else if ($this->getStartAt() == $this->getEndAt())
     {
       $this->setIsInstant(true);
-    }else
+    }
+    else
     {
       $this->setIsInstant(false);
     }
@@ -449,7 +447,7 @@ class VEvent
   /**
    * getFormatedStartAt
    *
-   * @param $format String the datetime format
+   * @param $format   String the datetime format
    * @param $timezone String the timezone name
    *
    * @return String the formated datetime
@@ -524,6 +522,7 @@ class VEvent
    * Set lastModifiedAt
    *
    * @param \DateTime $lastModifiedAt
+   *
    * @return $this
    */
   public function setLastModifiedAt(\DateTime $lastModifiedAt)

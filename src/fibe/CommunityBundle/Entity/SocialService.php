@@ -8,7 +8,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 use fibe\Bundle\WWWConfBundle\Entity_oldv1\SocialServiceAccount;
 
-
 /**
  * Social Services available
  *

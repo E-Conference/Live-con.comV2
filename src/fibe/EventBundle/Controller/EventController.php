@@ -45,7 +45,8 @@ class EventController extends Controller
 
     //Form Filter
     $filters = $this->createForm(new EventFilterType($this->getUser()));
-
+   
+    
     return array(
       'pager'        => $pager,
       'filters_form' => $filters->createView()
@@ -70,7 +71,7 @@ class EventController extends Controller
     {
       // bind values from the request
 
-      $entities = $em->getRepository('fibeWWWConfBundle:Event')->filtering($filters->getData(), $conf);
+      $entities = $em->getRepository('fibeEventBundle:Event')->filtering($filters->getData(), $conf);
       $nbResult = count($entities);
 
       //Pager
@@ -86,7 +87,7 @@ class EventController extends Controller
       }
 
       return $this->render(
-        'fibeWWWConfBundle:Event:list.html.twig',
+        'fibeEventBundle:Event:list.html.twig',
         array(
           'pager'    => $pager,
           'nbResult' => $nbResult,
@@ -103,21 +104,14 @@ class EventController extends Controller
   {
     $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Event');
 
-    $form = $this->createForm(new EventType($this->getUser()), $entity);
+    $form = $this->createForm(new EventType($this->getUser(), $entity);
     $form->bind($request);
 
     if ($form->isValid())
     {
       $em = $this->getDoctrine()->getManager();
-      $entity->setConference($this->getUser()->getCurrentMainEvent());
+      $entity->setMainEvent($this->getUser()->getCurrentMainEvent());
       $em->persist($entity);
-
-      // $xprop= new XProperty();
-      // $xprop->setXNamespace("event_uri");
-      // $xprop->setXKey(rand(0,999999));
-      // $xprop->setXValue("http://dataconf-event/" . $entity->getId());
-      // $xprop->setCalendarEntity($entity);
-      // $em->persist($xprop);
 
       $em->flush();
 
@@ -127,7 +121,7 @@ class EventController extends Controller
     }
 
     return $this->render(
-      'fibeWWWConfBundle:Event:new.html.twig',
+      'fibeEventBundle:Event:new.html.twig',
       array(
         'entity' => $entity,
         'form'   => $form->createView(),
@@ -144,13 +138,18 @@ class EventController extends Controller
   {
     $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Event');
 
-    $form = $this->createForm(new EventType($this->getUser()), $entity);
+    //From the index I can create event with all categories
+    $categoriesLevel= array("levels"=>array(1,2,3));
+
+    $form = $this->createForm(new EventType($categoriesLevel), $entity);
+     
 
     return $this->render(
-      'fibeWWWConfBundle:Event:new.html.twig',
+      'fibeEventBundle:Event:new.html.twig',
       array(
         'entity' => $entity,
         'form'   => $form->createView(),
+        'categoriesLevel' => $categoriesLevel,
       )
     );
   }
@@ -168,7 +167,7 @@ class EventController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return $this->render(
-      'fibeWWWConfBundle:Event:show.html.twig',
+      'fibeEventBundle:Event:show.html.twig',
       array(
         'entity'      => $entity,
         'delete_form' => $deleteForm->createView(),
@@ -197,7 +196,7 @@ class EventController extends Controller
         'papers',
         'entity',
         array(
-          'class'    => 'fibeWWWConfBundle:Paper',
+          'class'    => 'fibeContentBundle:Paper',
           'property' => 'title',
           'required' => false,
           'multiple' => false,
@@ -213,7 +212,7 @@ class EventController extends Controller
         'topics',
         'entity',
         array(
-          'class'    => 'fibeWWWConfBundle:Topic',
+          'class'    => 'fibeContentBundle:Topic',
           'required' => false,
           'property' => 'name',
           'multiple' => false,
@@ -224,7 +223,7 @@ class EventController extends Controller
       ->getForm();
 
     return $this->render(
-      'fibeWWWConfBundle:Event:edit.html.twig',
+      'fibeEventBundle:Event:edit.html.twig',
       array(
         'entity'      => $entity,
         'edit_form'   => $editForm->createView(),
@@ -360,7 +359,7 @@ class EventController extends Controller
     $em->flush();
 
     return $this->render(
-      'fibeWWWConfBundle:Event:topicRelation.html.twig',
+      'fibeEventBundle:Event:topicRelation.html.twig',
       array(
         'entity' => $entity,
       )
@@ -390,7 +389,7 @@ class EventController extends Controller
     $em->flush();
 
     return $this->render(
-      'fibeWWWConfBundle:Event:topicRelation.html.twig',
+      'fibeEventBundle:Event:topicRelation.html.twig',
       array(
         'entity' => $entity,
       )
@@ -422,7 +421,7 @@ class EventController extends Controller
     $em->flush();
 
     return $this->render(
-      'fibeWWWConfBundle:Event:paperRelation.html.twig',
+      'fibeEventBundle:Event:paperRelation.html.twig',
       array(
         'entity' => $entity,
       )
@@ -451,7 +450,7 @@ class EventController extends Controller
     $em->flush();
 
     return $this->render(
-      'fibeWWWConfBundle:Event:paperRelation.html.twig',
+      'fibeEventBundle:Event:paperRelation.html.twig',
       array(
         'entity' => $entity,
       )
@@ -478,7 +477,7 @@ class EventController extends Controller
     $id_type = $request->request->get('id_type');
 
     $em = $this->getDoctrine()->getManager();
-    $type = $em->getRepository('fibeWWWConfBundle:RoleType')->find($id_type);
+    $type = $em->getRepository('fibeContentBundle:RoleType')->find($id_type);
 
     if (!$type)
     {
@@ -499,7 +498,7 @@ class EventController extends Controller
     $em->flush();
 
     return $this->render(
-      'fibeWWWConfBundle:Event:personRelation.html.twig',
+      'fibeEventBundle:Event:personRelation.html.twig',
       array(
         'entity' => $entity,
       )
@@ -520,7 +519,7 @@ class EventController extends Controller
     $em = $this->getDoctrine()->getManager();
 
     $id_role = $request->request->get('id_role');
-    $role = $em->getRepository('fibeWWWConfBundle:Role')->findOneBy(
+    $role = $em->getRepository('fibeContentBundle:Role')->findOneBy(
       array('conference' => $this->getUser()->getCurrentMainEvent(), 'id' => $id_role)
     );
 
@@ -533,7 +532,7 @@ class EventController extends Controller
     $em->flush();
 
     return $this->render(
-      'fibeWWWConfBundle:Event:personRelation.html.twig',
+      'fibeEventBundle:Event:personRelation.html.twig',
       array(
         'entity' => $entity,
       )
