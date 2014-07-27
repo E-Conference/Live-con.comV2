@@ -66,17 +66,17 @@ class Sponsor
   protected $company;
 
   /**
-   * @TODO : manytomany with vevent
+   * 
    * sponsored event
-   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\VEvent", inversedBy="sponsor", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="sponsors", cascade={"persist"})
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    */
-  protected $event;
+  protected $mainEvent;
 
   /**
-   * Events related to a paper
+   * Events related to a sponsor
    *
-   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\VEvent", mappedBy="papers", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\VEvent", mappedBy="sponsors", cascade={"persist"})
    */
   protected $events;
 

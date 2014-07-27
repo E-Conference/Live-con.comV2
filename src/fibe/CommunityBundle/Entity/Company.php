@@ -43,14 +43,14 @@ class Company
   /**
    * Sponsors
    *
-   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Sponsor", mappedBy="sponsors",cascade={"persist", "remove"})
+   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Sponsor", mappedBy="company",cascade={"persist", "remove"})
    */
   private $sponsors;
 
   /**
    * Additional Infomations of the company
    *
-   * @ORM\ManyToOne(targetEntity="fibe\CommunityBundle\Entity\AdditionalInformations", inversedBy="Company", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\CommunityBundle\Entity\AdditionalInformations", cascade={"persist"})
    * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id")
    *
    */
@@ -65,7 +65,7 @@ class Company
   /**
    * Company related to a mainEvent
    *
-   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="organizations", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="companies", cascade={"persist"})
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
    *
    */
