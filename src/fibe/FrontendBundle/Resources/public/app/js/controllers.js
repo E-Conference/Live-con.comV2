@@ -5,20 +5,34 @@
 var liveconControllers = angular.module('liveconControllers', []);
 
 /*********************************** NAVS **********************************************/
-liveconControllers.controller('AlertCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG',
-    function ($scope, $routeParams, GLOBAL_CONFIG) {
+liveconControllers.controller('AlertCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', '$timeout',
+    function ($scope, $routeParams, GLOBAL_CONFIG, $timeout) {
         $scope.alerts = [];
 
         $scope.$on('AlertCtrl:addAlert',function(event, args) {$scope.addAlert(args)});
 
         $scope.addAlert = function(alert) {
-            debugger;
             $scope.alerts.push(alert);
+            $scope.resetAlertTimeout();
         };
 
         $scope.closeAlert = function(index) {
             $scope.alerts.splice(index, 1);
         };
+
+
+        $scope.clearAlert = function(){
+            $("#alertBox").children().first("span").fadeOut('500');
+            $scope.closeAlert(0);
+            $scope.alertTimeout = $timeout( $scope.clearAlert, 3000);
+        }
+
+        $scope.resetAlertTimeout = function(){
+            $timeout.cancel($scope.alertTimeout);
+            $scope.alertTimeout = $timeout( $scope.clearAlert, 3000);
+        }
+
+
     }]);
 
 /*********************************** NAVS **********************************************/
@@ -32,6 +46,10 @@ liveconControllers.controller('mainCtrl', ['$scope', '$routeParams', 'GLOBAL_CON
 liveconControllers.controller('navLeftCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG',
     function ($scope, $routeParams, GLOBAL_CONFIG) {
         $scope.liveconLogoPath = GLOBAL_CONFIG.liveconLogoPath;
+        $scope.status = {
+            isFirstOpen: true,
+            isFirstDisabled: false
+        };
     }]);
 
 liveconControllers.controller('navRightCtrl', ['$scope', '$routeParams',

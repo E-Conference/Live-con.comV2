@@ -1,0 +1,1 @@
+<alert  ng-repeat="alert in alerts track by $index" type="{{alert.type}}" close="closeAlert($index)" class="alertMsg">{{alert.code | translate}}</alert>

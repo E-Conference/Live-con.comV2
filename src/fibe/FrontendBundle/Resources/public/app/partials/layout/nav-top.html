@@ -1,33 +1,49 @@
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
 
       <div class="navbar-header">
-       
-           <button type="button"  id="sidebar-right-toggle"  class="navbar-toggle" data-toggle="offcanvas" data-target=".sidebar-nav">
-            <i class="fa fa-user fa-1x"></i>
-           </button>
-            <button type="button"  id="sidebar-left-toggle" ng-click="toggleNavLeft()" class="navbar-toggle" data-toggle="offcanvas" data-target=".sidebar-nav">
-            <i class="fa fa-bars fa-1x"></i>
-           </button>
+
+
+
+
             
           <a  href="#" title="Go back to Index"  style="float:left"> <img style="height:45px; width:auto;" src="{{GLOBAL_CONFIG.app.urls.img+'livecon.png'}}"/></a>
+
           <div style="float:left">
-          <div ng-repeat="local in locals">
-            <a href="" ng-click="changeLocal(local)"><img src="{{local.src}}"/></a>
-          </div>
-          <div style="float:left">
-           <a  class="btn btn-info"  href="#login" title="login">login</a>
-            <a  class="btn btn-info"  href="#register" title="login">register</a>
+              <a  id="sidebar-left-toggle" ng-click="toggleNavLeft()" class="btn btn-info" data-toggle="offcanvas" data-target=".sidebar-nav">
+                  <i class="fa fa-bars fa-1x"></i>
+              </a>
+
           </div>
 
-        </div>
       </div>
-        <!-- internationalization dropdown -->
-      <form class="navbar-form navbar-right" role="search">
-         <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search" ng-model="query"/>
-          </div>
-         
-      </form>
-       <!-- <h3 id="title" class="navbar-text navbar-right">{{title}}</h3> -->
-      
+
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a  href="#signout" title="logout" ng-click="signout()"  ng-if="currentUser.id">Logout</a>
+        </li>
+
+        <li>
+            <a    href="#profile" title="profile"  ng-if="currentUser.id">{{currentUser.username}}</a>
+        </li>
+
+        <li>
+            <a  href="#signin" title="login"  ng-if="currentUser.id == null">login</a>
+        </li>
+
+        <li>
+            <a   href="#signup" title="login" ng-if="currentUser.id == null">register</a>
+        </li>
+        <!-- <li>
+            <a id="sidebar-right-toggle"  class="btn btn-info" data-toggle="offcanvas" data-target=".sidebar-nav">
+                <i class="fa fa-user fa-1x"></i>
+            </a>
+        </li>-->
+        <li ng-repeat="local in locals">
+            <a href="" ng-click="changeLocal(local)"><img src="{{local.src}}"/></a>
+        </li>
+
+
+    </ul>
+
   </div>

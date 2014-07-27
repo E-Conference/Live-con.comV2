@@ -4,13 +4,14 @@
 angular.module('communityApp', []);
 angular.module('organizationApp', []);
 angular.module('angularTranslateApp', ['pascalprecht.translate']);
-angular.module('authentificationApp',[]);
+angular.module('authenticationApp',['ngCookies']);
 
 /* App Module */
 var liveconApp = angular.module('liveconApp', [
     'ngRoute',
     'ngAnimate',
     'ngResource',
+    'ngCookies',
     'ui.bootstrap',
     'ngDragDrop',
     'angular-loading-bar',
@@ -19,7 +20,7 @@ var liveconApp = angular.module('liveconApp', [
     'liveconServices',
     'organizationApp',
     'pascalprecht.translate',
-    'authentificationApp'
+    'authenticationApp'
 ]);
 
 
@@ -36,7 +37,8 @@ liveconApp.config(['$translateProvider', function ($translateProvider) {
         'Search_person': 'Search a person',
         'Search_organization': 'Search an organization',
         'Login_success': 'Welcome to live-con.com',
-        'Login_error': 'Bad credentials'
+        'Login_error': 'Bad credentials',
+        'signout_success' : 'Thanks for coming, see you soon'
     });   
 
      // Simply register translation table as object hash
@@ -47,7 +49,8 @@ liveconApp.config(['$translateProvider', function ($translateProvider) {
         'Search_person': 'Rechercher une personne',
         'Search_organization': 'Rechercher une organization',
         'Login_success': 'Bienvenue sur live-con.com',
-        'Login_error': 'Login impossible'
+        'Login_error': 'Login impossible',
+        'signout_success' : 'Merci d\'utiliser Live-con.com, à bientôt'
     });   
 
     $translateProvider.preferredLanguage('en_US');

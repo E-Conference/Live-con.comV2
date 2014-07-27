@@ -38,6 +38,11 @@ ul{
     overflow: hidden;
     white-space: nowrap;
 }
+
+.alertMsg.ng-leave {
+    -webkit-transition:0.5s linear all;
+    transition:0.5s linear all;
+}
 /*************************** NAV'S***************************/
 
 
@@ -128,7 +133,6 @@ ul{
 }
 
 #menu-toggle {
-  display: none;
 }
 
 .inset {
@@ -146,6 +150,13 @@ ul{
   overflow-y: auto;
   z-index: 1000;
   transition: all 0.4s ease 0s;
+}
+
+#sidebar-left-toggle{
+    background-color: #fff !important;
+    color : #19313b !important;
+    border-color : #19313b !important;
+    margin-left:10px;
 }
 
 /******************************** nav right ****************************/

@@ -30,8 +30,9 @@
                'bundles/frontend/vendors/ui-bootstrap-tpls.min.js' 
                'bundles/frontend/vendors/angular-ui-router.min.js' 
                'bundles/frontend/vendors/draganddrop.js' 
-               'bundles/frontend/vendors/loading-bar.js' 
-               'bundles/frontend/vendors/loadingBarModule.js'  output='js/compiled/main.js'%}
+               'bundles/frontend/vendors/loading-bar.js'
+               'bundles/frontend/vendors/angular-cookies.js'
+    'bundles/frontend/vendors/loadingBarModule.js'  output='js/compiled/main.js'%}
         <script src="{{ asset_url }}" type="text/javascript"></script>
     {% endjavascripts %}
 
@@ -58,9 +59,10 @@
     <script src="{{ asset('bundles/frontend/app/modules/organization/js/routes.js') }}"></script>
 
      <!-- authentification client app assets -->
-    <script src="{{ asset('bundles/frontend/app/modules/authentification/js/services.js') }}"></script>
-    <script src="{{ asset('bundles/frontend/app/modules/authentification/js/controllers.js') }}"></script>
-    <script src="{{ asset('bundles/frontend/app/modules/authentification/js/routes.js') }}"></script>
+    <script src="{{ asset('bundles/frontend/app/modules/authentication/js/services.js') }}"></script>
+    <script src="{{ asset('bundles/frontend/app/modules/authentication/js/controllers.js') }}"></script>
+    <script src="{{ asset('bundles/frontend/app/modules/authentication/js/routes.js') }}"></script>
+    <script src="{{ asset('bundles/frontend/app/modules/authentication/js/app.js') }}"></script>
 
     <!-- basic client app context definition -->
     <script>
@@ -86,11 +88,11 @@
                             img: "{{ asset('bundles/frontend/app/modules/organization/img') }}"
                         }
                     },
-                    authentification: {
+                    authentication: {
                         urls: {
-                            base: "{{ asset('bundles/frontend/app/modules/authentification/') }}",
-                            partials: "{{ asset('bundles/frontend/app/modules/authentification/partials/') }}",
-                            img: "{{ asset('bundles/frontend/app/modules/authentification/img') }}"
+                            base: "{{ asset('bundles/frontend/app/modules/authentication/') }}",
+                            partials: "{{ asset('bundles/frontend/app/modules/authentication/partials/') }}",
+                            img: "{{ asset('bundles/frontend/app/modules/authentication/img') }}"
                         }
                     }
                 }
@@ -107,9 +109,10 @@
     <div class="navTop" ng-include="GLOBAL_CONFIG.app.urls.partials+'layout/nav-top.html'"
          ng-controller="navTopCtrl">
     </div>
-    <div ng-controller="AlertCtrl" id="alertBox">
-        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.code}}{# {{alert.code | translate}} #}</alert>
-    </div>
+
+    <div id="alertBox" ng-include="GLOBAL_CONFIG.app.urls.partials+'layout/alert-box.html'"
+         ng-controller="AlertCtrl"></div>
+
     <div id="wrapper">
 
         <div class="navLeft" ng-include="GLOBAL_CONFIG.app.urls.partials+'layout/nav-left.html'"
