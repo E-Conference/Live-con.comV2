@@ -56,14 +56,14 @@ class Team
   }
 
 
-  public function setConference(MainEvent $conference = null)
+  public function setMainEvent(MainEvent $conference = null)
   {
     $this->conference = $conference;
 
     return $this;
   }
 
-  public function getConference()
+  public function getMainEvent()
   {
     return $this->conference;
   }

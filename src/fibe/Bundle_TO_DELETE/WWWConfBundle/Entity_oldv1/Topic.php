@@ -231,7 +231,7 @@ class Topic
    *
    * @return Topic
    */
-  public function setConference(\fibe\EventBundle\Entity\MainEvent $conference = null)
+  public function setMainEvent(\fibe\EventBundle\Entity\MainEvent $conference = null)
   {
     $this->conference = $conference;
 
@@ -243,7 +243,7 @@ class Topic
    *
    * @return \fibe\EventBundle\Entity\MainEvent
    */
-  public function getConference()
+  public function getMainEvent()
   {
     return $this->conference;
   }

@@ -87,7 +87,7 @@ class DBImportController extends Controller
 
           call_user_func_array(array($entity, $setter), array($value));
         }
-        $entity->setConference($this->conference);
+        $entity->setMainEvent($this->conference);
         $em->persist($entity);
         array_push($this->topicEntities, $entity);
       }
@@ -144,7 +144,7 @@ class DBImportController extends Controller
 
           call_user_func_array(array($entity, $setter), array($value));
         }
-        $entity->setConference($this->conference);
+        $entity->setMainEvent($this->conference);
         $em->persist($entity);
         array_push($this->organizationEntities, $entity);
       }
@@ -195,7 +195,7 @@ class DBImportController extends Controller
           }
         }
 
-        $entity->setConference($this->conference);
+        $entity->setMainEvent($this->conference);
         $em->persist($entity);
         array_push($this->personEntities, $entity);
       }
@@ -242,7 +242,7 @@ class DBImportController extends Controller
             call_user_func_array(array($entity, $setter), array($value));
           }
         }
-        $entity->setConference($this->conference);
+        $entity->setMainEvent($this->conference);
         $em->persist($entity);
         array_push($this->proceedingEntities, $entity);
       }
@@ -347,7 +347,7 @@ class DBImportController extends Controller
         {
           $entity->setParent($mainEvent);
         }
-        $entity->setConference($this->conference);
+        $entity->setMainEvent($this->conference);
         $em->persist($entity);
       }
       $entities = null;
@@ -481,7 +481,7 @@ class DBImportController extends Controller
             $val->setType($chairRoleType);
             $val->setPerson($this->personEntities[$chair]);
             $val->setEvent($entity);
-            $val->setConference($this->getUser()->getCurrentMainEvent());
+            $val->setMainEvent($this->getUser()->getCurrentMainEvent());
             $entity->addRole($val);
 
           }
@@ -495,7 +495,7 @@ class DBImportController extends Controller
             $val->setType($presenterRoleType);
             $val->setPerson($this->personEntities[$presenter]);
             $val->setEvent($entity);
-            $val->setConference($this->getUser()->getCurrentMainEvent());
+            $val->setMainEvent($this->getUser()->getCurrentMainEvent());
             $entity->addRole($val);
           }
         }
@@ -515,7 +515,7 @@ class DBImportController extends Controller
     //      echo date_format($entity->getStartAt(), 'Y-m-d H:i:s');
     // }
 
-    $entity->setConference($this->conference);
+    $entity->setMainEvent($this->conference);
     array_push($this->eventEntities, $entity);
   }
 

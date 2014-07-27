@@ -1,27 +1,14 @@
 <?php
 namespace fibe\Bundle\WWWConfBundle\Controller;
 
+use fibe\ContentBundle\Form\RoleType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-//On insere l'entity Event  de simple schedule
-
-use fibe\EventBundle\Entity\VEvent as Event;
-use fibe\Bundle\WWWConfBundle\Entity\XProperty;
-use fibe\Bundle\WWWConfBundle\Entity\Location;
-use fibe\Bundle\WWWConfBundle\Entity\Role;
-
-use fibe\Bundle\WWWConfBundle\Form\EventType;
-use fibe\Bundle\WWWConfBundle\Form\RoleType;
-use fibe\Bundle\WWWConfBundle\Form\ConfEventType;
-
-use fibe\Bundle\WWWConfBundle\Form\XPropertyType;
-
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use fibe\EventBundle\Entity\Event;
 
 
 /**
@@ -44,7 +31,7 @@ class ScheduleController extends Controller
 
     $user = $this->getUser();
     $em = $this->getDoctrine();
-    $conf = $this->getUser()->getCurrentMainEvent();
+    $mainEvent = $this->getUser()->getCurrentMainEvent();
 
     //filters
     $categories = $em->getRepository('fibeWWWConfBundle:Category')->getOrdered();
@@ -52,7 +39,7 @@ class ScheduleController extends Controller
     $topics = $user->getCurrentMainEvent()->getTopics();
 
     return array(
-      'currentMainEvent' => $conf,
+      'currentMainEvent' => $mainEvent,
       'authorized'  => isset($granted), // Si il existe une conference
       'categories'  => $categories,
       'locations'   => $locations,
@@ -81,8 +68,7 @@ class ScheduleController extends Controller
     $methodParam = $getData->get('method', '');
     $postData = $request->request->all();
 
-    $conf = $this->getUser()->getCurrentMainEvent();
-    $mainEvent = $conf->getMainConfEvent();
+    $mainEvent = $this->getUser()->getCurrentMainEvent();
 
     $event = null;
     if ($methodParam == "add")
@@ -131,7 +117,7 @@ class ScheduleController extends Controller
       }
     }
 
-    $event->setConference($conf);
+    $event->setMainEvent($mainEvent);
     //fix windows "double time specification" bug...
     $start = $this->parseDate($postData['start']);
     $end = $this->parseDate($postData['end']);
@@ -210,8 +196,8 @@ class ScheduleController extends Controller
 
     $em = $this->getDoctrine()->getManager();
     //The object must belong to the current conf
-    $conf = $this->getUser()->getCurrentMainEvent();
-    $entity = $em->getRepository('fibeWWWConfBundle:ConfEvent')->findOneBy(array('conference' => $conf, 'id' => $id));
+    $mainEvent = $this->getUser()->getCurrentMainEvent();
+    $entity = $em->getRepository('fibeWWWConfBundle:ConfEvent')->findOneBy(array('conference' => $mainEvent, 'id' => $id));
     if (!$entity)
     {
       throw $this->createNotFoundException('Unable to find ConfEvent entity.');
@@ -219,7 +205,7 @@ class ScheduleController extends Controller
 
     $role = new Role();
     $roleForm = $this->createForm(new RoleType($this->getUser()), $role);
-    $editForm = $this->createForm(new ConfEventType($this->getUser(), $entity), $entity);
+    $editForm = $this->createForm(new VEventType($this->getUser(), $entity), $entity);
 
     $papersForSelect = $this->getUser()->getCurrentMainEvent()->getPapers()->toArray();
     $form_paper = $this->createFormBuilder($entity)
@@ -291,9 +277,9 @@ class ScheduleController extends Controller
 //    $JSONArray = array();
 //
 //    //The object must belong to the current conf
-//    $conf = $this->getUser()->getCurrentMainEvent();
+//    $mainEvent = $this->getUser()->getCurrentMainEvent();
 //    $entity = $em->getRepository('fibeWWWConfBundle:ConfEvent')->findOneBy(
-//      array('conference' => $conf, 'id' => $id)
+//      array('conference' => $mainEvent, 'id' => $id)
 //    ); //@TODO error
 //    if (!$entity)
 //    {

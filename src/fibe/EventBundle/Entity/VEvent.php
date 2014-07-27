@@ -34,7 +34,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     "MainEvent"="MainEvent",
  * })
  */
-class VEvent
+abstract class VEvent
 {
   // Status values for "EVENT"
   const STATUS_EVENT_CANCELLED = "CANCELLED"; // Indicates event was cancelled.
@@ -471,6 +471,52 @@ class VEvent
     $dt->setTimeZone(new \DateTimezone($timezone));
 
     return $dt->format($format);
+  }
+
+
+  /**
+   * Modify start & end in order to fit to events' children.
+   * Do nothing if the event doesn't have children.
+   * Add one day if the children are all instant and on the same moment.
+   *
+   * @return bool
+   */
+  public function fitChildrenDate()
+  {
+    $earliestStart = new \DateTime('6000-10-10');
+    $latestEnd = new \DateTime('1000-10-10');
+    foreach ($this->getChildren() as $child)
+    {
+      /** @var Event $child */
+      if ($child->getIsInstant())
+      {
+        continue;
+      }
+      if ($child->getStartAt() < $earliestStart)
+      {
+        $earliestStart = $child->getStartAt();
+      }
+      if ($child->getEndAt() > $latestEnd)
+      {
+        $latestEnd = $child->getEndAt();
+      }
+    }
+    //if $earliestStart && $latestEnd were changed
+    if ($earliestStart != new \DateTime('6000-10-10') && $latestEnd != new \DateTime('1000-10-10'))
+    {
+      if ($earliestStart == $latestEnd)
+      {
+        $latestEnd->add(new \DateInterval('P1D'));
+      }
+      if ($earliestStart->getTimestamp() != $this->getStartAt()->getTimestamp() || $latestEnd->getTimestamp() != $this->getEndAt()->getTimestamp())
+      {
+        $this->setStartAt($earliestStart);
+        $this->setEndAt($latestEnd);
+
+        return true;
+      }
+    }
+    return false;
   }
 
   /**

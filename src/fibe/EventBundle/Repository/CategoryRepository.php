@@ -2,7 +2,10 @@
 
 namespace fibe\EventBundle\Repository;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use fibe\EventBundle\Entity\Category;
 
 /**
@@ -43,7 +46,7 @@ class CategoryRepository extends EntityRepository
   /**
    * getOrdered
    *
-   * @return DoctrineCollection
+   * @return ArrayCollection
    */
   public function getOrdered()
   {
@@ -101,37 +104,37 @@ class CategoryRepository extends EntityRepository
         ->andWhere($qb->expr()->in('cat.parent', $params['parent_category_ids']));
     }
 
-    if (isset($params['ancestor_category_id']))
-    {
-      $qb
-        ->andWhere(
-          $qb->expr()->like(
-            'cat.tree',
-            sprintf(
-              "'%%%d%s'",
-              $params['ancestor_category_id'],
-              Category::getTreeSeparator()
-            )
-          )
-        );
-    }
+//    if (isset($params['ancestor_category_id']))
+//    {
+//      $qb
+//        ->andWhere(
+//          $qb->expr()->like(
+//            'cat.tree',
+//            sprintf(
+//              "'%%%d%s'",
+//              $params['ancestor_category_id'],
+//              Category::getTreeSeparator()
+//            )
+//          )
+//        );
+//    }
 
-    if (isset($params['ancestor_category_ids']))
-    {
-      $temp = array();
-      foreach ($params['ancestor_category_ids'] as $id)
-      {
-        $temp[] = $qb->expr()->like(
-          'cat.tree',
-          sprintf(
-            "'%%%d%s'",
-            $id,
-            Category::getTreeSeparator()
-          )
-        );
-      }
-      $qb->andWhere(call_user_func_array(array($qb->expr(), 'orx'), $temp));
-    }
+//    if (isset($params['ancestor_category_ids']))
+//    {
+//      $temp = array();
+//      foreach ($params['ancestor_category_ids'] as $id)
+//      {
+//        $temp[] = $qb->expr()->like(
+//          'cat.tree',
+//          sprintf(
+//            "'%%%d%s'",
+//            $id,
+//            Category::getTreeSeparator()
+//          )
+//        );
+//      }
+//      $qb->andWhere(call_user_func_array(array($qb->expr(), 'orx'), $temp));
+//    }
 
     if (isset($params['location_id']))
     {
@@ -141,32 +144,32 @@ class CategoryRepository extends EntityRepository
         ->setParameter('loc_id', $params['location_id']);
     }
 
-    if (isset($params['all_in_location_id']))
-    {
-      $tempQb = $this->getOrderedQueryBuilder()
-        ->leftJoin('cat.calendarEntities', 'ce')
-        ->andWhere('ce.location = :loc_id')
-        ->setParameter('loc_id', $params['all_in_location_id']);
-
-      $tempResult = $tempQb->getQuery()->getResult();
-
-      $tempIds = array();
-      foreach ($tempResult as $r)
-      {
-        $tempIds[$r->getId()] = 1;
-        $ids = explode(Category::getTreeSeparator(), $r->getTree());
-        foreach ($ids as $id)
-        {
-          if ($id != '')
-          {
-            $tempIds[$id] = 1;
-          }
-        }
-      }
-
-      $qb
-        ->andWhere($qb->expr()->in('cat.id', array_keys($tempIds)));
-    }
+//    if (isset($params['all_in_location_id']))
+//    {
+//      $tempQb = $this->getOrderedQueryBuilder()
+//        ->leftJoin('cat.calendarEntities', 'ce')
+//        ->andWhere('ce.location = :loc_id')
+//        ->setParameter('loc_id', $params['all_in_location_id']);
+//
+//      $tempResult = $tempQb->getQuery()->getResult();
+//
+//      $tempIds = array();
+//      foreach ($tempResult as $r)
+//      {
+//        $tempIds[$r->getId()] = 1;
+//        $ids = explode(Category::getTreeSeparator(), $r->getTree());
+//        foreach ($ids as $id)
+//        {
+//          if ($id != '')
+//          {
+//            $tempIds[$id] = 1;
+//          }
+//        }
+//      }
+//
+//      $qb
+//        ->andWhere($qb->expr()->in('cat.id', array_keys($tempIds)));
+//    }
 
     return $qb;
   }
@@ -190,7 +193,7 @@ class CategoryRepository extends EntityRepository
    *
    * @param array $params
    *
-   * @return DoctrineCollection
+   * @return ArrayCollection
    */
   public function extract($params)
   {

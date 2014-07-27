@@ -119,7 +119,7 @@ class SponsorController extends Controller
     if ($form->isValid())
     {
       $em = $this->getDoctrine()->getManager();
-      $entity->setConference($this->getUser()->getCurrentMainEvent());
+      $entity->setMainEvent($this->getUser()->getCurrentMainEvent());
       $em->persist($entity);
       $entity->uploadLogo();
       $em->flush();

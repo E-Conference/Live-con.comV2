@@ -147,7 +147,7 @@
       $defaultTeam = new Team();
       $defaultTeam->addConfManager($user);
       $user->addTeam($defaultTeam);
-      $defaultTeam->setConference($mainEvent);
+      $defaultTeam->setMainEvent($mainEvent);
       $mainEvent->setTeam($defaultTeam);
       $this->entityManager->persist($defaultTeam);
 

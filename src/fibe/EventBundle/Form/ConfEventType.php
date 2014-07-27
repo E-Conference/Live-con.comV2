@@ -1,12 +1,10 @@
 <?php
 
-  namespace fibe\Bundle\WWWConfBundle\Form;
+  namespace fibe\EventBundle\Form;
 
   use Symfony\Component\Form\AbstractType;
   use Symfony\Component\Form\FormBuilderInterface;
   use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-  use fibe\Bundle\WWWConfBundle\Form\EventType;
-  use fibe\Bundle\WWWConfBundle\Entity\Location;
 
 
   /**

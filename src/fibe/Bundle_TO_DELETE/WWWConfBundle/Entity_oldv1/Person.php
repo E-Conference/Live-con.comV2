@@ -630,7 +630,7 @@ class Person
    *
    * @return Person
    */
-  public function setConference(\fibe\EventBundle\Entity\MainEvent $conference = null)
+  public function setMainEvent(\fibe\EventBundle\Entity\MainEvent $conference = null)
   {
     $this->conference = $conference;
 
@@ -642,7 +642,7 @@ class Person
    *
    * @return \fibe\EventBundle\Entity\MainEvent
    */
-  public function getConference()
+  public function getMainEvent()
   {
     return $this->conference;
   }

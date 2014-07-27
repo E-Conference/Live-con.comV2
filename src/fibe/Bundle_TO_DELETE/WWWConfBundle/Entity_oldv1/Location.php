@@ -314,7 +314,7 @@ class Location
    *
    * @return ConfEvent
    */
-  public function setConference(\fibe\EventBundle\Entity\MainEvent $conference)
+  public function setMainEvent(\fibe\EventBundle\Entity\MainEvent $conference)
   {
     $this->conference = $conference;
 
@@ -326,7 +326,7 @@ class Location
    *
    * @return \fibe\EventBundle\Entity\MainEvent
    */
-  public function getConference()
+  public function getMainEvent()
   {
     return $this->conference;
   }

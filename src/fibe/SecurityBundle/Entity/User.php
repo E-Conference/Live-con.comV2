@@ -198,7 +198,7 @@
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getConferences()
+    public function getMainEvents()
     {
       return $this->conferences;
     }

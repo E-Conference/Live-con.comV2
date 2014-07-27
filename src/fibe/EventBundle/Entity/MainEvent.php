@@ -22,12 +22,20 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Main Event entity
  *
  * @ORM\Entity
- * @ORM\Table(name="mainEvent")
+ * @ORM\Table(name="main_event")
  * @ORM\Entity(repositoryClass="fibe\EventBundle\Repository\MainEventRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class MainEvent extends VEvent
 {
+
+  /**
+   * @ORM\Id
+   * @ORM\Column(type="integer")
+   * @ORM\GeneratedValue(strategy="AUTO")
+   */
+  protected $id;
+
   /**
    * Events
    *
@@ -231,6 +239,8 @@ class MainEvent extends VEvent
    */
   public function __construct()
   {
+    parent::__construct();
+    $this->setIsAllDay(true);
     $this->events = new ArrayCollection();
     $this->confManagers = new ArrayCollection();
     $this->roles = new ArrayCollection();

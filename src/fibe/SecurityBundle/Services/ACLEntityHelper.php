@@ -38,47 +38,47 @@ class ACLEntityHelper extends ACLHelper
     ),
 
     'Event' => array(
-      'parent'    => 'getConference',
+      'parent'    => 'getMainEvent',
       'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
     ),
     'Location' => array(
-      'parent'    => 'getConference',
+      'parent'    => 'getMainEvent',
       'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
     ),
     'Paper' => array(
-      'parent'    => 'getConference',
+      'parent'    => 'getMainEvent',
       'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
     ),
     'Person' => array(
-      'parent'    => 'getConference',
+      'parent'    => 'getMainEvent',
       'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
     ),
     'Role' => array(
-      'parent'    => 'getConference',
+      'parent'    => 'getMainEvent',
       'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
     ),
     'Organization' => array(
-      'parent'    => 'getConference',
+      'parent'    => 'getMainEvent',
       'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
     ),
     'Topic' => array(
-      'parent'    => 'getConference',
+      'parent'    => 'getMainEvent',
       'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
     ),
     'Sponsor' => array(
-      'parent'    => 'getConference',
+      'parent'    => 'getMainEvent',
       'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
     ),
     'SocialServiceAccount' => array(
-      'parent'    => 'getConference',
+      'parent'    => 'getMainEvent',
       'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
     ),
     'Category' => array(
-      'parent'    => 'getConference',
+      'parent'    => 'getMainEvent',
       'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
     ),
     'Equipment' => array(
-      'parent'    => 'getConference',
+      'parent'    => 'getMainEvent',
       'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
     ),
     'RoleType' => array(

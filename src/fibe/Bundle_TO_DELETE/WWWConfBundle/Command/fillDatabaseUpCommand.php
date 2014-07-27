@@ -309,7 +309,7 @@
 //      $mainEvent->setStartAt(new \DateTime('now'));
 //      $end = new \DateTime('now');
 //      $mainEvent->setEndAt($end->add(new \DateInterval('P2D')));
-//      $mainEvent->setConference($conference);
+//      $mainEvent->setMainEvent($conference);
 //      $mainEvent->setComment("Livecon Conference " . $counter . " comment");
 //      $mainEvent->setUrl("http://liveconconference" . $counter);
 //      $em->persist($mainEvent);
@@ -353,7 +353,7 @@
       for ($counterEnt = 0; $counterEnt <= $limit; $counterEnt += 1)
       {
         $person = new Person();
-        $person->setConference($conference);
+        $person->setMainEvent($conference);
         $person->setFamilyName("person" . $counterEnt);
         $person->setFirstName("person" . $counterEnt);
         $person->setLabel("person" . $counterEnt);
@@ -364,7 +364,7 @@
 
 
         $organization = new Organization();
-        $organization->setConference($conference);
+        $organization->setMainEvent($conference);
         $organization->setLabel("organization" . $counterEnt);
         $organization->setPage("organization page" . $counterEnt);
         $organization->setCountry("organization country" . $counterEnt);
@@ -373,10 +373,10 @@
 
         $topic = new Topic();
         $topic->setLabel("topic" . $counterEnt);
-        $topic->setConference($conference);
+        $topic->setMainEvent($conference);
 
         $paper = new Paper();
-        $paper->setConference($conference);
+        $paper->setMainEvent($conference);
         $paper->setTitle("paper" . $counterEnt);
         $paper->setUrl("paper url" . $counterEnt);
         $paper->setAbstract("paper" . $counterEnt . "abstact abstact abstact abstact abstact abstact abstact abstact abstact abstact abstact abstact abstact abstact abstact abstact abstact ");
@@ -384,7 +384,7 @@
         $paper->addAuthor($person);
 
         $event = new ConfEvent();
-        $event->setConference($conference);
+        $event->setMainEvent($conference);
         $event->setStartAt(new \DateTime('now'));
         $end = new \DateTime('now');
         $event->setEndAt($end->add(new \DateInterval('P2D')));
@@ -395,7 +395,7 @@
         $event->setLocation($location);
 
         $role = new Role();
-        $role->setConference($conference);
+        $role->setMainEvent($conference);
         $role->setPerson($person);
         $role->setEvent($event);
         $role->setType($roleTypePresenter);

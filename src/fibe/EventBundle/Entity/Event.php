@@ -26,6 +26,14 @@ use JMS\Serializer\Annotation\VirtualProperty;
  */
 class Event extends VEvent
 {
+
+  /**
+   * @ORM\Id
+   * @ORM\Column(type="integer")
+   * @ORM\GeneratedValue(strategy="AUTO")
+   */
+  protected $id;
+
   /**
    * The parent of the event
    *
@@ -90,7 +98,7 @@ class Event extends VEvent
   }
 
   /**
-   * onUpdate
+   * onUpdateben
    *
    * @ORM\PrePersist()
    * @ORM\PreUpdate()
@@ -119,51 +127,6 @@ class Event extends VEvent
 //    }
   }
 
-
-  /**
-   * Ensure main conf event fits its children dates
-   *
-   * @param bool $allDay
-   *
-   * @return bool
-   */
-  public function fitChildrenDate($allDay = false)
-  {
-    $earliestStart = new \DateTime('6000-10-10');
-    $latestEnd = new \DateTime('1000-10-10');
-    foreach ($this->getChildren() as $child)
-    {
-      /** @var Event $child */
-      if ($child->getIsInstant())
-      {
-        continue;
-      }
-      if ($child->getStartAt() < $earliestStart)
-      {
-        $earliestStart = $child->getStartAt();
-      }
-      if ($child->getEndAt() > $latestEnd)
-      {
-        $latestEnd = $child->getEndAt();
-      }
-    }
-    if ($earliestStart == new \DateTime('6000-10-10') || $latestEnd == new \DateTime('1000-10-10'))
-    {
-      return; //@TODO
-    }
-    if ($earliestStart == $latestEnd)
-    {
-      $latestEnd->add(new \DateInterval('P1D'));
-    }
-    if ($earliestStart->getTimestamp() != $this->getStartAt()->getTimestamp() || $latestEnd->getTimestamp() != $this->getEndAt()->getTimestamp())
-    {
-      $this->setStartAt($earliestStart);
-      $this->setEndAt($latestEnd);
-
-      return true;
-    }
-  } //@TODO return statement
-
   /**
    * Set slug
    *
@@ -188,19 +151,6 @@ class Event extends VEvent
     $this->slugify();
 
     return $this->slug;
-  }
-
-  /** computeIsAllDay
-   *
-   * this is only computed on creation for the importer
-   * @ORM\PrePersist()
-   */
-  public function computeIsAllDay()
-  {
-    if ($this->isMainVEvent) //@TODO EVENT
-    {
-      $this->setIsAllDay(true);
-    }
   }
 
   /**
@@ -234,7 +184,7 @@ class Event extends VEvent
    *
    * @return VEvent
    */
-  public function setConference(\fibe\EventBundle\Entity\MainEvent $conference)
+  public function setMainEvent(\fibe\EventBundle\Entity\MainEvent $conference)
   {
     $this->conference = $conference;
 
@@ -246,7 +196,7 @@ class Event extends VEvent
    *
    * @return \fibe\EventBundle\Entity\MainEvent
    */
-  public function getConference()
+  public function getMainEvent()
   {
     return $this->conference;
   }

@@ -82,7 +82,7 @@ class MainEventSettings
    *
    * @return MainEventSettings
    */
-  public function setConference($conference)
+  public function setMainEvent($conference)
   {
     $this->conference = $conference;
 
@@ -94,7 +94,7 @@ class MainEventSettings
    *
    * @return boolean
    */
-  public function getConference()
+  public function getMainEvent()
   {
     return $this->conference;
   }

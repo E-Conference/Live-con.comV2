@@ -255,7 +255,7 @@ class Category
    *
    * @return \fibe\ConferenceBundle\Entity\MainEvent
    */
-  public function getConference()
+  public function getMainEvent()
   {
     return $this->mainEvent;
   }

@@ -122,7 +122,7 @@ class ConfEventController extends Controller
     if ($form->isValid())
     {
       $em = $this->getDoctrine()->getManager();
-      $entity->setConference($this->getUser()->getCurrentMainEvent());
+      $entity->setMainEvent($this->getUser()->getCurrentMainEvent());
       $em->persist($entity);
 
       // $xprop= new XProperty();
@@ -268,7 +268,7 @@ class ConfEventController extends Controller
       if ($entity->getIsMainConfEvent())
       {
 
-        $conference = $entity->getConference();
+        $conference = $entity->getMainEvent();
         $conference->slugify();
         $em->persist($conference);
       }
@@ -502,7 +502,7 @@ class ConfEventController extends Controller
     $role->setPerson($person);
     $role->setType($type);
     $role->setEvent($entity);
-    $role->setConference($this->getUser()->getCurrentMainEvent());
+    $role->setMainEvent($this->getUser()->getCurrentMainEvent());
     $em->persist($role);
 
     //Add paper to the confEvent

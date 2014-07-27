@@ -192,7 +192,7 @@ class Sponsor
   /**
    * @return mixed
    */
-  public function getConference()
+  public function getMainEvent()
   {
     return $this->conference;
   }
@@ -200,7 +200,7 @@ class Sponsor
   /**
    * @param mixed $conference
    */
-  public function setConference($conference)
+  public function setMainEvent($conference)
   {
     $this->conference = $conference;
   }

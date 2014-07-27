@@ -6,13 +6,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 
+use fibe\ContentBundle\Util\StringTools;
+use fibe\EventBundle\Entity\MainEvent;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use fibe\Bundle\WWWConfBundle\Util\StringTools;
 
 /**
  *
@@ -213,7 +214,7 @@ class Company
    * @param MainEvent $mainEvent
    * @return $this
    */
-  public function setConference(MainEvent $mainEvent)
+  public function setMainEvent(MainEvent $mainEvent)
   {
     $this->mainEvent = $mainEvent;
 

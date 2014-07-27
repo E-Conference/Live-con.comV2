@@ -159,7 +159,7 @@ class LocationController extends Controller
     if ($form->isValid())
     {
       $em = $this->getDoctrine()->getManager();
-      $entity->setConference($this->getUser()->getCurrentMainEvent());
+      $entity->setMainEvent($this->getUser()->getCurrentMainEvent());
       $em->persist($entity);
       $em->flush();
       //$this->get('fibe_security.acl_entity_helper')->createACL($entity,MaskBuilder::MASK_OWNER);

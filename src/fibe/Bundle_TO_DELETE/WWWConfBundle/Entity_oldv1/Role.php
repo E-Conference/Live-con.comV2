@@ -155,7 +155,7 @@ class Role
    *
    * @return Role
    */
-  public function setConference(\fibe\EventBundle\Entity\MainEvent $conf)
+  public function setMainEvent(\fibe\EventBundle\Entity\MainEvent $conf)
   {
     $this->conference = $conf;
 
@@ -167,7 +167,7 @@ class Role
    *
    * @return \fibe\EventBundle\Entity\MainEvent
    */
-  public function getConference()
+  public function getMainEvent()
   {
     return $this->conference;
   }

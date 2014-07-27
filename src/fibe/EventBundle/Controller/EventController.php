@@ -255,7 +255,7 @@ class EventController extends Controller
       if ($entity->getIsMainEvent())
       {
 
-        $conference = $entity->getConference();
+        $conference = $entity->getMainEvent();
         $conference->slugify();
         $em->persist($conference);
       }
@@ -489,7 +489,7 @@ class EventController extends Controller
     $role->setPerson($person);
     $role->setType($type);
     $role->setEvent($entity);
-    $role->setConference($this->getUser()->getCurrentMainEvent());
+    $role->setMainEvent($this->getUser()->getCurrentMainEvent());
     $em->persist($role);
 
     //Add paper to the confEvent

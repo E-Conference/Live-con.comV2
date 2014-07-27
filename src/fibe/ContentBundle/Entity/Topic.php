@@ -2,7 +2,11 @@
 
 namespace fibe\ContentBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use fibe\ContentBundle\Entity\Paper;
+use fibe\EventBundle\Entity\MainEvent;
+use fibe\EventBundle\Entity\VEvent;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use fibe\ContentBundle\Util\StringTools;
@@ -41,9 +45,9 @@ class Topic
   /**
    * Events related to this topic
    *
-   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\Event", mappedBy="topics", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\VEvent", mappedBy="topics", cascade={"persist"})
    */
-  private $events;
+  private $vEvents;
 
   /**
    * Topics associated to this conference
@@ -64,7 +68,8 @@ class Topic
    */
   public function __construct()
   {
-    $this->papers = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->papers = new ArrayCollection();
+    $this->vEvents = new ArrayCollection();
   }
 
   /**
@@ -103,7 +108,7 @@ class Topic
    *
    * @param string $slug
    *
-   * @return ConfEvent
+   * @return $this
    */
   public function setSlug($slug)
   {
@@ -135,11 +140,11 @@ class Topic
   /**
    * Add papers
    *
-   * @param \fibe\ContentBundle\Entity\Paper $papers
+   * @param Paper $papers
    *
    * @return Topic
    */
-  public function addPaper(\fibe\ContentBundle\Entity\Paper $papers)
+  public function addPaper(Paper $papers)
   {
     $this->papers[] = $papers;
 
@@ -149,9 +154,9 @@ class Topic
   /**
    * Remove papers
    *
-   * @param \fibe\ContentBundle\Entity\Paper $papers
+   * @param Paper $papers
    */
-  public function removePaper(\fibe\ContentBundle\Entity\Paper $papers)
+  public function removePaper(Paper $papers)
   {
     $this->papers->removeElement($papers);
   }
@@ -169,13 +174,13 @@ class Topic
   /**
    * Add events
    *
-   * @param \fibe\EventBundle\Entity\VEvent $events
+   * @param VEvent $events
    *
    * @return Topic
    */
-  public function addEvent(\fibe\EventBundle\Entity\VEvent $events)
+  public function addVEvent(VEvent $events)
   {
-    $this->events[] = $events;
+    $this->vEvents[] = $events;
 
     return $this;
   }
@@ -183,11 +188,11 @@ class Topic
   /**
    * Remove events
    *
-   * @param \fibe\EventBundle\Entity\VEvent $events
+   * @param VEvent $events
    */
-  public function removeEvent(\fibe\ContentBundle\Entity\VEvent $events)
+  public function removeVEvent(VEvent $events)
   {
-    $this->events->removeElement($events);
+    $this->vEvents->removeElement($events);
   }
 
   /**
@@ -195,9 +200,9 @@ class Topic
    *
    * @return \Doctrine\Common\Collections\Collection
    */
-  public function getEvents()
+  public function getVEvents()
   {
-    return $this->events;
+    return $this->vEvents;
   }
 
   /**
@@ -227,11 +232,11 @@ class Topic
   /**
    * Set conference
    *
-   * @param \fibe\EventBundle\Entity\MainEvent $conference
+   * @param MainEvent $conference
    *
    * @return Topic
    */
-  public function setConference(\fibe\EventBundle\Entity\MainEvent $conference = null)
+  public function setMainEvent(MainEvent $conference = null)
   {
     $this->conference = $conference;
 
@@ -241,9 +246,9 @@ class Topic
   /**
    * Get conference
    *
-   * @return \fibe\EventBundle\Entity\MainEvent
+   * @return MainEvent
    */
-  public function getConference()
+  public function getMainEvent()
   {
     return $this->conference;
   }

@@ -20,7 +20,7 @@
     </div>
     <div id="collapseConferences" class="panel-collapse collapse">
       <div class="panel-body">
-        {% for conference in app.user.getConferences() %}
+        {% for conference in app.user.getMainEvents() %}
           <a role="button" class="btn btn-info btn-medium"
              href="{{ path('schedule_conference_switch', {id: conference.id}) }}">
             {{ conference.getConfName() }}

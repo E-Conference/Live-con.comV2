@@ -456,7 +456,7 @@
 	{
   	if($AppConfig)
   	{
-      $AppConfig->setConference($this);
+      $AppConfig->setMainEvent($this);
     }
 	  $this->appConfig = $AppConfig;
 
