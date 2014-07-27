@@ -285,7 +285,6 @@ class Event extends VEvent
     return $this->papers;
   }
 
-  
   /**
    * Set parent
    *

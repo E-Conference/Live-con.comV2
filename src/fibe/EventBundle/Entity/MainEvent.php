@@ -4,15 +4,19 @@ namespace fibe\EventBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-use fibe\Bundle\WWWConfBundle\Entity\Module;
+use fibe\CommunityBundle\Entity\Company;
+use fibe\CommunityBundle\Entity\Person;
+use fibe\ContentBundle\Entity\Location;
+use fibe\ContentBundle\Entity\Paper;
+use fibe\ContentBundle\Entity\Sponsor;
+use fibe\ContentBundle\Entity\Topic;
+use fibe\ContentBundle\Util\StringTools;
 use fibe\EventBundle\Entity\VEvent;
 use JMS\Serializer\Annotation\Expose;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
-use fibe\EventBundle\Util\StringTools;
 
 /**
  * Main Event entity
@@ -60,13 +64,6 @@ class MainEvent extends VEvent
   private $companies;
 
   /**
-   * Topics
-   *
-   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Topic", mappedBy="mainEvent",cascade={"persist", "remove"})
-   */
-  private $topics;
-
-  /**
    * Sponsors
    *
    * @ORM\OneToMany(targetEntity="fibe\CommunityBundle\Entity\Sponsor", mappedBy="mainEvent",cascade={"persist", "remove"})
@@ -90,9 +87,9 @@ class MainEvent extends VEvent
   /**
    * mappingFiles
    *
-   * @ORM\OneToMany(targetEntity="fibe\EventBundle\Entity\MainEventSettings", mappedBy="mainEvent",cascade={"persist", "remove"})
+   * @ORM\OneToOne(targetEntity="fibe\EventBundle\Entity\MainEventSettings", mappedBy="mainEvent",cascade={"persist", "remove"})
    */
-  private $settings;
+  private $setting;
 
   /**
    * @var UploadedFile
@@ -125,16 +122,15 @@ class MainEvent extends VEvent
    */
   public function __toString()
   {
-    return $this->getSummary();
+    return $this->getLabel();
   }
 
   /**
    * Slugify
-   *
    */
   public function slugify()
   {
-    $this->setSlug(StringTools::slugify($this->getId() . $this->getSummary()));
+    $this->setSlug(StringTools::slugify($this->getId() . $this->getLabel()));
   }
 
   /**
@@ -371,68 +367,6 @@ class MainEvent extends VEvent
   }
 
   /**
-   * Add app config
-   *
-   * @param \fibe\MobileAppBundle\Entity\MobileAppConfig $AppConfig
-   *
-   * @return $this
-   */
-  public function setAppConfig($AppConfig)
-  {
-    if ($AppConfig)
-    {
-      $AppConfig->setMainEvent($this);
-    }
-    $this->appConfig = $AppConfig;
-
-    return $this;
-  }
-
-  /**
-   * Return the application configuration
-   *
-   * @return mixed
-   */
-  public function getAppConfig()
-  {
-    return $this->appConfig;
-  }
-
-  /**
-   * Add topics
-   *
-   * @param Topic $topics
-   *
-   * @return $this
-   */
-  public function addTopic(Topic $topics)
-  {
-    $this->topics[] = $topics;
-
-    return $this;
-  }
-
-  /**
-   * Remove topics
-   *
-   * @param Topic $topics
-   */
-  public function removeTopic(Topic $topics)
-  {
-    $this->topics->removeElement($topics);
-  }
-
-  /**
-   * Get topics
-   *
-   * @return \Doctrine\Common\Collections\Collection
-   */
-  public function getTopics()
-  {
-    return $this->topics;
-  }
-
-  /**
    * Add sponsors
    *
    * @param Sponsor $sponsor
@@ -451,7 +385,7 @@ class MainEvent extends VEvent
   /**
    * Remove sponsors
    *
-   * @param \fibe\EventBundle\Entity\Sponsor $sponsor
+   * @param \fibe\ContentBundle\Entity\Sponsor $sponsor
    */
   public function removeSponsor(Sponsor $sponsor)
   {
@@ -628,7 +562,7 @@ class MainEvent extends VEvent
    *
    * @param string $acronym
    *
-   * @return ConfEvent
+   * @return MainEvent
    */
   public function setAcronym($acronym)
   {
@@ -645,5 +579,21 @@ class MainEvent extends VEvent
   public function getAcronym()
   {
     return $this->acronym;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getSetting()
+  {
+    return $this->setting;
+  }
+
+  /**
+   * @param mixed $setting
+   */
+  public function setSetting($setting)
+  {
+    $this->setting = $setting;
   }
 }
