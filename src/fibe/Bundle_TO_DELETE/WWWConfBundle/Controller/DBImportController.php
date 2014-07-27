@@ -39,6 +39,7 @@ class DBImportController extends Controller
   private $organizationEntities = array();
   private $proceedingEntities = array();
   private $conference;
+  private $defaultCategory;
 
   /**
    * @Route("/", name="schedule_import")
@@ -60,7 +61,7 @@ class DBImportController extends Controller
 
     $mainEvent = $this->conference->getMainConfEvent();
 
-    $defaultCategory = $this->getDoctrine()
+    $this->defaultCategory = $this->getDoctrine()
       ->getRepository('fibeWWWConfBundle:Category')
       ->findOneBy(array('name' => 'TalkEvent'));
  
@@ -415,8 +416,8 @@ class DBImportController extends Controller
       {
         if (count($this->categoryEntities) <= $value)
         {
-          // echo count($this->categoryEntities)." ".$value." ".$entity->getSummary()."<br/>";
-          $value = $defaultCategory;
+          // echo count($this->categoryEntities)." ".$value." ".$entity->getLabel()."<br/>";
+          $value = $this->defaultCategory;
         }
         else
         {
@@ -510,7 +511,7 @@ class DBImportController extends Controller
     }
 
     // if($isMainConfEvent){
-    //      echo $entity->getSummary();
+    //      echo $entity->getLabel();
     //      echo date_format($entity->getStartAt(), 'Y-m-d H:i:s');
     // }
 

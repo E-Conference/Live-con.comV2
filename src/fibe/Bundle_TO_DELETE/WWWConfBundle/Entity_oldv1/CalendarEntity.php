@@ -325,7 +325,7 @@ class CalendarEntity
     return sprintf("%d] start at %s : %s",
       $this->getId(),
       $this->getStartAt()->format('Y-m-d'),
-      $this->getSummary()
+      $this->getLabel()
     );
   }
 
@@ -526,7 +526,7 @@ class CalendarEntity
    *
    * @return CalendarEntity
    */
-  public function setSummary($summary)
+  public function setLabel($summary)
   {
     $this->summary = $summary;
 
@@ -538,7 +538,7 @@ class CalendarEntity
    *
    * @return string
    */
-  public function getSummary()
+  public function getLabel()
   {
     return $this->summary;
   }

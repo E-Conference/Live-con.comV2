@@ -342,7 +342,7 @@ class VEvent
   {
     $this->roles = new ArrayCollection();
     $this->sponsors = new ArrayCollection();
-    $this->sponsors = new ArrayCollection();
+    $this->topics = new ArrayCollection();
     $this->setRevisionSequence($this->getRevisionSequence() + 1);
   }
 
@@ -356,7 +356,7 @@ class VEvent
     return sprintf("%d] start at %s : %s",
       $this->getId(),
       $this->getStartAt()->format('Y-m-d'),
-      $this->getSummary()
+      $this->getLabel()
     );
   }
 

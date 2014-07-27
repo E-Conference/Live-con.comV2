@@ -304,7 +304,7 @@
 //
 //      //Main conf event
 //      $mainEvent = new ConfEvent();
-//      $mainEvent->setSummary("Big Livecon Conference" . $counter);
+//      $mainEvent->setLabel("Big Livecon Conference" . $counter);
 //      $mainEvent->setIsMainConfEvent(true);
 //      $mainEvent->setStartAt(new \DateTime('now'));
 //      $end = new \DateTime('now');
@@ -388,7 +388,7 @@
         $event->setStartAt(new \DateTime('now'));
         $end = new \DateTime('now');
         $event->setEndAt($end->add(new \DateInterval('P2D')));
-        $event->setSummary("event " . $counterEnt);
+        $event->setLabel("event " . $counterEnt);
         $event->setAttach("event attach" . $counterEnt);
         $event->setDescription("event " . $counterEnt . " description : description description description description description description description description description description description description ");
         $event->addPaper($paper);

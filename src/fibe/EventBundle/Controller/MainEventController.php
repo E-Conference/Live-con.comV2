@@ -2,7 +2,6 @@
 
   namespace fibe\EventBundle\Controller;
 
-  use fibe\ConferenceBundle\Form\MainEventType;
   use Symfony\Bundle\FrameworkBundle\Controller\Controller;
   use Symfony\Component\HttpFoundation\Request;
   use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -14,7 +13,7 @@
   /**
    * Link controller.
    *
-   * @Route("/admin/mainEvent")
+   * @Route("/admin/main_event")
    */
   class MainEventController extends Controller
   {
