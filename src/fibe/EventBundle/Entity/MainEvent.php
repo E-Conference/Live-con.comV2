@@ -8,6 +8,7 @@ use fibe\CommunityBundle\Entity\Company;
 use fibe\CommunityBundle\Entity\Person;
 use fibe\ContentBundle\Entity\Location;
 use fibe\ContentBundle\Entity\Paper;
+use fibe\ContentBundle\Entity\Role;
 use fibe\ContentBundle\Entity\Sponsor;
 use fibe\ContentBundle\Entity\Topic;
 use fibe\ContentBundle\Util\StringTools;
@@ -95,7 +96,7 @@ class MainEvent extends VEvent
   /**
    * mappingFiles
    *
-   * @ORM\OneToOne(targetEntity="fibe\EventBundle\Entity\MainEventSetting", mappedBy="mainEvent",cascade={"persist", "remove"})
+   * @ORM\OneToOne(targetEntity="fibe\EventBundle\Entity\MainEventSettings", mappedBy="mainEvent",cascade={"persist", "remove"})
    */
   private $setting;
 
@@ -318,6 +319,40 @@ class MainEvent extends VEvent
   public function getPapers()
   {
     return $this->papers;
+  }
+
+  /**
+   * Add role
+   *
+   * @param Role $role
+   *
+   * @return $this
+   */
+  public function addRole(Role $role)
+  {
+    $this->roles[] = $role;
+
+    return $this;
+  }
+
+  /**
+   * Remove role
+   *
+   * @param Role $role
+   */
+  public function removeRole(Role $role)
+  {
+    $this->roles->removeElement($role);
+  }
+
+  /**
+   * Get papers
+   *
+   * @return \Doctrine\Common\Collections\Collection
+   */
+  public function getRoles()
+  {
+    return $this->roles;
   }
 
   /**

@@ -13,11 +13,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * This entity define actives module for a conference
  *
  *
- * @ORM\Table(name="main_event_setting")
+ * @ORM\Table(name="main_event_settings")
  * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\MainEventSettingsRepository")
  *
  */
-class MainEventSetting
+class MainEventSettings
 {
   /**
    * @ORM\Id

@@ -50,15 +50,6 @@ class Topic
   private $vEvents;
 
   /**
-   * Topics associated to this conference
-   *
-   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="topics", cascade={"persist"})
-   * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
-   *
-   */
-  protected $mainEvent;
-
-  /**
    * @ORM\Column(type="string", length=128, nullable=true)
    */
   protected $slug;
@@ -227,29 +218,5 @@ class Topic
   public function getLabel()
   {
     return $this->label;
-  }
-
-  /**
-   * Set conference
-   *
-   * @param MainEvent $conference
-   *
-   * @return Topic
-   */
-  public function setMainEvent(MainEvent $conference = null)
-  {
-    $this->conference = $conference;
-
-    return $this;
-  }
-
-  /**
-   * Get conference
-   *
-   * @return MainEvent
-   */
-  public function getMainEvent()
-  {
-    return $this->conference;
   }
 }

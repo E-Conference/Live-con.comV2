@@ -8,7 +8,6 @@ use fibe\EventBundle\Entity\MainEvent;
 use fibe\EventBundle\Entity\VEvent;
 
 use fibe\CommunityBundle\Entity\Person;
-use fibe\ContentBundle\Entity\RoleType;
 
 
 /**
@@ -81,11 +80,11 @@ class Role
   /**
    * Set person
    *
-   * @param \fibe\CommunityBundle\Entity\Person $person
+   * @param Person $person
    *
    * @return Role
    */
-  public function setPerson(\fibe\CommunityBundle\Entity\Person $person = null)
+  public function setPerson(Person $person = null)
   {
     $this->person = $person;
 
@@ -95,7 +94,7 @@ class Role
   /**
    * Get person
    *
-   * @return \fibe\CommunityBundle\Entity\Person
+   * @return Person
    */
   public function getPerson()
   {

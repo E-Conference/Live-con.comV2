@@ -28,7 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *    @ORM\Index(name="start_at_idx", columns={"start_at"})
  * })
  * @ORM\HasLifecycleCallbacks
- * @ORM\InheritanceType("JOINED")
+ * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorMap({
  *     "Event"="Event",
  *     "MainEvent"="MainEvent",
