@@ -9,17 +9,17 @@
 
       <div class="row">
         <div class="col-lg-4">
-          <img src="{{ asset('uploads/') }}{{ currentMainEvent.logoPath }}" style="max-height:100px;max-width:100%;"/>
+          <img src="{{ asset('uploads/') }}{{ mainEvent.logoPath }}" style="max-height:100px;max-width:100%;"/>
 
-          <h1>{{ currentMainEvent.summary }}</h1>
+          <h1>{{ mainEvent.label }}</h1>
           <ul>
-            <li> {{ currentMainEvent.events|length }} events</li>
-            <li> {{ currentMainEvent.papers|length }} papers</li>
-            <li> {{ currentMainEvent.locations|length }} locations</li>
-            <li> {{ currentMainEvent.persons|length }} persons</li>
-            <li> {{ currentMainEvent.topics|length }} topics</li>
-            <li> {{ currentMainEvent.companies|length }} organizations</li>
-            <li> {{ currentMainEvent.confManagers|length }} confManagers</li>
+            <li> {{ mainEvent.events|length }} Events</li>
+            <li> {{ mainEvent.papers|length }} Papers</li>
+            <li> {{ mainEvent.locations|length }} Locations</li>
+            <li> {{ mainEvent.persons|length }} Persons</li>
+            <li> {{ mainEvent.topics|length }} Topics</li>
+            <li> {{ mainEvent.companies|length }} Companies</li>
+            <li> {{ mainEvent.confManagers|length }} Managers</li>
           </ul>
         </div>
         <div class="col-lg-8">
