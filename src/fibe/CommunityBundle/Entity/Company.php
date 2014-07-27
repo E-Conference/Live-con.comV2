@@ -85,7 +85,11 @@ class Company
     $this->sponsors = new ArrayCollection();
   }
 
-
+  /**
+   * Method to string for the entity
+   *
+   * @return mixed
+   */
   public function __toString()
   {
     return $this->label;

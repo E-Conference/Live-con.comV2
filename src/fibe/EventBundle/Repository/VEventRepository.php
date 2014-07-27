@@ -15,7 +15,6 @@ class VEventRepository extends EntityRepository
   public function filtering($params, $currentMainEvent)
   {
     $qb = $this->getAllOrderByStartAtQueryBuilder();
-    $qb
 
     if (isset($params['only_instant']))
     {

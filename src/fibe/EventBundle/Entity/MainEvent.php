@@ -24,7 +24,6 @@ use fibe\EventBundle\Util\StringTools;
  */
 class MainEvent extends VEvent
 {
-
   /**
    * Events
    *
@@ -127,7 +126,6 @@ class MainEvent extends VEvent
   public function __toString()
   {
     return $this->getSummary();
-
   }
 
   /**
@@ -137,7 +135,6 @@ class MainEvent extends VEvent
   public function slugify()
   {
     $this->setSlug(StringTools::slugify($this->getId() . $this->getSummary()));
-
   }
 
   /**
@@ -175,7 +172,6 @@ class MainEvent extends VEvent
     return $this->slug;
   }
 
-
   /**
    * Return the id of the conference
    *
@@ -186,11 +182,11 @@ class MainEvent extends VEvent
     return $this->id;
   }
 
-
   /**
    * Sets file.
    *
    * @param \Symfony\Component\HttpFoundation\File\UploadedFile $logo
+   *
    * @return $this
    */
   public function setLogo(UploadedFile $logo = null)
@@ -199,7 +195,6 @@ class MainEvent extends VEvent
 
     return $this;
   }
-
 
   /**
    * Get file.
@@ -211,7 +206,6 @@ class MainEvent extends VEvent
     return $this->logo;
   }
 
-
   /**
    * Set the path of the confgerence's logo
    *
@@ -222,6 +216,7 @@ class MainEvent extends VEvent
   public function setLogoPath($logoPath)
   {
     $this->logoPath = $logoPath;
+
     return $this;
   }
 
@@ -245,10 +240,10 @@ class MainEvent extends VEvent
     $this->roles = new ArrayCollection();
     $this->locations = new ArrayCollection();
     $this->papers = new ArrayCollection();
-    $this->persons= new ArrayCollection();
-    $this->topics= new ArrayCollection();
-    $this->sponsors= new ArrayCollection();
-    $this->companies= new ArrayCollection();
+    $this->persons = new ArrayCollection();
+    $this->topics = new ArrayCollection();
+    $this->sponsors = new ArrayCollection();
+    $this->companies = new ArrayCollection();
   }
 
   /**
@@ -365,6 +360,7 @@ class MainEvent extends VEvent
 
     return $this;
   }
+
   /**
    *
    * @return \fibe\SecurityBundle\Entity\Team
@@ -383,7 +379,7 @@ class MainEvent extends VEvent
    */
   public function setAppConfig($AppConfig)
   {
-    if($AppConfig)
+    if ($AppConfig)
     {
       $AppConfig->setMainEvent($this);
     }
@@ -392,11 +388,15 @@ class MainEvent extends VEvent
     return $this;
   }
 
+  /**
+   * Return the application configuration
+   *
+   * @return mixed
+   */
   public function getAppConfig()
   {
     return $this->appConfig;
   }
-
 
   /**
    * Add topics
@@ -436,6 +436,7 @@ class MainEvent extends VEvent
    * Add sponsors
    *
    * @param Sponsor $sponsor
+   *
    * @internal param \fibe\EventBundle\Entity\Sponsor $sponsors
    *
    * @return $this
@@ -548,7 +549,9 @@ class MainEvent extends VEvent
 //	  return $sub_events;
   }
 
-
+  /**
+   * Upload method for the logo of the main event
+   */
   public function uploadLogo()
   {
     // the file property can be empty if the field is not required
@@ -582,7 +585,6 @@ class MainEvent extends VEvent
     return __DIR__ . '/../../../../../web/' . $this->getUploadDir();
   }
 
-
   /**
    * @TODO comment
    *
@@ -612,12 +614,12 @@ class MainEvent extends VEvent
    */
   public function isEmpty()
   {
-    return  (count($this->events)      <= 1)
-    and (count($this->locations)     <= 1)
-    and (count($this->papers)        == 0)
-    and (count($this->persons)       == 0)
-    and (count($this->companies)     == 0)
-    and (count($this->topics)        == 0);
+    return (count($this->events) <= 1)
+    and (count($this->locations) <= 1)
+    and (count($this->papers) == 0)
+    and (count($this->persons) == 0)
+    and (count($this->companies) == 0)
+    and (count($this->topics) == 0);
 
   }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Controller;
+namespace fibe\EventBundle\Controller;
 
 use fibe\Bundle\WWWConfBundle\Form\Filters\EventFilterType;
 use Pagerfanta\Adapter\ArrayAdapter;

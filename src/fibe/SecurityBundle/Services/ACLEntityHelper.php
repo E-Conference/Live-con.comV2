@@ -25,7 +25,7 @@ class ACLEntityHelper extends ACLHelper
   public static $ACLEntityNameArray = array(
     'MainEvent' => array(
       'classpath' => 'fibe\\ConferenceBundle\\Entity',
-      'repositoryBundle' => 'fibeConferenceBundle'
+      'repositoryBundle' => 'fibeEventBundle'
     ),
     'Team' => array(
       'classpath' => 'fibe\\SecurityBundle\\Entity',
