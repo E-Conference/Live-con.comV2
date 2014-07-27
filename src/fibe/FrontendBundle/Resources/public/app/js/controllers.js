@@ -65,6 +65,7 @@ liveconControllers.controller('navTopCtrl', ['$translate','$scope', '$routeParam
         };
 
         $scope.locals = [{ label : 'EN', code : 'en_US', src: GLOBAL_CONFIG.app.urls.img+'/english-flag.png'},{ label : 'FR', code : 'fr_FR',  src: GLOBAL_CONFIG.app.urls.img+'/french-flag.png'}]
+
         $scope.changeLocal = function(local) {
             $translate.use(local.code);
             return local;

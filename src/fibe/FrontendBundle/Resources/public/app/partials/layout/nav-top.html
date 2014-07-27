@@ -1,18 +1,12 @@
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
 
       <div class="navbar-header">
-
-
-
-
-            
           <a  href="#" title="Go back to Index"  style="float:left"> <img style="height:45px; width:auto;" src="{{GLOBAL_CONFIG.app.urls.img+'livecon.png'}}"/></a>
 
           <div style="float:left">
               <a  id="sidebar-left-toggle" ng-click="toggleNavLeft()" class="btn btn-info" data-toggle="offcanvas" data-target=".sidebar-nav">
                   <i class="fa fa-bars fa-1x"></i>
               </a>
-
           </div>
 
       </div>
@@ -40,7 +34,7 @@
             </a>
         </li>-->
         <li ng-repeat="local in locals">
-            <a href="" ng-click="changeLocal(local)"><img src="{{local.src}}"/></a>
+            <a href=""  ng-click="changeLocal(local)"><img ng-src="{{ local.src }}" /></a>
         </li>
 
 
