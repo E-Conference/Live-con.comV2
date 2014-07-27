@@ -245,7 +245,7 @@ class VEvent
   /**
    * location
    *
-   * @ORM\ManyToOne(targetEntity="fibe\ContentBundle\Entity\Location", inversedBy="VEvents")
+   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Location", mappedBy="events")
    * @ORM\JoinColumn(name="location_id", referencedColumnName="id", onDelete="Set Null")
    */
   protected $location;
