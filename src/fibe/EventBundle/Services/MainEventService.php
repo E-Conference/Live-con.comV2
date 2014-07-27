@@ -30,7 +30,7 @@
     {
       $mainEvent = new MainEvent();
       $mainEvent->setLogoPath("livecon.png");
-      $mainEvent->setSummary("Livecon Conference");
+      $mainEvent->setLabel("Livecon Conference");
       $mainEvent->setStartAt(new \DateTime('now'));
       $end = new \DateTime('now');
       $mainEvent->setEndAt($end->add(new \DateInterval('P2D')));
@@ -178,7 +178,7 @@
     {
       $this->removeObjects($mainEvent);
 
-      $mainEvent->setSummary("Livecon Conference");
+      $mainEvent->setLabel("Livecon Conference");
       $mainEvent->setStartAt(new \DateTime('now'));
       $end = new \DateTime('now');
       $mainEvent->setEndAt($end->add(new \DateInterval('P2D')));

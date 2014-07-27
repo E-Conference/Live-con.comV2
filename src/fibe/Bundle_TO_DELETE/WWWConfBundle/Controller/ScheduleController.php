@@ -145,7 +145,7 @@ class ScheduleController extends Controller
     {
       $event->setParent($mainEvent);
     }
-    $event->setSummary($postData['title']);
+    $event->setLabel($postData['title']);
     $event->setIsAllDay($postData['allDay'] == "true");
     $mainEvent->setParent(null);
 

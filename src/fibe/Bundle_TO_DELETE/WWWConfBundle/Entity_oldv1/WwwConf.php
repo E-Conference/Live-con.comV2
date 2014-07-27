@@ -158,7 +158,7 @@
 	 */
 	public function __toString()
 	{
-	  return ($this->mainEvent ? $this->mainEvent->getSummary() : "");
+	  return ($this->mainEvent ? $this->mainEvent->getLabel() : "");
 
 	}
 
@@ -225,7 +225,7 @@
 	 */
 	public function getConfName()
 	{
-	  return ($this->mainEvent ? $this->mainEvent->getSummary() : "");
+	  return ($this->mainEvent ? $this->mainEvent->getLabel() : "");
 	}
 
 

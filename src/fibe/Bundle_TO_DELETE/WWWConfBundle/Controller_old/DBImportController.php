@@ -415,7 +415,7 @@ class DBImportController extends Controller
       {
         if (count($this->categoryEntities) <= $value)
         {
-          // echo count($this->categoryEntities)." ".$value." ".$entity->getSummary()."<br/>";
+          // echo count($this->categoryEntities)." ".$value." ".$entity->getLabel()."<br/>";
           $value = $defaultCategory;
         }
         else
@@ -510,7 +510,7 @@ class DBImportController extends Controller
     }
 
     // if($isMainConfEvent){
-    //      echo $entity->getSummary();
+    //      echo $entity->getLabel();
     //      echo date_format($entity->getStartAt(), 'Y-m-d H:i:s');
     // }
 

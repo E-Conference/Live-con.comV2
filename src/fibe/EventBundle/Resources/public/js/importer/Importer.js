@@ -156,7 +156,7 @@ function Importer()
         {
             if(empty == true && dataArray[i] && dataArray[i].length>0)empty = false;
         }
-        if(empty == true && !dataArray['conference']['setSummary'])
+        if(empty == true && !dataArray['conference']['setLabel'])
         {
             if(fallback!=undefined)fallback("nothing found... please check your file !"); 
             return;
