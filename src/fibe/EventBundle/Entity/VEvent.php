@@ -253,7 +253,7 @@ class VEvent
   /**
    * location
    *
-   * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Topic", inversedBy="VEvents", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Topic", inversedBy="events", cascade={"persist"})
    * @ORM\JoinTable(name="venvent_paper",
    *     joinColumns={@ORM\JoinColumn(name="venvt_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="topic_id", referencedColumnName="id")})
@@ -280,8 +280,11 @@ class VEvent
   /**
    * Sponsors related to a VEvent
    *
-   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Sponsor", mappedBy="VEvents",cascade={"persist","remove"})
-   * @ORM\JoinColumn( onDelete="CASCADE")
+   * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Sponsor", inversedBy="events", cascade={"persist"})
+   * @ORM\JoinTable(name="venvent_sponsor",
+   *     joinColumns={@ORM\JoinColumn(name="venvt_id", referencedColumnName="id")},
+   *     inverseJoinColumns={@ORM\JoinColumn(name="sponsor_id", referencedColumnName="id")})
+   *
    * @Expose
    */
   private $sponsors;

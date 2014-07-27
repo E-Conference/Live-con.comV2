@@ -41,7 +41,7 @@ class Topic
   /**
    * Events related to this topic
    *
-   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\Event", mappedBy="topics", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\VEvent", mappedBy="topics", cascade={"persist"})
    */
   private $events;
 
