@@ -44,38 +44,6 @@ class Person
   protected $additionalInformation;
 
   /**
-   * @return AdditionalInformations
-   */
-  public function getAdditionalInformation()
-  {
-    return $this->additionalInformation;
-  }
-
-  /**
-   * @param AdditionalInformations $additionalInformation
-   */
-  public function setAdditionalInformation(AdditionalInformations $additionalInformation)
-  {
-    $this->additionalInformation = $additionalInformation;
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getCompanies()
-  {
-    return $this->companies;
-  }
-
-  /**
-   * @param mixed $companies
-   */
-  public function setCompanies($companies)
-  {
-    $this->companies = $companies;
-  }
-
-  /**
    * technical user
    *
    * @ORM\OneToOne(targetEntity="fibe\SecurityBundle\Entity\User", cascade={"persist", "remove"})
@@ -588,5 +556,38 @@ class Person
   public function setUser(UserInterface $user)
   {
     $this->user = $user;
+  }
+
+
+/**
+   * @return AdditionalInformations
+   */
+  public function getAdditionalInformation()
+  {
+    return $this->additionalInformation;
+  }
+
+  /**
+   * @param AdditionalInformations $additionalInformation
+   */
+  public function setAdditionalInformation(AdditionalInformations $additionalInformation)
+  {
+    $this->additionalInformation = $additionalInformation;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getCompanies()
+  {
+    return $this->companies;
+  }
+
+  /**
+   * @param mixed $companies
+   */
+  public function setCompanies($companies)
+  {
+    $this->companies = $companies;
   }
 }

@@ -59,7 +59,7 @@ class Paper
    *     joinColumns={@ORM\JoinColumn(name="paper_id", referencedColumnName="id", onDelete="Cascade")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id", onDelete="Cascade")})
    */
-  protected $authors;
+  private $authors;
 
   /**
    * The label of the publisher
@@ -78,33 +78,33 @@ class Paper
   /**
    * The topics of the paper
    *
-   * @ORM\ManyToMany(targetEntity="Topic", inversedBy="paper", cascade={"persist", "remove"})
+   * @ORM\ManyToMany(targetEntity="Topic", inversedBy="papers", cascade={"persist", "remove"})
    * @ORM\JoinTable(name="paper_topic",
    *     joinColumns={@ORM\JoinColumn(name="paper_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="topic_id", referencedColumnName="id")})
    */
-  protected $topics;
+  private $topics;
 
   /**
    * Events related to the paper
    *
-   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\VEvent", mappedBy="paper", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\Event", mappedBy="papers", cascade={"persist"})
    */
-  protected $events;
+  private $events;
 
   /**
    *  MainEvent associated to this paper
    *
-   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="paper", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="papers", cascade={"persist"})
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    *
    */
-  protected $mainEvent;
+  private $mainEvent;
 
   /**
    * @ORM\Column(type="string", length=256, nullable=true)
    */
-  protected $slug;
+  private $slug;
 
   /**
    * Constructor
