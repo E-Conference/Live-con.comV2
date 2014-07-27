@@ -7,17 +7,16 @@ use Doctrine\ORM\Mapping as ORM;
 use fibe\ContentBundle\Util\StringTools;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
-
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
 
 
-
 /**
- * Event
+ * Class Event
+ *
+ * @package fibe\EventBundle\Entity
  *
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
@@ -58,7 +57,6 @@ class Event extends VEvent
    */
   protected $slug;
 
-
   /**
    * Papers presented at an event
    *
@@ -69,8 +67,6 @@ class Event extends VEvent
    * @Expose
    */
   private $papers;
-
-
 
   /**
    * Constructor
@@ -85,6 +81,7 @@ class Event extends VEvent
 
   /**
    * Slugify
+   *
    * @ORM\PrePersist()
    */
   public function slugify()
@@ -136,6 +133,7 @@ class Event extends VEvent
     $latestEnd = new \DateTime('1000-10-10');
     foreach ($this->getChildren() as $child)
     {
+      /** @var Event $child */
       if ($child->getIsInstant())
       {
         continue;
@@ -151,7 +149,7 @@ class Event extends VEvent
     }
     if ($earliestStart == new \DateTime('6000-10-10') || $latestEnd == new \DateTime('1000-10-10'))
     {
-      return;
+      return; //@TODO
     }
     if ($earliestStart == $latestEnd)
     {
@@ -164,7 +162,7 @@ class Event extends VEvent
 
       return true;
     }
-  }
+  } //@TODO return statement
 
   /**
    * Set slug
@@ -232,11 +230,11 @@ class Event extends VEvent
   /**
    * Set conference
    *
-   * @param \fibe\ConferenceBundle\Entity\MainEvent $conference
+   * @param \fibe\EventBundle\Entity\MainEvent $conference
    *
    * @return VEvent
    */
-  public function setConference(\fibe\ConferenceBundle\Entity\MainEvent $conference)
+  public function setConference(\fibe\EventBundle\Entity\MainEvent $conference)
   {
     $this->conference = $conference;
 
@@ -246,7 +244,7 @@ class Event extends VEvent
   /**
    * Get conference
    *
-   * @return \fibe\ConferenceBundle\Entity\MainEvent
+   * @return \fibe\EventBundle\Entity\MainEvent
    */
   public function getConference()
   {
@@ -256,11 +254,11 @@ class Event extends VEvent
   /**
    * Add papers
    *
-   * @param \fibe\EventBundle\Entity\Paper $papers
+   * @param \fibe\ContentBundle\Entity\Paper $papers
    *
    * @return VEvent
    */
-  public function addPaper(\fibe\EventBundle\Entity\Paper $papers)
+  public function addPaper(\fibe\ContentBundle\Entity\Paper $papers)
   {
     $this->papers[] = $papers;
 
@@ -270,9 +268,9 @@ class Event extends VEvent
   /**
    * Remove papers
    *
-   * @param \fibe\EventBundle\Entity\Paper $papers
+   * @param \fibe\ContentBundle\Entity\Paper $papers
    */
-  public function removePaper(\fibe\EventBundle\Entity\Paper $papers)
+  public function removePaper(\fibe\ContentBundle\Entity\Paper $papers)
   {
     $this->papers->removeElement($papers);
   }
@@ -290,11 +288,11 @@ class Event extends VEvent
   /**
    * Add topics
    *
-   * @param \fibe\EventBundle\Entity\Topic $topics
+   * @param \fibe\ContentBundle\Entity\Topic $topics
    *
    * @return VEvent
    */
-  public function addTopic(\fibe\EventBundle\Entity\Topic $topics)
+  public function addTopic(\fibe\ContentBundle\Entity\Topic $topics)
   {
     $this->topics[] = $topics;
 
@@ -304,9 +302,9 @@ class Event extends VEvent
   /**
    * Remove topics
    *
-   * @param \fibe\EventBundle\Entity\Topic $topics
+   * @param \fibe\ContentBundle\Entity\Topic $topics
    */
-  public function removeTopic(\fibe\EventBundle\Entity\Topic $topics)
+  public function removeTopic(\fibe\ContentBundle\Entity\Topic $topics)
   {
     $this->topics->removeElement($topics);
   }
@@ -388,5 +386,4 @@ class Event extends VEvent
   {
     return count($this->children) != 0;
   }
-
 }
