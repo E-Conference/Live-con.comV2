@@ -78,7 +78,7 @@ class Location
    *
    * mainEvent
    *
-   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="locations", cascade={"persist"})
+   * @ORM\OneToMany(targetEntity="fibe\EventBundle\Entity\MainEvent", mappedBy="location")
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    */
   protected $mainEvent;
@@ -89,8 +89,6 @@ class Location
    * @ORM\OneToMany(targetEntity="fibe\EventBundle\Entity\VEvent", mappedBy="location")
    */
   protected $events;
-
-
 
   /**
    * Constructor
