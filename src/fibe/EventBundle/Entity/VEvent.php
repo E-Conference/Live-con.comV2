@@ -254,8 +254,10 @@ class VEvent
   /**
    * location
    *
-   * @ORM\ManyToOne(targetEntity="fibe\ContentBundle\Entity\Topic", inversedBy="VEvents")
-   * @ORM\JoinColumn(name="topic_id", referencedColumnName="id", onDelete="Set Null")
+   * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Topic", inversedBy="VEvents", cascade={"persist"})
+   * @ORM\JoinTable(name="venvent_paper",
+   *     joinColumns={@ORM\JoinColumn(name="venvt_id", referencedColumnName="id")},
+   *     inverseJoinColumns={@ORM\JoinColumn(name="topic_id", referencedColumnName="id")})
    */
   protected $topics;
 

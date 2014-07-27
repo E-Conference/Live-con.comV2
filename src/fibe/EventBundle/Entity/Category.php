@@ -14,6 +14,7 @@ use JMS\Serializer\Annotation\Expose;
  */
 class Category
 {
+  const DEFAULT_LEVEL = 3;
   /**
    * @ORM\Id
    * @ORM\Column(type="integer")
@@ -73,6 +74,7 @@ class Category
   {
     $this->childs = new ArrayCollection();
     $this->VEvent = new ArrayCollection();
+    $this->level = self::DEFAULT_LEVEL;
   }
 
   /**
