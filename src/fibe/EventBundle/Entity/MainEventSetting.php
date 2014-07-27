@@ -13,11 +13,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * This entity define actives module for a conference
  *
  *
- * @ORM\Table(name="main_event_settings")
+ * @ORM\Table(name="main_event_setting")
  * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\MainEventSettingsRepository")
  *
  */
-class MainEventSettings
+class MainEventSetting
 {
   /**
    * @ORM\Id
@@ -34,7 +34,7 @@ class MainEventSettings
   /**
    * MainEvent
    *
-   * @ORM\OneToOne(targetEntity="fibe\EventBundle\Entity\MainEvent",cascade={"persist","remove"})
+   * @ORM\OneToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="setting", cascade={"persist","merge","remove"})
    * @ORM\JoinColumn(name="mainEvent", referencedColumnName="id",onDelete="CASCADE")
    */
   private $mainEvent;
@@ -80,7 +80,7 @@ class MainEventSettings
    *
    * @param boolean $conference
    *
-   * @return MainEventSettings
+   * @return MainEventSetting
    */
   public function setMainEvent($conference)
   {

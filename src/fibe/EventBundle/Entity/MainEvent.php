@@ -95,7 +95,7 @@ class MainEvent extends VEvent
   /**
    * mappingFiles
    *
-   * @ORM\OneToOne(targetEntity="fibe\EventBundle\Entity\MainEventSettings", mappedBy="mainEvent",cascade={"persist", "remove"})
+   * @ORM\OneToOne(targetEntity="fibe\EventBundle\Entity\MainEventSetting", mappedBy="mainEvent",cascade={"persist", "remove"})
    */
   private $setting;
 

@@ -130,7 +130,7 @@ class Person
    * @TODO : Difference avec un utilisateur Livecon ? Peut appartenir a plusieurs main events
    *
    * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="persons", cascade={"persist"})
-   * @ORM\JoinTable(name="mainevents_persons",
+   * @ORM\JoinTable(name="main_event_person",
    *     joinColumns={@ORM\JoinColumn(name="mainevent_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")})
    * @Expose

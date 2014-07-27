@@ -28,7 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *    @ORM\Index(name="start_at_idx", columns={"start_at"})
  * })
  * @ORM\HasLifecycleCallbacks
- * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorMap({
  *     "Event"="Event",
  *     "MainEvent"="MainEvent",
@@ -253,8 +253,8 @@ abstract class VEvent
   /**
    * location
    *
-   * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Topic", inversedBy="events", cascade={"persist"})
-   * @ORM\JoinTable(name="venvent_paper",
+   * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Topic", inversedBy="vEvents", cascade={"persist"})
+   * @ORM\JoinTable(name="vevent_paper",
    *     joinColumns={@ORM\JoinColumn(name="venvt_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="topic_id", referencedColumnName="id")})
    */
@@ -281,7 +281,7 @@ abstract class VEvent
    * Sponsors related to a VEvent
    *
    * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Sponsor", inversedBy="events", cascade={"persist"})
-   * @ORM\JoinTable(name="venvent_sponsor",
+   * @ORM\JoinTable(name="vevent_sponsor",
    *     joinColumns={@ORM\JoinColumn(name="venvt_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="sponsor_id", referencedColumnName="id")})
    *

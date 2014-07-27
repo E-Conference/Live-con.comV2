@@ -27,7 +27,7 @@
     public function showAction(Request $request)
     {
       $mainEvent = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'MainEvent');
-      $currentMainEvent = $this->getUser()->getCurrentMainEvent();
+//      $mainEvent = $this->getUser()->getCurrentMainEvent();
       $form = $this->createForm(new MainEventType($this->getUser()), $mainEvent);
 
       $request = $this->get('request');
@@ -59,8 +59,8 @@
       }
 
       return array(
-        'currentMainEvent' => $currentMainEvent,
-        'form'      => $form->createView(), 
+        'mainEvent' => $mainEvent,
+        'form'      => $form->createView(),
 
       );
 

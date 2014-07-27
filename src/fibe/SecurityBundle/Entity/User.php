@@ -16,7 +16,7 @@
 
   /**
    * @ORM\Entity(repositoryClass="fibe\SecurityBundle\Repository\UserRepository")
-   * @ORM\Table(name="manager")  
+   * @ORM\Table(name="user")
    * @ExclusionPolicy("all") 
    */
   class User extends BaseUser

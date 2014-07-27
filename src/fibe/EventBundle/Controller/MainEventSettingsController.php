@@ -2,7 +2,7 @@
 
 namespace fibe\EventBundle\Controller;
 
-use fibe\EventBundle\Entity\MainEventSettings;
+use fibe\EventBundle\Entity\MainEventSetting;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -11,7 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use fibe\Bundle\WWWConfBundle\Form\MainEventSettingsType;
 
 /**
- * MainEventSettings controller.
+ * MainEventSetting controller.
  *
  * @Route("/maineventsettings")
  */
@@ -19,7 +19,7 @@ class MainEventSettingsController extends Controller
 {
 
     /**
-     * Lists all MainEventSettings entities.
+     * Lists all MainEventSetting entities.
      *
      * @Route("/", name="maineventsettings")
      * @Method("GET")
@@ -36,7 +36,7 @@ class MainEventSettingsController extends Controller
         );
     }
     /**
-     * Creates a new MainEventSettings entity.
+     * Creates a new MainEventSetting entity.
      *
      * @Route("/", name="maineventsettings_create")
      * @Method("POST")
@@ -63,7 +63,7 @@ class MainEventSettingsController extends Controller
     }
 
     /**
-     * Creates a form to create a MainEventSettings entity.
+     * Creates a form to create a MainEventSetting entity.
      *
      * @param MainEventSettings $entity The entity
      *
@@ -82,7 +82,7 @@ class MainEventSettingsController extends Controller
     }
 
     /**
-     * Displays a form to create a new MainEventSettings entity.
+     * Displays a form to create a new MainEventSetting entity.
      *
      * @Route("/new", name="maineventsettings_new")
      * @Method("GET")
@@ -100,7 +100,7 @@ class MainEventSettingsController extends Controller
     }
 
     /**
-     * Finds and displays a MainEventSettings entity.
+     * Finds and displays a MainEventSetting entity.
      *
      * @Route("/{id}", name="maineventsettings_show")
      * @Method("GET")
@@ -113,7 +113,7 @@ class MainEventSettingsController extends Controller
         $entity = $em->getRepository('fibeEventBundle:MainEventSettings')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find MainEventSettings entity.');
+            throw $this->createNotFoundException('Unable to find MainEventSetting entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -125,7 +125,7 @@ class MainEventSettingsController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing MainEventSettings entity.
+     * Displays a form to edit an existing MainEventSetting entity.
      *
      * @Route("/{id}/edit", name="maineventsettings_edit")
      * @Method("GET")
@@ -138,7 +138,7 @@ class MainEventSettingsController extends Controller
         $entity = $em->getRepository('fibeEventBundle:MainEventSettings')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find MainEventSettings entity.');
+            throw $this->createNotFoundException('Unable to find MainEventSetting entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -152,7 +152,7 @@ class MainEventSettingsController extends Controller
     }
 
     /**
-    * Creates a form to edit a MainEventSettings entity.
+    * Creates a form to edit a MainEventSetting entity.
     *
     * @param MainEventSettings $entity The entity
     *
@@ -170,7 +170,7 @@ class MainEventSettingsController extends Controller
         return $form;
     }
     /**
-     * Edits an existing MainEventSettings entity.
+     * Edits an existing MainEventSetting entity.
      *
      * @Route("/{id}", name="maineventsettings_update")
      * @Method("PUT")
@@ -183,7 +183,7 @@ class MainEventSettingsController extends Controller
         $entity = $em->getRepository('fibeEventBundle:MainEventSettings')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find MainEventSettings entity.');
+            throw $this->createNotFoundException('Unable to find MainEventSetting entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -203,7 +203,7 @@ class MainEventSettingsController extends Controller
         );
     }
     /**
-     * Deletes a MainEventSettings entity.
+     * Deletes a MainEventSetting entity.
      *
      * @Route("/{id}", name="maineventsettings_delete")
      * @Method("DELETE")
@@ -218,7 +218,7 @@ class MainEventSettingsController extends Controller
             $entity = $em->getRepository('fibeEventBundle:MainEventSettings')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find MainEventSettings entity.');
+                throw $this->createNotFoundException('Unable to find MainEventSetting entity.');
             }
 
             $em->remove($entity);
@@ -229,7 +229,7 @@ class MainEventSettingsController extends Controller
     }
 
     /**
-     * Creates a form to delete a MainEventSettings entity by id.
+     * Creates a form to delete a MainEventSetting entity by id.
      *
      * @param mixed $id The entity id
      *
