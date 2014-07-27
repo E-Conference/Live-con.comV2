@@ -29,7 +29,7 @@ class RoleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('fibeWWWConfBundle:Role')->findAll();
+        $entities = $em->getRepository('fibeContentBundle:Role')->findAll();
 
         return array(
             'entities' => $entities,
@@ -38,9 +38,9 @@ class RoleController extends Controller
     /**
      * Creates a new Role entity.
      *
-     * @Route("/", name="role_create")
+     * @Route("/", name="content_role_create")
      * @Method("POST")
-     * @Template("fibeWWWConfBundle:Role:new.html.twig")
+     * @Template("fibeContentBundle:Role:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -53,7 +53,7 @@ class RoleController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('role_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('content_role_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -72,7 +72,7 @@ class RoleController extends Controller
     private function createCreateForm(Role $entity)
     {
         $form = $this->createForm(new RoleType(), $entity, array(
-            'action' => $this->generateUrl('role_create'),
+            'action' => $this->generateUrl('content_role_create'),
             'method' => 'POST',
         ));
 
@@ -84,7 +84,7 @@ class RoleController extends Controller
     /**
      * Displays a form to create a new Role entity.
      *
-     * @Route("/new", name="role_new")
+     * @Route("/new", name="content_role_new")
      * @Method("GET")
      * @Template()
      */
@@ -102,7 +102,7 @@ class RoleController extends Controller
     /**
      * Finds and displays a Role entity.
      *
-     * @Route("/{id}", name="role_show")
+     * @Route("/{id}", name="content_role_show")
      * @Method("GET")
      * @Template()
      */
@@ -110,7 +110,7 @@ class RoleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('fibeWWWConfBundle:Role')->find($id);
+        $entity = $em->getRepository('fibeContentBundle:Role')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Role entity.');
@@ -127,7 +127,7 @@ class RoleController extends Controller
     /**
      * Displays a form to edit an existing Role entity.
      *
-     * @Route("/{id}/edit", name="role_edit")
+     * @Route("/{id}/edit", name="content_role_edit")
      * @Method("GET")
      * @Template()
      */
@@ -135,7 +135,7 @@ class RoleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('fibeWWWConfBundle:Role')->find($id);
+        $entity = $em->getRepository('fibeContentBundle:Role')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Role entity.');
@@ -161,7 +161,7 @@ class RoleController extends Controller
     private function createEditForm(Role $entity)
     {
         $form = $this->createForm(new RoleType(), $entity, array(
-            'action' => $this->generateUrl('role_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('content_role_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -172,15 +172,15 @@ class RoleController extends Controller
     /**
      * Edits an existing Role entity.
      *
-     * @Route("/{id}", name="role_update")
+     * @Route("/{id}", name="content_role_update")
      * @Method("PUT")
-     * @Template("fibeWWWConfBundle:Role:edit.html.twig")
+     * @Template("fibeContentBundle:Role:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('fibeWWWConfBundle:Role')->find($id);
+        $entity = $em->getRepository('fibeContentBundle:Role')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Role entity.');
@@ -193,7 +193,7 @@ class RoleController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('role_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('content_role_edit', array('id' => $id)));
         }
 
         return array(
@@ -205,7 +205,7 @@ class RoleController extends Controller
     /**
      * Deletes a Role entity.
      *
-     * @Route("/{id}", name="role_delete")
+     * @Route("/{id}", name="content_role_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -215,7 +215,7 @@ class RoleController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('fibeWWWConfBundle:Role')->find($id);
+            $entity = $em->getRepository('fibeContentBundle:Role')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Role entity.');
@@ -238,7 +238,7 @@ class RoleController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('role_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('content_role_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

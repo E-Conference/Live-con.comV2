@@ -20,16 +20,17 @@ use Pagerfanta\Exception\NotValidCurrentPageException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-
 /**
  * Paper controller.
+ *
  * @Route("/paper")
  */
 class PaperController extends Controller
 {
   /**
    * Lists all Paper entities.
-   * @Route("/", name="schedule_paper")
+   *
+   * @Route("/", name="content_paper")
    * @Template()
    */
   public function indexAction(Request $request)
@@ -59,7 +60,8 @@ class PaperController extends Controller
 
   /**
    * Filter paper index list
-   * @Route("/filter", name="schedule_paper_filter")
+   *
+   * @Route("/filter", name="content_paper_filter")
    */
   public function filterAction(Request $request)
   {
@@ -74,7 +76,7 @@ class PaperController extends Controller
     {
       // bind values from the request
 
-      $entities = $em->getRepository('fibeWWWConfBundle:Paper')->filtering($filters->getData(), $conf);
+      $entities = $em->getRepository('fibeContentBundle:Paper')->filtering($filters->getData(), $conf);
       $nbResult = count($entities);
 
       //Pager
@@ -90,7 +92,7 @@ class PaperController extends Controller
       }
 
       return $this->render(
-        'fibeWWWConfBundle:Paper:list.html.twig',
+        'fibeContentBundle:Paper:list.html.twig',
         array(
           'pager'    => $pager,
           'nbResult' => $nbResult,
@@ -101,7 +103,8 @@ class PaperController extends Controller
 
   /**
    * Creates a new Paper entity.
-   * @Route("/create", name="schedule_paper_create")
+   *
+   * @Route("/create", name="content_paper_create")
    * @Template()
    */
   public function createAction(Request $request)
@@ -119,11 +122,11 @@ class PaperController extends Controller
 
       //$this->get('fibe_security.acl_entity_helper')->createACL($entity,MaskBuilder::MASK_OWNER);
 
-      return $this->redirect($this->generateUrl('schedule_paper'));
+      return $this->redirect($this->generateUrl('content_paper'));
     }
 
     return $this->render(
-      'fibeWWWConfBundle:Paper:new.html.twig',
+      'fibeContentBundle:Paper:new.html.twig',
       array(
         'entity' => $entity,
         'form'   => $form->createView()
@@ -133,9 +136,9 @@ class PaperController extends Controller
 
   /**
    * Displays a form to create a new Paper entity.
-   * @Route("/new", name="schedule_paper_new")
-   * @Template()
    *
+   * @Route("/new", name="content_paper_new")
+   * @Template()
    */
   public function newAction()
   {
@@ -144,7 +147,7 @@ class PaperController extends Controller
     $form = $this->createForm(new PaperType($this->getUser()), $entity);
 
     return $this->render(
-      'fibeWWWConfBundle:Paper:new.html.twig',
+      'fibeContentBundle:Paper:new.html.twig',
       array(
         'entity' => $entity,
         'form'   => $form->createView(),
@@ -154,7 +157,8 @@ class PaperController extends Controller
 
   /**
    * Finds and displays a Paper entity.
-   * @Route("/{id}/show", name="schedule_paper_show")
+   *
+   * @Route("/{id}/show", name="content_paper_show")
    * @Template()
    */
   public function showAction($id)
@@ -163,7 +167,7 @@ class PaperController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return $this->render(
-      'fibeWWWConfBundle:Paper:show.html.twig',
+      'fibeContentBundle:Paper:show.html.twig',
       array(
         'entity'      => $entity,
         'delete_form' => $deleteForm->createView()
@@ -173,7 +177,8 @@ class PaperController extends Controller
 
   /**
    * Displays a form to edit an existing Paper entity.
-   * @Route("/{id}/edit", name="schedule_paper_edit")
+   *
+   * @Route("/{id}/edit", name="content_paper_edit")
    * @Template()
    */
   public function editAction($id)
@@ -184,7 +189,7 @@ class PaperController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return $this->render(
-      'fibeWWWConfBundle:Paper:edit.html.twig',
+      'fibeContentBundle:Paper:edit.html.twig',
       array(
         'entity'      => $entity,
         'edit_form'   => $editForm->createView(),
@@ -195,7 +200,8 @@ class PaperController extends Controller
 
   /**
    * Edits an existing Paper entity.
-   * @Route("/{id}/update", name="schedule_paper_update")
+   *
+   * @Route("/{id}/update", name="content_paper_update")
    */
   public function updateAction(Request $request, $id)
   {
@@ -211,12 +217,13 @@ class PaperController extends Controller
       $em->flush();
     }
 
-    return $this->redirect($this->generateUrl('schedule_paper_show', array('id' => $id)));
+    return $this->redirect($this->generateUrl('content_paper_show', array('id' => $id)));
   }
 
   /**
    * Deletes a Paper entity.
-   * @Route("/{id}/delete", name="schedule_paper_delete")
+   *
+   * @Route("/{id}/delete", name="content_paper_delete")
    * @Method({"POST", "DELETE"})
    */
   public function deleteAction(Request $request, $id)
@@ -237,7 +244,7 @@ class PaperController extends Controller
       );
     }
 
-    return $this->redirect($this->generateUrl('schedule_paper'));
+    return $this->redirect($this->generateUrl('content_paper'));
   }
 
   /**
