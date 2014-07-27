@@ -1,14 +1,14 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Controller;
+namespace fibe\EventBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use fibe\Bundle\WWWConfBundle\Entity\Category;
-use fibe\Bundle\WWWConfBundle\Form\CategoryType;
+use fibe\EventBundle\Entity\Category;
+use fibe\EventBundle\Form\CategoryType;
 
 /**
  * Category controller.
@@ -59,7 +59,7 @@ class CategoryController extends Controller
       throw $this->createNotFoundException('Unable to find Category entity.');
     }
 
-    // $deleteForm = $this->createDeleteForm($id);
+    //$deleteForm = $this->createDeleteForm($id);
 
     return array(
       'entity' => $entity,
@@ -149,7 +149,7 @@ class CategoryController extends Controller
    *
    * @Route("/{id}/update", name="schedule_category_update")
    * @Method("POST")
-   * @Template("fibeWWWConfBundle:Category:edit.html.twig")
+   * @Template("fibeEventBundle:Category:edit.html.twig")
    */
   public function updateAction(Request $request, $id)
   {

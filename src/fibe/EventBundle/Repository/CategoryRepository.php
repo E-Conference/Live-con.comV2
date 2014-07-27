@@ -69,6 +69,11 @@ class CategoryRepository extends EntityRepository
         ->andWhere('cat.level = :level')
         ->setParameter('level', $params['level']);
     }
+    if (isset($params['levels']))
+    {
+      $qb
+        ->andWhere($qb->expr()->in('cat.level', $params['levels']));
+    }
 
     if (isset($params['id']))
     {

@@ -1,18 +1,11 @@
 <?php
 
-/**
- * 
- * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
- * @licence: GPL
- *
- */
-
-namespace fibe\Bundle\WWWConfBundle\Form;
+namespace fibe\EventBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use fibe\Bundle\WWWConfBundle\Entity\Recur;
+use fibe\Bundle\Event\Entity\Recur;
 
 class RecurType extends AbstractType
 {

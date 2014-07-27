@@ -139,102 +139,85 @@
        $em->persist($topic);*/
 
 
-      //categories
-      //TODO : color
+      $OrganisedEvent = new Category();
+      $OrganisedEvent->setLabel("Organized Event")
+                     ->setColor("#0EFF74")
+                     ->setLevel(3);
+      $em->persist($OrganisedEvent);
 
-      //abstract category
-      // $OrganisedEvent = new Category();
-      // $OrganisedEvent->setLabel("OrganisedEvent")
-      //          ->setColor("#0EFF74") ;
-      // $em->persist($OrganisedEvent);
+      $NonAcademicEvent = new Category();
+      $NonAcademicEvent->setLabel("Non Academic Event")
+                       ->setColor("#A6FF88")
+                       ->setLevel(3);
+      $em->persist($NonAcademicEvent);
 
-      // $NonAcademicEvent = new Category();
-      // $NonAcademicEvent->setLabel("NonAcademicEvent")
-      //                 ->setColor("#A6FF88")
-      //                 ->setParent($OrganisedEvent);
-      // $em->persist($NonAcademicEvent);
+      $AcademicEvent = new Category();
+      $AcademicEvent->setLabel("Academic Event")
+                    ->setColor("#57A5C9")
+                    ->setLevel(3);
+      $em->persist($AcademicEvent);
 
-      // $AcademicEvent = new Category();
-      // $AcademicEvent->setLabel("AcademicEvent")
-      //               ->setColor("#57A5C9")
-      //               ->setParent($OrganisedEvent);
-      // $em->persist($AcademicEvent);
-      // non academic
-      // $SocialEvent = new Category();
-      // $SocialEvent->setLabel("SocialEvent");
-      //  $SocialEvent->setLabel("Social event")
-      //              ->setColor("#B186D7")
-      //             // ->setParent($NonAcademicEvent)
-      //             ;
-      // $em->persist($SocialEvent);
+      $SocialEvent = new Category();
+      $SocialEvent->setLabel("Social Event")
+                  ->setColor("#B186D7")
+                  ->setLevel(3);                  ;
+      $em->persist($SocialEvent);
 
-      // $MealEvent = new Category();
-      // $MealEvent->setLabel("MealEvent");
-      // $MealEvent->setLabel("Meal Event")
-      //           ->setColor("#00a2e0")
-      //           // ->setParent($NonAcademicEvent)
-      //           ;
-      // $em->persist($MealEvent);
+      $MealEvent = new Category();
+      $MealEvent->setLabel("Meal Event")
+                ->setColor("#00a2e0")
+                ->setLevel(3);
+      $em->persist($MealEvent);
 
-      // $BreakEvent = new Category();
-      // $BreakEvent->setLabel("Break event")
-      //           ->setColor("#00a2e0")
-      //           // ->setParent($NonAcademicEvent)
-      //           ;
-      // $em->persist($BreakEvent);
+      $BreakEvent = new Category();
+      $BreakEvent->setLabel("Break event")
+                 ->setColor("#00a2e0")
+                 ->setLevel(3);
+      $em->persist($BreakEvent);
 
-      // // academic
+      $KeynoteEvent = new Category();
+      $KeynoteEvent->setLabel("Keynote event")
+                   ->setColor("#afcbe0")
+                   ->setLevel(3);
+      $em->persist($KeynoteEvent);
 
-      // $KeynoteEvent = new Category();
-      // $KeynoteEvent->setLabel("Keynote event")
-      //          ->setColor("#afcbe0")
-      //           // ->setParent($AcademicEvent)
-      //           ;
-      // $em->persist($KeynoteEvent);
+      $TrackEvent = new Category();
+      $TrackEvent->setLabel("Track event")
+                ->setColor("#afcbe0")
+                ->setLevel(1);
+      $em->persist($TrackEvent);
 
-      // $TrackEvent = new Category();
-      // $TrackEvent->setLabel("Track event")
-      //           ->setColor("#afcbe0")
-      //           // ->setParent($AcademicEvent)
-      //           ;
-      // $em->persist($TrackEvent);
+      $PanelEvent = new Category();
+      $PanelEvent->setLabel("Panel Event")
+                 ->setColor("#e7431e")
+                 ->setLevel(3);
+      $em->persist($PanelEvent);
 
-      // $PanelEvent = new Category();
-      // $PanelEvent->setLabel("PanelEvent");
-      // $PanelEvent->setLabel("Panel event")
-      //           ->setColor("#e7431e")
-      //           // ->setParent($AcademicEvent)
-      //           ;
-      // $em->persist($PanelEvent);
+      $ConferenceEvent = new Category();
+      $ConferenceEvent->setLabel("Conference Event")
+                      ->setColor("#b0ca0f")
+                      ->setLevel(0);
+      $em->persist($ConferenceEvent);
 
-      // $ConferenceEvent = new Category();
-      // $ConferenceEvent->setLabel("Conference event")
-      //           ->setColor("#b0ca0f")
-      //           // ->setParent($AcademicEvent)
-      //           ;
-      // $em->persist($ConferenceEvent);
+      $WorkshopEvent = new Category();
+       $WorkshopEvent->setLabel("Workshop event")
+                ->setColor("#EBD94E")
+                ->setLevel(3);
+      $em->persist($WorkshopEvent);
 
-      // $WorkshopEvent = new Category();
-      //  $WorkshopEvent->setLabel("Workshop event")
-      //           ->setColor("#EBD94E")
-      //           // ->setParent($AcademicEvent)
-      //           ;
-      // $em->persist($WorkshopEvent);
+      $SessionEvent = new Category();
+       $SessionEvent->setLabel("Session event")
+                ->setColor("#8F00FF")
+                ->setLevel(2);
+      $em->persist($SessionEvent);
 
-      // $SessionEvent = new Category();
-      //  $SessionEvent->setLabel("Session event")
-      //           ->setColor("#8F00FF")
-      //           // ->setParent($AcademicEvent)
-      //           ;
-      // $em->persist($SessionEvent);
+      $TalkEvent = new Category();
+      $TalkEvent->setLabel("Talk event")
+                ->setColor("#FF5A45")
+                ->setLevel(0);
+      $em->persist($TalkEvent);
 
-      // $TalkEvent = new Category();
-      // $TalkEvent->setLabel("Talk event")
-      //           ->setColor("#FF5A45")
-      // ->setParent($AcademicEvent)
-      ;
-      // $em->persist($TalkEvent);
-      // $em->flush();
+      $em->flush();
 
       $output->writeln("common rows inserted successfully");
 

@@ -6,32 +6,21 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class MainEventType extends AbstractType
+class MainEventSettingsType extends AbstractType
 {
-
-  protected $user;
-
-  /**
-   * @param $user
-   */
-  public function __construct($user)
-  {
-    $this->user = $user;
-  }
-
         /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-      parent::buildForm($builder, $options);
-      $builder
-        ->add('logo', 'file', array('required' => false,
-          'label'    => 'Logo (jpeg - png - 2MO)',
-          'attr'     => array('placeholder' => 'logoPath')))
-       
-      ;
+        $builder
+            ->add('label')
+            ->add('paperModule')
+            ->add('organizationModule')
+            ->add('sponsorModule')
+            ->add('mainEvent')
+        ;
     }
     
     /**
@@ -40,7 +29,7 @@ class MainEventType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'fibe\EventBundle\Entity\MainEvent'
+            'data_class' => 'fibe\EventBundle\Entity\MainEventSettings'
         ));
     }
 
@@ -49,6 +38,6 @@ class MainEventType extends AbstractType
      */
     public function getName()
     {
-        return 'fibe_eventbundle_mainevent';
+        return 'fibe_bundle_eventbundle_maineventsettings';
     }
 }

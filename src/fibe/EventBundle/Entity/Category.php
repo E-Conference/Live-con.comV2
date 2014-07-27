@@ -27,7 +27,7 @@ class Category
   protected $label;
 
   /**
-   * @ORM\Column(type="integer")
+   * @ORM\Column(type="integer", default="3")
    */
   protected $level;
 
