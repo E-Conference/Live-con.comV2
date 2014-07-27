@@ -16,7 +16,6 @@ use fibe\ContentBundle\Util\StringTools;
  * @ORM\Table(name="sponsor")
  * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\SponsorRepository")
  * @ORM\HasLifecycleCallbacks
- *
  */
 class Sponsor
 {
@@ -66,8 +65,8 @@ class Sponsor
   protected $company;
 
   /**
-   * 
    * sponsored event
+   *
    * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="sponsors", cascade={"persist"})
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    */

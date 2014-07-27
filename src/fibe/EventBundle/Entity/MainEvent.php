@@ -75,7 +75,7 @@ class MainEvent extends VEvent
   /**
    * Sponsors
    *
-   * @ORM\OneToMany(targetEntity="fibe\CommunityBundle\Entity\Sponsor", mappedBy="mainEvent",cascade={"persist", "remove"})
+   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Sponsor", mappedBy="mainEvent",cascade={"persist", "remove"})
    */
   private $sponsors;
 
