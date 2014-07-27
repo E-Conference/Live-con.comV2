@@ -78,10 +78,10 @@ class Paper
   /**
    * The topics of the paper
    *
-   * @ORM\ManyToMany(targetEntity="Topic", inversedBy="paper", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="Topic", inversedBy="paper", cascade={"persist", "remove"})
    * @ORM\JoinTable(name="paper_topic",
-   *     joinColumns={@ORM\JoinColumn(name="paper_id", referencedColumnName="id", onDelete="Cascade")},
-   *     inverseJoinColumns={@ORM\JoinColumn(name="topic_id", referencedColumnName="id", onDelete="Cascade")})
+   *     joinColumns={@ORM\JoinColumn(name="paper_id", referencedColumnName="id")},
+   *     inverseJoinColumns={@ORM\JoinColumn(name="topic_id", referencedColumnName="id")})
    */
   protected $topics;
 

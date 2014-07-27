@@ -78,7 +78,7 @@ class Location
    *
    * mainEvent
    *
-   * @ORM\OneToMany(targetEntity="fibe\EventBundle\Entity\MainEvent", mappedBy="location")
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="locations")
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    */
   protected $mainEvent;
@@ -86,7 +86,8 @@ class Location
   /**
    * Events
    *
-   * @ORM\OneToMany(targetEntity="fibe\EventBundle\Entity\VEvent", mappedBy="location")
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\VEvent", inversedBy="location")
+   * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
    */
   protected $events;
 
