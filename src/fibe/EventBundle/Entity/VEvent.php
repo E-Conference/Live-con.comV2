@@ -271,7 +271,7 @@ class VEvent
   /**
    * Persons related to an event according to a role
    *
-   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Role", mappedBy="VEvents",cascade={"persist","remove"})
+   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Role", mappedBy="VEvent",cascade={"persist","remove"})
    * @ORM\JoinColumn( onDelete="CASCADE")
    * @Expose
    */

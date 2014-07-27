@@ -36,9 +36,6 @@
       $mainEvent->setEndAt($end->add(new \DateInterval('P2D')));
       $this->entityManager->persist($mainEvent);
 
-      //Main conf event
-      $mainEvent = new MainEvent();
-
 
       // conference location
       $mainEventLocation = new Location();
@@ -74,7 +71,7 @@
 
       // non academic
 
-      $SocialEvent = new Category();
+      /*$SocialEvent = new Category();
       $SocialEvent->setMainEvent($mainEvent)
         ->setLabel("Social event")
         ->setColor("#B186D7")// ->setParent($NonAcademicEvent)
@@ -144,7 +141,7 @@
         ->setLabel("Talk event")
         ->setColor("#FF5A45")// ->setParent($AcademicEvent)
       ;
-      $this->entityManager->persist($TalkEvent);
+      $this->entityManager->persist($TalkEvent);*/
 
       //Team
       $defaultTeam = new Team();
