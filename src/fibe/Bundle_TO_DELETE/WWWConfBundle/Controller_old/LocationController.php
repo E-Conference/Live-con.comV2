@@ -38,7 +38,7 @@ class LocationController extends Controller
   /**
    * Lists all Location entities.
    *
-   * @Route("/", name="schedule_location")
+   * @Route("/", name="content_location")
    * @Template()
    */
   public function indexAction(Request $request)
@@ -67,7 +67,7 @@ class LocationController extends Controller
 
   /**
    * Filter location index list
-   * @Route("/filter", name="schedule_location_filter")
+   * @Route("/filter", name="content_location_filter")
    */
   public function filterAction(Request $request)
   {
@@ -111,7 +111,7 @@ class LocationController extends Controller
   /**
    * Finds and displays a Location entity.
    *
-   * @Route("/{id}/show", name="schedule_location_show")
+   * @Route("/{id}/show", name="content_location_show")
    * @Template()
    */
   public function showAction($id)
@@ -129,7 +129,7 @@ class LocationController extends Controller
   /**
    * Displays a form to create a new Location entity.
    *
-   * @Route("/new", name="schedule_location_new")
+   * @Route("/new", name="content_location_new")
    * @Template()
    */
   public function newAction()
@@ -146,7 +146,7 @@ class LocationController extends Controller
   /**
    * Creates a new Location entity.
    *
-   * @Route("/create", name="schedule_location_create")
+   * @Route("/create", name="content_location_create")
    * @Method("POST")
    * @Template("fibeWWWConfBundle:Location:new.html.twig")
    */
@@ -175,7 +175,7 @@ class LocationController extends Controller
         )
       );
 
-      return $this->redirect($this->generateUrl('schedule_location'));
+      return $this->redirect($this->generateUrl('content_location'));
     }
 
     return array(
@@ -187,7 +187,7 @@ class LocationController extends Controller
   /**
    * Displays a form to edit an existing Location entity.
    *
-   * @Route("/{id}/edit", name="schedule_location_edit")
+   * @Route("/{id}/edit", name="content_location_edit")
    * @Template()
    */
   public function editAction($id)
@@ -212,7 +212,7 @@ class LocationController extends Controller
   /**
    * Edits an existing Location entity.
    *
-   * @Route("/{id}/update", name="schedule_location_update")
+   * @Route("/{id}/update", name="content_location_update")
    * @Method("POST")
    * @Template("fibeWWWConfBundle:Location:edit.html.twig")
    */
@@ -240,7 +240,7 @@ class LocationController extends Controller
         )
       );
 
-      return $this->redirect($this->generateUrl('schedule_location'));
+      return $this->redirect($this->generateUrl('content_location'));
     }
 
     return array(
@@ -253,7 +253,7 @@ class LocationController extends Controller
   /**
    * Deletes a Location entity.
    *
-   * @Route("/{id}/delete", name="schedule_location_delete")
+   * @Route("/{id}/delete", name="content_location_delete")
    * @Method({"POST", "DELETE"})
    */
   public function deleteAction(Request $request, $id)
@@ -281,7 +281,7 @@ class LocationController extends Controller
       );
     }
 
-    return $this->redirect($this->generateUrl('schedule_location'));
+    return $this->redirect($this->generateUrl('content_location'));
   }
 
   /**

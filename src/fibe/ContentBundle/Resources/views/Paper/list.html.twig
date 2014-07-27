@@ -34,7 +34,7 @@
       </td>
       <td>
         <ul> {% for topic in entity.topics %}
-            <li><a href="{{ path('schedule_topic_show', { 'id': topic.id }) }}">
+            <li><a href="{{ path('content_topic_show', { 'id': topic.id }) }}">
                 {{ topic.name|e }}
               </a></li>
           {% endfor %}

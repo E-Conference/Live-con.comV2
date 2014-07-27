@@ -31,7 +31,7 @@
       var id_equipment = $('#equipment_list').val();
       console.log(id_equipment);
       //start send the post request
-      $.post("{{path('schedule_location_addEquipment')}}",
+      $.post("{{path('content_location_addEquipment')}}",
           {id_equipment: id_equipment, id_location: "{{ entity.id }}"},
           function (response)
           {
@@ -48,7 +48,7 @@
       var id_equipment = $(this).attr('id');
 
       //start send the post request
-      $.post("{{path('schedule_location_deleteEquipment')}}",
+      $.post("{{path('content_location_deleteEquipment')}}",
           {id_equipment: id_equipment, id_location: "{{ entity.id }}"},
           function (response)
           {

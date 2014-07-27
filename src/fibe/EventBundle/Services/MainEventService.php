@@ -200,16 +200,6 @@
     public function delete(MainEvent $mainEvent)
     {
       $this->removeObjects($mainEvent);
- 
-      //appConfig
-      $appConfig = $mainEvent->getAppConfig();
-      $mainEvent->setAppConfig(null);
-      if($appConfig)
-      { 
-        $this->entityManager->flush();
-        $this->entityManager->remove($appConfig);
-        $this->entityManager->flush();
-      }
 
       //team
       $team = $mainEvent->getTeam();
