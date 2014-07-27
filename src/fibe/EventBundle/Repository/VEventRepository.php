@@ -3,6 +3,7 @@
 namespace fibe\EventBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use fibe\EventBundle\Entity\Category;
 
 /**
  * ConfEventRepository
@@ -12,6 +13,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class VEventRepository extends EntityRepository
 {
+  /**
+   * @param $params
+   * @param $currentMainEvent
+   *
+   * @return mixed
+   */
   public function filtering($params, $currentMainEvent)
   {
     $qb = $this->getAllOrderByStartAtQueryBuilder();
@@ -55,12 +62,11 @@ class VEventRepository extends EntityRepository
 
   }
 
-  
 
   /**
    * getAllOrderByStartAtQueryBuilder
    *
-   * @return QueryBuilder
+   * @return \Doctrine\ORM\QueryBuilder
    */
   public function getAllOrderByStartAtQueryBuilder()
   {
@@ -75,7 +81,7 @@ class VEventRepository extends EntityRepository
   /**
    * getAllOrderByStartAtQuery
    *
-   * @return Query
+   * @return \Doctrine\ORM\Query|\Doctrine\ORM\QueryBuilder
    */
   public function getAllOrderByStartAtQuery()
   {
@@ -87,7 +93,7 @@ class VEventRepository extends EntityRepository
   /**
    * getAllOrderByStartAt
    *
-   * @return DoctrineCollection
+   * @return array
    */
   public function getAllOrderByStartAt()
   {
@@ -101,7 +107,7 @@ class VEventRepository extends EntityRepository
    *
    * @param array $params
    *
-   * @return QueryBuilder
+   * @return \Doctrine\ORM\QueryBuilder
    */
   public function extractQueryBuilder($params)
   {
@@ -265,7 +271,7 @@ class VEventRepository extends EntityRepository
    *
    * @param array $params
    *
-   * @return Query
+   * @return \Doctrine\ORM\Query|\Doctrine\ORM\QueryBuilder
    */
   public function extractQuery($params)
   {
@@ -279,7 +285,7 @@ class VEventRepository extends EntityRepository
    *
    * @param array $params
    *
-   * @return DoctrineCollection
+   * @return array
    */
   public function extract($params)
   {
