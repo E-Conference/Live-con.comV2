@@ -31,11 +31,6 @@ fibe_home_page:
     type:     annotation
     prefix:   / 
 
-fibe_mobile_app:
-    resource: "@fibeMobileAppBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 fibe_dashboard:
     resource: "@fibeDashboardBundle/Controller/"
     type:     annotation
