@@ -2,13 +2,14 @@
 
 namespace fibe\ContentBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use fibe\EventBundle\Entity\Event;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use fibe\EventBundle\Entity\MainEvent;
 use fibe\EventBundle\Entity\VEvent;
 use fibe\CommunityBundle\Entity\Person;
-use fibe\ContentBundle\Entity\Topic;
 use fibe\ContentBundle\Util\StringTools;
 
 /**
@@ -53,7 +54,7 @@ class Paper
   /**
    * Authors : Persons related to an event
    *
-   * @ORM\ManyToMany(targetEntity="fibe\CommunityBundle\Entity\Person", inversedBy="paper", cascade={"persist", "merge"})
+   * @ORM\ManyToMany(targetEntity="fibe\CommunityBundle\Entity\Person", inversedBy="papers", cascade={"persist", "merge", "remove"})
    * @ORM\JoinTable(
    *     joinColumns={@ORM\JoinColumn(name="paper_id", referencedColumnName="id", onDelete="Cascade")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id", onDelete="Cascade")})
@@ -110,9 +111,9 @@ class Paper
    */
   public function __construct()
   {
-    $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->topic = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->authors = new ArrayCollection();
+    $this->topics = new ArrayCollection();
+    $this->events = new ArrayCollection();
   }
 
   /**
@@ -305,11 +306,11 @@ class Paper
   /**
    * Add authors
    *
-   * @param \fibe\CommunityBundle\Entity\Person $authors
+   * @param Person $authors
    *
    * @return Paper
    */
-  public function addAuthor(\fibe\CommunityBundle\Entity\Person $authors)
+  public function addAuthor(Person $authors)
   {
     $this->authors[] = $authors;
 
@@ -319,9 +320,9 @@ class Paper
   /**
    * Remove authors
    *
-   * @param \fibe\CommunityBundle\Entity\Person $authors
+   * @param Person $authors
    */
-  public function removeAuthor(\fibe\Bundle\CommunityBundle\Entity\Person $authors)
+  public function removeAuthor(Person $authors)
   {
     $this->authors->removeElement($authors);
   }
@@ -339,11 +340,11 @@ class Paper
   /**
    * Add topics
    *
-   * @param \fibe\ContentBundle\Entity\Topic $topics
+   * @param Topic $topics
    *
    * @return Paper
    */
-  public function addTopic(\fibe\ContentBundle\Entity\Topic $topics)
+  public function addTopic(Topic $topics)
   {
     $this->topics[] = $topics;
 
@@ -353,9 +354,9 @@ class Paper
   /**
    * Remove topics
    *
-   * @param \fibe\ContentBundle\Entity\Topic $topics
+   * @param Topic $topics
    */
-  public function removeTopic(\fibe\ContentBundle\Entity\Topic $topics)
+  public function removeTopic(Topic $topics)
   {
     $this->topics->removeElement($topics);
   }
@@ -373,11 +374,11 @@ class Paper
   /**
    * Add events
    *
-   * @param \fibe\EventBundle\Entity\VEvent $events
+   * @param Event $events
    *
    * @return Paper
    */
-  public function addEvent(\fibe\EventBundle\Entity\VEvent $events)
+  public function addEvent(Event $events)
   {
     $this->events[] = $events;
 
@@ -387,9 +388,9 @@ class Paper
   /**
    * Remove events
    *
-   * @param \fibe\EventBundle\Entity\VEvent $events
+   * @param Event $events
    */
-  public function removeEvent(\fibe\EventBundle\Entity\VEvent $events)
+  public function removeEvent(Event $events)
   {
     $this->events->removeElement($events);
   }
@@ -405,26 +406,26 @@ class Paper
   }
 
   /**
-   * Set conference
+   * Set mainEvent
    *
-   * @param \fibe\EventBundle\Entity\MainEvent $conference
+   * @param MainEvent $mainEvent
    *
    * @return Paper
    */
-  public function setConference(\fibe\EventBundle\Entity\MainEvent $conference = null)
+  public function setMainEvent(MainEvent $mainEvent = null)
   {
-    $this->conference = $conference;
+    $this->mainEvent = $mainEvent;
 
     return $this;
   }
 
   /**
-   * Get conference
+   * Get mainEvent
    *
-   * @return \fibe\EventBundle\Entity\MainEvent
+   * @return MainEvent
    */
-  public function getConference()
+  public function getMainEvent()
   {
-    return $this->conference;
+    return $this->mainEvent;
   }
 }

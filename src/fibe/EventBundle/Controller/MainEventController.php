@@ -2,6 +2,7 @@
 
   namespace fibe\EventBundle\Controller;
 
+  use fibe\EventBundle\Form\MainEventType;
   use Symfony\Bundle\FrameworkBundle\Controller\Controller;
   use Symfony\Component\HttpFoundation\Request;
   use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -26,7 +27,7 @@
     public function showAction(Request $request)
     {
       $mainEvent = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'MainEvent');
-      $currentMainEvent = $this->getUser()->getCurrentConf();
+      $currentMainEvent = $this->getUser()->getCurrentMainEvent();
       $form = $this->createForm(new MainEventType($this->getUser()), $mainEvent);
 
       $request = $this->get('request');
@@ -148,16 +149,15 @@
     }
 
 
-  /**
-   * Edits an existing Module entity.
-   * @Route("/module", name="schedule_module_update")
-   *
-   * @param Request $request
-   * @param         $id
-   *
-   * @return \Symfony\Component\HttpFoundation\RedirectResponse
-   * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-   */
+    /**
+     * Edits an existing Module entity.
+     * @Route("/module", name="schedule_module_update")
+     *
+     * @param Request $request
+     * @internal param $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
   public function updateModuleAction(Request $request)
   {
 
