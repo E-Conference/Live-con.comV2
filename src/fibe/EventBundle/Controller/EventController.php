@@ -11,8 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use fibe\Bundle\WWWConfBundle\Entity\Event;
-use fibe\Bundle\WWWConfBundle\Form\EventType;
+use fibe\EventBundle\Entity\Event;
+use fibe\EventBundle\Form\EventType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -45,8 +45,8 @@ class EventController extends Controller
 
     //Form Filter
     $filters = $this->createForm(new EventFilterType($this->getUser()));
-   
-    
+
+
     return array(
       'pager'        => $pager,
       'filters_form' => $filters->createView()
@@ -104,7 +104,7 @@ class EventController extends Controller
   {
     $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Event');
 
-    $form = $this->createForm(new EventType($this->getUser(), $entity);
+    $form = $this->createForm(new Event($this->getUser(), $entity));
     $form->bind($request);
 
     if ($form->isValid())
@@ -139,16 +139,16 @@ class EventController extends Controller
     $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Event');
 
     //From the index I can create event with all categories
-    $categoriesLevel= array("levels"=>array(1,2,3));
+    $categoriesLevel = array("levels" => array(1, 2, 3));
 
     $form = $this->createForm(new EventType($categoriesLevel), $entity);
-     
+
 
     return $this->render(
       'fibeEventBundle:Event:new.html.twig',
       array(
-        'entity' => $entity,
-        'form'   => $form->createView(),
+        'entity'          => $entity,
+        'form'            => $form->createView(),
         'categoriesLevel' => $categoriesLevel,
       )
     );

@@ -3,10 +3,15 @@ namespace fibe\EventBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
+use fibe\ContentBundle\Entity\Location;
+use fibe\ContentBundle\Entity\Role;
+use fibe\ContentBundle\Entity\Sponsor;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
+
+use fibe\ContentBundle\Entity\Topic;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -49,6 +54,16 @@ class VEvent
   protected $id;
 
   /**
+   * label -> summary
+   *
+   * This property defines a short summary or subject for the
+   * calendar component.
+   *
+   * @ORM\Column(type="string", length=255, nullable=true)
+   */
+  protected $label;
+
+  /**
    * dtstart
    *
    * This property specifies when the calendar component begins.
@@ -66,16 +81,6 @@ class VEvent
    * @ORM\Column(type="datetime", name="end_at")
    */
   protected $endAt;
-
-  /**
-   * summary
-   *
-   * This property defines a short summary or subject for the
-   * calendar component.
-   *
-   * @ORM\Column(type="string", length=255, nullable=true)
-   */
-  protected $summary;
 
   /**
    * description
@@ -245,6 +250,14 @@ class VEvent
    * @ORM\JoinColumn(name="location_id", referencedColumnName="id", onDelete="Set Null")
    */
   protected $location;
+
+  /**
+   * location
+   *
+   * @ORM\ManyToOne(targetEntity="fibe\ContentBundle\Entity\Topic", inversedBy="VEvents")
+   * @ORM\JoinColumn(name="topic_id", referencedColumnName="id", onDelete="Set Null")
+   */
+  protected $topics;
 
   /**
    * Category
@@ -539,30 +552,6 @@ class VEvent
   public function getLastModifiedAt()
   {
     return $this->lastModifiedAt;
-  }
-
-  /**
-   * Set summary
-   *
-   * @param string $summary
-   *
-   * @return $this
-   */
-  public function setSummary($summary)
-  {
-    $this->summary = $summary;
-
-    return $this;
-  }
-
-  /**
-   * Get summary
-   *
-   * @return string
-   */
-  public function getSummary()
-  {
-    return $this->summary;
   }
 
   /**
@@ -946,16 +935,6 @@ class VEvent
   }
 
   /**
-   * Get topics
-   *
-   * @return \Doctrine\Common\Collections\Collection
-   */
-  public function getTopics()
-  {
-    return $this->topics;
-  }
-
-  /**
    * @return mixed
    */
   public function getLabel()
@@ -1001,5 +980,21 @@ class VEvent
   public function setPriority($priority)
   {
     $this->priority = $priority;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getTopics()
+  {
+    return $this->topics;
+  }
+
+  /**
+   * @param mixed $topics
+   */
+  public function setTopics($topics)
+  {
+    $this->topics = $topics;
   }
 }

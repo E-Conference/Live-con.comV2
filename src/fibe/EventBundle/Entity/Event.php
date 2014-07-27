@@ -286,40 +286,6 @@ class Event extends VEvent
   }
 
   /**
-   * Add topics
-   *
-   * @param \fibe\ContentBundle\Entity\Topic $topics
-   *
-   * @return VEvent
-   */
-  public function addTopic(\fibe\ContentBundle\Entity\Topic $topics)
-  {
-    $this->topics[] = $topics;
-
-    return $this;
-  }
-
-  /**
-   * Remove topics
-   *
-   * @param \fibe\ContentBundle\Entity\Topic $topics
-   */
-  public function removeTopic(\fibe\ContentBundle\Entity\Topic $topics)
-  {
-    $this->topics->removeElement($topics);
-  }
-
-  /**
-   * Get topics
-   *
-   * @return \Doctrine\Common\Collections\Collection
-   */
-  public function getTopics()
-  {
-    return $this->topics;
-  }
-
-  /**
    * Set parent
    *
    * @param VEvent $parent
