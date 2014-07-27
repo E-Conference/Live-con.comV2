@@ -137,16 +137,16 @@
               {% endif %}
 
               <li
-                  class="schedule_location schedule_location_edit schedule_location_new schedule_location_show  col-xs-1 col-sm-1  col-mg-1 col-lg-1">
-                <a href="{{ path('schedule_location') }}" class='ellipsis'> <i
+                  class="content_location content_location_edit content_location_new content_location_show  col-xs-1 col-sm-1  col-mg-1 col-lg-1">
+                <a href="{{ path('content_location') }}" class='ellipsis'> <i
                       class="fa fa-map-marker fa-1x"></i><span>  Locations</span></a></li>
               <li
                   class="schedule_category schedule_category_new schedule_category_edit schedule_category_show  col-xs-1 col-sm-1  col-mg-1 col-lg-2">
                 <a href="{{ path('schedule_category') }}" class='ellipsis'><i class="fa fa-sort-amount-asc fa-1x"></i>
                   <span> Categories</span> </a></li>
               <li
-                  class="schedule_topic schedule_topic_new  schedule_topic_edit schedule_topic_show  col-xs-1 col-sm-1  col-mg-1 col-lg-1">
-                <a href="{{ path('schedule_topic') }}" class='ellipsis'> <i class="fa fa-crosshairs fa-1x"></i>
+                  class="content_topic content_topic_new  content_topic_edit content_topic_show  col-xs-1 col-sm-1  col-mg-1 col-lg-1">
+                <a href="{{ path('content_topic') }}" class='ellipsis'> <i class="fa fa-crosshairs fa-1x"></i>
                   <span>  Topics</span></a></li>
               {% if app.user.getCurrentMainEvent().getModule().getSponsorModule()== true %}
                 <li class="col-xs-1 col-sm-1  col-mg-1 col-lg-1">

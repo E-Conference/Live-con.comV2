@@ -30,7 +30,7 @@ class TopicController extends Controller
   /**
    * Lists all Topic entities.
    *
-   * @Route("/", name="schedule_topic")
+   * @Route("/", name="content_topic")
    * @Method("GET")
    * @Template()
    */
@@ -62,7 +62,7 @@ class TopicController extends Controller
 
   /**
    * Filter paper index list
-   * @Route("/filter", name="schedule_topic_filter")
+   * @Route("/filter", name="content_topic_filter")
    */
   public function filterAction(Request $request)
   {
@@ -103,7 +103,7 @@ class TopicController extends Controller
   /**
    * Creates a new Topic entity.
    *
-   * @Route("/", name="schedule_topic_create")
+   * @Route("/", name="content_topic_create")
    * @Method("POST")
    * @Template("fibeWWWConfBundle:Topic:new.html.twig")
    */
@@ -122,7 +122,7 @@ class TopicController extends Controller
 
       //$this->get('fibe_security.acl_entity_helper')->createACL($entity,MaskBuilder::MASK_OWNER);
 
-      return $this->redirect($this->generateUrl('schedule_topic'));
+      return $this->redirect($this->generateUrl('content_topic'));
     }
 
     return array(
@@ -134,7 +134,7 @@ class TopicController extends Controller
   /**
    * Displays a form to create a new Topic entity.
    *
-   * @Route("/new", name="schedule_topic_new")
+   * @Route("/new", name="content_topic_new")
    * @Method("GET")
    * @Template()
    */
@@ -152,7 +152,7 @@ class TopicController extends Controller
   /**
    * Finds and displays a Topic entity.
    *
-   * @Route("/{id}", name="schedule_topic_show")
+   * @Route("/{id}", name="content_topic_show")
    * @Method("GET")
    * @Template()
    */
@@ -171,7 +171,7 @@ class TopicController extends Controller
   /**
    * Displays a form to edit an existing Topic entity.
    *
-   * @Route("/{id}/edit", name="schedule_topic_edit")
+   * @Route("/{id}/edit", name="content_topic_edit")
    * @Method("GET")
    * @Template()
    */
@@ -192,7 +192,7 @@ class TopicController extends Controller
   /**
    * Edits an existing Topic entity.
    *
-   * @Route("/{id}", name="schedule_topic_update")
+   * @Route("/{id}", name="content_topic_update")
    * @Method("PUT")
    * @Template("fibeWWWConfBundle:Topic:edit.html.twig")
    */
@@ -210,13 +210,13 @@ class TopicController extends Controller
       $em->flush();
     }
 
-    return $this->redirect($this->generateUrl('schedule_topic_show', array('id' => $id)));
+    return $this->redirect($this->generateUrl('content_topic_show', array('id' => $id)));
   }
 
   /**
    * Deletes a Topic entity.
    *
-   * @Route("/{id}", name="schedule_topic_delete")
+   * @Route("/{id}", name="content_topic_delete")
    * @Method({"POST", "DELETE"})
    */
   public function deleteAction(Request $request, $id)
@@ -237,7 +237,7 @@ class TopicController extends Controller
       );
     }
 
-    return $this->redirect($this->generateUrl('schedule_topic'));
+    return $this->redirect($this->generateUrl('content_topic'));
   }
 
   /**
