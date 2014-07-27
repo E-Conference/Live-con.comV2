@@ -8,28 +8,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use fibe\ContentBundle\Entity\RoleType;
-use fibe\ContentBundle\Form\RoleTypeType;
+use fibe\ContentBundle\Entity\Rolelabel;
+use fibe\ContentBundle\Form\RolelabelType;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * RoleType controller.
+ * RoleLabel controller.
  *
- * @Route("/schedule/roletype")
+ * @Route("/schedule/rolelabel")
  */
-class RoleTypeController extends Controller
+class RoleLabelController extends Controller
 {
   /**
-   * Lists all RoleType entities.
+   * Lists all RoleLabel entities.
    *
-   * @Route("/", name="schedule_roletype")
+   * @Route("/", name="content_rolelabel")
    * @Method("GET")
    * @Template()
    */
   public function indexAction()
   {
-    $entities = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('VIEW', 'RoleType');
+    $entities = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('VIEW', 'Rolelabel');
 
     return array(
       'entities' => $entities
@@ -37,17 +37,17 @@ class RoleTypeController extends Controller
   }
 
   /**
-   * Creates a new RoleType entity.
+   * Creates a new Rolelabel entity.
    *
-   * @Route("/", name="schedule_roletype_create")
+   * @Route("/", name="content_rolelabel_create")
    * @Method("POST")
-   * @Template("fibeWWWConfBundle:RoleType:new.html.twig")
+   * @Template("fibeContentBundle:Rolelabel:new.html.twig")
    */
   public function createAction(Request $request)
   {
-    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'RoleType');
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Rolelabel');
 
-    $form = $this->createForm(new RoleTypeType(), $entity);
+    $form = $this->createForm(new RolelabelType(), $entity);
     $form->bind($request);
 
     if ($form->isValid())
@@ -56,7 +56,7 @@ class RoleTypeController extends Controller
       $em->persist($entity);
       $em->flush();
 
-      return $this->redirect($this->generateUrl('schedule_roletype'));
+      return $this->redirect($this->generateUrl('content_rolelabel'));
     }
 
     return array(
@@ -66,16 +66,16 @@ class RoleTypeController extends Controller
   }
 
   /**
-   * Displays a form to create a new RoleType entity.
+   * Displays a form to create a new Rolelabel entity.
    *
-   * @Route("/new", name="schedule_roletype_new")
+   * @Route("/new", name="content_rolelabel_new")
    * @Method("GET")
    * @Template()
    */
   public function newAction()
   {
-    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'RoleType');
-    $form = $this->createForm(new RoleTypeType(), $entity);
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Rolelabel');
+    $form = $this->createForm(new RolelabelType(), $entity);
 
     return array(
       'entity' => $entity,
@@ -84,19 +84,19 @@ class RoleTypeController extends Controller
   }
 
   /**
-   * Finds and displays a RoleType entity.
+   * Finds and displays a Rolelabel entity.
    *
-   * @Route("/{id}", name="schedule_roletype_show")
+   * @Route("/{id}", name="content_rolelabel_show")
    * @Method("GET")
    * @Template()
    */
   public function showAction($id)
   {
-    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'RoleType', $id);
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'Rolelabel', $id);
 
     if (!$entity)
     {
-      throw $this->createNotFoundException('Unable to find RoleType entity.');
+      throw $this->createNotFoundException('Unable to find Rolelabel entity.');
     }
 
     $deleteForm = $this->createDeleteForm($id);
@@ -108,22 +108,22 @@ class RoleTypeController extends Controller
   }
 
   /**
-   * Displays a form to edit an existing RoleType entity.
+   * Displays a form to edit an existing Rolelabel entity.
    *
-   * @Route("/{id}/edit", name="schedule_roletype_edit")
+   * @Route("/{id}/edit", name="content_rolelabel_edit")
    * @Method("GET")
    * @Template()
    */
   public function editAction($id)
   {
-    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT', 'RoleType', $id);
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT', 'Rolelabel', $id);
 
     if (!$entity)
     {
-      throw $this->createNotFoundException('Unable to find RoleType entity.');
+      throw $this->createNotFoundException('Unable to find Rolelabel entity.');
     }
 
-    $editForm = $this->createForm(new RoleTypeType(), $entity);
+    $editForm = $this->createForm(new RolelabelType(), $entity);
     $deleteForm = $this->createDeleteForm($id);
 
     return array(
@@ -134,23 +134,23 @@ class RoleTypeController extends Controller
   }
 
   /**
-   * Edits an existing RoleType entity.
+   * Edits an existing Rolelabel entity.
    *
-   * @Route("/{id}", name="schedule_roletype_update")
+   * @Route("/{id}", name="content_rolelabel_update")
    * @Method("PUT")
-   * @Template("fibeWWWConfBundle:RoleType:edit.html.twig")
+   * @Template("fibeContentBundle:Rolelabel:edit.html.twig")
    */
   public function updateAction(Request $request, $id)
   {
-    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT', 'RoleType', $id);
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT', 'Rolelabel', $id);
 
     if (!$entity)
     {
-      throw $this->createNotFoundException('Unable to find RoleType entity.');
+      throw $this->createNotFoundException('Unable to find Rolelabel entity.');
     }
 
     $deleteForm = $this->createDeleteForm($id);
-    $editForm = $this->createForm(new RoleTypeType(), $entity);
+    $editForm = $this->createForm(new RolelabelType(), $entity);
     $editForm->bind($request);
 
     if ($editForm->isValid())
@@ -159,7 +159,7 @@ class RoleTypeController extends Controller
       $em->persist($entity);
       $em->flush();
 
-      return $this->redirect($this->generateUrl('schedule_roletype'));
+      return $this->redirect($this->generateUrl('content_rolelabel'));
     }
 
     return array(
@@ -170,14 +170,14 @@ class RoleTypeController extends Controller
   }
 
   /**
-   * Deletes a RoleType entity.
+   * Deletes a Rolelabel entity.
    *
-   * @Route("/{id}", name="schedule_roletype_delete")
+   * @Route("/{id}", name="content_rolelabel_delete")
    * @Method({"POST", "DELETE"})
    */
   public function deleteAction(Request $request, $id)
   {
-    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('DELETE', 'RoleType', $id);
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('DELETE', 'Rolelabel', $id);
 
     $form = $this->createDeleteForm($id);
     $form->bind($request);
@@ -188,18 +188,18 @@ class RoleTypeController extends Controller
 
       if (!$entity)
       {
-        throw $this->createNotFoundException('Unable to find RoleType entity.');
+        throw $this->createNotFoundException('Unable to find Rolelabel entity.');
       }
 
       $em->remove($entity);
       $em->flush();
     }
 
-    return $this->redirect($this->generateUrl('schedule_roletype'));
+    return $this->redirect($this->generateUrl('content_rolelabel'));
   }
 
   /**
-   * Creates a form to delete a RoleType entity by id.
+   * Creates a form to delete a Rolelabel entity by id.
    *
    * @param mixed $id The entity id
    *

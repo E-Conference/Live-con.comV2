@@ -29,7 +29,7 @@ class SponsorController extends Controller
   /**
    * Lists all Sponsor entities.
    *
-   * @Route("/", name="schedule_sponsor")
+   * @Route("/", name="content_sponsor")
    * @Method("GET")
    * @Template()
    */
@@ -61,7 +61,7 @@ class SponsorController extends Controller
 
   /**
    * Filter paper index list
-   * @Route("/filter", name="schedule_sponsor_filter")
+   * @Route("/filter", name="content_sponsor_filter")
    */
   public function filterAction(Request $request)
   {
@@ -77,7 +77,7 @@ class SponsorController extends Controller
     {
       // bind values from the request
 
-      $entities = $em->getRepository('fibeWWWConfBundle:Sponsor')->filtering($filters->getData(), $conf);
+      $entities = $em->getRepository('fibeContentBundle:Sponsor')->filtering($filters->getData(), $conf);
       $nbResult = count($entities);
 
       //Pager
@@ -93,7 +93,7 @@ class SponsorController extends Controller
       }
 
       return $this->render(
-        'fibeWWWConfBundle:Sponsor:list.html.twig',
+        'fibeContentBundle:Sponsor:list.html.twig',
         [
           'pager'    => $pager,
           'nbResult' => $nbResult,
@@ -106,9 +106,9 @@ class SponsorController extends Controller
   /**
    * Creates a new Sponsor entity.
    *
-   * @Route("/", name="schedule_sponsor_create")
+   * @Route("/", name="content_sponsor_create")
    * @Method("POST")
-   * @Template("fibeWWWConfBundle:Sponsor:new.html.twig")
+   * @Template("fibeContentBundle:Sponsor:new.html.twig")
    */
   public function createAction(Request $request)
   {
@@ -124,7 +124,7 @@ class SponsorController extends Controller
       $entity->uploadLogo();
       $em->flush();
 
-      return $this->redirect($this->generateUrl('schedule_sponsor'));
+      return $this->redirect($this->generateUrl('content_sponsor'));
     }
 
     return [
@@ -136,7 +136,7 @@ class SponsorController extends Controller
   /**
    * Displays a form to create a new Sponsor entity.
    *
-   * @Route("/new", name="schedule_sponsor_new")
+   * @Route("/new", name="content_sponsor_new")
    * @Method("GET")
    * @Template()
    */
@@ -154,7 +154,7 @@ class SponsorController extends Controller
   /**
    * Finds and displays a Sponsor entity.
    *
-   * @Route("/{id}", name="schedule_sponsor_show")
+   * @Route("/{id}", name="content_sponsor_show")
    * @Method("GET")
    * @Template()
    */
@@ -178,7 +178,7 @@ class SponsorController extends Controller
   /**
    * Displays a form to edit an existing Sponsor entity.
    *
-   * @Route("/{id}/edit", name="schedule_sponsor_edit")
+   * @Route("/{id}/edit", name="content_sponsor_edit")
    * @Method("GET")
    * @Template()
    */
@@ -203,9 +203,9 @@ class SponsorController extends Controller
   /**
    * Edits an existing Sponsor entity.
    *
-   * @Route("/{id}", name="schedule_sponsor_update")
+   * @Route("/{id}", name="content_sponsor_update")
    * @Method("PUT")
-   * @Template("fibeWWWConfBundle:Sponsor:edit.html.twig")
+   * @Template("fibeContentBundle:Sponsor:edit.html.twig")
    */
   public function updateAction(Request $request, $id)
   {
@@ -227,7 +227,7 @@ class SponsorController extends Controller
       $em->persist($entity);
       $em->flush();
 
-      return $this->redirect($this->generateUrl('schedule_sponsor'));
+      return $this->redirect($this->generateUrl('content_sponsor'));
     }
 
     return [
@@ -240,7 +240,7 @@ class SponsorController extends Controller
   /**
    * Deletes a Sponsor entity.
    *
-   * @Route("/{id}", name="schedule_sponsor_delete")
+   * @Route("/{id}", name="content_sponsor_delete")
    * @Method({"POST", "DELETE"})
    */
   public function deleteAction(Request $request, $id)
@@ -261,7 +261,7 @@ class SponsorController extends Controller
       $em->flush();
     }
 
-    return $this->redirect($this->generateUrl('schedule_sponsor'));
+    return $this->redirect($this->generateUrl('content_sponsor'));
   }
 
   /**

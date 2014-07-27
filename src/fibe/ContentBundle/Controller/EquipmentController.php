@@ -16,6 +16,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Equipment controller.
+ *
  * @Route("/equipment")
  */
 class EquipmentController extends Controller
@@ -23,7 +24,7 @@ class EquipmentController extends Controller
   /**
    * Lists all Equipment entities.
    *
-   * @Route("/", name="schedule_equipment_index")
+   * @Route("/", name="content_equipment_index")
    * @Template()
    */
   public function indexAction()
@@ -31,7 +32,7 @@ class EquipmentController extends Controller
     $entities = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('VIEW', 'Equipment');
 
     return $this->render(
-      'fibeWWWConfBundle:Equipment:index.html.twig',
+      'fibeContentBundle:Equipment:index.html.twig',
       array(
         'entities' => $entities,
       )
@@ -41,7 +42,7 @@ class EquipmentController extends Controller
   /**
    * Creates a new Equipment entity.
    *
-   * @Route("/create", name="schedule_equipment_create")
+   * @Route("/create", name="content_equipment_create")
    * @Template()
    */
   public function createAction(Request $request)
@@ -58,11 +59,11 @@ class EquipmentController extends Controller
       $em->persist($entity);
       $em->flush();
 
-      return $this->redirect($this->generateUrl('schedule_equipment_show', array('id' => $entity->getId())));
+      return $this->redirect($this->generateUrl('content_equipment_show', array('id' => $entity->getId())));
     }
 
     return $this->render(
-      'fibeWWWConfBundle:Equipment:new.html.twig',
+      'fibeContentBundle:Equipment:new.html.twig',
       array(
         'entity' => $entity,
         'form'   => $form->createView()
@@ -73,7 +74,7 @@ class EquipmentController extends Controller
   /**
    * Displays a form to create a new Equipment entity.
    *
-   * @Route("/new", name="schedule_equipment_new")
+   * @Route("/new", name="content_equipment_new")
    * @Template()
    */
   public function newAction()
@@ -85,7 +86,7 @@ class EquipmentController extends Controller
     $form = $this->createForm(new EquipmentType(), $entity);
 
     return $this->render(
-      'fibeWWWConfBundle:Equipment:new.html.twig',
+      'fibeContentBundle:Equipment:new.html.twig',
       array(
         'entity' => $entity,
         'form'   => $form->createView()
@@ -96,7 +97,7 @@ class EquipmentController extends Controller
   /**
    * Finds and displays a Equipment entity.
    *
-   * @Route("/{id}/show", name="schedule_equipment_show")
+   * @Route("/{id}/show", name="content_equipment_show")
    * @Template()
    *
    * @param $id
@@ -116,7 +117,7 @@ class EquipmentController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return $this->render(
-      'fibeWWWConfBundle:Equipment:show.html.twig',
+      'fibeContentBundle:Equipment:show.html.twig',
       array(
         'entity'      => $entity,
         'delete_form' => $deleteForm->createView()
@@ -128,7 +129,7 @@ class EquipmentController extends Controller
   /**
    * Displays a form to edit an existing Equipment entity.
    *
-   * @Route("/{id}/edit", name="schedule_equipment_edit")
+   * @Route("/{id}/edit", name="content_equipment_edit")
    * @Template()
    *
    * @param $id
@@ -152,7 +153,7 @@ class EquipmentController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return $this->render(
-      'fibeWWWConfBundle:Equipment:edit.html.twig',
+      'fibeContentBundle:Equipment:edit.html.twig',
       array(
         'entity'      => $entity,
         'edit_form'   => $editForm->createView(),
@@ -164,7 +165,7 @@ class EquipmentController extends Controller
 
   /**
    * Edits an existing Equipment entity.
-   * @Route("/{id}/update", name="schedule_equipment_update")
+   * @Route("/{id}/update", name="content_equipment_update")
    *
    * @param Request $request
    * @param         $id
@@ -192,11 +193,11 @@ class EquipmentController extends Controller
       $em->persist($entity);
       $em->flush();
 
-      return $this->redirect($this->generateUrl('schedule_equipment_edit', array('id' => $id)));
+      return $this->redirect($this->generateUrl('content_equipment_edit', array('id' => $id)));
     }
 
     return $this->render(
-      'fibeWWWConfBundle:Equipment:edit.html.twig',
+      'fibeContentBundle:Equipment:edit.html.twig',
       array(
         'entity'      => $entity,
         'edit_form'   => $editForm->createView(),
@@ -208,7 +209,7 @@ class EquipmentController extends Controller
 
   /**
    * Deletes a Equipment entity.
-   * @Route("/{id}/delete", name="schedule_equipment_delete")
+   * @Route("/{id}/delete", name="content_equipment_delete")
    * @Method({"POST", "DELETE"})
    *
    * @param Request $request
