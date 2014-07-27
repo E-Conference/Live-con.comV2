@@ -14,8 +14,6 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
-
 /**
  * This entity is based on the specification FOAF.
  *

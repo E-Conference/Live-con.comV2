@@ -35,7 +35,6 @@ class PersonController extends Controller
    * @Route("/", name="schedule_person_index")
    * @Template()
    */
-
   public function indexAction(Request $request)
   {
     $entities = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('VIEW', 'Person');
@@ -61,7 +60,6 @@ class PersonController extends Controller
       'filters_form' => $filters->createView(),
     );
   }
-
 
   /**
    * Filter person index list
