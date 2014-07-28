@@ -3,6 +3,7 @@
 
   use fibe\ContentBundle\Entity\Equipment;
   use fibe\ContentBundle\Entity\RoleLabel;
+  use fibe\EventBundle\Entity\Category;
   use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
   use Symfony\Component\Console\Input\InputInterface;
   use Symfony\Component\Console\Output\OutputInterface;
@@ -116,6 +117,86 @@
        $topic = new Topic();
        $topic->setName("Tech");
        $em->persist($topic);*/
+
+       $OrganisedEvent = new Category();
+      $OrganisedEvent->setLabel("Organized Event")
+                     ->setColor("#0EFF74")
+                     ->setLevel(3);
+      $em->persist($OrganisedEvent);
+
+      $NonAcademicEvent = new Category();
+      $NonAcademicEvent->setLabel("Non Academic Event")
+                       ->setColor("#A6FF88")
+                       ->setLevel(3);
+      $em->persist($NonAcademicEvent);
+
+      $AcademicEvent = new Category();
+      $AcademicEvent->setLabel("Academic Event")
+                    ->setColor("#57A5C9")
+                    ->setLevel(3);
+      $em->persist($AcademicEvent);
+
+      $SocialEvent = new Category();
+      $SocialEvent->setLabel("Social Event")
+                  ->setColor("#B186D7")
+                  ->setLevel(3);                  
+      $em->persist($SocialEvent);
+
+      $MealEvent = new Category();
+      $MealEvent->setLabel("Meal Event")
+                ->setColor("#00a2e0")
+                ->setLevel(3);
+      $em->persist($MealEvent);
+
+      $BreakEvent = new Category();
+      $BreakEvent->setLabel("Break event")
+                 ->setColor("#00a2e0")
+                 ->setLevel(3);
+      $em->persist($BreakEvent);
+
+      $KeynoteEvent = new Category();
+      $KeynoteEvent->setLabel("Keynote event")
+                   ->setColor("#afcbe0")
+                   ->setLevel(3);
+      $em->persist($KeynoteEvent);
+
+      $TrackEvent = new Category();
+      $TrackEvent->setLabel("Track event")
+                ->setColor("#afcbe0")
+                ->setLevel(1);
+      $em->persist($TrackEvent);
+
+      $PanelEvent = new Category();
+      $PanelEvent->setLabel("Panel Event")
+                 ->setColor("#e7431e")
+                 ->setLevel(3);
+      $em->persist($PanelEvent);
+
+      $ConferenceEvent = new Category();
+      $ConferenceEvent->setLabel("Conference Event")
+                      ->setColor("#b0ca0f")
+                      ->setLevel(0);
+      $em->persist($ConferenceEvent);
+
+      $WorkshopEvent = new Category();
+       $WorkshopEvent->setLabel("Workshop event")
+                ->setColor("#EBD94E")
+                ->setLevel(3);
+      $em->persist($WorkshopEvent);
+
+      $SessionEvent = new Category();
+       $SessionEvent->setLabel("Session event")
+                ->setColor("#8F00FF")
+                ->setLevel(2);
+      $em->persist($SessionEvent);
+
+      $TalkEvent = new Category();
+      $TalkEvent->setLabel("Talk event")
+                ->setColor("#FF5A45")
+                ->setLevel(0);
+      $em->persist($TalkEvent);
+
+      $em->flush();
 
 
 

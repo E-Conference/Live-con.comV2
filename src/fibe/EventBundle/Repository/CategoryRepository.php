@@ -25,8 +25,7 @@ class CategoryRepository extends EntityRepository
   {
     $qb = $this->createQueryBuilder('cat')
       ->orderBy('cat.level', 'ASC')
-      ->addOrderBy('cat.parent', 'ASC')
-      ->addOrderBy('cat.name', 'ASC');
+      ->addOrderBy('cat.label', 'ASC');
 
     return $qb;
   }

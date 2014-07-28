@@ -34,56 +34,56 @@ class ACLEntityHelper extends ACLHelper
       'classpath' => 'fibe\\MobileAppBundle\\Entity',
     ),
     'Module'               => array(
-      'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
+      'classpath' => 'fibe\\ContentBundle\\Entity',
     ),
     'Event'                => array(
       'parent'    => 'getMainEvent',
-      'classpath' => 'fibe\\Bundle\\EventBundle\\Entity',
+      'classpath' => 'fibe\\EventBundle\\Entity',
       'repositoryBundle' => 'fibeEventBundle'
     ),
     'Location'             => array(
       'parent'    => 'getMainEvent',
-      'classpath' => 'fibe\\Bundle\\ContentBundle\\Entity',
+      'classpath' => 'fibe\\ContentBundle\\Entity',
     ),
     'Paper'                => array(
       'parent'    => 'getMainEvent',
-      'classpath' => 'fibe\\Bundle\\ContentBundle\\Entity',
+      'classpath' => 'fibe\\ContentBundle\\Entity',
     ),
     'Person'               => array(
       'parent'    => 'getMainEvent',
-      'classpath' => 'fibe\\Bundle\\CommunityBundle\\Entity',
+      'classpath' => 'fibe\\CommunityBundle\\Entity',
     ),
     'Role'                 => array(
       'parent'    => 'getMainEvent',
-      'classpath' => 'fibe\\Bundle\\ContentBundle\\Entity',
+      'classpath' => 'fibe\\ContentBundle\\Entity',
     ),
     'Organization'         => array(
       'parent'    => 'getMainEvent',
-      'classpath' => 'fibe\\Bundle\\CommunityBundle\\Entity',
+      'classpath' => 'fibe\\CommunityBundle\\Entity',
     ),
     'Topic'                => array(
       'parent'    => 'getMainEvent',
-      'classpath' => 'fibe\\Bundle\\ContentBundle\\Entity',
+      'classpath' => 'fibe\\ContentBundle\\Entity',
     ),
     'Sponsor'              => array(
       'parent'    => 'getMainEvent',
-      'classpath' => 'fibe\\Bundle\\ContentBundle\\Entity',
+      'classpath' => 'fibe\\ContentBundle\\Entity',
     ),
     'SocialServiceAccount' => array(
       'parent'    => 'getMainEvent',
-      'classpath' => 'fibe\\Bundle\\CommunityBundle\\Entity',
+      'classpath' => 'fibe\\CommunityBundle\\Entity',
     ),
     'Category'             => array(
       'parent'    => 'getMainEvent',
-      'classpath' => 'fibe\\Bundle\\EventBundle\\Entity',
+      'classpath' => 'fibe\\EventBundle\\Entity',
     ),
     'Equipment'            => array(
       'parent'    => 'getMainEvent',
-      'classpath' => 'fibe\\Bundle\\ContentBundle\\Entity',
+      'classpath' => 'fibe\\ContentBundle\\Entity',
     ),
     'RoleType'             => array(
       'parent'    => 'MainEvent',
-      'classpath' => 'fibe\\Bundle\\ContentBundle\\Entity',
+      'classpath' => 'fibe\\ContentBundle\\Entity',
     )
   );
 

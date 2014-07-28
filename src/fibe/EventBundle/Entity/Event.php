@@ -184,9 +184,9 @@ class Event extends VEvent
    *
    * @return VEvent
    */
-  public function setMainEvent(\fibe\EventBundle\Entity\MainEvent $conference)
+  public function setMainEvent(\fibe\EventBundle\Entity\MainEvent $mainEvent)
   {
-    $this->conference = $conference;
+    $this->mainEvent = $mainEvent;
 
     return $this;
   }
@@ -198,7 +198,7 @@ class Event extends VEvent
    */
   public function getMainEvent()
   {
-    return $this->conference;
+    return $this->mainEvent;
   }
 
   /**

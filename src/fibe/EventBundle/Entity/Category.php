@@ -203,6 +203,30 @@ class Category
   }
 
   /**
+   * Set level
+   *
+   * @param integer $level
+   *
+   * @return $this
+   */
+  public function setLevel($level)
+  {
+    $this->level = $level;
+
+    return $this;
+  }
+
+  /**
+   * Get level
+   *
+   * @return integer
+   */
+  public function getLevel()
+  {
+    return $this->level;
+  }
+
+  /**
    * Add VEvent
    *
    * @param VEvent $VEvent
@@ -236,28 +260,6 @@ class Category
     return $this->VEvent;
   }
 
-  /**
-   * Set mainEvent
-   *
-   * @param MainEvent $mainEvent
-   *
-   * @return $this
-   */
-  public function setMainEvent(MainEvent $mainEvent = null)
-  {
-    $this->mainEvent = $mainEvent;
-
-    return $this;
-  }
-
-  /**
-   * Get mainEvent
-   *
-   * @return \fibe\ConferenceBundle\Entity\MainEvent
-   */
-  public function getMainEvent()
-  {
-    return $this->mainEvent;
-  }
+  
 
 }

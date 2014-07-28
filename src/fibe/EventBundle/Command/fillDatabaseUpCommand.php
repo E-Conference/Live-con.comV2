@@ -2,14 +2,15 @@
   namespace fibe\EventBundle\Command;
 
   use fibe\MobileAppBundle\Entity\MobileAppConfig;
-  use fibe\Bundle\ContentBundle\Entity\Module;
-  use fibe\Bundle\ContentBundle\Entity\Paper;
-  use fibe\Bundle\ContentBundle\Entity\Person;
-  use fibe\Bundle\ContentBundle\Entity\Role;
-  use fibe\Bundle\ContentBundle\Entity\RoleType;
-  use fibe\Bundle\ContentBundle\Entity\Topic;
+  use fibe\ContentBundle\Entity\Module;
+  use fibe\ContentBundle\Entity\Paper;
+  use fibe\ContentBundle\Entity\Person;
+  use fibe\ContentBundle\Entity\Role;
+  use fibe\ContentBundle\Entity\RoleLabel;
+  use fibe\ContentBundle\Entity\Topic;
   use fibe\EventBundle\Entity\MainEvent;
-  use fibe\Bundle\ContentBundle\Entity\Location;
+  use fibe\EventBundle\Entity\Category;
+  use fibe\ContentBundle\Entity\Location;
   use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
   use Symfony\Component\Console\Input\InputInterface;
   use Symfony\Component\Console\Output\OutputInterface;
@@ -53,23 +54,19 @@
 
 
       //RoleType
-      $roleType = new RoleType();
-      $roleType->setLabel("Delegate");
+      $roleType = new RoleLabel();
       $roleType->setLabel("Delegate");
       $em->persist($roleType);
 
-      $roleTypeChair = new RoleType();
-      $roleTypeChair->setLabel("Chair");
+      $roleTypeChair = new RoleLabel();
       $roleTypeChair->setLabel("Chair");
       $em->persist($roleTypeChair);
 
-      $roleTypePresenter = new RoleType();
-      $roleTypePresenter->setLabel("Presenter");
+      $roleTypePresenter = new RoleLabel();
       $roleTypePresenter->setLabel("Presenter");
       $em->persist($roleTypePresenter);
 
-      $roleType = new RoleType();
-      $roleType->setLabel("ProgrammeCommitteeMember");
+      $roleType = new RoleLabel();
       $roleType->setLabel("Programme Committee Member");
       $em->persist($roleType);
 
@@ -160,7 +157,7 @@
       $SocialEvent = new Category();
       $SocialEvent->setLabel("Social Event")
                   ->setColor("#B186D7")
-                  ->setLevel(3);                  ;
+                  ->setLevel(3);                  
       $em->persist($SocialEvent);
 
       $MealEvent = new Category();

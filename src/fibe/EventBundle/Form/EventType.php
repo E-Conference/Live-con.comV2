@@ -2,11 +2,12 @@
 
 namespace fibe\EventBundle\Form;
 
+use fibe\EventBundle\Form\VEventType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class EventType extends AbstractType
+class EventType extends VEventType
 {
        
     protected $categoriesLevels;
@@ -24,7 +25,6 @@ class EventType extends AbstractType
     {
         parent::buildForm($builder, $options);
         $builder
-            ->add('parent')
             ->add('papers') 
         ;
     }

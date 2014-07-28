@@ -5,14 +5,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-//On insere l'entity Event  de simple schedule
 
 use fibe\EventBundle\Entity\Event;
 use fibe\ContentBundle\Entity\Role;
 
 use fibe\ContentBundle\Form\RoleType;
-
-use fibe\Bundle\WWWConfBundle\Form\XPropertyType;
 
 
 use Symfony\Component\HttpFoundation\Request;
@@ -40,19 +37,19 @@ class ScheduleController extends Controller
 
     $user = $this->getUser();
     $em = $this->getDoctrine();
-    $mainEvent = $user->getCurrentMainEvent();
+   // $mainEvent = $user->getCurrentMainEvent();
 
     //filters
-    $categories = $em->getRepository('fibeWWWConfBundle:Category')->getOrdered();
-    $locations = $user->getCurrentMainEvent()->getLocations();
-    $topics = $user->getCurrentMainEvent()->getTopics();
+    $categories = $em->getRepository('fibeEventBundle:Category')->getOrdered();
+  //  $locations = $user->getCurrentMainEvent()->getLocations();
+   // $topics = $user->getCurrentMainEvent()->getTopics();
 
     return array(
-      'currentMainEvent' => $mainEvent,
+      //'currentMainEvent' => $mainEvent,
       'authorized'  => isset($granted), // Si il existe une conference
       'categories'  => $categories,
-      'locations'   => $locations,
-      'topics'      => $topics,
+      //'locations'   => $locations,
+      //'topics'      => $topics,
     );
   }
 
@@ -86,7 +83,7 @@ class ScheduleController extends Controller
     }
     else if ($methodParam == "update")
     {
-      $event = $em->getRepository('fibeWWWConfBundle:ConfEvent')->find($postData['id']);
+      $event = $em->getRepository('fibeEventBundle:Event')->find($postData['id']);
     }
 
     //resource(s)
@@ -101,10 +98,10 @@ class ScheduleController extends Controller
       $resource = $postData['resourceId'];
       $currentRes = $resConfig[$postData['currentRes']];
 
-      $repo = $em->getRepository('fibeWWWConfBundle:' . $currentRes["name"]);
+      $repo = $em->getRepository('fibeEventBundle:' . $currentRes["name"]);
       if (!$repo)
       {
-        $repo = $em->getRepository('fibeWWWConfBundle:' . $currentRes["name"]);
+        $repo = $em->getRepository('fibeEventBundle:' . $currentRes["name"]);
       }
 
       if ($repo)
@@ -134,7 +131,7 @@ class ScheduleController extends Controller
     $event->setEndAt($end);
     if(isset($postData['parent']) && $postData['parent']!= "")
     {
-      $parent = $em->getRepository('fibeWWWConfBundle:ConfEvent')->find($postData['parent']);
+      $parent = $em->getRepository('fibeEventBundle:Event')->find($postData['parent']);
       $event->setParent($parent);
     }else
     {
@@ -204,7 +201,7 @@ class ScheduleController extends Controller
     $em = $this->getDoctrine()->getManager();
     //The object must belong to the current conf
     $mainEvent = $this->getUser()->getCurrentMainEvent();
-    $entity = $em->getRepository('fibeWWWConfBundle:ConfEvent')->findOneBy(array('conference' => $mainEvent, 'id' => $id));
+    $entity = $em->getRepository('fibeEventBundle:Event')->findOneBy(array('conference' => $mainEvent, 'id' => $id));
     if (!$entity)
     {
       throw $this->createNotFoundException('Unable to find ConfEvent entity.');
@@ -220,7 +217,7 @@ class ScheduleController extends Controller
         'papers',
         'entity',
         array(
-          'class'    => 'fibeWWWConfBundle:Paper',
+          'class'    => 'fibeContentBundle:Paper',
           'property' => 'title',
           'required' => false,
           'choices'  => $papersForSelect,
@@ -235,7 +232,7 @@ class ScheduleController extends Controller
         'topics',
         'entity',
         array(
-          'class'    => 'fibeWWWConfBundle:Topic',
+          'class'    => 'fibeContentBundle:Topic',
           'required' => false,
           'property' => 'name',
           'choices'  => $topicsForSelect,
@@ -247,7 +244,7 @@ class ScheduleController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return $this->render(
-      'fibeWWWConfBundle:Schedule:scheduleEdit.html.twig',
+      'fibeEventBundle:Schedule:scheduleEdit.html.twig',
       array(
         'entity'      => $entity,
         'edit_form'   => $editForm->createView(),
@@ -327,50 +324,8 @@ class ScheduleController extends Controller
 //    return $response;
 //  }
 
-  /**
-   * Override simplescehdule controller to provide json response
-   * @Route("/{id}/xpropAdd", name="schedule_xproperty_add")
-   */
-  public function xpropAddAction(Request $request, $id)
-  {
-
-
-    $em = $this->getDoctrine()->getManager();
-    $calendarEntity = $em->getRepository('fibeWWWConfBundle:CalendarEntity')->find($id);
-
-    if (!$calendarEntity)
-    {
-      throw $this->createNotFoundException('Unable to find Calendar entity.');
-    }
-
-    $entity = new XProperty();
-    $form = $this->createForm(new XPropertyType, $entity);
-    $form->bind($request);
-
-    if ($form->isValid())
-    {
-      $em->persist($entity);
-      $em->flush();
-      $this->container->get('session')->getFlashBag()->add(
-        'success',
-        'Event successfully updated'
-      );
-    }
-    else
-    {
-      $this->container->get('session')->getFlashBag()->add(
-        'error',
-        'Submission failed'
-      );
-    }
-
-    $response = new Response(json_encode("ok"));
-    $response->headers->set('Content-Type', 'application/json');
-
-    return $response;
-
-
-  }
+ 
+  
 
   /**
    * @TODO comment

@@ -27,7 +27,6 @@ class VEventType extends AbstractType
             ->add('label')
             ->add('startAt')
             ->add('endAt')
-            ->add('summary')
             ->add('description')
             ->add('comment')
             ->add('revisionSequence')
@@ -40,7 +39,7 @@ class VEventType extends AbstractType
             ->add('category', 'entity', array(
                 'class' => 'fibeEventBundle:Category',
                 'query_builder' => function(EntityRepository $er) {
-             return $er->extractQueryBuilder($cat);
+             return $er->extractQueryBuilder($this->categoriesLevels);
             },
               ));
     }

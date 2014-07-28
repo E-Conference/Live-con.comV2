@@ -63,7 +63,7 @@ class MainEvent extends VEvent
    *
    * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Role", mappedBy="mainEvent",cascade={"persist", "remove"})
    */
-  private $roles;
+  protected $roles;
 
   /**
    * Companies
@@ -77,7 +77,7 @@ class MainEvent extends VEvent
    *
    * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Sponsor", mappedBy="mainEvent",cascade={"persist", "remove"})
    */
-  private $sponsors;
+  protected $sponsors;
 
   /**
    *

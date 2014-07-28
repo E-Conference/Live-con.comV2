@@ -275,7 +275,7 @@ abstract class VEvent
    * @ORM\JoinColumn( onDelete="CASCADE")
    * @Expose
    */
-  private $roles;
+  protected $roles;
 
   /**
    * Sponsors related to a VEvent
@@ -287,7 +287,7 @@ abstract class VEvent
    *
    * @Expose
    */
-  private $sponsors;
+  protected $sponsors;
 
   /**
    * url
@@ -306,7 +306,7 @@ abstract class VEvent
    * @ORM\Column(name="is_all_day", type="boolean")
    * @Expose
    */
-  private $isAllDay = false;
+  protected $isAllDay = false;
 
   /**
    * Is an all day event
@@ -315,7 +315,7 @@ abstract class VEvent
    * @ORM\Column(name="is_instant", type="boolean")
    * @Expose
    */
-  private $isInstant;
+  protected $isInstant;
 
   /**
    * created_at
@@ -891,6 +891,32 @@ abstract class VEvent
   {
     return $this->location;
   }
+
+
+  /**
+   * Set category
+   *
+   * @param Category $category
+   *
+   * @return $this
+   */
+  public function setCategory(Category $category = null)
+  {
+    $this->category = $category;
+
+    return $this;
+  }
+
+  /**
+   * Get category
+   *
+   * @return Category
+   */
+  public function getCategory()
+  {
+    return $this->category;
+  }
+
 
   /**
    * Add roles

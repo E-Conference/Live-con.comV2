@@ -1,0 +1,371 @@
+Searching 12202 files for "fibeEventBundle::base.html.twig"
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/Resources/FOSUserBundle/views/ChangePassword/changePassword.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block title %}Change password{% endblock title %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/Resources/FOSUserBundle/views/User/list.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block title %}Index{% endblock title %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/profiler/fc/5b/ed5bfc:
+    <binary>
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/profiler/fe/e9/c8e9fe:
+    <binary>
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig/12/34/a8c535ab4c4b61a68f4170174934d576f2e22bb1498eea607706773d39d0.php:
+    8          parent::__construct($env);
+    9  
+   10:         $this->parent = $this->env->loadTemplate("fibeEventBundle::base.html.twig");
+   11  
+   12          $this->blocks = array(
+   ..
+   17      protected function doGetParent(array $context)
+   18      {
+   19:         return "fibeEventBundle::base.html.twig";
+   20      }
+   21  
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig/18/8b/6739bbeafc5c42ecd750ebfb865ea2fecbeeccaaa04086d33943508add43.php:
+    8          parent::__construct($env);
+    9  
+   10:         $this->parent = $this->env->loadTemplate("fibeEventBundle::base.html.twig");
+   11  
+   12          $this->blocks = array(
+   ..
+   18      protected function doGetParent(array $context)
+   19      {
+   20:         return "fibeEventBundle::base.html.twig";
+   21      }
+   22  
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig/1e/2d/e4f8006f2742adf1a4c3c5ce0dd9fdd069f1e89028f4dacc4c9044ab0c0e.php:
+    8          parent::__construct($env);
+    9  
+   10:         $this->parent = $this->env->loadTemplate("fibeEventBundle::base.html.twig");
+   11  
+   12          $this->blocks = array(
+   ..
+   19      protected function doGetParent(array $context)
+   20      {
+   21:         return "fibeEventBundle::base.html.twig";
+   22      }
+   23  
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig/26/3a/cda602d08588893add0b1259f764477f2291df9fd58a5abe236cf7a17636.php:
+    8          parent::__construct($env);
+    9  
+   10:         $this->parent = $this->env->loadTemplate("fibeEventBundle::base.html.twig");
+   11  
+   12          $this->blocks = array(
+   ..
+   19      protected function doGetParent(array $context)
+   20      {
+   21:         return "fibeEventBundle::base.html.twig";
+   22      }
+   23  
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig/28/13/56ee5ea0593cd2155870e289c508d6a05bfab5ba90338ef4534ca37a123a.php:
+    8          parent::__construct($env);
+    9  
+   10:         $this->parent = $this->env->loadTemplate("fibeEventBundle::base.html.twig");
+   11  
+   12          $this->blocks = array(
+   ..
+   18      protected function doGetParent(array $context)
+   19      {
+   20:         return "fibeEventBundle::base.html.twig";
+   21      }
+   22  
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig/2b/d5/3374af34583e8846df584d741ae6fdccb96ac92aec03863cd97835981bda.php:
+    8          parent::__construct($env);
+    9  
+   10:         $this->parent = $this->env->loadTemplate("fibeEventBundle::base.html.twig");
+   11  
+   12          $this->blocks = array(
+   ..
+   17      protected function doGetParent(array $context)
+   18      {
+   19:         return "fibeEventBundle::base.html.twig";
+   20      }
+   21  
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig/36/60/ceb7101d0136c04e8d199fb3e87d28cb0b8384c2b0ba83a70ac35846f4eb.php:
+    8          parent::__construct($env);
+    9  
+   10:         $this->parent = $this->env->loadTemplate("fibeEventBundle::base.html.twig");
+   11  
+   12          $this->blocks = array(
+   ..
+   17      protected function doGetParent(array $context)
+   18      {
+   19:         return "fibeEventBundle::base.html.twig";
+   20      }
+   21  
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig/52/ab/41a1135b1745e6bf9a535c32e59a7518dcf2a5d1d78985a4c5e0a0f0f7e2.php:
+    8          parent::__construct($env);
+    9  
+   10:         $this->parent = $this->env->loadTemplate("fibeEventBundle::base.html.twig");
+   11  
+   12          $this->blocks = array(
+   ..
+   20      protected function doGetParent(array $context)
+   21      {
+   22:         return "fibeEventBundle::base.html.twig";
+   23      }
+   24  
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig/61/bb/12413ea51fc43baa0aaf7b7294ad8e311f2e1a0bc5425412cc6faaac6f17.php:
+    8          parent::__construct($env);
+    9  
+   10:         $this->parent = $this->env->loadTemplate("fibeEventBundle::base.html.twig");
+   11  
+   12          $this->blocks = array(
+   ..
+   17      protected function doGetParent(array $context)
+   18      {
+   19:         return "fibeEventBundle::base.html.twig";
+   20      }
+   21  
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig/6a/ce/e3eddf9dbed154efa3e37a5490b5bdf0da3ab247c10caa847883f80e7c8d.php:
+    8          parent::__construct($env);
+    9  
+   10:         $this->parent = $this->env->loadTemplate("fibeEventBundle::base.html.twig");
+   11  
+   12          $this->blocks = array(
+   ..
+   18      protected function doGetParent(array $context)
+   19      {
+   20:         return "fibeEventBundle::base.html.twig";
+   21      }
+   22  
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig/6e/a7/356b1d37db5958165abf17c47314bdb867dde8af5160f1cf56237a9cf7e0.php:
+    8          parent::__construct($env);
+    9  
+   10:         $this->parent = $this->env->loadTemplate("fibeEventBundle::base.html.twig");
+   11  
+   12          $this->blocks = array(
+   ..
+   18      protected function doGetParent(array $context)
+   19      {
+   20:         return "fibeEventBundle::base.html.twig";
+   21      }
+   22  
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig/86/21/71488046f59629a0cb1a5937aca1cd5d1678abe150093e65fb4b34fdac73.php:
+    8          parent::__construct($env);
+    9  
+   10:         $this->parent = $this->env->loadTemplate("fibeEventBundle::base.html.twig");
+   11  
+   12          $this->blocks = array(
+   ..
+   21      protected function doGetParent(array $context)
+   22      {
+   23:         return "fibeEventBundle::base.html.twig";
+   24      }
+   25  
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig/8a/38/1f097f6915507fdad0ac577c3962d71091d12d379191edea6782c85e3aa3.php:
+    8          parent::__construct($env);
+    9  
+   10:         $this->parent = $this->env->loadTemplate("fibeEventBundle::base.html.twig");
+   11  
+   12          $this->blocks = array(
+   ..
+   20      protected function doGetParent(array $context)
+   21      {
+   22:         return "fibeEventBundle::base.html.twig";
+   23      }
+   24  
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig/a7/1a/b5af87d010f2af7995dda093d509c262de83d21493148ae24fad9f5e06eb.php:
+    8          parent::__construct($env);
+    9  
+   10:         $this->parent = $this->env->loadTemplate("fibeEventBundle::base.html.twig");
+   11  
+   12          $this->blocks = array(
+   ..
+   18      protected function doGetParent(array $context)
+   19      {
+   20:         return "fibeEventBundle::base.html.twig";
+   21      }
+   22  
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig/ba/b0/5ed7a44c6dd2106521753162de6902808d9215914a560828e932203fa783.php:
+    8          parent::__construct($env);
+    9  
+   10:         $this->parent = $this->env->loadTemplate("fibeEventBundle::base.html.twig");
+   11  
+   12          $this->blocks = array(
+   ..
+   18      protected function doGetParent(array $context)
+   19      {
+   20:         return "fibeEventBundle::base.html.twig";
+   21      }
+   22  
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig/bc/ff/2fe6990e8cfd76051050eca89f38e93162df24cebedd35e301d1e9ef9b2e.php:
+    8          parent::__construct($env);
+    9  
+   10:         $this->parent = $this->env->loadTemplate("fibeEventBundle::base.html.twig");
+   11  
+   12          $this->blocks = array(
+   ..
+   18      protected function doGetParent(array $context)
+   19      {
+   20:         return "fibeEventBundle::base.html.twig";
+   21      }
+   22  
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig/bf/e6/d024ddc0bea38593c71ce289fada8f4f86f3a477930420bf45fbda3b47d4.php:
+    8          parent::__construct($env);
+    9  
+   10:         $this->parent = $this->env->loadTemplate("fibeEventBundle::base.html.twig");
+   11  
+   12          $this->blocks = array(
+   ..
+   20      protected function doGetParent(array $context)
+   21      {
+   22:         return "fibeEventBundle::base.html.twig";
+   23      }
+   24  
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/twig/d0/a8/164071dd53c3111f89dcd0fc9db4a56008924cd0af44c5eab9b498ed85ab.php:
+    8          parent::__construct($env);
+    9  
+   10:         $this->parent = $this->env->loadTemplate("fibeEventBundle::base.html.twig");
+   11  
+   12          $this->blocks = array(
+   ..
+   18      protected function doGetParent(array $context)
+   19      {
+   20:         return "fibeEventBundle::base.html.twig";
+   21      }
+   22  
+
+/opt/lampp/htdocs/www/LiveconV2.0/app/logs/dev.log:
+ 6386  [2014-07-28 21:07:28] security.INFO: [ACLInheritanceVoter] action => VIEW, entity => fibe\EventBundle\Entity\MainEvent [] []
+ 6387  [2014-07-28 21:07:28] doctrine.DEBUG: SELECT c0_.id AS id_0, c0_.label AS label_1, c0_.level AS level_2, c0_.slug AS slug_3, c0_.description AS description_4, c0_.color AS color_5 FROM category c0_ ORDER BY c0_.level ASC, c0_.label ASC [] []
+ 6388: [2014-07-28 21:07:28] request.CRITICAL: Uncaught PHP Exception InvalidArgumentException: "Unable to find template "fibeEventBundle::base.html.twig"." at /opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Bridge/Twig/TwigEngine.php line 128 {"exception":"[object] (InvalidArgumentException: Unable to find template \"fibeEventBundle::base.html.twig\". at /opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Bridge/Twig/TwigEngine.php:128, Twig_Error_Loader: Unable to find template \"fibeEventBundle::base.html.twig\". at /opt/lampp/htdocs/www/LiveconV2.0/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Loader/FilesystemLoader.php:106, InvalidArgumentException: Template name \"fibeEventBundle::base.html.twig\" is not valid. at /opt/lampp/htdocs/www/LiveconV2.0/app/cache/dev/classes.php:749, InvalidArgumentException: Bundle \"fibeWWWConfBundle\" does not exist or it is not enabled. Maybe you forgot to add it in the registerBundles() method of your AppKernel.php file? at /opt/lampp/htdocs/www/LiveconV2.0/app/bootstrap.php.cache:2339)"} []
+ 6389  [2014-07-28 21:07:28] event.DEBUG: Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ErrorsLoggerListener::injectLogger". [] []
+ 6390  [2014-07-28 21:07:28] event.DEBUG: Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ErrorsLoggerListener::injectLogger". [] []
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/Bundle_TO_DELETE/WWWConfBundle/Resources/views/ConfEvent/edit.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block title %}Edit conference event{% endblock title %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/Bundle_TO_DELETE/WWWConfBundle/Resources/views/ConfEvent/index.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block title %}Event list{% endblock title %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/Bundle_TO_DELETE/WWWConfBundle/Resources/views/ConfEvent/new.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block title %}New event{% endblock title %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/Bundle_TO_DELETE/WWWConfBundle/Resources/views/ConfEvent/show.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block title %}conference details{% endblock title %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/CommunityBundle/Resources/views/Organization/edit.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block title %}Organization edit{% endblock title %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/CommunityBundle/Resources/views/Organization/index.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block title %}Organization{% endblock title %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/CommunityBundle/Resources/views/Organization/new.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/CommunityBundle/Resources/views/Organization/show.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block title %}Organization detail{% endblock title %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/EventBundle/Resources/views/Category/edit.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block title %}Category edit{% endblock title %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/EventBundle/Resources/views/Category/index.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block title %}Categories{% endblock title %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/EventBundle/Resources/views/Category/new.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block title %}New category{% endblock title %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/EventBundle/Resources/views/Category/show.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block title %}Categories{% endblock title %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/EventBundle/Resources/views/Event/edit.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block title %}Edit conference event{% endblock title %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/EventBundle/Resources/views/Event/index.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block title %}Event list{% endblock title %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/EventBundle/Resources/views/Event/new.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block title %}New event{% endblock title %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/EventBundle/Resources/views/Event/show.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block title %}conference details{% endblock title %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/EventBundle/Resources/views/Schedule/index.html.twig:
+    1  {# 
+    2: {% extends 'fibeEventBundle::base.html.twig' %}
+    3  
+    4  {% block title %}Schedule{% endblock title %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/EventBundle/Resources/views/Schedule/schedule.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/EventBundle/Resources/views/Status/edit.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block body %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/EventBundle/Resources/views/Status/index.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block body %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/EventBundle/Resources/views/Status/new.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block body %}
+
+/opt/lampp/htdocs/www/LiveconV2.0/src/fibe/EventBundle/Resources/views/Status/show.html.twig:
+    1: {% extends 'fibeEventBundle::base.html.twig' %}
+    2  
+    3  {% block body %}
+
+100 matches across 45 files

@@ -82,7 +82,7 @@ class ACLHelper
 
   protected function restrictQueryBuilderByConferenceId(QueryBuilder $queryBuilder)
   {
-    $queryBuilder->andWhere("entity.main_event = " . $this->getCurrentMainEvent()->getId());
+    $queryBuilder->andWhere("entity.mainEvent = " . $this->getCurrentMainEvent()->getId());
   }
 
   protected function restrictQueryBuilderByIds(QueryBuilder $queryBuilder, $ids)

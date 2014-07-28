@@ -2,7 +2,7 @@
 
 namespace fibe\EventBundle\Controller;
 
-use fibe\Bundle\WWWConfBundle\Form\Filters\EventFilterType;
+use fibe\EventBundle\Form\Filters\EventFilterType;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Pagerfanta;
@@ -140,7 +140,7 @@ class EventController extends Controller
     $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Event');
 
     //From the index I can create event with all categories
-    $categoriesLevel = array("levels" => array(1, 2, 3));
+    $categoriesLevel = array("levels" => array(1, 2,3));
 
     $form = $this->createForm(new EventType($categoriesLevel), $entity);
 
