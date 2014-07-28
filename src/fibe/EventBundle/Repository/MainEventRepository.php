@@ -60,7 +60,7 @@ class MainEventRepository extends VEventRepository
     $qb = $this->createQueryBuilder('me');
 
     $qb
-      ->where($qb->expr()->like('me.summary', $qb->expr()->literal('%' . $name . '%')));
+      ->where($qb->expr()->like('me.label', $qb->expr()->literal('%' . $name . '%')));
 
     $query = $qb->getQuery();
 

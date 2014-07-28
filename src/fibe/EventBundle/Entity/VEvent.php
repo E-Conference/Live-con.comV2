@@ -221,7 +221,7 @@ abstract class VEvent
   /**
    * status
    *
-   * @ORM\Column(type="string", length=32)
+   * @ORM\Column(type="string", length=32, nullable=true)
    * @Assert\Choice(multiple=false, choices = {"CANCELLED","CONFIRMED","TENTATIVE"},  message = "Choose a valid status.")
    */
   protected $status = self::CLASSIFICATION_PUBLIC;

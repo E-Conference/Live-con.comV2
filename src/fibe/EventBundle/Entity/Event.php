@@ -94,7 +94,7 @@ class Event extends VEvent
    */
   public function slugify()
   {
-    $this->setSlug(StringTools::slugify($this->getId() . $this->getSummary()));
+    $this->setSlug(StringTools::slugify($this->getId() . $this->getLabel()));
   }
 
   /**

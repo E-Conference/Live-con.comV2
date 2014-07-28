@@ -291,7 +291,7 @@ class ACLEntityHelper extends ACLHelper
       $findOneByArgs = array('id' => $id);
       if ($repositoryName != ACLEntityHelper::LINK_WITH)
       {
-        $findOneByArgs['conference'] = $this->getCurrentMainEvent();
+        $findOneByArgs['mainEvent'] = $this->getCurrentMainEvent();
       }
       $entity = $this->entityManager->getRepository($this->getClassNameByRepositoryName($repositoryName))->findOneBy(
         $findOneByArgs

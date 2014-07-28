@@ -11,13 +11,13 @@ class MainEventType extends AbstractType
 
   protected $user;
 
-  /**
-   * @param $user
-   */
-  public function __construct($user)
-  {
-    $this->user = $user;
-  }
+    /**
+     * @param $user
+     */
+    public function __construct($user)
+    {
+      $this->user = $user;
+    }
 
         /**
      * @param FormBuilderInterface $builder

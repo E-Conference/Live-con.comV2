@@ -25,7 +25,13 @@ class EventType extends VEventType
     {
         parent::buildForm($builder, $options);
         $builder
-            ->add('papers') 
+            ->add('papers', 'entity', array(
+                    'class'    => 'fibeContentBundle:Paper',
+                    'label'    => 'Papers',
+                    //'choices'  => $this->user->getCurrentMainEvent()->getPapers()->toArray(),
+                    'multiple' => true,
+                    'required' => false
+      ))
         ;
     }
     
