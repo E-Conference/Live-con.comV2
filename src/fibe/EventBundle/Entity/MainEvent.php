@@ -29,14 +29,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class MainEvent extends VEvent
 {
-
-  /**
-   * @ORM\Id
-   * @ORM\Column(type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
-   */
-  protected $id;
-
   /**
    * Events
    *
@@ -63,7 +55,7 @@ class MainEvent extends VEvent
    *
    * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Role", mappedBy="mainEvent",cascade={"persist", "remove"})
    */
-  protected $roles;
+  private $roles;
 
   /**
    * Companies
@@ -71,13 +63,6 @@ class MainEvent extends VEvent
    * @ORM\OneToMany(targetEntity="fibe\CommunityBundle\Entity\Company", mappedBy="mainEvent",cascade={"persist", "remove"})
    */
   private $companies;
-
-  /**
-   * Sponsors
-   *
-   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Sponsor", mappedBy="mainEvent",cascade={"persist", "remove"})
-   */
-  protected $sponsors;
 
   /**
    *
@@ -96,7 +81,7 @@ class MainEvent extends VEvent
   /**
    * mappingFiles
    *
-   * @ORM\OneToOne(targetEntity="fibe\EventBundle\Entity\MainEventSettings", mappedBy="mainEvent",cascade={"persist", "remove"})
+   * @ORM\OneToOne(targetEntity="fibe\EventBundle\Entity\MainEventSettings", mappedBy="mainEvent", cascade={"persist", "remove"})
    */
   private $setting;
 
@@ -118,13 +103,13 @@ class MainEvent extends VEvent
   /**
    * @ORM\Column(type="string", length=256, nullable=true)
    */
-  protected $slug;
+  private $slug;
 
   /**
    *
    * @ORM\Column(type="string", length=128, nullable=true)
    */
-  protected $acronym;
+  private $acronym;
 
   /**
    * @return string

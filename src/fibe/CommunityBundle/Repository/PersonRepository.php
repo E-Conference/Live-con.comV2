@@ -29,9 +29,11 @@ class PersonRepository extends EntityRepository
    */
   public function getAuthor($paper)
   {
+    //@TODO ORMV2 :
+    /*
     $query = $this->getEntityManager()->createQuery(
       'SELECT p
-       FROM fibeWWWConfBundle:Person p, fibeWWWConfBundle:Author a
+       FROM fibeCommunityBundle:Person p, fibeWWWConfBundle:Author a
        WHERE a.id_paper = :id_paper
        AND   p.id = a.id_person'
     )->setParameter('id_paper', $paper->getId());
@@ -39,6 +41,7 @@ class PersonRepository extends EntityRepository
     $authors = $query->getResult();
 
     return $authors;
+    */
   }
 
   /**

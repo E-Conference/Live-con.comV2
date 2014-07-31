@@ -59,6 +59,6 @@ class VEventType extends AbstractType
      */
     public function getName()
     {
-        return 'fibe_bundle_wwwconfbundle_vevent';
+        return 'fibe_eventbundle_vevent';
     }
 }

@@ -27,7 +27,7 @@ class AdditionalInformationsType extends AbstractType
   public function setDefaultOptions(OptionsResolverInterface $resolver)
   {
     $resolver->setDefaults(array(
-      'data_class' => 'fibe\Bundle\WWWConfBundle\Entity\AdditionalInformations'
+      'data_class' => 'fibe\CommunityBundle\Entity\AdditionalInformations'
     ));
   }
 
@@ -36,6 +36,6 @@ class AdditionalInformationsType extends AbstractType
    */
   public function getName()
   {
-    return 'fibe_bundle_wwwconfbundle_additionalinformations';
+    return 'fibe_communitybundle_additionalinformations';
   }
 }

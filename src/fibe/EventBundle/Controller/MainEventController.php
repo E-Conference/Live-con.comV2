@@ -8,8 +8,6 @@
   use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
   use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-  use fibe\Bundle\WWWConfBundle\Form\ModuleType;
-
 
   /**
    * Link controller.

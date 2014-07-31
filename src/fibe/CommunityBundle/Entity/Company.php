@@ -31,7 +31,7 @@ class Company
    * @ORM\GeneratedValue(strategy="AUTO")
    * @Expose
    */
-  protected $id;
+  private $id;
 
   /**
    * label
@@ -39,7 +39,7 @@ class Company
    * @ORM\Column(type="string")
    * @Expose
    */
-  protected $label;
+  private $label;
 
   /**
    * Sponsors
@@ -55,27 +55,26 @@ class Company
    * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id")
    *
    */
-  protected $additionalInformation;
+  private $additionalInformation;
 
   /**
    * @ORM\ManyToMany(targetEntity="Person",  mappedBy="companies", cascade={"persist","merge","remove"})
    * @Expose
    */
-  protected $members;
+  private $members;
 
   /**
    * Company related to a mainEvent
    *
    * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="companies", cascade={"persist"})
    * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
-   *
    */
-  protected $mainEvent;
+  private $mainEvent;
 
   /**
    * @ORM\Column(type="string", length=256, nullable=true)
    */
-  protected $slug;
+  private $slug;
 
   /**
    * Constructor

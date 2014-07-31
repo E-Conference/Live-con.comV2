@@ -198,7 +198,7 @@ class CompanyController extends Controller
    *
    * @Route("/{id}/update", name="schedule_company_update")
    * @Method("PUT")
-   * @Template("fibeWWWConfBundle:Organization:edit.html.twig")
+   * @Template("fibeCommunityBundle:Organization:edit.html.twig")
    */
   public function updateAction(Request $request, $id)
   {

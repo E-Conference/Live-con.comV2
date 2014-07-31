@@ -9,7 +9,7 @@
 
   /**
    * Class ConfEventType
-   * @package fibe\Bundle\WWWConfBundle\Form
+   * @package fibe\EventBundle\Form
    */
   class ConfEventType extends EventType
   { 
@@ -36,7 +36,7 @@
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
       $resolver->setDefaults(array(
-        'data_class' => 'fibe\Bundle\WWWConfBundle\Entity\VEvent'
+        'data_class' => 'fibe\EventBundle\Entity\VEvent'
       ));
     }
 
@@ -45,6 +45,6 @@
      */
     public function getName()
     {
-      return 'fibe_bundle_wwwconfbundle_confeventtype';
+      return 'fibe_eventbundle_confeventtype';
     }
   }

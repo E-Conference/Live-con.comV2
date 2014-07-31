@@ -238,7 +238,7 @@ class CategoryController extends Controller
   // public function deleteFormAction($id)
   // {
   //   $em = $this->getDoctrine()->getManager();
-  //   $entity = $em->getRepository('fibeWWWConfBundle:Category')->find($id);
+  //   $entity = $em->getRepository('fibeEventBundle:Category')->find($id);
 
   //   if (!$entity)
   //   {

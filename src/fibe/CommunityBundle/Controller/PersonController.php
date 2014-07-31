@@ -12,10 +12,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-use fibe\Bundle\WWWConfBundle\Entity\Person;
-use fibe\Bundle\WWWConfBundle\Form\PersonType;
+use fibe\CommunityBundle\Entity\Person;
+use fibe\CommunityBundle\Form\PersonType;
 //Filter type form
-use fibe\Bundle\WWWConfBundle\Form\Filters\PersonFilterType;
+//use fibe\CommunityBundle\Form\Filters\PersonFilterType;
 
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
@@ -79,7 +79,7 @@ class PersonController extends Controller
     {
       // bind values from the request
 
-      $entities = $em->getRepository('fibeWWWConfBundle:Person')->filtering($filters->getData(), $conf);
+      $entities = $em->getRepository('fibeCommunityBundle:Person')->filtering($filters->getData(), $conf);
       $nbResult = count($entities);
 
       //Pager
@@ -95,7 +95,7 @@ class PersonController extends Controller
       }
 
       return $this->render(
-        'fibeWWWConfBundle:Person:list.html.twig',
+        'fibeCommunityBundle:Person:list.html.twig',
         array(
           'pager'    => $pager,
           'nbResult' => $nbResult,
@@ -140,7 +140,7 @@ class PersonController extends Controller
     }
 
     return $this->render(
-      'fibeWWWConfBundle:Person:new.html.twig',
+      'fibeCommunityBundle:Person:new.html.twig',
       array(
         'entity' => $entity,
         'form'   => $form->createView()
@@ -159,7 +159,7 @@ class PersonController extends Controller
     $form = $this->createForm(new PersonType($this->getUser()), $entity);
 
     return $this->render(
-      'fibeWWWConfBundle:Person:new.html.twig',
+      'fibeCommunityBundle:Person:new.html.twig',
       array(
         'entity' => $entity,
         'form'   => $form->createView(),
@@ -179,7 +179,7 @@ class PersonController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return $this->render(
-      'fibeWWWConfBundle:Person:show.html.twig',
+      'fibeCommunityBundle:Person:show.html.twig',
       array(
         'entity'      => $entity,
         'delete_form' => $deleteForm->createView()
@@ -200,7 +200,7 @@ class PersonController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return $this->render(
-      'fibeWWWConfBundle:Person:edit.html.twig',
+      'fibeCommunityBundle:Person:edit.html.twig',
       array(
         'entity'      => $entity,
         'edit_form'   => $editForm->createView(),

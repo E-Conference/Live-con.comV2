@@ -26,14 +26,14 @@ class Topic
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  private $id;
 
   /**
    * label
    *
    * @ORM\Column(type="string")
    */
-  protected $label;
+  private $label;
 
   /**
    * Papers related to thise topic
@@ -52,7 +52,7 @@ class Topic
   /**
    * @ORM\Column(type="string", length=128, nullable=true)
    */
-  protected $slug;
+  private $slug;
 
   /**
    * Constructor

@@ -8,19 +8,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use fibe\EventBundle\Entity\VEvent as Event;
-use fibe\Bundle\WWWConfBundle\Entity\Person;
-use fibe\Bundle\WWWConfBundle\Entity\Topic;
-use fibe\Bundle\WWWConfBundle\Entity\Organization;
-use fibe\Bundle\WWWConfBundle\Entity\Paper;
-use fibe\Bundle\WWWConfBundle\Entity\Role;
-use fibe\Bundle\WWWConfBundle\Entity\RoleType;
-use fibe\Bundle\WWWConfBundle\Entity\SocialService;
-use fibe\Bundle\WWWConfBundle\Entity\SocialServiceAccount;
-use fibe\Bundle\WWWConfBundle\Entity\Category;
-use fibe\Bundle\WWWConfBundle\Entity\Location;
-use fibe\Bundle\WWWConfBundle\Entity\XProperty;
+use fibe\CommunityBundle\Entity\Person;
+use fibe\ContentBundle\Entity\Topic;
+use fibe\ContentBundle\Entity\Paper;
+use fibe\ContentBundle\Entity\Role;
+use fibe\ContentBundle\Entity\RoleLabel;
+use fibe\CommunityBundle\Entity\SocialService;
+use fibe\CommunityBundle\Entity\SocialServiceAccount;
+use fibe\EventBundle\Entity\Category;
+use fibe\ContentBundle\Entity\Location;
 
-use fibe\Bundle\WWWConfBundle\Util\StringTools;
+use fibe\ContentBundle\Util\StringTools;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 
@@ -62,7 +60,7 @@ class DBImportController extends Controller
     $mainEvent = $this->conference->getMainConfEvent();
 
     $this->defaultCategory = $this->getDoctrine()
-      ->getRepository('fibeWWWConfBundle:Category')
+      ->getRepository('fibeEventBundle:Category')
       ->findOneBy(array('name' => 'TalkEvent'));
  
 
@@ -74,7 +72,7 @@ class DBImportController extends Controller
       {
         $current = $topics[$i];
         $existsTest = $this->getDoctrine()
-          ->getRepository('fibeWWWConfBundle:Topic')
+          ->getRepository('fibeContentBundle:Topic')
           ->findOneBy(array('name' => $current['setName'], 'conference' => $this->conference->getId()));
         if ($existsTest != null)
         {
@@ -102,7 +100,7 @@ class DBImportController extends Controller
       {
         $current = $locations[$i];
         $existsTest = $this->getDoctrine()
-          ->getRepository('fibeWWWConfBundle:Location')
+          ->getRepository('fibeContentBundle:Location')
           ->findOneBy(array('name' => $current['setName'], 'conference' => $this->conference->getId()));
         if ($existsTest != null)
         {
@@ -130,7 +128,7 @@ class DBImportController extends Controller
       {
         $current = $organizations[$i];
         $existsTest = $this->getDoctrine()
-          ->getRepository('fibeWWWConfBundle:Organization')
+          ->getRepository('fibeContentBundle:Organization')
           ->findOneBy(array('name' => $current['setName'], 'conference' => $this->conference->getId()));
         if ($existsTest != null)
         {
@@ -167,7 +165,7 @@ class DBImportController extends Controller
           {
             //get twitter entity
             $ss = $this->getDoctrine()
-              ->getRepository('fibeWWWConfBundle:SocialService')
+              ->getRepository('fibeCommunityBundle:SocialService')
               ->findOneBy(array('name' => 'Twitter'));
             //create account
             $ssa = new SocialServiceAccount();
@@ -211,7 +209,7 @@ class DBImportController extends Controller
       {
         $current = $proceedings[$i];
         $existsTest = $this->getDoctrine()
-          ->getRepository('fibeWWWConfBundle:Paper')
+          ->getRepository('fibeContentBundle:Paper')
           ->findOneBy(array('title' => $current['setTitle'], 'conference' => $this->conference->getId()));
         if ($existsTest != null)
         {
@@ -260,7 +258,7 @@ class DBImportController extends Controller
         $catSlug = StringTools::slugify($current['setName']);
 
         $existsTest = $this->getDoctrine()
-          ->getRepository('fibeWWWConfBundle:Category')
+          ->getRepository('fibeEventBundle:Category')
           ->findOneBy(array('slug' => $catSlug));
         if ($existsTest != null)
         {
@@ -295,11 +293,11 @@ class DBImportController extends Controller
 
     //retrieve Chair roletype
     $chairRoleType = $this->getDoctrine()
-      ->getRepository('fibeWWWConfBundle:RoleType')
+      ->getRepository('fibeContentBundle:RoleType')
       ->findOneBy(array('name' => 'Chair'));
     //retrieve Presenter roletype
     $presenterRoleType = $this->getDoctrine()
-      ->getRepository('fibeWWWConfBundle:RoleType')
+      ->getRepository('fibeContentBundle:RoleType')
       ->findOneBy(array('name' => 'Presenter'));
 
 
@@ -309,7 +307,7 @@ class DBImportController extends Controller
       $entities = $JSONFile['events'];
       for ($i = 0; $i < count($entities); $i++)
       {
-        $entity = new Event();
+        $entity = new \fibe\EventBundle\Entity\Event();
         $current = $entities[$i];
         $isMainConfEvent = false;
         if (isset($current["mainConferenceEvent"]))

@@ -65,19 +65,12 @@ class Sponsor
   protected $company;
 
   /**
-   * sponsored event
-   *
-   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="sponsors", cascade={"persist"})
-   * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
-   */
-  protected $mainEvent;
-
-  /**
    * Events related to a sponsor
    *
-   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\VEvent", mappedBy="sponsors", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\VEvent", inversedBy="sponsors", cascade={"persist"})
+   * @ORM\JoinColumn(name="v_event_id", referencedColumnName="id", onDelete="Set Null")
    */
-  protected $events;
+  protected $vEvent;
 
   /**
    * __toString method
@@ -296,16 +289,16 @@ class Sponsor
   /**
    * @return mixed
    */
-  public function getEvents()
+  public function getVEvent()
   {
-    return $this->events;
+    return $this->vEvent;
   }
 
   /**
-   * @param mixed $events
+   * @param mixed $vEvent
    */
-  public function setEvents($events)
+  public function setVEvent($vEvent)
   {
-    $this->events = $events;
+    $this->vEvent = $vEvent;
   }
 }

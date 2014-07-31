@@ -23,33 +23,33 @@ class Location
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  private $id;
 
   /**
    * @ORM\Column(type="string", length=255)
    */
-  protected $label;
+  private $label;
 
   /**
    * Capacity to welcome atendees
    *
    * @ORM\Column(type="integer", nullable=true)
    */
-  protected $capacity;
+  private $capacity;
 
   /**
    * Equipments who are in the location
    *
    * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Equipment")
    */
-  protected $equipments;
+  private $equipments;
 
   /**
    * Description of the location
    *
    * @ORM\Column(type="text", nullable=true)
    */
-  protected $description;
+  private $description;
 
   /**
    * @ORM\Column(type="decimal", precision=10, scale=6, nullable=true)
@@ -61,7 +61,7 @@ class Location
    *      maxMessage = "YYou must be between -90 and 90."
    * )
    */
-  protected $latitude;
+  private $latitude;
 
   /**
    * @ORM\Column(type="decimal", precision=10, scale=6, nullable=true)
@@ -72,7 +72,7 @@ class Location
    *      maxMessage = "YYou must be between -180 and 180."
    * )
    */
-  protected $longitude;
+  private $longitude;
 
   /**
    *
@@ -81,15 +81,14 @@ class Location
    * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="locations", cascade={"persist"})
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    */
-  protected $mainEvent;
+  private $mainEvent;
 
   /**
    * Events
    *
-   * @ORM\OneToMany(targetEntity="fibe\EventBundle\Entity\VEvent", mappedBy="location",cascade={"persist", "remove"})
-   *
+   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\Event", mappedBy="locations",cascade={"persist"})
    */
-  protected $events;
+  private $events;
 
 
 
