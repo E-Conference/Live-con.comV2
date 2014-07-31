@@ -1,0 +1,96 @@
+{
+    "id"               : "{{ entity.id }}",
+    "name"             : {% if entity.summary != null %}{{entity.summary|json_encode|raw()}}{% else %}""{% endif %},
+    "description"      : {% if entity.description != null %}{{entity.description|json_encode|raw()}}{% else %}""{% endif %},
+    "created_at"       : "{{ entity.createdAt | date('Y-m-d H:i') }}",
+    "end_at"           : "{{ entity.endAt | date('Y-m-d H:i') }}",
+    "start_at"         : "{{ entity.startAt | date('Y-m-d H:i') }}",
+    "is_transparent"   : "{{ entity.isTransparent }}",
+    "is_allday"        : "{% if entity.isAllDay == true %}true{% elseif entity.isAllDay == false %}false{% endif %}",
+    "is_mainconfevent" : "{% if entity.isMainConfEvent == true %}true{% elseif entity.isMainConfEvent == false %}false{% endif %}",
+    "resources"        : {{ entity.resources |json_encode|raw()}},
+    "duration"         : "{{ entity.duration }}",
+    "last_modified_at" : "{{ entity.lastModifiedAt | date('Y-m-d H:i') }}",
+    "comment"          : {{ entity.comment|json_encode|raw()}},
+    "url"              : {{ entity.url |json_encode|raw() }},
+    "organizer"        : {{ entity.organizer |json_encode|raw()}},
+    "revision_sequence": "{{ entity.revisionSequence }}",
+    "attendees"        : "{{ entity.attendees }}",
+    "contacts"         : "{{ entity.contacts }}",
+    "excluded_dates"   : "{{ entity.excludedDates }}",
+    "included_dates"   : "{{ entity.includedDates }}",
+    "classification"   : "{{ entity.classification }}",
+    "r_rule"           : "{% autoescape false %}{{ entity.includedRule }}{% endautoescape %}",
+    "twitterWidgetToken" : {% if entity.attach != null %}{{entity.attach|json_encode|raw()}}{% else %}""{% endif %},
+    "location":
+    {
+        "id": "{{ entity.location.id }}",
+        "name": {% if entity.location.name != null %}{{entity.location.name|json_encode|raw()}}{% else %}""{% endif %},
+        {% if entity.hasGeo() %}
+        "latitude": "{{ entity.location.latitude }}",
+        "latitude": "{{ entity.location.longitude }}",
+        {% endif %}
+        "description": {% if entity.location.getDescription() != null %}{{entity.location.getDescription()|json_encode|raw()}}{% else %}""{% endif %}
+    },
+    "parent"           :
+    {
+        "id"           : "{{ entity.parent.id }}",
+        "name"         : {% if entity.location.getDescription() != null %}{{entity.parent.summary|json_encode|raw()}}{% else %}""{% endif %}
+    },
+    {% spaceless %}
+    "children":
+    [
+    {% for child in entity.children %}
+        {% if loop.first %} {% else %},{% endif %}
+        { "id": "{{ child.id }}", "name": {% if child.getLabel() != null %}{{child.getLabel()|json_encode|raw()}}{% else %}""{% endif %} }
+    {% endfor %}
+    ],
+    "topics":
+    [
+    {% for topic in entity.topics %}
+        {% if loop.first %} {% else %},{% endif %}
+        { "id": "{{ topic.id }}", "name": {% if topic.getname() != null %}{{topic.getname()|json_encode|raw()}}{% else %}""{% endif %} }
+    {% endfor %}
+    ],
+    "categories":
+    [
+    {% for category in entity.categories %}
+        {% if loop.first %} {% else %},{% endif %}
+        { "id": "{{ category.id }}", "name": {% if category.name != null %}{{category.name|json_encode|raw()}}{% else %}""{% endif %}, "slug": "{{ category.slug }}", "color": "{{ category.color }}" }
+    {% endfor %}
+    ],
+    "roles":
+    [
+    {% for role in entity.roles %}
+        {% if loop.first %} {% else %},{% endif %}{ 
+            "id": "{{ role.id }}", 
+            "type": "{{ role.type.name }}", 
+            "person": {
+                "id"  : "{{ role.person.id }}",
+                "name"  : "{{ role.person.name }}",
+                "slug"  : "{{ role.person.slug }}"
+            }
+        }
+    {% endfor %}
+    ],
+    "xproperties":
+    [
+    {% for xproperty in entity.xProperties %}
+        {% if loop.first %} {% else %},{% endif %}{ "id": "{{ xproperty.id }}","xNamespace": "{{ xproperty.xNamespace }}","xKey": "{{ xproperty.xKey }}","xValue": "{{ xproperty.xValue }}" }
+    {% endfor %}
+    ],
+
+     "papers":
+    [
+    {% for paper in entity.papers %}
+        {% if loop.first %}
+        { "id": "{{ paper.id }}","title": {{ paper.title|json_encode|raw() }}}
+        {% else %}
+        ,{ "id": "{{ paper.id }}","title": {{ paper.title|json_encode|raw() }}}
+        {% endif %}
+    {% endfor %}
+    ]
+    {% endspaceless %}
+ 
+    
+}

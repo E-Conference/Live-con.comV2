@@ -1,4 +1,4 @@
-{% extends 'fibeConferenceBundle::base.html.twig' %}
+{% extends 'fibeEventBundle::base.html.twig' %}
 
 {% block title %}Team{% endblock title %}
 
@@ -145,7 +145,7 @@
       $datas = $("#filter_form").serialize();
 
       //start send the post request
-      $.post("{{path('schedule_confevent_filter')}}",
+      $.post("{{path('schedule_event_filter')}}",
           $datas,
           function (response)
           {

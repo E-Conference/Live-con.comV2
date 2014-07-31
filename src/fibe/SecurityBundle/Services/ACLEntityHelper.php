@@ -1,98 +1,91 @@
 <?php
 namespace fibe\SecurityBundle\Services;
 
-use Symfony\Component\Security\Core\SecurityContext;
-use Doctrine\ORM\QueryBuilder;
-use Symfony\Component\Security\Acl\Dbal\MutableAclProvider;
+use Doctrine\Entity;
+use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
 use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Acl\Exception\NoAceFoundException;
-use fibe\SecurityBundle\Entity\ConfPermission;
-use fibe\SecurityBundle\Entity\UserConfPermission;
 
 /**
  * to be used with this class entity must :
  * - have a link to the conference table
  * - be registered in the here present public static $ACLEntityNameArray
- * 
+ *
  *  Explaination on the role table
  *     http://symfony.com/fr/doc/current/cookbook/security/acl_advanced.html#table-de-permission-integree
  */
 class ACLEntityHelper extends ACLHelper
 {
-
-  const LINK_WITH = 'WwwConf';
+  const LINK_WITH = 'MainEvent';
+  const DEFAULT_REPOSITORY_BUNDLE = 'fibeWWWConfBundle';
 
   /** @const */
   public static $ACLEntityNameArray = array(
-    'WwwConf' => array(
-      'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
+    'MainEvent'            => array(
+      'classpath'        => 'fibe\\EventBundle\\Entity',
+      'repositoryBundle' => 'fibeEventBundle'
     ),
-    'Team' => array(
+    'Team'                 => array(
       'classpath' => 'fibe\\SecurityBundle\\Entity',
     ),
-    'MobileAppConfig' => array(
+    'MobileAppConfig'      => array(
       'classpath' => 'fibe\\MobileAppBundle\\Entity',
     ),
-    'Module' => array(
-      'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
+    'Module'               => array(
+      'classpath' => 'fibe\\ContentBundle\\Entity',
     ),
-    'MobileAppConfig' => array(
-      'classpath' => 'fibe\\MobileAppBundle\\Entity'
+    'Event'                => array(
+      'parent'    => 'getMainEvent',
+      'classpath' => 'fibe\\EventBundle\\Entity',
+      'repositoryBundle' => 'fibeEventBundle'
     ),
-
-    'ConfEvent' => array(
-      'parent'    => 'getConference',
-      'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
+    'Location'             => array(
+      'parent'    => 'getMainEvent',
+      'classpath' => 'fibe\\ContentBundle\\Entity',
     ),
-    'Location' => array(
-      'parent'    => 'getConference',
-      'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
+    'Paper'                => array(
+      'parent'    => 'getMainEvent',
+      'classpath' => 'fibe\\ContentBundle\\Entity',
     ),
-    'Paper' => array(
-      'parent'    => 'getConference',
-      'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
+    'Person'               => array(
+      'parent'    => 'getMainEvent',
+      'classpath' => 'fibe\\CommunityBundle\\Entity',
     ),
-    'Person' => array(
-      'parent'    => 'getConference',
-      'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
+    'Role'                 => array(
+      'parent'    => 'getMainEvent',
+      'classpath' => 'fibe\\ContentBundle\\Entity',
     ),
-    'Role' => array(
-      'parent'    => 'getConference',
-      'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
+    'Organization'         => array(
+      'parent'    => 'getMainEvent',
+      'classpath' => 'fibe\\CommunityBundle\\Entity',
     ),
-    'Organization' => array(
-      'parent'    => 'getConference',
-      'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
+    'Topic'                => array(
+      'parent'    => 'getMainEvent',
+      'classpath' => 'fibe\\ContentBundle\\Entity',
     ),
-    'Topic' => array(
-      'parent'    => 'getConference',
-      'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
-    ),
-    'Sponsor' => array(
-      'parent'    => 'getConference',
-      'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
+    'Sponsor'              => array(
+      'parent'    => 'getMainEvent',
+      'classpath' => 'fibe\\ContentBundle\\Entity',
     ),
     'SocialServiceAccount' => array(
-      'parent'    => 'getConference',
-      'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
+      'parent'    => 'getMainEvent',
+      'classpath' => 'fibe\\CommunityBundle\\Entity',
     ),
-    'Category' => array(
-      'parent'    => 'getConference',
-      'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
+    'Category'             => array(
+      'parent'    => 'getMainEvent',
+      'classpath' => 'fibe\\EventBundle\\Entity',
     ),
-    'Equipment' => array(
-      'parent'    => 'getConference',
-      'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
+    'Equipment'            => array(
+      'parent'    => 'getMainEvent',
+      'classpath' => 'fibe\\ContentBundle\\Entity',
     ),
-    'RoleType' => array(
-      'parent'    => 'WwwConf',
-      'classpath' => 'fibe\\Bundle\\WWWConfBundle\\Entity',
+    'RoleType'             => array(
+      'parent'    => 'MainEvent',
+      'classpath' => 'fibe\\ContentBundle\\Entity',
     )
   );
-
 
   /**
    * get an entity in the conf with permission check
@@ -100,13 +93,21 @@ class ACLEntityHelper extends ACLHelper
    *   $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE','Topic');
    *   $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT','Person',$id);
    *   $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT','Person',$entity);
+   *
+   * @param String $action         VIEW|EDIT|CREATE|DELETE|OPERATOR|OWNER|MASTER
+   * @param String $repositoryName the class name
+   * @param mixed  $entity         the entity to get
+   *
+   * @return mixed the entity to get
+   * @throws AccessDeniedException
+   *
    */
   public function getEntityACL($action, $repositoryName, $entity = null)
   {
 
     if (!is_object($entity))
     {
-      $entity = $this->getEntityInConf($repositoryName, $entity);
+      $entity = $this->getEntitiesInConf($repositoryName, $entity);
     }
     if (false === $this->securityContext->isGranted($action, $entity))
     {
@@ -124,23 +125,27 @@ class ACLEntityHelper extends ACLHelper
   }
 
   /**
-   * get entities link with the current conf with their foreign key "conference" = current_conf_id
-   * get every WwwConf when repositoryName param is = "WwwConf"
+   * get an entity in the conf with permission check
+   * get every MainEvent when $repositoryName param is = "MainEvent"
    * i.e.
-   * $entities = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('EDIT','Topic');
-   * TODO : perf improvments
+   *  $entities = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('EDIT','Topic');
+   *
+   * @param String $action         VIEW|EDIT|CREATE|DELETE|OPERATOR|OWNER|MASTER
+   * @param String $repositoryName the class name
+   *
+   * @return array(Entity) entities to get
    */
   public function getEntitiesACL($action, $repositoryName)
-  { 
+  {
     // $ids = $this->aclProvider->getAllowedEntitiesIds($this->getClassNameByRepositoryName($repositoryName), $action);
-    $queryBuilder = $this->entityManager->getRepository('fibeWWWConfBundle:' . $repositoryName)->createQueryBuilder(
+    $repositoryFullName = (
+      isset(self::$ACLEntityNameArray[$repositoryName]["repositoryBundle"])
+        ? self::$ACLEntityNameArray[$repositoryName]["repositoryBundle"]
+        : self::DEFAULT_REPOSITORY_BUNDLE
+      ) . ':' . $repositoryName;
+    $queryBuilder = $this->entityManager->getRepository($repositoryFullName)->createQueryBuilder(
       'entity'
     );
-
-    if (is_null($queryBuilder))
-    {
-      return array();
-    }
 
     if ($repositoryName != ACLEntityHelper::LINK_WITH)
     {
@@ -149,11 +154,11 @@ class ACLEntityHelper extends ACLHelper
     // $this->restrictQueryBuilderByIds($queryBuilder, $ids);
 
     $entities = $queryBuilder->getQuery()->getResult();
-    if("VIEW" == $action && $repositoryName != ACLEntityHelper::LINK_WITH) 
+    if ("VIEW" == $action && $repositoryName != ACLEntityHelper::LINK_WITH)
     {
       return $entities;
     }
-    
+
     $rtn = array();
     foreach ($entities as $entity)
     {
@@ -166,11 +171,11 @@ class ACLEntityHelper extends ACLHelper
     return $rtn;
   }
 
-
   public function getACEByRepositoryName($repositoryName, $user = null, $id = null)
-  { 
-    $entity = $this->getEntityInConf($repositoryName, $id);  
-    return $this->getACEByEntity($entity,$user);
+  {
+    $entity = $this->getEntitiesInConf($repositoryName, $id);
+
+    return $this->getACEByEntity($entity, $user);
   }
 
   /**
@@ -183,7 +188,18 @@ class ACLEntityHelper extends ACLHelper
    *
    * @return [string|int]       the uppest permission
    */
-  public function getACEByEntity($entity, $user = null, $returnType = "action", $acl = null)
+
+  /**get the allowed action
+   *
+   * @param Object             $entity     the entity to get
+   * @param UserInterface|null $user       the current user if null
+   * @param String             $returnType all|mask|index|action (all | int binary mask | index of the ace in the acl | readable action i.e. VIEW)
+   * @param null               $acl        provide acl if you already got it
+   *
+   * @throws \Symfony\Component\Security\Acl\Exception\NoAceFoundException
+   * @return String VIEW|EDIT|CREATE|DELETE|OPERATOR|OWNER|MASTER
+   */
+  public function getACEByEntity($entity, UserInterface $user = null, $returnType = "action", $acl = null)
   {
     $entitySecurityIdentity = ObjectIdentity::fromDomainObject($entity);
     $userSecurityIdentity = UserSecurityIdentity::fromAccount($user ? $user : $this->getUser());
@@ -227,17 +243,14 @@ class ACLEntityHelper extends ACLHelper
     );
   }
 
-
   /**
-   * lookup in ACLEntityHelper::$ACLEntityNameArray to return the full class path
+   * @param String $repositoryName registered in the ACLEntityHelper::$ACLEntityNameArray
    *
-   * @param  [String] $repositoryName           registered in the ACLEntityHelper::$ACLEntityNameArray
-   *
-   * @return [String]                           the full class path
-   * @throw  [EntityACLNotRegisteredException]  in case entity is not registered in the array
+   * @return String  the full class path
+   * @throws EntityACLNotRegisteredException in case entity is not registered in the array
    */
   public function getClassNameByRepositoryName($repositoryName)
-  { 
+  {
     if (!isset(self::$ACLEntityNameArray[$repositoryName]))
     {
       throw new EntityACLNotRegisteredException(
@@ -247,10 +260,10 @@ class ACLEntityHelper extends ACLHelper
 
     return self::$ACLEntityNameArray[$repositoryName]['classpath'] . '\\' . $repositoryName;
   }
- 
+
   public static function getRepositoryNameByClassName($className)
-  { 
-    $class = new \ReflectionClass($className); 
+  {
+    $class = new \ReflectionClass($className);
 
     if (!isset(self::$ACLEntityNameArray[$class->getShortName()]))
     {
@@ -262,16 +275,15 @@ class ACLEntityHelper extends ACLHelper
     return $class->getShortName();
   }
 
-
   /**
    * filter by conferenceId if the repository != this::LINK_WITH
    *
-   * @param  [type] $repositoryName [description]
-   * @param  [type] $id             [description]
+   * @param      $repositoryName
+   * @param null $id
    *
-   * @return [type]                 [description]
+   * @return null|object
    */
-  private function getEntityInConf($repositoryName, $id = null)
+  private function getEntitiesInConf($repositoryName, $id = null)
   {
     $entity = null;
     if ($id)
@@ -279,7 +291,7 @@ class ACLEntityHelper extends ACLHelper
       $findOneByArgs = array('id' => $id);
       if ($repositoryName != ACLEntityHelper::LINK_WITH)
       {
-        $findOneByArgs['conference'] = $this->getCurrentConf();
+        $findOneByArgs['mainEvent'] = $this->getCurrentMainEvent();
       }
       $entity = $this->entityManager->getRepository($this->getClassNameByRepositoryName($repositoryName))->findOneBy(
         $findOneByArgs
@@ -297,7 +309,6 @@ class ACLEntityHelper extends ACLHelper
 
     return $entity;
   }
-
 }
 
 

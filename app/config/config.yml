@@ -2,9 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: parameters_common.yml }
     - { resource: security.yml }
-    - { resource: @fibeWWWConfBundle/Resources/config/config.yml}
-    - { resource: @fibeWWWConfBundle/Resources/config/services.yml}
-    - { resource: @fibeConferenceBundle/Resources/config/services.yml}
+    - { resource: @fibeEventBundle/Resources/config/services.yml}
 
 hwi_oauth:
     #this is my custom user provider, created from FOSUBUserProvider - will manage the 
@@ -82,8 +80,6 @@ swiftmailer:
 twig:
     form:
         resources:
-            - 'fibeWWWConfBundle:Form:duration_widget.html.twig'
-            - 'fibeWWWConfBundle:Form:my_form_div.html.twig'
 
 
 fos_user:

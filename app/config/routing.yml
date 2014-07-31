@@ -1,3 +1,18 @@
+fibe_community:
+    resource: "@fibeCommunityBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fibe_content:
+    resource: "@fibeContentBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fibe_event:
+    resource: "@fibeEventBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 fibe_rest:
     resource: "@fibeRestBundle/Controller/"
 
@@ -11,33 +26,10 @@ documentation:
     type:     annotation
     prefix:   /
 
-fibe_conference:
-    resource: "@fibeConferenceBundle/Controller/"
-    type:     annotation
-    prefix:   / 
-
 fibe_home_page:
     resource: "@fibeHomePageBundle/Controller/"
     type:     annotation
     prefix:   / 
-
-fibe_mobile_app:
-    resource: "@fibeMobileAppBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-fibe_dashboard:
-    resource: "@fibeDashboardBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-fibe_www_conf:
-    resource: "@fibeWWWConfBundle/Controller/"
-    prefix:   /schedule
-
-fibe_data:
-    resource: "@DataBundle/Controller/"
-    prefix:   /data
 
 fibe_security_www_conf:
     resource: "@fibeSecurityBundle/Controller/"
@@ -100,9 +92,3 @@ facebook_login:
 
 linkedin_login:
     pattern: /login/check-linkedin
-
-#REST 
-rest : 
-  type : rest 
-  resource : "routing_rest.yml"
-  prefix : /apiREST

@@ -59,7 +59,7 @@ class UserConfPermissionType extends AbstractType
             'required'      => true,
             'query_builder' => function (EntityRepository $er)
               {
-                return $er->ManagerForSelectTeamQuery($this->user->getCurrentConf()->getTeam());
+                return $er->ManagerForSelectTeamQuery($this->user->getCurrentMainEvent()->getTeam());
               },
           ));
           // seems to be bugged https://github.com/symfony/symfony/issues/7807

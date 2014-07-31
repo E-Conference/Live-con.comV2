@@ -1,9 +1,3 @@
-# intellij files
-*.iml
-.idea
-
-#composer
-composer.lock
 
 #mobile app
 src/fibe/MobileAppBundle/Resources/public/mobileApp/*
@@ -21,6 +15,11 @@ web/bundles/*
 # Symfony files
 app/config/parameters.yml
 app/bootstrap.php.cache
+composer.lock
+
+# intellij files
+*.iml
+.idea
 
 # gedit temp file
 *~

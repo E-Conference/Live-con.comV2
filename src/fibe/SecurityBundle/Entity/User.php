@@ -2,12 +2,13 @@
 
   namespace fibe\SecurityBundle\Entity;
 
+  use Doctrine\Common\Collections\ArrayCollection;
+  use fibe\CommunityBundle\Entity\Person;
+  use fibe\EventBundle\Entity\MainEvent;
   use FOS\UserBundle\Entity\User as BaseUser;
   use Doctrine\ORM\Mapping as ORM;
 
-  use fibe\Bundle\WWWConfBundle\Entity\WwwConf;
-  use Symfony\Component\Security\Core\Exception\AccessDeniedException; 
-  use JMS\Serializer\Annotation\Type; 
+  use JMS\Serializer\Annotation\Type;
   use JMS\Serializer\Annotation\ExclusionPolicy;
   use JMS\Serializer\Annotation\Expose;
   use JMS\Serializer\Annotation\Groups;
@@ -15,7 +16,7 @@
 
   /**
    * @ORM\Entity(repositoryClass="fibe\SecurityBundle\Repository\UserRepository")
-   * @ORM\Table(name="manager")  
+   * @ORM\Table(name="user")
    * @ExclusionPolicy("all") 
    */
   class User extends BaseUser
@@ -28,25 +29,38 @@
      */
     protected $id;
 
+
+    /**
+     * @var string
+     * @Type("string")
+     * @Expose
+     */
+    protected $username;
+
+    /**
+     * @var string
+     * @Type("string")
+     * @Expose
+     */
+    protected $password;
+
+    /**
+     * Person
+     *
+     * @ORM\OneToOne(targetEntity="fibe\CommunityBundle\Entity\Person",cascade={"persist"})
+     */
+    private $person;
+
+
     /**
      *
-     * @ORM\ManyToOne(targetEntity="fibe\Bundle\WWWConfBundle\Entity\WwwConf")
-     * @ORM\JoinColumn(name="currentConf", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent")
+     * @ORM\JoinColumn(name="current_main_event", referencedColumnName="id")
      */
-    protected $currentConf;
+    protected $currentMainEvent;
 
     /**
-     * owner of those conferences
-     *  
-     * @ORM\ManyToMany(targetEntity="fibe\Bundle\WWWConfBundle\Entity\WwwConf", inversedBy="confManagers", cascade={"persist"})
-     * @ORM\JoinTable(name="manager_conference",
-     *     joinColumns={@ORM\JoinColumn(name="manager_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="conference_id", referencedColumnName="id")})
-     */
-    protected $conferences;
-
-    /**
-     *  invited in a conf
+     * @TODO : put it in person with a technical role
      *  
      * @ORM\ManyToMany(targetEntity="Team", inversedBy="confManagers", cascade={"persist","remove"})
      * @ORM\JoinTable(name="manager_team",
@@ -60,14 +74,17 @@
     protected $name;
  
     /** @ORM\Column(name="picture", type="string", length=255, nullable=true) */
-    protected $picture; 
+    protected $picture;
 
     protected $captcha;
 
 
 
 
-    /***************** SOCIAL NETWORK ID*******************/
+    /************************************
+     * SOCIAL NETWORK ID
+     * @TODO : put it in the table social_service_account
+     ************************************/
  
     /** @ORM\Column(name="google_id", type="string", length=255, nullable=true) */
     protected $google_id;
@@ -96,36 +113,14 @@
     /** @ORM\Column(name="linkedin_access_token", type="string", length=255, nullable=true) */
     protected $linkedin_access_token;
 
-    /*********** SERIALIZE ***********/
-
-
-    /**
-     * @var string
-     * @Type("string")
-     * @Expose
-     */
-    protected $username;
-
-    /**
-     * @var string
-     * @Type("string")
-     * @Expose
-     */
-    protected $password;
-
-    /**
-     * @var string to send after authentication, don't persist
-     * @Type("string")
-     * @Expose
-     */
-    protected $session_id;
-
     /**
      * Constructor
      */
     public function __construct()
     {
       parent::__construct();
+      $this->teams = new ArrayCollection();
+      $this->conferences = new ArrayCollection();
     }
 
 
@@ -177,11 +172,11 @@
     /**
      * Add conferences
      *
-     * @param \fibe\Bundle\WWWConfBundle\Entity\WwwConf $conferences
+     * @param MainEvent $conferences
      *
      * @return User
      */
-    public function addConference(\fibe\Bundle\WWWConfBundle\Entity\WwwConf $conferences)
+    public function addConference(MainEvent $conferences)
     {
       $this->conferences[] = $conferences;
 
@@ -191,9 +186,9 @@
     /**
      * Remove conferences
      *
-     * @param \fibe\Bundle\WWWConfBundle\Entity\WwwConf $conferences
+     * @param MainEvent $conferences
      */
-    public function removeConference(\fibe\Bundle\WWWConfBundle\Entity\WwwConf $conferences)
+    public function removeConference(MainEvent $conferences)
     {
       $this->conferences->removeElement($conferences);
     }
@@ -203,51 +198,34 @@
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getConferences()
+    public function getMainEvents()
     {
       return $this->conferences;
     }
 
     /**
-     * Set currentConf
+     * Set currentMainEvent
      *
-     * @param \fibe\Bundle\WWWConfBundle\Entity\WwwConf $currentConf
+     * @param MainEvent $currentMainEvent
      *
      * @return User
      */
-    public function setCurrentConf(\fibe\Bundle\WWWConfBundle\Entity\WwwConf $currentConf = null)
+    public function setCurrentMainEvent(MainEvent $currentMainEvent = null)
     {
-      $this->currentConf = $currentConf;
+      $this->currentMainEvent = $currentMainEvent;
 
       return $this;
     }
 
     /**
-     * Get currentConf
+     * Get currentMainEvent
      *
-     * @return \fibe\Bundle\WWWConfBundle\Entity\WwwConf
+     * @return MainEvent
      */
-    public function getCurrentConf()
+    public function getCurrentMainEvent()
     {
-      return $this->currentConf;
+      return $this->currentMainEvent;
     }
-    /**
-     * @TODO comment
-     *
-     * @param WwwConf $conf
-     *
-     * @return bool
-     */
-    public function authorizedAccesToConference(\fibe\Bundle\WWWConfBundle\Entity\WwwConf $conf)
-    {
-      $conferences = $this->conferences->toArray();
-      if (in_array($conf, $conferences))
-      {
-        return true;
-      }
-
-      return false;
-    }  
 
     public function getName()
     {
@@ -388,17 +366,19 @@
       return $this;
     }
 
-    /***************** SERIALISE *******************/
-
-    public function getsessionId()
+    /**
+     * @return Person
+     */
+    public function getPerson()
     {
-      return $this->session_id;
+      return $this->person;
     }
 
-    public function setsessionId( $sessionId )
+    /**
+     * @param Person $person
+     */
+    public function setPerson(Person $person)
     {
-      $this->session_id = $sessionId;
-
-      return $this;
+      $this->person = $person;
     }
   }

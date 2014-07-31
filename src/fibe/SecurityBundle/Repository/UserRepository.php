@@ -18,7 +18,7 @@ class UserRepository extends EntityRepository
   /**
    * @TODO comment
    *
-   * @param $currentConf
+   * @param $currentMainEvent
    *
    * @return \Doctrine\ORM\QueryBuilder
    */

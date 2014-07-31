@@ -48,7 +48,7 @@
      */
     public function getUserConfPermission($manager=null, $restrictForm = true)
     {
-      $currentConf = $this->getCurrentConf();
+      $currentMainEvent = $this->getCurrentMainEvent();
       $user = $this->getUser();
 
       $userConfPermission = new UserConfPermission();
@@ -59,28 +59,28 @@
       $formAllowed = false;
       $isOwner = false;
 
-      $entity = $currentConf;
+      $entity = $currentMainEvent;
       $newManagerDefaultAction = 'EDIT';
-      $repositoryName = 'WwwConf';
+      $repositoryName = 'MainEvent';
       $entityLabel = 'Conference';
       $confPermission=$this->newConfPermission($user,$restrictForm,$formAllowed,$noManager,$manager,$entity,$newManagerDefaultAction,$repositoryName,$entityLabel);
       $userConfPermission->addConfPermission($confPermission);
 
-      $entity = $currentConf->getAppConfig();
+      $entity = $currentMainEvent->getAppConfig();
       $newManagerDefaultAction = 'EDIT';
       $repositoryName = 'MobileAppConfig';
       $entityLabel = 'Mobile application';
       $confPermission=$this->newConfPermission($user,$restrictForm,$formAllowed,$noManager,$manager,$entity,$newManagerDefaultAction,$repositoryName,$entityLabel);
       $userConfPermission->addConfPermission($confPermission);
 
-      $entity = $currentConf->getModule();
+      $entity = $currentMainEvent->getModule();
       $newManagerDefaultAction = 'EDIT';
       $repositoryName = 'Module';
       $entityLabel = 'Modules';
       $confPermission=$this->newConfPermission($user,$restrictForm,$formAllowed,$noManager,$manager,$entity,$newManagerDefaultAction,$repositoryName,$entityLabel);
       $userConfPermission->addConfPermission($confPermission);
 
-      $entity = $currentConf->getTeam();
+      $entity = $currentMainEvent->getTeam();
       $newManagerDefaultAction = 'VIEW';
       $repositoryName = 'Team';
       $entityLabel = 'Team';
@@ -88,7 +88,7 @@
       $userConfPermission->addConfPermission($confPermission);
 
       $userConfPermission->setRestricted(!$formAllowed);
-      $userConfPermission->setIsOwner("OWNER" == $this->getACEByEntity($currentConf,$manager));
+      $userConfPermission->setIsOwner("OWNER" == $this->getACEByEntity($currentMainEvent,$manager));
       
       return $userConfPermission; 
     } 
@@ -108,7 +108,7 @@
       }
       // cannot demote the owner of the conference
       try {
-        if("OWNER" == $this->getACEByEntity($this->getCurrentConf(),$teamate))
+        if("OWNER" == $this->getACEByEntity($this->getCurrentMainEvent(),$teamate))
         {
           throw new AccessDeniedException("You cannot demote the owner.");
         }
@@ -149,7 +149,7 @@
       try {
         $action = $this->getACEByEntity($entity,$teamate);
       } catch (NoAceFoundException $e) {
-        $action = $this->getACEByEntity($this->getCurrentConf(),$teamate);
+        $action = $this->getACEByEntity($this->getCurrentMainEvent(),$teamate);
       }
       $this->performUpdateUserACL($teamate,$action,$entity);
     }

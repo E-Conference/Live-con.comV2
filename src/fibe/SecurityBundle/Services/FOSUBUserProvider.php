@@ -1,6 +1,7 @@
 <?php
 namespace fibe\SecurityBundle\Services;
  
+use fibe\SecurityBundle\Entity\User;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -22,12 +23,14 @@ class FOSUBUserProvider extends BaseClass
     protected $serviceName;
     protected $response;
 
-    /**
-     * Constructor.
-     *
-     * @param UserManagerInterface $userManager FOSUB user provider.
-     * @param array                $properties  Property mapping.
-     */
+  /**
+   * Constructor.
+   *
+   * @param UserManagerInterface $userManager FOSUB user provider.
+   * @param array $properties Property mapping.
+   * @param \Symfony\Component\HttpFoundation\Session\Session $session
+   * @param $mailer
+   */
     public function __construct(UserManagerInterface $userManager, array $properties, Session $session,$mailer)
     {
       parent::__construct($userManager, $properties); 
@@ -39,7 +42,7 @@ class FOSUBUserProvider extends BaseClass
      * {@inheritdoc}
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
-    { 
+    {
       $socialServiceId = $response->getUsername();
       $socialServiceUser = $this->userManager->findUserBy(array($this->getProperty($response) => $socialServiceId));
       $loggedUser = $this->userManager->findUserBy(array('id' => $this->session->get("userId")));
@@ -50,8 +53,8 @@ class FOSUBUserProvider extends BaseClass
       { //social service user not found
         if($loggedUser instanceof UserInterface)
         { //first account  
-          $setter = 'set' . ucfirst($serviceName) . 'Id'; 
-          $user->$setter($socialServiceId);
+          $setter = 'set' . ucfirst($serviceName) . 'Id';
+          $loggedUser->$setter($socialServiceId);
           return $this->enrich($loggedUser,$serviceName,$response);  
         }
         else
@@ -132,7 +135,7 @@ class FOSUBUserProvider extends BaseClass
       return $user;
     } 
 
-    private function enrichUserDatas(UserInterface $user,$serviceName,UserResponseInterface $response)
+    private function enrichUserDatas(User $user,$serviceName,UserResponseInterface $response)
     {
       if(!empty($response->getEmail()))
           $user->setEmail($response->getEmail());

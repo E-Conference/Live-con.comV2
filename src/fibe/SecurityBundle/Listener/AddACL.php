@@ -49,7 +49,7 @@
           $aclProvider->updateAcl($acl);
 
           //share with teamates
-          $teamates = $user->getCurrentConf()->getTeam()->getConfManagers();
+          $teamates = $user->getCurrentMainEvent()->getTeam()->getConfManagers();
           foreach ($teamates as $teamate)
           {
             if($teamate->getId() != $user->getId())

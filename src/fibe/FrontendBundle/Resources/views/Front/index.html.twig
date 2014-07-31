@@ -8,8 +8,7 @@
 
     <title>livecon app'</title>
 
-    {% stylesheets 'bundles/frontend/app/css/bootstrap-combined.min.css' 
-                   'bundles/frontend/app/css/bootstrap.min.css'
+    {% stylesheets 'bundles/frontend/app/css/bootstrap.min.css'
                    'bundles/frontend/app/css/loading-bar.css' 
                    'bundles/frontend/app/css/app.css' 
                    'bundles/frontend/app/css/animations.css' 
@@ -77,9 +76,9 @@
         var globalConfig = {
             api: {
                 urls: {
-                    organizations: "{{ path('apiREST_get_organizations') }}",
+                    organizations: "{{ path('schedule_company_index') }}",
                     login: "{{ path('api_user_login', {_format: 'json'}) }}",
-                    registration: "{{ path('apiREST_get_organizations') }}"
+                    registration: "{{ path('schedule_company_index') }}"
                 }
             },
             app: {
