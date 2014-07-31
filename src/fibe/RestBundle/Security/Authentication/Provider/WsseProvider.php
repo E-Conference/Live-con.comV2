@@ -71,7 +71,7 @@ class WsseProvider extends ContainerAware implements AuthenticationProviderInter
         file_put_contents($this->cacheDir.'/'.$nonce, time());
 
         // Validate Secret
-        $expected = base64_encode(sha1(base64_decode($nonce).$created.$secret, true));
+        $expected = base64_encode(md5(base64_decode($nonce).$created.$secret, true));
 
         // Return TRUE if our newly-calculated digest is the same as the one provided in the validateDigest() call
         return $expected === $digest;

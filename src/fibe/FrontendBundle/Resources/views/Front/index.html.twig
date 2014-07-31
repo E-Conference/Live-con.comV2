@@ -76,9 +76,9 @@
         var globalConfig = {
             api: {
                 urls: {
-                    organizations: "{{ path('schedule_company_index') }}",
+                    organizations: "{{ path('apiREST_get_companies') }}",
                     login: "{{ path('api_user_login', {_format: 'json'}) }}",
-                    registration: "{{ path('schedule_company_index') }}"
+                    registration: "{{ path('apiREST_get_companies') }}"
                 }
             },
             app: {
