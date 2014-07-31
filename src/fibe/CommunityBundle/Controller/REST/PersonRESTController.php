@@ -22,6 +22,7 @@ class PersonRESTController extends FOSRestController
   /**
    *@Rest\View()
   **/
+
    public function getPersonAction($id){
 
           $em = $this->getDoctrine()->getManager();

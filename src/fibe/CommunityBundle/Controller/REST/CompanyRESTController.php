@@ -103,10 +103,9 @@ class CompanyRESTController extends FOSRestController
 public function putCompanyAction(Request $request, $id)
 {
     
-    $user=$this->getUser();
 
-    //$serializer = $this->container->get('jms_serializer');
-    //$entity = $serializer->deserialize( $request->getContent(), ' fibe\Bundle\WWWConfBundle\Entity\Company', 'json');
+    $serializer = $this->container->get('jms_serializer');
+    $entity = $serializer->deserialize( $request->getContent(), ' fibe\CommunityBundle\Entity\Company', 'json');
     
     $em = $this->getDoctrine()->getManager();
     
@@ -114,8 +113,8 @@ public function putCompanyAction(Request $request, $id)
     $company =  $em->getRepository('fibeCommunityBundle:Company')->find($id);
     
 
-    $form = $this->createForm(new CompanyType($this->getUser()), $company);
-    $form->bind($request);
+    $form = $this->createForm(new CompanyType(), $company);
+    $form->bind($entity);
 
     if($form->isValid()){
         $em = $this->getDoctrine()->getManager();
