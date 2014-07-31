@@ -68,7 +68,7 @@ ul{
 
 .sidebar-nav {
   position: absolute;
-  width: 250px;
+  width: 100%;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -85,17 +85,22 @@ ul{
 }
 
 .sidebar-nav li a {
-  color: #19313b;
-  display: block;
-  text-decoration: none;
+    display: block;
+    color: #19313b;
 }
 
-.sidebar-nav li a:hover {
+.sidebar-nav li:hover a{
   color: #fff;
-  background: rgba(255,255,255,0.2);
-  text-decoration: none;
 }
 
+.sidebar-nav li:hover{
+  background: #324852;
+}
+.sidebar-nav li:active{
+  background: #19313b;
+}
+
+.sidebar-nav li a:hover,
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
   text-decoration: none;

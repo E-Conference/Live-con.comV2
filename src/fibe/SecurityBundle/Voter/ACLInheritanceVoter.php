@@ -1,5 +1,5 @@
 <?php
-  // src/Acme/DemoBundle/Security/Authorization/Voter/PostVoter.php
+
   namespace fibe\SecurityBundle\Voter;
 
   use Symfony\Component\Security\Core\Exception\InvalidArgumentException;
@@ -83,10 +83,11 @@
       if ($entity instanceof ObjectIdentityInterface) {
           $oid = $entity;
       } elseif (null === $oid = $this->objectIdentityRetrievalStrategy->getObjectIdentity($entity)) {  
-          return self::ACCESS_GRANTED;
-        throw new InvalidArgumentException(
-          sprintf('[ACLInheritanceVoter] no ACL for object %s',get_class($entity))
-        );  
+        //not protected instance
+        return self::ACCESS_GRANTED;
+//        throw new InvalidArgumentException(
+//          sprintf('[ACLInheritanceVoter] no ACL for object %s',get_class($entity))
+//        );
       }
       try {
         $acl = $this->aclProvider->findAcl($oid, $sids);
