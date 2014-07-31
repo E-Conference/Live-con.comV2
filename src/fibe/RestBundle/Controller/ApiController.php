@@ -13,12 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use fibe\SecurityBundle\Entity\User;
-<<<<<<< HEAD
 
-=======
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Exception\AccountStatusException;
->>>>>>> 886230f676d3766a85909266c65e4f1ec994c071
 
 class ApiController extends Controller
 {
