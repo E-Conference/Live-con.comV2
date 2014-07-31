@@ -4,6 +4,7 @@ namespace fibe\ContentBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use fibe\ContentBundle\Util\ContentCode;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -29,6 +30,11 @@ class RoleLabel
    * @ORM\Column(type="string", name="label", nullable=false)
    */
   protected $label;
+
+  /**
+   * @ORM\Column(type="string", name="context", nullable=false)
+   */
+  protected $context = 'CONFERENCE';
 
   /**
    * role
@@ -122,5 +128,21 @@ class RoleLabel
   public function getLabel()
   {
     return $this->label;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getContext()
+  {
+    return $this->context;
+  }
+
+  /**
+   * @param mixed $context
+   */
+  public function setContext($context)
+  {
+    $this->context = $context;
   }
 }

@@ -48,12 +48,12 @@ class RecurType extends AbstractType
     // public function setDefaultOptions(OptionsResolverInterface $resolver)
     // {
     //     $resolver->setDefaults(array(
-    //         'data_class' => 'fibe\Bundle\WWWConfBundle\Entity\Recur'
+    //         'data_class' => 'fibe\EventBundle\Entity\Recur'
     //     ));
     // }
 
     // public function getName()
     // {
-    //     return 'fibe_bundle_wwwconfbundle_recurtype';
+    //     return 'fibe_eventbundle_recurtype';
     // }
 }

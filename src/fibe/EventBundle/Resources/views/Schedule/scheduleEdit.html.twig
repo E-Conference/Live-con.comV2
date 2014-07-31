@@ -54,7 +54,7 @@
     <div id="loader_topics" style="visibility: hidden; display:inline;"><img src="{{ asset('img/ajax-loader.gif') }}"/>
     </div>
     <div id="topics_related_list">
-      {% include "fibeWWWConfBundle:ConfEvent:topicRelation.html.twig" %}
+      {#{% include "fibeWWWConfBundle:ConfEvent:topicRelation.html.twig" %}#}
     </div>
     {{ form_widget(topic_form) }}
   </div>
@@ -68,7 +68,7 @@
       <div id="loader_papers" style="visibility: hidden; display:inline;"><img
             src="{{ asset('img/ajax-loader.gif') }}"/></div>
       <div id="paper_related_list">
-        {% include "fibeWWWConfBundle:ConfEvent:paperRelation.html.twig" %}
+        {#{% include "fibeWWWConfBundle:ConfEvent:paperRelation.html.twig" %}#}
       </div>
       {{ form_widget(paper_form) }}
     </div>
@@ -82,7 +82,7 @@
     <div id="loader_persons" style="visibility: hidden; display:inline;"><img src="{{ asset('img/ajax-loader.gif') }}"/>
     </div>
     <div id="person_related_list">
-      {% include "fibeWWWConfBundle:ConfEvent:personRelation.html.twig" %}
+      {#{% include "fibeWWWConfBundle:ConfEvent:personRelation.html.twig" %}#}
     </div>
 
     <form id="role_form" action="{{ path('schedule_event_addPerson') }}"
@@ -178,8 +178,8 @@
     $("#role_form").submit(function ()
     {
       //get the url for the form
-      var id_person = $('#fibe_bundle_wwwconfbundle_roletype_person').val();
-      var id_type = $('#fibe_bundle_wwwconfbundle_roletype_type').val();
+//      var id_person = $('#fibe_bundle_wwwconfbundle_roletype_person').val();
+//      var id_type = $('#fibe_bundle_wwwconfbundle_roletype_type').val();
       $('#loader_persons').show();
       //start send the post request
       $.post("{{path('schedule_event_addPerson')}}",

@@ -142,7 +142,7 @@ public function putCompanyAction(Request $request, $id)
     $user=$this->getUser();
 
     $serializer = $this->container->get('jms_serializer');
-    $entity = $serializer->deserialize( $request->getContent(), ' fibe\Bundle\WWWConfBundle\Entity\Company', 'json');
+    $entity = $serializer->deserialize( $request->getContent(), ' fibe\CommunityBundle\Entity\Company', 'json');
     if($entity instanceof Company == false){
    
         return $this->view(null, Codes::HTTP_NOT_MODIFIED);

@@ -9,14 +9,12 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use fibe\Bundle\WWWConfBundle\Util\StringTools;
-
 /**
  * This entity define relation between a paper and a person
  *
  *
  * @ORM\Table(name="additional_informations")
- * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\AdditionalInformationsRepository")
+ * @ORM\Entity(repositoryClass="fibe\CommunityBundle\Repository\AdditionalInformationsRepository")
  *
  */
 class AdditionalInformations
@@ -34,7 +32,7 @@ class AdditionalInformations
    * @ORM\Column(type="string", nullable=true)
    * @Expose
    */
-  protected $website;
+  private $website;
 
   /**
    * @TODO Enum : I18N (CodeInfo/JS/...)
@@ -43,21 +41,21 @@ class AdditionalInformations
    *
    * @ORM\Column(type="string", nullable=true)
    */
-  protected $country;
+  private $country;
 
   /**
    * img
    *
    * @ORM\Column(type="string", nullable=true,  name="img")
    */
-  protected $img;
+  private $img;
 
   /**
    * email
    *
    * @ORM\Column(type="string", nullable=true,  name="email")
    */
-  protected $email;
+  private $email;
 
   /**
    * Get id

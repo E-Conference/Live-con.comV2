@@ -14,8 +14,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use fibe\Bundle\WWWConfBundle\Entity\Status;
-use fibe\Bundle\WWWConfBundle\Form\StatusType;
 
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
@@ -40,7 +38,7 @@ class StatusController extends Controller
   {
     throw new ServiceUnavailableHttpException('Not available yet.');
     $em = $this->getDoctrine()->getManager();
-    $entities = $em->getRepository('fibeWWWConfBundle:Status')->findAll();
+    $entities = $em->getRepository('fibeEventBundle:Status')->findAll();
 
     $adapter = new ArrayAdapter($entities);
     $pager = new PagerFanta($adapter);
@@ -69,7 +67,7 @@ class StatusController extends Controller
   {
     throw new ServiceUnavailableHttpException('Not available yet.');
     $em = $this->getDoctrine()->getManager();
-    $entity = $em->getRepository('fibeWWWConfBundle:Status')->find($id);
+    $entity = $em->getRepository('fibeEventBundle:Status')->find($id);
 
     if (!$entity)
     {
@@ -105,7 +103,7 @@ class StatusController extends Controller
    *
    * @Route("/create", name="schedule_status_create")
    * @Method("POST")
-   * @Template("fibeWWWConfBundle:Status:new.html.twig")
+   * @Template("fibeEventBundle:Status:new.html.twig")
    */
   public function createAction(Request $request)
   {
@@ -150,7 +148,7 @@ class StatusController extends Controller
   {
     throw new ServiceUnavailableHttpException('Not available yet.');
     $em = $this->getDoctrine()->getManager();
-    $entity = $em->getRepository('fibeWWWConfBundle:Status')->find($id);
+    $entity = $em->getRepository('fibeEventBundle:Status')->find($id);
 
     if (!$entity)
     {
@@ -172,13 +170,13 @@ class StatusController extends Controller
    *
    * @Route("/{id}/update", name="schedule_status_update")
    * @Method("POST")
-   * @Template("fibeWWWConfBundle:Status:edit.html.twig")
+   * @Template("fibeEventBundle:Status:edit.html.twig")
    */
   public function updateAction(Request $request, $id)
   {
     throw new ServiceUnavailableHttpException('Not available yet.');
     $em = $this->getDoctrine()->getManager();
-    $entity = $em->getRepository('fibeWWWConfBundle:Status')->find($id);
+    $entity = $em->getRepository('fibeEventBundle:Status')->find($id);
 
     if (!$entity)
     {
@@ -229,7 +227,7 @@ class StatusController extends Controller
     if ($form->isValid())
     {
       $em = $this->getDoctrine()->getManager();
-      $entity = $em->getRepository('fibeWWWConfBundle:Status')->find($id);
+      $entity = $em->getRepository('fibeEventBundle:Status')->find($id);
 
       if (!$entity)
       {
@@ -263,7 +261,7 @@ class StatusController extends Controller
   {
     throw new ServiceUnavailableHttpException('Not available yet.');
     $em = $this->getDoctrine()->getManager();
-    $entity = $em->getRepository('fibeWWWConfBundle:Status')->find($id);
+    $entity = $em->getRepository('fibeEventBundle:Status')->find($id);
 
     if (!$entity)
     {

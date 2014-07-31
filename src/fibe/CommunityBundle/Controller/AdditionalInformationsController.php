@@ -28,7 +28,7 @@ class AdditionalInformationsController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
 
-    $entities = $em->getRepository('fibeWWWConfBundle:AdditionalInformations')->findAll();
+    $entities = $em->getRepository('fibeCommunityBundle:AdditionalInformations')->findAll();
 
     return array(
       'entities' => $entities,
@@ -40,7 +40,7 @@ class AdditionalInformationsController extends Controller
    *
    * @Route("/", name="additionalinformations_create")
    * @Method("POST")
-   * @Template("fibeWWWConfBundle:AdditionalInformations:new.html.twig")
+   * @Template("fibeCommunityBundle:AdditionalInformations:new.html.twig")
    */
   public function createAction(Request $request)
   {
@@ -111,7 +111,7 @@ class AdditionalInformationsController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
 
-    $entity = $em->getRepository('fibeWWWConfBundle:AdditionalInformations')->find($id);
+    $entity = $em->getRepository('fibeCommunityBundle:AdditionalInformations')->find($id);
 
     if (!$entity)
     {
@@ -137,7 +137,7 @@ class AdditionalInformationsController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
 
-    $entity = $em->getRepository('fibeWWWConfBundle:AdditionalInformations')->find($id);
+    $entity = $em->getRepository('fibeCommunityBundle:AdditionalInformations')->find($id);
 
     if (!$entity)
     {
@@ -178,13 +178,13 @@ class AdditionalInformationsController extends Controller
    *
    * @Route("/{id}", name="additionalinformations_update")
    * @Method("PUT")
-   * @Template("fibeWWWConfBundle:AdditionalInformations:edit.html.twig")
+   * @Template("fibeCommunityBundle:AdditionalInformations:edit.html.twig")
    */
   public function updateAction(Request $request, $id)
   {
     $em = $this->getDoctrine()->getManager();
 
-    $entity = $em->getRepository('fibeWWWConfBundle:AdditionalInformations')->find($id);
+    $entity = $em->getRepository('fibeCommunityBundle:AdditionalInformations')->find($id);
 
     if (!$entity)
     {
@@ -223,7 +223,7 @@ class AdditionalInformationsController extends Controller
     if ($form->isValid())
     {
       $em = $this->getDoctrine()->getManager();
-      $entity = $em->getRepository('fibeWWWConfBundle:AdditionalInformations')->find($id);
+      $entity = $em->getRepository('fibeCommunityBundle:AdditionalInformations')->find($id);
 
       if (!$entity)
       {

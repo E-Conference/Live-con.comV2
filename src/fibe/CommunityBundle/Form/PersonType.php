@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * Class PersonType
  *
- * @package fibe\Bundle\WWWConfBundle\Form
+ * @package fibe\CommunityBundle\Form
  */
 class PersonType extends AbstractType
 {
@@ -41,14 +41,14 @@ class PersonType extends AbstractType
       ->add('description', 'textarea', array('required' => false, 'label' => 'Description'))
       // ->add('nick', 'text', array('required' => false))
       ->add('organizations', 'entity', array(
-        'class'    => 'fibeWWWConfBundle:Organization',
+        'class'    => 'fibeCommunityBundle:Organization',
         'label'    => 'Organizations',
         'choices'  => $this->user->getCurrentMainEvent()->getOrganizations()->toArray(),
         'required' => false,
         'multiple' => true
       ))
       ->add('papers', 'entity', array(
-        'class'    => 'fibeWWWConfBundle:Paper',
+        'class'    => 'fibeCommunityBundle:Paper',
         'label'    => 'Publications',
         'choices'  => $this->user->getCurrentMainEvent()->getPapers()->toArray(),
         'required' => false,
@@ -66,7 +66,7 @@ class PersonType extends AbstractType
   public function setDefaultOptions(OptionsResolverInterface $resolver)
   {
     $resolver->setDefaults(array(
-      'data_class' => 'fibe\Bundle\WWWConfBundle\Entity\Person'
+      'data_class' => 'fibe\CommunityBundle\Entity\Person'
     ));
   }
 
@@ -77,6 +77,6 @@ class PersonType extends AbstractType
    */
   public function getName()
   {
-    return 'fibe_bundle_wwwconfbundle_persontype';
+    return 'fibe_communitybundle_persontype';
   }
 }

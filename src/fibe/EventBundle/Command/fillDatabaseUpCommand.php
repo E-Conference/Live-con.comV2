@@ -20,7 +20,7 @@
    * Initialization command for filling the DataBase
    *
    * Class fillDatabaseUpCommand
-   * @package fibe\Bundle\WWWConfBundle\Command
+   * @package fibe\EventBundle\Command
    */
   class fillDatabaseUpCommand extends ContainerAwareCommand
   {

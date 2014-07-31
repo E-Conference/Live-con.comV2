@@ -7,4 +7,4 @@ sudo php app/console livecon:admin:create admin admin@admin.fr admin
 sudo php app/console fos:user:promote admin ROLE_ADMIN
 sudo php app/console livecon:admin:create admin2 admin2@admin.fr admin2
 sudo php app/console livecon:admin:create admin3 admin3@admin.fr admin3
-
+php app/console cache:clear

@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  *
  * @ORM\Table(name="main_event_settings")
- * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\MainEventSettingsRepository")
+ * @ORM\Entity(repositoryClass="fibe\EventBundle\Repository\MainEventSettingsRepository")
  *
  */
 class MainEventSettings
@@ -73,30 +73,6 @@ class MainEventSettings
   public function getId()
   {
     return $this->id;
-  }
-
-  /**
-   * Set conference
-   *
-   * @param boolean $conference
-   *
-   * @return MainEventSetting
-   */
-  public function setMainEvent($conference)
-  {
-    $this->conference = $conference;
-
-    return $this;
-  }
-
-  /**
-   * Get conference
-   *
-   * @return boolean
-   */
-  public function getMainEvent()
-  {
-    return $this->conference;
   }
 
   /**
@@ -181,5 +157,21 @@ class MainEventSettings
   public function setLabel($label)
   {
     $this->label = $label;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getMainEvent()
+  {
+    return $this->mainEvent;
+  }
+
+  /**
+   * @param mixed $mainEvent
+   */
+  public function setMainEvent($mainEvent)
+  {
+    $this->mainEvent = $mainEvent;
   }
 }

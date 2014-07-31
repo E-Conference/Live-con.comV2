@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * Class MemberType
  *
- * @package fibe\Bundle\WWWConfBundle\Form
+ * @package fibe\CommunityBundle\Form
  */
 class MemberType extends AbstractType
 {
@@ -29,7 +29,7 @@ class MemberType extends AbstractType
   public function setDefaultOptions(OptionsResolverInterface $resolver)
   {
     $resolver->setDefaults(array(
-      'data_class' => 'fibe\Bundle\WWWConfBundle\Entity\Member'
+      'data_class' => 'fibe\CommunityBundle\Entity\Member'
     ));
   }
 
@@ -40,6 +40,6 @@ class MemberType extends AbstractType
    */
   public function getName()
   {
-    return 'fibe_bundle_wwwconfbundle_membertype';
+    return 'fibe_communitybundle_membertype';
   }
 }

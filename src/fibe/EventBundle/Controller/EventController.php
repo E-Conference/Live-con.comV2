@@ -239,7 +239,7 @@ class EventController extends Controller
   /**
    * Edits an existing Event entity.
    * @Route("/{id}/update", name="schedule_event_update")
-   * @Template("fibeWWWConfBundle:Event:edit.html.twig")
+   * @Template("fibeEventBundle:Event:edit.html.twig")
    */
   public function updateAction(Request $request, $id)
   {

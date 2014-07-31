@@ -23,7 +23,7 @@ class Equipment
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  private $id;
 
   /**
    * label
@@ -32,14 +32,14 @@ class Equipment
    *
    * @ORM\Column(type="string", length=255,name="label")
    */
-  protected $label;
+  private $label;
 
   /**
    * @var string $icon
    * @Assert\File( maxSize = "1024k", mimeTypesMessage = "Please upload a valid Image")
    * @ORM\Column(name="icon", type="string", length=255)
    */
-  protected $icon;
+  private $icon;
 
   public function __toString()
   {

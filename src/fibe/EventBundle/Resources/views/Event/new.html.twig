@@ -92,8 +92,8 @@
       $("#role_form").submit(function ()
       {
         //get the url for the form
-        var id_person = $('#fibe_bundle_wwwconfbundle_roletype_person').val();
-        var id_type = $('#fibe_bundle_wwwconfbundle_roletype_type').val();
+        var id_person = $('#fibe_eventbundle_roletype_person').val();
+        var id_type = $('#fibe_eventbundle_roletype_type').val();
         //start send the post request
         $.post("{{path('schedule_event_addPerson')}}",
             {id_person: id_person, id_type: id_type, id_entity: "{{entity.id }}"},
