@@ -15,14 +15,11 @@ class CompanyType extends AbstractType
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
     $builder
-      ->add('name')
-      ->add('page', 'text', array('required' => false, 'label' => 'Homepage'))
-      ->add('country')
+      ->add('label')
       ->add('members', 'entity', array(
-        'class'    => 'fibeWWWConfBundle:Person',
+        'class'    => 'fibeCommunityBundle:Person',
         'label'    => 'Members',
         'multiple' => true,
-        'choices'  => $this->user->getCurrentMainEvent()->getPersons()->toArray(),
         'required' => false
       ));
   }
@@ -33,7 +30,8 @@ class CompanyType extends AbstractType
   public function setDefaultOptions(OptionsResolverInterface $resolver)
   {
     $resolver->setDefaults(array(
-      'data_class' => 'fibe\Bundle\WWWConfBundle\Entity\Company'
+      'data_class' => 'fibe\CommunityBundle\Entity\Company',
+      'csrf_protection' => false
     ));
   }
 
@@ -42,6 +40,6 @@ class CompanyType extends AbstractType
    */
   public function getName()
   {
-    return 'fibe_bundle_wwwconfbundle_company';
+    return 'fibe_bundle_communitybundle_company';
   }
 }

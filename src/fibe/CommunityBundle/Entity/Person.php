@@ -12,6 +12,7 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
+
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -106,7 +107,7 @@ class Person
    * @ORM\JoinTable(name="member",
    *     joinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id", onDelete="Cascade")})
    *     inverseJoinColumns={@ORM\JoinColumn(name="company_id", referencedColumnName="id", onDelete="Cascade")},
-   * @Expose
+   * 
    */
   private $companies;
 
