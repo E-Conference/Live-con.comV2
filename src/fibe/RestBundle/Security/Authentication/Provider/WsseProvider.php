@@ -3,13 +3,12 @@
 namespace fibe\RestBundle\Security\Authentication\Provider;
 
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\NonceExpiredException;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use fibe\RestBundle\Security\Authentication\Token\WsseUserToken;
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class WsseProvider extends ContainerAware implements AuthenticationProviderInterface
 {
