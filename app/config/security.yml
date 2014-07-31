@@ -5,11 +5,13 @@ jms_security_extra:
 security:
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
-        fibe\SecurityBundle\Entity\User: sha512
+        fibe\SecurityBundle\Entity\User:
+          algorithm: sha1
+          encode_as_base64: true
 
     providers:
         main:
-            id: fos_user.user_manager
+            id: fos_user.user_provider.username
 
     acl:
         connection: default
@@ -29,6 +31,17 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        angular:
+            # Cette expression régulière permet de prendre /login (mais pas /login_check !)
+            pattern:   ^/angular
+            anonymous: true # On autorise les anonymes sur ce pare-feu
+
+        wsse_secured:
+            pattern: ^/api/
+            wsse: { lifetime: 30}
+
+
+        #old not rest application
 
         # main_login:
         #     pattern:   ^/login$
@@ -52,9 +65,6 @@ security:
             pattern:   ^/apps/
             anonymous: true # On autorise les anonymes sur ce pare-feu
 
-        api:
-            pattern:   ^/api/
-            anonymous: true 
         data:
             pattern:   ^/data/
             anonymous: true 
@@ -70,7 +80,7 @@ security:
                 path:     /
                 domain:   ~ # Defaults to the current domain from $_SERVER
             pattern:   ^/
-            anonymous: false
+            anonymous: ~
             provider:  main
             form_login:
                 login_path: /login

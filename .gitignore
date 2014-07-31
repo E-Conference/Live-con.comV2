@@ -2,9 +2,10 @@
 *.iml
 .idea
 
-#actually not working
+#composer
 composer.lock
 
+#mobile app
 src/fibe/MobileAppBundle/Resources/public/mobileApp/*
 
 # Symfony directories
@@ -12,6 +13,7 @@ src/fibe/MobileAppBundle/Resources/public/mobileApp/*
 app/cache/*
 */cache/*
 web/uploads/*
+#keep the logo ;)
 !web/uploads/livecon.png
 vendor/*
 web/bundles/*

@@ -4,7 +4,7 @@ parameters:
     database_port:     ~
     database_name:     livecon
     database_user:     root
-    database_password: Uxp88qts
+    database_password: root
 
     mailer_transport:  smtp
     mailer_encryption: ssl

@@ -6,19 +6,36 @@
 
     <parameters>
         <parameter key="serialize_exception_listener.class">fibe\RestBundle\Listener\SerializeExceptionListener</parameter>
-        <parameter key="app.cors_listener.class">fibe\RestBundle\Listener\CorsListener</parameter>
-        <parameter key="session.storage.native_file.class">fibe\RestBundle\Session\Storage</parameter>
+        <!--<parameter key="app.cors_listener.class">fibe\RestBundle\Listener\CorsListener</parameter>-->
+        <!--<parameter key="session.storage.native_file.class">fibe\RestBundle\Session\Storage</parameter>-->
     </parameters>
 
     <services>
         <service id="serialize_exception_listener" class="%serialize_exception_listener.class%">
             <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException"/>
             <argument type="service" id="serializer" />
-        </service> 
+        </service>
+
+        <!-- cors support -->
+
         <!-- <service id="app.cors_listener" class="%app.cors_listener.class%">
             <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse"/>
         </service> -->
-    </services> 
 
-         
+
+        <!-- wsse authentication-->
+
+        <service id="wsse.security.authentication.provider"
+                 class="fibe\RestBundle\Security\Authentication\Provider\WsseProvider" public="false">
+            <argument /> <!-- User Provider -->
+            <argument>%kernel.cache_dir%/security/nonces</argument>
+        </service>
+
+        <service id="wsse.security.authentication.listener"
+                 class="fibe\RestBundle\Security\Firewall\WsseListener" public="false">
+            <argument type="service" id="security.context"/>
+            <argument type="service" id="security.authentication.manager" />
+        </service>
+    </services>
+
 </container>

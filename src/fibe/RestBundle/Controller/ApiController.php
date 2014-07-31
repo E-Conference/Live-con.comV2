@@ -14,6 +14,7 @@ use FOS\UserBundle\Model\UserInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use fibe\SecurityBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AccountStatusException;
 
 class ApiController extends Controller
 {
@@ -24,6 +25,8 @@ class ApiController extends Controller
         $providerKey = $this->container->getParameter('fos_user.firewall_name');
         $roles = $user->getRoles();
         $token = new UsernamePasswordToken($user, null, $providerKey, $roles);
+        $token->setUser($user);
+        $security->
         $security->setToken($token);
     }
 
@@ -72,17 +75,17 @@ class ApiController extends Controller
         }
 
 
-        try {
-            $this->container->get('fos_user.security.login_manager')->loginUser(
-                $this->container->getParameter('fos_user.firewall_name'),
-                $user,
-                new Response());
-        } catch (AccountStatusException $ex) {
-            // We simply do not authenticate users which do not pass the user
-            // checker (not enabled, expired, etc.).
-        }
+//        try {
+//            $this->container->get('fos_user.security.login_manager')->loginUser(
+//                $this->container->getParameter('fos_user.firewall_name'),
+//                $user,
+//                new Response());
+//        } catch (AccountStatusException $ex) {
+//            // We simply do not authenticate users which do not pass the user
+//            // checker (not enabled, expired, etc.).
+//        }
 
-        // $this->loginUser($user);
+         $this->loginUser($user);
         // $user->setSessionId($this->container->get("session")->getId());
         return $user;
     }
