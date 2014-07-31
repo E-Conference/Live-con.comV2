@@ -1,0 +1,9 @@
+organization:
+    type: rest
+    resource: fibe\CommunityBundle\Controller\REST\CompanyRESTController
+    name_prefix: apiREST_
+
+person:
+    type: rest
+    resource: fibe\CommunityBundle\Controller\REST\PersonRESTController
+    name_prefix: apiREST_

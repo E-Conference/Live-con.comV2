@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  *
  * @ORM\Table(name="organization")
- * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\OrganizationRepository")
+ * @ORM\Entity(repositoryClass="fibe\CommunityBundle\Repository\CompanyRepository")
  * @ORM\HasLifecycleCallbacks
  * @ExclusionPolicy("all") 
  *
