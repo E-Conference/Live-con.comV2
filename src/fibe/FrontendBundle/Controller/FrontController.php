@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class FrontController extends Controller
 {
     /**
-     * @Route("/angular")
+     * @Route("/")
      * @Template()
      */
     public function indexAction()

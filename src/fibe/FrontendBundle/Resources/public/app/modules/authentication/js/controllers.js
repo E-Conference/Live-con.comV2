@@ -24,6 +24,9 @@ angular.module('authenticationApp').controller('signupCtrl', ['$scope', '$routeP
 function ($scope, $routeParams, GLOBAL_CONFIG) {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
+    $scope.signupAction = function(){
+
+    }
 }]);
 
 

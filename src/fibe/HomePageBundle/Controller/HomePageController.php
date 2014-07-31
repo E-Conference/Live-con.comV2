@@ -18,7 +18,7 @@ use fibe\HomePageBundle\Form\ContactType;
 class HomePageController extends Controller
 {
   /**
-   * @Route("/", name="homePage_index")
+   * @Route("/homepage", name="homePage_index")
    * @Template()
    */
   public function indexAction(Request $request)

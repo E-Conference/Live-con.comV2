@@ -7,14 +7,13 @@
     <parameters>
         <parameter key="serialize_exception_listener.class">fibe\RestBundle\Listener\SerializeExceptionListener</parameter>
         <parameter key="app.cors_listener.class">fibe\RestBundle\Listener\CorsListener</parameter>
-        <parameter key="session.storage.native_file.class">fibe\RestBundle\Session\Storage</parameter>
     </parameters>
 
     <services>
         <service id="serialize_exception_listener" class="%serialize_exception_listener.class%">
             <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException"/>
             <argument type="service" id="serializer" />
-        </service> 
+        </service>
         <!-- <service id="app.cors_listener" class="%app.cors_listener.class%">
             <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse"/>
         </service> -->

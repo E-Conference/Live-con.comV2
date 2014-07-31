@@ -1,30 +1,21 @@
 
 
-<form id="login-form"  role="form" ng-submit="loginAction(user)" >
+<form name="signinForm" class="form" role="form" ng-submit="loginAction(user)"  novalidate="">
   <div class="form-group">
-    <label for="inputUsername" class="col-sm-2 control-label">Login</label>
-    <div class="col-sm-10">
-      <input type="text" name="_username" class="form-control" id="inputUsername" placeholder="Username" ng-model="user.username"/>
-    </div>
+    <label for="inputUsername">Login</label>
+    <input  required="" type="text" name="_username" class="form-control" id="inputUsername" placeholder="Username" ng-model="user.username"   ng-minlength=3
+            ng-maxlength=20 />
+    <div class="alert alert-danger" role="alert" ng-show="signinForm._username.$error.minlength">Your login is required to be at least 3 characters</div>
+    <div class="alert alert-danger" role="alert" ng-show="signinForm._username.$error.maxlength">Your login cannot be longer than 20 characters</div>
   </div>
   <div class="form-group">
-    <label for="inputPassword" class="col-sm-2 control-label">Password</label>
-    <div class="col-sm-10">
-      <input type="password" name="_password" class="form-control" id="inputPassword" placeholder="Password" ng-model="user.password" />
-    </div>
+    <label for="inputPassword">Password</label>
+    <input required="" type="password" name="_password" class="form-control" id="inputPassword" placeholder="Password" ng-model="user.password"  ng-minlength=3
+           ng-maxlength=20/>
+      <div class="alert alert-danger" role="alert" ng-show="signinForm._password.$error.minlength">Your password is required to be at least 3 characters</div>
+      <div class="alert alert-danger" role="alert" ng-show="signinForm._password.$error.maxlength">Your password cannot be longer than 20 characters</div>
   </div>
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <div class="checkbox">
-        <label>
-          <input name="_remember_me"  type="checkbox" ng-model="user.rememberMe"/>
-        </label>
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Sign in</button>
-    </div>
+      <button ng-disabled="signinForm.$invalid" type="submit" class="btn btn-default">Sign in</button>
   </div>
 </form>

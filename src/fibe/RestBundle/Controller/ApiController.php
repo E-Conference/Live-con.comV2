@@ -13,17 +13,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use fibe\SecurityBundle\Entity\User;
-use Symfony\Component\HttpFoundation\Response;
+
 
 class ApiController extends Controller
 {
 
     protected function loginUser(UserInterface $user)
     {
+
         $security = $this->get('security.context');
         $providerKey = $this->container->getParameter('fos_user.firewall_name');
         $roles = $user->getRoles();
         $token = new UsernamePasswordToken($user, null, $providerKey, $roles);
+
+        $token->setUser($user);
+
         $security->setToken($token);
     }
 
@@ -46,13 +50,13 @@ class ApiController extends Controller
     }
 
     /**
-     * @Route("/api/user/login.{_format}", name="api_user_login")
+     * @Route("/api/user/login", name="api_user_login")
    	 * @Rest\View()
      */
     public function loginAction()
     { 
         $serializer = $this->container->get('jms_serializer');
-        $request = $this->getRequest();
+        $request = $this->container->get('request');
       	$user = $serializer->deserialize( $request->getContent(), ' fibe\SecurityBundle\Entity\User', 'json');
 
         $username = $user->getUserName();
@@ -72,18 +76,19 @@ class ApiController extends Controller
         }
 
 
-        try {
-            $this->container->get('fos_user.security.login_manager')->loginUser(
-                $this->container->getParameter('fos_user.firewall_name'),
-                $user,
-                new Response());
-        } catch (AccountStatusException $ex) {
-            // We simply do not authenticate users which do not pass the user
-            // checker (not enabled, expired, etc.).
-        }
+//        try {
+//            $this->container->get('fos_user.security.login_manager')->loginUser(
+//                $this->container->getParameter('fos_user.firewall_name'),
+//                $user,
+//                new Response());
+//        } catch (AccountStatusException $ex) {
+//
+//            // We simply do not authenticate users which do not pass the user
+//            // checker (not enabled, expired, etc.).
+//        }
 
-        // $this->loginUser($user);
-        // $user->setSessionId($this->container->get("session")->getId());
+         $this->loginUser($user);
+         $user->setSessionId($this->container->get("session")->getId());
         return $user;
     }
 

@@ -9,7 +9,7 @@
     <title>livecon app'</title>
 
     {% stylesheets 'bundles/frontend/app/css/bootstrap-combined.min.css' 
-                   'bundles/frontend/app/css/bootstrap.min.css' 
+                   'bundles/frontend/app/css/bootstrap.min.css'
                    'bundles/frontend/app/css/loading-bar.css' 
                    'bundles/frontend/app/css/app.css' 
                    'bundles/frontend/app/css/animations.css' 
@@ -33,6 +33,8 @@
                'bundles/frontend/vendors/loading-bar.js'
                'bundles/frontend/vendors/angular-cached-resource.min.js'
                'bundles/frontend/vendors/angular-cookies.js'
+               'bundles/frontend/vendors/CryptoJSPlugin.js'
+               'bundles/frontend/vendors/angularjs-crypto.js'
                'bundles/frontend/vendors/loadingBarModule.js'  output='js/compiled/main.js'%}
         <script src="{{ asset_url }}" type="text/javascript"></script>
     {% endjavascripts %}
@@ -64,6 +66,11 @@
     <script src="{{ asset('bundles/frontend/app/modules/authentication/js/controllers.js') }}"></script>
     <script src="{{ asset('bundles/frontend/app/modules/authentication/js/routes.js') }}"></script>
     <script src="{{ asset('bundles/frontend/app/modules/authentication/js/app.js') }}"></script>
+
+
+    <!-- cryptojs aes files -->
+    <script type='text/javascript' src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
+    <script type='text/javascript' src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/mode-ecb.js"></script>
 
     <!-- basic client app context definition -->
     <script>
@@ -114,7 +121,7 @@
     <div id="alertBox" ng-include="GLOBAL_CONFIG.app.urls.partials+'layout/alert-box.html'"
          ng-controller="AlertCtrl"></div>
 
-    <div id="wrapper">
+    <div id="wrapper" class="container">
 
         <div class="navLeft" ng-include="GLOBAL_CONFIG.app.urls.partials+'layout/nav-left.html'"
              ng-controller="navLeftCtrl"></div>
