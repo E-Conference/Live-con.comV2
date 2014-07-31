@@ -73,7 +73,7 @@ angular.module('authenticationApp').factory('tokenHandler', ['$cookieStore', 'Ba
             var created = formatDate(new Date());
 
             // Generating digest from secret, creation and seed
-            var hash = CryptoJS.MD5(nonce+created+secret);
+            var hash = CryptoJS.SHA1(nonce+created+CryptoJS.SHA1(secret));
             var digest = hash.toString(CryptoJS.enc.Base64);
 
             // Base64 Encode digest

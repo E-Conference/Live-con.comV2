@@ -8,7 +8,7 @@ security:
         fibe\SecurityBundle\Entity\User:
           algorithm: sha1
           iterations: 1
-          encode_as_base64: true
+          encode_as_base64: false
 
     providers:
         main:
