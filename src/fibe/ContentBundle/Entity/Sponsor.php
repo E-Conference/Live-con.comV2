@@ -160,38 +160,6 @@ class Sponsor
   }
 
   /**
-   * @return mixed
-   */
-  public function getMainEvent()
-  {
-    return $this->conference;
-  }
-
-  /**
-   * @param mixed $conference
-   */
-  public function setMainEvent($conference)
-  {
-    $this->conference = $conference;
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getDescription()
-  {
-    return $this->description;
-  }
-
-  /**
-   * @param mixed $description
-   */
-  public function setDescription($message)
-  {
-    $this->description = $message;
-  }
-
-  /**
    * @return UploadedFile
    */
   public function getLogo()

@@ -1,6 +1,7 @@
 <?php
 namespace fibe\EventBundle\Controller;
 
+use fibe\EventBundle\Form\ConfEventType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

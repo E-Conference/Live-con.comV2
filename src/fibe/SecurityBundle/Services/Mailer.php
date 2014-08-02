@@ -45,10 +45,14 @@
 
 
     /**
-     * @param string $templateName
-     * @param array  $context
+     * @param        $subject
      * @param string $fromEmail
      * @param string $toEmail
+     * @param        $textBody
+     * @param bool   $htmlBody
+     *
+     * @internal param string $templateName
+     * @internal param array $context
      */
     protected function sendEmailMessage($subject,$fromEmail, $toEmail, $textBody, $htmlBody = false)
     { 

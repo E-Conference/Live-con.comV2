@@ -23,7 +23,7 @@ hr{
 }
 
 ul{
-  padding-left: 0px !important;
+  padding-left: 0 !important;
 }
 
 /*************************** ALERT BOX ***************************/
@@ -131,8 +131,7 @@ ul{
 }
 
 .content-header h1 {
-  margin: 0;
-  margin-left: 20px;
+  margin: 0 0 0 20px;
   line-height: 65px;
   display: inline-block;
 }

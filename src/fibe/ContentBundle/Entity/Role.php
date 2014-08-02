@@ -103,7 +103,9 @@ class Role
   /**
    * Set event
    *
-   * @param VEvent $event
+   * @param \fibe\EventBundle\Entity\VEvent $events
+   *
+   * @internal param \fibe\EventBundle\Entity\VEvent $event
    *
    * @return Role
    */

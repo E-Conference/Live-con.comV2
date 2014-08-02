@@ -2,7 +2,6 @@
 
 namespace fibe\EventBundle\Controller;
 
-use fibe\EventBundle\Entity\MainEventSetting;
 use fibe\EventBundle\Entity\MainEventSettings;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

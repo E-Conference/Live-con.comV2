@@ -2,6 +2,9 @@
 
 namespace fibe\EventBundle\Controller;
 
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Exception\NotValidCurrentPageException;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -9,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use fibe\EventBundle\Entity\Category;
 use fibe\EventBundle\Form\CategoryType;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Category controller.
@@ -28,7 +32,7 @@ class CategoryController extends Controller
     $entities = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('VIEW', 'Category');
 
     $adapter = new ArrayAdapter($entities);
-    $pager = new PagerFanta($adapter);
+    $pager = new Pagerfanta($adapter);
     $pager->setMaxPerPage($this->container->getParameter('max_per_page'));
 
     try

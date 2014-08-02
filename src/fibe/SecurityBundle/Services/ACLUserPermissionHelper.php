@@ -1,7 +1,8 @@
 <?php
   namespace fibe\SecurityBundle\Services;
 
-  use Symfony\Component\Security\Core\SecurityContext; 
+  use Symfony\Component\Security\Acl\Exception\AclNotFoundException;
+  use Symfony\Component\Security\Core\SecurityContext;
   use Symfony\Component\Security\Core\Exception\AccessDeniedException;
   use Doctrine\ORM\EntityManager;
   use Doctrine\ORM\QueryBuilder;
@@ -39,12 +40,15 @@
     // ); 
 
     const NOT_AUTHORYZED_UPDATE_RIGHT_LABEL = 'You need to be MASTER to be able to change other user permission on %s %s ';
-  
+
     /**
      * get or create a UserConfPermission object to show or get a form
-     * @param  [User]  $manager       the manager to get permissions of. if null : current user
-     * @param  boolean $restrict      if none : returns "view" as action  if no manager given to add teamate when the given user doesn't have the owner required permission to update others permission  on the object   
-     * @return [UserConfPermission]   object listing permission for an user used to show or build a form
+     *
+     * @param    [User]  $manager       the manager to get permissions of. if null : current user
+     * @param bool $restrictForm
+     *
+     * @internal param bool $restrict if none : returns "view" as action  if no manager given to add teamate when the given user doesn't have the owner required permission to update others permission  on the object
+     * @return \fibe\SecurityBundle\Entity\UserConfPermission [UserConfPermission]   object listing permission for an user used to show or build a form
      */
     public function getUserConfPermission($manager=null, $restrictForm = true)
     {
@@ -91,12 +95,15 @@
       $userConfPermission->setIsOwner("OWNER" == $this->getACEByEntity($currentMainEvent,$manager));
       
       return $userConfPermission; 
-    } 
- 
+    }
+
     /**
-     * process UserConfPermission to change all given permissions 
+     * process UserConfPermission to change all given permissions
      *    with "checks" on user given in UserConfPermission->getUser()
+     *
      * @param  UserConfPermission $userConfPermission the object with the user & his permission
+     *
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function updateUserConfPermission(UserConfPermission $userConfPermission)
     {
