@@ -18,7 +18,7 @@
   {
 
     /**
-     * @Route("", name="schedule_conference_show")
+     * @Route("", name="event_mainevent_show")
      *
      * @Template()
      */
@@ -67,7 +67,7 @@
 
 
     /**
-     * @Route("/{id}/empty", name="schedule_conference_empty")
+     * @Route("/{id}/empty", name="event_mainevent_empty")
      */
     public function emptyAction(Request $request, $id)
     {
@@ -88,24 +88,24 @@
         'success',
         'conference successfully emptied.'
       );
-      return $this->redirect($this->generateUrl('schedule_conference_show'));
+      return $this->redirect($this->generateUrl('event_mainevent_show'));
     }
 
     /**
      * Creates a new COnference.
-     * @Route("/create", name="schedule_conference_create")
+     * @Route("/create", name="event_mainevent_create")
      */
     public function createAction(Request $request)
     {
       //Create the conference
       $this->get('mainEventService')->create($this->getUser());
 
-      return $this->redirect($this->generateUrl('schedule_conference_show'));
+      return $this->redirect($this->generateUrl('event_mainevent_show'));
     }
 
 
     /**
-     * @Route("/{id}/delete", name="schedule_conference_delete")
+     * @Route("/{id}/delete", name="event_mainevent_delete")
      */
     public function deleteAction(Request $request, $id)
     {
@@ -130,7 +130,7 @@
     /*************************** MODULE *************************/
 
     /**
-     * @Route("/module", name="schedule_conference_module")
+     * @Route("/module", name="event_mainevent_module")
      *
      * @Template()
      */
@@ -138,7 +138,7 @@
     { 
       $module = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT','Module',$this->getUser()->getCurrentMainEvent()->getModule());
 
-      $moduleForm = $this->createForm(new ModuleType(), $module); 
+      $moduleForm = $this->createForm(new ModuleType(), $module);
 
       return array( 
         'module'      => $module,
@@ -150,7 +150,7 @@
 
     /**
      * Edits an existing Module entity.
-     * @Route("/module", name="schedule_module_update")
+     * @Route("/module", name="event_module_update")
      *
      * @param Request $request
      * @internal param $id
@@ -185,7 +185,7 @@
       );
     }
 
-    return $this->redirect($this->generateUrl('schedule_conference_module'));
+    return $this->redirect($this->generateUrl('event_mainevent_module'));
   }
 
 

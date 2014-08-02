@@ -26,7 +26,7 @@ class EventController extends Controller
 {
   /**
    * Lists all Event entities.
-   * @Route("/",name="schedule_event")
+   * @Route("/",name="event_event")
    * @Template()
    */
   public function indexAction(Request $request)
@@ -57,7 +57,7 @@ class EventController extends Controller
 
   /**
    * Filter confevent
-   * @Route("/filter", name="schedule_event_filter")
+   * @Route("/filter", name="event_event_filter")
    */
   public function filterAction(Request $request)
   {
@@ -100,7 +100,7 @@ class EventController extends Controller
 
   /**
    * Creates a new Event entity.
-   * @Route("/create", name="schedule_event_create")
+   * @Route("/create", name="event_event_create")
    */
   public function createAction(Request $request)
   {
@@ -120,7 +120,7 @@ class EventController extends Controller
 
       //$this->get('fibe_security.acl_entity_helper')->createACL($entity,MaskBuilder::MASK_OWNER);
 
-      return $this->redirect($this->generateUrl('schedule_event_show', array('id' => $entity->getId())));
+      return $this->redirect($this->generateUrl('event_event_show', array('id' => $entity->getId())));
     }
 
     return $this->render(
@@ -134,7 +134,7 @@ class EventController extends Controller
 
   /**
    * Displays a form to create a new Event entity.
-   * @Route("/new",name="schedule_event_new")
+   * @Route("/new",name="event_event_new")
    * @Template()
    */
   public function newAction()
@@ -159,7 +159,7 @@ class EventController extends Controller
 
   /**
    * Finds and displays a Event entity.
-   * @Route("/{id}/show", name="schedule_event_show")
+   * @Route("/{id}/show", name="event_event_show")
    * @Template()
    */
 
@@ -181,7 +181,7 @@ class EventController extends Controller
 
   /**
    * Displays a form to edit an existing Event entity.
-   * @Route("/{id}/edit", name="schedule_event_edit")
+   * @Route("/{id}/edit", name="event_event_edit")
    * @Template()
    */
   public function editAction($id)
@@ -240,7 +240,7 @@ class EventController extends Controller
 
   /**
    * Edits an existing Event entity.
-   * @Route("/{id}/update", name="schedule_event_update")
+   * @Route("/{id}/update", name="event_event_update")
    * @Template("fibeEventBundle:Event:edit.html.twig")
    */
   public function updateAction(Request $request, $id)
@@ -266,12 +266,12 @@ class EventController extends Controller
       $em->flush();
     }
 
-    return $this->redirect($this->generateUrl('schedule_event_show', array('id' => $id)));
+    return $this->redirect($this->generateUrl('event_event_show', array('id' => $id)));
   }
 
   /**
    * Deletes a Event entity.
-   * @Route("/{id}/delete", name="schedule_event_delete")
+   * @Route("/{id}/delete", name="event_event_delete")
    * @Method({"DELETE","POST"})
    */
   public function deleteAction(Request $request, $id)
@@ -293,7 +293,7 @@ class EventController extends Controller
           'You cannot delete the Conference Event'
         );
 
-        return $this->redirect($this->generateUrl('schedule_event_edit', array('id' => $entity->getId())));
+        return $this->redirect($this->generateUrl('event_event_edit', array('id' => $entity->getId())));
       }
       // set orphan children as children of main conf event
       $children = $entity->getChildren();
@@ -313,7 +313,7 @@ class EventController extends Controller
       $em->flush();
     }
 
-    return $this->redirect($this->generateUrl('schedule_event'));
+    return $this->redirect($this->generateUrl('event_event'));
   }
 
   /**
@@ -342,7 +342,7 @@ class EventController extends Controller
 
   /**
    * Add topic to a confEvent
-   * @Route("/addTopic", name="schedule_event_addTopic")
+   * @Route("/addTopic", name="event_event_addTopic")
    * @Method("POST")
    *
    */
@@ -372,7 +372,7 @@ class EventController extends Controller
 
   /**
    * Delete topic of a confEvent
-   * @Route("/deleteTopic", name="schedule_event_deleteTopic")
+   * @Route("/deleteTopic", name="event_event_deleteTopic")
    * @Method("POST")
    *
    */
@@ -404,7 +404,7 @@ class EventController extends Controller
 
   /**
    * Add paper to the confEvent
-   * @Route("/addPaper", name="schedule_event_addPaper")
+   * @Route("/addPaper", name="event_event_addPaper")
    * @Method("POST")
    *
    */
@@ -433,7 +433,7 @@ class EventController extends Controller
 
   /**
    * Delete paper to a confEvent
-   * @Route("/deletePaper", name="schedule_event_deletePaper")
+   * @Route("/deletePaper", name="event_event_deletePaper")
    * @Method({"DELETE","POST"})
    *
    */
@@ -465,7 +465,7 @@ class EventController extends Controller
   /**
    * Add person to the confEvent
    *
-   * @Route( "/addPerson",name="schedule_event_addPerson")
+   * @Route( "/addPerson",name="event_event_addPerson")
    * @Method("POST")
    *
    */
@@ -510,7 +510,7 @@ class EventController extends Controller
 
   /**
    * Delete person  to a confEvent
-   * @Route("/deletePerson", name="schedule_event_deletePerson")
+   * @Route("/deletePerson", name="event_event_deletePerson")
    * @Method("POST")
    *
    */

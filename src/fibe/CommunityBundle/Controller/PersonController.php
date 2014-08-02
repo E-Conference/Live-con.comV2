@@ -32,7 +32,7 @@ class PersonController extends Controller
   /**
    * Lists all Person entities.
    *
-   * @Route("/", name="schedule_person_index")
+   * @Route("/", name="community_person_index")
    * @Template()
    */
   public function indexAction(Request $request)
@@ -63,7 +63,7 @@ class PersonController extends Controller
 
   /**
    * Filter person index list
-   * @Route("/filter", name="schedule_person_filter")
+   * @Route("/filter", name="community_person_filter")
    */
   public function filterAction(Request $request)
   {
@@ -107,7 +107,7 @@ class PersonController extends Controller
 
   /**
    * Creates a new Person entity.
-   * @Route("/create", name="schedule_person_create")
+   * @Route("/create", name="community_person_create")
    * @Template()
    */
   public function createAction(Request $request)
@@ -135,7 +135,7 @@ class PersonController extends Controller
 
       //$this->get('fibe_security.acl_entity_helper')->createACL($entity,MaskBuilder::MASK_OWNER);
 
-      return $this->redirect($this->generateUrl('schedule_person_show', array('id' => $entity->getId())));
+      return $this->redirect($this->generateUrl('community_person_show', array('id' => $entity->getId())));
 
     }
 
@@ -150,7 +150,7 @@ class PersonController extends Controller
 
   /**
    * Displays a form to create a new Person entity.
-   * @Route("/new", name="schedule_person_new")
+   * @Route("/new", name="community_person_new")
    * @Template()
    */
   public function newAction()
@@ -169,7 +169,7 @@ class PersonController extends Controller
 
   /**
    * Finds and displays a Person entity.
-   * @Route("/{id}/show", name="schedule_person_show")
+   * @Route("/{id}/show", name="community_person_show")
    * @Template()
    */
   public function showAction($id)
@@ -189,7 +189,7 @@ class PersonController extends Controller
 
   /**
    * Displays a form to edit an existing Person entity.
-   * @Route("/{id}/edit", name="schedule_person_edit")
+   * @Route("/{id}/edit", name="community_person_edit")
    * @Template()
    */
   public function editAction($id)
@@ -211,7 +211,7 @@ class PersonController extends Controller
 
   /**
    * Edits an existing Person entity.
-   * @Route("/{id}/update", name="schedule_person_update")
+   * @Route("/{id}/update", name="community_person_update")
    */
   public function updateAction(Request $request, $id)
   {
@@ -276,12 +276,12 @@ class PersonController extends Controller
       $em->flush();
     }
 
-    return $this->redirect($this->generateUrl('schedule_person_show', array('id' => $id)));
+    return $this->redirect($this->generateUrl('community_person_show', array('id' => $id)));
   }
 
   /**
    * Deletes a Person entity.
-   * @Route("/{id}/delete", name="schedule_person_delete")
+   * @Route("/{id}/delete", name="community_person_delete")
    * @Method({"POST", "DELETE"})
    */
   public function deleteAction(Request $request, $id)
@@ -299,7 +299,7 @@ class PersonController extends Controller
       $em->flush();
     }
 
-    return $this->redirect($this->generateUrl('schedule_person_index'));
+    return $this->redirect($this->generateUrl('community_person_index'));
   }
 
   /**
