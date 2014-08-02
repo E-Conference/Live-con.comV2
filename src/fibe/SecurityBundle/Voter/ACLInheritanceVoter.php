@@ -84,9 +84,6 @@
           $oid = $entity;
       } elseif (null === $oid = $this->objectIdentityRetrievalStrategy->getObjectIdentity($entity)) {  
           return self::ACCESS_GRANTED;
-        throw new InvalidArgumentException(
-          sprintf('[ACLInheritanceVoter] no ACL for object %s',get_class($entity))
-        );  
       }
       try {
         $acl = $this->aclProvider->findAcl($oid, $sids);

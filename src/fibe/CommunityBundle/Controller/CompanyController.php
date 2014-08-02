@@ -2,6 +2,9 @@
 
 namespace fibe\CommunityBundle\Controller;
 
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Exception\NotValidCurrentPageException;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -9,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use fibe\CommunityBundle\Entity\Company;
 use fibe\CommunityBundle\Form\CompanyType;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Company controller.
@@ -30,7 +34,7 @@ class CompanyController extends Controller
     // $entities = $this->getUser()->getCurrentMainEvent()->getOrganizations()->toArray();
 
     $adapter = new ArrayAdapter($entities);
-    $pager = new PagerFanta($adapter);
+    $pager = new Pagerfanta($adapter);
     $pager->setMaxPerPage($this->container->getParameter('max_per_page'));
 
     try
@@ -280,7 +284,7 @@ class CompanyController extends Controller
    *
    * @param mixed $id The entity id
    *
-   * @return Form The form
+   * @return \Symfony\Component\Form\Form
    */
   private function createDeleteForm($id)
   {

@@ -11,6 +11,7 @@ namespace fibe\ContentBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use fibe\ContentBundle\Entity\Equipment;
+use fibe\ContentBundle\Entity\Location;
 
 /**
  * LocationRepository
@@ -37,11 +38,11 @@ class EquipmentRepository extends EntityRepository
   /**
    * Return equipments for the selected location
    *
-   * @param \fibe\ContentBundle\Entity\Location $location
+   * @param Location $location
    *
    * @return mixed
    */
-  public function getEquipmentForLocationSelect(\fibe\ContentBundle\Entity\Location $location = null)
+  public function getEquipmentForLocationSelect(Location $location = null)
   {
     $ids = null;
     if ($location)

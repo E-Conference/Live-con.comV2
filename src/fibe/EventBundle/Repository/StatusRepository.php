@@ -48,7 +48,7 @@ class StatusRepository extends EntityRepository
    *
    * @param $discr string the discriminant
    *
-   * @return DoctrineCollection
+   * @return array
    */
   public function getDiscrStatus($discr)
   {

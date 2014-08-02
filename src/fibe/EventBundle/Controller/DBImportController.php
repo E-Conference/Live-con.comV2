@@ -1,6 +1,7 @@
 <?php
 namespace fibe\EventBundle\Controller;
 
+use fibe\CommunityBundle\Entity\Company;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -136,7 +137,7 @@ class DBImportController extends Controller
           continue; //skip existing organization
         }
 
-        $entity = new Organization();
+        $entity = new Company();
         foreach ($current as $setter => $value)
         {
 

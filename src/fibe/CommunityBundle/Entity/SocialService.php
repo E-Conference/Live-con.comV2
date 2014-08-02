@@ -2,6 +2,7 @@
 
 namespace fibe\CommunityBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use fibe\CommunityBundle\fibeCommunityBundle;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -48,7 +49,7 @@ class SocialService
    */
   public function __construct()
   {
-    $this->accounts = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->accounts = new ArrayCollection();
   }
 
   /**

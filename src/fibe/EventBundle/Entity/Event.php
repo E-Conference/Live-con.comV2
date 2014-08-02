@@ -4,6 +4,7 @@ namespace fibe\EventBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use fibe\ContentBundle\Entity\Paper;
 use fibe\ContentBundle\Util\StringTools;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -194,11 +195,13 @@ class Event extends VEvent
   /**
    * Set conference
    *
-   * @param \fibe\EventBundle\Entity\MainEvent $conference
+   * @param MainEvent $mainEvent
+   *
+   * @internal param \fibe\EventBundle\Entity\MainEvent $conference
    *
    * @return VEvent
    */
-  public function setMainEvent(\fibe\EventBundle\Entity\MainEvent $mainEvent)
+  public function setMainEvent(MainEvent $mainEvent)
   {
     $this->mainEvent = $mainEvent;
 
@@ -208,7 +211,7 @@ class Event extends VEvent
   /**
    * Get conference
    *
-   * @return \fibe\EventBundle\Entity\MainEvent
+   * @return MainEvent
    */
   public function getMainEvent()
   {
@@ -218,11 +221,11 @@ class Event extends VEvent
   /**
    * Add papers
    *
-   * @param \fibe\ContentBundle\Entity\Paper $papers
+   * @param Paper $papers
    *
    * @return VEvent
    */
-  public function addPaper(\fibe\ContentBundle\Entity\Paper $papers)
+  public function addPaper(Paper $papers)
   {
     $this->papers[] = $papers;
 
@@ -232,9 +235,9 @@ class Event extends VEvent
   /**
    * Remove papers
    *
-   * @param \fibe\ContentBundle\Entity\Paper $papers
+   * @param Paper $papers
    */
-  public function removePaper(\fibe\ContentBundle\Entity\Paper $papers)
+  public function removePaper(Paper $papers)
   {
     $this->papers->removeElement($papers);
   }

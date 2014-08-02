@@ -1,10 +1,11 @@
 <?php
   namespace fibe\EventBundle\Command;
 
+  use fibe\CommunityBundle\Entity\Company;
+  use fibe\CommunityBundle\Entity\Person;
   use fibe\MobileAppBundle\Entity\MobileAppConfig;
   use fibe\ContentBundle\Entity\Module;
   use fibe\ContentBundle\Entity\Paper;
-  use fibe\ContentBundle\Entity\Person;
   use fibe\ContentBundle\Entity\Role;
   use fibe\ContentBundle\Entity\RoleLabel;
   use fibe\ContentBundle\Entity\Topic;
@@ -344,7 +345,7 @@
         $person->setPage("mypersonnalpage.com");
 
 
-        $organization = new Organization();
+        $organization = new Company();
         $organization->setMainEvent($conference);
         $organization->setLabel("organization" . $counterEnt);
         $organization->setPage("organization page" . $counterEnt);

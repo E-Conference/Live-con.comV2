@@ -66,7 +66,6 @@ class ACLHelper
     {
       return $this->securityContext->getToken()->getUser();
     }
-    $this->throwNotFoundHttpException($repositoryName, $id);
   }
 
   protected function getCurrentMainEvent()

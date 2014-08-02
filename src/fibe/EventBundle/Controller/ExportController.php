@@ -2,6 +2,7 @@
 
 namespace fibe\EventBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -78,7 +79,7 @@ class ExportController extends Controller
       $format = $export_form["export_format"]->getData();
 
       $conference = $this->getUser()->getCurrentMainEvent();
-      $conferenceArr = new \Doctrine\Common\Collections\ArrayCollection();
+      $conferenceArr = new ArrayCollection();
       $conferenceArr->add($conference);
 
       $exportManager = $this->get('idci_exporter.manager');

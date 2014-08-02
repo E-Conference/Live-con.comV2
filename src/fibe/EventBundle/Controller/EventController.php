@@ -2,6 +2,8 @@
 
 namespace fibe\EventBundle\Controller;
 
+use fibe\ContentBundle\Entity\Role;
+use fibe\ContentBundle\Form\RoleType;
 use fibe\EventBundle\Form\Filters\EventFilterType;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Exception\NotValidCurrentPageException;
@@ -319,7 +321,7 @@ class EventController extends Controller
    *
    * @param mixed $id The entity id
    *
-   * @return Form The form
+   * @return \Symfony\Component\Form\Form
    */
   private function createDeleteForm($id)
   {
