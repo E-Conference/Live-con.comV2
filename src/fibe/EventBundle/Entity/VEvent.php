@@ -292,9 +292,10 @@ abstract class VEvent
    */
   public function __toString()
   {
+    $startAt = $this->getStartAt();
     return sprintf("%d] start at %s : %s",
       $this->getId(),
-      $this->getStartAt()->format('Y-m-d'),
+      isset($startAt) ? $startAt->format('Y-m-d') : null,
       $this->getLabel()
     );
   }
