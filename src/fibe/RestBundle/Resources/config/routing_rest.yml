@@ -1,0 +1,4 @@
+user:
+    type: rest
+    resource: fibe\CommunityBundle\Controller\ApiController
+    name_prefix: apiREST_

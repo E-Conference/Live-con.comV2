@@ -18,7 +18,6 @@ angular.module('authenticationApp').factory('globalHttpInterceptor', ['$q', 'tok
         debugger;
         return {
             'request' : function(config){
-                debugger;
                 config.headers["X-WSSE"] = tokenHandler.getCredentials('admin', 'admin');
                 return config;
             },

@@ -17,7 +17,7 @@
   /**
    * @ORM\Entity(repositoryClass="fibe\SecurityBundle\Repository\UserRepository")
    * @ORM\Table(name="user")
-   * @ExclusionPolicy("all") 
+   * @ExclusionPolicy("all")
    */
   class User extends BaseUser
   {

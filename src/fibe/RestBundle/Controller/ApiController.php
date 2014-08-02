@@ -5,30 +5,30 @@ namespace fibe\RestBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
+
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use fibe\SecurityBundle\Entity\User;
+use FOS\RestBundle\Controller\FOSRestController;
 
 
-class ApiController extends Controller
+class ApiController  extends FOSRestController
 {
 
-    protected function loginUser(UserInterface $user)
-    {
-
-        $security = $this->get('security.context');
-        $providerKey = $this->container->getParameter('fos_user.firewall_name');
-        $roles = $user->getRoles();
-        $token = new UsernamePasswordToken($user, null, $providerKey, $roles);
-        $token->setUser($user);
-        $security->
-        $security->setToken($token);
-    }
+//    protected function loginUser(UserInterface $user)
+//    {
+//
+//        $security = $this->get('security.context');
+//        $providerKey = $this->container->getParameter('fos_user.firewall_name');
+//        $roles = $user->getRoles();
+//        $token = new UsernamePasswordToken($user, null, $providerKey, $roles);
+//        $token->setUser($user);
+//        $security->
+//        $security->setToken($token);
+//    }
 
     protected function logoutUser()
     {
@@ -56,10 +56,10 @@ class ApiController extends Controller
     { 
         $serializer = $this->container->get('jms_serializer');
         $request = $this->container->get('request');
-      	$user = $serializer->deserialize( $request->getContent(), ' fibe\SecurityBundle\Entity\User', 'json');
+      	$user = $serializer->deserialize( $request->getContent(), 'fibe\SecurityBundle\Entity\User', 'json');
 
         $username = $user->getUserName();
-        $password = $user->getPassword(); 
+        $password = $user->getPassword();
 
         $um = $this->get('fos_user.user_manager');
         $user = $um->findUserBy(array("username" => $username));
@@ -85,11 +85,11 @@ class ApiController extends Controller
 //            // checker (not enabled, expired, etc.).
 //        }
 
-         $this->loginUser($user);
+        // $this->loginUser($user);
 
         // $user->setSessionId($this->container->get("session")->getId());
 
-        return $user;
+        return $serializer->serialize($user, 'json');
     }
 
     /**
