@@ -20,7 +20,7 @@
     </div>
     {% if is_granted('CREATE', app.user.getCurrentMainEvent()) %}
       <div class="page-btn-list  col-xs-5  col-sm-4 col-md-3 col-lg-2">
-        <a class="btn btn-info btn-create create" href="{{ path('schedule_event_new') }}" title="Add an event">
+        <a class="btn btn-info btn-create create" href="{{ path('event_event_new') }}" title="Add an event">
           <i class="fa fa-plus"></i> New event
         </a>
       </div>
@@ -49,7 +49,7 @@
       $datas = $("#filter_form").serialize();
 
       //start send the post request
-      $.post("{{path('schedule_event_filter')}}",
+      $.post("{{path('event_event_filter')}}",
           $datas,
           function (response)
           {

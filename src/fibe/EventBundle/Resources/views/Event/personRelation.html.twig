@@ -32,7 +32,7 @@
       var id_role = $(this).attr('id');
       $('#loader_persons').show();
       //start send the post request
-      $.post("{{path('schedule_event_deletePerson')}}",
+      $.post("{{path('event_event_deletePerson')}}",
           {id_role: id_role, id_entity: "{{ entity.id }}"},
           function (response)
           {
