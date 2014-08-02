@@ -216,8 +216,8 @@
   //url
       DATA_FEED_URL = "{{ path('schedule_view_event_get') }}",
       op = {
-        getOrderedUrl: "{{ path('exporter_api', { 'entityReference': 'schedule_event','_format': 'json' }) }}?conference_id={{currentMainEvent.id}}",
-        getDatalessUrl: "{{ path('exporter_api', { 'entityReference': 'schedule_event','_format': 'json' }) }}?only_instant=whatever&conference_id={{currentMainEvent.id}}",
+        getOrderedUrl: "{{ path('exporter_api', { 'entityReference': 'event_event','_format': 'json' }) }}?conference_id={{currentMainEvent.id}}",
+        getDatalessUrl: "{{ path('exporter_api', { 'entityReference': 'event_event','_format': 'json' }) }}?only_instant=whatever&conference_id={{currentMainEvent.id}}",
         updateUrl: "{{ path('schedule_view_event_edit') }}", //event modal form
         quickAddUrl: DATA_FEED_URL + "?method=add",
         quickUpdateUrl: DATA_FEED_URL + "?method=update",
@@ -357,7 +357,7 @@
           }
         }
       }, category: {
-        url: "{{ path('exporter_api', { 'entityReference': 'schedule_category','_format': 'json' }) }}?conference_id={{currentMainEvent.id}}",
+        url: "{{ path('exporter_api', { 'entityReference': 'event_category','_format': 'json' }) }}?conference_id={{currentMainEvent.id}}",
         parse: function (e)
         {
           console.log(e)

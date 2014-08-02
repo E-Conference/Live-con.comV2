@@ -21,20 +21,20 @@
       {% if entity.logoPath is null %}
         <td><em>No logo uploaded</em></td>
       {% else %}
-        <td><a href="{{ path('schedule_sponsor_show', { 'id': entity.id }) }}"><img
+        <td><a href="{{ path('content_sponsor_show', { 'id': entity.id }) }}"><img
                 src="{{ asset('uploads/sponsors/') }}{{ entity.logoPath }}" style="height:100px;width:auto;"/></a>
         </td>
       {% endif %}
-      <td><a href="{{ path('schedule_sponsor_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+      <td><a href="{{ path('content_sponsor_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
       <td><a href="{{ entity.url }}">{{ entity.url }}</a></td>
       <td>
         {% if is_granted('VIEW', entity) %}
-          <a class="btn btn-default" href="{{ path('schedule_sponsor_show', { 'id': entity.id }) }}">
+          <a class="btn btn-default" href="{{ path('content_sponsor_show', { 'id': entity.id }) }}">
             <i class="fa fa-eye"></i>
           </a>
         {% endif %}
         {% if is_granted('EDIT', entity) %}
-          <a class="btn btn-warning edit" href="{{ path('schedule_sponsor_edit', { 'id': entity.id }) }}">
+          <a class="btn btn-warning edit" href="{{ path('content_sponsor_edit', { 'id': entity.id }) }}">
             <i class="fa fa-pencil"></i>
           </a>
         {% endif %}
