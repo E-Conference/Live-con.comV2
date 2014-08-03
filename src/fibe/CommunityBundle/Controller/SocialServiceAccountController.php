@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use fibe\Bundle\WWWConfBundle\Entity\SocialServiceAccount;
-use fibe\Bundle\WWWConfBundle\Form\SocialServiceAccountType;
+use fibe\CommunityBundle\Entity\SocialServiceAccount;
+use fibe\CommunityBundle\Form\SocialServiceAccountType;
 
 /**
  * SocialServiceAccount controller.
@@ -28,7 +28,7 @@ class SocialServiceAccountController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
 
-    $entities = $em->getRepository('fibeWWWConfBundle:SocialServiceAccount')->findAll();
+    $entities = $em->getRepository('fibeCommunityBundle:SocialServiceAccount')->findAll();
 
     return array(
       'entities' => $entities,
@@ -40,7 +40,7 @@ class SocialServiceAccountController extends Controller
    *
    * @Route("/", name="socialserviceaccount_create")
    * @Method("POST")
-   * @Template("fibeWWWConfBundle:SocialServiceAccount:new.html.twig")
+   * @Template("fibeCommunityBundle:SocialServiceAccount:new.html.twig")
    */
   public function createAction(Request $request)
   {
@@ -111,7 +111,7 @@ class SocialServiceAccountController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
 
-    $entity = $em->getRepository('fibeWWWConfBundle:SocialServiceAccount')->find($id);
+    $entity = $em->getRepository('fibeCommunityBundle:SocialServiceAccount')->find($id);
 
     if (!$entity)
     {
@@ -137,7 +137,7 @@ class SocialServiceAccountController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
 
-    $entity = $em->getRepository('fibeWWWConfBundle:SocialServiceAccount')->find($id);
+    $entity = $em->getRepository('fibeCommunityBundle:SocialServiceAccount')->find($id);
 
     if (!$entity)
     {
@@ -178,13 +178,13 @@ class SocialServiceAccountController extends Controller
    *
    * @Route("/{id}", name="socialserviceaccount_update")
    * @Method("PUT")
-   * @Template("fibeWWWConfBundle:SocialServiceAccount:edit.html.twig")
+   * @Template("fibeCommunityBundle:SocialServiceAccount:edit.html.twig")
    */
   public function updateAction(Request $request, $id)
   {
     $em = $this->getDoctrine()->getManager();
 
-    $entity = $em->getRepository('fibeWWWConfBundle:SocialServiceAccount')->find($id);
+    $entity = $em->getRepository('fibeCommunityBundle:SocialServiceAccount')->find($id);
 
     if (!$entity)
     {
@@ -223,7 +223,7 @@ class SocialServiceAccountController extends Controller
     if ($form->isValid())
     {
       $em = $this->getDoctrine()->getManager();
-      $entity = $em->getRepository('fibeWWWConfBundle:SocialServiceAccount')->find($id);
+      $entity = $em->getRepository('fibeCommunityBundle:SocialServiceAccount')->find($id);
 
       if (!$entity)
       {

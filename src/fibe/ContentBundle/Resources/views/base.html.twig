@@ -115,24 +115,24 @@
 
               <li
                   class="schedule_event schedule_event_new schedule_event_edit schedule_event_show schedule_event_show schedule_event schedule_event_new schedule_event_edit col-xs-1 col-sm-1  col-mg-1 col-lg-1">
-                <a href="{{ path('schedule_event') }}" class='ellipsis'> <i class="fa fa-calendar-o fa-1x"></i>
+                <a href="{{ path('event_event') }}" class='ellipsis'> <i class="fa fa-calendar-o fa-1x"></i>
                   <span> Events </span> </a></li>
               <li
                   class="schedule_person_index schedule_person_edit schedule_person_new schedule_person_show  col-xs-1 col-sm-1  col-mg-1 col-lg-1">
-                <a href="{{ path('schedule_person_index') }}" class='ellipsis'> <i class="fa fa-user fa-1x"></i>
+                <a href="{{ path('community_person_index') }}" class='ellipsis'> <i class="fa fa-user fa-1x"></i>
                   <span> Persons </span> </a></li>
 
               {% if app.user.getCurrentMainEvent().getModule().getPaperModule()== true %}
                 <li
                     class="schedule_paper schedule_paper_edit schedule_paper_new schedule_paper_show  col-xs-1 col-sm-1  col-mg-1 col-lg-2">
-                  <a href="{{ path('schedule_paper') }}" class='ellipsis'><i class="fa fa-book fa-1x"></i>
+                  <a href="{{ path('content_paper') }}" class='ellipsis'><i class="fa fa-book fa-1x"></i>
                     <span> Publications  </span></a></li>
               {% endif %}
 
               {% if app.user.getCurrentMainEvent().getModule().getOrganizationModule()== true %}
                 <li
                     class="schedule_company_index  schedule_company_new schedule_company_edit schedule_company_show col-xs-1 col-sm-1  ccol-mg-2 col-lg-2">
-                  <a href="{{ path('schedule_company_index') }}" class='ellipsis'><i class="fa fa-users fa-1x"></i><span> Organizations</span>
+                  <a href="{{ path('community_company_index') }}" class='ellipsis'><i class="fa fa-users fa-1x"></i><span> Organizations</span>
                   </a></li>
               {% endif %}
 
@@ -142,7 +142,7 @@
                       class="fa fa-map-marker fa-1x"></i><span>  Locations</span></a></li>
               <li
                   class="schedule_category schedule_category_new schedule_category_edit schedule_category_show  col-xs-1 col-sm-1  col-mg-1 col-lg-2">
-                <a href="{{ path('schedule_category') }}" class='ellipsis'><i class="fa fa-sort-amount-asc fa-1x"></i>
+                <a href="{{ path('event_category') }}" class='ellipsis'><i class="fa fa-sort-amount-asc fa-1x"></i>
                   <span> Categories</span> </a></li>
               <li
                   class="content_topic content_topic_new  content_topic_edit content_topic_show  col-xs-1 col-sm-1  col-mg-1 col-lg-1">
@@ -150,7 +150,7 @@
                   <span>  Topics</span></a></li>
               {% if app.user.getCurrentMainEvent().getModule().getSponsorModule()== true %}
                 <li class="col-xs-1 col-sm-1  col-mg-1 col-lg-1">
-                  <a href="{{ path('schedule_sponsor') }}" class='ellipsis'> <i class="fa fa-dollar fa-1x"></i>
+                  <a href="{{ path('content_sponsor') }}" class='ellipsis'> <i class="fa fa-dollar fa-1x"></i>
                     <span>  Sponsors</span></a></li>
               {% endif %}
               {% block menu_page %}

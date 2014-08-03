@@ -9,7 +9,7 @@
     <h1>{% trans %}Edit{% endtrans %}</h1>
   </div>
 
-  <form action="{{ path('schedule_status_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+  <form action="{{ path('event_status_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
     <p>
       <button type="btn btn-default" type="submit" class="btn btn-primary">
@@ -17,11 +17,11 @@
       </button>
     </p>
   </form>
-  <a class="btn btn-list btn-warning" href="{{ path('schedule_status') }}">
+  <a class="btn btn-list btn-warning" href="{{ path('event_status') }}">
     <i class="icon-list"></i>
   </a>
 
-  <form action="{{ path('schedule_status_delete', { 'id': entity.id }) }}" method="post">
+  <form action="{{ path('event_status_delete', { 'id': entity.id }) }}" method="post">
     {{ form_widget(delete_form) }}
     <button type="submit" class="btn btn-danger">
       <i class="fa fa-trash-o"></i>

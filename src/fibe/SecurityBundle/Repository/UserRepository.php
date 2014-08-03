@@ -16,9 +16,12 @@ class UserRepository extends EntityRepository
 {
 
   /**
-   * @TODO comment
+   * @TODO     comment
    *
-   * @param $currentMainEvent
+   * @param $team
+   * @param $excludedId
+   *
+   * @internal param $currentMainEvent
    *
    * @return \Doctrine\ORM\QueryBuilder
    */

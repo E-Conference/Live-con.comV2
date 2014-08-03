@@ -14,8 +14,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use fibe\Bundle\WWWConfBundle\Entity\Status;
-use fibe\Bundle\WWWConfBundle\Form\StatusType;
 
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
@@ -33,14 +31,14 @@ class StatusController extends Controller
   /**
    * Lists all Status entities.
    *
-   * @Route("/", name="schedule_status")
+   * @Route("/", name="event_status")
    * @Template()
    */
   public function indexAction(Request $request)
   {
     throw new ServiceUnavailableHttpException('Not available yet.');
     $em = $this->getDoctrine()->getManager();
-    $entities = $em->getRepository('fibeWWWConfBundle:Status')->findAll();
+    $entities = $em->getRepository('fibeEventBundle:Status')->findAll();
 
     $adapter = new ArrayAdapter($entities);
     $pager = new PagerFanta($adapter);
@@ -62,14 +60,14 @@ class StatusController extends Controller
   /**
    * Finds and displays a Status entity.
    *
-   * @Route("/{id}/show", name="schedule_status_show")
+   * @Route("/{id}/show", name="event_status_show")
    * @Template()
    */
   public function showAction($id)
   {
     throw new ServiceUnavailableHttpException('Not available yet.');
     $em = $this->getDoctrine()->getManager();
-    $entity = $em->getRepository('fibeWWWConfBundle:Status')->find($id);
+    $entity = $em->getRepository('fibeEventBundle:Status')->find($id);
 
     if (!$entity)
     {
@@ -85,7 +83,7 @@ class StatusController extends Controller
   /**
    * Displays a form to create a new Status entity.
    *
-   * @Route("/new", name="schedule_status_new")
+   * @Route("/new", name="event_status_new")
    * @Template()
    */
   public function newAction()
@@ -103,9 +101,9 @@ class StatusController extends Controller
   /**
    * Creates a new Status entity.
    *
-   * @Route("/create", name="schedule_status_create")
+   * @Route("/create", name="event_status_create")
    * @Method("POST")
-   * @Template("fibeWWWConfBundle:Status:new.html.twig")
+   * @Template("fibeEventBundle:Status:new.html.twig")
    */
   public function createAction(Request $request)
   {
@@ -131,7 +129,7 @@ class StatusController extends Controller
         )
       );
 
-      return $this->redirect($this->generateUrl('schedule_status_show', array('id' => $entity->getId())));
+      return $this->redirect($this->generateUrl('event_status_show', array('id' => $entity->getId())));
     }
 
     return array(
@@ -143,14 +141,14 @@ class StatusController extends Controller
   /**
    * Displays a form to edit an existing Status entity.
    *
-   * @Route("/{id}/edit", name="schedule_status_edit")
+   * @Route("/{id}/edit", name="event_status_edit")
    * @Template()
    */
   public function editAction($id)
   {
     throw new ServiceUnavailableHttpException('Not available yet.');
     $em = $this->getDoctrine()->getManager();
-    $entity = $em->getRepository('fibeWWWConfBundle:Status')->find($id);
+    $entity = $em->getRepository('fibeEventBundle:Status')->find($id);
 
     if (!$entity)
     {
@@ -170,15 +168,15 @@ class StatusController extends Controller
   /**
    * Edits an existing Status entity.
    *
-   * @Route("/{id}/update", name="schedule_status_update")
+   * @Route("/{id}/update", name="event_status_update")
    * @Method("POST")
-   * @Template("fibeWWWConfBundle:Status:edit.html.twig")
+   * @Template("fibeEventBundle:Status:edit.html.twig")
    */
   public function updateAction(Request $request, $id)
   {
     throw new ServiceUnavailableHttpException('Not available yet.');
     $em = $this->getDoctrine()->getManager();
-    $entity = $em->getRepository('fibeWWWConfBundle:Status')->find($id);
+    $entity = $em->getRepository('fibeEventBundle:Status')->find($id);
 
     if (!$entity)
     {
@@ -204,7 +202,7 @@ class StatusController extends Controller
         )
       );
 
-      return $this->redirect($this->generateUrl('schedule_status_edit', array('id' => $id)));
+      return $this->redirect($this->generateUrl('event_status_edit', array('id' => $id)));
 
     }
 
@@ -217,7 +215,7 @@ class StatusController extends Controller
   /**
    * Deletes a Status entity.
    *
-   * @Route("/{id}/delete", name="schedule_status_delete")
+   * @Route("/{id}/delete", name="event_status_delete")
    * @Method("POST")
    */
   public function deleteAction(Request $request, $id)
@@ -229,7 +227,7 @@ class StatusController extends Controller
     if ($form->isValid())
     {
       $em = $this->getDoctrine()->getManager();
-      $entity = $em->getRepository('fibeWWWConfBundle:Status')->find($id);
+      $entity = $em->getRepository('fibeEventBundle:Status')->find($id);
 
       if (!$entity)
       {
@@ -251,7 +249,7 @@ class StatusController extends Controller
       );
     }
 
-    return $this->redirect($this->generateUrl('schedule_status'));
+    return $this->redirect($this->generateUrl('event_status'));
   }
 
   /**
@@ -263,7 +261,7 @@ class StatusController extends Controller
   {
     throw new ServiceUnavailableHttpException('Not available yet.');
     $em = $this->getDoctrine()->getManager();
-    $entity = $em->getRepository('fibeWWWConfBundle:Status')->find($id);
+    $entity = $em->getRepository('fibeEventBundle:Status')->find($id);
 
     if (!$entity)
     {

@@ -11,10 +11,10 @@ namespace fibe\EventBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use fibe\Bundle\WWWConfBundle\Entity\LocationAwareCalendarEntity;
 
 class DurationToStringTransformer implements DataTransformerInterface
 {
+  //@TODO ORM V2 ::
     /**
      * Transforms a string (duration) to an array.
      *
@@ -23,16 +23,16 @@ class DurationToStringTransformer implements DataTransformerInterface
      */
     public function transform($duration)
     {
-        if (null === $duration) {
-            return array(
-                'week'   => 0,
-                'day'    => 0,
-                'hour'   => 0,
-                'minute' => 0,
-                'second' => 0,
-            );
-        }
-
+//        if (null === $duration) {
+//            return array(
+//                'week'   => 0,
+//                'day'    => 0,
+//                'hour'   => 0,
+//                'minute' => 0,
+//                'second' => 0,
+//            );
+//        }
+//
         return LocationAwareCalendarEntity::durationToArray($duration);
     }
 
@@ -44,6 +44,6 @@ class DurationToStringTransformer implements DataTransformerInterface
      */
     public function reverseTransform($duration)
     {
-        return LocationAwareCalendarEntity::arrayToDuration($duration);
+//        return LocationAwareCalendarEntity::arrayToDuration($duration);
     }
 }

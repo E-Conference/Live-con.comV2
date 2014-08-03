@@ -20,32 +20,32 @@ class Category
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  private $id;
 
   /**
    * @ORM\Column(type="string", length=128)
    */
-  protected $label;
+  private $label;
 
   /**
    * @ORM\Column(type="integer", options={"default" = 3})
    */
-  protected $level;
+  private $level;
 
   /**
    * @ORM\Column(type="string", length=128)
    */
-  protected $slug;
+  private $slug;
 
   /**
    * @ORM\Column(type="text", nullable=true)
    */
-  protected $description;
+  private $description;
 
   /**
    * @ORM\Column(type="string", nullable=true)
    */
-  protected $color;
+  private $color;
 
   /**
    * VEvents related to an category
@@ -54,7 +54,7 @@ class Category
    * @ORM\JoinColumn( onDelete="CASCADE")
    * @Expose
    */
-  private $VEvents;
+  private $vEvents;
 
 
   /**
@@ -257,9 +257,16 @@ class Category
    */
   public function getVEvents()
   {
-    return $this->VEvent;
+    return $this->vEvents;
   }
 
-  
+  /**
+   * @param mixed $vEvents
+   */
+  public function setVEvents($vEvents)
+  {
+    $this->vEvents = $vEvents;
+  }
+
 
 }

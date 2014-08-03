@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  *
  * @ORM\Table(name="role_type")
- * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\RoleTypeRepository")
+ * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\RoleLabelRepository")
  *
  */
 class RoleLabel
@@ -29,6 +29,11 @@ class RoleLabel
    * @ORM\Column(type="string", name="label", nullable=false)
    */
   protected $label;
+
+  /**
+   * @ORM\Column(type="string", name="context", nullable=false)
+   */
+  protected $context = 'CONFERENCE';
 
   /**
    * role
@@ -122,5 +127,21 @@ class RoleLabel
   public function getLabel()
   {
     return $this->label;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getContext()
+  {
+    return $this->context;
+  }
+
+  /**
+   * @param mixed $context
+   */
+  public function setContext($context)
+  {
+    $this->context = $context;
   }
 }

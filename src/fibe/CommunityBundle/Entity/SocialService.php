@@ -1,19 +1,18 @@
 <?php
 
-namespace fibe\Bundle\WWWConfBundle\Entity_oldv1;
+namespace fibe\CommunityBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use fibe\CommunityBundle\fibeCommunityBundle;
 use Symfony\Component\Validator\Constraints as Assert;
-
-
-use fibe\Bundle\WWWConfBundle\Entity_oldv1\SocialServiceAccount;
 
 /**
  * Social Services available
  *
  *
  * @ORM\Table(name="socialService")
- * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\SocialServiceRepository")
+ * @ORM\Entity(repositoryClass="fibe\CommunityBundle\Repository\SocialServiceRepository")
  *
  */
 class SocialService
@@ -50,7 +49,7 @@ class SocialService
    */
   public function __construct()
   {
-    $this->accounts = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->accounts = new ArrayCollection();
   }
 
   /**
@@ -114,11 +113,11 @@ class SocialService
   /**
    * Add accounts
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\SocialServiceAccount $accounts
+   * @param SocialServiceAccount $accounts
    *
    * @return SocialService
    */
-  public function addAccount(\fibe\Bundle\WWWConfBundle\Entity\SocialServiceAccount $accounts)
+  public function addAccount(SocialServiceAccount $accounts)
   {
     $this->accounts[] = $accounts;
 
@@ -128,9 +127,9 @@ class SocialService
   /**
    * Remove accounts
    *
-   * @param \fibe\Bundle\WWWConfBundle\Entity\SocialServiceAccount $accounts
+   * @param SocialServiceAccount $accounts
    */
-  public function removeAccount(\fibe\Bundle\WWWConfBundle\Entity\SocialServiceAccount $accounts)
+  public function removeAccount(SocialServiceAccount $accounts)
   {
     $this->accounts->removeElement($accounts);
   }

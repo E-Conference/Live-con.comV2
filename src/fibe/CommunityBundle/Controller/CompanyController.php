@@ -2,6 +2,9 @@
 
 namespace fibe\CommunityBundle\Controller;
 
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Exception\NotValidCurrentPageException;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -9,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use fibe\CommunityBundle\Entity\Company;
 use fibe\CommunityBundle\Form\CompanyType;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Company controller.
@@ -20,7 +24,7 @@ class CompanyController extends Controller
   /**
    * Lists all Organization entities.
    *
-   * @Route("/", name="schedule_company_index")
+   * @Route("/", name="community_company_index")
    * @Method("GET")
    * @Template()
    */
@@ -30,7 +34,7 @@ class CompanyController extends Controller
     // $entities = $this->getUser()->getCurrentMainEvent()->getOrganizations()->toArray();
 
     $adapter = new ArrayAdapter($entities);
-    $pager = new PagerFanta($adapter);
+    $pager = new Pagerfanta($adapter);
     $pager->setMaxPerPage($this->container->getParameter('max_per_page'));
 
     try
@@ -52,7 +56,7 @@ class CompanyController extends Controller
 
   /**
    * Filter organization index list
-   * @Route("/filter", name="schedule_company_filter")
+   * @Route("/filter", name="community_company_filter")
    */
   public function filterAction(Request $request)
   {
@@ -97,7 +101,7 @@ class CompanyController extends Controller
   /**
    * Creates a new Company entity.
    *
-   * @Route("/create", name="schedule_company_create")
+   * @Route("/create", name="community_company_create")
    * @Method("POST")
    * @Template("fibeCommunityBundle:Company:new.html.twig")
    */
@@ -126,7 +130,7 @@ class CompanyController extends Controller
 
       //$this->get('fibe_security.acl_entity_helper')->createACL($entity,MaskBuilder::MASK_OWNER);
 
-      return $this->redirect($this->generateUrl('schedule_company_index'));
+      return $this->redirect($this->generateUrl('community_company_index'));
     }
 
     return array(
@@ -138,7 +142,7 @@ class CompanyController extends Controller
   /**
    * Displays a form to create a new Organization entity.
    *
-   * @Route("/new", name="schedule_company_new")
+   * @Route("/new", name="community_company_new")
    * @Method("GET")
    * @Template()
    */
@@ -156,7 +160,7 @@ class CompanyController extends Controller
   /**
    * Finds and displays a Organization entity.
    *
-   * @Route("/{id}/show", name="schedule_company_show")
+   * @Route("/{id}/show", name="community_company_show")
    * @Method("GET")
    * @Template()
    */
@@ -175,7 +179,7 @@ class CompanyController extends Controller
   /**
    * Displays a form to edit an existing Organization entity.
    *
-   * @Route("/{id}/edit", name="schedule_company_edit")
+   * @Route("/{id}/edit", name="community_company_edit")
    * @Method("GET")
    * @Template()
    */
@@ -196,9 +200,9 @@ class CompanyController extends Controller
   /**
    * Edits an existing Organization entity.
    *
-   * @Route("/{id}/update", name="schedule_company_update")
+   * @Route("/{id}/update", name="community_company_update")
    * @Method("PUT")
-   * @Template("fibeWWWConfBundle:Organization:edit.html.twig")
+   * @Template("fibeCommunityBundle:Organization:edit.html.twig")
    */
   public function updateAction(Request $request, $id)
   {
@@ -237,7 +241,7 @@ class CompanyController extends Controller
       $em->persist($entity);
       $em->flush();
 
-      return $this->redirect($this->generateUrl('schedule_company_index'));
+      return $this->redirect($this->generateUrl('community_company_index'));
     }
 
     return array(
@@ -250,7 +254,7 @@ class CompanyController extends Controller
   /**
    * Deletes a Organization entity.
    *
-   * @Route("/{id}/delete", name="schedule_company_delete")
+   * @Route("/{id}/delete", name="community_company_delete")
    * @Method({"POST", "DELETE"})
    */
   public function deleteAction(Request $request, $id)
@@ -272,7 +276,7 @@ class CompanyController extends Controller
       );
     }
 
-    return $this->redirect($this->generateUrl('schedule_company_index'));
+    return $this->redirect($this->generateUrl('community_company_index'));
   }
 
   /**
@@ -280,7 +284,7 @@ class CompanyController extends Controller
    *
    * @param mixed $id The entity id
    *
-   * @return Form The form
+   * @return \Symfony\Component\Form\Form
    */
   private function createDeleteForm($id)
   {

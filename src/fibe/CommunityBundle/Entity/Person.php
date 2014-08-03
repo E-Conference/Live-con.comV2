@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * This class define a Person.
  * @ORM\Table(name="person")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\PersonRepository")
+ * @ORM\Entity(repositoryClass="fibe\CommunityBundle\Repository\PersonRepository")
  * @ExclusionPolicy("all") 
  *
  */
@@ -33,7 +33,7 @@ class Person
    * @ORM\GeneratedValue(strategy="AUTO")
    * @Expose
    */
-  protected $id;
+  private $id;
 
   /**
    * Additional Infomations of the company
@@ -42,7 +42,7 @@ class Person
    * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id", onDelete="CASCADE")
    *
    */
-  protected $additionalInformation;
+  private $additionalInformation;
 
   /**
    * technical user
@@ -51,7 +51,7 @@ class Person
    * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
    *
    */
-  protected $user;
+  private $user;
 
   /**
    * label
@@ -60,21 +60,21 @@ class Person
    * @ORM\Column(type="string")
    * @Expose
    */
-  protected $label;
+  private $label;
 
   /**
    * familyName
    * @Assert\NotBlank(message ="Please give a family name")
    * @ORM\Column(type="string", nullable=true,  name="familyName")
    */
-  protected $familyName;
+  private $familyName;
 
   /**
    * firstName
    * @Assert\NotBlank(message ="Please give a first name")
    * @ORM\Column(type="string", nullable=true,  name="firstName")
    */
-  protected $firstName;
+  private $firstName;
 
   /**
    * description
@@ -82,7 +82,7 @@ class Person
    * @ORM\Column(type="string", length=1024, nullable=true, name="description")
    * @Expose
    */
-  protected $description;
+  private $description;
 
   /**
    * age
@@ -90,7 +90,7 @@ class Person
    * @ORM\Column(type="integer", nullable=true,  name="age")
    * @Expose
    */
-  protected $age;
+  private $age;
 
   /**
    * Paper
@@ -117,7 +117,7 @@ class Person
    *
    * @ORM\Column(type="string", nullable=true,  name="openId")
    */
-  protected $openId;
+  private $openId;
 
   /**
    *
@@ -136,19 +136,19 @@ class Person
    *     inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")})
    * @Expose
    */
-  protected $mainEvents;
+  private $mainEvents;
 
   /**
    *
    * @ORM\OneToMany(targetEntity="SocialServiceAccount",  mappedBy="owner", cascade={"persist", "remove"})
    *
    */
-  protected $accounts;
+  private $accounts;
 
   /**
    * @ORM\Column(type="string", length=256, nullable=true)
    */
-  protected $slug;
+  private $slug;
 
   /**
    * Constructor
@@ -159,7 +159,7 @@ class Person
     $this->companies = new ArrayCollection();
     $this->roles = new ArrayCollection();
     $this->accounts = new ArrayCollection();
-    $this->$mainEvents = new ArrayCollection();
+    $this->mainEvents = new ArrayCollection();
   }
 
   /**

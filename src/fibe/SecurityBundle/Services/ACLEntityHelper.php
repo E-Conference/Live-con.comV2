@@ -19,7 +19,7 @@ use Symfony\Component\Security\Acl\Exception\NoAceFoundException;
 class ACLEntityHelper extends ACLHelper
 {
   const LINK_WITH = 'MainEvent';
-  const DEFAULT_REPOSITORY_BUNDLE = 'fibeWWWConfBundle';
+  const DEFAULT_REPOSITORY_BUNDLE = 'ERREUR_DE_DEFINITION_ACL';
 
   /** @const */
   public static $ACLEntityNameArray = array(
@@ -64,6 +64,7 @@ class ACLEntityHelper extends ACLHelper
     'Topic'                => array(
       'parent'    => 'getMainEvent',
       'classpath' => 'fibe\\ContentBundle\\Entity',
+      'repositoryBundle' => 'fibeContentBundle'
     ),
     'Sponsor'              => array(
       'parent'    => 'getMainEvent',
@@ -137,7 +138,6 @@ class ACLEntityHelper extends ACLHelper
    */
   public function getEntitiesACL($action, $repositoryName)
   {
-    // $ids = $this->aclProvider->getAllowedEntitiesIds($this->getClassNameByRepositoryName($repositoryName), $action);
     $repositoryFullName = (
       isset(self::$ACLEntityNameArray[$repositoryName]["repositoryBundle"])
         ? self::$ACLEntityNameArray[$repositoryName]["repositoryBundle"]

@@ -4,6 +4,7 @@ namespace fibe\EventBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use fibe\ContentBundle\Entity\Paper;
 use fibe\ContentBundle\Util\StringTools;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -26,14 +27,6 @@ use JMS\Serializer\Annotation\VirtualProperty;
  */
 class Event extends VEvent
 {
-
-  /**
-   * @ORM\Id
-   * @ORM\Column(type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
-   */
-  protected $id;
-
   /**
    * The parent of the event
    *
@@ -41,7 +34,7 @@ class Event extends VEvent
    * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
    * @Expose
    */
-  protected $parent;
+  private $parent;
 
   /**
    * The events who are children
@@ -49,7 +42,7 @@ class Event extends VEvent
    * @ORM\OneToMany(targetEntity="fibe\EventBundle\Entity\Event", mappedBy="parent", cascade={"persist"})
    * @Expose
    */
-  protected $children;
+  private $children;
 
   /**
    * Main Event
@@ -63,7 +56,7 @@ class Event extends VEvent
   /**
    * @ORM\Column(type="string", length=128, nullable=true)
    */
-  protected $slug;
+  private $slug;
 
   /**
    * Papers presented at an event
@@ -75,6 +68,28 @@ class Event extends VEvent
    * @Expose
    */
   private $papers;
+
+  /**
+   * Lovcations for the event
+   *
+   * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Location", inversedBy="events", cascade={"persist"})
+   * @ORM\JoinTable(name="event_location",
+   *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
+   *     inverseJoinColumns={@ORM\JoinColumn(name="location_id", referencedColumnName="id")})
+   * @Expose
+   */
+  private $locations;
+
+  /**
+   * Roles for the event
+   *
+   * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Role", inversedBy="events", cascade={"persist"})
+   * @ORM\JoinTable(name="event_role",
+   *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
+   *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")})
+   * @Expose
+   */
+  private $roles;
 
   /**
    * Constructor
@@ -109,9 +124,9 @@ class Event extends VEvent
     $this->setIsInstant($this->getEndAt()->format('U') == $this->getStartAt()->format('U'));
 
     //events that aren't leaf in the hierarchy can't have a location
-    if ($this->hasChildren() && $this->getLocation() != null)
+    if ($this->hasChildren() && $this->getLocations() != null)
     {
-      $this->setLocation(null);
+      $this->setLocations(null);
     }
 
     //ensure main conf has correct properties
@@ -180,11 +195,13 @@ class Event extends VEvent
   /**
    * Set conference
    *
-   * @param \fibe\EventBundle\Entity\MainEvent $conference
+   * @param MainEvent $mainEvent
+   *
+   * @internal param \fibe\EventBundle\Entity\MainEvent $conference
    *
    * @return VEvent
    */
-  public function setMainEvent(\fibe\EventBundle\Entity\MainEvent $mainEvent)
+  public function setMainEvent(MainEvent $mainEvent)
   {
     $this->mainEvent = $mainEvent;
 
@@ -194,7 +211,7 @@ class Event extends VEvent
   /**
    * Get conference
    *
-   * @return \fibe\EventBundle\Entity\MainEvent
+   * @return MainEvent
    */
   public function getMainEvent()
   {
@@ -204,11 +221,11 @@ class Event extends VEvent
   /**
    * Add papers
    *
-   * @param \fibe\ContentBundle\Entity\Paper $papers
+   * @param Paper $papers
    *
    * @return VEvent
    */
-  public function addPaper(\fibe\ContentBundle\Entity\Paper $papers)
+  public function addPaper(Paper $papers)
   {
     $this->papers[] = $papers;
 
@@ -218,9 +235,9 @@ class Event extends VEvent
   /**
    * Remove papers
    *
-   * @param \fibe\ContentBundle\Entity\Paper $papers
+   * @param Paper $papers
    */
-  public function removePaper(\fibe\ContentBundle\Entity\Paper $papers)
+  public function removePaper(Paper $papers)
   {
     $this->papers->removeElement($papers);
   }
@@ -301,5 +318,37 @@ class Event extends VEvent
   public function hasChildren()
   {
     return count($this->children) != 0;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getLocations()
+  {
+    return $this->locations;
+  }
+
+  /**
+   * @param mixed $locations
+   */
+  public function setLocations($locations)
+  {
+    $this->locations = $locations;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getRoles()
+  {
+    return $this->roles;
+  }
+
+  /**
+   * @param mixed $roles
+   */
+  public function setRoles($roles)
+  {
+    $this->roles = $roles;
   }
 }

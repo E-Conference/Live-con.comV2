@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * Class AuthorType
  *
- * @package fibe\Bundle\WWWConfBundle\Form
+ * @package fibe\CommunityBundle\Form
  */
 class AuthorType extends AbstractType
 {
@@ -29,7 +29,7 @@ class AuthorType extends AbstractType
   public function setDefaultOptions(OptionsResolverInterface $resolver)
   {
     $resolver->setDefaults(array(
-      'data_class' => 'fibe\Bundle\WWWConfBundle\Entity\Author'
+      'data_class' => 'fibe\CommunityBundle\Entity\Author'
     ));
   }
 
@@ -40,6 +40,6 @@ class AuthorType extends AbstractType
    */
   public function getName()
   {
-    return 'fibe_bundle_wwwconfbundle_authortype';
+    return 'fibe_communitybundle_authortype';
   }
 }

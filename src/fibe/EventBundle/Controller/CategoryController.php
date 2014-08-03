@@ -2,6 +2,9 @@
 
 namespace fibe\EventBundle\Controller;
 
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Exception\NotValidCurrentPageException;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -9,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use fibe\EventBundle\Entity\Category;
 use fibe\EventBundle\Form\CategoryType;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Category controller.
@@ -20,7 +24,7 @@ class CategoryController extends Controller
   /**
    * Lists all Category entities.
    *
-   * @Route("/", name="schedule_category")
+   * @Route("/", name="event_category")
    * @Template()
    */
   public function indexAction(Request $request)
@@ -28,7 +32,7 @@ class CategoryController extends Controller
     $entities = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('VIEW', 'Category');
 
     $adapter = new ArrayAdapter($entities);
-    $pager = new PagerFanta($adapter);
+    $pager = new Pagerfanta($adapter);
     $pager->setMaxPerPage($this->container->getParameter('max_per_page'));
 
     try
@@ -47,7 +51,7 @@ class CategoryController extends Controller
   /**
    * Finds and displays a Category entity.
    *
-   * @Route("/{id}/show", name="schedule_category_show")
+   * @Route("/{id}/show", name="event_category_show")
    * @Template()
    */
   public function showAction($id)
@@ -70,7 +74,7 @@ class CategoryController extends Controller
   /**
    * Displays a form to create a new Category entity.
    *
-   * @Route("/new", name="schedule_category_new")
+   * @Route("/new", name="event_category_new")
    * @Template()
    */
   public function newAction()
@@ -88,7 +92,7 @@ class CategoryController extends Controller
   /**
    * Creates a new Category entity.
    *
-   * @Route("/create", name="schedule_category_create")
+   * @Route("/create", name="event_category_create")
    */
   public function createAction(Request $request)
   {
@@ -114,15 +118,15 @@ class CategoryController extends Controller
         )
       );
 
-      return $this->redirect($this->generateUrl('schedule_category_show', array('id' => $entity->getId())));
+      return $this->redirect($this->generateUrl('event_category_show', array('id' => $entity->getId())));
     }
-    return $this->redirect($this->generateUrl('schedule_category_new'));
+    return $this->redirect($this->generateUrl('event_category_new'));
   }
 
   /**
    * Displays a form to edit an existing Category entity.
    *
-   * @Route("/{id}/edit", name="schedule_category_edit")
+   * @Route("/{id}/edit", name="event_category_edit")
    * @Template()
    */
   public function editAction($id)
@@ -147,7 +151,7 @@ class CategoryController extends Controller
   /**
    * Edits an existing Category entity.
    *
-   * @Route("/{id}/update", name="schedule_category_update")
+   * @Route("/{id}/update", name="event_category_update")
    * @Method("POST")
    * @Template("fibeEventBundle:Category:edit.html.twig")
    */
@@ -181,7 +185,7 @@ class CategoryController extends Controller
         )
       );
 
-      return $this->redirect($this->generateUrl('schedule_category_show', array('id' => $id)));
+      return $this->redirect($this->generateUrl('event_category_show', array('id' => $id)));
     }
 
     return array(
@@ -194,7 +198,7 @@ class CategoryController extends Controller
   /**
    * Deletes a Category entity.
    *
-   * @Route("/{id}/delete", name="schedule_category_delete")
+   * @Route("/{id}/delete", name="event_category_delete")
    * @Method({"POST", "DELETE"})
    */
   public function deleteAction(Request $request, $id)
@@ -227,7 +231,7 @@ class CategoryController extends Controller
       );
     }
 
-    return $this->redirect($this->generateUrl('schedule_category'));
+    return $this->redirect($this->generateUrl('event_category'));
   }
 
   /**
@@ -238,7 +242,7 @@ class CategoryController extends Controller
   // public function deleteFormAction($id)
   // {
   //   $em = $this->getDoctrine()->getManager();
-  //   $entity = $em->getRepository('fibeWWWConfBundle:Category')->find($id);
+  //   $entity = $em->getRepository('fibeEventBundle:Category')->find($id);
 
   //   if (!$entity)
   //   {

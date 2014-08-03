@@ -23,12 +23,12 @@
                 </div>
             </td>
             <td>
-                <a class="btn btn-default" href="{{ path('schedule_category_show', { 'id': entity.id }) }}">
+                <a class="btn btn-default" href="{{ path('event_category_show', { 'id': entity.id }) }}">
                     <i class="fa fa-eye"></i>
                 </a>
                
                 {% if is_granted('EDIT', entity) %} 
-                    <a class="btn btn-warning edit" href="{{ path('schedule_category_edit', { 'id': entity.id }) }}">
+                    <a class="btn btn-warning edit" href="{{ path('event_category_edit', { 'id': entity.id }) }}">
                          <i class="fa fa-pencil"></i>
                     </a>
                 {% endif %}

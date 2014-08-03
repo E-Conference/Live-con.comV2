@@ -14,11 +14,12 @@ class AclProvider extends MutableAclProvider
   /**
    * Get the entities Ids for the className that match the given role & mask
    *
-   * @param string  $className
-   * @param string  $roles
-   * @param integer $mask
-   * @param bool    $asString - Return a comma-delimited string with the ids instead of an array
+   * @param string       $className
+   * @param integer      $mask
+   * @param array|string $roles
+   * @param bool         $asString - Return a comma-delimited string with the ids instead of an array
    *
+   * @throws \RuntimeException
    * @return bool|array|string - True if its allowed to all entities, false if its not
    *          allowed, array or string depending on $asString parameter.
    */

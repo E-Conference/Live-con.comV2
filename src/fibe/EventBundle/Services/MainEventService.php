@@ -12,7 +12,7 @@
 
   /**
    * Class MainEventService
-   * @package fibe\Bundle\WWWConfBundle\Services
+   * @package fibe\EventBundle\Services
    */
   class MainEventService
   {
@@ -42,7 +42,7 @@
       $mainEventLocation->setLabel("Conference's location");
       $mainEventLocation->setMainEvent($mainEvent);
       $this->entityManager->persist($mainEventLocation);
-      $mainEvent->setLocation($mainEventLocation);
+      $mainEvent->addLocation($mainEventLocation);
       $this->entityManager->persist($mainEvent);
 
       //conference categories
@@ -179,7 +179,7 @@
       $mainEvent->setStartAt(new \DateTime('now'));
       $end = new \DateTime('now');
       $mainEvent->setEndAt($end->add(new \DateInterval('P2D')));
-//      $mainEvent->addCategorie($this->entityManager->getRepository('fibeWWWConfBundle:Category')->findOneByName("ConferenceEvent"));
+//      $mainEvent->addCategorie($this->entityManager->getRepository('fibeEventBundle:Category')->findOneByName("ConferenceEvent"));
 
       //recreate main event location
       $mainEventLocation = new Location();

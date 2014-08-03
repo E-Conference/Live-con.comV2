@@ -3,7 +3,7 @@
 namespace fibe\CommunityBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use fibe\Bundle\WWWConfBundle\Entity_oldv1\SocialService;
+use fibe\CommunityBundle\Entity\SocialService;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -13,7 +13,7 @@ use fibe\EventBundle\Entity\MainEvent;
  * @TODO comment
  *
  * @ORM\Table(name="socialServiceAccount")
- * @ORM\Entity(repositoryClass="fibe\Bundle\WWWConfBundle\Repository\SocialServiceAccountRepository")
+ * @ORM\Entity(repositoryClass="fibe\CommunityBundle\Repository\SocialServiceAccountRepository")
  *
  */
 class SocialServiceAccount
@@ -38,16 +38,14 @@ class SocialServiceAccount
 
   /**
    * @ORM\ManyToOne(targetEntity="Person", inversedBy="accounts")
-   *
    */
   private $owner;
 
   /**
-   *
    * @ORM\Column(type="string", length=32)
    * @Assert\Choice(multiple=false, choices = {"Facebook","Twitter","LinkedIn"},  message = "Choose a valid social service.")
    */
-  protected $socialService;
+  private $socialService;
 
   /**
    * Get id

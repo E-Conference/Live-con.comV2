@@ -44,12 +44,11 @@ class Role
 
   /**
    *
-   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\VEvent", inversedBy="roles")
-   * @ORM\JoinColumn(name="vevent_id", referencedColumnName="id")
+   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\Event", mappedBy="roles")
    * @Assert\NotBlank(message="You have to choose an event")
    *
    */
-  private $VEvent;
+  private $events;
 
   /**
    * The RoleType associated
@@ -104,13 +103,15 @@ class Role
   /**
    * Set event
    *
-   * @param VEvent $event
+   * @param \fibe\EventBundle\Entity\VEvent $events
+   *
+   * @internal param \fibe\EventBundle\Entity\VEvent $event
    *
    * @return Role
    */
-  public function setEvent(VEvent $event = null)
+  public function setEvents(VEvent $events = null)
   {
-    $this->$VEvent = $event;
+    $this->events = $events;
 
     return $this;
   }
@@ -120,9 +121,9 @@ class Role
    *
    * @return VEvent
    */
-  public function getEvent()
+  public function getEvents()
   {
-    return $this->$VEvent;
+    return $this->events;
   }
 
   /**

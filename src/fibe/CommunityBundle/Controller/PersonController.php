@@ -12,10 +12,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-use fibe\Bundle\WWWConfBundle\Entity\Person;
-use fibe\Bundle\WWWConfBundle\Form\PersonType;
+use fibe\CommunityBundle\Entity\Person;
+use fibe\CommunityBundle\Form\PersonType;
 //Filter type form
-use fibe\Bundle\WWWConfBundle\Form\Filters\PersonFilterType;
+//use fibe\CommunityBundle\Form\Filters\PersonFilterType;
 
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
@@ -32,7 +32,7 @@ class PersonController extends Controller
   /**
    * Lists all Person entities.
    *
-   * @Route("/", name="schedule_person_index")
+   * @Route("/", name="community_person_index")
    * @Template()
    */
   public function indexAction(Request $request)
@@ -63,7 +63,7 @@ class PersonController extends Controller
 
   /**
    * Filter person index list
-   * @Route("/filter", name="schedule_person_filter")
+   * @Route("/filter", name="community_person_filter")
    */
   public function filterAction(Request $request)
   {
@@ -79,7 +79,7 @@ class PersonController extends Controller
     {
       // bind values from the request
 
-      $entities = $em->getRepository('fibeWWWConfBundle:Person')->filtering($filters->getData(), $conf);
+      $entities = $em->getRepository('fibeCommunityBundle:Person')->filtering($filters->getData(), $conf);
       $nbResult = count($entities);
 
       //Pager
@@ -95,7 +95,7 @@ class PersonController extends Controller
       }
 
       return $this->render(
-        'fibeWWWConfBundle:Person:list.html.twig',
+        'fibeCommunityBundle:Person:list.html.twig',
         array(
           'pager'    => $pager,
           'nbResult' => $nbResult,
@@ -107,7 +107,7 @@ class PersonController extends Controller
 
   /**
    * Creates a new Person entity.
-   * @Route("/create", name="schedule_person_create")
+   * @Route("/create", name="community_person_create")
    * @Template()
    */
   public function createAction(Request $request)
@@ -135,12 +135,12 @@ class PersonController extends Controller
 
       //$this->get('fibe_security.acl_entity_helper')->createACL($entity,MaskBuilder::MASK_OWNER);
 
-      return $this->redirect($this->generateUrl('schedule_person_show', array('id' => $entity->getId())));
+      return $this->redirect($this->generateUrl('community_person_show', array('id' => $entity->getId())));
 
     }
 
     return $this->render(
-      'fibeWWWConfBundle:Person:new.html.twig',
+      'fibeCommunityBundle:Person:new.html.twig',
       array(
         'entity' => $entity,
         'form'   => $form->createView()
@@ -150,7 +150,7 @@ class PersonController extends Controller
 
   /**
    * Displays a form to create a new Person entity.
-   * @Route("/new", name="schedule_person_new")
+   * @Route("/new", name="community_person_new")
    * @Template()
    */
   public function newAction()
@@ -159,7 +159,7 @@ class PersonController extends Controller
     $form = $this->createForm(new PersonType($this->getUser()), $entity);
 
     return $this->render(
-      'fibeWWWConfBundle:Person:new.html.twig',
+      'fibeCommunityBundle:Person:new.html.twig',
       array(
         'entity' => $entity,
         'form'   => $form->createView(),
@@ -169,7 +169,7 @@ class PersonController extends Controller
 
   /**
    * Finds and displays a Person entity.
-   * @Route("/{id}/show", name="schedule_person_show")
+   * @Route("/{id}/show", name="community_person_show")
    * @Template()
    */
   public function showAction($id)
@@ -179,7 +179,7 @@ class PersonController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return $this->render(
-      'fibeWWWConfBundle:Person:show.html.twig',
+      'fibeCommunityBundle:Person:show.html.twig',
       array(
         'entity'      => $entity,
         'delete_form' => $deleteForm->createView()
@@ -189,7 +189,7 @@ class PersonController extends Controller
 
   /**
    * Displays a form to edit an existing Person entity.
-   * @Route("/{id}/edit", name="schedule_person_edit")
+   * @Route("/{id}/edit", name="community_person_edit")
    * @Template()
    */
   public function editAction($id)
@@ -200,7 +200,7 @@ class PersonController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return $this->render(
-      'fibeWWWConfBundle:Person:edit.html.twig',
+      'fibeCommunityBundle:Person:edit.html.twig',
       array(
         'entity'      => $entity,
         'edit_form'   => $editForm->createView(),
@@ -211,7 +211,7 @@ class PersonController extends Controller
 
   /**
    * Edits an existing Person entity.
-   * @Route("/{id}/update", name="schedule_person_update")
+   * @Route("/{id}/update", name="community_person_update")
    */
   public function updateAction(Request $request, $id)
   {
@@ -276,12 +276,12 @@ class PersonController extends Controller
       $em->flush();
     }
 
-    return $this->redirect($this->generateUrl('schedule_person_show', array('id' => $id)));
+    return $this->redirect($this->generateUrl('community_person_show', array('id' => $id)));
   }
 
   /**
    * Deletes a Person entity.
-   * @Route("/{id}/delete", name="schedule_person_delete")
+   * @Route("/{id}/delete", name="community_person_delete")
    * @Method({"POST", "DELETE"})
    */
   public function deleteAction(Request $request, $id)
@@ -299,7 +299,7 @@ class PersonController extends Controller
       $em->flush();
     }
 
-    return $this->redirect($this->generateUrl('schedule_person_index'));
+    return $this->redirect($this->generateUrl('community_person_index'));
   }
 
   /**

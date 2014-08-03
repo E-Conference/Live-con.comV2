@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use fibe\EventBundle\Entity\VEvent;
-use fibe\Bundle\WWWConfBundle\Form\VEventType;
+use fibe\EventBundle\Form\VEventType;
 
 /**
  * VEvent controller.
@@ -18,6 +18,7 @@ use fibe\Bundle\WWWConfBundle\Form\VEventType;
 class VEventController extends Controller
 {
 
+  //@TODO : TO DELETE THE UNNECESSARY...
     /**
      * Lists all VEvent entities.
      *
@@ -29,75 +30,76 @@ class VEventController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('fibeWWWConfBundle:VEvent')->findAll();
+        $entities = $em->getRepository('fibeEventBundle:VEvent')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
-    /**
-     * Creates a new VEvent entity.
-     *
-     * @Route("/", name="vevent_create")
-     * @Method("POST")
-     * @Template("fibeWWWConfBundle:VEvent:new.html.twig")
-     */
-    public function createAction(Request $request)
-    {
-        $entity = new VEvent();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+//    /**
+//     * Creates a new VEvent entity.
+//     *
+//     * @Route("/", name="vevent_create")
+//     * @Method("POST")
+//     * @Template("fibeEventBundle:VEvent:new.html.twig")
+//     */
+//    public function createAction(Request $request)
+//    {
+//        $entity = new VEvent();
+//        $form = $this->createCreateForm($entity);
+//        $form->handleRequest($request);
+//
+//        if ($form->isValid()) {
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($entity);
+//            $em->flush();
+//
+//            return $this->redirect($this->generateUrl('vevent_show', array('id' => $entity->getId())));
+//        }
+//
+//        return array(
+//            'entity' => $entity,
+//            'form'   => $form->createView(),
+//        );
+//    }
 
-            return $this->redirect($this->generateUrl('vevent_show', array('id' => $entity->getId())));
-        }
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
-    }
-
-    /**
-     * Creates a form to create a VEvent entity.
-     *
-     * @param VEvent $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(VEvent $entity)
-    {
-        $form = $this->createForm(new VEventType(), $entity, array(
-            'action' => $this->generateUrl('vevent_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
-    }
-
-    /**
-     * Displays a form to create a new VEvent entity.
-     *
-     * @Route("/new", name="vevent_new")
-     * @Method("GET")
-     * @Template()
-     */
-    public function newAction()
-    {
-        $entity = new VEvent();
-        $form   = $this->createCreateForm($entity);
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
-    }
+//    /**
+//     * Creates a form to create a VEvent entity.
+//     *
+//     * @param VEvent $entity The entity
+//     *
+//     * @return \Symfony\Component\Form\Form The form
+//     */
+//    private function createCreateForm(VEvent $entity)
+//    {
+//        $form = $this->createForm(new VEventType(), $entity, array(
+//            'action' => $this->generateUrl('vevent_create'),
+//            'method' => 'POST',
+//        ));
+//
+//        $form->add('submit', 'submit', array('label' => 'Create'));
+//
+//        return $form;
+//    }
+//
+//    /**
+//     * Displays a form to create a new VEvent entity.
+//     *
+//     * @Route("/new", name="vevent_new")
+//     * @Method("GET")
+//     * @Template()
+//     */
+//    public function newAction()
+//    {
+//        $entity = new VEvent();
+//        $form   = $this->createCreateForm($entity);
+//
+//        return array(
+//            'entity' => $entity,
+//            'form'   => $form->createView(),
+//        );
+//    }
 
     /**
      * Finds and displays a VEvent entity.
@@ -110,7 +112,7 @@ class VEventController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('fibeWWWConfBundle:VEvent')->find($id);
+        $entity = $em->getRepository('fibeEventBundle:VEvent')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find VEvent entity.');
@@ -135,7 +137,7 @@ class VEventController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('fibeWWWConfBundle:VEvent')->find($id);
+        $entity = $em->getRepository('fibeEventBundle:VEvent')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find VEvent entity.');
@@ -151,36 +153,37 @@ class VEventController extends Controller
         );
     }
 
-    /**
-    * Creates a form to edit a VEvent entity.
-    *
-    * @param VEvent $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(VEvent $entity)
-    {
-        $form = $this->createForm(new VEventType(), $entity, array(
-            'action' => $this->generateUrl('vevent_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
+//    /**
+//    * Creates a form to edit a VEvent entity.
+//    *
+//    * @param VEvent $entity The entity
+//    *
+//    * @return \Symfony\Component\Form\Form The form
+//    */
+//    private function createEditForm(VEvent $entity)
+//    {
+//        $form = $this->createForm(new VEventType(), $entity, array(
+//            'action' => $this->generateUrl('vevent_update', array('id' => $entity->getId())),
+//            'method' => 'PUT',
+//        ));
+//
+//        $form->add('submit', 'submit', array('label' => 'Update'));
+//
+//        return $form;
+//    }
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
-        return $form;
-    }
     /**
      * Edits an existing VEvent entity.
      *
      * @Route("/{id}", name="vevent_update")
      * @Method("PUT")
-     * @Template("fibeWWWConfBundle:VEvent:edit.html.twig")
+     * @Template("fibeEventBundle:VEvent:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('fibeWWWConfBundle:VEvent')->find($id);
+        $entity = $em->getRepository('fibeEventBundle:VEvent')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find VEvent entity.');
@@ -215,7 +218,7 @@ class VEventController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('fibeWWWConfBundle:VEvent')->find($id);
+            $entity = $em->getRepository('fibeEventBundle:VEvent')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find VEvent entity.');

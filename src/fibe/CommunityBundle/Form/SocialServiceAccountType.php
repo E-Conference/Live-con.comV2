@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * Class SocialServiceAccountType
  *
- * @package fibe\Bundle\WWWConfBundle\Form
+ * @package fibe\CommunityBundle\Form
  */
 class SocialServiceAccountType extends AbstractType
 {
@@ -21,7 +21,7 @@ class SocialServiceAccountType extends AbstractType
     $builder
       ->add('accountName')
       ->add('socialService', 'entity', array(
-        'class'    => 'fibeWWWConfBundle:SocialService',
+        'class'    => 'fibecommunityBundle:SocialService',
         'label'    => 'Social service',
         'required' => true));
   }
@@ -32,7 +32,7 @@ class SocialServiceAccountType extends AbstractType
   public function setDefaultOptions(OptionsResolverInterface $resolver)
   {
     $resolver->setDefaults(array(
-      'data_class' => 'fibe\Bundle\WWWConfBundle\Entity\SocialServiceAccount'
+      'data_class' => 'fibe\CommunityBundle\Entity\SocialServiceAccount'
     ));
   }
 
@@ -43,6 +43,6 @@ class SocialServiceAccountType extends AbstractType
    */
   public function getName()
   {
-    return 'fibe_bundle_wwwconfbundle_socialserviceaccounttype';
+    return 'fibe_communitybundle_socialserviceaccounttype';
   }
 }

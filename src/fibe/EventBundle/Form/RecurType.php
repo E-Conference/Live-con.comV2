@@ -5,12 +5,12 @@ namespace fibe\EventBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use fibe\Bundle\Event\Entity\Recur;
+use fibe\EventBundle\Entity\Recur;
 
 class RecurType extends AbstractType
 {
-    // public function buildForm(FormBuilderInterface $builder, array $options)
-    // {
+     public function buildForm(FormBuilderInterface $builder, array $options)
+     {
     //     $builder
     //         ->add('frequency', 'choice', array(
     //             'choices'  => Recur::getFrequencies()
@@ -43,17 +43,17 @@ class RecurType extends AbstractType
     //         ))
     //         ->add('until')
     //     ;
-    // }
+     }
 
-    // public function setDefaultOptions(OptionsResolverInterface $resolver)
-    // {
+     public function setDefaultOptions(OptionsResolverInterface $resolver)
+     {
     //     $resolver->setDefaults(array(
-    //         'data_class' => 'fibe\Bundle\WWWConfBundle\Entity\Recur'
+    //         'data_class' => 'fibe\EventBundle\Entity\Recur'
     //     ));
-    // }
+     }
 
-    // public function getName()
-    // {
-    //     return 'fibe_bundle_wwwconfbundle_recurtype';
-    // }
+     public function getName()
+     {
+    //     return 'fibe_eventbundle_recurtype';
+     }
 }
