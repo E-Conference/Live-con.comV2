@@ -21,3 +21,15 @@ angular.module('organizationApp').controller('organizationListCtrl', ['$scope', 
     });*/
     //$scope.organizations = $cachedResource();
 }]);
+
+
+angular.module('organizationApp').controller('organizationNewCtrl', [ '$scope', 'Organization', function ($scope, Organization) {
+    $scope.organization = new Organization;
+
+    $scope.create = function(form){
+        if ( form.$valid ) {
+            $scope.organization.$create();
+        }
+    }
+
+}]);

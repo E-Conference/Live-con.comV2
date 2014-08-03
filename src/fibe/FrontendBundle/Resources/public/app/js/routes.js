@@ -32,25 +32,6 @@ liveconApp.config(['$routeProvider',
                 controller: 'personCtrl'
             })
 
-            .when('/organization/', {
-                redirectTo: '/organization/list'
-                //templateUrl: globalConfig.app.modules.organization.urls.partials+'organization-list.html'
-                //, controller: 'organizationMainCtrl'
-            })
-            /*
-            .when('/organization/show/:organizationId', {
-                templateUrl: globalConfig.app.urls.partials+'organization/organization-show.html',
-                controller: 'organizationCtrl'
-            })
-            .when('/organization/edit/:organizationId', {
-                templateUrl: globalConfig.app.urls.partials+'organization/organization-edit.html',
-                controller: 'organizationCtrl'
-            })
-            .when('/organization/new', {
-                templateUrl: globalConfig.app.urls.partials+'organization/organization-new.html',
-                controller: 'organizationCtrl'
-            })
-            */
             .when('/widget/hightlight', {
                 templateUrl: globalConfig.app.urls.partials+'widget/hightlight.html',
                 controller: 'widgetCtrl'
@@ -85,10 +66,6 @@ liveconApp.config(['$routeProvider',
             }).
             when('/search/event', {
                 templateUrl: globalConfig.app.urls.partials+'home/searchEvent.html',
-                controller: 'scheduleCtrl'
-            }).
-            when('/search/organization', {
-                templateUrl: globalConfig.app.urls.partials+'home/searchOrganization.html',
                 controller: 'scheduleCtrl'
             }).
             when('/search/person', {
