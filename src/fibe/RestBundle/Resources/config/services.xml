@@ -6,11 +6,23 @@
 
     <parameters>
         <parameter key="serialize_exception_listener.class">fibe\RestBundle\Listener\SerializeExceptionListener</parameter>
+        <parameter key="authentication_handler.class">fibe\RestBundle\Listener\AuthenticationHandler</parameter>
         <!--<parameter key="app.cors_listener.class">fibe\RestBundle\Listener\CorsListener</parameter>-->
         <!--<parameter key="session.storage.native_file.class">fibe\RestBundle\Session\Storage</parameter>-->
     </parameters>
 
     <services>
+
+        <!-- ajax login -->
+        <service id="authentication_handler" class="%authentication_handler.class%">
+            <argument type="service" id="router" />
+            <argument type="service" id="security.context" />
+            <argument type="service" id="fos_user.user_manager" />
+            <argument type="service" id="translator" />
+            <argument type="service" id="jms_serializer" />
+        </service>
+
+
         <!--<service id="serialize_exception_listener" class="%serialize_exception_listener.class%">-->
             <!--<tag name="kernel.event_listener" event="kernel.exception" method="onKernelException"/>-->
             <!--<argument type="service" id="serializer" />-->
@@ -22,21 +34,6 @@
         <!-- <service id="app.cors_listener" class="%app.cors_listener.class%">
             <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse"/>
         </service> -->
-
-
-        <!-- wsse authentication-->
-
-        <service id="wsse.security.authentication.provider"
-                 class="fibe\RestBundle\Security\Authentication\Provider\WsseProvider" public="false">
-            <argument /> <!-- User Provider -->
-            <argument>%kernel.cache_dir%/security/nonces</argument>
-        </service>
-
-        <service id="wsse.security.authentication.listener"
-                 class="fibe\RestBundle\Security\Firewall\WsseListener" public="false">
-            <argument type="service" id="security.context"/>
-            <argument type="service" id="security.authentication.manager" />
-        </service>
     </services>
 
 </container>

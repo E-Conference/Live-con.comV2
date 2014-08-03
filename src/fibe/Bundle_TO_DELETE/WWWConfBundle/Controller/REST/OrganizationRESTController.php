@@ -71,7 +71,7 @@ class OrganizationRESTController extends FOSRestController
 
       $form = $this->createForm(new OrganizationType($this->getUser()), $entity);
       $form->bind($request);
-  
+
 
      if ($form->isValid()) {
          $em = $this->getDoctrine()->getManager();
