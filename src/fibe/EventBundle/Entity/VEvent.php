@@ -102,21 +102,21 @@ abstract class VEvent
    */
   protected $comment;
 
-  /**
-   * organizer
-   *
-   * Purpose: The property defines the organizer for a calendar component.
-   *
-   * @TODO EVENT
-   * ==>
-   * Here in Livecon, the owner of the event is
-   * the most responsible person of the event
-   * <==
-   *
-   * The following is an example of this property:
-   * ORGANIZER;CN=John Smith:MAILTO:jsmith@host1.com
-   */
-  protected $organizer;
+//  /**
+//   * organizer
+//   *
+//   * Purpose: The property defines the organizer for a calendar component.
+//   *
+//   * @TODO EVENT
+//   * ==>
+//   * Here in Livecon, the owner of the event is
+//   * the most responsible person of the event
+//   * <==
+//   *
+//   * The following is an example of this property:
+//   * ORGANIZER;CN=John Smith:MAILTO:jsmith@host1.com
+//   */
+//  protected $organizer;
 
   /**
    * sequence
@@ -143,36 +143,36 @@ abstract class VEvent
    */
   protected $revisionSequence = 0;
 
-  /**
-   * contact
-   *
-   * The property is used to represent contact information or
-   * alternately a reference to contact information associated with the
-   * calendar component.
-   *
-   * ==>
-   * @TODO EVENT : à réfléchir... Ne pas persister en base, mais déduire
-   * la propriété de manière logiqu avec la table attendee
-   * <==
-   */
-  protected $contacts;
+//  /**
+//   * contact
+//   *
+//   * The property is used to represent contact information or
+//   * alternately a reference to contact information associated with the
+//   * calendar component.
+//   *
+//   * ==>
+//   * @TODO EVENT : à réfléchir... Ne pas persister en base, mais déduire
+//   * la propriété de manière logiqu avec la table attendee
+//   * <==
+//   */
+//  protected $contacts;
 
-  /**
-   * class
-   *
-   * This property defines the access classification for a calendar component.
-   *
-   * class      = "CLASS" classparam ":" classvalue CRLF
-   * classparam = *(";" xparam)
-   * classvalue = "PUBLIC" / "PRIVATE" / "CONFIDENTIAL"
-   * Default is PUBLIC
-   *
-   * ==>
-   * @TODO EVENT : à réfléchir... Ne pas persister en base, mais déduire
-   * la propriété de manière logique avec la table atendee
-   * <==
-   */
-  protected $classification = self::CLASSIFICATION_PUBLIC;
+//  /**
+//   * class
+//   *
+//   * This property defines the access classification for a calendar component.
+//   *
+//   * class      = "CLASS" classparam ":" classvalue CRLF
+//   * classparam = *(";" xparam)
+//   * classvalue = "PUBLIC" / "PRIVATE" / "CONFIDENTIAL"
+//   * Default is PUBLIC
+//   *
+//   * ==>
+//   * @TODO EVENT : à réfléchir... Ne pas persister en base, mais déduire
+//   * la propriété de manière logique avec la table atendee
+//   * <==
+//   */
+//  protected $classification = self::CLASSIFICATION_PUBLIC;
 
   /**
    * status
@@ -282,6 +282,8 @@ abstract class VEvent
   public function __construct()
   {
     $this->topics = new ArrayCollection();
+    $this->createdAt = new \DateTime();
+    $this->lastModifiedAt = new \DateTime();
     $this->setRevisionSequence($this->getRevisionSequence() + 1);
   }
 
@@ -466,6 +468,14 @@ abstract class VEvent
   public function getId()
   {
     return $this->id;
+  }
+
+  /**
+   * @param mixed $id
+   */
+  public function setId($id)
+  {
+    $this->id = $id;
   }
 
   /**
@@ -661,30 +671,6 @@ abstract class VEvent
   }
 
   /**
-   * Set organizer
-   *
-   * @param string $organizer
-   *
-   * @return $this
-   */
-  public function setOrganizer($organizer)
-  {
-    $this->organizer = $organizer;
-
-    return $this;
-  }
-
-  /**
-   * Get organizer
-   *
-   * @return string
-   */
-  public function getOrganizer()
-  {
-    return $this->organizer;
-  }
-
-  /**
    * Set revisionSequence
    *
    * @param integer $revisionSequence
@@ -706,54 +692,6 @@ abstract class VEvent
   public function getRevisionSequence()
   {
     return $this->revisionSequence;
-  }
-
-  /**
-   * Set contacts
-   *
-   * @param string $contacts
-   *
-   * @return $this
-   */
-  public function setContacts($contacts)
-  {
-    $this->contacts = $contacts;
-
-    return $this;
-  }
-
-  /**
-   * Get contacts
-   *
-   * @return string
-   */
-  public function getContacts()
-  {
-    return $this->contacts;
-  }
-
-  /**
-   * Set classification
-   *
-   * @param string $classification
-   *
-   * @return $this
-   */
-  public function setClassification($classification)
-  {
-    $this->classification = $classification;
-
-    return $this;
-  }
-
-  /**
-   * Get classification
-   *
-   * @return string
-   */
-  public function getClassification()
-  {
-    return $this->classification;
   }
 
   /**
@@ -830,39 +768,39 @@ abstract class VEvent
   }
 
 
-  /**
-   * Add roles
-   *
-   * @param Role $role
-   *
-   * @return $this
-   */
-  public function addRole(Role $role)
-  {
-    $this->roles[] = $role;
-
-    return $this;
-  }
-
-  /**
-   * Remove roles
-   *
-   * @param Role $role
-   */
-  public function removeRole(Role $role)
-  {
-    $this->roles->removeElement($role);
-  }
-
-  /**
-   * Get roles
-   *
-   * @return \Doctrine\Common\Collections\Collection
-   */
-  public function getRoles()
-  {
-    return $this->roles;
-  }
+//  /**
+//   * Add roles
+//   *
+//   * @param Role $role
+//   *
+//   * @return $this
+//   */
+//  public function addRole(Role $role)
+//  {
+//    $this->roles[] = $role;
+//
+//    return $this;
+//  }
+//
+//  /**
+//   * Remove roles
+//   *
+//   * @param Role $role
+//   */
+//  public function removeRole(Role $role)
+//  {
+//    $this->roles->removeElement($role);
+//  }
+//
+//  /**
+//   * Get roles
+//   *
+//   * @return \Doctrine\Common\Collections\Collection
+//   */
+//  public function getRoles()
+//  {
+//    return $this->roles;
+//  }
 
   /**
    * Add sponsors
@@ -896,6 +834,14 @@ abstract class VEvent
   public function getSponsors()
   {
     return $this->sponsors;
+  }
+
+  /**
+   * @param mixed $sponsors
+   */
+  public function setSponsors($sponsors)
+  {
+    $this->sponsors = $sponsors;
   }
 
   /**

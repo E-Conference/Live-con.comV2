@@ -38,7 +38,7 @@ class TwitterApiController extends Controller
         // Retrieve the user's timeline
 
         $twitter = $this->container->get('fibe_security.twitter');
-        $twitter->setUser($user); 
+        $twitter->setUser($user);
         $response = $twitter->query($name, $method, $format, $parameters);
 
         return new Response(
