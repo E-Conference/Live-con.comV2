@@ -24,14 +24,14 @@ class CompanyRESTController extends FOSRestController
   **/
    public function getCompanyAction($id){
 
-          $em = $this->getDoctrine()->getManager();
-          //$Company = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'Company',$id);
-          $Company = $em->getRepository('fibeCommunityBundle:Company')->find($id);
-             if(!is_object($Company)){
-                throw $this->createNotFoundException();
-                }
-            return $Company;
-    }
+      $em = $this->getDoctrine()->getManager();
+      //$Company = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'Company',$id);
+      $Company = $em->getRepository('fibeCommunityBundle:Company')->find($id);
+         if(!is_object($Company)){
+            throw $this->createNotFoundException();
+            }
+        return $Company;
+   }
 
 
     /**

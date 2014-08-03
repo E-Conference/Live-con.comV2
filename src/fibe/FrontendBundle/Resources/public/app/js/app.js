@@ -21,7 +21,8 @@ var liveconApp = angular.module('liveconApp', [
     'liveconServices',
     'organizationApp',
     'pascalprecht.translate',
-    'authenticationApp'
+    'authenticationApp',
+    'angularMoment'
 ]);
 
 
@@ -58,4 +59,6 @@ liveconApp.config(['$translateProvider', function ($translateProvider) {
 }]);
 
 
-
+liveconApp.run(function(amMoment) {
+    amMoment.changeLanguage('de');
+});

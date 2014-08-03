@@ -44,7 +44,7 @@ login:
     defaults:  { _controller: FOSUserBundle:Security:login }
 
 login_check:
-    pattern:   /login/login_check
+     pattern:   /login/login_check
 
 logout:
     pattern:   /logout

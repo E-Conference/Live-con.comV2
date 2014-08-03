@@ -13,12 +13,11 @@ angular.module('authenticationApp').factory('userFactory', ['$resource',
     }]);
 
 
-angular.module('authenticationApp').factory('globalHttpInterceptor', ['$q', 'tokenHandler',
-    function($q, tokenHandler) {
-        debugger;
+angular.module('authenticationApp').factory('globalHttpInterceptor', ['$q', '$cookieStore', 'tokenHandler',
+    function($q, $cookieStore, tokenHandler) {
         return {
             'request' : function(config){
-                config.headers["X-WSSE"] = tokenHandler.getCredentials('admin', 'admin');
+                config.headers["X-WSSE"] = tokenHandler.getCredentials();
                 return config;
             },
             'response': function(response) {
@@ -36,7 +35,7 @@ angular.module('authenticationApp').factory('globalHttpInterceptor', ['$q', 'tok
 
 
 
-angular.module('authenticationApp').factory('tokenHandler', ['$cookieStore', 'Base64', function($cookieStore, Base64) {
+angular.module('authenticationApp').factory('tokenHandler', ['$cookieStore', 'GLOBAL_CONFIG', 'Base64', function($cookieStore, GLOBAL_CONFIG, Base64) {
     var tokenHandler = {};
     var token = 'none';
 
@@ -48,46 +47,43 @@ angular.module('authenticationApp').factory('tokenHandler', ['$cookieStore', 'Ba
         return token;
     };
 
-    tokenHandler.getCredentials = function ( username, secret) {
+    tokenHandler.getCredentials = function () {
         // Check if token is registered in cookies
-        if ( (typeof $cookieStore.get('username') !== 'undefined') &&
-            (typeof $cookieStore.get('digest') !== 'undefined') &&
-            (typeof $cookieStore.get('b64nonce') !== 'undefined') &&
-            (typeof $cookieStore.get('created') !== 'undefined') )
-        {
-            // Define variables from cookie cache
-            var username = $cookieStore.get('username');
-            var digest = $cookieStore.get('digest');
-            var b64nonce = $cookieStore.get('b64nonce');
-            var created = $cookieStore.get('created');
-        }
-        else
-        {
-            // Create token for backend communication
-            var seed = Math.floor( Math.random() * 1000 )+'';
-            // Encode seed in MD5
-            var nonce = CryptoJS.MD5( seed ).toString(CryptoJS.enc.Hex);
 
-            // Creation time of the token
-            var created = formatDate(new Date());
+        // Define variables from cookie cache
+        var username = $cookieStore.get('username') || null;
+        var digest = $cookieStore.get('digest') || null;
+        var created = $cookieStore.get('created') || null;
 
-            // Generating digest from secret, creation and seed
-            var hash = CryptoJS.SHA1(nonce+created+CryptoJS.SHA1(secret));
-            var digest = hash.toString(CryptoJS.enc.Base64);
-
-            // Base64 Encode digest
-            var b64nonce = Base64.encode(nonce);
-
-            // Save token in cookies
-            $cookieStore.put('username', username);
-            $cookieStore.put('digest', digest);
-            $cookieStore.put('nonce', b64nonce);
-            $cookieStore.put('created', created);
-        }
 
         // Return generated token
-        return 'UsernameToken Username="'+username+'", PasswordDigest="'+digest+'", Nonce="'+b64nonce+'", Created="'+created+'"';
+        return 'UsernameToken Username="'+username+'", PasswordDigest="'+digest+'", Nonce="'+this.genNounce()+'", Created="'+created+'"';
     };
+
+    tokenHandler.setCredentials = function (username, secret) {
+
+
+        // Creation time of the token
+        var created = formatDate(new Date());
+
+        // Generating digest from secret, creation and seed
+        var hash = CryptoJS.SHA1(nonce+created+secret);
+
+        var digest = hash.toString(CryptoJS.enc.Base64);
+
+
+        // Save token in cookies
+        $cookieStore.put('username', username);
+        $cookieStore.put('digest', digest);
+        $cookieStore.put('created', created);
+    }
+
+    tokenHandler.genNounce = function () {
+        // Create token for backend communication
+        var seed = Math.floor( Math.random() * 1000 )+'';
+        var nonce = CryptoJS.MD5( seed ).toString(CryptoJS.enc.Hex);
+        return Base64.encode(nonce);
+    }
 
     // Token Reinitializer
     tokenHandler.clearCredentials = function () {
@@ -97,9 +93,8 @@ angular.module('authenticationApp').factory('tokenHandler', ['$cookieStore', 'Ba
         $cookieStore.remove('nonce');
         $cookieStore.remove('created');
 
-        // Clear token variable
-        delete $http.defaults.headers.common['X-WSSE'];
     };
+
 
 
     // Date formater to UTC

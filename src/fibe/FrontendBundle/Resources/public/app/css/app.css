@@ -86,7 +86,7 @@ ul{
 
 .sidebar-nav li a {
     display: block;
-    color: #19313b;
+    color: #e7e7e7;
 }
 
 .sidebar-nav li:hover a{
@@ -162,6 +162,21 @@ ul{
     color : #19313b !important;
     border-color : #19313b !important;
     margin-left:10px;
+}
+
+.panel-collapse {
+    background : #19313b;
+    border: 0px;
+
+}
+
+.panel-heading{
+    background-color : #fff !important;
+}
+
+.panel {
+    border : 0px;
+    border-radius: 0px !important;
 }
 
 /******************************** nav right ****************************/

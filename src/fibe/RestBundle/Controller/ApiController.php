@@ -18,17 +18,17 @@ use FOS\RestBundle\Controller\FOSRestController;
 class ApiController  extends FOSRestController
 {
 
-//    protected function loginUser(UserInterface $user)
-//    {
-//
-//        $security = $this->get('security.context');
-//        $providerKey = $this->container->getParameter('fos_user.firewall_name');
-//        $roles = $user->getRoles();
-//        $token = new UsernamePasswordToken($user, null, $providerKey, $roles);
-//        $token->setUser($user);
-//        $security->
-//        $security->setToken($token);
-//    }
+    protected function loginUser(UserInterface $user)
+    {
+
+        $security = $this->get('security.context');
+        $providerKey = $this->container->getParameter('fos_user.firewall_name');
+        $roles = $user->getRoles();
+        $token = new UsernamePasswordToken($user, null, $providerKey, $roles);
+        $token->setUser($user);
+        $security->
+        $security->setToken($token);
+    }
 
     protected function logoutUser()
     {
@@ -49,10 +49,9 @@ class ApiController  extends FOSRestController
     }
 
     /**
-     * @Route("/api/user/login", name="api_user_login")
    	 * @Rest\View()
      */
-    public function loginAction()
+    public function postLoginAction()
     { 
         $serializer = $this->container->get('jms_serializer');
         $request = $this->container->get('request');
@@ -74,22 +73,21 @@ class ApiController  extends FOSRestController
             throw new AccessDeniedException("Wrong password");
         }
 
+        try {
+            $this->container->get('fos_user.security.login_manager')->loginUser(
+                $this->container->getParameter('fos_user.firewall_name'),
+                $user,
+                new Response());
+        } catch (AccountStatusException $ex) {
+            // We simply do not authenticate users which do not pass the user
+            // checker (not enabled, expired, etc.).
+        }
 
-//        try {
-//            $this->container->get('fos_user.security.login_manager')->loginUser(
-//                $this->container->getParameter('fos_user.firewall_name'),
-//                $user,
-//                new Response());
-//        } catch (AccountStatusException $ex) {
-//            // We simply do not authenticate users which do not pass the user
-//            // checker (not enabled, expired, etc.).
-//        }
-
-        // $this->loginUser($user);
+         $this->loginUser($user);
 
         // $user->setSessionId($this->container->get("session")->getId());
 
-        return $serializer->serialize($user, 'json');
+        return $user;
     }
 
     /**

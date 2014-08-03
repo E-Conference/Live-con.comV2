@@ -39,7 +39,7 @@ class WsseProvider extends ContainerAware implements AuthenticationProviderInter
     }
 
     // Token validator
-    public function validateDigest( $digest, $nonce, $created, $secret )
+    public function validateDigest( $digest, $nonce, $created, $secret)
     {
         // Generate created Token time difference
         $now = new \DateTime('now', new \DateTimeZone('UTC'));
@@ -72,7 +72,6 @@ class WsseProvider extends ContainerAware implements AuthenticationProviderInter
 
         // Validate Secret
         $expected = base64_encode(sha1(base64_decode($nonce).$created.$secret, true));
-
 
         // Return TRUE if our newly-calculated digest is the same as the one provided in the validateDigest() call
         return $expected === $digest;

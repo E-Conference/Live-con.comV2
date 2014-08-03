@@ -6,8 +6,9 @@ security:
     encoders:
        # Symfony\Component\Security\Core\User\User: plaintext
         fibe\SecurityBundle\Entity\User:
+         # id : fos_user.password_provider.encoder
           algorithm: sha1
-          iterations: 2
+          iterations: 1
           encode_as_base64: false
 
     providers:
@@ -34,34 +35,28 @@ security:
 
 
 
-        wsse_secured:
-            pattern: ^/apiREST/
-            wsse: { lifetime: 30}
-
-
         #old not rest application
 
         main_login:
-            pattern:   /*
+            pattern:   /apiREST/logins.json
             anonymous: true # On autorise les anonymes sur ce pare-feu
 
 
-
         main:
-#            remember_me:
-#                key:      "%secret%"
-#                lifetime: 31536000 # 365 days in seconds
-#                path:     /
-#                domain:   ~ # Defaults to the current domain from $_SERVER
-#            pattern:   ^/
-#            anonymous: ~
-#            provider:  main
-#            form_login:
-#                login_path: /login
-#                check_path: /login/login_check
-#                default_target_path: dashboard_index
-#                #
-                # success_handler: fibe_security.select_conference_success_handler
+            remember_me:
+                key:      "%secret%"
+                lifetime: 31536000 # 365 days in seconds
+                path:     /
+                domain:   ~ # Defaults to the current domain from $_SERVER
+            pattern:   ^/*
+            anonymous: true
+            provider:  main
+            form_login:
+                login_path: /login
+                check_path: /login/login_check
+                default_target_path: dashboard_index
+                #
+              #  success_handler: fibe_security.select_conference_success_handler
             oauth:
                 resource_owners:
                     google:         "/login/check-google"
