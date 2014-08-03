@@ -111,7 +111,7 @@ class Role
    */
   public function setEvents(VEvent $events = null)
   {
-    $this->$events = $events;
+    $this->events = $events;
 
     return $this;
   }
@@ -123,7 +123,7 @@ class Role
    */
   public function getEvents()
   {
-    return $this->$events;
+    return $this->events;
   }
 
   /**
