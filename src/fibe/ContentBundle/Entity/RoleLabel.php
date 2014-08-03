@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  *
  * @ORM\Table(name="role_type")
- * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\RoleTypeRepository")
+ * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\RoleLabelRepository")
  *
  */
 class RoleLabel
