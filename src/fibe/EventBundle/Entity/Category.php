@@ -257,7 +257,7 @@ class Category
    */
   public function getVEvents()
   {
-    return $this->VEvent;
+    return $this->vEvents;
   }
 
   /**
