@@ -57,6 +57,12 @@ class AdditionalInformations
    */
   private $email;
 
+  public function __toString()
+  {
+    //@TODO : méthode to String fonctionnel
+    return 'toString @TODO in AdditionalInformation Entity';
+  }
+
   /**
    * Get id
    *
