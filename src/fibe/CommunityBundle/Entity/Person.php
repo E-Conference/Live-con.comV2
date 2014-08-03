@@ -159,7 +159,7 @@ class Person
     $this->companies = new ArrayCollection();
     $this->roles = new ArrayCollection();
     $this->accounts = new ArrayCollection();
-    $this->$mainEvents = new ArrayCollection();
+    $this->mainEvents = new ArrayCollection();
   }
 
   /**
