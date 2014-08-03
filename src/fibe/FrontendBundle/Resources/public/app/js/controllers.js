@@ -119,22 +119,7 @@ liveconControllers.controller('conferenceCtrl', ['$scope', '$rootScope', '$route
     }]);
 
 
-/*********************************** ORGANIZATIONS **********************************************/
-/*
-liveconControllers.controller('organizationsCtrl', ['$scope', '$rootScope', '$routeParams', 'organizationFactory', 'GLOBAL_CONFIG',
-    function ($scope, $rootScope, $routeParams, organizationFactory, GLOBAL_CONFIG) {
-        $scope.organizations = organizationFactory.list();
-    }]);
 
-liveconControllers.controller('organizationCtrl', ['$scope', '$rootScope', '$routeParams', 'organizationFactory',
-    function ($scope, $rootScope, $routeParams, organizationFactory) {
-
-        $scope.organization = organizationFactory.query({organizationId: $routeParams.organizationId});
-        $scope.create = function () {
-            $scope.organization.$create()
-        };
-    }]);
-*/
 /*********************************** DASHBOARDS **********************************************/
 liveconControllers.controller('dashboardCtrl', ['$scope', '$rootScope', '$routeParams', 'organizationFactory', 'GLOBAL_CONFIG',
     function ($scope, $rootScope, $routeParams, organizationFactory, GLOBAL_CONFIG) {

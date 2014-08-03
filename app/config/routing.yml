@@ -33,10 +33,6 @@ fibe_home_page:
 
 fibe_security_www_conf:
     resource: "@fibeSecurityBundle/Controller/"
-    type:     annotation 
-
-idci_exporter:
-    resource: "../../vendor/idci/exporter-bundle/IDCI/Bundle/ExporterBundle/Controller"
     type:     annotation
 
 login:
@@ -94,8 +90,8 @@ linkedin_login:
     pattern: /login/check-linkedin
 
 
-    #REST 
+#REST
 rest : 
   type : rest 
   resource : "routing_rest.yml"
-  prefix : /apiREST
+  prefix : /api

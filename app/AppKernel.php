@@ -20,13 +20,13 @@ class AppKernel extends Kernel
       new JMS\DiExtraBundle\JMSDiExtraBundle($this),
       new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
       new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-      new IDCI\Bundle\ExporterBundle\IDCIExporterBundle(),
+
+
       new fibe\SecurityBundle\fibeSecurityBundle(),
       new fibe\HomePageBundle\fibeHomePageBundle(),
       new fibe\RestBundle\fibeRestBundle(),
       new fibe\DocumentationBundle\DocumentationBundle(),
       new FOS\UserBundle\FOSUserBundle(),
-      new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
       new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
       new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
       new JMS\SerializerBundle\JMSSerializerBundle(),

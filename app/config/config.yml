@@ -123,6 +123,3 @@ fos_rest:
         view_response_listener: 'force'
     disable_csrf_role: ROLE_API
 
-
-gregwar_captcha: ~
-

@@ -1,6 +1,6 @@
 
 <input type="text" class="form-control" placeholder="Search" ng-model="query">
-<a class="btn btn-info btn-create create" href="#/organization/new/{{organization.id}}" title="Add an organization"> <i class="fa fa-plus"></i> New organization </a>
+<a class="btn btn-info btn-create create" href="#/organization/new/" title="Add an organization"> <i class="fa fa-plus"></i> New organization </a>
 <a class="btn btn-info btn-create create" href title="Add an organization" data-ng-click="reload()"> Refresh </a>
 <table class="table table-striped">
   <thead>
@@ -14,15 +14,15 @@
   </thead>
   <tbody>
   <tr ng-repeat="organization in organizations">
-      <td>{{ organization.name }}</td>
-      <td>Lorem</td>
-      <td>ipsum</td>
+      <td>{{ organization.label }}</td>
+      <td>{{ organization.homepage }}</td>
+      <td>{{ organization.country }}</td>
       <td>dolor</td>
       <td>
-          <a class="btn btn-warning" href="schedule/event/edit" role="button"><i class="fa fa-edit fa-2x"></i></a>
-          <a class="btn btn-default" href="schedule/event/show" role="button"><i class="fa fa-eye fa-2x"></i></a>
-          <a class="btn btn-primary" href="schedule/event/copy" role="button"><i class="fa fa-files-o fa-2x"></i></a>
-          <a class="btn btn-danger" href="schedule/event/copy" role="button"><i class="fa fa-trash-o fa-2x"></i></a>
+          <a class="btn btn-warning" href="#organization/edit/{{ organization.id }}" role="button"><i class="fa fa-edit fa-2x"></i></a>
+          <a class="btn btn-default" href="#organization/show/{{ organization.id }}" role="button"><i class="fa fa-eye fa-2x"></i></a>
+          <a class="btn btn-primary" href="#organization/copy/{{ organization.id }}" role="button"><i class="fa fa-files-o fa-2x"></i></a>
+          <a class="btn btn-danger" href="#organization/delete/{{ organization.id }}" role="button"><i class="fa fa-trash-o fa-2x"></i></a>
       </td>
   </tr>
   </tbody>

@@ -8,9 +8,9 @@ angular.module('organizationApp')
                         controller: 'organizationListCtrl',
                         from: 'list'
                     })
-                    .when('/organization/add', {
+                    .when('/organization/new', {
                         templateUrl: globalConfig.app.modules.organization.urls.partials+'organization-new.html',
-                        controller: 'organizationAddCtrl',
+                        controller: 'organizationNewCtrl',
                         from: 'new'
                     })
                     .when('/organization/edit/:organizationId', {

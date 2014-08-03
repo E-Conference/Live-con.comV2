@@ -2,11 +2,15 @@
 
 namespace fibe\CommunityBundle\Controller\REST;
 
+use FOS\RestBundle\Controller\Annotations\Delete;
+use FOS\RestBundle\Controller\Annotations\Put;
 use Symfony\Component\HttpFoundation\Request;
 use fibe\CommunityBundle\Entity\Company;
 use fibe\CommunityBundle\Form\CompanyType;
 
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Post;
+
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Util\Codes;
@@ -21,7 +25,7 @@ class CompanyRESTController extends FOSRestController
 
 
   /**
-   * @Rest\View()
+   * @Get("/company/{id}")
    **/
   public function getCompanyAction($id)
   {
@@ -40,7 +44,7 @@ class CompanyRESTController extends FOSRestController
 
   /**
    * Lists all Company entities.
-   * @Rest\View()
+   * @Get("/companies")
    */
   public function getCompaniesAction(Request $request)
   {
@@ -56,10 +60,9 @@ class CompanyRESTController extends FOSRestController
 
 
   /**
-   * Creates a new note from the submitted data.
+   * Creates a new company from the submitted data.
    *
-   *
-   * @Rest\View()
+   * @Post("/company")
    *
    * @param Request $request the request object
    *
@@ -86,7 +89,7 @@ class CompanyRESTController extends FOSRestController
       // return $this->redirect($this->generateUrl('apiREST_get_company', array('id' => $company->getId())));
       return $this->redirectView(
         $this->generateUrl(
-          'apiREST_get_company',
+          'api_get_company',
           array('id' => $company->getId())
         ),
         Codes::HTTP_CREATED
@@ -101,7 +104,7 @@ class CompanyRESTController extends FOSRestController
 
   /**
    * Put action
-   *
+   * @Put("/company/{id}")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return array|\FOS\RestBundle\View\View
@@ -139,7 +142,7 @@ class CompanyRESTController extends FOSRestController
 
   /**
    * Put action
-   *
+   * @Delete("/company/{id}")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return View|array
