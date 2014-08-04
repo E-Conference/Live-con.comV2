@@ -16,6 +16,7 @@ class CompanyType extends AbstractType
   {
     $builder
       ->add('label')
+      ->add('testRest')
       ->add('members', 'entity', array(
         'class'    => 'fibeCommunityBundle:Person',
         'label'    => 'Members',

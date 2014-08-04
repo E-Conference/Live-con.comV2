@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  *
- * @ORM\Table(name="organization")
+ * @ORM\Table(name="company")
  * @ORM\Entity(repositoryClass="fibe\CommunityBundle\Repository\CompanyRepository")
  * @ORM\HasLifecycleCallbacks
  * @ExclusionPolicy("all") 
@@ -40,6 +40,14 @@ class Company
    * @Expose
    */
   private $label;
+
+  /**
+   * testRest
+   *
+   * @ORM\Column(type="string")
+   * @Expose
+   */
+  private $testRest;
 
   /**
    * Sponsors
@@ -173,6 +181,31 @@ class Company
   public function getLabel()
   {
     return $this->label;
+  }
+
+
+  /**
+   * Set testRest
+   *
+   * @param string $testRest
+   *
+   * @return $this
+   */
+  public function setTestRest($testRest)
+  {
+    $this->testRest = $testRest;
+
+    return $this;
+  }
+
+  /**
+   * Get testRest
+   *
+   * @return string
+   */
+  public function getTestRest()
+  {
+    return $this->testRest;
   }
 
   /**
