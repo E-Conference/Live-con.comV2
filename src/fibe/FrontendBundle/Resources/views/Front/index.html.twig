@@ -77,14 +77,14 @@
         var globalConfig = {
             api: {
                 urls: {
-                    get_organizations: "{{ path('api_get_companies') }}",
-                    get_organization: "{{ path('api_get_company',  {id: '1'}) }}",
-                    post_organization: "{{ path('api_post_company') }}",
-                    put_organization: "{{ path('api_put_company',  {id: '1'}) }}",
-                    delete_organization: "{{ path('api_put_company',  {id: '1'}) }}",
+                    {#get_organizations: "{{ path('') }}",#}
+                    {#get_organization: "{{ path('',  {id: '1'}) }}",#}
+                    {#post_organization: "{{ path('') }}",#}
+                    {#put_organization: "{{ path('  ',  {id: '1'}) }}",#}
+                    {#delete_organization: "{{ path('',  {id: '1'}) }}",#}
 
-                    login: "{{ path('apiREST_post_login', {_format: 'json'}) }}",
-                    registration: "{{ path('api_get_companies') }}"
+                    login: "{{ path('login_check', {_format: 'json'}) }}",
+                    {#registration: "{{ path('') }}"#}
                 }
             },
             app: {

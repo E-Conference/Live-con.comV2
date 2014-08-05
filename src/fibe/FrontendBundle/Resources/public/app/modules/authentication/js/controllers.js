@@ -1,9 +1,9 @@
 
-angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootScope', 'tokenHandler', '$routeParams', 'GLOBAL_CONFIG', 'userFactory', '$location',
-function ($scope, $rootScope, tokenHandler, $routeParams, GLOBAL_CONFIG, userFactory, $location) {
+angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG', 'userFactory', '$location',
+function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, userFactory, $location) {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
     $scope.loginAction = function(user){
-        userFactory.login({},{"username" : $scope.user.username, "password": $scope.user.password}, function(response, args) {$scope.success(response, args)},  function(response, args) {$scope.error(response, args)});
+        userFactory.login({},{"_username" : $scope.user.username, "_password": $scope.user.password}, function(response, args) {$scope.success(response, args)},  function(response, args) {$scope.error(response, args)});
     }
     $scope.error = function(response, args){
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'Login_error', type:'danger'});
@@ -11,7 +11,6 @@ function ($scope, $rootScope, tokenHandler, $routeParams, GLOBAL_CONFIG, userFac
     $scope.success = function(response, args){
         $scope.user = response;
         $rootScope.currentUser = response;
-        tokenHandler.setCredentials(response.username, response.password);
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'Login_success', type:'success'});
         $location.path('/');
     }
