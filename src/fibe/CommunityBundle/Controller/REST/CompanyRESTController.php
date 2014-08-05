@@ -2,18 +2,10 @@
 
 namespace fibe\CommunityBundle\Controller\REST;
 
-use FOS\RestBundle\Controller\Annotations\Delete;
-use FOS\RestBundle\Controller\Annotations\Patch;
-use FOS\RestBundle\Controller\Annotations\Put;
-use FOS\RestBundle\Controller\Annotations\View;
-use Symfony\Component\HttpFoundation\Request;
-use fibe\CommunityBundle\Entity\Company;
-use fibe\CommunityBundle\Form\CompanyType;
-
-use FOS\RestBundle\Controller\Annotations\Get;
-use FOS\RestBundle\Controller\Annotations\Post;
-
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use Symfony\Component\HttpFoundation\Request;
+
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Util\Codes;
 
@@ -23,44 +15,48 @@ use FOS\RestBundle\Util\Codes;
 class CompanyRESTController extends FOSRestController
 {
 
-  const CLASSNAME = "fibe\\CommunityBundle\\Entity\\Company";
+  const ENTITY_CLASSNAME = "fibe\\CommunityBundle\\Entity\\Company";
+  const FORM_CLASSNAME = "fibe\\CommunityBundle\\Form\\CompanyType";
 
 
   /**
    * Lists all Company entities.
-   * @Get("/companies")
-   * @View
+   * @Rest\Get("/companies")
+   * @Rest\View
+   * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
+   * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
    */
-  public function getCompaniesAction(Request $request)
+  public function getCompaniesAction(Request $request, ParamFetcherInterface $paramFetcher)
   {
-    $em = $this->getDoctrine()->getManager();
-    $entities = $em->getRepository('fibeCommunityBundle:Company')->findAll();
+    return $this->get('fibe.rest.crudhandler')->getAll(
+      $this::ENTITY_CLASSNAME,
+      $paramFetcher
+    );
 
-    return $entities;
+//    $em = $this->getDoctrine()->getManager();
+//    $entities = $em->getRepository('fibeCommunityBundle:Company')->findAll();
+//
+//    return $entities;
+//
   }
 
   /**
-   * @Get("/companies/{id}", name="api_company_get")
+   * @Rest\Get("/companies/{id}")
    **/
   public function getCompanyAction($id)
   {
 
-    $em = $this->getDoctrine()->getManager();
-    //$company = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'Company',$id);
-    $company = $em->getRepository('fibeCommunityBundle:Company')->find($id);
-    if (!is_object($company))
-    {
-      throw $this->createNotFoundException();
-    }
-
-    return $company;
+    return $this->get('fibe.rest.crudhandler')->get(
+      $this::ENTITY_CLASSNAME,
+      $id
+    );
   }
 
 
   /**
    * Creates a new company from the submitted data.
    *
-   * @Post("/companies",name="api_company_post")
+   * @Rest\Post("/companies",name="api_company_post")
    *
    * @param Request $request the request object
    *
@@ -70,8 +66,9 @@ class CompanyRESTController extends FOSRestController
   {
 
     return $this->get('fibe.rest.crudhandler')->processForm(
-      $this::CLASSNAME,
       $request,
+      $this::ENTITY_CLASSNAME,
+      $this::FORM_CLASSNAME,
       'POST'
     );
 
@@ -109,7 +106,7 @@ class CompanyRESTController extends FOSRestController
 
   /**
    * Put action
-   * @Put("/companies/{id}")
+   * @Rest\Put("/companies/{id}")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
@@ -118,8 +115,9 @@ class CompanyRESTController extends FOSRestController
   {
 
     return $this->get('fibe.rest.crudhandler')->processForm(
-      $this::CLASSNAME,
       $request,
+      $this::ENTITY_CLASSNAME,
+      $this::FORM_CLASSNAME,
       'PUT'
     );
 
@@ -155,24 +153,24 @@ class CompanyRESTController extends FOSRestController
 
   /**
    * Patch action
-   * @Patch("/companies/{id}")
+   * @Rest\Patch("/companies/{id}")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
    */
   public function patchCompanyAction(Request $request, $id)
   {
-
     return $this->get('fibe.rest.crudhandler')->processForm(
-      $this::CLASSNAME,
       $request,
+      $this::ENTITY_CLASSNAME,
+      $this::FORM_CLASSNAME,
       'PATCH'
     );
   }
 
     /**
    * Put action
-   * @Delete("/companies/{id}")
+   * @Rest\Delete("/companies/{id}")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return View|array
@@ -201,20 +199,25 @@ class CompanyRESTController extends FOSRestController
 
   /**
    * Delete action
+   * @Rest\Delete("/companies/{id}")
    *
    * @var integer $id Id of the entity
-   * @return View
    */
   public function deleteCompanyAction($id)
   {
-    $em = $this->getDoctrine()->getManager();
-    $company = $em->getRepository('fibeCommunityBundle:Company')->find($id);
 
-    $em = $this->getDoctrine()->getManager();
-    $em->remove($company);
-    $em->flush();
-
-    return $this->view(null, Codes::HTTP_NO_CONTENT);
+    return $this->get('fibe.rest.crudhandler')->delete(
+      $this::ENTITY_CLASSNAME,
+      $id
+    );
+//    $em = $this->getDoctrine()->getManager();
+//    $company = $em->getRepository('fibeCommunityBundle:Company')->find($id);
+//
+//    $em = $this->getDoctrine()->getManager();
+//    $em->remove($company);
+//    $em->flush();
+//
+//    return $this->view(null, Codes::HTTP_NO_CONTENT);
   }
 
 }

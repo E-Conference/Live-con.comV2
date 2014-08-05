@@ -58,6 +58,7 @@ security:
                 default_target_path: dashboard_index
                 success_handler: authentication_handler
                 failure_handler: authentication_handler
+                require_previous_session: false # The default value is true
                 #
               #  success_handler: fibe_security.select_conference_success_handler
             oauth:

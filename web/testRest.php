@@ -162,8 +162,21 @@ $(function(){
     }
   });
 
-  //TODO test pagination
+
+  /***********************************************************************************************/
+  /******************************************* test pagination *****************************************/
+  /***********************************************************************************************/
+  test = "test pagination";
+  url  = 'app_dev.php/api/companies';
+  $body.append("<br/><span style='font-size:20px;font-weight: bold'>"+test+" : "+url+"</h3>");
+
+
+  $.ajax({
+    url: url
+  });
   //TODO test remove
+  //TODO test order
+  //TODO test order
 
 
 
