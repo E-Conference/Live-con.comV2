@@ -10,8 +10,10 @@
 
 $(function(){
 
-  var test,
+    var test,
     url,
+    limit,
+    entity,
     entities  ={orga:[]},
     oldCookie = document.cookie,
     $body=$("body"),
@@ -19,10 +21,10 @@ $(function(){
     originalLabel = "test_orga",
     updatedLabel = "test_orga-updated",
     originalTestRest = "test_rest",
-    updatedTestRest = "test_rest-updated"
+    updatedTestRest = "test_rest-updated", offset
     ;
 
-	$.ajaxSetup({  
+	$.ajaxSetup({
 		async:false,
 		complete:function(a) {
 			if(a.status>=300)
@@ -96,7 +98,7 @@ $(function(){
 	    url: url,
 	    data: '{"label": "'+originalLabel+'", "testRest": "'+originalTestRest+'"}',
     success:function(a,b){
-        entities['orga'].push(a);
+      entity = a;
       }
 	});
   /***********************************************************************************************/
@@ -105,25 +107,25 @@ $(function(){
   test = "test PUT";
 
 
-  url =   'app_dev.php/api/companies/'+entities['orga'][0].id+'';
+  url =   'app_dev.php/api/companies/'+entity.id+'';
   $.ajax({
     url: url
   });
-  url =   'app_dev.php/api/companies/'+entities['orga'][0].id+'';
+  url =   'app_dev.php/api/companies/'+entity.id+'';
 
 
   $body.append("<br/><span style='font-size:20px;font-weight: bold'>"+test+" : "+url+"</h3>");
   $.ajax({
     type: "PUT",
     url: url,
-    data: '{"id": "'+entities['orga'][0].id+'","label": "'+updatedLabel+'"}',
+    data: '{"id": "'+entity.id+'","label": "'+updatedLabel+'"}',
       success:function(a,b){
-        entities['orga'][0] = a;
+        entity = a;
       }
   });
 
 
-  url =   'app_dev.php/api/companies/'+entities['orga'][0].id+'';
+  url =   'app_dev.php/api/companies/'+entity.id+'';
 
 
   $.ajax({
@@ -139,7 +141,7 @@ $(function(){
   /******************************************* test PATCH *****************************************/
   /***********************************************************************************************/
   test = "test PATCH";
-  url =   'app_dev.php/api/companies/'+entities['orga'][0].id+'';
+  url =   'app_dev.php/api/companies/'+entity.id+'';
 
   $body.append("<br/><span style='font-size:20px;font-weight: bold'>"+test+" : "+url+"</h3>");
 
@@ -147,9 +149,9 @@ $(function(){
   $.ajax({
     type: "PATCH",
     url: url,
-    data: '{"id": "'+entities['orga'][0].id+'","testRest": "'+updatedTestRest+'"}',
+    data: '{"id": "'+entity.id+'","testRest": "'+updatedTestRest+'"}',
       success:function(a,b){
-        entities['orga'][0] = a;
+        entity = a;
       }
   });
 
@@ -166,13 +168,41 @@ $(function(){
   /***********************************************************************************************/
   /******************************************* test pagination *****************************************/
   /***********************************************************************************************/
-  test = "test pagination";
+  test = "test limit (pagination)";
   url  = 'app_dev.php/api/companies';
+  for(var i = 0; i<10;i++)
+  {
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: '{"label": "'+originalLabel+'", "testRest": "'+originalTestRest+'"}',
+      complete:function(){}//avoid print
+    });
+  }
+  limit = 8;
+  offset = 4;
+  url  = 'app_dev.php/api/companies?offset=0&limit='+limit;
   $body.append("<br/><span style='font-size:20px;font-weight: bold'>"+test+" : "+url+"</h3>");
 
 
   $.ajax({
-    url: url
+    url: url,
+    success:function(a){
+      assertTrue('a.length should be '+limit, a.length == limit);
+      entity = a[offset];
+    }
+  });
+
+  test = "test offset (pagination)";
+  url  = 'app_dev.php/api/companies?offset='+offset;
+  $body.append("<br/><span style='font-size:20px;font-weight: bold'>"+test+" : "+url+"</h3>");
+
+
+  $.ajax({
+    url: url,
+    success:function(a){
+      assertTrue('entity.id should be '+ a[0].id, entity.id == a[0].id);
+    }
   });
   //TODO test remove
   //TODO test order
