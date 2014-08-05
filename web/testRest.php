@@ -58,7 +58,7 @@ $(function(){
 
       $.ajax(
 	    {
-			    contentType: "application/x-www-form-urlencoded", 
+			    contentType: "application/x-www-form-urlencoded",
 	        url : formURL,
 	        type: "POST",
 	        data : postData
@@ -70,7 +70,12 @@ $(function(){
 
   assertTrue('cookie not changed !', oldCookie != document.cookie);
 
-	$.ajaxSetup({ contentType: "application/json"});
+	$.ajaxSetup({
+    beforeSend: function (xhr){
+      xhr.setRequestHeader("Content-Type","application/json");
+      xhr.setRequestHeader("Accept","application/json");
+    }
+  });
 
   /***********************************************************************************************/
   /******************************************* test simple request *****************************************/
