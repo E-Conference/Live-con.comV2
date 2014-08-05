@@ -151,7 +151,6 @@ class ACLEntityHelper extends ACLHelper
     {
       $this->restrictQueryBuilderByConferenceId($queryBuilder);
     }
-    // $this->restrictQueryBuilderByIds($queryBuilder, $ids);
 
     $entities = $queryBuilder->getQuery()->getResult();
     if ("VIEW" == $action && $repositoryName != ACLEntityHelper::LINK_WITH)

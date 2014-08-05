@@ -3,6 +3,11 @@ fibe_community:
     type:     annotation
     prefix:   /
 
+fibe_rest_test:
+    resource: "@fibeCommunityBundle/Controller/REST"
+    type:     annotation
+    prefix:   /api/
+
 fibe_content:
     resource: "@fibeContentBundle/Controller/"
     type:     annotation
