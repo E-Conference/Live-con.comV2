@@ -158,6 +158,46 @@ class EventController extends Controller
   }
 
   /**
+   * Displays a form to create a new Event entity.
+   * @Route("session/{id}/addEvent",name="event_addeventensession")
+   * @Template()
+   */
+  public function addEventInSessionAction(Request $request,$id)
+  {
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Event');
+    $em = $this->getDoctrine()->getManager();
+    //From the index I can create event with all categories
+    $categoriesLevel = array("levels" => array(3));
+
+    $form = $this->createForm(new EventType($categoriesLevel), $entity);
+
+    $form->bind($request);
+
+    if ($form->isValid())
+    {
+      $em = $this->getDoctrine()->getManager();
+      $entity->setParent($em->getRepository('fibeEventBundle:Event')->find($id));
+      $em->persist($entity);
+
+      $em->flush();
+
+      //$this->get('fibe_security.acl_entity_helper')->createACL($entity,MaskBuilder::MASK_OWNER);
+
+      return $this->redirect($this->generateUrl('event_event_show', array('id' => $id)));
+    }
+
+
+    return $this->render(
+      'fibeEventBundle:Event:new.html.twig',
+      array(
+        'entity'          => $entity,
+        'form'            => $form->createView(),
+        'categoriesLevel' => $categoriesLevel,
+      )
+    );
+  }
+
+  /**
    * Finds and displays a Event entity.
    * @Route("/{id}/show", name="event_event_show")
    * @Template()

@@ -89,6 +89,7 @@ class CompanyRESTController extends FOSRestController
       $em->persist($company);
       $em->flush();
 
+
       return $this->redirectView(
         $this->generateUrl(
           'fibe_community_rest_companyrest_getcompany',
