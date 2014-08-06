@@ -35,12 +35,7 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
 
   }
   public function onAuthenticationSuccess(Request $request, TokenInterface $token) {
-    $result = array(
-      'success'   => true,
-      'user'      => $this->jms_serializer->serialize( $token->getUser(), 'json'),
-      'targetUrl' => $request->getSession()->get('_security.main.target_path')
-    );
-    $response = new Response(json_encode($result));
+    $response = new Response($this->jms_serializer->serialize( $token->getUser(), 'json'));
     $response->headers->set('Content-Type', 'application/json');
     return $response;
   }
