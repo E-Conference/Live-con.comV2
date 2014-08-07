@@ -40,6 +40,7 @@ liveconApp.config(['$translateProvider', function ($translateProvider) {
         'Search_organization': 'Search an organization',
         'Login_success': 'Welcome to live-con.com',
         'Login_error': 'Bad credentials',
+        'Forgotten_password' : 'Forgotten password',
         'signout_success' : 'Thanks for coming, see you soon'
     });   
 
@@ -52,6 +53,7 @@ liveconApp.config(['$translateProvider', function ($translateProvider) {
         'Search_organization': 'Rechercher une organization',
         'Login_success': 'Bienvenue sur live-con.com',
         'Login_error': 'Login impossible',
+        'Forgotten_password' : 'Mot de passe oublié ?',
         'signout_success' : 'Merci d\'utiliser Live-con.com, à bientôt'
     });   
 

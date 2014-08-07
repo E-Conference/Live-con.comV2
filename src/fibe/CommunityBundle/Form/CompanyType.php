@@ -2,6 +2,7 @@
 
 namespace fibe\CommunityBundle\Form;
 
+use fibe\CommunityBundle\Entity\AdditionalInformations;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -16,13 +17,13 @@ class CompanyType extends AbstractType
   {
     $builder
       ->add('label')
-      ->add('testRest')
       ->add('members', 'entity', array(
         'class'    => 'fibeCommunityBundle:Person',
         'label'    => 'Members',
         'multiple' => true,
         'required' => false
-      ));
+      ))
+      ->add('additional_information', new AdditionalInformationsType());
   }
 
   /**

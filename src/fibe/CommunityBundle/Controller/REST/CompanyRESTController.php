@@ -21,7 +21,7 @@ class CompanyRESTController extends FOSRestController
 
   /**
    * Lists all Company entities.
-   * @Rest\Get("/companies")
+   * @Rest\Get("/companies", name="community_companies_all")
    * @Rest\View
    * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
    * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
@@ -41,7 +41,7 @@ class CompanyRESTController extends FOSRestController
   }
 
   /**
-   * @Rest\Get("/companies/{id}")
+   * @Rest\Get("/companies/{id}", name="community_companies_get")
    **/
   public function getCompanyAction($id)
   {
@@ -56,7 +56,7 @@ class CompanyRESTController extends FOSRestController
   /**
    * Creates a new company from the submitted data.
    *
-   * @Rest\Post("/companies",name="api_company_post")
+   * @Rest\Post("/companies",name="community_companies_post")
    *
    * @param Request $request the request object
    *
@@ -107,7 +107,7 @@ class CompanyRESTController extends FOSRestController
 
   /**
    * Put action
-   * @Rest\Put("/companies/{id}")
+   * @Rest\Put("/companies/{id}", name="community_companies_put")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
@@ -154,7 +154,7 @@ class CompanyRESTController extends FOSRestController
 
   /**
    * Patch action
-   * @Rest\Patch("/companies/{id}")
+   * @Rest\Patch("/companies/{id}", name="community_companies_patch")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
@@ -200,7 +200,7 @@ class CompanyRESTController extends FOSRestController
 
   /**
    * Delete action
-   * @Rest\Delete("/companies/{id}")
+   * @Rest\Delete("/companies/{id}", name="community_companies_delete")
    *
    * @var integer $id Id of the entity
    */

@@ -41,13 +41,6 @@ class Company
    */
   private $label;
 
-  /**
-   * testRest
-   *
-   * @ORM\Column(type="string")
-   * @Expose
-   */
-  private $testRest;
 
   /**
    * Sponsors
@@ -61,7 +54,7 @@ class Company
    *
    * @ORM\ManyToOne(targetEntity="fibe\CommunityBundle\Entity\AdditionalInformations", cascade={"persist"})
    * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id")
-   *
+   * @Expose
    */
   private $additionalInformation;
 
@@ -71,13 +64,6 @@ class Company
    */
   private $members;
 
-  /**
-   * Company related to a mainEvent
-   *
-   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="companies", cascade={"persist"})
-   * @ORM\JoinColumn(name="conference_id", referencedColumnName="id")
-   */
-  private $mainEvent;
 
   /**
    * @ORM\Column(type="string", length=256, nullable=true)
@@ -184,29 +170,6 @@ class Company
   }
 
 
-  /**
-   * Set testRest
-   *
-   * @param string $testRest
-   *
-   * @return $this
-   */
-  public function setTestRest($testRest)
-  {
-    $this->testRest = $testRest;
-
-    return $this;
-  }
-
-  /**
-   * Get testRest
-   *
-   * @return string
-   */
-  public function getTestRest()
-  {
-    return $this->testRest;
-  }
 
   /**
    * Add members

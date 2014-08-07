@@ -15,6 +15,7 @@ class AdditionalInformationsType extends AbstractType
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
     $builder
+      ->add('id')
       ->add('website')
       ->add('country')
       ->add('img')

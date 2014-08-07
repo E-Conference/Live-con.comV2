@@ -1,31 +1,42 @@
 
 angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG', 'userFactory', '$location',
 function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, userFactory, $location) {
+
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
-    $scope.loginAction = function(user){
-        userFactory.login({},{"_username" : $scope.user.username, "_password": $scope.user.password}, function(response, args) {$scope.success(response, args)},  function(response, args) {$scope.error(response, args)});
-    }
-    $scope.error = function(response, args){
+
+    var error = function(response, args){
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'Login_error', type:'danger'});
     }
-    $scope.success = function(response, args){
+    var success = function(response, args){
         $scope.user = response;
         $rootScope.currentUser = response;
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'Login_success', type:'success'});
         $location.path('/');
     }
-
+    $scope.signinAction = function(user){
+        userFactory.signin({},{"_username" : $scope.user.username, "_password": $scope.user.password},success, error);
+    }
 }]);
 
 
 
-angular.module('authenticationApp').controller('signupCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG',
-function ($scope, $routeParams, GLOBAL_CONFIG) {
+angular.module('authenticationApp').controller('signupCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'userFactory',
+function ($scope, $routeParams, GLOBAL_CONFIG, userFactory) {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
-    $scope.signupAction = function(){
-
+    var error = function(response, args){
+        $rootScope.$broadcast('AlertCtrl:addAlert', {code:'Register_error', type:'danger'});
     }
+    var success = function(response, args){
+        $scope.user = response;
+        $rootScope.currentUser = response;
+        $rootScope.$broadcast('AlertCtrl:addAlert', {code:'Register_success', type:'success'});
+        $location.path('/');
+    }
+    $scope.signupAction = function(){
+        userFactory.signup({},{"_username" : $scope.user.username, "_password": $scope.user.password},success, error);
+    }
+
 }]);
 
 

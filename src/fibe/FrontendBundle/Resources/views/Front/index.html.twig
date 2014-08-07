@@ -67,22 +67,12 @@
     <!-- <script src="{{ asset('bundles/frontend/app/js/animations.js') }}"></script> -->
 
 
-    <!-- TODO : add to vendors diles : cryptojs files -->
-    <script type='text/javascript' src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
-    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
-    <script type='text/javascript' src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/mode-ecb.js"></script>
-
     <!-- basic client app context definition -->
     <script>
         var globalConfig = {
             api: {
                 urls: {
-                    {#get_organizations: "{{ path('') }}",#}
-                    {#get_organization: "{{ path('',  {id: '1'}) }}",#}
-                    {#post_organization: "{{ path('') }}",#}
-                    {#put_organization: "{{ path('  ',  {id: '1'}) }}",#}
-                    {#delete_organization: "{{ path('',  {id: '1'}) }}",#}
-
+                    get_companies: "{{ path('community_companies_post') }}",
                     login: "{{ path('login_check', {_format: 'json'}) }}",
                     {#registration: "{{ path('') }}"#}
 

@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="additional_informations")
  * @ORM\Entity(repositoryClass="fibe\CommunityBundle\Repository\AdditionalInformationsRepository")
- *
+ * @ExclusionPolicy("all")
  */
 class AdditionalInformations
 {
@@ -23,6 +23,7 @@ class AdditionalInformations
    * @ORM\Id
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
+   * @Expose
    */
   private $id;
 
@@ -32,28 +33,28 @@ class AdditionalInformations
    * @ORM\Column(type="string", nullable=true)
    * @Expose
    */
-  private $website;
+private $website;
 
   /**
    * @TODO Enum : I18N (CodeInfo/JS/...)
    *
    * country
-   *
    * @ORM\Column(type="string", nullable=true)
+   * @Expose
    */
   private $country;
 
   /**
    * img
-   *
    * @ORM\Column(type="string", nullable=true,  name="img")
+   * @Expose
    */
   private $img;
 
   /**
    * email
-   *
    * @ORM\Column(type="string", nullable=true,  name="email")
+   * @Expose
    */
   private $email;
 
