@@ -8,6 +8,7 @@
   use FOS\UserBundle\Entity\User as BaseUser;
   use Doctrine\ORM\Mapping as ORM;
 
+  use JMS\Serializer\Annotation\Exclude;
   use JMS\Serializer\Annotation\Type;
   use JMS\Serializer\Annotation\ExclusionPolicy;
   use JMS\Serializer\Annotation\Expose;
@@ -38,9 +39,15 @@
     protected $username;
 
     /**
+    * @var string
+    * @Type("string")
+    * @Exclude
+    */
+    protected $salt;
+
+    /**
      * @var string
      * @Type("string")
-     * @Expose
      */
     protected $password;
 
@@ -75,9 +82,6 @@
  
     /** @ORM\Column(name="picture", type="string", length=255, nullable=true) */
     protected $picture;
-
-    protected $captcha;
-
 
 
 

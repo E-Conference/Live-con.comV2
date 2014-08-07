@@ -120,7 +120,7 @@ fos_rest:
             xml:  true
     format_listener:
         rules:
-            - { path: ^/, priorities: [ html, json, xml, css ], fallback_format: ~, prefer_extension: true }
+            - { path: ^/, priorities: [ html, json, xml, css, js ], fallback_format: ~, prefer_extension: true }
     exception:
         codes:
             'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
