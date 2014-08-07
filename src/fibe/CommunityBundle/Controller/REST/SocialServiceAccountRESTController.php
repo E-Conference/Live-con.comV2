@@ -1,6 +1,6 @@
 <?php
 
-namespace fibe\ContentBundle\Controller\REST;
+namespace fibe\CommunityBundle\Controller\REST;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;

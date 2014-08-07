@@ -1,6 +1,6 @@
 <?php
 
-namespace fibe\ContentBundle\Controller\REST;
+namespace fibe\CommunityBundle\Controller\REST;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
@@ -12,7 +12,7 @@ use FOS\RestBundle\Util\Codes;
 /**
  * AdditionalInformationsControl rest controller.
  */
-class AdditionalInformationsControlRESTController extends FOSRestController
+class AdditionalInformationsRESTController extends FOSRestController
 {
 
   const ENTITY_CLASSNAME = "fibe\\ContentBundle\\Entity\\AdditionalInformationsControl";
