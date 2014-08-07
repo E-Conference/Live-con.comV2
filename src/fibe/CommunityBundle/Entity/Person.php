@@ -55,7 +55,7 @@ class Person
 
   /**
    * label
-   * Name of the person (Family Name + FirstName)
+   * Full name of the person (Family Name + FirstName)
    * 
    * @ORM\Column(type="string")
    * @Expose

@@ -30,7 +30,7 @@ class MainEventType extends AbstractType
         ->add('logo', 'file', array('required' => false,
           'label'    => 'Logo (jpeg - png - 2MO)',
           'attr'     => array('placeholder' => 'logoPath')))
-       
+
       ;
     }
     

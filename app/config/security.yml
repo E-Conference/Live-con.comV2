@@ -50,7 +50,7 @@ security:
                 path:     /
                 domain:   ~ # Defaults to the current domain from $_SERVER
             pattern:   ^/
-            anonymous: true
+            anonymous: false
             provider:  main
             form_login:
                 login_path: /login

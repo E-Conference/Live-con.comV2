@@ -25,7 +25,7 @@ class TopicRESTController extends FOSRestController
    * @Rest\View
    * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
    * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
-   * @Rest\QueryParam(name="query", requirements="[a-z]{2,64}", nullable=true, description="the query to search.")
+   * @Rest\QueryParam(name="query", requirements=".{2,128}", nullable=true, description="the query to search.")
    */
   public function getTopicsAction(Request $request, ParamFetcherInterface $paramFetcher)
   {

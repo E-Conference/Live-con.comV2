@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use fibe\EventBundle\Entity\MainEvent;
 
 /**
- * plain old object used as dto for user permissions about the current conference
+ * plain old object used as DTO for a form purpose
  */
 class UserConfPermission
 {
