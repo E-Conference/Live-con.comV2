@@ -1,0 +1,131 @@
+<?php
+
+namespace fibe\ContentBundle\Controller\REST;
+
+use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use Symfony\Component\HttpFoundation\Request;
+
+use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Util\Codes;
+
+/**
+ * MainEvent rest controller.
+ */
+class MainEventRESTController extends FOSRestController
+{
+
+  const ENTITY_CLASSNAME = "fibe\\ContentBundle\\Entity\\MainEvent";
+  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\MainEvent";
+
+
+  /**
+   * Lists all MainEvent entities.
+   * @Rest\Get("/mainEvents")
+   * @Rest\View
+   * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
+   * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
+   * @Rest\QueryParam(name="query", requirements="[a-z]{2,64}", nullable=true, description="the query to search.")
+   */
+  public function getMainEventsAction(Request $request, ParamFetcherInterface $paramFetcher)
+  {
+    return $this->get('fibe.rest.crudhandler')->getAll(
+      $this::ENTITY_CLASSNAME,
+      $paramFetcher
+    );
+
+  }
+
+  /**
+   * @Rest\Get("/mainEvents/{id}")
+   **/
+  public function getMainEventAction($id)
+  {
+
+    return $this->get('fibe.rest.crudhandler')->get(
+      $this::ENTITY_CLASSNAME,
+      $id
+    );
+  }
+
+
+  /**
+   * Creates a new MainEvent from the submitted data.
+   *
+   * @Rest\Post("/mainEvents",name="api_mainEvent_post")
+   *
+   * @param Request $request the request object
+   *
+   * @return array|\FOS\RestBundle\View\View
+   */
+  public function postMainEventAction(Request $request)
+  {
+
+    return $this->get('fibe.rest.crudhandler')->processForm(
+      $request,
+      $this::ENTITY_CLASSNAME,
+      $this::FORM_CLASSNAME,
+      'POST'
+    );
+
+  }
+
+
+  /**
+   * Put action
+   * @Rest\Put("/mainEvents/{id}")
+   * @var Request $request
+   * @var integer $id Id of the entity
+   * @return mixed
+   */
+  public function putMainEventAction(Request $request, $id)
+  {
+
+    return $this->get('fibe.rest.crudhandler')->processForm(
+      $request,
+      $this::ENTITY_CLASSNAME,
+      $this::FORM_CLASSNAME,
+      'PUT'
+    );
+
+  }
+
+
+  /**
+   * Patch action
+   * @Rest\Patch("/mainEvents/{id}")
+   * @var Request $request
+   * @var integer $id Id of the entity
+   * @return mixed
+   */
+  public function patchMainEventAction(Request $request, $id)
+  {
+    return $this->get('fibe.rest.crudhandler')->processForm(
+      $request,
+      $this::ENTITY_CLASSNAME,
+      $this::FORM_CLASSNAME,
+      'PATCH'
+    );
+  }
+
+  
+
+
+  /**
+   * Delete action
+   * @Rest\Delete("/mainEvents/{id}")
+   *
+   * @var integer $id Id of the entity
+   */
+  public function deleteMainEventAction($id)
+  {
+
+    return $this->get('fibe.rest.crudhandler')->delete(
+      $this::ENTITY_CLASSNAME,
+      $id
+    );
+;
+  }
+
+}
+        
