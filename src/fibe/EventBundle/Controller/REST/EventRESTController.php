@@ -10,24 +10,24 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Util\Codes;
 
 /**
- * Location rest controller.
+ * Event rest controller.
  */
-class LocationRESTController extends FOSRestController
+class EventRESTController extends FOSRestController
 {
 
-  const ENTITY_CLASSNAME = "fibe\\ContentBundle\\Entity\\Location";
-  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\Location";
+  const ENTITY_CLASSNAME = "fibe\\ContentBundle\\Entity\\Event";
+  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\Event";
 
 
   /**
-   * Lists all Location entities.
-   * @Rest\Get("/locations")
+   * Lists all Event entities.
+   * @Rest\Get("/events")
    * @Rest\View
    * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
    * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
    * @Rest\QueryParam(name="query", requirements="[a-z]{2,64}", nullable=true, description="the query to search.")
    */
-  public function getLocationsAction(Request $request, ParamFetcherInterface $paramFetcher)
+  public function getEventsAction(Request $request, ParamFetcherInterface $paramFetcher)
   {
     return $this->get('fibe.rest.crudhandler')->getAll(
       $this::ENTITY_CLASSNAME,
@@ -37,9 +37,9 @@ class LocationRESTController extends FOSRestController
   }
 
   /**
-   * @Rest\Get("/locations/{id}")
+   * @Rest\Get("/events/{id}")
    **/
-  public function getLocationAction($id)
+  public function getEventAction($id)
   {
 
     return $this->get('fibe.rest.crudhandler')->get(
@@ -50,15 +50,15 @@ class LocationRESTController extends FOSRestController
 
 
   /**
-   * Creates a new Location from the submitted data.
+   * Creates a new Event from the submitted data.
    *
-   * @Rest\Post("/locations",name="api_location_post")
+   * @Rest\Post("/events",name="api_event_post")
    *
    * @param Request $request the request object
    *
    * @return array|\FOS\RestBundle\View\View
    */
-  public function postLocationAction(Request $request)
+  public function postEventAction(Request $request)
   {
 
     return $this->get('fibe.rest.crudhandler')->processForm(
@@ -73,12 +73,12 @@ class LocationRESTController extends FOSRestController
 
   /**
    * Put action
-   * @Rest\Put("/locations/{id}")
+   * @Rest\Put("/events/{id}")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
    */
-  public function putLocationAction(Request $request, $id)
+  public function putEventAction(Request $request, $id)
   {
 
     return $this->get('fibe.rest.crudhandler')->processForm(
@@ -93,12 +93,12 @@ class LocationRESTController extends FOSRestController
 
   /**
    * Patch action
-   * @Rest\Patch("/locations/{id}")
+   * @Rest\Patch("/events/{id}")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
    */
-  public function patchLocationAction(Request $request, $id)
+  public function patchEventAction(Request $request, $id)
   {
     return $this->get('fibe.rest.crudhandler')->processForm(
       $request,
@@ -113,11 +113,11 @@ class LocationRESTController extends FOSRestController
 
   /**
    * Delete action
-   * @Rest\Delete("/locations/{id}")
+   * @Rest\Delete("/events/{id}")
    *
    * @var integer $id Id of the entity
    */
-  public function deleteLocationAction($id)
+  public function deleteEventAction($id)
   {
 
     return $this->get('fibe.rest.crudhandler')->delete(
