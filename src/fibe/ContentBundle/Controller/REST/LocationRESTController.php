@@ -10,23 +10,23 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Util\Codes;
 
 /**
- * Company rest controller.
+ * Location rest controller.
  */
-class EquipmentRESTController extends FOSRestController
+class LocationRESTController extends FOSRestController
 {
 
-  const ENTITY_CLASSNAME = "fibe\\ContentBundle\\Entity\\Equipment";
-  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\Equipment";
+  const ENTITY_CLASSNAME = "fibe\\ContentBundle\\Entity\\Location";
+  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\Location";
 
 
   /**
-   * Lists all Equipment entities.
-   * @Rest\Get("/equipments")
+   * Lists all Location entities.
+   * @Rest\Get("/locations")
    * @Rest\View
    * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
    * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
    */
-  public function getEquipmentsAction(Request $request, ParamFetcherInterface $paramFetcher)
+  public function getLocationsAction(Request $request, ParamFetcherInterface $paramFetcher)
   {
     return $this->get('fibe.rest.crudhandler')->getAll(
       $this::ENTITY_CLASSNAME,
@@ -36,9 +36,9 @@ class EquipmentRESTController extends FOSRestController
   }
 
   /**
-   * @Rest\Get("/equipments/{id}")
+   * @Rest\Get("/locations/{id}")
    **/
-  public function getEquipmentAction($id)
+  public function getLocationAction($id)
   {
 
     return $this->get('fibe.rest.crudhandler')->get(
@@ -49,15 +49,15 @@ class EquipmentRESTController extends FOSRestController
 
 
   /**
-   * Creates a new equipment from the submitted data.
+   * Creates a new Location from the submitted data.
    *
-   * @Rest\Post("/equipments",name="api_equipment_post")
+   * @Rest\Post("/locations",name="api_location_post")
    *
    * @param Request $request the request object
    *
    * @return array|\FOS\RestBundle\View\View
    */
-  public function postEquipmentAction(Request $request)
+  public function postLocationAction(Request $request)
   {
 
     return $this->get('fibe.rest.crudhandler')->processForm(
@@ -72,12 +72,12 @@ class EquipmentRESTController extends FOSRestController
 
   /**
    * Put action
-   * @Rest\Put("/equipments/{id}")
+   * @Rest\Put("/locations/{id}")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
    */
-  public function putEquipmentAction(Request $request, $id)
+  public function putLocationAction(Request $request, $id)
   {
 
     return $this->get('fibe.rest.crudhandler')->processForm(
@@ -92,12 +92,12 @@ class EquipmentRESTController extends FOSRestController
 
   /**
    * Patch action
-   * @Rest\Patch("/equipments/{id}")
+   * @Rest\Patch("/locations/{id}")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
    */
-  public function patchEquipmentAction(Request $request, $id)
+  public function patchLocationAction(Request $request, $id)
   {
     return $this->get('fibe.rest.crudhandler')->processForm(
       $request,
@@ -112,11 +112,11 @@ class EquipmentRESTController extends FOSRestController
 
   /**
    * Delete action
-   * @Rest\Delete("/equipments/{id}")
+   * @Rest\Delete("/locations/{id}")
    *
    * @var integer $id Id of the entity
    */
-  public function deleteEquipmentAction($id)
+  public function deleteLocationAction($id)
   {
 
     return $this->get('fibe.rest.crudhandler')->delete(
