@@ -3,6 +3,7 @@
 namespace fibe\RestBundle\Handler;
 
 use Doctrine\ORM\EntityManager;
+use fibe\RestBundle\Search\SearchServiceInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use JMS\Serializer\SerializerInterface;
@@ -11,15 +12,17 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CrudHandler
 {
-  private $em;
-  private $serializer;
-  private $formFactory;
+  protected $em;
+  protected $serializer;
+  protected $formFactory;
+  protected $searchService;
 
-  public function __construct(EntityManager $em, SerializerInterface $serializer, FormFactoryInterface $formFactory)
+  public function __construct(EntityManager $em, SerializerInterface $serializer, FormFactoryInterface $formFactory,SearchServiceInterface $searchService)
   {
     $this->em = $em;
     $this->serializer = $serializer;
     $this->formFactory = $formFactory;
+    $this->searchService = $searchService;
   }
 
   public function get($entityClassName, $id)
@@ -32,6 +35,12 @@ class CrudHandler
     $offset = $paramFetcher->get('offset');
 //    $offset = null == $offset ? 0 : $offset;
     $limit = $paramFetcher->get('limit');
+    if(($query = $paramFetcher->get('query')) != null)
+    {
+      return $this->searchService->doSearch($entityClassName, $query, $limit, $offset);
+    }
+
+    //search
 
     return $this->em->getRepository($entityClassName)->findBy(array(), null, $limit, $offset);
   }
@@ -81,4 +90,5 @@ class CrudHandler
     $this->em->persist($entity);
     $this->em->flush($entity);
   }
+
 }

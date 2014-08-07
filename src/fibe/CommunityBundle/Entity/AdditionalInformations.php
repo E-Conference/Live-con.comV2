@@ -51,7 +51,7 @@ class AdditionalInformations
   private $img;
 
   /**
-   * email
+   * emailgit add -u 
    *
    * @ORM\Column(type="string", nullable=true,  name="email")
    */

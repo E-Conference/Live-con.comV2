@@ -8,6 +8,7 @@
         <parameter key="serialize_exception_listener.class">fibe\RestBundle\Listener\SerializeExceptionListener</parameter>
         <parameter key="authentication_handler.class">fibe\RestBundle\Listener\AuthenticationHandler</parameter>
         <parameter key="fibe.rest.crudhandler.class">fibe\RestBundle\Handler\CrudHandler</parameter>
+        <parameter key="fibe.rest.searchservice.class">fibe\RestBundle\Search\SearchService</parameter>
         <!--<parameter key="app.cors_listener.class">fibe\RestBundle\Listener\CorsListener</parameter>-->
         <!--<parameter key="session.storage.native_file.class">fibe\RestBundle\Session\Storage</parameter>-->
     </parameters>
@@ -28,7 +29,13 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="jms_serializer"/>
             <argument type="service" id="form.factory"/>
-            <argument type="service" id="router"/>
+            <argument type="service" id="fibe.rest.searchservice"/>
+        </service>
+
+        <!-- search serice-->
+        <service id="fibe.rest.searchservice" class="%fibe.rest.searchservice.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="annotations.reader" />
         </service>
 
 
