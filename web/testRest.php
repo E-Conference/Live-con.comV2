@@ -214,12 +214,13 @@ $(function(){
   /******************************************* test search *****************************************/
   /***********************************************************************************************/
   test = "test search";
-  url  = 'app_dev.php/api/companies?query='+"updated";
+  url  = 'app_dev.php/api/companies?query='+"t_orga-u";
   $body.append("<br/><span style='font-size:20px;font-weight: bold'>"+test+" : "+url+"</h3>");
 
   $.ajax({
     url: url,
     success:function(a){
+      assertTrue('a.length should be > 0', a.length > 0);/**/
     }
   });
 

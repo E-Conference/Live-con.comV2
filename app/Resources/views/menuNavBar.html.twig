@@ -29,12 +29,12 @@
           <ul class="dropdown-menu">
 
             <li>
-              <a style="padding-right:5px;" href="{{ path('mainevent_show') }}">
+              <a style="padding-right:5px;" href="{{ path('event_mainevent_show') }}">
                 <i class="fa  fa-search-plus fa-3x"></i> Overview
               </a>
 
               {% if is_granted('VIEW', app.user.currentMainEvent.module) %}
-                <a style="padding-right:5px;" href="{{ path('mainevent_module') }}">
+                <a style="padding-right:5px;" href="{{ path('event_mainevent_module') }}">
                   <i class="fa fa-inbox fa-3x"></i> Modules manager
                 </a>
               {% endif %}
@@ -82,7 +82,7 @@
               {% endif %}
 
               {% if app.user.getCurrentMainEvent().getModule().getOrganizationModule()== true %}
-                <a style="padding-right:5px;" href="{{ path('company_company_index') }}">
+                <a style="padding-right:5px;" href="{{ path('community_company_index') }}">
                   <i class="fa fa-users fa-3x"></i> Organizations
                 </a>
               {% endif %}
@@ -108,7 +108,7 @@
         </li>
 
         <li>
-          <a style="padding-right:5px;" href="{{ path('event_view') }}">
+          <a style="padding-right:5px;" href="{{ path('event_event') }}">
             <i class="fa fa-calendar fa-3x"></i> Schedule
           </a>
         </li>

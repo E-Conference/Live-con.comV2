@@ -22,26 +22,24 @@ class SearchService implements SearchServiceInterface
     $this->em = $em;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function doSearch($entityClassName, $query, $limit, $offset)
   {
-    $searchArray = [];
     $searchFields = $this->getSearchFields($entityClassName);
-
     $qb = $this->em->getRepository($entityClassName)->createQueryBuilder('qb')  //add select and array for JSON
     ->setMaxResults($limit)
     ->setFirstResult($offset);
+
     foreach($searchFields as $searchField)
     {
-      $qb->andWhere('qb.'.$searchField.' LIKE :string')
+      $qb->orWhere('qb.'.$searchField.' LIKE :string')
          ->setParameter('string', '%'.$query.'%');
     }
 
     return $qb->getQuery()->getResult();
   }
-
-  /**
-   * {@inheritdoc}
-   */
   protected function getSearchFields($entityClassName)
   {
     $searchFields = [];

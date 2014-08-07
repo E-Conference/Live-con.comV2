@@ -3,17 +3,16 @@ namespace fibe\SecurityBundle\Services;
  
 use fibe\SecurityBundle\Entity\User;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
+use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseFOSUBUserProvider;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
-use FOS\UserBundle\Model\UserManagerInterface; 
+use FOS\UserBundle\Model\UserManagerInterface;
 use Doctrine\ORM\ORMException;
 
 /**
  *  Social media user provider @see https://gist.github.com/danvbe/4476697#file-fosubuserprovider-php
  */
-class FOSUBUserProvider extends BaseClass
+class FOSUBUserProvider extends BaseFOSUBUserProvider
 {
 
     protected $session;

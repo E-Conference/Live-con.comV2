@@ -39,9 +39,6 @@ class CrudHandler
     {
       return $this->searchService->doSearch($entityClassName, $query, $limit, $offset);
     }
-
-    //search
-
     return $this->em->getRepository($entityClassName)->findBy(array(), null, $limit, $offset);
   }
 
