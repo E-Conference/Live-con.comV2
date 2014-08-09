@@ -2,12 +2,12 @@ angular.module('organizationApp').factory('Organization', ['$resource', '$cached
     function($cachedResource){
         return $cachedResource(
             globalConfig.api.urls.get_companies,
-            {'id': '@id'},
+            {},
             {
-                get: {method:'GET', url: globalConfig.api.urls.get_companies+'/:id', params:{cache: true}, isArray:false},
+                get: {method:'GET', url: globalConfig.api.urls.get_companies+'/:id', params:{'id': '@id', cache: true}, isArray:false},
                 create: {method:'POST', params:{}, isArray:false},
-                update: {method:'PATCH', url: globalConfig.api.urls.get_companies+'/:id', isArray:false},
-                delete: {method:'DELETE', url: globalConfig.api.urls.get_companies+'/:id', isArray:false},
+                update: {method:'PUT', url: globalConfig.api.urls.get_companies+'/:id', params:{'id': '@id'}, isArray:false},
+                delete: {method:'DELETE', url: globalConfig.api.urls.get_companies+'/:id', params:{'id': '@id'}, isArray:false},
                 all: {method:'GET', params:{}, isArray:true}
             }
         );

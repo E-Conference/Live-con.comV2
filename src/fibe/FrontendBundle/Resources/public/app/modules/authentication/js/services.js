@@ -14,8 +14,8 @@ angular.module('authenticationApp').factory('userFactory', ['$resource',
     }]);
 
 
-angular.module('authenticationApp').factory('globalHttpInterceptor', ['$q',
-    function($q) {
+angular.module('authenticationApp').factory('globalHttpInterceptor', ['$q', '$rootScope',
+    function($q, $rootScope) {
         return {
             'request' : function(config){
                 return config;

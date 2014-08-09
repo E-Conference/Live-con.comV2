@@ -84,7 +84,7 @@ class CrudHandler
   public function delete($entityClassName, $id)
   {
     $entity = $this->em->getRepository($entityClassName)->find($id);
-    $this->em->persist($entity);
+    $this->em->remove($entity);
     $this->em->flush($entity);
   }
 

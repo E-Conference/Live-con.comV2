@@ -1,0 +1,21 @@
+<div ng-include="GLOBAL_CONFIG.app.modules.organization.urls.partials+'organization-actions.html'" ng-controller="organizationMainCtrl"></div>
+
+<input type="text" class="form-control" placeholder="Search" ng-model="query">
+        
+<div class="row" infinite-scroll='scroll()' infinite-scroll-disabled='busy' infinite-scroll-distance='0.5'>
+    <div ng-repeat="organization in organizations  track by $index" class="col-sm-6 col-md-6 col-lg-4 well">
+        <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+        <h2>{{ organization.label }}</h2>
+        <p>{{ organization.additional_information.website }}</p>
+        <p>{{ organization.additional_information.country }}</p>
+        <a class="btn btn-warning" href="#organization/edit/{{ organization.id }}" role="button"><i class="fa fa-edit fa-1x"></i></a>
+        <a class="btn btn-default" href="#organization/show/{{ organization.id }}" role="button"><i class="fa fa-eye fa-1x"></i></a>
+        <a class="btn btn-primary" href="" data-ng-click="clone(organization)" role="button"><i class="fa fa-files-o fa-1x"></i></a>
+        <button class="btn btn-danger" data-ng-click="deleteModal($index, organization)" role="button"><i class="fa fa-trash-o fa-1x"></i></button>
+    </div>
+</div>
+
+
+
+
+

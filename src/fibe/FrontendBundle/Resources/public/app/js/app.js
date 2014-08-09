@@ -2,7 +2,7 @@
 
 /* sub modules */
 angular.module('communityApp', []);
-angular.module('organizationApp', []);
+angular.module('organizationApp', ['fundoo.services']);
 angular.module('angularTranslateApp', ['pascalprecht.translate']);
 angular.module('authenticationApp',['ngCookies']);
 
@@ -12,7 +12,6 @@ var liveconApp = angular.module('liveconApp', [
     'ngAnimate',
     'ngResource',
     'ngCookies',
-    'ui.bootstrap',
     'ngDragDrop',
     'angular-loading-bar',
     'ngCachedResource',

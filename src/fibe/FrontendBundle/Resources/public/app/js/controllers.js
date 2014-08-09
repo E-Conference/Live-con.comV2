@@ -4,6 +4,18 @@
 
 var liveconControllers = angular.module('liveconControllers', []);
 
+/*********************************** MAIN **********************************************/
+liveconControllers.controller('mainCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG',
+    function ($scope, $routeParams, GLOBAL_CONFIG) {
+        $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
+
+        $scope.scrollTop = function(){
+            $('html, body').animate({scrollTop:0}, 'slow');
+        }
+    }]);
+
+
+
 /*********************************** NAVS **********************************************/
 liveconControllers.controller('AlertCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', '$timeout',
     function ($scope, $routeParams, GLOBAL_CONFIG, $timeout) {
@@ -34,13 +46,6 @@ liveconControllers.controller('AlertCtrl', ['$scope', '$routeParams', 'GLOBAL_CO
 
 
     }]);
-
-/*********************************** NAVS **********************************************/
-liveconControllers.controller('mainCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG',
-    function ($scope, $routeParams, GLOBAL_CONFIG) {
-        $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
-    }]);
-
 
 /*********************************** NAVS **********************************************/
 liveconControllers.controller('navLeftCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG',

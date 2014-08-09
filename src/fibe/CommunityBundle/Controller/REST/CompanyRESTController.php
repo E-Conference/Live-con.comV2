@@ -24,7 +24,7 @@ class CompanyRESTController extends FOSRestController
    * @Rest\Get("/companies", name="community_companies_all")
    * @Rest\View
    * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
-   * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
+   * @Rest\QueryParam(name="limit", requirements="\d+", default="70", description="How many entity to return.")
    * @Rest\QueryParam(name="query", requirements=".{2,64}", nullable=true, description="the query to search.")
    */
   public function getCompaniesAction(Request $request, ParamFetcherInterface $paramFetcher)
@@ -33,12 +33,6 @@ class CompanyRESTController extends FOSRestController
       $this::ENTITY_CLASSNAME,
       $paramFetcher
     );
-
-//    $em = $this->getDoctrine()->getManager();
-//    $entities = $em->getRepository('fibeCommunityBundle:Company')->findAll();
-//
-//    return $entities;
-//
   }
 
   /**
@@ -72,37 +66,6 @@ class CompanyRESTController extends FOSRestController
       $this::FORM_CLASSNAME,
       'POST'
     );
-
-    /*
-    $entity = new Company();
-    $user = $this->getUser();
-
-    $serializer = $this->container->get('jms_serializer');
-    $company = $serializer->deserialize($request->getContent(), ' fibe\CommunityBundle\Entity\Company', 'json');
-
-    $form = $this->createForm(new CompanyType(), $entity);
-    $form->bind($request);
-
-
-    if ($form->isValid())
-    {
-      $em = $this->getDoctrine()->getManager();
-      $em->persist($company);
-      $em->flush();
-
-
-      return $this->redirectView(
-        $this->generateUrl(
-          'fibe_community_rest_companyrest_getcompany',
-          array('id' => $company->getId())
-//          ,Codes::HTTP_CREATED
-        )
-      );
-    }
-
-    return array(
-      'form' => $form,
-    );*/
   }
 
 
@@ -122,34 +85,6 @@ class CompanyRESTController extends FOSRestController
       $this::FORM_CLASSNAME,
       'PUT'
     );
-
-//
-//
-//    $serializer = $this->container->get('jms_serializer');
-//    $entity = $serializer->deserialize($request->getContent(), ' fibe\CommunityBundle\Entity\Company', 'json');
-//
-//    $em = $this->getDoctrine()->getManager();
-//
-//
-//    $company = $em->getRepository('fibeCommunityBundle:Company')->find($id);
-//
-//
-//    $form = $this->createForm(new CompanyType(), $company);
-//    $form->bind($entity);
-//
-//    if ($form->isValid())
-//    {
-//      $em = $this->getDoctrine()->getManager();
-//      $em->persist($form->getData());
-//      $em->flush();
-//
-//      return $this->view(null, Codes::HTTP_NO_CONTENT);
-//    }
-//
-//    return array(
-//      'form' => $form,
-//    );
-
   }
 
 
@@ -170,33 +105,7 @@ class CompanyRESTController extends FOSRestController
     );
   }
 
-    /**
-   * Put action
-   * @Rest\Delete("/companies/{id}")
-   * @var Request $request
-   * @var integer $id Id of the entity
-   * @return View|array
-   */
-  /*public function putCompanyAction(Request $request, $id)
-  {
 
-      $user=$this->getUser();
-
-      $serializer = $this->container->get('jms_serializer');
-      $entity = $serializer->deserialize( $request->getContent(), ' fibe\CommunityBundle\Entity\Company', 'json');
-      if($entity instanceof Company == false){
-
-          return $this->view(null, Codes::HTTP_NOT_MODIFIED);
-
-       }
-
-         $em = $this->getDoctrine()->getManager();
-         $em->merge($entity);
-         $em->flush();
-
-     return $this->view(null, Codes::HTTP_NO_CONTENT);
-
-  }*/
 
 
   /**
@@ -212,14 +121,7 @@ class CompanyRESTController extends FOSRestController
       $this::ENTITY_CLASSNAME,
       $id
     );
-//    $em = $this->getDoctrine()->getManager();
-//    $company = $em->getRepository('fibeCommunityBundle:Company')->find($id);
-//
-//    $em = $this->getDoctrine()->getManager();
-//    $em->remove($company);
-//    $em->flush();
-//
-//    return $this->view(null, Codes::HTTP_NO_CONTENT);
+
   }
 
 }

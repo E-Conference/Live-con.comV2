@@ -7,6 +7,10 @@ angular.module('organizationApp')
                         templateUrl: globalConfig.app.modules.organization.urls.partials+'organization-list.html',
                         controller: 'organizationListCtrl'
                     })
+                    .when('/organization/thumbnail', {
+                        templateUrl: globalConfig.app.modules.organization.urls.partials+'organization-thumbnail.html',
+                        controller: 'organizationListCtrl'
+                    })
                     .when('/organization/new', {
                         templateUrl: globalConfig.app.modules.organization.urls.partials+'organization-new.html',
                         controller: 'organizationNewCtrl'
@@ -18,10 +22,6 @@ angular.module('organizationApp')
                     .when('/organization/show/:organizationId', {
                         templateUrl: globalConfig.app.modules.organization.urls.partials+'organization-show.html',
                         controller: 'organizationShowCtrl'
-                    })
-                    .when('/organization/delete/:organizationId', {
-                        templateUrl: globalConfig.app.modules.organization.urls.partials+'organization-show.html',
-                        controller: 'organizationDeleteCtrl'
                     })
                     .otherwise({
                         redirectTo: '/organization/list'

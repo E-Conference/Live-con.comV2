@@ -26,15 +26,13 @@
                'bundles/frontend/vendors/angular-route.js'
                'bundles/frontend/vendors/angular-animate.min.js'
                'bundles/frontend/vendors/bootstrap.min.js'
-               'bundles/frontend/vendors/ui-bootstrap-tpls.min.js'
                'bundles/frontend/vendors/angular-ui-router.min.js'
                'bundles/frontend/vendors/draganddrop.js'
                'bundles/frontend/vendors/loading-bar.js'
                'bundles/frontend/vendors/angular-cached-resource.min.js'
                'bundles/frontend/vendors/angular-cookies.js'
-               'bundles/frontend/vendors/CryptoJSPlugin.js'
-               'bundles/frontend/vendors/angularjs-crypto.js'
                'bundles/frontend/vendors/moment.js'
+               'bundles/frontend/vendors/createDialog.js'
                'bundles/frontend/vendors/angular-moment.js'
                'bundles/frontend/vendors/loadingBarModule.js'  output='js/compiled/main.js'%}
         <script src="{{ asset_url }}" type="text/javascript"></script>
@@ -43,8 +41,8 @@
     <!-- common client app assets -->
     {% javascripts 'bundles/frontend/app/js/app.js'
                'bundles/frontend/app/js/controllers.js'
-               'bundles/frontend/app/js/directives.js'
                'bundles/frontend/app/js/routes.js'
+               'bundles/frontend/app/js/directives.js'
                'bundles/frontend/app/js/services.js'
                'bundles/frontend/app/js/filters.js'
 
@@ -131,7 +129,9 @@
                 </div>
 
             </div>
-
+            <div id="scrollTopBtn">
+                <button class="btn btn-default" ng-click="scrollTop()" role="button"><i class="fa  fa-arrows-v fa-3x"></i></button>
+            </div>
         </div>
 
     </div>

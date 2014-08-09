@@ -1,30 +1,26 @@
-
+<div ng-include="GLOBAL_CONFIG.app.modules.organization.urls.partials+'organization-actions.html'" ng-controller="organizationMainCtrl"></div>
 <input type="text" class="form-control" placeholder="Search" ng-model="query">
-<a class="btn btn-info btn-create create" href="#/organization/new/" title="Add an organization"> <i class="fa fa-plus"></i> New organization </a>
-<a class="btn btn-info btn-create create" href title="Add an organization" data-ng-click="reload()"> Refresh </a>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>#</th>
-      <th>Event</th>
-      <th>Location</th>
-      <th>Speakers</th>
+      <th>Label</th>
+      <th>website</th>
+      <th>Country</th>
       <th>Actions</th>
     </tr>
   </thead>
-  <tbody>
-  <tr ng-repeat="organization in organizations">
-      <td>{{ organization.label }}</td>
-      <td>{{ organization.homepage }}</td>
-      <td>{{ organization.country }}</td>
-      <td>dolor</td>
-      <td>
-          <a class="btn btn-warning" href="#organization/edit/{{ organization.id }}" role="button"><i class="fa fa-edit fa-2x"></i></a>
-          <a class="btn btn-default" href="#organization/show/{{ organization.id }}" role="button"><i class="fa fa-eye fa-2x"></i></a>
-          <a class="btn btn-primary" href="#organization/copy/{{ organization.id }}" role="button"><i class="fa fa-files-o fa-2x"></i></a>
-          <a class="btn btn-danger" href="#organization/delete/{{ organization.id }}" role="button"><i class="fa fa-trash-o fa-2x"></i></a>
-      </td>
-  </tr>
+  <tbody infinite-scroll='scroll()' infinite-scroll-disabled='busy' infinite-scroll-distance='0.5'>
+      <tr ng-repeat="organization in organizations  track by $index">
+          <td>{{ organization.label }}</td>
+          <td>{{ organization.additional_information.website }}</td>
+          <td>{{ organization.additional_information.country }}</td>
+          <td>
+              <a class="btn btn-warning" href="#organization/edit/{{ organization.id }}" role="button"><i class="fa fa-edit fa-1x"></i></a>
+              <a class="btn btn-default" href="#organization/show/{{ organization.id }}" role="button"><i class="fa fa-eye fa-1x"></i></a>
+              <a class="btn btn-primary" href="" data-ng-click="clone(organization)" role="button"><i class="fa fa-files-o fa-1x"></i></a>
+              <button class="btn btn-danger" data-ng-click="deleteModal($index, organization)" role="button"><i class="fa fa-trash-o fa-1x"></i></button>
+          </td>
+      </tr>
   </tbody>
 </table>
 
