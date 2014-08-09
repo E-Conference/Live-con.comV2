@@ -56,16 +56,31 @@ angular.module('organizationApp').controller('organizationListCtrl', ['$scope', 
         });
     }
 
-    $scope.scroll = function() {
+//    $scope.search = function(query) {
+//        //reset
+//        $scope.load(query);
+//    }
+    $scope.load = function(query) {
         offset = offset + limit;
+
+        if (query) {
+            offset = 0;
+            limit = 20;
+            $scope.busy = false;
+        }
 
         if (this.busy) return;
 
         $scope.busy = true;
-        Organization.all({offset : offset, limit:limit}, function(data) {
+        Organization.all({offset : offset, limit:limit, query: query}, function(data) {
             var items = data;
-            for (var i = 0; i < items.length; i++) {
-                $scope.organizations.push(items[i]);
+
+            if (query) {
+                $scope.organizations = data;
+            }else {
+                for (var i = 0; i < items.length; i++) {
+                    $scope.organizations.push(items[i]);
+                }
             }
 
             if (items.length > 1){
@@ -73,6 +88,12 @@ angular.module('organizationApp').controller('organizationListCtrl', ['$scope', 
             }
         })
     };
+
+//    $scope.search = function(query) {
+//        Organization.all({offset: 0, limit: 20, query: query}, function (data) {
+//            $scope.organizations = data;
+//        })
+//    };
 
     /*
     var Org = $cachedResource('org', globalConfig.api.urls.organizations+'/:organizationId.json', {id: "@id"});
