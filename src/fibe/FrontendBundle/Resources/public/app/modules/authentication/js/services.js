@@ -27,7 +27,9 @@ angular.module('authenticationApp').factory('globalHttpInterceptor', ['$q', '$ro
             'responseError': function(rejection) {
                 if (rejection.status == "401") {
                     $rootScope.$broadcast('globalHttpInterceptor:401', {});
+                    $rootScope.$broadcast('AlertCtrl:addAlert', {code:'You need to signin to have access to this page', type:'danger'});
                 }
+                $rootScope.$broadcast('AlertCtrl:addAlert', {code: rejection.status +' '+rejection.statusText, type:'danger'});
                 return $q.reject(rejection);
             }
         };

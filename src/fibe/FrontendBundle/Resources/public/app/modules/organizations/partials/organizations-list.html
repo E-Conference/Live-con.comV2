@@ -1,4 +1,4 @@
-<div ng-include="GLOBAL_CONFIG.app.modules.organization.urls.partials+'organization-actions.html'" ng-controller="organizationMainCtrl"></div>
+<div ng-include="GLOBAL_CONFIG.app.modules.organizations.urls.partials+'organizations-actions.html'" ng-controller="organizationsMainCtrl"></div>
 <input type="text" class="form-control" placeholder="Search" ng-change="load(query)" ng-model="query">
 <table class="table table-striped">
   <thead>
@@ -15,8 +15,8 @@
           <td>{{ organization.additional_information.website }}</td>
           <td>{{ organization.additional_information.country }}</td>
           <td>
-              <a class="btn btn-warning" href="#organization/edit/{{ organization.id }}" role="button"><i class="fa fa-edit fa-1x"></i></a>
-              <a class="btn btn-default" href="#organization/show/{{ organization.id }}" role="button"><i class="fa fa-eye fa-1x"></i></a>
+              <a class="btn btn-warning" href="#organizations/edit/{{ organization.id }}" role="button"><i class="fa fa-edit fa-1x"></i></a>
+              <a class="btn btn-default" href="#organizations/show/{{ organization.id }}" role="button"><i class="fa fa-eye fa-1x"></i></a>
               <a class="btn btn-primary" href="" data-ng-click="clone(organization)" role="button"><i class="fa fa-files-o fa-1x"></i></a>
               <button class="btn btn-danger" data-ng-click="deleteModal($index, organization)" role="button"><i class="fa fa-trash-o fa-1x"></i></button>
           </td>

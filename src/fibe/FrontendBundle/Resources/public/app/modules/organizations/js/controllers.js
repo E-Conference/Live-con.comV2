@@ -1,15 +1,15 @@
-angular.module('organizationApp').controller('organizationMainCtrl', [function ($scope) {
+angular.module('organizationsApp').controller('organizationsMainCtrl', [function ($scope) {
 
 }]);
 
-angular.module('organizationApp').controller('organizationListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'Organization', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, Organization, $cachedResource) {
+angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'OrganizationsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, OrganizationsFact, $cachedResource) {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
-    var offset = 0;
+    var offset = -20;
     var limit = 20;
     $scope.busy = false;
 
-    $scope.organizations = Organization.all({offset : offset, limit:limit});
+    $scope.organizations = [];
 
     $scope.reload = function(){
        // $scope.organizations = Organization.list();
@@ -42,13 +42,13 @@ angular.module('organizationApp').controller('organizationListCtrl', ['$scope', 
     $scope.deleteModal = function(index, organization) {
         $scope.index = index;
 
-        createDialogService(GLOBAL_CONFIG.app.modules.organization.urls.partials+'organization-delete.html', {
+        createDialogService(GLOBAL_CONFIG.app.modules.organizations.urls.partials+'organizations-delete.html', {
             id: 'complexDialog',
-            title: 'Person deletion',
+            title: 'Organization deletion',
             backdrop: true,
-            controller: 'organizationDeleteCtrl',
+            controller: 'organizationsDeleteCtrl',
             success: {label: 'Ok', fn: function() {
-                Organization.delete({id:organization.id});
+                OrganizationsFact.delete({id:organization.id});
                 $scope.organizations.splice(index,1);
             }}
             }, {
@@ -56,10 +56,7 @@ angular.module('organizationApp').controller('organizationListCtrl', ['$scope', 
         });
     }
 
-//    $scope.search = function(query) {
-//        //reset
-//        $scope.load(query);
-//    }
+
     $scope.load = function(query) {
         offset = offset + limit;
 
@@ -72,7 +69,7 @@ angular.module('organizationApp').controller('organizationListCtrl', ['$scope', 
         if (this.busy) return;
 
         $scope.busy = true;
-        Organization.all({offset : offset, limit:limit, query: query}, function(data) {
+        OrganizationsFact.all({offset : offset, limit:limit, query: query}, function(data) {
             var items = data;
 
             if (query) {
@@ -106,8 +103,8 @@ angular.module('organizationApp').controller('organizationListCtrl', ['$scope', 
 }]);
 
 
-angular.module('organizationApp').controller('organizationNewCtrl', [ '$scope', '$rootScope', '$location', 'Organization', function ($scope, $rootScope, $location, Organization) {
-    $scope.organization = new Organization;
+angular.module('organizationsApp').controller('organizationsNewCtrl', [ '$scope', '$rootScope', '$location', 'OrganizationsFact', function ($scope, $rootScope, $location, OrganizationsFact) {
+    $scope.organization = new OrganizationsFact;
 
     var error = function(response, args){
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'the organization has not been created', type:'danger'});
@@ -115,7 +112,7 @@ angular.module('organizationApp').controller('organizationNewCtrl', [ '$scope', 
 
     var success = function(response, args){
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'organization created', type:'success'});
-        $location.path('/organization/list');
+        $location.path('/organizations/list');
     }
 
     $scope.create = function(form){
@@ -125,8 +122,8 @@ angular.module('organizationApp').controller('organizationNewCtrl', [ '$scope', 
     }
 }]);
 
-angular.module('organizationApp').controller('organizationEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'Organization', function ($scope, $rootScope, $routeParams, $location, Organization) {
-    $scope.organization = Organization.get({id:$routeParams.organizationId});
+angular.module('organizationsApp').controller('organizationsEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'OrganizationsFact', function ($scope, $rootScope, $routeParams, $location, OrganizationsFact) {
+    $scope.organization = OrganizationsFact.get({id:$routeParams.organizationId});
 
     var error = function(response, args){
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'the organization has not been saved', type:'danger'});
@@ -134,7 +131,7 @@ angular.module('organizationApp').controller('organizationEditCtrl', [ '$scope',
 
     var success = function(response, args){
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'organization saved', type:'success'});
-        $location.path('/organization/list');
+        $location.path('/organizations/list');
     }
 
     $scope.update = function(form){
@@ -144,12 +141,12 @@ angular.module('organizationApp').controller('organizationEditCtrl', [ '$scope',
     }
 }]);
 
-angular.module('organizationApp').controller('organizationShowCtrl', [ '$scope', '$routeParams', 'Organization', function ($scope, $routeParams, Organization) {
-    $scope.organization = Organization.get({id:$routeParams.organizationId});
+angular.module('organizationsApp').controller('organizationsShowCtrl', [ '$scope', '$routeParams', 'OrganizationsFact', function ($scope, $routeParams, OrganizationsFact) {
+    $scope.organization = OrganizationsFact.get({id:$routeParams.organizationId});
 
 }]);
 
-angular.module('organizationApp').controller('organizationDeleteCtrl', [ '$scope', 'organizationModel', function ($scope, organizationModel) {
+angular.module('organizationsApp').controller('organizationsDeleteCtrl', [ '$scope', 'organizationModel', function ($scope, organizationModel) {
        $scope.organization = organizationModel;
 }]);
 

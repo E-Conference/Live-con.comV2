@@ -13,17 +13,17 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class PersonType extends AbstractType
 {
-  private $user;
-
-  /**
-   * Constructor
-   *
-   * @param $user
-   */
-  public function __construct($user)
-  {
-    $this->user = $user;
-  }
+//  private $user;
+//
+//  /**
+//   * Constructor
+//   *
+//   * @param $user
+//   */
+//  public function __construct($user)
+//  {
+//    $this->user = $user;
+//  }
 
   /**
    * {@inheritdoc}
@@ -31,33 +31,36 @@ class PersonType extends AbstractType
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
     $builder
-      ->add('firstName', 'text', array('label' => "First name"))
-      ->add('familyName', 'text', array('label' => "Family Name"))
-      ->add('email', 'text', array('required' => false))
-      ->add('age', 'text', array('required' => false))
-      ->add('page', 'text', array('required' => false, 'label' => 'Homepage'))
-      ->add('img', 'text', array('required' => false, 'label' => 'Image (external url)'))
-      ->add('openId', 'text', array('required' => false))
-      ->add('description', 'textarea', array('required' => false, 'label' => 'Description'))
-      // ->add('nick', 'text', array('required' => false))
-      ->add('organizations', 'entity', array(
-        'class'    => 'fibeCommunityBundle:Organization',
-        'label'    => 'Organizations',
-        'choices'  => $this->user->getCurrentMainEvent()->getOrganizations()->toArray(),
-        'required' => false,
-        'multiple' => true
-      ))
-      ->add('papers', 'entity', array(
-        'class'    => 'fibeCommunityBundle:Paper',
-        'label'    => 'Publications',
-        'choices'  => $this->user->getCurrentMainEvent()->getPapers()->toArray(),
-        'required' => false,
-        'multiple' => true
-      ))
-
-      ->add('accounts', 'collection', array('type'         => new SocialServiceAccountType(),
-                                            'allow_add'    => true,
-                                            'allow_delete' => true));
+        ->add('label')
+        ->add('firstName')
+        ->add('familyName')
+        ->add('additional_information', new AdditionalInformationsType());
+//      ->add('firstName', 'text', array('label' => "First name"))
+//      ->add('familyName', 'text', array('label' => "Family Name"))
+//      ->add('email', 'text', array('required' => false))
+//      ->add('age', 'text', array('required' => false))
+//      ->add('page', 'text', array('required' => false, 'label' => 'Homepage'))
+//      ->add('img', 'text', array('required' => false, 'label' => 'Image (external url)'))
+//      ->add('openId', 'text', array('required' => false))
+//      ->add('description', 'textarea', array('required' => false, 'label' => 'Description'))
+//      // ->add('nick', 'text', array('required' => false))
+//      ->add('organizations', 'entity', array(
+//        'class'    => 'fibeCommunityBundle:Organization',
+//        'label'    => 'Organizations',
+//        'choices'  => $this->user->getCurrentMainEvent()->getOrganizations()->toArray(),
+//        'required' => false,
+//        'multiple' => true
+//      ))
+//      ->add('papers', 'entity', array(
+//        'class'    => 'fibeCommunityBundle:Paper',
+//        'label'    => 'Publications',
+//        'choices'  => $this->user->getCurrentMainEvent()->getPapers()->toArray(),
+//        'required' => false,
+//        'multiple' => true
+//      ))
+//      ->add('accounts', 'collection', array('type'         => new SocialServiceAccountType(),
+//                                            'allow_add'    => true,
+//                                            'allow_delete' => true));
   }
 
   /**
@@ -66,7 +69,8 @@ class PersonType extends AbstractType
   public function setDefaultOptions(OptionsResolverInterface $resolver)
   {
     $resolver->setDefaults(array(
-      'data_class' => 'fibe\CommunityBundle\Entity\Person'
+      'data_class' => 'fibe\CommunityBundle\Entity\Person',
+      'csrf_protection' => false
     ));
   }
 

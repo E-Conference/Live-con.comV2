@@ -14,24 +14,7 @@ liveconApp.config(['$routeProvider',
             when('/dashboard/widget', {
                 templateUrl: globalConfig.app.urls.partials+'dashboards/dashboard-widget.html',
                 controller: 'dashboardCtrl'
-            }).
-            when('/publications', {
-                templateUrl: globalConfig.app.urls.partials+'publication/publication-list.html',
-                controller: 'publicationsCtrl'
-            }).
-            when('/publication/:publicationId', {
-                templateUrl: globalConfig.app.urls.partials+'publication/publication-detail.html',
-                controller: 'publicationCtrl'
-            }).
-            when('/speakers', {
-                templateUrl: globalConfig.app.urls.partials+'person/persons-list.html',
-                controller: 'personsCtrl'
-            }).
-            when('/speaker/:personId', {
-                templateUrl: globalConfig.app.urls.partials+'person/person-detail.html',
-                controller: 'personCtrl'
             })
-
             .when('/widget/hightlight', {
                 templateUrl: globalConfig.app.urls.partials+'widget/hightlight.html',
                 controller: 'widgetCtrl'
@@ -66,10 +49,6 @@ liveconApp.config(['$routeProvider',
             }).
             when('/search/event', {
                 templateUrl: globalConfig.app.urls.partials+'home/searchEvent.html',
-                controller: 'scheduleCtrl'
-            }).
-            when('/search/person', {
-                templateUrl: globalConfig.app.urls.partials+'home/searchPerson.html',
                 controller: 'scheduleCtrl'
             }).
             when('/', {

@@ -46,13 +46,13 @@
                'bundles/frontend/app/js/services.js'
                'bundles/frontend/app/js/filters.js'
 
-               'bundles/frontend/app/modules/community/js/controllers.js'
-               'bundles/frontend/app/modules/community/js/routes.js'
-               'bundles/frontend/app/modules/community/js/services.js'
+                'bundles/frontend/app/modules/organizations/js/services.js'
+                'bundles/frontend/app/modules/organizations/js/controllers.js'
+                'bundles/frontend/app/modules/organizations/js/routes.js'
 
-                'bundles/frontend/app/modules/organization/js/services.js'
-                'bundles/frontend/app/modules/organization/js/controllers.js'
-                'bundles/frontend/app/modules/organization/js/routes.js'
+                'bundles/frontend/app/modules/persons/js/services.js'
+                'bundles/frontend/app/modules/persons/js/controllers.js'
+                'bundles/frontend/app/modules/persons/js/routes.js'
 
                 'bundles/frontend/app/modules/authentication/js/services.js'
                 'bundles/frontend/app/modules/authentication/js/controllers.js'
@@ -71,6 +71,7 @@
             api: {
                 urls: {
                     get_companies: "{{ path('community_companies_post') }}",
+                    get_persons: "{{ path('community_persons_post') }}",
                     login: "{{ path('login_check', {_format: 'json'}) }}",
                     {#registration: "{{ path('') }}"#}
                 }
@@ -82,11 +83,18 @@
                     img: "{{ asset('bundles/frontend/app/img/') }}"
                 },
                 modules: {
-                    organization: {
+                    organizations: {
                         urls: {
-                            base: "{{ asset('bundles/frontend/app/modules/organization/') }}",
-                            partials: "{{ asset('bundles/frontend/app/modules/organization/partials/') }}",
-                            img: "{{ asset('bundles/frontend/app/modules/organization/img') }}"
+                            base: "{{ asset('bundles/frontend/app/modules/organizations/') }}",
+                            partials: "{{ asset('bundles/frontend/app/modules/organizations/partials/') }}",
+                            img: "{{ asset('bundles/frontend/app/modules/organizations/img') }}"
+                        }
+                    },
+                    persons: {
+                        urls: {
+                            base: "{{ asset('bundles/frontend/app/modules/persons/') }}",
+                            partials: "{{ asset('bundles/frontend/app/modules/persons/partials/') }}",
+                            img: "{{ asset('bundles/frontend/app/modules/persons/img') }}"
                         }
                     },
                     authentication: {

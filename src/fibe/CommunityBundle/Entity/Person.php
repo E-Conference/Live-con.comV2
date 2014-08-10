@@ -66,6 +66,7 @@ class Person
    * familyName
    * @Assert\NotBlank(message ="Please give a family name")
    * @ORM\Column(type="string", nullable=true,  name="familyName")
+   * @Expose
    */
   private $familyName;
 
@@ -73,6 +74,7 @@ class Person
    * firstName
    * @Assert\NotBlank(message ="Please give a first name")
    * @ORM\Column(type="string", nullable=true,  name="firstName")
+   * @Expose
    */
   private $firstName;
 
