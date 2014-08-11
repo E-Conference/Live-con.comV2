@@ -14,42 +14,6 @@ liveconApp.config(['$routeProvider',
             when('/dashboard/widget', {
                 templateUrl: globalConfig.app.urls.partials+'dashboards/dashboard-widget.html',
                 controller: 'dashboardCtrl'
-            })
-            .when('/widget/hightlight', {
-                templateUrl: globalConfig.app.urls.partials+'widget/hightlight.html',
-                controller: 'widgetCtrl'
-            }).
-            when('/widget/app', {
-                templateUrl: globalConfig.app.urls.partials+'widget/mobileApp.html',
-                controller: 'widgetCtrl'
-            }).
-            when('/widget/ticketPage', {
-                templateUrl: globalConfig.app.urls.partials+'widget/ticketPage.html',
-                controller: 'widgetCtrl'
-            }).
-            when('/widget/calendar', {
-                templateUrl: globalConfig.app.urls.partials+'widget/eCalendar.html',
-                controller: 'widgetCtrl'
-            }).
-            when('/schedule/calendar', {
-                templateUrl: globalConfig.app.urls.partials+'schedule/schedule-calendar.html',
-                controller: 'scheduleCtrl'
-            }).
-            when('/schedule/list', {
-                templateUrl: globalConfig.app.urls.partials+'schedule/schedule-list.html',
-                controller: 'scheduleCtrl'
-            }).
-            when('/schedule/thumbnail', {
-                templateUrl: globalConfig.app.urls.partials+'schedule/schedule-thumbnail.html',
-                controller: 'scheduleCtrl'
-            }).
-            when('/schedule/tree', {
-                templateUrl: globalConfig.app.urls.partials+'schedule/schedule-tree.html',
-                controller: 'scheduleCtrl'
-            }).
-            when('/search/event', {
-                templateUrl: globalConfig.app.urls.partials+'home/searchEvent.html',
-                controller: 'scheduleCtrl'
             }).
             when('/', {
                 templateUrl: globalConfig.app.urls.partials+'home/home.html',
