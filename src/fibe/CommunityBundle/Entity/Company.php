@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="company")
  * @ORM\Entity(repositoryClass="fibe\CommunityBundle\Repository\CompanyRepository")
  * @ORM\HasLifecycleCallbacks
- * @ExclusionPolicy("all") 
+ * @ExclusionPolicy("all")
  *
  */
 class Company
@@ -52,8 +52,8 @@ class Company
   /**
    * Additional Infomations of the company
    *
-   * @ORM\ManyToOne(targetEntity="fibe\CommunityBundle\Entity\AdditionalInformations", cascade={"persist"})
-   * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id")
+   * @ORM\OneToOne(targetEntity="AdditionalInformations", cascade={"persist"}, fetch="EAGER")
+   * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id",onDelete="CASCADE")
    * @Expose
    */
   private $additionalInformation;

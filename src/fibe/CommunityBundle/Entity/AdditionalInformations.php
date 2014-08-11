@@ -23,7 +23,6 @@ class AdditionalInformations
    * @ORM\Id
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
-   * @Expose
    */
   private $id;
 
@@ -57,6 +56,19 @@ private $website;
    * @Expose
    */
   private $email;
+
+  /**
+   * company
+   * @ORM\OneToOne(targetEntity="fibe\CommunityBundle\Entity\Company",cascade={"persist", "remove"})
+   */
+  private $company;
+
+  /**
+   * person
+   * @ORM\OneToOne(targetEntity="fibe\CommunityBundle\Entity\Person",cascade={"persist", "remove"})
+   */
+  private $person;
+
 
   public function __toString()
   {
@@ -137,4 +149,37 @@ private $website;
   {
     $this->email = $email;
   }
+
+  /**
+   * @return mixed
+   */
+  public function getCompany()
+  {
+    return $this->company;
+  }
+
+  /**
+   * @param mixed $company
+   */
+  public function setCompany($company)
+  {
+    $this->company = $company;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getPerson()
+  {
+    return $this->person;
+  }
+
+  /**
+   * @param mixed $person
+   */
+  public function setPerson($person)
+  {
+    $this->person = $person;
+  }
+
 }

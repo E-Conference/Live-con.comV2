@@ -179,7 +179,7 @@ $(function(){
 //    $.ajax({
 //      type: "POST",
 //      url: url,
-//      data: '{"label": "'+originalLabel+'", "testRest": "'+originalTestRest+'"}',
+//      data: '{"label": "'+originalLabel+'"}',
 //      complete:function(){}//avoid print
 //    });
 //  }
@@ -214,7 +214,7 @@ $(function(){
   /******************************************* test search *****************************************/
   /***********************************************************************************************/
   test = "test search";
-  url  = 'app_dev.php/api/companies?query='+"t_orga-u";
+  url  = 'app_dev.php/api/companies?query='+"t_orga";
   $body.append("<br/><span style='font-size:20px;font-weight: bold'>"+test+" : "+url+"</h3>");
 
   $.ajax({
@@ -242,7 +242,7 @@ $(function(){
   $.ajax({
     url: url,
     success:function(a){
-      assertTrue('a.label : '+a[0].label+' should be < entity.label : '+entity.label, entity.label < a[0].label);
+      assertTrue('a.label : '+a[0].label+' should be <= entity.label : '+entity.label, entity.label <= a[0].label);
     }
   });
 
