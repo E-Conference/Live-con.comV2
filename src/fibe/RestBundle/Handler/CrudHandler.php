@@ -37,9 +37,9 @@ class CrudHandler
     $limit = $paramFetcher->get('limit');
     if(($query = $paramFetcher->get('query')) != null)
     {
-      return $this->searchService->doSearch($entityClassName, $query, $limit, $offset);
+      return $this->searchService->doSearch($entityClassName, $query, $limit, $offset, $paramFetcher->get('order'));
     }
-    return $this->em->getRepository($entityClassName)->findBy(array(), null, $limit, $offset);
+    return $this->em->getRepository($entityClassName)->findBy(array(), $paramFetcher->get('order'), $limit, $offset);
   }
 
   /**

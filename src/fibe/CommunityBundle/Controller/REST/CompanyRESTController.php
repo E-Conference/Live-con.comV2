@@ -26,6 +26,7 @@ class CompanyRESTController extends FOSRestController
    * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
    * @Rest\QueryParam(name="limit", requirements="\d+", default="70", description="How many entity to return.")
    * @Rest\QueryParam(name="query", requirements=".{2,64}", nullable=true, description="the query to search.")
+   * @Rest\QueryParam(name="order", nullable=true, array=true, description="the query to search.")
    */
   public function getCompaniesAction(Request $request, ParamFetcherInterface $paramFetcher)
   {

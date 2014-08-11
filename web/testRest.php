@@ -224,8 +224,29 @@ $(function(){
     }
   });
 
+
+  /***********************************************************************************************/
+  /******************************************* test order *****************************************/
+  /***********************************************************************************************/
+  test = "test order";
+  url  = 'app_dev.php/api/companies?order[label]=ASC&query=orga';
+  $body.append("<br/><span style='font-size:20px;font-weight: bold'>"+test+" : "+url+"</h3>");
+
+  $.ajax({
+    url: url,
+    success:function(a){
+      entity = a[0];
+    }
+  });
+  url  = 'app_dev.php/api/companies?order[label]=DESC&query=orga';
+  $.ajax({
+    url: url,
+    success:function(a){
+      assertTrue('a.label : '+a[0].label+' should be < entity.label : '+entity.label, entity.label < a[0].label);
+    }
+  });
+
   //TODO test remove
-  //TODO test order
 
   function assertTrue(errorMsg,test)
   {

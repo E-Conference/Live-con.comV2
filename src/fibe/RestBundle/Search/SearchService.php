@@ -8,6 +8,7 @@ namespace fibe\RestBundle\Search;
 
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\Expr\OrderBy;
 
 class SearchService implements SearchServiceInterface
 {
@@ -25,7 +26,7 @@ class SearchService implements SearchServiceInterface
   /**
    * {@inheritdoc}
    */
-  public function doSearch($entityClassName, $query, $limit, $offset)
+  public function doSearch($entityClassName, $query, $limit, $offset, $orders = null)
   {
     $searchFields = $this->getSearchFields($entityClassName);
     $qb = $this->em->getRepository($entityClassName)->createQueryBuilder('qb')  //add select and array for JSON
@@ -35,11 +36,25 @@ class SearchService implements SearchServiceInterface
     foreach($searchFields as $searchField)
     {
       $qb->orWhere('qb.'.$searchField.' LIKE :string')
-         ->setParameter('string', '%'.$query.'%');
+        ->setParameter('string', '%'.$query.'%');
     }
+
+    if(count($orders) > 0)
+    {
+      foreach($orders as $field => $order)
+      {
+        $qb->addOrderBy('qb.'.$field,$order);
+      }
+    }
+
 
     return $qb->getQuery()->getResult();
   }
+
+  /**
+   * @param string $entityClassName
+   * @return array
+   */
   protected function getSearchFields($entityClassName)
   {
     $searchFields = [];
