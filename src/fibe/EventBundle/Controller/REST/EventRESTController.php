@@ -15,17 +15,18 @@ use FOS\RestBundle\Util\Codes;
 class EventRESTController extends FOSRestController
 {
 
-  const ENTITY_CLASSNAME = "fibe\\ContentBundle\\Entity\\Event";
-  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\Event";
+  const ENTITY_CLASSNAME = "fibe\\EventBundle\\Entity\\Event";
+  const FORM_CLASSNAME = "fibe\\EventBundle\\Form\\EventType";
 
 
   /**
    * Lists all Event entities.
-   * @Rest\Get("/events")
+   * @Rest\Get("/events", name="schedule_events_all")
    * @Rest\View
    * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
    * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
    * @Rest\QueryParam(name="query", requirements=".{2,128}", nullable=true, description="the query to search.")
+   * @Rest\QueryParam(name="order", nullable=true, array=true, description="the query to search.")
    */
   public function getEventsAction(Request $request, ParamFetcherInterface $paramFetcher)
   {
@@ -37,7 +38,7 @@ class EventRESTController extends FOSRestController
   }
 
   /**
-   * @Rest\Get("/events/{id}")
+   * @Rest\Get("/events/{id}", name="schedule_events_get")
    **/
   public function getEventAction($id)
   {
@@ -52,7 +53,7 @@ class EventRESTController extends FOSRestController
   /**
    * Creates a new Event from the submitted data.
    *
-   * @Rest\Post("/events",name="api_event_post")
+   * @Rest\Post("/events", name="schedule_events_post")
    *
    * @param Request $request the request object
    *
@@ -73,7 +74,7 @@ class EventRESTController extends FOSRestController
 
   /**
    * Put action
-   * @Rest\Put("/events/{id}")
+   * @Rest\Put("/events/{id}", name="schedule_events_put")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
@@ -93,7 +94,7 @@ class EventRESTController extends FOSRestController
 
   /**
    * Patch action
-   * @Rest\Patch("/events/{id}")
+   * @Rest\Patch("/events/{id}", name="schedule_events_patch")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
@@ -113,7 +114,7 @@ class EventRESTController extends FOSRestController
 
   /**
    * Delete action
-   * @Rest\Delete("/events/{id}")
+   * @Rest\Delete("/events/{id}", name="schedule_events_delete")
    *
    * @var integer $id Id of the entity
    */

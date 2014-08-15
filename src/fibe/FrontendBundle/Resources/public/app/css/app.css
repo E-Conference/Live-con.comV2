@@ -32,6 +32,9 @@ ul{
     right: 1em;
 }
 
+.btn{
+    border-radius : 0px !important;
+}
 /*************************** ALERT BOX ***************************/
 #alertBox {
     position: fixed;

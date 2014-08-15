@@ -35,11 +35,14 @@ class CrudHandler
     $offset = $paramFetcher->get('offset');
 //    $offset = null == $offset ? 0 : $offset;
     $limit = $paramFetcher->get('limit');
+    $order = $paramFetcher->get('order');
+
     if(($query = $paramFetcher->get('query')) != null)
     {
-      return $this->searchService->doSearch($entityClassName, $query, $limit, $offset, $paramFetcher->get('order'));
+      return $this->searchService->doSearch($entityClassName, $query, $limit, $offset, $order);
     }
-    return $this->em->getRepository($entityClassName)->findBy(array(), $paramFetcher->get('order'), $limit, $offset);
+
+    return $this->em->getRepository($entityClassName)->findBy(array(), $order, $limit, $offset);
   }
 
   /**

@@ -55,6 +55,10 @@
                     'bundles/frontend/app/modules/persons/js/controllers.js'
                     'bundles/frontend/app/modules/persons/js/routes.js'
 
+                    'bundles/frontend/app/modules/events/js/services.js'
+                    'bundles/frontend/app/modules/events/js/controllers.js'
+                    'bundles/frontend/app/modules/events/js/routes.js'
+
                     'bundles/frontend/app/modules/authentication/js/services.js'
                     'bundles/frontend/app/modules/authentication/js/controllers.js'
                     'bundles/frontend/app/modules/authentication/js/routes.js'
@@ -74,6 +78,7 @@
                 urls: {
                     get_companies: "{{ path('community_companies_post') }}",
                     get_persons: "{{ path('community_persons_post') }}",
+                    get_events: "{{ path('schedule_events_post') }}",
                     login: "{{ path('login_check', {_format: 'json'}) }}",
                     {#registration: "{{ path('') }}"#}
                 }
@@ -90,6 +95,13 @@
                             base: "{{ asset('bundles/frontend/app/modules/organizations/') }}",
                             partials: "{{ asset('bundles/frontend/app/modules/organizations/partials/') }}",
                             img: "{{ asset('bundles/frontend/app/modules/organizations/img') }}"
+                        }
+                    },
+                    events: {
+                        urls: {
+                            base: "{{ asset('bundles/frontend/app/modules/events/') }}",
+                            partials: "{{ asset('bundles/frontend/app/modules/events/partials/') }}",
+                            img: "{{ asset('bundles/frontend/app/modules/events/img') }}"
                         }
                     },
                     persons: {

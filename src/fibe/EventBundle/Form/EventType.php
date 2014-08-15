@@ -12,9 +12,9 @@ class EventType extends VEventType
        
     protected $categoriesLevels;
 
-    public function __construct($cat)
+    public function __construct()
     { 
-        $this->categoriesLevels = $cat;
+//        $this->categoriesLevels = $cat;
     }
 
         /**

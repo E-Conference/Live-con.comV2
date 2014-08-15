@@ -1,0 +1,22 @@
+<div ng-include="GLOBAL_CONFIG.app.modules.events.urls.partials+'events-actions.html'" ng-controller="eventsMainCtrl"></div>
+<form name="eventNewForm"   class="form" role="form" ng-submit="create(eventNewForm)">
+  <div>
+    <label for="inputName">Label</label>
+      <input type="text" class="form-control" id="label" required placeholder="Label" ng-model="event.label">
+  </div>
+   <div >
+    <label for="inputHomepage">Website</label>
+      <input type="text " class="form-control" id="inputWebsite" placeholder="Website" ng-model="event.additional_information.website">
+  </div>
+  <div class="form-group">
+    <label for="inputCountry">Country</label>
+    <input type="text " class="form-control" id="inputCountry" placeholder="Country" ng-model="event.additional_information.country">
+  </div>
+    <div class="form-group">
+        <label for="inputImg">Image</label>
+        <input type="text " class="form-control" id="inputCountry" placeholder="Image link" ng-model="event.additional_information.img">
+    </div>
+  <div class="form-group">
+      <button type="submit" class="btn btn-success">Save</button>
+  </div>
+</form>

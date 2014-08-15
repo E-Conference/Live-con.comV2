@@ -9,6 +9,10 @@ angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope'
     var limit = 20;
     $scope.busy = false;
 
+    $scope.query = "";
+    $scope.orderBy = "label";
+    $scope.orderSide = "ASC";
+
     $scope.organizations = [];
 
     $scope.reload = function(){
@@ -19,7 +23,7 @@ angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope'
         //console.log($scope.organizations);
     }
 
-    $scope.clone = function(organization){
+    $scope.clone = function(organization, index){
         // $scope.organizations = Organization.list();
 
         cloneOrganization = angular.copy(organization);
@@ -32,7 +36,8 @@ angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope'
 
         var success = function(response, args){
             $rootScope.$broadcast('AlertCtrl:addAlert', {code:'Organization saved', type:'success'});
-            $scope.organizations.push(response);
+           // $scope.organizations.push(response);
+            $scope.organizations.splice(index+1, 0, response);
         }
 
         cloneOrganization.$create({}, success, error);
@@ -56,28 +61,39 @@ angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope'
         });
     }
 
+    var initialize = function(){
+        offset = -20;
+        limit = 20;
+        $scope.busy = false;
+        $scope.organizations = [];
+    }
 
-    $scope.load = function(query) {
+    $scope.search = function(){
+        initialize();
+        $scope.load($scope.query);
+    }
+
+    $scope.order = function(orderBy, orderSide){
+        initialize();
+        $scope.orderBy = orderBy;
+        $scope.orderSide = orderSide;
+        $scope.load();
+    }
+
+    $scope.load = function() {
         offset = offset + limit;
 
-        if (query) {
-            offset = 0;
-            limit = 20;
-            $scope.busy = false;
-        }
-
+        filters = {offset : offset, limit:limit};
         if (this.busy) return;
+        if($scope.query) filters.query = $scope.query;
+        if($scope.orderBy) filters["order["+$scope.orderBy+"]"] = $scope.orderSide;
 
         $scope.busy = true;
-        OrganizationsFact.all({offset : offset, limit:limit, query: query}, function(data) {
+        OrganizationsFact.all(filters, function(data) {
             var items = data;
 
-            if (query) {
-                $scope.organizations = data;
-            }else {
-                for (var i = 0; i < items.length; i++) {
-                    $scope.organizations.push(items[i]);
-                }
+            for (var i = 0; i < items.length; i++) {
+                $scope.organizations.push(items[i]);
             }
 
             if (items.length > 1){
