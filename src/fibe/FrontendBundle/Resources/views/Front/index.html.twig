@@ -59,6 +59,10 @@
                     'bundles/frontend/app/modules/events/js/controllers.js'
                     'bundles/frontend/app/modules/events/js/routes.js'
 
+                    'bundles/frontend/app/modules/conferences/js/services.js'
+                    'bundles/frontend/app/modules/conferences/js/controllers.js'
+                    'bundles/frontend/app/modules/conferences/js/routes.js'
+
                     'bundles/frontend/app/modules/authentication/js/services.js'
                     'bundles/frontend/app/modules/authentication/js/controllers.js'
                     'bundles/frontend/app/modules/authentication/js/routes.js'
@@ -79,6 +83,7 @@
                     get_companies: "{{ path('community_companies_post') }}",
                     get_persons: "{{ path('community_persons_post') }}",
                     get_events: "{{ path('schedule_events_post') }}",
+                    get_conferences: "{{ path('schedule_conferences_post') }}",
                     login: "{{ path('login_check', {_format: 'json'}) }}",
                     {#registration: "{{ path('') }}"#}
                 }
@@ -102,6 +107,13 @@
                             base: "{{ asset('bundles/frontend/app/modules/events/') }}",
                             partials: "{{ asset('bundles/frontend/app/modules/events/partials/') }}",
                             img: "{{ asset('bundles/frontend/app/modules/events/img') }}"
+                        }
+                    },
+                    conferences: {
+                        urls: {
+                            base: "{{ asset('bundles/frontend/app/modules/conferences/') }}",
+                            partials: "{{ asset('bundles/frontend/app/modules/conferences/partials/') }}",
+                            img: "{{ asset('bundles/frontend/app/modules/conferences/img') }}"
                         }
                     },
                     persons: {

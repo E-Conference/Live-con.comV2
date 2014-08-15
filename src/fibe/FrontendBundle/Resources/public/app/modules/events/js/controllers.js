@@ -28,7 +28,6 @@ angular.module('eventsApp').controller('eventsListCtrl', ['$scope', 'GLOBAL_CONF
 
         cloneEvent = angular.copy(event);
         cloneEvent.id = null;
-        cloneEvent.additional_information.id = null;
 
         var error = function(response, args){
             $rootScope.$broadcast('AlertCtrl:addAlert', {code:'Clone not completed', type:'danger'});

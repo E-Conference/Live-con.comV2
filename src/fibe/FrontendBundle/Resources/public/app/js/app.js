@@ -5,6 +5,7 @@ angular.module('communityApp', []);
 angular.module('organizationsApp', ['fundoo.services']);
 angular.module('personsApp', ['fundoo.services']);
 angular.module('eventsApp', ['fundoo.services']);
+angular.module('conferencesApp', ['fundoo.services']);
 angular.module('angularTranslateApp', ['pascalprecht.translate']);
 angular.module('authenticationApp',['ngCookies']);
 
@@ -25,6 +26,7 @@ var liveconApp = angular.module('liveconApp', [
     'organizationsApp',
     'personsApp',
     'eventsApp',
+    'conferencesApp',
     'angularMoment'
 ]);
 

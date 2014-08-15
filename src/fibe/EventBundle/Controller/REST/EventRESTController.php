@@ -78,6 +78,7 @@ class EventRESTController extends FOSRestController
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
+   * @TODO Remove dtype from the serialization
    */
   public function putEventAction(Request $request, $id)
   {

@@ -29,19 +29,13 @@ class VEventType extends AbstractType
             ->add('endAt')
             ->add('description')
             ->add('comment')
-            ->add('revisionSequence')
-            ->add('status')
-            ->add('priority')
-            ->add('url')
-            ->add('createdAt')
-            ->add('lastModifiedAt')
-            ->add('location')
-            ->add('category', 'entity', array(
-                'class' => 'fibeEventBundle:Category',
-                'query_builder' => function(EntityRepository $er) {
-             return $er->extractQueryBuilder($this->categoriesLevels);
-            },
-              ));
+            ->add('url');
+//            ->add('category', 'entity', array(
+//                'class' => 'fibeEventBundle:Category',
+//                'query_builder' => function(EntityRepository $er) {
+//             return $er->extractQueryBuilder($this->categoriesLevels);
+//            },
+//              ));
     }
     
     /**
@@ -50,7 +44,8 @@ class VEventType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'fibe\VEventBundle\Entity\VEvent'
+            'data_class' => 'fibe\VEventBundle\Entity\VEvent',
+            'csrf_protection' => false
         ));
     }
 

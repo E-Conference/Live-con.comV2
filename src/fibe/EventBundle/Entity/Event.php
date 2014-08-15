@@ -5,6 +5,7 @@ namespace fibe\EventBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use fibe\ContentBundle\Entity\Paper;
+use fibe\ContentBundle\Entity\Location;
 use fibe\ContentBundle\Util\StringTools;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -24,6 +25,7 @@ use JMS\Serializer\Annotation\VirtualProperty;
  * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="fibe\EventBundle\Repository\EventRepository")
  * @ORM\HasLifecycleCallbacks
+ * @ExclusionPolicy("all")
  */
 class Event extends VEvent
 {
@@ -40,7 +42,6 @@ class Event extends VEvent
    * The events who are children
    *
    * @ORM\OneToMany(targetEntity="fibe\EventBundle\Entity\Event", mappedBy="parent", cascade={"persist"})
-   * @Expose
    */
   private $children;
 
@@ -49,7 +50,6 @@ class Event extends VEvent
    *
    * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="events", cascade={"persist"})
    * @ORM\JoinColumn(name="mainevent_id", referencedColumnName="id")
-   * @Expose
    */
   private $mainEvent;
 
@@ -65,18 +65,16 @@ class Event extends VEvent
    * @ORM\JoinTable(name="event_paper",
    *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="paper_id", referencedColumnName="id")})
-   * @Expose
    */
   private $papers;
 
   /**
-   * Lovcations for the event
+   * Locations for the event
    *
    * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Location", inversedBy="events", cascade={"persist"})
    * @ORM\JoinTable(name="event_location",
    *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="location_id", referencedColumnName="id")})
-   * @Expose
    */
   private $locations;
 
@@ -87,7 +85,6 @@ class Event extends VEvent
    * @ORM\JoinTable(name="event_role",
    *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")})
-   * @Expose
    */
   private $roles;
 
@@ -99,6 +96,7 @@ class Event extends VEvent
     parent::__construct();
     $this->papers = new ArrayCollection();
     $this->children = new ArrayCollection();
+    $this->locations = new ArrayCollection();
     $this->categories = new ArrayCollection();
   }
 
@@ -321,7 +319,7 @@ class Event extends VEvent
   }
 
   /**
-   * @return mixed
+   * @return \Doctrine\Common\Collections\Collection
    */
   public function getLocations()
   {
@@ -329,7 +327,7 @@ class Event extends VEvent
   }
 
   /**
-   * @param mixed $locations
+   * @param Location $locations
    */
   public function setLocations($locations)
   {

@@ -1,0 +1,18 @@
+<div ng-include="GLOBAL_CONFIG.app.modules.conferences.urls.partials+'conferences-actions.html'" ng-controller="conferencesMainCtrl"></div>
+<form name="conferenceEditForm"  class="form" role="form" ng-submit="update(conferenceEditForm)">
+    <div>
+        <label for="inputName">Label</label>
+        <input type="text" class="form-control" id="label" required placeholder="{{conference.label}}" ng-model="conference.label">
+    </div>
+    <div class="form-group">
+        <label for="inputDescription">Description</label>
+        <input type="text " class="form-control" id="inputDescription" placeholder="{{conference.description}}" ng-model="conference.description">
+    </div>
+    <div >
+        <label for="inputUrl">Url</label>
+        <input type="text " class="form-control" id="inputUrl" placeholder="{{conference.url}}" ng-model="conference.url">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
+</form>

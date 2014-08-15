@@ -15,17 +15,18 @@ use FOS\RestBundle\Util\Codes;
 class MainEventRESTController extends FOSRestController
 {
 
-  const ENTITY_CLASSNAME = "fibe\\ContentBundle\\Entity\\MainEvent";
-  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\MainEvent";
+  const ENTITY_CLASSNAME = "fibe\\EventBundle\\Entity\\MainEvent";
+  const FORM_CLASSNAME = "fibe\\EventBundle\\Form\\MainEventType";
 
 
   /**
    * Lists all MainEvent entities.
-   * @Rest\Get("/mainEvents")
+   * @Rest\Get("/mainEvents", name="schedule_conferences_all")
    * @Rest\View
    * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
    * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
    * @Rest\QueryParam(name="query", requirements=".{2,128}", nullable=true, description="the query to search.")
+   * @Rest\QueryParam(name="order", nullable=true, array=true, description="the query to search.")
    */
   public function getMainEventsAction(Request $request, ParamFetcherInterface $paramFetcher)
   {
@@ -37,7 +38,7 @@ class MainEventRESTController extends FOSRestController
   }
 
   /**
-   * @Rest\Get("/mainEvents/{id}")
+   * @Rest\Get("/mainEvents/{id}", name="schedule_conferences_get")
    **/
   public function getMainEventAction($id)
   {
@@ -52,7 +53,7 @@ class MainEventRESTController extends FOSRestController
   /**
    * Creates a new MainEvent from the submitted data.
    *
-   * @Rest\Post("/mainEvents",name="api_mainEvent_post")
+   * @Rest\Post("/mainEvents", name="schedule_conferences_post")
    *
    * @param Request $request the request object
    *
@@ -73,7 +74,7 @@ class MainEventRESTController extends FOSRestController
 
   /**
    * Put action
-   * @Rest\Put("/mainEvents/{id}")
+   * @Rest\Put("/mainEvents/{id}", name="schedule_conferences_put")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
@@ -93,7 +94,7 @@ class MainEventRESTController extends FOSRestController
 
   /**
    * Patch action
-   * @Rest\Patch("/mainEvents/{id}")
+   * @Rest\Patch("/mainEvents/{id}", name="schedule_conferences_patch")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
@@ -113,7 +114,7 @@ class MainEventRESTController extends FOSRestController
 
   /**
    * Delete action
-   * @Rest\Delete("/mainEvents/{id}")
+   * @Rest\Delete("/mainEvents/{id}", name="schedule_conferences_delete")
    *
    * @var integer $id Id of the entity
    */

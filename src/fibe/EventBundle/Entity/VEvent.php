@@ -8,6 +8,7 @@ use fibe\ContentBundle\Entity\Role;
 use fibe\ContentBundle\Entity\Sponsor;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Discriminator;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
 
@@ -27,11 +28,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="vevent", indexes={
  *    @ORM\Index(name="start_at_idx", columns={"start_at"})
  * })
+ * @ExclusionPolicy("all")
  * @ORM\HasLifecycleCallbacks
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorMap({
  *     "Event"="Event",
- *     "MainEvent"="MainEvent",
+ *     "MainEvent"="MainEvent"
  * })
  */
 abstract class VEvent
@@ -50,6 +52,7 @@ abstract class VEvent
    * @ORM\Id
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
+   * @Expose
    */
   protected $id;
 
@@ -58,8 +61,8 @@ abstract class VEvent
    *
    * This property defines a short summary or subject for the
    * calendar component.
-   *
    * @ORM\Column(type="string", length=255, nullable=true)
+   * @Expose
    */
   protected $label;
 
@@ -69,6 +72,7 @@ abstract class VEvent
    * This property specifies when the calendar component begins.
    *
    * @ORM\Column(type="datetime", name="start_at")
+   * @Expose
    */
   protected $startAt;
 
@@ -79,6 +83,7 @@ abstract class VEvent
    * component ends.
    *
    * @ORM\Column(type="datetime", name="end_at")
+   * @Expose
    */
   protected $endAt;
 
@@ -89,6 +94,7 @@ abstract class VEvent
    * calendar component, than that provided by the "SUMMARY" property.
    *
    * @ORM\Column(type="text", nullable=true)
+   * @Expose
    */
   protected $description;
 
@@ -178,7 +184,7 @@ abstract class VEvent
    * status
    *
    * @ORM\Column(type="string", length=32, nullable=true)
-   * @Assert\Choice(multiple=false, choices = {"CANCELLED","CONFIRMED","TENTATIVE"},  message = "Choose a valid status.")
+   * @Assert\Choice(multiple=false, choices = {"CANCELLED","CONFIRMED","TENTATIVE"}, strict=false, message = "Choose a valid status.")
    */
   protected $status = self::CLASSIFICATION_PUBLIC;
 
@@ -199,10 +205,10 @@ abstract class VEvent
   protected $priority;
 
   /**
-   * location
+   * Topic
    *
    * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Topic", inversedBy="vEvents", cascade={"persist"})
-   * @ORM\JoinTable(name="vevent_paper",
+   * @ORM\JoinTable(name="vevent_topic",
    *     joinColumns={@ORM\JoinColumn(name="venvt_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="topic_id", referencedColumnName="id")})
    */
@@ -221,8 +227,6 @@ abstract class VEvent
    *
    * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Sponsor", mappedBy="vEvent", cascade={"persist"})
    * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="cascade")
-   *
-   * @Expose
    */
   protected $sponsors;
 
@@ -241,7 +245,6 @@ abstract class VEvent
    * Used for ui representation in the calendar view
    *
    * @ORM\Column(name="is_all_day", type="boolean")
-   * @Expose
    */
   protected $isAllDay = false;
 
@@ -250,7 +253,6 @@ abstract class VEvent
    * Used for ui representation in the calendar view
    *
    * @ORM\Column(name="is_instant", type="boolean")
-   * @Expose
    */
   protected $isInstant;
 
@@ -284,6 +286,7 @@ abstract class VEvent
     $this->topics = new ArrayCollection();
     $this->createdAt = new \DateTime();
     $this->lastModifiedAt = new \DateTime();
+    $this->status = "CONFIRMED";
     $this->setRevisionSequence($this->getRevisionSequence() + 1);
   }
 
@@ -343,7 +346,6 @@ abstract class VEvent
   public function onCreation()
   {
     $now = new \DateTime('now');
-
     $this->setCreatedAt($now);
     $this->setLastModifiedAt($now);
   }
@@ -356,7 +358,6 @@ abstract class VEvent
   public function onUpdate()
   {
     $now = new \DateTime('now');
-
     $this->setLastModifiedAt($now);
   }
 
@@ -536,7 +537,6 @@ abstract class VEvent
   public function setLastModifiedAt(\DateTime $lastModifiedAt)
   {
     $this->lastModifiedAt = $lastModifiedAt;
-
     return $this;
   }
 

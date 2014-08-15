@@ -49,14 +49,14 @@
           $aclProvider->updateAcl($acl);
 
           //share with teamates
-          $teamates = $user->getCurrentMainEvent()->getTeam()->getConfManagers();
-          foreach ($teamates as $teamate)
-          {
-            if($teamate->getId() != $user->getId())
-            {
-              $aclHelper->createUserACL($teamate,$entity);
-            }
-          }
+//          $teamates = $user->getCurrentMainEvent()->getTeam()->getConfManagers();
+//          foreach ($teamates as $teamate)
+//          {
+//            if($teamate->getId() != $user->getId())
+//            {
+//              $aclHelper->createUserACL($teamate,$entity);
+//            }
+//          }
         }
       } catch(EntityACLNotRegisteredException $e){
         // just don't add acl

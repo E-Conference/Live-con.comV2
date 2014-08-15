@@ -11,12 +11,8 @@ class MainEventType extends AbstractType
 
   protected $user;
 
-    /**
-     * @param $user
-     */
-    public function __construct($user)
+    public function __construct()
     {
-      $this->user = $user;
     }
 
         /**
@@ -27,9 +23,16 @@ class MainEventType extends AbstractType
     {
       parent::buildForm($builder, $options);
       $builder
-        ->add('logo', 'file', array('required' => false,
-          'label'    => 'Logo (jpeg - png - 2MO)',
-          'attr'     => array('placeholder' => 'logoPath')))
+          ->add('acronym')
+          ->add('label')
+          ->add('startAt')
+          ->add('endAt')
+          ->add('description')
+          ->add('comment')
+          ->add('url');;
+//        ->add('logo', 'file', array('required' => false,
+//          'label'    => 'Logo (jpeg - png - 2MO)',
+//          'attr'     => array('placeholder' => 'logoPath')))
 
       ;
     }
@@ -40,7 +43,8 @@ class MainEventType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'fibe\EventBundle\Entity\MainEvent'
+            'data_class' => 'fibe\EventBundle\Entity\MainEvent',
+             'csrf_protection' => false
         ));
     }
 

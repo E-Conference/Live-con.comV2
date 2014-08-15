@@ -4,18 +4,14 @@
     <label for="inputName">Label</label>
       <input type="text" class="form-control" id="label" required placeholder="Label" ng-model="event.label">
   </div>
+  <div >
+     <label for="inputDescription">Description</label>
+     <input type="text " class="form-control" id="inputDescription" placeholder="Description" ng-model="event.description">
+  </div>
    <div >
-    <label for="inputHomepage">Website</label>
-      <input type="text " class="form-control" id="inputWebsite" placeholder="Website" ng-model="event.additional_information.website">
+      <label for="inputUrl">Url</label>
+      <input type="text " class="form-control" id="inputUrl" placeholder="Url" ng-model="event.url">
   </div>
-  <div class="form-group">
-    <label for="inputCountry">Country</label>
-    <input type="text " class="form-control" id="inputCountry" placeholder="Country" ng-model="event.additional_information.country">
-  </div>
-    <div class="form-group">
-        <label for="inputImg">Image</label>
-        <input type="text " class="form-control" id="inputCountry" placeholder="Image link" ng-model="event.additional_information.img">
-    </div>
   <div class="form-group">
       <button type="submit" class="btn btn-success">Save</button>
   </div>

@@ -1,9 +1,4 @@
 #app/routing_rest.yml
-Rest_CommunityBundle : 
-  type : rest
-  resource: "@fibeCommunityBundle/Resources/config/routing_rest.yml"
-
 Rest_RestBundle:
     type: rest
     resource: "@fibeRestBundle/Resources/config/routing_rest.yml"
-

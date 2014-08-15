@@ -25,6 +25,7 @@ class EventType extends VEventType
     {
         parent::buildForm($builder, $options);
         $builder
+            ->add('locations')
             ->add('papers', 'entity', array(
                     'class'    => 'fibeContentBundle:Paper',
                     'label'    => 'Papers',
@@ -41,7 +42,8 @@ class EventType extends VEventType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'fibe\EventBundle\Entity\Event'
+            'data_class' => 'fibe\EventBundle\Entity\Event',
+            'csrf_protection' => false
         ));
     }
 
