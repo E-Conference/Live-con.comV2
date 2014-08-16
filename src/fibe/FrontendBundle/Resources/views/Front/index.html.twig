@@ -11,8 +11,9 @@
     {% stylesheets 'bundles/frontend/app/css/bootstrap.min.css'
                    'bundles/frontend/app/css/loading-bar.css' 
                    'bundles/frontend/app/css/app.css' 
-                   'bundles/frontend/app/css/animations.css' 
-                    output='css/compiled/vendors.css' %}
+                   'bundles/frontend/app/css/animations.css'
+                   'bundles/frontend/app/css/datetimepicker.css'
+    output='css/compiled/vendors.css' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     {% endstylesheets %}
@@ -35,6 +36,7 @@
                    'bundles/frontend/vendors/createDialog.js'
                    'bundles/frontend/vendors/angular-moment.js'
                    'bundles/frontend/vendors/loadingBarModule.js'
+                   'bundles/frontend/vendors/datetimepicker.js'
                     output='js/compiled/main.js'%}
         <script src="{{ asset_url }}" type="text/javascript"></script>
     {% endjavascripts %}
