@@ -71,13 +71,10 @@ class CrudHandler
     {
       $entity = $form->getData();
       //get the service of the entity conventionally named fibe.{entityNme}Service
-      echo"lol";
       if($entityService = $this->container->get('fibe.'.substr($entityClassName, strrpos($entityClassName,'\\') + 1).'Service'))
       {
-        echo strtolower($method);
         if(method_exists($entityService,strtolower($method)))
         {
-          echo"lol2";
           call_user_func_array(array($entityService, strtolower($method)), array($entity));
         }
       }
