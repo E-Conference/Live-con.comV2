@@ -27,11 +27,9 @@ class VEventType extends AbstractType
             ->add('label')
             ->add('startAt', 'datetime', array(
                 'widget' =>'single_text',
-                'format' => \DateTime::ATOM,
             ))
             ->add('endAt', 'datetime', array(
                 'widget' =>'single_text',
-                'format' => \DateTime::ATOM,
             ))
             ->add('description')
             ->add('comment')
