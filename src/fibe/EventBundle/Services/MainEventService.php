@@ -9,6 +9,8 @@
   use fibe\EventBundle\Entity\MainEvent;
   use fibe\SecurityBundle\Entity\Team;
   use fibe\SecurityBundle\Entity\User;
+  use Symfony\Component\Security\Core\SecurityContext;
+  use Symfony\Component\Security\Core\SecurityContextInterface;
 
   /**
    * Class MainEventService
@@ -18,22 +20,28 @@
   {
 
     protected $entityManager;
+    protected $securityContext;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManager $entityManager, SecurityContextInterface $securityContext)
     {
       $this->entityManager = $entityManager;
+      $this->securityContext = $securityContext;
     }
 
 
 
-    public function create(User $user)
+    public function post(MainEvent $mainEvent = null)
     {
-      $mainEvent = new MainEvent();
+      $user = $this->securityContext->getToken()->getUser();
+
+      if(null == $mainEvent)
+      {
+        $mainEvent = new MainEvent();
+        $mainEvent->setLabel("Livecon Conference");
+      }
       $mainEvent->setLogoPath("livecon.png");
-      $mainEvent->setLabel("Livecon Conference");
       $mainEvent->setStartAt(new \DateTime('now'));
-      $end = new \DateTime('now');
-      $mainEvent->setEndAt($end->add(new \DateInterval('P2D')));
+      $mainEvent->setEndAt(clone $mainEvent->getStartAt()->add(new \DateInterval('P2D')));
       $this->entityManager->persist($mainEvent);
 
 

@@ -18,11 +18,11 @@
   {
 
     /**
-     * @Route("", name="event_mainevent_show")
+     * @Route("/{id}", name="event_mainevent_show")
      *
      * @Template()
      */
-    public function showAction(Request $request)
+    public function showAction(Request $request,$id)
     {
       //$mainEvent = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'MainEvent');
       $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'MainEvent');
@@ -80,7 +80,7 @@
       // $token = $csrf->generateCsrfToken($intention); //Intention should be empty string, if you did not define it in parameters
       // BOOLEAN $csrf->isCsrfTokenValid($intention, $token); 
 
-      $this->get('mainEventService')->reset($conference);
+      $this->get('fibe.event.MainEventService')->reset($conference);
 
       $em->flush();
 
@@ -98,7 +98,7 @@
     public function createAction(Request $request)
     {
       //Create the conference
-      $this->get('mainEventService')->create($this->getUser());
+      $this->get('fibe.event.MainEventService')->create();
 
       return $this->redirect($this->generateUrl('event_mainevent_show'));
     }
@@ -118,7 +118,7 @@
       $user->setcurrentMainEvent(null);
       $em->persist($user);
 
-      $this->get('mainEventService')->delete($conference);
+      $this->get('fibe.event.MainEventService')->delete($conference);
 
       $this->container->get('session')->getFlashBag()->add(
         'success',

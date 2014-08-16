@@ -23,17 +23,18 @@ class SerializeExceptionListener
 
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
-        // $format = $event->getRequest()->getRequestFormat();
-        // if(!$format || $format === "html"){
-        //     return;
-        // }
-        // $error = $event->getException();
-        // $data = array('error' => $error->getMessage());
-        // $content = $this->getSerializer()->serialize($data, $format);
-        // $response = new Response($content, 400);
-        // if(method_exists($error,'getStatusCode')){
-        //     $response->setStatusCode($error->getStatusCode());
-        // }
-        // $event->setResponse($response);
+         $format = $event->getRequest()->getRequestFormat();
+         if(!$format || $format === "html"){
+             return;
+         }
+         $error = $event->getException();
+         $data = array('error' => $error->getMessage());
+         $data[] = array('stacktrace' => $error->getTrace());
+         $content = $this->getSerializer()->serialize($data, $format);
+         $response = new Response($content, 400);
+         if(method_exists($error,'getStatusCode')){
+             $response->setStatusCode($error->getStatusCode());
+         }
+         $event->setResponse($response);
     }
 }

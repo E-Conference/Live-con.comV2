@@ -76,7 +76,7 @@ class Team
    *
    * @return $this
    */
-  public function addConfManager(User $confManager = null)
+  public function addConfManager(User $confManager)
   {
     $this->confManagers[] = $confManager;
 
