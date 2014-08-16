@@ -27,7 +27,8 @@ var liveconApp = angular.module('liveconApp', [
     'personsApp',
     'eventsApp',
     'conferencesApp',
-    'angularMoment'
+    'angularMoment',
+    'ui.bootstrap.datetimepicker'
 ]);
 
 
