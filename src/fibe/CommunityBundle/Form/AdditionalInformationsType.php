@@ -28,7 +28,8 @@ class AdditionalInformationsType extends AbstractType
   public function setDefaultOptions(OptionsResolverInterface $resolver)
   {
     $resolver->setDefaults(array(
-      'data_class' => 'fibe\CommunityBundle\Entity\AdditionalInformations'
+      'data_class' => 'fibe\CommunityBundle\Entity\AdditionalInformations',
+      'csrf_protection' => false,
     ));
   }
 

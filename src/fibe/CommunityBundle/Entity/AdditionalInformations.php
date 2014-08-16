@@ -60,13 +60,13 @@ private $website;
 
   /**
    * company
-   * @ORM\OneToOne(targetEntity="fibe\CommunityBundle\Entity\Company",cascade={"persist", "remove"})
+   * @ORM\OneToOne(targetEntity="fibe\CommunityBundle\Entity\Company", inversedBy="additionalInformation", cascade={"all"})
    */
   private $company;
 
   /**
    * person
-   * @ORM\OneToOne(targetEntity="fibe\CommunityBundle\Entity\Person",cascade={"persist", "remove"})
+   * @ORM\OneToOne(targetEntity="fibe\CommunityBundle\Entity\Person",cascade={"all"})
    */
   private $person;
 

@@ -17,13 +17,15 @@ class CompanyType extends AbstractType
   {
     $builder
       ->add('label')
+      ->add('additional_information', new AdditionalInformationsType())
+//      ->add('additional_information', new AdditionalInformationsType())
       ->add('members', 'entity', array(
         'class'    => 'fibeCommunityBundle:Person',
         'label'    => 'Members',
         'multiple' => true,
         'required' => false
       ))
-      ->add('additional_information', new AdditionalInformationsType());
+    ;
   }
 
   /**
@@ -33,7 +35,8 @@ class CompanyType extends AbstractType
   {
     $resolver->setDefaults(array(
       'data_class' => 'fibe\CommunityBundle\Entity\Company',
-      'csrf_protection' => false
+      'csrf_protection' => false,
+      'cascade_validation' => true,
     ));
   }
 

@@ -3,6 +3,7 @@
 namespace fibe\CommunityBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -45,21 +46,21 @@ class Company
   /**
    * Sponsors
    *
-   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Sponsor", mappedBy="company",cascade={"persist", "remove"})
+   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Sponsor", mappedBy="company", cascade={"all"})
    */
   private $sponsors;
 
   /**
    * Additional Infomations of the company
    *
-   * @ORM\OneToOne(targetEntity="AdditionalInformations", cascade={"persist"})
-   * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id",onDelete="CASCADE")
+   * @ORM\OneToOne(targetEntity="AdditionalInformations", mappedBy="company", cascade={"all"}, fetch="EAGER")
+   * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id", onDelete="CASCADE")
    * @Expose
    */
   private $additionalInformation;
 
   /**
-   * @ORM\ManyToMany(targetEntity="Person",  mappedBy="companies", cascade={"persist","merge","remove"})
+   * @ORM\ManyToMany(targetEntity="Person",  mappedBy="companies", cascade={"all"})
    * @Expose
    */
   private $members;
@@ -115,6 +116,22 @@ class Company
   {
     $this->slugify();
   }
+
+  /**
+   * auto persist of embedded data
+   * @ORM\PreFlush
+   */
+  public function updateSomething(PreFlushEventArgs $eventArgs)
+  {
+    if(!$this->getId()) return;
+    $em = $eventArgs->getEntityManager();
+    $uow = $em->getUnitOfWork();
+    $uow->recomputeSingleEntityChangeSet(
+      $em->getClassMetadata(get_class($this->getAdditionalInformation())),
+      $this->getAdditionalInformation()
+    );
+  }
+
 
   /**
    * Set slug
@@ -244,7 +261,7 @@ class Company
   /**
    * @param mixed $additionalInformation
    */
-  public function setAdditionalInformation($additionalInformation)
+  public function setAdditionalInformation(AdditionalInformations $additionalInformation)
   {
     $this->additionalInformation = $additionalInformation;
   }
