@@ -8,6 +8,7 @@ use fibe\ContentBundle\Entity\Role;
 use fibe\ContentBundle\Entity\Sponsor;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Discriminator;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
@@ -72,6 +73,7 @@ abstract class VEvent
    * This property specifies when the calendar component begins.
    *
    * @ORM\Column(type="datetime", name="start_at")
+   * @SerializedName("startAt")
    * @Expose
    */
   protected $startAt;
@@ -83,6 +85,7 @@ abstract class VEvent
    * component ends.
    *
    * @ORM\Column(type="datetime", name="end_at")
+   * @SerializedName("endAt")
    * @Expose
    */
   protected $endAt;

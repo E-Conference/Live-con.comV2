@@ -69,6 +69,7 @@ class CrudHandler
     }
     $form = $this->formFactory->create(new $formClassName(), $entity, array('method' => $method));
     unset($formData['id']);//remove id to avoid form validation error with this unnecessary id
+    unset($formData['dtype']);//remove dtype to avoid form validation error with this unnecessary dtype (TODO remove dtype from serialization)
     $form->submit($formData, 'PATCH' !== $method);
     if ($form->isValid())
     {

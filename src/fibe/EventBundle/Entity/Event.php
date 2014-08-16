@@ -119,7 +119,7 @@ class Event extends VEvent
   public function onUpdate()
   {
     $this->slugify();
-    $this->setIsInstant($this->getEndAt()->format('U') == $this->getStartAt()->format('U'));
+    //$this->setIsInstant($this->getEndAt()->format('U') == $this->getStartAt()->format('U'));
 
     //events that aren't leaf in the hierarchy can't have a location
     if ($this->hasChildren() && $this->getLocations() != null)

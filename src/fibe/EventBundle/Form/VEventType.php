@@ -25,8 +25,14 @@ class VEventType extends AbstractType
     {
         $builder
             ->add('label')
-            ->add('startAt')
-            ->add('endAt')
+            ->add('startAt', 'datetime', array(
+                'widget' =>'single_text',
+                'format' => \DateTime::ATOM,
+            ))
+            ->add('endAt', 'datetime', array(
+                'widget' =>'single_text',
+                'format' => \DateTime::ATOM,
+            ))
             ->add('description')
             ->add('comment')
             ->add('url');
