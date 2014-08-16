@@ -8,6 +8,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -72,12 +73,19 @@ class CrudHandler
     {
       $entity = $form->getData();
       //get the service of the entity conventionally named fibe.{entityNme}Service
-      if($entityService = $this->container->get('fibe.'.substr($entityClassName, strrpos($entityClassName,'\\') + 1).'Service'))
+      try
       {
-        if(method_exists($entityService,strtolower($method)))
+        if($entityService = $this->container->get('fibe.'.substr($entityClassName, strrpos($entityClassName,'\\') + 1).'Service'))
         {
-          call_user_func_array(array($entityService, strtolower($method)), array($entity));
+          if(method_exists($entityService,strtolower($method)))
+          {
+            call_user_func_array(array($entityService, strtolower($method)), array($entity));
+          }
         }
+      }
+      catch(ServiceNotFoundException $e)
+      {
+        //no business service defined
       }
 
       $this->em->persist($entity);

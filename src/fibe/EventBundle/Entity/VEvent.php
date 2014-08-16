@@ -52,7 +52,7 @@ abstract class VEvent
   /**
    * @ORM\Id
    * @ORM\Column(type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
+   * @ORM\GeneratedValue()
    * @Expose
    */
   protected $id;
