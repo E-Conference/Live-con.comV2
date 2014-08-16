@@ -25,8 +25,12 @@ class MainEventType extends AbstractType
       $builder
           ->add('acronym')
           ->add('label')
-          ->add('startAt')
-          ->add('endAt')
+          ->add('startAt', 'datetime', array(
+            'widget' =>'single_text',
+          ))
+          ->add('endAt', 'datetime', array(
+            'widget' =>'single_text',
+          ))
           ->add('description')
           ->add('comment')
           ->add('url');;
