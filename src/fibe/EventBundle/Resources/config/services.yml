@@ -1,5 +1,5 @@
 services:
-    mainEventService:
+    fibe.MainEventService:
         class:  fibe\EventBundle\Services\MainEventService
-        arguments: ["@doctrine.orm.entity_manager"]
+        arguments: ["@doctrine.orm.entity_manager","@security.context"]
 

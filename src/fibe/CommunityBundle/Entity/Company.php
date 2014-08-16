@@ -52,7 +52,7 @@ class Company
   /**
    * Additional Infomations of the company
    *
-   * @ORM\OneToOne(targetEntity="AdditionalInformations", cascade={"persist"}, fetch="EAGER")
+   * @ORM\OneToOne(targetEntity="AdditionalInformations", cascade={"persist"})
    * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id",onDelete="CASCADE")
    * @Expose
    */
@@ -64,11 +64,18 @@ class Company
    */
   private $members;
 
-
   /**
    * @ORM\Column(type="string", length=256, nullable=true)
    */
   private $slug;
+
+  /**
+   * The mainEvent associated
+   *
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="companies", cascade={"persist"})
+   * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
+   */
+  private $mainEvent;
 
   /**
    * Constructor

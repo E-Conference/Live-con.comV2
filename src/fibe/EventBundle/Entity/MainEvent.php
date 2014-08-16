@@ -13,6 +13,7 @@ use fibe\ContentBundle\Entity\Sponsor;
 use fibe\ContentBundle\Entity\Topic;
 use fibe\ContentBundle\Util\StringTools;
 use fibe\EventBundle\Entity\VEvent;
+use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;

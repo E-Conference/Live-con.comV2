@@ -28,25 +28,25 @@ class DashboardController extends Controller
 
     return array('conferences' => $entities);
   }
-
-
-  /**
-   * @Route("{id}/enter" , name="dashboard_enter_conference")
-   */
-  public function enterConferenceAction($id)
-  {
-
-    $em = $this->getDoctrine()->getManager();
-    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'MainEvent', $id);
-
-    $user = $this->getUser();
-    $user->setMainEvent($entity);
-    $em->persist($user);
-    $em->flush();
-
-    return $this->redirect($this->generateUrl('event_mainevent_show'));
-
-  }
+//
+//
+//  /**
+//   * @Route("{id}/enter" , name="dashboard_enter_conference")
+//   */
+//  public function enterConferenceAction($id)
+//  {
+//
+//    $em = $this->getDoctrine()->getManager();
+//    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'MainEvent', $id);
+//
+//    $user = $this->getUser();
+//    $user->setMainEvent($entity);
+//    $em->persist($user);
+//    $em->flush();
+//
+//    return $this->redirect($this->generateUrl('event_mainevent_show'));
+//
+//  }
 
 
 }

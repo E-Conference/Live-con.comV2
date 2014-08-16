@@ -7,22 +7,19 @@ use fibe\RestBundle\Search\SearchServiceInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use JMS\Serializer\SerializerInterface;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class CrudHandler
 {
   protected $em;
-  protected $serializer;
-  protected $formFactory;
-  protected $searchService;
+  protected $container;
 
-  public function __construct(EntityManager $em, SerializerInterface $serializer, FormFactoryInterface $formFactory,SearchServiceInterface $searchService)
+  public function __construct(Container $container )
   {
-    $this->em = $em;
-    $this->serializer = $serializer;
-    $this->formFactory = $formFactory;
-    $this->searchService = $searchService;
+    $this->container      = $container;
+    $this->em             = $container->get('doctrine.orm.entity_manager');
   }
 
   public function get($entityClassName, $id)
@@ -39,7 +36,7 @@ class CrudHandler
 
     if(($query = $paramFetcher->get('query')) != null)
     {
-      return $this->searchService->doSearch($entityClassName, $query, $limit, $offset, $order);
+      return $this->container->get('fibe.rest.searchservice')->doSearch($entityClassName, $query, $limit, $offset, $order);
     }
 
     return $this->em->getRepository($entityClassName)->findBy(array(), $order, $limit, $offset);
@@ -67,14 +64,22 @@ class CrudHandler
     {
       $entity = $this->em->getRepository($entityClassName)->find($formData['id']);
     }
-    $form = $this->formFactory->create(new $formClassName(), $entity, array('method' => $method));
+    $form = $this->container->get('form.factory')->create(new $formClassName(), $entity, array('method' => $method));
     unset($formData['id']);//remove id to avoid form validation error with this unnecessary id
     unset($formData['dtype']);//remove dtype to avoid form validation error with this unnecessary dtype (TODO remove dtype from serialization)
     $form->submit($formData, 'PATCH' !== $method);
     if ($form->isValid())
     {
-      //TODO call a service for business logic if it exists
       $entity = $form->getData();
+      //get the service of the entity conventionally named fibe.{entityNme}Service
+      if($entityService = $this->container->get('fibe.'.substr($entityClassName, strrpos($entityClassName,'\\') + 1).'Service'))
+      {
+        if(method_exists($entityService,strtolower($method)))
+        {
+          call_user_func_array(array($entityService, strtolower($method)), array($entity));
+        }
+      }
+
       $this->em->persist($entity);
       $this->em->flush($entity);
       return $entity;

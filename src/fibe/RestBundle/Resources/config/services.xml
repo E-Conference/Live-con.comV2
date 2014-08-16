@@ -26,10 +26,7 @@
 
         <!-- generic crud handler-->
         <service id="fibe.rest.crudhandler" class="%fibe.rest.crudhandler.class%">
-            <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="jms_serializer"/>
-            <argument type="service" id="form.factory"/>
-            <argument type="service" id="fibe.rest.searchservice"/>
+            <argument type="service" id="service_container" />
         </service>
 
         <!-- search serice-->
@@ -39,10 +36,10 @@
         </service>
 
 
-        <!--<service id="serialize_exception_listener" class="%serialize_exception_listener.class%">-->
-            <!--<tag name="kernel.event_listener" event="kernel.exception" method="onKernelException"/>-->
-            <!--<argument type="service" id="serializer" />-->
-        <!--</service>-->
+        <service id="serialize_exception_listener" class="%serialize_exception_listener.class%">
+            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException"/>
+            <argument type="service" id="serializer" />
+        </service>
 
 
         <!-- cors support -->
