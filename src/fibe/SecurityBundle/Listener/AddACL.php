@@ -36,7 +36,7 @@
         {
             
           $aclHelper->getClassNameByRepositoryName($this->get_real_class($entity));
-          // creating the ACL
+          // create the ACL
           $aclProvider = $this->container->get('security.acl.provider');
 
           $objectIdentity = ObjectIdentity::fromDomainObject($entity);

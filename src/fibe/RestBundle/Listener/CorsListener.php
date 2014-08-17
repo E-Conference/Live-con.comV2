@@ -4,6 +4,13 @@ namespace fibe\RestBundle\Listener;
 
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
+/**
+ * Class CorsListener
+ *  unused!
+ *
+ * enable it in the config.xml
+ * @package fibe\RestBundle\Listener
+ */
 class CorsListener
 {
     public function onKernelResponse(FilterResponseEvent $event)
