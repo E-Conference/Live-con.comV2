@@ -1,4 +1,4 @@
-angular.module('roleLabelsApp').factory('roleLabelsFact', ['$resource', '$cachedResource',
+angular.module('rolesApp').factory('rolesFact', ['$resource', '$cachedResource',
     function($cachedResource){
         return $cachedResource(
             globalConfig.api.urls.get_roleLabels,
