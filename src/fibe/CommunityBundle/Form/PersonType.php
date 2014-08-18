@@ -34,7 +34,7 @@ class PersonType extends AbstractType
         ->add('label')
         ->add('firstName')
         ->add('familyName')
-        ->add('additional_information', new AdditionalInformationsType());
+        ->add('additionalInformation', new AdditionalInformationsType());
 //      ->add('firstName', 'text', array('label' => "First name"))
 //      ->add('familyName', 'text', array('label' => "Family Name"))
 //      ->add('email', 'text', array('required' => false))
