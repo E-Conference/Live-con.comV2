@@ -1,8 +1,8 @@
-angular.module('roleLabelsApp').controller('roleLabelsMainCtrl', [function ($scope) {
+angular.module('rolesApp').controller('rolesMainCtrl', [function ($scope) {
 
 }]);
 
-angular.module('roleLabelsApp').controller('roleLabelsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'roleLabelsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, roleLabelsFact, $cachedResource) {
+angular.module('rolesApp').controller('rolesListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'roleLabelsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, roleLabelsFact, $cachedResource) {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
     var offset = -20;

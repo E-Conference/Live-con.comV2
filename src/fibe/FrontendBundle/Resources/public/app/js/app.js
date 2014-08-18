@@ -3,6 +3,9 @@
 /* sub modules */
 angular.module('communityApp', []);
 angular.module('organizationsApp', ['fundoo.services']);
+angular.module('papersApp', ['fundoo.services']);
+angular.module('rolesApp', ['fundoo.services']);
+angular.module('categoriesApp', ['fundoo.services']);
 angular.module('personsApp', ['fundoo.services']);
 angular.module('eventsApp', ['fundoo.services']);
 angular.module('conferencesApp', ['fundoo.services']);
@@ -26,7 +29,10 @@ var liveconApp = angular.module('liveconApp', [
     'organizationsApp',
     'personsApp',
     'eventsApp',
+    'rolesApp',
+    'categoriesApp',
     'conferencesApp',
+    'papersApp',
     'angularMoment',
     'ui.bootstrap.datetimepicker'
 ]);

@@ -1,4 +1,4 @@
-angular.module('roleLabelsApp')
+angular.module('rolesApp')
     .config(
         ['$routeProvider',
             function ($routeProvider) {
