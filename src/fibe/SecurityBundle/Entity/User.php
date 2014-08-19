@@ -55,6 +55,7 @@
      * Person
      *
      * @ORM\OneToOne(targetEntity="fibe\CommunityBundle\Entity\Person",cascade={"persist"})
+     * @Expose
      */
     private $person;
 
@@ -80,7 +81,10 @@
     /** @ORM\Column(name="name", type="string", length=255, nullable=true) */
     protected $name;
  
-    /** @ORM\Column(name="picture", type="string", length=255, nullable=true) */
+    /**
+     * @Expose
+     * @ORM\Column(name="picture", type="string", length=255, nullable=true)
+     */
     protected $picture;
 
 
