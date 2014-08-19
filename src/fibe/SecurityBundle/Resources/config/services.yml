@@ -37,6 +37,10 @@ services:
             - @session
             - @fibe_security.mailer
 
+    fibe.UserService:
+        class:  fibe\SecurityBundle\Services\UserService
+        arguments: ["@doctrine.orm.entity_manager","@security.context"]
+
     fibe_user.registration.form.type:
         class: fibe\SecurityBundle\Form\RegistrationFormType
         arguments: [%fos_user.model.user.class%]
