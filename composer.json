@@ -25,7 +25,8 @@
         "lexik/form-filter-bundle": "*",
         "hwi/oauth-bundle": "0.4.*@dev",
         "friendsofsymfony/rest-bundle": "1.3.*",
-        "jms/serializer-bundle": "*"
+        "jms/serializer-bundle": "*",
+        "liip/functional-test-bundle":"dev-master"
 
     },
     "scripts": {
