@@ -6,15 +6,14 @@
 
     <parameters>
         <parameter key="serialize_exception_listener.class">fibe\RestBundle\Listener\SerializeExceptionListener</parameter>
-        <parameter key="authentication_handler.class">fibe\RestBundle\Listener\AuthenticationHandler</parameter>
+        <parameter key="authentication_handler.class">fibe\RestBundle\Handler\AuthenticationHandler</parameter>
+
         <parameter key="fibe.rest.crudhandler.class">fibe\RestBundle\Handler\CrudHandler</parameter>
         <parameter key="fibe.rest.searchservice.class">fibe\RestBundle\Search\SearchService</parameter>
         <!--<parameter key="app.cors_listener.class">fibe\RestBundle\Listener\CorsListener</parameter>-->
-        <!--<parameter key="session.storage.native_file.class">fibe\RestBundle\Session\Storage</parameter>-->
     </parameters>
 
     <services>
-
         <!-- ajax login -->
         <service id="authentication_handler" class="%authentication_handler.class%">
             <argument type="service" id="router" />
