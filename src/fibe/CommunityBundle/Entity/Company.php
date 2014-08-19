@@ -12,6 +12,7 @@ use fibe\EventBundle\Entity\MainEvent;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -56,12 +57,12 @@ class Company
    * @ORM\OneToOne(targetEntity="AdditionalInformations", mappedBy="company", cascade={"all"}, fetch="EAGER")
    * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id", onDelete="CASCADE")
    * @Expose
+   * @SerializedName("additionalInformation")
    */
   private $additionalInformation;
 
   /**
    * @ORM\ManyToMany(targetEntity="Person",  mappedBy="companies", cascade={"all"})
-   * @Expose
    */
   private $members;
 
@@ -168,6 +169,17 @@ class Company
   {
     return $this->id;
   }
+
+    /**
+     * Set id
+     * @param string $id
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
 
   /**
    * Set label

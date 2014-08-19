@@ -1,0 +1,22 @@
+<div ng-include="GLOBAL_CONFIG.app.modules.categories.urls.partials+'categories-actions.html'" ng-controller="categoriesMainCtrl"></div>
+<form name="categoryNewForm"   class="form" role="form" ng-submit="create(categoryNewForm)">
+   <div>
+        <label for="inputLabel">Label</label>
+        <input type="text" class="form-control" id="inputLabel" required placeholder="Label" ng-model="category.label">
+    </div>
+    <div >
+        <label for="inputDescription">Description</label>
+        <input type="textarea " class="form-control" id="inputDescription" placeholder="Description" ng-model="category.description">
+    </div>
+    <div >
+        <label for="inputLevel">Level</label>
+        <input type="text " class="form-control" id="inputLevel" placeholder="3" ng-model="category.level">
+    </div>
+    <div >
+        <label for="inputColor">Color</label>
+        <input type="text " class="form-control" id="inputColor" placeholder="Color" ng-model="category.color">
+    </div>
+  <div class="form-group">
+      <button type="submit" class="btn btn-success">Save</button>
+  </div>
+</form>

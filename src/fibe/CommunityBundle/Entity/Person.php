@@ -11,6 +11,7 @@ use FOS\UserBundle\Model\UserInterface;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
 
 use Symfony\Component\Validator\Constraints as Assert;
@@ -40,7 +41,8 @@ class Person
    *
    * @ORM\OneToOne(targetEntity="AdditionalInformations", cascade={"persist", "remove"})
    * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id", onDelete="CASCADE")
-   *
+   * @Expose
+   * @SerializedName("additionalInformation")
    */
   private $additionalInformation;
 
@@ -67,6 +69,7 @@ class Person
    * @Assert\NotBlank(message ="Please give a family name")
    * @ORM\Column(type="string", nullable=true,  name="familyName")
    * @Expose
+   * @SerializedName("familyName")
    */
   private $familyName;
 
@@ -75,6 +78,7 @@ class Person
    * @Assert\NotBlank(message ="Please give a first name")
    * @ORM\Column(type="string", nullable=true,  name="firstName")
    * @Expose
+   * @SerializedName("firstName")
    */
   private $firstName;
 
@@ -136,7 +140,6 @@ class Person
    * @ORM\JoinTable(name="main_event_person",
    *     joinColumns={@ORM\JoinColumn(name="mainevent_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")})
-   * @Expose
    */
   private $mainEvents;
 

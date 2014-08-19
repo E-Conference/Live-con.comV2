@@ -12,8 +12,8 @@
   <tbody infinite-scroll='load()' infinite-scroll-disabled='busy' infinite-scroll-distance='0.5'>
       <tr ng-repeat="organization in organizations  track by $index">
           <td>{{ organization.label }}</td>
-          <td>{{ organization.additional_information.website }}</td>
-          <td>{{ organization.additional_information.country }}</td>
+          <td>{{ organization.additionalInformation.website }}</td>
+          <td>{{ organization.additionalInformation.country }}</td>
           <td>
               <a class="btn btn-warning" href="#organizations/edit/{{ organization.id }}" role="button"><i class="fa fa-edit fa-1x"></i></a>
               <a class="btn btn-default" href="#organizations/show/{{ organization.id }}" role="button"><i class="fa fa-eye fa-1x"></i></a>

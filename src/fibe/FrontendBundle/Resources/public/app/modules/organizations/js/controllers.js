@@ -28,7 +28,7 @@ angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope'
 
         cloneOrganization = angular.copy(organization);
         cloneOrganization.id = null;
-        cloneOrganization.additional_information.id = null;
+        cloneOrganization.additionalInformation.id = null;
 
         var error = function(response, args){
             $rootScope.$broadcast('AlertCtrl:addAlert', {code:'Clone not completed', type:'danger'});

@@ -24,6 +24,7 @@ angular.module('personsApp').controller('personsListCtrl', ['$scope', 'GLOBAL_CO
 
         clonePerson = angular.copy(person);
         clonePerson.id = null;
+        clonePerson.additionalInformation.id = null;
 
         var error = function(response, args){
             $rootScope.$broadcast('AlertCtrl:addAlert', {code:'Clone not completed', type:'danger'});

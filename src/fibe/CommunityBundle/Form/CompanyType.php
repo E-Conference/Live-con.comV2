@@ -16,8 +16,9 @@ class CompanyType extends AbstractType
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
     $builder
+        ->add('id')
       ->add('label')
-      ->add('additional_information', new AdditionalInformationsType())
+      ->add('additionalInformation', new AdditionalInformationsType())
 //      ->add('additional_information', new AdditionalInformationsType())
       ->add('members', 'entity', array(
         'class'    => 'fibeCommunityBundle:Person',
