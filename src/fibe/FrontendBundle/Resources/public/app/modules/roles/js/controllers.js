@@ -1,8 +1,11 @@
+
+/********************************************************Roles Label*******************************************
+***************************************************************************************************************/
 angular.module('rolesApp').controller('rolesMainCtrl', [function ($scope) {
 
 }]);
 
-angular.module('rolesApp').controller('rolesListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'roleLabelsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, roleLabelsFact, $cachedResource) {
+angular.module('rolesApp').controller('rolesLabelsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'roleLabelsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, roleLabelsFact, $cachedResource) {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
     var offset = -20;
@@ -146,6 +149,157 @@ angular.module('roleLabelsApp').controller('roleLabelsShowCtrl', [ '$scope', '$r
 }]);
 
 angular.module('roleLabelsApp').controller('roleLabelsDeleteCtrl', [ '$scope', 'roleLabelModel', function ($scope, roleLabelModel) {
+       $scope.roleLabel = roleLabelModel;
+}]);
+
+
+
+/********************************************************Roles******************************************
+***************************************************************************************************************/
+angular.module('rolesApp').controller('rolesListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'rolesFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, rolesFact, $cachedResource) {
+    $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
+
+    var offset = -20;
+    var limit = 20;
+    $scope.busy = false;
+
+    $scope.roles = [];
+
+    $scope.reload = function(){
+       // $scope.roleLabels = role.list();
+        $scope.roles.$promise.then(function() {
+            console.log('From cache:', $scope.roles);
+        });
+        //console.log($scope.roles);
+    }
+
+    $scope.clone = function(role){
+        // $scope.roles = role.list();
+
+        clonerole = angular.copy(role);
+        clonerole.id = null;
+
+        var error = function(response, args){
+            $rootScope.$broadcast('AlertCtrl:addAlert', {code:'Clone not completed', type:'danger'});
+        }
+
+        var success = function(response, args){
+            $rootScope.$broadcast('AlertCtrl:addAlert', {code:'role saved', type:'success'});
+            $scope.roleLabels.push(response);
+        }
+
+        clonerole.$create({}, success, error);
+    }
+
+
+    $scope.deleteModal = function(index, role) {
+        $scope.index = index;
+
+        createDialogService(GLOBAL_CONFIG.app.modules.roles.urls.partials+'roles-delete.html', {
+            id: 'complexDialog',
+            title: 'role deletion',
+            backdrop: true,
+            controller: 'rolesDeleteCtrl',
+            success: {label: 'Ok', fn: function() {
+                rolesFact.delete({id:role.id});
+                $scope.roles.splice(index,1);
+            }}
+            }, {
+            roleModel: role
+        });
+    }
+
+
+    $scope.load = function(query) {
+        offset = offset + limit;
+
+        if (query) {
+            offset = 0;
+            limit = 20;
+            $scope.busy = false;
+        }
+
+        if (this.busy) return;
+
+        $scope.busy = true;
+        roles.all({offset : offset, limit:limit, query: query}, function(data) {
+            var items = data;
+
+            if (query) {
+                $scope.roles = data;
+            }else {
+                for (var i = 0; i < items.length; i++) {
+                    $scope.roles.push(items[i]);
+                }
+            }
+
+            if (items.length > 1){
+                $scope.busy = false;
+            }
+        })
+    };
+
+//    $scope.search = function(query) {
+//        role.all({offset: 0, limit: 20, query: query}, function (data) {
+//            $scope.roles = data;
+//        })
+//    };
+
+    /*
+    var Org = $cachedResource('org', globalConfig.api.urls.roles+'/:roleId.json', {id: "@id"});
+    $scope.roles = Org.query();
+    $scope.roles.$promise.then(function(data) {
+        console.log($scope.roles);
+       console.log($scope.roles.length);
+    });*/
+    //$scope.roles = $cachedResource();
+}]);
+
+
+angular.module('rolesApp').controller('rolesNewCtrl', [ '$scope', '$rootScope', '$location', 'rolesFact', function ($scope, $rootScope, $location, rolesFact) {
+    $scope.roleLabel = new roleLabelsFact;
+
+    var error = function(response, args){
+        $rootScope.$broadcast('AlertCtrl:addAlert', {code:'the rolehas not been created', type:'danger'});
+    }
+
+    var success = function(response, args){
+        $rootScope.$broadcast('AlertCtrl:addAlert', {code:'role created', type:'success'});
+        $location.path('/roles/list');
+    }
+
+    $scope.create = function(form){
+        if ( form.$valid ) {
+            $scope.role.$create({}, success, error);
+        }
+    }
+}]);
+
+angular.module('rolesApp').controller('rolesEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'rolesFact', function ($scope, $rootScope, $routeParams, $location, rolesFact) {
+    $scope.role = rolesFact.get({id:$routeParams.roleId});
+
+    var error = function(response, args){
+        $rootScope.$broadcast('AlertCtrl:addAlert', {code:'the role has not been saved', type:'danger'});
+    }
+
+    var success = function(response, args){
+        $rootScope.$broadcast('AlertCtrl:addAlert', {code:'role saved', type:'success'});
+        $location.path('/roles/list');
+    }
+
+    $scope.update = function(form){
+        if ( form.$valid ) {
+            $scope.role.$update({},success, error);
+        }
+    }
+}]);
+
+angular.module('rolesApp').controller('rolesShowCtrl', [ '$scope', '$routeParams', 'rolesFact', function ($scope, $routeParams, rolesFact) {
+    $scope.role = rolesFact.get({id:$routeParams.roleId});
+
+}]);
+
+angular.module('rolesApp').controller('rolesDeleteCtrl', [ '$scope', 'roleModel', function ($scope, roleModel) {
        $scope.roleLabel = roleLabelModel;
 }]);
 

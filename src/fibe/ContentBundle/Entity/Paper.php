@@ -12,12 +12,19 @@ use fibe\EventBundle\Entity\VEvent;
 use fibe\CommunityBundle\Entity\Person;
 use fibe\ContentBundle\Util\StringTools;
 
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\VirtualProperty;
+
 /**
  * Paper entity
  *
  * @ORM\Table(name="paper")
  * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\PaperRepository")
  * @ORM\HasLifecycleCallbacks
+ * @ExclusionPolicy("all") 
  *
  */
 class Paper
@@ -26,6 +33,7 @@ class Paper
    * @ORM\Id
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
+   * @Expose
    */
   private $id;
 
@@ -33,6 +41,7 @@ class Paper
    * label (or title of the paper)
    *
    * @ORM\Column(type="string")
+   * @Expose
    */
   private $label;
 
@@ -41,6 +50,7 @@ class Paper
    * events in datasets may don't have abstract
    *
    * @ORM\Column(type="text", name="abstract", nullable=true)
+   * @Expose
    */
   private $abstract;
 
@@ -48,6 +58,7 @@ class Paper
    * Url for the paper
    *
    * @ORM\Column(type="string", nullable=true)
+   * @Expose
    */
   private $url;
 
@@ -65,6 +76,7 @@ class Paper
    * The label of the publisher
    *
    * @ORM\Column(type="string", nullable=true, name="publisher")
+   * @Expose
    */
   private $publisher;
 
@@ -72,6 +84,8 @@ class Paper
    * The date of the publication
    *
    * @ORM\Column(type="string", nullable=true, name="publishDate")
+   * @SerializedName("publishDate")
+   * @Expose
    */
   private $publishDate;
 

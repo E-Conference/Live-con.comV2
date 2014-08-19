@@ -1,4 +1,4 @@
-angular.module('rolesApp').factory('rolesFact', ['$resource', '$cachedResource',
+angular.module('rolesApp').factory('rolesLabelFact', ['$resource', '$cachedResource',
     function($cachedResource){
         return $cachedResource(
             globalConfig.api.urls.get_roleLabels,
@@ -8,6 +8,21 @@ angular.module('rolesApp').factory('rolesFact', ['$resource', '$cachedResource',
                 create: {method:'POST', params:{}, isArray:false},
                 update: {method:'PUT', url: globalConfig.api.urls.get_roleLabels+'/:id', params:{'id': '@id'}, isArray:false},
                 delete: {method:'DELETE', url: globalConfig.api.urls.get_roleLabels+'/:id', params:{'id': '@id'}, isArray:false},
+                all: {method:'GET', params:{}, isArray:true}
+            }
+        );
+    }]);
+
+angular.module('rolesApp').factory('rolesFact', ['$resource', '$cachedResource',
+    function($cachedResource){
+        return $cachedResource(
+            globalConfig.api.urls.get_roles,
+            {},
+            {
+                get: {method:'GET', url: globalConfig.api.urls.get_roles+'/:id', params:{'id': '@id', cache: true}, isArray:false},
+                create: {method:'POST', params:{}, isArray:false},
+                update: {method:'PUT', url: globalConfig.api.urls.get_roles+'/:id', params:{'id': '@id'}, isArray:false},
+                delete: {method:'DELETE', url: globalConfig.api.urls.get_roles+'/:id', params:{'id': '@id'}, isArray:false},
                 all: {method:'GET', params:{}, isArray:true}
             }
         );

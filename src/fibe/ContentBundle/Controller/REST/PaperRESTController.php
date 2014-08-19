@@ -6,6 +6,10 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+use fibe\ContentBundle\Entity\Paper;
+use fibe\ContentBundle\Form\PaperType;
+use fibe\ContentBundle\Form\Filters\PaperFilterType;
+
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Util\Codes;
 
@@ -16,16 +20,17 @@ class PaperRESTController extends FOSRestController
 {
 
   const ENTITY_CLASSNAME = "fibe\\ContentBundle\\Entity\\Paper";
-  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\Paper";
+  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\PaperType";
 
 
   /**
    * Lists all Paper entities.
-   * @Rest\Get("/papers")
+   * @Rest\Get("/papers",name="content_papers_all")
    * @Rest\View
    * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
    * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
    * @Rest\QueryParam(name="query", requirements=".{2,128}", nullable=true, description="the query to search.")
+   * @Rest\QueryParam(name="order", nullable=true, array=true, description="the query to search.")
    */
   public function getPapersAction(Request $request, ParamFetcherInterface $paramFetcher)
   {
@@ -37,7 +42,7 @@ class PaperRESTController extends FOSRestController
   }
 
   /**
-   * @Rest\Get("/papers/{id}")
+   * @Rest\Get("/papers/{id}",name="content_papers_get")
    **/
   public function getPaperAction($id)
   {
@@ -52,7 +57,7 @@ class PaperRESTController extends FOSRestController
   /**
    * Creates a new Paper from the submitted data.
    *
-   * @Rest\Post("/papers",name="api_paper_post")
+   * @Rest\Post("/papers",name="content_papers_post")
    *
    * @param Request $request the request object
    *
@@ -73,7 +78,7 @@ class PaperRESTController extends FOSRestController
 
   /**
    * Put action
-   * @Rest\Put("/papers/{id}")
+   * @Rest\Put("/papers/{id}",name="content_papers_put")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
@@ -93,7 +98,7 @@ class PaperRESTController extends FOSRestController
 
   /**
    * Patch action
-   * @Rest\Patch("/papers/{id}")
+   * @Rest\Patch("/papers/{id}",name="content_papers_patch")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
@@ -113,7 +118,7 @@ class PaperRESTController extends FOSRestController
 
   /**
    * Delete action
-   * @Rest\Delete("/papers/{id}")
+   * @Rest\Delete("/papers/{id}",name="content_papers_delete")
    *
    * @var integer $id Id of the entity
    */

@@ -53,6 +53,14 @@
                     'bundles/frontend/app/modules/organizations/js/controllers.js'
                     'bundles/frontend/app/modules/organizations/js/routes.js'
 
+                    'bundles/frontend/app/modules/papers/js/services.js'
+                    'bundles/frontend/app/modules/papers/js/controllers.js'
+                    'bundles/frontend/app/modules/papers/js/routes.js'
+
+                    'bundles/frontend/app/modules/categories/js/services.js'
+                    'bundles/frontend/app/modules/categories/js/controllers.js'
+                    'bundles/frontend/app/modules/categories/js/routes.js'
+
                     'bundles/frontend/app/modules/persons/js/services.js'
                     'bundles/frontend/app/modules/persons/js/controllers.js'
                     'bundles/frontend/app/modules/persons/js/routes.js'
@@ -85,6 +93,8 @@
                     get_companies: "{{ path('community_companies_post') }}",
                     get_persons: "{{ path('community_persons_post') }}",
                     get_events: "{{ path('schedule_events_post') }}",
+                    get_papers: "{{ path('content_papers_post') }}",
+                    get_categories: "{{ path('schedule_categories_post') }}",
                     get_conferences: "{{ path('schedule_conferences_post') }}",
                     login: "{{ path('login_check', {_format: 'json'}) }}",
                     {#registration: "{{ path('') }}"#}
@@ -109,6 +119,20 @@
                             base: "{{ asset('bundles/frontend/app/modules/events/') }}",
                             partials: "{{ asset('bundles/frontend/app/modules/events/partials/') }}",
                             img: "{{ asset('bundles/frontend/app/modules/events/img') }}"
+                        }
+                    },
+                    papers: {
+                        urls: {
+                            base: "{{ asset('bundles/frontend/app/modules/papers/') }}",
+                            partials: "{{ asset('bundles/frontend/app/modules/papers/partials/') }}",
+                            img: "{{ asset('bundles/frontend/app/modules/papers/img') }}"
+                        }
+                    },
+                    categories: {
+                        urls: {
+                            base: "{{ asset('bundles/frontend/app/modules/categories/') }}",
+                            partials: "{{ asset('bundles/frontend/app/modules/categories/partials/') }}",
+                            img: "{{ asset('bundles/frontend/app/modules/categories/img') }}"
                         }
                     },
                     conferences: {
