@@ -1,6 +1,6 @@
 <?php
 
-namespace fibe\RestBundle\Listener;
+namespace fibe\RestBundle\Handler;
 
 use FOS\UserBundle\Model\UserManagerInterface;
 use JMS\Serializer\SerializationContext;
@@ -41,9 +41,7 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
   }
   public function onAuthenticationFailure(Request $request, AuthenticationException $exception) {
     $result = array(
-      'success' => false,
-      'error' => true,
-      'message' => $this->translator->trans($exception->getMessage(), array(), 'FOSUserBundle')
+      'error' => $this->translator->trans($exception->getMessage(), array(), 'FOSUserBundle'),
     );
     $response = new Response(json_encode($result));
     $response->headers->set('Content-Type', 'application/json');
