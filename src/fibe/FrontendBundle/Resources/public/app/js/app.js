@@ -7,6 +7,7 @@ angular.module('papersApp', ['fundoo.services']);
 angular.module('rolesApp', ['fundoo.services']);
 angular.module('categoriesApp', ['fundoo.services']);
 angular.module('personsApp', ['fundoo.services']);
+angular.module('locationsApp', ['fundoo.services']);
 angular.module('eventsApp', ['fundoo.services']);
 angular.module('conferencesApp', ['fundoo.services']);
 angular.module('angularTranslateApp', ['pascalprecht.translate']);
@@ -28,6 +29,7 @@ var liveconApp = angular.module('liveconApp', [
     'authenticationApp',
     'organizationsApp',
     'personsApp',
+    'locationsApp',
     'eventsApp',
     'rolesApp',
     'categoriesApp',

@@ -6,6 +6,10 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+use fibe\ContentBundle\Entity\Location;
+use fibe\ContentBundle\Form\LocationType;
+use fibe\ContentBundle\Form\Filters\LocationFilterType;
+
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Util\Codes;
 
@@ -16,16 +20,17 @@ class LocationRESTController extends FOSRestController
 {
 
   const ENTITY_CLASSNAME = "fibe\\ContentBundle\\Entity\\Location";
-  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\Location";
+  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\LocationType";
 
 
   /**
    * Lists all Location entities.
-   * @Rest\Get("/locations")
+   * @Rest\Get("/locations",name="content_locations_all")
    * @Rest\View
    * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
    * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
    * @Rest\QueryParam(name="query", requirements=".{2,128}", nullable=true, description="the query to search.")
+   * @Rest\QueryParam(name="order", nullable=true, array=true, description="the query to search.")
    */
   public function getLocationsAction(Request $request, ParamFetcherInterface $paramFetcher)
   {
@@ -37,7 +42,7 @@ class LocationRESTController extends FOSRestController
   }
 
   /**
-   * @Rest\Get("/locations/{id}")
+   * @Rest\Get("/locations/{id}",name="content_locations_get")
    **/
   public function getLocationAction($id)
   {
@@ -52,7 +57,7 @@ class LocationRESTController extends FOSRestController
   /**
    * Creates a new Location from the submitted data.
    *
-   * @Rest\Post("/locations",name="api_location_post")
+   * @Rest\Post("/locations",name="content_locations_post")
    *
    * @param Request $request the request object
    *
@@ -73,7 +78,7 @@ class LocationRESTController extends FOSRestController
 
   /**
    * Put action
-   * @Rest\Put("/locations/{id}")
+   * @Rest\Put("/locations/{id}",name="content_locations_put")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
@@ -93,7 +98,7 @@ class LocationRESTController extends FOSRestController
 
   /**
    * Patch action
-   * @Rest\Patch("/locations/{id}")
+   * @Rest\Patch("/locations/{id}",name="content_locations_patch")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
@@ -113,7 +118,7 @@ class LocationRESTController extends FOSRestController
 
   /**
    * Delete action
-   * @Rest\Delete("/locations/{id}")
+   * @Rest\Delete("/locations/{id}",name="content_locations_delete")
    *
    * @var integer $id Id of the entity
    */

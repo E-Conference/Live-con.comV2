@@ -9,12 +9,12 @@
         <input type="textarea " class="form-control" id="inputDescription" placeholder="{{category.description}}" ng-model="category.description">
     </div>
     <div >
-        <label for="inputLevel">Level</label>
-        <input type="text" class="form-control" id="inputLevel" placeholder="3" ng-model="category.level">
-    </div>
-    <div >
         <label for="inputColor">Color</label>
         <input type="text" class="form-control" id="inputColor" placeholder="{{category.color}}" ng-model="category.color">
+    </div>
+    <div >
+        <label for="inputLevel"></label>
+        <input type="hidden" class="form-control" id="inputLevel" placeholder="3" ng-model="category.level">
     </div>
     <div>
         <button type="submit" class="btn btn-success">Save</button>

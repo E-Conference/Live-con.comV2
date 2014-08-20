@@ -1,12 +1,5 @@
 <?php
 
-/**
- *
- * @author :  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
- * @licence: GPL
- *
- */
-
 namespace fibe\ContentBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -26,12 +19,12 @@ class LocationType extends AbstractType
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
     $builder
-      ->add('name', 'text')
+      ->add('label', 'text')
       ->add('capacity')
       ->add('description')
       ->add('latitude')
       ->add('longitude')
-      ->add(
+      /*->add(
         'equipments',
         'entity',
         array(
@@ -40,7 +33,7 @@ class LocationType extends AbstractType
           'required' => false,
           'multiple' => true
         )
-      );
+      )*/;
   }
 
   /**
@@ -50,7 +43,8 @@ class LocationType extends AbstractType
   {
     $resolver->setDefaults(
       array(
-        'data_class' => 'fibe\ContentBundle\Entity\Location'
+        'data_class' => 'fibe\ContentBundle\Entity\Location',
+        'csrf_protection' => false
       )
     );
   }
