@@ -26,8 +26,13 @@
         "hwi/oauth-bundle": "0.4.*@dev",
         "friendsofsymfony/rest-bundle": "1.3.*",
         "jms/serializer-bundle": "*",
-        "liip/functional-test-bundle":"dev-master"
-
+        "nelmio/api-doc-bundle": "@dev"
+    },
+    "require-dev": {
+      "doctrine/doctrine-fixtures-bundle": "dev-master",
+      "phpunit/phpunit": "3.7.*",
+      "liip/functional-test-bundle":"dev-master",
+      "guzzle/plugin": "3.7.*"
     },
     "scripts": {
         "post-install-cmd": [
