@@ -2,6 +2,7 @@
 
 namespace fibe\RestBundle\Tests\Controller;
 
+use Doctrine\Common\Util\Debug;
 use fibe\RestBundle\Tests\LocationFixture;
 use Liip\FunctionalTestBundle\Test\WebTestCase as WebTestCase;
 
@@ -19,11 +20,50 @@ class LocationCrudTest extends WebTestCase
     $this->client = static::createClient();
   }
 
+  /**
+   * test to be placed before any array_pop
+   */
+  public function testGetAndPagination()
+  {
+    $fixtures = array(static::LOCATION_CLASS);
+    $this->loadFixtures($fixtures);
+    $entities = LocationFixture::$entities;
+
+    $offset = 0;
+    $limit = 3;
+
+    $this->client->request(
+      'GET',
+      sprintf(static::API_URL.'?offset=%d&limit=%d', $offset, $limit),
+      array(),
+      array(),
+      array('HTTP_ACCEPT' => 'application/json')
+    );
+    $this->assertJsonResponse($this->client->getResponse());
+    $decoded = json_decode($this->client->getResponse()->getContent(), true);
+    $this->assertEquals(count($decoded), $limit, $decoded);
+
+    $offset = $limit;
+
+    $this->client->request(
+      'GET',
+      sprintf(static::API_URL.'?offset=%d&limit=%d', $offset, $limit),
+      array(),
+      array(),
+      array('HTTP_ACCEPT' => 'application/json')
+    );
+    $this->assertJsonResponse($this->client->getResponse());
+    $decoded = json_decode($this->client->getResponse()->getContent(), true);
+    $this->assertEquals(count($decoded), $limit,$decoded);
+    $this->assertEquals($entities[$offset]->getId(), $decoded[0]['id'], $this->client->getResponse());
+  }
+
     public function testGet()
     {
       $fixtures = array(static::LOCATION_CLASS);
       $this->loadFixtures($fixtures);
       $entities = LocationFixture::$entities;
+
       $entity = array_pop($entities);
       $this->client->request(
         'GET',
@@ -46,10 +86,11 @@ class LocationCrudTest extends WebTestCase
       $fixtures = array(static::LOCATION_CLASS);
       $this->loadFixtures($fixtures);
       $entities = LocationFixture::$entities;
-        $entity = array_pop($entities);
+
+      $entity = array_pop($entities);
 
         $this->client->request(
-            'HEAD',  
+            'HEAD',
             sprintf(static::API_URL.'/%d', $entity->getId()),
             array(),
             array(),
@@ -98,6 +139,7 @@ class LocationCrudTest extends WebTestCase
       $fixtures = array(static::LOCATION_CLASS);
       $this->loadFixtures($fixtures);
       $entities = LocationFixture::$entities;
+
       $entity = array_pop($entities);
       $this->client->request(
         'GET',
@@ -140,7 +182,9 @@ class LocationCrudTest extends WebTestCase
     $fixtures = array(static::LOCATION_CLASS);
     $this->loadFixtures($fixtures);
     $entities = LocationFixture::$entities;
+
     $entity = array_pop($entities);
+    $newDesc = "def";
 
     $this->client->request(
       'PATCH',
@@ -149,7 +193,7 @@ class LocationCrudTest extends WebTestCase
       array(),
       array('HTTP_ACCEPT' => 'application/json',
         'CONTENT_TYPE' => 'application/json'),
-      '{"description":"def"}'
+      '{"description":"' . $newDesc . '"}'
     );
 
     $this->assertJsonResponse($this->client->getResponse());
@@ -165,81 +209,37 @@ class LocationCrudTest extends WebTestCase
     $decoded = json_decode($response->getContent(), true);
     $this->assertTrue(isset($decoded['id']));
     $this->assertEquals($decoded['label'], $entity->getLabel(), $response);
+    $this->assertEquals($decoded['description'], $newDesc, $response);
 
-    $this->assertTrue(
-      $this->client->getResponse()->headers->contains(
-        'Location',
-        sprintf(static::API_URL.'/%d', $entity->getId())
-      ),
-      $this->client->getResponse()->headers
-    );
   }
-
-    public function testPagination()
-    {
-      $offset = 0;
-      $limit = 3;
-      $fixtures = array(static::LOCATION_CLASS);
-      $this->loadFixtures($fixtures);
-      $entities = LocationFixture::$entities;
-      $this->client->request(
-        'GET',
-        sprintf(static::API_URL.'?offset=%d&limit=%d', $offset, $limit),
-        array(),
-        array(),
-        array('HTTP_ACCEPT' => 'application/json')
-      );
-      $this->assertJsonResponse($this->client->getResponse());
-      $decoded = json_decode($this->client->getResponse()->getContent(), true);
-      $this->assertEquals(count($decoded), $limit, $decoded);
-
-      $offset = 3;
-
-      $this->client->request(
-        'GET',
-        sprintf(static::API_URL.'?offset=%d&limit=%d', $offset, $limit),
-        array(),
-        array(),
-        array('HTTP_ACCEPT' => 'application/json')
-      );
-      $this->assertJsonResponse($this->client->getResponse());
-      $decoded = json_decode($this->client->getResponse()->getContent(), true);
-      $this->assertEquals(count($decoded), $limit,$decoded);
-      $this->assertEquals($decoded[0]['id'], $entities[3]->getId(), $decoded);
-    }
 
     public function testSort()
     {
-      $order = "label";
       $fixtures = array(static::LOCATION_CLASS);
       $this->loadFixtures($fixtures);
       $entities = LocationFixture::$entities;
-      echo sprintf(static::API_URL.'?offset=%d&limit=%d', $offset, $limit);
+
+      $order = "label";
+
       $this->client->request(
         'GET',
-        sprintf(static::API_URL.'?offset=%d&limit=%d', $offset, $limit),
+        sprintf(static::API_URL.'?order[%s]=DESC', $order),
         array(),
         array(),
         array('HTTP_ACCEPT' => 'application/json')
       );
       $this->assertJsonResponse($this->client->getResponse());
       $decoded = json_decode($this->client->getResponse()->getContent(), true);
-      $this->assertEquals(count($decoded), $limit, $decoded);
-
-      $offset = 3;
-
-      $this->client->request(
-        'GET',
-        sprintf(static::API_URL.'?offset=%d&limit=%d', $offset, $limit),
-        array(),
-        array(),
-        array('HTTP_ACCEPT' => 'application/json')
+      $this->assertEquals(
+        $entities[count($entities)-1]->getId(),
+        $decoded[0]['id'],
+        $this->client->getResponse()
       );
-      $this->assertJsonResponse($this->client->getResponse());
-      $decoded = json_decode($this->client->getResponse()->getContent(), true);
-      $this->assertEquals(count($decoded), $limit,$decoded);
-      $this->assertEquals($decoded[0]['id'], $entities[3]->getId(), $decoded);
     }
+
+  // @TODO : test linked entity
+  // @TODO : test search
+  // @TODO : test search on linked entity
 
     /*
     not implemented : responds 400 not found instead of create a new entity
