@@ -15,6 +15,7 @@ use FOS\RestBundle\Util\Codes;
 
 /**
  * Location rest controller.
+ * @Rest\Route("/api")
  */
 class LocationRESTController extends FOSRestController
 {
