@@ -10,16 +10,18 @@ use fibe\ContentBundle\Entity\Location;
 
 class LocationFixture extends AbstractFixture implements FixtureInterface
 {
-    static public $entities = array();
+  static public $entities = array();
 
-    public function load(ObjectManager $manager)
+  public function load(ObjectManager $manager)
+  {
+    for($i = 0; $i < 10; $i++)
     {
-        $entity = new Location();
-        $entity->setLabel('title');
-
-        $manager->persist($entity);
-        $manager->flush();
-
-        self::$entities[] = $entity;
+      $entity = new Location();
+      $entity->setLabel('label' . $i);
+      $manager->persist($entity);
+      self::$entities[] = $entity;
     }
+    $manager->flush();
+
+  }
 }

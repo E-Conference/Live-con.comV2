@@ -9,7 +9,7 @@ class LocationCrudTest extends WebTestCase
 {
 
     const LOCATION_CLASS = 'fibe\RestBundle\Tests\LocationFixture';
-    const API_URL = "/api/companies";
+    const API_URL = "/api/locations";
 
     private $client;
 
@@ -25,10 +25,12 @@ class LocationCrudTest extends WebTestCase
       $this->loadFixtures($fixtures);
       $entities = LocationFixture::$entities;
       $entity = array_pop($entities);
-      echo "entity id : ".($entity->getId());
-      $route =  $this->getUrl("data_locations_get", array('id' => $entity->getId()));
-      echo "route : ".$route;
-      $this->client->request('GET', $route, array(),array(), array('HTTP_ACCEPT' => 'application/json'));
+      $this->client->request(
+        'GET',
+        sprintf(static::API_URL.'/%d', $entity->getId()),
+        array(),
+        array(),
+        array('HTTP_ACCEPT' => 'application/json'));
       $response = $this->client->getResponse();
 
       $this->assertJsonResponse($response);
@@ -36,6 +38,7 @@ class LocationCrudTest extends WebTestCase
 
       $decoded = json_decode($content, true);
       $this->assertTrue(isset($decoded['id']));
+      $this->assertEquals($decoded['id'], $entity->getId(), $decoded);
     }
 
     public function testHeadRoute()
@@ -77,57 +80,165 @@ class LocationCrudTest extends WebTestCase
 
     public function testPostLocationActionShouldReturn400WithBadParameters()
     {
-        $this->client->request(
-            'POST',
-            static::API_URL.'',
-            array(),
-            array(),
-            array('HTTP_ACCEPT' => 'application/json',
-              'CONTENT_TYPE' => 'application/json'),
-            '{"labels":"body1"}'
-        );
+      $this->client->request(
+        'POST',
+        static::API_URL.'',
+        array(),
+        array(),
+        array('HTTP_ACCEPT' => 'application/json',
+          'CONTENT_TYPE' => 'application/json'),
+        '{"labels":"body1"}'
+      );
 
-        $this->assertJsonResponse($this->client->getResponse(), 400, false);
+      $this->assertJsonResponse($this->client->getResponse(), 400, false);
     }
 
     public function testPutLocationActionShouldModify()
     {
-        $fixtures = array(static::LOCATION_CLASS);
-        $this->loadFixtures($fixtures);
-        $entities = LocationFixture::$entities;
-        $entity = array_pop($entities);
-        $this->client->request(
-            'GET', 
-            sprintf(static::API_URL.'/%d',$entity->getId()),
-            array(),
-            array(),
-            array('HTTP_ACCEPT' => 'application/json')
-        );
-        $this->assertEquals(
-            200, 
-            $this->client->getResponse()->getStatusCode(), 
-            $this->client->getResponse()->getContent()
-        );
-        $this->client->request(
-            'PUT',
-            sprintf(static::API_URL.'/%d', $entity->getId()),
-            array(),
-            array(),
-            array(
-              'HTTP_ACCEPT' => 'application/json',
-              'CONTENT_TYPE' => 'application/json'),
-            '{"label":"abc"}'
-        );
-        $this->assertJsonResponse($this->client->getResponse());
+      $fixtures = array(static::LOCATION_CLASS);
+      $this->loadFixtures($fixtures);
+      $entities = LocationFixture::$entities;
+      $entity = array_pop($entities);
+      $this->client->request(
+        'GET',
+        sprintf(static::API_URL.'/%d',$entity->getId()),
+        array(),
+        array(),
+        array('HTTP_ACCEPT' => 'application/json')
+      );
+      $this->assertEquals(
+        200,
+        $this->client->getResponse()->getStatusCode(),
+        $this->client->getResponse()->getContent()
+      );
+      $this->client->request(
+        'PUT',
+        sprintf(static::API_URL.'/%d', $entity->getId()),
+        array(),
+        array(),
+        array(
+          'HTTP_ACCEPT' => 'application/json',
+          'CONTENT_TYPE' => 'application/json'),
+        '{"label":"abc"}'
+      );
+      $this->assertJsonResponse($this->client->getResponse());
 
-        /* not implemented : responds 400 not found
-        $this->assertTrue(
-            $this->client->getResponse()->headers->contains(
-                'Location',
-                sprintf('http://localhost'.static::API_URL.'/%d', $entity->getId())
-            ),
-            $this->client->getResponse()->headers
-        );*/
+      /* not implemented : responds 400 not found
+      $this->assertTrue(
+        $this->client->getResponse()->headers->contains(
+          'Location',
+          sprintf('http://localhost'.static::API_URL.'/%d', $entity->getId())
+        ),
+        $this->client->getResponse()->headers
+      );*/
+    }
+
+
+  // @TODO : change by an entity with two text field so we can perform this test
+  public function testPatch()
+  {
+    $fixtures = array(static::LOCATION_CLASS);
+    $this->loadFixtures($fixtures);
+    $entities = LocationFixture::$entities;
+    $entity = array_pop($entities);
+
+    $this->client->request(
+      'PATCH',
+      sprintf(static::API_URL.'/%d', $entity->getId()),
+      array(),
+      array(),
+      array('HTTP_ACCEPT' => 'application/json',
+        'CONTENT_TYPE' => 'application/json'),
+      '{"description":"def"}'
+    );
+
+    $this->assertJsonResponse($this->client->getResponse());
+
+    $this->client->request(
+      'GET',
+      sprintf(static::API_URL.'/%d', $entity->getId()),
+      array(),
+      array(),
+      array('HTTP_ACCEPT' => 'application/json'));
+    $response = $this->client->getResponse();
+
+    $decoded = json_decode($response->getContent(), true);
+    $this->assertTrue(isset($decoded['id']));
+    $this->assertEquals($decoded['label'], $entity->getLabel(), $response);
+
+    $this->assertTrue(
+      $this->client->getResponse()->headers->contains(
+        'Location',
+        sprintf(static::API_URL.'/%d', $entity->getId())
+      ),
+      $this->client->getResponse()->headers
+    );
+  }
+
+    public function testPagination()
+    {
+      $offset = 0;
+      $limit = 3;
+      $fixtures = array(static::LOCATION_CLASS);
+      $this->loadFixtures($fixtures);
+      $entities = LocationFixture::$entities;
+      $this->client->request(
+        'GET',
+        sprintf(static::API_URL.'?offset=%d&limit=%d', $offset, $limit),
+        array(),
+        array(),
+        array('HTTP_ACCEPT' => 'application/json')
+      );
+      $this->assertJsonResponse($this->client->getResponse());
+      $decoded = json_decode($this->client->getResponse()->getContent(), true);
+      $this->assertEquals(count($decoded), $limit, $decoded);
+
+      $offset = 3;
+
+      $this->client->request(
+        'GET',
+        sprintf(static::API_URL.'?offset=%d&limit=%d', $offset, $limit),
+        array(),
+        array(),
+        array('HTTP_ACCEPT' => 'application/json')
+      );
+      $this->assertJsonResponse($this->client->getResponse());
+      $decoded = json_decode($this->client->getResponse()->getContent(), true);
+      $this->assertEquals(count($decoded), $limit,$decoded);
+      $this->assertEquals($decoded[0]['id'], $entities[3]->getId(), $decoded);
+    }
+
+    public function testSort()
+    {
+      $order = "label";
+      $fixtures = array(static::LOCATION_CLASS);
+      $this->loadFixtures($fixtures);
+      $entities = LocationFixture::$entities;
+      echo sprintf(static::API_URL.'?offset=%d&limit=%d', $offset, $limit);
+      $this->client->request(
+        'GET',
+        sprintf(static::API_URL.'?offset=%d&limit=%d', $offset, $limit),
+        array(),
+        array(),
+        array('HTTP_ACCEPT' => 'application/json')
+      );
+      $this->assertJsonResponse($this->client->getResponse());
+      $decoded = json_decode($this->client->getResponse()->getContent(), true);
+      $this->assertEquals(count($decoded), $limit, $decoded);
+
+      $offset = 3;
+
+      $this->client->request(
+        'GET',
+        sprintf(static::API_URL.'?offset=%d&limit=%d', $offset, $limit),
+        array(),
+        array(),
+        array('HTTP_ACCEPT' => 'application/json')
+      );
+      $this->assertJsonResponse($this->client->getResponse());
+      $decoded = json_decode($this->client->getResponse()->getContent(), true);
+      $this->assertEquals(count($decoded), $limit,$decoded);
+      $this->assertEquals($decoded[0]['id'], $entities[3]->getId(), $decoded);
     }
 
     /*
@@ -161,58 +272,30 @@ class LocationCrudTest extends WebTestCase
         $this->assertJsonResponse($this->client->getResponse(), 201, false);
     }*/
 
-/* @TODO : change by an entity with two text field so we can perform this test
-    public function testPatch()
-    {
-      $fixtures = array(static::LOCATION_CLASS);
-      $this->loadFixtures($fixtures);
-      $entities = LocationFixture::$entities;
-        $entity = array_pop($entities);
-
-        $this->client->request(
-            'PATCH',
-            sprintf(static::API_URL.'/%d', $entity->getId()),
-            array(),
-            array(),
-            array('HTTP_ACCEPT' => 'application/json',
-              'CONTENT_TYPE' => 'application/json'),
-            '{"body":"def"}'
-        );
-
-        $this->assertJsonResponse($this->client->getResponse(), 204, false);
-        $this->assertTrue(
-            $this->client->getResponse()->headers->contains(
-                'Location',
-                sprintf('http://localhosstatic::API_URL.t/%d', $entity->getId())
-            ),
-            $this->client->getResponse()->headers
-        );
-    }*/
-
     protected function assertJsonResponse(
-        $response, 
-        $statusCode = 200, 
-        $checkValidJson =  true, 
-        $contentType = 'application/json'
+      $response,
+      $statusCode = 200,
+      $checkValidJson =  true,
+      $contentType = 'application/json'
     )
     {
-        $this->assertEquals(
-            $statusCode,
-            $response->getStatusCode(),
-            $response
-        );
-        $this->assertTrue(
-            $response->headers->contains('Content-Type', $contentType),
-            $response->headers,
-            $response->headers
-        );
+      $this->assertEquals(
+        $statusCode,
+        $response->getStatusCode(),
+        $response
+      );
+      $this->assertTrue(
+        $response->headers->contains('Content-Type', $contentType),
+        $response->headers,
+        $response->headers
+      );
 
-        if ($checkValidJson) {
-            $decode = json_decode($response->getContent());
-            $this->assertTrue(($decode != null && $decode != false),
-                'is response valid json: [' . $response->getContent() . ']',
-                $response->getContent()
-            );
-        }
+      if ($checkValidJson) {
+        $decode = json_decode($response->getContent());
+        $this->assertTrue(($decode != null && $decode != false),
+          'is response valid json: [' . $response->getContent() . ']',
+          $response->getContent()
+        );
+      }
     }
 }
