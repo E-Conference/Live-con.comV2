@@ -15,13 +15,15 @@ class CategoryType extends AbstractType
             ->add('label')
             ->add('description')
             ->add('color')
+            ->add('level')
         ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'fibe\EventBundle\Entity\Category'
+            'data_class' => 'fibe\EventBundle\Entity\Category',
+            'csrf_protection' => false
         ));
     }
 

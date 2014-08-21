@@ -13,17 +13,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class PaperType extends AbstractType
 {
-  private $user;
-
-  /**
-   * Constructor
-   *
-   * @param $user
-   */
-  public function __construct($user)
-  {
-    $this->user = $user;
-  }
 
   /**
    * {@inheritdoc}
@@ -31,12 +20,12 @@ class PaperType extends AbstractType
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
     $builder
-      ->add('title')
+      ->add('label')
       ->add('abstract', 'textarea', array('required' => true))
       ->add('publisher', 'text', array('label' => 'Publisheur', 'required' => false))
       ->add('publishDate', 'text', array('label' => 'Published date', 'required' => false))
       ->add('url')
-      ->add('topics', 'entity', array(
+      /*->add('topics', 'entity', array(
         'class'    => 'fibeContentBundle:Topic',
         'label'    => 'Topics',
         'choices'  => $this->user->getCurrentMainEvent()->getTopics()->toArray(),
@@ -49,7 +38,7 @@ class PaperType extends AbstractType
         'choices'  => $this->user->getCurrentMainEvent()->getPersons()->toArray(),
         'multiple' => true,
         'required' => false
-      ));
+      ))*/;
   }
 
 
@@ -59,7 +48,8 @@ class PaperType extends AbstractType
   public function setDefaultOptions(OptionsResolverInterface $resolver)
   {
     $resolver->setDefaults(array(
-      'data_class' => 'fibe\ContentBundle\Entity\Paper'
+      'data_class' => 'fibe\ContentBundle\Entity\Paper',
+      'csrf_protection' => false
     ));
   }
 

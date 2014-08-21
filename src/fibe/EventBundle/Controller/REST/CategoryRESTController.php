@@ -15,17 +15,18 @@ use FOS\RestBundle\Util\Codes;
 class CategoryRESTController extends FOSRestController
 {
 
-  const ENTITY_CLASSNAME = "fibe\\ContentBundle\\Entity\\Category";
-  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\Category";
+  const ENTITY_CLASSNAME = "fibe\\EventBundle\\Entity\\Category";
+  const FORM_CLASSNAME = "fibe\\EventBundle\\Form\\CategoryType";
 
 
   /**
    * Lists all Category entities.
-   * @Rest\Get("/categories")
+   * @Rest\Get("/categories", name="schedule_categories_all")
    * @Rest\View
    * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
    * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
    * @Rest\QueryParam(name="query", requirements=".{2,128}", nullable=true, description="the query to search.")
+   * @Rest\QueryParam(name="order", nullable=true, array=true, description="the query to search.")
    */
   public function getCategoriesAction(Request $request, ParamFetcherInterface $paramFetcher)
   {
@@ -37,7 +38,7 @@ class CategoryRESTController extends FOSRestController
   }
 
   /**
-   * @Rest\Get("/categories/{id}")
+   * @Rest\Get("/categories/{id}", name="schedule_categories_get")
    **/
   public function getCategoryAction($id)
   {
@@ -52,7 +53,7 @@ class CategoryRESTController extends FOSRestController
   /**
    * Creates a new Category from the submitted data.
    *
-   * @Rest\Post("/categories",name="api_category_post")
+   * @Rest\Post("/categories", name="schedule_categories_post")
    *
    * @param Request $request the request object
    *
@@ -73,7 +74,7 @@ class CategoryRESTController extends FOSRestController
 
   /**
    * Put action
-   * @Rest\Put("/categories/{id}")
+   * @Rest\Put("/categories/{id}", name="schedule_categories_put")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
@@ -93,7 +94,7 @@ class CategoryRESTController extends FOSRestController
 
   /**
    * Patch action
-   * @Rest\Patch("/categories/{id}")
+   * @Rest\Patch("/categories/{id}", name="schedule_categories_patch")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
@@ -113,7 +114,7 @@ class CategoryRESTController extends FOSRestController
 
   /**
    * Delete action
-   * @Rest\Delete("/categories/{id}")
+   * @Rest\Delete("/categories/{id}", name="schedule_categories_delete")
    *
    * @var integer $id Id of the entity
    */

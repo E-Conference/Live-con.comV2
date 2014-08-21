@@ -10,11 +10,18 @@ use Symfony\Component\Validator\Constraints as Assert;
 use fibe\EventBundle\Entity\VEvent;
 use fibe\EventBundle\Entity\MainEvent;
 
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\VirtualProperty;
+
 /**
  * Location entity
  *
  * @ORM\Table(name="location")
  * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\LocationRepository")
+ * @ExclusionPolicy("all") 
  */
 class Location
 {
@@ -22,11 +29,13 @@ class Location
    * @ORM\Id
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
+   * @Expose
    */
   private $id;
 
   /**
    * @ORM\Column(type="string", length=255)
+   * @Expose
    */
   private $label;
 
@@ -34,6 +43,7 @@ class Location
    * Capacity to welcome atendees
    *
    * @ORM\Column(type="integer", nullable=true)
+   * @Expose
    */
   private $capacity;
 
@@ -48,6 +58,7 @@ class Location
    * Description of the location
    *
    * @ORM\Column(type="text", nullable=true)
+   * @Expose
    */
   private $description;
 
@@ -60,6 +71,7 @@ class Location
    *      minMessage = "You must be between -90 and 90.",
    *      maxMessage = "YYou must be between -90 and 90."
    * )
+   * @Expose
    */
   private $latitude;
 
@@ -71,6 +83,7 @@ class Location
    *      minMessage = "You must be between -180 and 180.",
    *      maxMessage = "YYou must be between -180 and 180."
    * )
+   * @Expose
    */
   private $longitude;
 

@@ -5,12 +5,18 @@ namespace fibe\EventBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use fibe\ContentBundle\Util\StringTools;
+
+use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 /**
  * @ORM\Table(name="category")
  * @ORM\Entity(repositoryClass="fibe\EventBundle\Repository\CategoryRepository")
  * @ORM\HasLifecycleCallbacks
+ * @ExclusionPolicy("all") 
  */
 class Category
 {
@@ -19,16 +25,19 @@ class Category
    * @ORM\Id
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
+   * @Expose
    */
   private $id;
 
   /**
    * @ORM\Column(type="string", length=128)
+   * @Expose
    */
   private $label;
 
   /**
    * @ORM\Column(type="integer", options={"default" = 3})
+   * @Expose
    */
   private $level;
 
@@ -39,11 +48,13 @@ class Category
 
   /**
    * @ORM\Column(type="text", nullable=true)
+   * @Expose
    */
   private $description;
 
   /**
    * @ORM\Column(type="string", nullable=true)
+   * @Expose
    */
   private $color;
 
@@ -52,7 +63,6 @@ class Category
    *
    * @ORM\OneToMany(targetEntity="VEvent", mappedBy="category",cascade={"persist","remove"})
    * @ORM\JoinColumn( onDelete="CASCADE")
-   * @Expose
    */
   private $vEvents;
 
