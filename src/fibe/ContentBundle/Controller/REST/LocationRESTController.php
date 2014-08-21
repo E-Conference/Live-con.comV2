@@ -85,7 +85,7 @@ class LocationRESTController extends FOSRestController
       $request,
       $this::ENTITY_CLASSNAME,
       $this::FORM_CLASSNAME,
-      'PUT'
+      'PUT',$id
     );
 
   }
