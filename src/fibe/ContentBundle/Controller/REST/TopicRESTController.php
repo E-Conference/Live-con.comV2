@@ -104,7 +104,7 @@ class TopicRESTController extends FOSRestController
       $request,
       $this::ENTITY_CLASSNAME,
       $this::FORM_CLASSNAME,
-      'PATCH'
+      'PATCH',$id
     );
   }
 
