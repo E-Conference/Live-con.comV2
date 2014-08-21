@@ -8,6 +8,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,17 +18,27 @@ class CrudHandler
   protected $em;
   protected $container;
 
-  public function __construct(Container $container )
+  public function __construct(ContainerInterface $container )
   {
     $this->container      = $container;
     $this->em             = $container->get('doctrine.orm.entity_manager');
   }
 
+  /**
+   * @param string $entityClassName
+   * @param string $id
+   * @return mixed Entity
+   */
   public function get($entityClassName, $id)
   {
     return $this->em->getRepository($entityClassName)->find($id);
   }
 
+  /**
+   * @param string $entityClassName
+   * @param ParamFetcherInterface $paramFetcher
+   * @return array of Entities
+   */
   public function getAll($entityClassName, ParamFetcherInterface $paramFetcher = null)
   {
     $offset = $paramFetcher->get('offset');
@@ -50,20 +61,21 @@ class CrudHandler
    * @param string $formClassName
    * @param Request $request
    * @param String $method
+   * @param String $id
    *
    * @return mixed $entity|form validation errors
    */
-  public function processForm(Request $request, $entityClassName, $formClassName, $method)
+  public function processForm(Request $request, $entityClassName, $formClassName, $method, $id = null)
   {
     //TODO secure with acl
     $formData = $request->request->all();
-    if($method == "POST")
+    if($id === null)
     {
       $entity = new $entityClassName();
     }
     else
     {
-      $entity = $this->em->getRepository($entityClassName)->find($formData['id']);
+      $entity = $this->em->getRepository($entityClassName)->find($id);
     }
     $form = $this->container->get('form.factory')->create(new $formClassName(), $entity, array('method' => $method));
     unset($formData['id']);//remove id to avoid form validation error with this unnecessary id
