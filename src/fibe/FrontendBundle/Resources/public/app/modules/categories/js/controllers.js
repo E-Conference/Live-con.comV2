@@ -55,6 +55,8 @@ angular.module('categoriesApp').controller('categoriesListCtrl', ['$scope', 'GLO
         });
     }
 
+    
+
 
     $scope.load = function(query) {
         offset = offset + limit;

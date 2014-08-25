@@ -60,6 +60,21 @@ angular.module('eventsApp').controller('eventsListCtrl', ['$scope', 'GLOBAL_CONF
         });
     }
 
+    $scope.createCategoryModal = function(index) {
+        $scope.index = index;
+
+        createDialogService(GLOBAL_CONFIG.app.modules.categories.urls.partials+'categories-new.html', {
+            id: 'complexDialog',
+            title: 'category creation',
+            backdrop: true,
+            controller: 'categoriesNewCtrl',
+            success: {label: 'Ok', fn: function() {
+                GLOBAL_CONFIG.app.modules.categories.urls.js.categoriesFact.create();
+                $scope.categories.splice(index,1);
+            }}
+            });
+    }
+
     var initialize = function(){
         offset = -20;
         limit = 20;
