@@ -23,7 +23,7 @@ angular.module('papersApp').controller('papersListCtrl', ['$scope', 'GLOBAL_CONF
         // $scope.papers = paper.list();
 
         clonePaper = angular.copy(paper);
-        clonepaper.id = null;
+        clonePaper.id = null;
 
         var error = function(response, args){
             $rootScope.$broadcast('AlertCtrl:addAlert', {code:'Clone not completed', type:'danger'});
@@ -34,7 +34,7 @@ angular.module('papersApp').controller('papersListCtrl', ['$scope', 'GLOBAL_CONF
             $scope.papers.push(response);
         }
 
-        clonepaper.$create({}, success, error);
+        clonePaper.$create({}, success, error);
     }
 
 

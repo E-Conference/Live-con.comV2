@@ -9,6 +9,30 @@
         <input type="text " class="form-control" id="inputDescription" placeholder="{{event.description}}" ng-model="event.description">
     </div>
     <div >
+        <label for="inputStart">Start at</label>
+        <div class="dropdown">
+            <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0)">
+              <input  type="text " class="form-control" id="inputStart" name="inputStart" placeholder="Start at" ng-model="event.startAt">
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="event.startAt" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+            </ul>
+        </div>
+        <div class="alert alert-danger" role="alert" ng-show="eventNewForm.eventStart.$dirty && eventNewForm.eventStart > eventNewForm.eventEnd">The start date must be before the end date</div>
+    </div>
+    <div >
+        <label for="inputEnd">End at</label>
+        <div class="dropdown">
+            <a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0)">
+                <input  type="text " class="form-control" id="inputEnd"  name="inputEnd" placeholder="End at" ng-model="event.endAt">
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="event.endAt" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+            </ul>
+        </div>
+        <div class="alert alert-danger" role="alert" ng-show="eventNewForm.eventStart.$dirty && eventNewForm.eventEnd < eventNewForm.eventStart ">The end date must be after the start date</div>
+    </div>
+    <div >
         <label for="inputUrl">Url</label>
         <input type="text " class="form-control" id="inputUrl" placeholder="{{event.url}}" ng-model="event.url">
     </div>

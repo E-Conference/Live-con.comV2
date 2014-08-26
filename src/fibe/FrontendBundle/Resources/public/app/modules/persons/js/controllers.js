@@ -103,7 +103,7 @@ angular.module('personsApp').controller('personsListCtrl', ['$scope', 'GLOBAL_CO
 }]);
 
 
-angular.module('personsApp').controller('personsNewCtrl', [ '$scope', '$rootScope', '$location', 'PersonsFact', function ($scope, $rootScope, $location, PersonsFact) {
+angular.module('personsApp').controller('personsNewCtrl', [ '$scope', '$rootScope', '$person', 'PersonsFact', function ($scope, $rootScope, $person, PersonsFact) {
     $scope.person = new PersonsFact;
 
     var error = function(response, args){
@@ -112,7 +112,7 @@ angular.module('personsApp').controller('personsNewCtrl', [ '$scope', '$rootScop
 
     var success = function(response, args){
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'person created', type:'success'});
-        $location.path('/persons/list');
+        $person.path('/persons/list');
     }
 
     $scope.create = function(form){
@@ -122,7 +122,7 @@ angular.module('personsApp').controller('personsNewCtrl', [ '$scope', '$rootScop
     }
 }]);
 
-angular.module('personsApp').controller('personsEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'PersonsFact', function ($scope, $rootScope, $routeParams, $location, PersonsFact) {
+angular.module('personsApp').controller('personsEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$person', 'PersonsFact', function ($scope, $rootScope, $routeParams, $person, PersonsFact) {
     $scope.person = PersonsFact.get({id:$routeParams.personId});
 
     var error = function(response, args){
@@ -131,7 +131,7 @@ angular.module('personsApp').controller('personsEditCtrl', [ '$scope', '$rootSco
 
     var success = function(response, args){
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'person saved', type:'success'});
-        $location.path('/persons/list');
+        $person.path('/persons/list');
     }
 
     $scope.update = function(form){
