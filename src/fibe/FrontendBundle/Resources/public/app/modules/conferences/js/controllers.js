@@ -2,8 +2,10 @@ angular.module('conferencesApp').controller('conferencesMainCtrl', [function ($s
 
 }]);
 
-angular.module('conferencesApp').controller('conferencesListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'ConferencesFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, ConferencesFact, $cachedResource) {
+angular.module('conferencesApp').controller('conferencesListCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'ConferencesFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, ConferencesFact, $cachedResource) {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
+
+
 
     var offset = -20;
     var limit = 20;
@@ -14,14 +16,6 @@ angular.module('conferencesApp').controller('conferencesListCtrl', ['$scope', 'G
     $scope.orderSide = "ASC";
 
     $scope.conferences = [];
-
-    $scope.reload = function(){
-       // $scope.conferences = Conference.list();
-        $scope.conferences.$promise.then(function() {
-            console.log('From cache:', $scope.conferences);
-        });
-        //console.log($scope.conferences);
-    }
 
     $scope.clone = function(conference, index){
         // $scope.conferences = Conference.list();
@@ -101,20 +95,6 @@ angular.module('conferencesApp').controller('conferencesListCtrl', ['$scope', 'G
         })
     };
 
-//    $scope.search = function(query) {
-//        Conference.all({offset: 0, limit: 20, query: query}, function (data) {
-//            $scope.conferences = data;
-//        })
-//    };
-
-    /*
-    var Org = $cachedResource('org', globalConfig.api.urls.conferences+'/:conferenceId.json', {id: "@id"});
-    $scope.conferences = Org.query();
-    $scope.conferences.$promise.then(function(data) {
-        console.log($scope.conferences);
-       console.log($scope.conferences.length);
-    });*/
-    //$scope.conferences = $cachedResource();
 }]);
 
 
@@ -138,7 +118,7 @@ angular.module('conferencesApp').controller('conferencesNewCtrl', [ '$scope', '$
 }]);
 
 angular.module('conferencesApp').controller('conferencesEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'ConferencesFact', function ($scope, $rootScope, $routeParams, $location, ConferencesFact) {
-    $scope.conference = ConferencesFact.get({id:$routeParams.conferenceId});
+    $scope.conference = ConferencesFact.get({id:$routeParams.confId});
 
     var error = function(response, args){
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'the conference has not been saved', type:'danger'});
@@ -154,14 +134,20 @@ angular.module('conferencesApp').controller('conferencesEditCtrl', [ '$scope', '
             $scope.conference.$update({},success, error);
         }
     }
+
+    //Context change
+    $rootScope.$broadcast('contextCtrl:changeContext', {confId:$routeParams.confId});
 }]);
 
-angular.module('conferencesApp').controller('conferencesShowCtrl', [ '$scope', '$routeParams', 'ConferencesFact', function ($scope, $routeParams, ConferencesFact) {
-    $scope.conference = ConferencesFact.get({id:$routeParams.conferenceId});
+angular.module('conferencesApp').controller('conferencesShowCtrl', [ '$scope', '$rootScope', '$routeParams', 'ConferencesFact', function ($scope, $rootScope, $routeParams, ConferencesFact) {
+    $scope.conference = ConferencesFact.get({id:$routeParams.confId});
+
+    //Context change
+    $rootScope.$broadcast('contextCtrl:changeContext', {confId:$routeParams.confId});
 
 }]);
 
-angular.module('conferencesApp').controller('conferencesDeleteCtrl', [ '$scope', 'conferenceModel', function ($scope, conferenceModel) {
-       $scope.conference = conferenceModel;
+angular.module('conferencesApp').controller('conferencesDeleteCtrl', [ '$scope',  '$rootScope', 'conferenceModel', function ($scope, $rootScope, conferenceModel) {
+    $scope.conference = conferenceModel;
 }]);
 

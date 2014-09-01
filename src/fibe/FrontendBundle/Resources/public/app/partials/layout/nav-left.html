@@ -12,7 +12,7 @@
                 <div id="collapseCommunity" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <ul class="sidebar-nav-list">
-                            <li><a href="#conferences/list"><i class="fa fa-calendar fa-2x"></i>  {{ 'Search_event' | translate }}</a>
+                            <li><a href="#conferences/list"><i class="fa fa-calendar fa-2x"></i>  {{ 'Search_conference' | translate }}</a>
                             </li>
                             <li >
                                 <a href="#search/event"><i class="fa fa-book fa-2x"></i>  {{ 'Search_publication' | translate }}</a>
@@ -39,7 +39,7 @@
                         <a data-toggle="collapse" data-parent="#myspaceAccordion" href="#dashboard/overview#collapseMyspace"><i class="fa fa-user fa-2x"></i>  My space</a>
                     </h4>
                 </div>
-                <div id="collapseMyspace" class="panel-collapse collapse in">
+                <div id="collapseMySpace" class="panel-collapse collapse in">
                     <div class="panel-body">
 
                         <ul class="sidebar-nav-list">
@@ -58,8 +58,8 @@
             </div>
         </div>
 
+        <div class="panel-group" id="conferenceAccordion"  ng-if="currentConference.id">
 
-        <div class="panel-group" id="conferenceAccordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
@@ -110,8 +110,7 @@
                             <div id="collapseTwo" class="panel-collapse collapse">
                               <div class="panel-body">
                                 <ul class="sidebar-nav-list">
-                                     <li>
-                                          <a href="#events/list"><i class="fa fa-clock-o fa-2x"></i>  Calendar</a>
+                                     <li><a href="#conference/1/events/list"><i class="fa fa-clock-o fa-2x"></i>  Calendar</a>
                                     </li>
                                     <li>
                                         <a href="#locations/list"><i class="fa fa-map-marker fa-2x"></i>  Locations</a>

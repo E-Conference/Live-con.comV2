@@ -2,8 +2,12 @@ angular.module('eventsApp').controller('eventsMainCtrl', [function ($scope) {
 
 }]);
 
-angular.module('eventsApp').controller('eventsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'EventsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, EventsFact, $cachedResource) {
+
+angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'EventsFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, EventsFact, $cachedResource) {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
+
+    //Changement de contexte
+    $rootScope.$broadcast('contextCtrl:changeContext', {confId:$routeParams.confId});
 
     var offset = -20;
     var limit = 20;

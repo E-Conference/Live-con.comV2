@@ -12,6 +12,7 @@ angular.module('eventsApp', ['fundoo.services']);
 angular.module('conferencesApp', ['fundoo.services']);
 angular.module('angularTranslateApp', ['pascalprecht.translate']);
 angular.module('authenticationApp',['ngCookies']);
+angular.module('contextualizationApp',['conferencesApp']);
 
 /* App Module */
 var liveconApp = angular.module('liveconApp', [
@@ -34,6 +35,7 @@ var liveconApp = angular.module('liveconApp', [
     'rolesApp',
     'categoriesApp',
     'conferencesApp',
+    'contextualizationApp',
     'papersApp',
     'angularMoment',
     'ui.bootstrap.datetimepicker'
@@ -49,6 +51,7 @@ liveconApp.config(['$translateProvider', function ($translateProvider) {
     $translateProvider.translations('en_US',{
         'Home': 'Home',
         'Search_event': 'Search an event',
+        'Search_conference': 'Search a conference',
         'Search_publication': 'Search an publication',
         'Search_person': 'Search a person',
         'Search_organization': 'Search an organization',
@@ -62,6 +65,7 @@ liveconApp.config(['$translateProvider', function ($translateProvider) {
     $translateProvider.translations('fr_FR',{
         'Home': 'Accueil',
         'Search_event': 'Rechercher un evenement',
+        'Search_conference': 'Rechercher une conference',
         'Search_publication': 'Rechercher une publication',
         'Search_person': 'Rechercher une personne',
         'Search_organization': 'Rechercher une organization',

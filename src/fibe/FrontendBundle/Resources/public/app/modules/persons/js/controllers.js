@@ -2,6 +2,11 @@ angular.module('personsApp').controller('personsMainCtrl', [function ($scope) {
 
 }]);
 
+angular.module('personsApp').controller('personsListByEventCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'PersonsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, PersonsFact, $cachedResource) {
+    $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
+    $scope.person = PersonsFact.get({idEvent:$routeParams.eventId});
+}]);
+
 angular.module('personsApp').controller('personsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'PersonsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, PersonsFact, $cachedResource) {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 

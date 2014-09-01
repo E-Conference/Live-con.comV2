@@ -15,11 +15,11 @@ angular.module('conferencesApp')
                         templateUrl: globalConfig.app.modules.conferences.urls.partials+'conferences-new.html',
                         controller: 'conferencesNewCtrl'
                     })
-                    .when('/conferences/edit/:conferenceId', {
+                    .when('/conferences/edit/:confId', {
                         templateUrl: globalConfig.app.modules.conferences.urls.partials+'conferences-edit.html',
                         controller: 'conferencesEditCtrl'
                     })
-                    .when('/conferences/show/:conferenceId', {
+                    .when('/conferences/show/:confId', {
                         templateUrl: globalConfig.app.modules.conferences.urls.partials+'conferences-show.html',
                         controller: 'conferencesShowCtrl'
                     })
