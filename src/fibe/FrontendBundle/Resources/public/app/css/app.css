@@ -105,8 +105,8 @@ ul{
 .sidebar-nav li:hover{
   background: #324852;
 }
-.sidebar-nav li:active{
-  background: #19313b;
+.sidebar-nav li a:active{
+  background: #324852;
 }
 
 .sidebar-nav li a:hover,

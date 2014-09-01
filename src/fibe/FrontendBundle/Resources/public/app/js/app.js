@@ -38,6 +38,7 @@ var liveconApp = angular.module('liveconApp', [
     'contextualizationApp',
     'papersApp',
     'angularMoment',
+    'leaflet-directive',
     'ui.bootstrap.datetimepicker'
 ]);
 

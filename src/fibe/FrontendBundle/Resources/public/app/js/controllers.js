@@ -85,7 +85,9 @@ liveconControllers.controller('dashboardCtrl', ['$scope', '$rootScope', '$routeP
     }]);
 
 /*********************************** HOME **********************************************/
-liveconControllers.controller('conferenceCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG',
-    function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG) {
+liveconControllers.controller('conferenceCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG',  'ConferencesFact',
+    function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, ConferencesFact) {
+    $scope.conferences =  ConferencesFact.all( {offset : 0, limit:20});
 
-    }]);
+
+}]);

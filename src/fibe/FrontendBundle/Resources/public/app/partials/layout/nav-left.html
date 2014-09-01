@@ -6,16 +6,13 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#communityAccordion" href="#dashboard/overview#collapseCommunity"><i class="fa fa-home fa-2x"></i>  {{ 'Home' | translate }}</a>
+                        <a data-toggle="collapse" data-parent="#communityAccordion" href="#/#collapseCommunity"><i class="fa fa-home fa-2x"></i>  {{ 'Home' | translate }}</a>
                     </h4>
                 </div>
                 <div id="collapseCommunity" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <ul class="sidebar-nav-list">
                             <li><a href="#conferences/list"><i class="fa fa-calendar fa-2x"></i>  {{ 'Search_conference' | translate }}</a>
-                            </li>
-                            <li >
-                                <a href="#search/event"><i class="fa fa-book fa-2x"></i>  {{ 'Search_publication' | translate }}</a>
                             </li>
                             <li>
                                  <a href="#search/organization"><i class="fa fa-users fa-2x"></i>  {{ 'Search_organization' | translate }}</a>
@@ -32,11 +29,11 @@
              </div>
         </div>
 
-        <div class="panel-group" id="myspaceAccordion">
+        <div class="panel-group" id="myspaceAccordion" ng-if="currentUser.id">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#myspaceAccordion" href="#dashboard/overview#collapseMyspace"><i class="fa fa-user fa-2x"></i>  My space</a>
+                        <a data-toggle="collapse" data-parent="#collapseMySpace" href="#dashboard/overview#collapseMyspace"><i class="fa fa-user fa-2x"></i>  My space</a>
                     </h4>
                 </div>
                 <div id="collapseMySpace" class="panel-collapse collapse in">
@@ -63,7 +60,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#conferenceAccordion" href="#dashboard/overview#collapseConference"><i class="fa fa-th fa-2x"></i>  WWW2012'</a>
+                        <a data-toggle="collapse" data-parent="#conferenceAccordion" href="#dashboard/overview#collapseConference"><i class="fa fa-th fa-2x"></i> {{currentConference.label}}</a>
                     </h4>
                 </div>
                 <div id="collapseConference" class="panel-collapse collapse in">
@@ -80,7 +77,7 @@
                               <div class="panel-body">
                                 <ul class="sidebar-nav-list">
                                     <li>
-                                        <a href="#publications"><i class="fa fa-cogs fa-2x"></i>  Settings</a>
+                                        <a href="#conferences/edit/{{currentConference.id}}"><i class="fa fa-cogs fa-2x"></i>  Settings</a>
                                     </li>
                                     <li>
                                         <a href="#papers/list"><i class="fa fa-book fa-2x"></i>  Publications</a>

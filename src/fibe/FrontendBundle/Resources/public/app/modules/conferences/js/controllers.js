@@ -124,6 +124,16 @@ angular.module('conferencesApp').controller('conferencesEditCtrl', [ '$scope', '
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'the conference has not been saved', type:'danger'});
     }
 
+    //Get geolocalization of the user
+//    $.get("http://ipinfo.io", function(response) {
+//
+//        var lat = response.loc.split(",")[0];
+//        var lng = response.loc.split(",")[1];
+//        var latlng = L.latLng(lat, lng);
+//        map.setView(latlng, 4, {animate: true});
+//    }, "jsonp");
+
+
     var success = function(response, args){
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'conference saved', type:'success'});
         $location.path('/conferences/list');
@@ -135,8 +145,26 @@ angular.module('conferencesApp').controller('conferencesEditCtrl', [ '$scope', '
         }
     }
 
+    $scope.markers = new Array();
+
+    $scope.$on("leafletDirectiveMap.click", function(event, args){
+        var leafEvent = args.leafletEvent;
+
+        $scope.markers.push({
+            lat: leafEvent.latlng.lat,
+            lng: leafEvent.latlng.lng,
+            message: "My Added Marker"
+        });
+
+        $scope.conference.latitude = leafEvent.latlng.lat;
+        $scope.conference.latitude = leafEvent.latlng.longitude;
+
+    });
+
     //Context change
     $rootScope.$broadcast('contextCtrl:changeContext', {confId:$routeParams.confId});
+
+
 }]);
 
 angular.module('conferencesApp').controller('conferencesShowCtrl', [ '$scope', '$rootScope', '$routeParams', 'ConferencesFact', function ($scope, $rootScope, $routeParams, ConferencesFact) {

@@ -3,13 +3,14 @@ angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootSc
 function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, userFactory, $location) {
 
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
-
+    $rootScope.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     var error = function(response, args){
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'Login_error', type:'danger'});
     }
     var success = function(response, args){
         $scope.user = response;
         $rootScope.currentUser = response;
+            localStorage.setItem('currentUser', JSON.stringify(response));
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'Login_success', type:'success'});
         $location.path('/');
     }
@@ -20,8 +21,8 @@ function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, userFactory, $locatio
 
 
 
-angular.module('authenticationApp').controller('signupCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'userFactory',
-function ($scope, $routeParams, GLOBAL_CONFIG, userFactory) {
+angular.module('authenticationApp').controller('signupCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'GLOBAL_CONFIG', 'userFactory',
+function ($scope, $rootScope, $location, $routeParams, GLOBAL_CONFIG, userFactory) {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
     var error = function(response, args){

@@ -12,6 +12,7 @@
                    'bundles/frontend/app/css/loading-bar.css' 
                    'bundles/frontend/app/css/app.css' 
                    'bundles/frontend/app/css/animations.css'
+                   'bundles/frontend/app/css/leaflet.css'
                    'bundles/frontend/app/css/datetimepicker.css'
     output='css/compiled/vendors.css' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
@@ -33,10 +34,12 @@
                    'bundles/frontend/vendors/angular-cached-resource.min.js'
                    'bundles/frontend/vendors/angular-cookies.js'
                    'bundles/frontend/vendors/moment.js'
+                   'bundles/frontend/vendors/angular-leaflet-directive.min.js'
                    'bundles/frontend/vendors/createDialog.js'
                    'bundles/frontend/vendors/angular-moment.js'
                    'bundles/frontend/vendors/loadingBarModule.js'
                    'bundles/frontend/vendors/datetimepicker.js'
+                   'bundles/frontend/vendors/leaflet.js'
                     output='js/compiled/main.js'%}
         <script src="{{ asset_url }}" type="text/javascript"></script>
     {% endjavascripts %}
@@ -92,6 +95,9 @@
 
 
     <!-- <script src="{{ asset('bundles/frontend/app/js/animations.js') }}"></script> -->
+
+    <!-- OpenStreetMap  -->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css">
 
 
     <!-- basic client app context definition -->

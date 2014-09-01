@@ -11,57 +11,41 @@
         <div class="caption well">
            <div class="form-group">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search an upcoming event" ng-model="query">
+              <input type="text" class="form-control" placeholder="Search an upcoming event" ng-change="search()" ng-model="query">
               <div class="input-group-btn">
                <button type="button" class="btn btn-default" tabindex="-1"><i class="fa fa-search"></i></button>
               </div>
             </div>
           </div>
-          <p>...</p>
-          
-        </div>
-       
-      </div>
-    </div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
-      <div class="thumbnail">
-        <div class="caption well">
-           <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Your events</th>
-                  <th></th>
-                  <th></th>
+            <table class="table table-striped">
+
+                <tbody>
+                <tr ng-repeat="conference in conferences  track by $index">
+                    <td>{{ conference.label }}</td>
+                    <td>{{ conference.start_at }}</td>
+                    <td>{{ conference.end_at }}</td>
+                    <td>
+                        <a class="btn btn-default" href="#conferences/show/{{ conference.id }}" role="button"><i class="fa fa-eye fa-1x"></i></a>
+                    </td>
                 </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><img style="height:20px;" src="http://2013.eswc-conferences.org/sites/default/files/ESWC2013-logo.png"/></td>
-                  <td>ESWC2013</td>
-                  <td>
-                    <a class="btn btn-warning" href="schedule/event/edit" role="button"><i class="fa fa-edit"></i></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td><img style="height:20px;" src="http://www2013.org/wp-content/themes/teste-programacao/img/logo_www2013_opt.png"/></td>
-                  <td>WWW2013'</td>
-                  <td>
-                    <a class="btn btn-warning" href="schedule/event/edit" role="button"><i class="fa fa-edit"></i></a>
-                  </td>
-                </tr>
-                 <tr>
-                  <td><img style="height:20px;" src="http://iswc2013.semanticweb.org/sites/all/themes/iswc/iswcdesktop/logo.png"/></td>
-                  <td>Lorem</td>
-                  <td>
-                    <a class="btn btn-warning" href="schedule/event/edit" role="button"><i class="fa fa-edit"></i></a>
-                  </td>
-                </tr>
-              </tbody>
+                </tbody>
             </table>
+
         </div>
+
       </div>
     </div>
   </div>
+    <div class="row">
+        <div class="col-sm-8 col-md-8 col-lg-8">
+            <div class="thumbnail">
+                <div class="caption well">
+                    <leaflet defaults="defaults" center="center" height="300px" width="100%"></leaflet>
+                    <p>Events next to you</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
   <div class="row">
     <div class="col-sm-8 col-md-8 col-lg-8">
@@ -74,14 +58,7 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sm-8 col-md-8 col-lg-8">
-      <div class="thumbnail">
-        <div class="caption well">
-          <img style="height:230px;" src="https://www.drupal.org/files/Leaflet_OSM.png"/>
-          <p>Events next to you</p>
-        </div>
-      </div>
-    </div>
-  </div>
+
+
+
 </div>
