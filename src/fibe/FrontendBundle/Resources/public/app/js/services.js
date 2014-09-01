@@ -1,7 +1,10 @@
 'use strict';
 
-/* Services */
-
+/**
+ * Services
+ *
+ * @type {module}
+ */
 var liveconServices = angular.module('liveconServices', ['ngResource']);
 
 liveconServices.factory('publicationFactory', ['$resource',
@@ -14,8 +17,6 @@ liveconServices.factory('publicationFactory', ['$resource',
     });
   }]);
 
-
-
 liveconServices.factory('personFactory', ['$resource',
   function($resource){
     return $resource('/livecon.com/web/app_dev.php/api/schedule_person.json?id=:personId', {}, {
@@ -25,8 +26,6 @@ liveconServices.factory('personFactory', ['$resource',
        list: {method:'GET',  url : '/livecon.com/web/app_dev.php/api/schedule_person.json?conference_id=:conferenceId', params:{}, isArray:true}
     });
   }]);
-
-
 
 liveconServices.factory('conferenceFactory', ['$resource',
   function($resource){

@@ -14,7 +14,11 @@ angular.module('angularTranslateApp', ['pascalprecht.translate']);
 angular.module('authenticationApp',['ngCookies']);
 angular.module('contextualizationApp',['conferencesApp']);
 
-/* App Module */
+/**
+ * Main App Module
+ *
+ * @type {module}
+ */
 var liveconApp = angular.module('liveconApp', [
     'ngRoute',
     'ngAnimate',
@@ -41,10 +45,9 @@ var liveconApp = angular.module('liveconApp', [
     'ui.bootstrap.datetimepicker'
 ]);
 
-
-
-
-// Configuring $translateProvider
+/**
+ * Configuring $translateProvider
+ */
 liveconApp.config(['$translateProvider', function ($translateProvider) {
     
     // Simply register translation table as object hash
@@ -73,11 +76,10 @@ liveconApp.config(['$translateProvider', function ($translateProvider) {
         'Login_error': 'Login impossible',
         'Forgotten_password' : 'Mot de passe oublié ?',
         'signout_success' : 'Merci d\'utiliser Live-con.com, à bientôt'
-    });   
+    });
 
     $translateProvider.preferredLanguage('en_US');
 }]);
-
 
 liveconApp.run(function(amMoment) {
     amMoment.changeLanguage('de');

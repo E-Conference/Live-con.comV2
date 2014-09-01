@@ -1,7 +1,10 @@
 'use strict';
 
-/* Controllers */
-
+/**
+ * Controllers
+ *
+ * @type {module}
+ */
 var liveconControllers = angular.module('liveconControllers', []);
 
 /*********************************** MAIN **********************************************/
