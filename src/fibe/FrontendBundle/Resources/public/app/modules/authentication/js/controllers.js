@@ -10,7 +10,7 @@ function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, userFactory, $locatio
     var success = function(response, args){
         $scope.user = response;
         $rootScope.currentUser = response;
-            localStorage.setItem('currentUser', JSON.stringify(response));
+        localStorage.setItem('currentUser', JSON.stringify(response));
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'Login_success', type:'success'});
         $location.path('/');
     }

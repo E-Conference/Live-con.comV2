@@ -8,11 +8,13 @@ function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, conferencesFact, $loc
     var changeContext = function(conference){
 
         if (conference.confId != $rootScope.currentConference.id) {
-            $rootScope.currentConference = conferencesFact.get({id: conference.confId});
+            $rootScope.currentConference = conferencesFact.get({id: conference.confId},function(conference){
+                localStorage.setItem('currentConference', JSON.stringify(conference));
+            });
             $('#collapseMySpace').collapse('hide');
             $('#collapseCommunity').collapse('hide');
             $('#collapseConference').collapse('show');
-            localStorage.setItem('currentConference', JSON.stringify(conference));
+
             $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Welcome to ' + $rootScope.currentConference.slug, type: 'success'});
         }
 
