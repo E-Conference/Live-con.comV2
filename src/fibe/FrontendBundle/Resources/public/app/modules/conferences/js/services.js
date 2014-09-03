@@ -1,3 +1,10 @@
+/**
+ * Conferences Factory
+ *
+ * Service calls for CRUD actions
+ *
+ * @type {factory}
+ */
 angular.module('conferencesApp').factory('ConferencesFact', ['$resource', '$cachedResource',
   function ($cachedResource)
   {

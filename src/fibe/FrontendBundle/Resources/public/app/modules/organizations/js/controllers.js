@@ -1,8 +1,22 @@
+/**
+ * Organizations controllers
+ */
+
+/**
+ * Main organizations controller
+ *
+ * @type {controller}
+ */
 angular.module('organizationsApp').controller('organizationsMainCtrl', [function ($scope)
 {
 
 }]);
 
+/**
+ * List organization controller
+ *
+ * @type {controller}
+ */
 angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'OrganizationsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, OrganizationsFact, $cachedResource)
 {
   $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
@@ -143,7 +157,11 @@ angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope'
   //$scope.organizations = $cachedResource();
 }]);
 
-
+/**
+ * New organization controller
+ *
+ * @type {controller}
+ */
 angular.module('organizationsApp').controller('organizationsNewCtrl', [ '$scope', '$rootScope', '$location', 'OrganizationsFact', function ($scope, $rootScope, $location, OrganizationsFact)
 {
   $scope.organization = new OrganizationsFact;
@@ -168,6 +186,11 @@ angular.module('organizationsApp').controller('organizationsNewCtrl', [ '$scope'
   }
 }]);
 
+/**
+ * Edit organization controller
+ *
+ * @type {controller}
+ */
 angular.module('organizationsApp').controller('organizationsEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'OrganizationsFact', function ($scope, $rootScope, $routeParams, $location, OrganizationsFact)
 {
   $scope.organization = OrganizationsFact.get({id: $routeParams.organizationId});
@@ -192,14 +215,23 @@ angular.module('organizationsApp').controller('organizationsEditCtrl', [ '$scope
   }
 }]);
 
+/**
+ * Show organization controller
+ *
+ * @type {controller}
+ */
 angular.module('organizationsApp').controller('organizationsShowCtrl', [ '$scope', '$routeParams', 'OrganizationsFact', function ($scope, $routeParams, OrganizationsFact)
 {
   $scope.organization = OrganizationsFact.get({id: $routeParams.organizationId});
 
 }]);
 
+/**
+ * Delete organization controller
+ *
+ * @type {controller}
+ */
 angular.module('organizationsApp').controller('organizationsDeleteCtrl', [ '$scope', 'organizationModel', function ($scope, organizationModel)
 {
   $scope.organization = organizationModel;
 }]);
-

@@ -1,3 +1,9 @@
+/**
+ * Organizations module configuration
+ * route <--> template <--> controller
+ *
+ * @type {config}
+ */
 angular.module('organizationsApp')
   .config(
   ['$routeProvider',

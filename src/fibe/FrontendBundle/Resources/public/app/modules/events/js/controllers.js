@@ -1,9 +1,22 @@
+/**
+ * Events Controllers
+ */
+
+/**
+ * Main events controller
+ *
+ * @type {controller}
+ */
 angular.module('eventsApp').controller('eventsMainCtrl', [function ($scope)
 {
 
 }]);
 
-
+/**
+ * List events controller
+ *
+ * @type {controller}
+ */
 angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'EventsFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, EventsFact, $cachedResource)
 {
   $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
@@ -163,7 +176,11 @@ angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', 
   //$scope.events = $cachedResource();
 }]);
 
-
+/**
+ * New event controller
+ *
+ * @type {controller}
+ */
 angular.module('eventsApp').controller('eventsNewCtrl', [ '$scope', '$rootScope', '$location', 'EventsFact', function ($scope, $rootScope, $location, EventsFact)
 {
   $scope.event = new EventsFact;
@@ -188,6 +205,11 @@ angular.module('eventsApp').controller('eventsNewCtrl', [ '$scope', '$rootScope'
   }
 }]);
 
+/**
+ * Edit event controller
+ *
+ * @type {controller}
+ */
 angular.module('eventsApp').controller('eventsEditCtrl', [ '$scope', '$rootScope', 'GLOBAL_CONFIG', '$routeParams', '$location', 'EventsFact', 'createDialog', function ($scope, $rootScope, GLOBAL_CONFIG, $routeParams, $location, EventsFact, createDialogService)
 {
   $scope.event = EventsFact.get({id: $routeParams.eventId});
@@ -237,12 +259,22 @@ angular.module('eventsApp').controller('eventsEditCtrl', [ '$scope', '$rootScope
 
 }]);
 
+/**
+ * Show event controller
+ *
+ * @type {controller}
+ */
 angular.module('eventsApp').controller('eventsShowCtrl', [ '$scope', '$routeParams', 'EventsFact', function ($scope, $routeParams, EventsFact)
 {
   $scope.event = EventsFact.get({id: $routeParams.eventId});
 
 }]);
 
+/**
+ * Delete event controller
+ *
+ * @type {controller}
+ */
 angular.module('eventsApp').controller('eventsDeleteCtrl', [ '$scope', 'eventModel', function ($scope, eventModel)
 {
   $scope.event = eventModel;

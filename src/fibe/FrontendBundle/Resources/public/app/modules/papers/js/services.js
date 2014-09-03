@@ -1,3 +1,10 @@
+/**
+ * Papers Factory
+ *
+ * Service calls for CRUD actions
+ *
+ * @type {factory}
+ */
 angular.module('papersApp').factory('papersFact', ['$resource', '$cachedResource',
   function ($cachedResource)
   {

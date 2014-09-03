@@ -1,6 +1,12 @@
 'use strict';
 
-/* sub modules */
+/**
+ * Main angular app
+ */
+
+/**
+ * Main app sub-modules
+ */
 angular.module('communityApp', []);
 angular.module('organizationsApp', ['fundoo.services']);
 angular.module('papersApp', ['fundoo.services']);
@@ -83,6 +89,11 @@ liveconApp.config(['$translateProvider', function ($translateProvider)
   $translateProvider.preferredLanguage('en_US');
 }]);
 
+/**
+ * Main app run event
+ *
+ * (execute after injection)
+ */
 liveconApp.run(function (amMoment)
 {
   amMoment.changeLanguage('de');

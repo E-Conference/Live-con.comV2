@@ -1,3 +1,10 @@
+/**
+ * Category Factory
+ *
+ * Service calls for CRUD actions
+ *
+ * @type {factory}
+ */
 angular.module('categoriesApp').factory('categoriesFact', ['$resource', '$cachedResource',
   function ($cachedResource)
   {

@@ -1,7 +1,17 @@
 'use strict';
 
-/* Directives */
-/* ng-infinite-scroll - v1.0.0 - 2013-02-23 */
+/**
+ * Global directives
+ */
+
+/**
+ * ng-infinite-scroll - v1.0.0 - 2013-02-23
+ *
+ * Description :
+ * Directive which permit to dinamically load content on a page, as the user scroll down/up
+ *
+ * @type {directive}
+ */
 angular.module('liveconApp').directive('infiniteScroll', [
   '$rootScope', '$window', '$timeout', function ($rootScope, $window, $timeout)
   {

@@ -1,8 +1,22 @@
+/**
+ * Category controllers
+ */
+
+/**
+ * Main category controller
+ *
+ * @type {controller}
+ */
 angular.module('categoriesApp').controller('categoriesMainCtrl', [function ($scope)
 {
 
 }]);
 
+/**
+ * List category controller
+ *
+ * @type {controller}
+ */
 angular.module('categoriesApp').controller('categoriesListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'categoriesFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, categoriesFact, $cachedResource)
 {
   $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
@@ -121,7 +135,11 @@ angular.module('categoriesApp').controller('categoriesListCtrl', ['$scope', 'GLO
   //$scope.categories = $cachedResource();
 }]);
 
-
+/**
+ * New category controller
+ *
+ * @type {controller}
+ */
 angular.module('categoriesApp').controller('categoriesNewCtrl', [ '$scope', '$rootScope', '$location', 'categoriesFact', function ($scope, $rootScope, $location, categoriesFact)
 {
   $scope.category = new categoriesFact;
@@ -146,6 +164,11 @@ angular.module('categoriesApp').controller('categoriesNewCtrl', [ '$scope', '$ro
   }
 }]);
 
+/**
+ * Edit category controller
+ *
+ * @type {controller}
+ */
 angular.module('categoriesApp').controller('categoriesEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'categoriesFact', function ($scope, $rootScope, $routeParams, $location, categoriesFact)
 {
   $scope.category = categoriesFact.get({id: $routeParams.categoryId});
@@ -170,12 +193,22 @@ angular.module('categoriesApp').controller('categoriesEditCtrl', [ '$scope', '$r
   }
 }]);
 
+/**
+ * Show category controller
+ *
+ * @type {controller}
+ */
 angular.module('categoriesApp').controller('categoriesShowCtrl', [ '$scope', '$routeParams', 'categoriesFact', function ($scope, $routeParams, categoriesFact)
 {
   $scope.category = categoriesFact.get({id: $routeParams.categoryId});
 
 }]);
 
+/**
+ * Delete category controller
+ *
+ * @type {controller}
+ */
 angular.module('categoriesApp').controller('categoriesDeleteCtrl', [ '$scope', 'categoryModel', function ($scope, categoryModel)
 {
   $scope.category = categoryModel;

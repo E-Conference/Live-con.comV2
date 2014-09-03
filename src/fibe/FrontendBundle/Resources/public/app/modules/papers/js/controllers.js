@@ -1,8 +1,22 @@
+/**
+ * Paper controllers
+ */
+
+/**
+ * Main papers controller
+ *
+ * @type {controller}
+ */
 angular.module('papersApp').controller('papersMainCtrl', [function ($scope)
 {
 
 }]);
 
+/**
+ * List papers controller
+ *
+ * @type {controller}
+ */
 angular.module('papersApp').controller('papersListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'papersFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, papersFact, $cachedResource)
 {
   $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
@@ -121,7 +135,11 @@ angular.module('papersApp').controller('papersListCtrl', ['$scope', 'GLOBAL_CONF
   //$scope.papers = $cachedResource();
 }]);
 
-
+/**
+ * New paper controller
+ *
+ * @type {controller}
+ */
 angular.module('papersApp').controller('papersNewCtrl', [ '$scope', '$rootScope', '$location', 'papersFact', function ($scope, $rootScope, $location, papersFact)
 {
   $scope.paper = new papersFact;
@@ -146,6 +164,11 @@ angular.module('papersApp').controller('papersNewCtrl', [ '$scope', '$rootScope'
   }
 }]);
 
+/**
+ * Edit paper controller
+ *
+ * @type {controller}
+ */
 angular.module('papersApp').controller('papersEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'papersFact', function ($scope, $rootScope, $routeParams, $location, papersFact)
 {
   $scope.paper = papersFact.get({id: $routeParams.paperId});
@@ -170,12 +193,22 @@ angular.module('papersApp').controller('papersEditCtrl', [ '$scope', '$rootScope
   }
 }]);
 
+/**
+ * Show paper controller
+ *
+ * @type {controller}
+ */
 angular.module('papersApp').controller('papersShowCtrl', [ '$scope', '$routeParams', 'papersFact', function ($scope, $routeParams, papersFact)
 {
   $scope.paper = papersFact.get({id: $routeParams.paperId});
 
 }]);
 
+/**
+ * Delete paper controller
+ *
+ * @type {controller}
+ */
 angular.module('papersApp').controller('papersDeleteCtrl', [ '$scope', 'paperModel', function ($scope, paperModel)
 {
   $scope.paper = paperModel;

@@ -1,4 +1,9 @@
 /**
+ * Angular animations
+ */
+
+
+/**
  * Animation module
  *
  * @type {module}

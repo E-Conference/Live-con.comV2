@@ -1,3 +1,9 @@
+/**
+ * Persons module configuration
+ * route <--> template <--> controller
+ *
+ * @type {config}
+ */
 angular.module('personsApp')
   .config(
   ['$routeProvider',

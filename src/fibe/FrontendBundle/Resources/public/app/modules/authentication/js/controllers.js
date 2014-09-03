@@ -1,3 +1,12 @@
+/**
+ * Authentication controllers
+ */
+
+/**
+ * Sign in controller
+ *
+ * @type {controller}
+ */
 angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG', 'userFactory', '$location',
   function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, userFactory, $location)
   {
@@ -22,7 +31,11 @@ angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootSc
     }
   }]);
 
-
+/**
+ * Sign up controller
+ *
+ * @type {controller}
+ */
 angular.module('authenticationApp').controller('signupCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'GLOBAL_CONFIG', 'userFactory',
   function ($scope, $rootScope, $location, $routeParams, GLOBAL_CONFIG, userFactory)
   {
@@ -46,7 +59,11 @@ angular.module('authenticationApp').controller('signupCtrl', ['$scope', '$rootSc
 
   }]);
 
-
+/**
+ * Sign out controller
+ *
+ * @type {controller}
+ */
 angular.module('authenticationApp').controller('signoutCtrl', ['$scope', '$rootScope', '$window', '$routeParams', 'GLOBAL_CONFIG', '$cookieStore', '$location',
   function ($scope, $rootScope, $window, $routeParams, GLOBAL_CONFIG, $cookieStore, $location)
   {
@@ -63,7 +80,11 @@ angular.module('authenticationApp').controller('signoutCtrl', ['$scope', '$rootS
     }
   }]);
 
-
+/**
+ * Global authentication controller
+ *
+ * @type {controller}
+ */
 angular.module('authenticationApp').controller('globalAuthCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG',
   function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG)
   {

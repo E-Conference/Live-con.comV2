@@ -1,3 +1,9 @@
+/**
+ * Authentication module configuration
+ * route <--> template <--> controller
+ *
+ * @type {config}
+ */
 angular.module('authenticationApp')
   .config(
   ['$routeProvider',

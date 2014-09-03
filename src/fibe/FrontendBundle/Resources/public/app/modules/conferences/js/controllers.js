@@ -1,8 +1,22 @@
+/**
+ * Conference (mainEvent) controllers
+ */
+
+/**
+ * Main conference controller
+ *
+ * @type {controller}
+ */
 angular.module('conferencesApp').controller('conferencesMainCtrl', [function ($scope)
 {
 
 }]);
 
+/**
+ * List conference controller
+ *
+ * @type {controller}
+ */
 angular.module('conferencesApp').controller('conferencesListCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'ConferencesFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, ConferencesFact, $cachedResource)
 {
   $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
@@ -119,7 +133,11 @@ angular.module('conferencesApp').controller('conferencesListCtrl', ['$scope', '$
 
 }]);
 
-
+/**
+ * New conference controller
+ *
+ * @type {controller}
+ */
 angular.module('conferencesApp').controller('conferencesNewCtrl', [ '$scope', '$rootScope', '$location', 'ConferencesFact', function ($scope, $rootScope, $location, ConferencesFact)
 {
   $scope.conference = new ConferencesFact;
@@ -144,6 +162,11 @@ angular.module('conferencesApp').controller('conferencesNewCtrl', [ '$scope', '$
   }
 }]);
 
+/**
+ * Edit conference controller
+ *
+ * @type {controller}
+ */
 angular.module('conferencesApp').controller('conferencesEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'ConferencesFact', function ($scope, $rootScope, $routeParams, $location, ConferencesFact)
 {
   $scope.conference = ConferencesFact.get({id: $routeParams.confId});
@@ -200,6 +223,11 @@ angular.module('conferencesApp').controller('conferencesEditCtrl', [ '$scope', '
 
 }]);
 
+/**
+ * Show conference controller
+ *
+ * @type {controller}
+ */
 angular.module('conferencesApp').controller('conferencesShowCtrl', [ '$scope', '$rootScope', '$routeParams', 'ConferencesFact', function ($scope, $rootScope, $routeParams, ConferencesFact)
 {
   $scope.conference = ConferencesFact.get({id: $routeParams.confId});
@@ -209,6 +237,11 @@ angular.module('conferencesApp').controller('conferencesShowCtrl', [ '$scope', '
 
 }]);
 
+/**
+ * Delete conference controller
+ *
+ * @type {controller}
+ */
 angular.module('conferencesApp').controller('conferencesDeleteCtrl', [ '$scope', '$rootScope', 'conferenceModel', function ($scope, $rootScope, conferenceModel)
 {
   $scope.conference = conferenceModel;

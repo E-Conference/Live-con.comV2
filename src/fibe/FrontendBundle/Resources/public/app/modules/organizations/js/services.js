@@ -1,3 +1,10 @@
+/**
+ * Organizations Factory
+ *
+ * Service calls for CRUD actions
+ *
+ * @type {factory}
+ */
 angular.module('organizationsApp').factory('OrganizationsFact', ['$resource', '$cachedResource',
   function ($cachedResource)
   {

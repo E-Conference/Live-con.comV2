@@ -1,3 +1,10 @@
+/**
+ * Persons Factory
+ *
+ * Service calls for CRUD actions
+ *
+ * @type {factory}
+ */
 angular.module('personsApp').factory('PersonsFact', ['$resource', '$cachedResource',
   function ($cachedResource)
   {

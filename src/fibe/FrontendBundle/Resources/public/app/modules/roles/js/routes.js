@@ -1,3 +1,9 @@
+/**
+ * Roles module configuration
+ * route <--> template <--> controller
+ *
+ * @type {config}
+ */
 angular.module('rolesApp')
   .config(
   ['$routeProvider',

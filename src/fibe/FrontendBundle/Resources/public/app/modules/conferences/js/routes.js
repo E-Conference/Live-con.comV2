@@ -1,3 +1,9 @@
+/**
+ * Conference module configuration
+ * route <--> template <--> controller
+ *
+ * @type {config}
+ */
 angular.module('conferencesApp')
   .config(
   ['$routeProvider',

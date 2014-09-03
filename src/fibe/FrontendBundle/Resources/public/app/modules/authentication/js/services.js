@@ -1,3 +1,15 @@
+/**
+ * User Factory
+ *
+ * Service calls for following actions :
+ * - get
+ * - signin
+ * - signup
+ * - show
+ * - list
+ *
+ * @type {factory}
+ */
 angular.module('authenticationApp').factory('userFactory', ['$resource',
   function ($resource)
   {
@@ -14,7 +26,13 @@ angular.module('authenticationApp').factory('userFactory', ['$resource',
     );
   }]);
 
-
+/**
+ * Interceptor factory
+ *
+ * @TODO Florian : Comment
+ *
+ * @type
+ */
 angular.module('authenticationApp').factory('globalHttpInterceptor', ['$q', '$rootScope',
   function ($q, $rootScope)
   {

@@ -1,12 +1,17 @@
 'use strict';
 
 /**
- * Services
+ * Main services
  *
  * @type {module}
  */
 var liveconServices = angular.module('liveconServices', ['ngResource']);
 
+/**
+ * Publication factory
+ *
+ * @type {factory}
+ */
 liveconServices.factory('publicationFactory', ['$resource',
   function ($resource)
   {
@@ -18,6 +23,11 @@ liveconServices.factory('publicationFactory', ['$resource',
     });
   }]);
 
+/**
+ * Person factory
+ *
+ * @type {factory}
+ */
 liveconServices.factory('personFactory', ['$resource',
   function ($resource)
   {
@@ -29,6 +39,11 @@ liveconServices.factory('personFactory', ['$resource',
     });
   }]);
 
+/**
+ * Conference factory
+ *
+ * @type {factory}
+ */
 liveconServices.factory('conferenceFactory', ['$resource',
   function ($resource)
   {

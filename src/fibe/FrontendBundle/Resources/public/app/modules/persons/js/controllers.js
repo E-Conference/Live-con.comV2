@@ -1,14 +1,33 @@
+/**
+ * Persons controllers
+ */
+
+/**
+ * Main persons controller
+ *
+ * @type {controller}
+ */
 angular.module('personsApp').controller('personsMainCtrl', [function ($scope)
 {
 
 }]);
 
+/**
+ * List persons by event controller
+ *
+ * @type {controller}
+ */
 angular.module('personsApp').controller('personsListByEventCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'PersonsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, PersonsFact, $cachedResource)
 {
   $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
   $scope.person = PersonsFact.get({idEvent: $routeParams.eventId});
 }]);
 
+/**
+ * List (all) persons controller
+ *
+ * @type {controller}
+ */
 angular.module('personsApp').controller('personsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'PersonsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, PersonsFact, $cachedResource)
 {
   $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
@@ -128,7 +147,11 @@ angular.module('personsApp').controller('personsListCtrl', ['$scope', 'GLOBAL_CO
   //$scope.persons = $cachedResource();
 }]);
 
-
+/**
+ * New person controller
+ *
+ * @type {controller}
+ */
 angular.module('personsApp').controller('personsNewCtrl', [ '$scope', '$rootScope', '$person', 'PersonsFact', function ($scope, $rootScope, $person, PersonsFact)
 {
   $scope.person = new PersonsFact;
@@ -153,6 +176,11 @@ angular.module('personsApp').controller('personsNewCtrl', [ '$scope', '$rootScop
   }
 }]);
 
+/**
+ * Edit person controller
+ *
+ * @type {controller}
+ */
 angular.module('personsApp').controller('personsEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$person', 'PersonsFact', function ($scope, $rootScope, $routeParams, $person, PersonsFact)
 {
   $scope.person = PersonsFact.get({id: $routeParams.personId});
@@ -177,12 +205,22 @@ angular.module('personsApp').controller('personsEditCtrl', [ '$scope', '$rootSco
   }
 }]);
 
+/**
+ * Show person controller
+ *
+ * @type {controller}
+ */
 angular.module('personsApp').controller('personsShowCtrl', [ '$scope', '$routeParams', 'PersonsFact', function ($scope, $routeParams, PersonsFact)
 {
   $scope.person = PersonsFact.get({id: $routeParams.personId});
 
 }]);
 
+/**
+ * Delete person controller
+ *
+ * @type {controller}
+ */
 angular.module('personsApp').controller('personsDeleteCtrl', [ '$scope', 'personModel', function ($scope, personModel)
 {
   $scope.person = personModel;

@@ -1,8 +1,22 @@
+/**
+ * Locations controllers
+ */
+
+/**
+ * Main location controller
+ *
+ * @type {controller}
+ */
 angular.module('locationsApp').controller('locationsMainCtrl', [function ($scope)
 {
 
 }]);
 
+/**
+ * List location controller
+ *
+ * @type {controller}
+ */
 angular.module('locationsApp').controller('locationsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'locationsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, locationsFact, $cachedResource)
 {
   $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
@@ -121,7 +135,11 @@ angular.module('locationsApp').controller('locationsListCtrl', ['$scope', 'GLOBA
   //$scope.locations = $cachedResource();
 }]);
 
-
+/**
+ * New location controller
+ *
+ * @type {controller}
+ */
 angular.module('locationsApp').controller('locationsNewCtrl', [ '$scope', '$rootScope', '$location', 'locationsFact', function ($scope, $rootScope, $location, locationsFact)
 {
   $scope.location = new locationsFact;
@@ -146,6 +164,11 @@ angular.module('locationsApp').controller('locationsNewCtrl', [ '$scope', '$root
   }
 }]);
 
+/**
+ * Edit location controller
+ *
+ * @type {controller}
+ */
 angular.module('locationsApp').controller('locationsEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'locationsFact', function ($scope, $rootScope, $routeParams, $location, locationsFact)
 {
   $scope.location = locationsFact.get({id: $routeParams.locationId});
@@ -170,12 +193,22 @@ angular.module('locationsApp').controller('locationsEditCtrl', [ '$scope', '$roo
   }
 }]);
 
+/**
+ * Show location controller
+ *
+ * @type {controller}
+ */
 angular.module('locationsApp').controller('locationsShowCtrl', [ '$scope', '$routeParams', 'locationsFact', function ($scope, $routeParams, locationsFact)
 {
   $scope.location = locationsFact.get({id: $routeParams.locationId});
 
 }]);
 
+/**
+ * Delete location controller
+ *
+ * @type {controller}
+ */
 angular.module('locationsApp').controller('locationsDeleteCtrl', [ '$scope', 'locationModel', function ($scope, locationModel)
 {
   $scope.location = locationModel;

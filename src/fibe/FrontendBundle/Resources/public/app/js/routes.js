@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * Main app module configuration
+ * route <--> template <--> controller
+ *
+ * @type {config}
+ */
 liveconApp.config(['$routeProvider',
   function ($routeProvider)
   {

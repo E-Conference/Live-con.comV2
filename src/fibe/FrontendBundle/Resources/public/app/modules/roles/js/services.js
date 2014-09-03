@@ -1,3 +1,14 @@
+/**
+ * Roles Factories
+ */
+
+/**
+ * Roles labels Factory
+ *
+ * Service calls for CRUD actions
+ *
+ * @type {factory}
+ */
 angular.module('rolesApp').factory('rolesLabelFact', ['$resource', '$cachedResource',
   function ($cachedResource)
   {
@@ -14,6 +25,13 @@ angular.module('rolesApp').factory('rolesLabelFact', ['$resource', '$cachedResou
     );
   }]);
 
+/**
+ * Roles Factory
+ *
+ * Service calls for CRUD actions
+ *
+ * @type {factory}
+ */
 angular.module('rolesApp').factory('rolesFact', ['$resource', '$cachedResource',
   function ($cachedResource)
   {

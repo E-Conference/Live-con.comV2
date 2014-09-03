@@ -1,13 +1,21 @@
 'use strict';
 
 /**
- * Controllers
+ * Main and global controllers
+ */
+
+/**
+ * Main app controllers
  *
  * @type {module}
  */
 var liveconControllers = angular.module('liveconControllers', []);
 
-/*********************************** MAIN **********************************************/
+/**
+ * Main controller
+ *
+ * @type {controller}
+ */
 liveconControllers.controller('mainCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG',
   function ($scope, $routeParams, GLOBAL_CONFIG)
   {
@@ -20,7 +28,11 @@ liveconControllers.controller('mainCtrl', ['$scope', '$routeParams', 'GLOBAL_CON
   }]);
 
 
-/*********************************** ALERT **********************************************/
+/**
+ * Global alert controller
+ *
+ * @type {controller}
+ */
 liveconControllers.controller('AlertCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', '$timeout',
   function ($scope, $routeParams, GLOBAL_CONFIG, $timeout)
   {
@@ -60,6 +72,12 @@ liveconControllers.controller('AlertCtrl', ['$scope', '$routeParams', 'GLOBAL_CO
   }]);
 
 /*********************************** NAVS **********************************************/
+
+/**
+ * Nav left controller (left panel controller)
+ *
+ * @type {controller}
+ */
 liveconControllers.controller('navLeftCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG',
   function ($scope, $routeParams, GLOBAL_CONFIG)
   {
@@ -70,11 +88,21 @@ liveconControllers.controller('navLeftCtrl', ['$scope', '$routeParams', 'GLOBAL_
     };
   }]);
 
+/**
+ * Nav right controller (right panel controller)
+ *
+ * @type {controller}
+ */
 liveconControllers.controller('navRightCtrl', ['$scope', '$routeParams',
   function ($scope, $routeParams)
   {
   }]);
 
+/**
+ * Nav top controller (top panel controller)
+ *
+ * @type {controller}
+ */
 liveconControllers.controller('navTopCtrl', ['$translate', '$scope', '$routeParams', 'GLOBAL_CONFIG',
   function ($translate, $scope, $routeParams, GLOBAL_CONFIG)
   {
@@ -99,18 +127,23 @@ liveconControllers.controller('navTopCtrl', ['$translate', '$scope', '$routePara
 
   }]);
 
-/*********************************** DASHBOARDS **********************************************/
+/**
+ * Dashboard controller
+ *
+ * @type {controller}
+ */
 liveconControllers.controller('dashboardCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG',
   function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG)
   {
 
   }]);
 
-/*********************************** HOME **********************************************/
+/**
+ * Main event controller (conference controller)
+ */
 liveconControllers.controller('conferenceCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG', 'ConferencesFact',
   function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, ConferencesFact)
   {
     $scope.conferences = ConferencesFact.all({offset: 0, limit: 20});
-
 
   }]);

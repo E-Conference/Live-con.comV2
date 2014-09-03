@@ -1,3 +1,9 @@
+/**
+ * Paper module configuration
+ * route <--> template <--> controller
+ *
+ * @type {config}
+ */
 angular.module('papersApp')
   .config(
   ['$routeProvider',

@@ -1,3 +1,9 @@
+/**
+ * Events module configuration
+ * route <--> template <--> controller
+ *
+ * @type {config}
+ */
 angular.module('eventsApp')
   .config(
   ['$routeProvider',

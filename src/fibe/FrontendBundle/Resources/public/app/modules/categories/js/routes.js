@@ -1,3 +1,9 @@
+/**
+ * Category module configuration
+ * route <--> template <--> controller
+ *
+ * @type {config}
+ */
 angular.module('categoriesApp')
   .config(
   ['$routeProvider',

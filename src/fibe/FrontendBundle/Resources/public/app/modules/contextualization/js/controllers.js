@@ -1,3 +1,10 @@
+/**
+ * Context controller
+ *
+ * Controller for conference context changes
+ *
+ * @type {controller}
+ */
 angular.module('contextualizationApp').controller('contextCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG', 'ConferencesFact', '$location',
   function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, conferencesFact, $location)
   {

@@ -1,3 +1,12 @@
+/**
+ * Context Factory
+ *
+ * Service calls for CRUD actions
+ * @TODO Florian : Etrange comme factory... A supprimer ? ou a adapter pour le context controller, non ?
+ * @TODO *** toutes les routes ne sont pas utiles en tout cas, non ? Si oui un commentaire pour exepliquer le fonctionnemnt du context... ?
+ *
+ * @type {factory}
+ */
 angular.module('contextualizationApp').factory('userFactory', ['$resource',
   function ($resource)
   {

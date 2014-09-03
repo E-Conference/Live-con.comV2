@@ -1,3 +1,10 @@
+/**
+ * Events Factory
+ *
+ * Service calls for CRUD actions
+ *
+ * @type {factory}
+ */
 angular.module('eventsApp').factory('EventsFact', ['$resource', '$cachedResource',
   function ($cachedResource)
   {

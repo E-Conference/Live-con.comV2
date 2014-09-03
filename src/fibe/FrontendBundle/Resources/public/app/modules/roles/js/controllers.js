@@ -1,10 +1,26 @@
-/********************************************************Roles Label*******************************************
- ***************************************************************************************************************/
+/**
+ * Roles controllers
+ *
+ * Contains controllers for both roles and roleslabels
+ */
+
+/**
+ * Main roles controller
+ *
+ * @type {controller}
+ */
 angular.module('rolesApp').controller('rolesMainCtrl', [function ($scope)
 {
 
 }]);
 
+/** Roles labels controllers **/
+
+/**
+ * List roles labels controller
+ *
+ * @type {controller}
+ */
 angular.module('rolesApp').controller('rolesLabelsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'roleLabelsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, roleLabelsFact, $cachedResource)
 {
   $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
@@ -123,7 +139,11 @@ angular.module('rolesApp').controller('rolesLabelsListCtrl', ['$scope', 'GLOBAL_
   //$scope.roleLabels = $cachedResource();
 }]);
 
-
+/**
+ * New label role controller
+ *
+ * @type {controller}
+ */
 angular.module('roleLabelsApp').controller('roleLabelsNewCtrl', [ '$scope', '$rootScope', '$location', 'roleLabelsFact', function ($scope, $rootScope, $location, roleLabelsFact)
 {
   $scope.roleLabel = new roleLabelsFact;
@@ -148,6 +168,11 @@ angular.module('roleLabelsApp').controller('roleLabelsNewCtrl', [ '$scope', '$ro
   }
 }]);
 
+/**
+ * Edit label role controller
+ *
+ * @type {controller}
+ */
 angular.module('roleLabelsApp').controller('roleLabelsEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'roleLabelsFact', function ($scope, $rootScope, $routeParams, $location, roleLabelsFact)
 {
   $scope.roleLabel = roleLabelsFact.get({id: $routeParams.roleLabelId});
@@ -172,20 +197,34 @@ angular.module('roleLabelsApp').controller('roleLabelsEditCtrl', [ '$scope', '$r
   }
 }]);
 
+/**
+ * Show label role controller
+ *
+ * @type {controller}
+ */
 angular.module('roleLabelsApp').controller('roleLabelsShowCtrl', [ '$scope', '$routeParams', 'roleLabelsFact', function ($scope, $routeParams, roleLabelsFact)
 {
   $scope.roleLabel = roleLabelsFact.get({id: $routeParams.roleLabelId});
 
 }]);
 
+/**
+ * Delete label role controller
+ *
+ * @type {controller}
+ */
 angular.module('roleLabelsApp').controller('roleLabelsDeleteCtrl', [ '$scope', 'roleLabelModel', function ($scope, roleLabelModel)
 {
   $scope.roleLabel = roleLabelModel;
 }]);
 
+/** Roles controllers **/
 
-/********************************************************Roles******************************************
- ***************************************************************************************************************/
+/**
+ * List roles controller
+ *
+ * @type {controller}
+ */
 angular.module('rolesApp').controller('rolesListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'rolesFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, rolesFact, $cachedResource)
 {
   $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
@@ -304,7 +343,11 @@ angular.module('rolesApp').controller('rolesListCtrl', ['$scope', 'GLOBAL_CONFIG
   //$scope.roles = $cachedResource();
 }]);
 
-
+/**
+ * New role controller
+ *
+ * @type {controller}
+ */
 angular.module('rolesApp').controller('rolesNewCtrl', [ '$scope', '$rootScope', '$location', 'rolesFact', function ($scope, $rootScope, $location, rolesFact)
 {
   $scope.roleLabel = new roleLabelsFact;
@@ -329,6 +372,11 @@ angular.module('rolesApp').controller('rolesNewCtrl', [ '$scope', '$rootScope', 
   }
 }]);
 
+/**
+ * Edit role controller
+ *
+ * @type {controller}
+ */
 angular.module('rolesApp').controller('rolesEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'rolesFact', function ($scope, $rootScope, $routeParams, $location, rolesFact)
 {
   $scope.role = rolesFact.get({id: $routeParams.roleId});
@@ -353,12 +401,22 @@ angular.module('rolesApp').controller('rolesEditCtrl', [ '$scope', '$rootScope',
   }
 }]);
 
+/**
+ * Show role controller
+ *
+ * @type {controller}
+ */
 angular.module('rolesApp').controller('rolesShowCtrl', [ '$scope', '$routeParams', 'rolesFact', function ($scope, $routeParams, rolesFact)
 {
   $scope.role = rolesFact.get({id: $routeParams.roleId});
 
 }]);
 
+/**
+ * Delete role controller
+ *
+ * @type {controller}
+ */
 angular.module('rolesApp').controller('rolesDeleteCtrl', [ '$scope', 'roleModel', function ($scope, roleModel)
 {
   $scope.roleLabel = roleLabelModel;

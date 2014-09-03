@@ -1,3 +1,10 @@
+/**
+ * Locations Factory
+ *
+ * Service calls for CRUD actions
+ *
+ * @type {factory}
+ */
 angular.module('locationsApp').factory('locationsFact', ['$resource', '$cachedResource',
   function ($cachedResource)
   {
