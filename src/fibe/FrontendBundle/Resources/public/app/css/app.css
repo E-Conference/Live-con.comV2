@@ -247,7 +247,7 @@ ul
 
   #wrapper.active-left
   {
-    position: relative;
+    position: static;
     left: 250px;
   }
 
