@@ -12,6 +12,8 @@ var liveconAnimations = angular.module('liveconAnimations', ['ngAnimate']);
 
 /**
  * Animation on page change
+ *
+ * @TODO Florian : comment
  */
 liveconAnimations.animation('.pageChange', function ()
 {

@@ -208,6 +208,13 @@ ul
 .panel-heading
 {
   background-color: #fff !important;
+  padding: 0px;
+}
+
+.panel-heading-href
+{
+  width: 100%;
+  text-align: left;
 }
 
 .panel
