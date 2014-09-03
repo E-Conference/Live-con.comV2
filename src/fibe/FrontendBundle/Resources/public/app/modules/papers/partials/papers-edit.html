@@ -1,26 +1,26 @@
 <div ng-include="GLOBAL_CONFIG.app.modules.papers.urls.partials+'papers-actions.html'" ng-controller="papersMainCtrl"></div>
-<form name="paperEditForm"  class="form" role="form" ng-submit="update(paperEditForm)">
-    <div>
-        <label for="inputLabel">Label</label>
-        <input type="text" class="form-control" id="inputLabel" required placeholder="{{paper.label}}" ng-model="paper.label">
-    </div>
-    <div >
-        <label for="inputAbstract">Abstract</label>
-        <input type="text" class="form-control" id="inputAbstract" placeholder="{{paper.abstract}}" ng-model="paper.abstract">
-    </div>
-    <div >
-        <label for="inputUrl">Url</label>
-        <input type="text" class="form-control" id="inputUrl" placeholder="{{paper.url}}" ng-model="paper.url">
-    </div>
-    <div >
-        <label for="inputPublisher">Publisher</label>
-        <input type="text" class="form-control" id="inputPublisher" placeholder="Publisher" ng-model="paper.publisher">
-    </div>
-    <div >
-        <label for="inputPublishDate">Publish Date</label>
-        <input type="text" class="form-control" id="inputPublishDate" placeholder="{{paper.publishDate}}" ng-model="paper.publishDate">
-    </div>
-    <div>
-        <button type="submit" class="btn btn-success">Save</button>
-    </div>
+<form name="paperEditForm" class="form" role="form" ng-submit="update(paperEditForm)">
+  <div>
+    <label for="inputLabel">Label</label>
+    <input type="text" class="form-control" id="inputLabel" required placeholder="{{paper.label}}" ng-model="paper.label">
+  </div>
+  <div>
+    <label for="inputAbstract">Abstract</label>
+    <input type="text" class="form-control" id="inputAbstract" placeholder="{{paper.abstract}}" ng-model="paper.abstract">
+  </div>
+  <div>
+    <label for="inputUrl">Url</label>
+    <input type="text" class="form-control" id="inputUrl" placeholder="{{paper.url}}" ng-model="paper.url">
+  </div>
+  <div>
+    <label for="inputPublisher">Publisher</label>
+    <input type="text" class="form-control" id="inputPublisher" placeholder="Publisher" ng-model="paper.publisher">
+  </div>
+  <div>
+    <label for="inputPublishDate">Publish Date</label>
+    <input type="text" class="form-control" id="inputPublishDate" placeholder="{{paper.publishDate}}" ng-model="paper.publishDate">
+  </div>
+  <div>
+    <button type="submit" class="btn btn-success">Save</button>
+  </div>
 </form>

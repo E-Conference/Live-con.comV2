@@ -1,7 +1,8 @@
 angular.module('contextualizationApp')
-    .config(
-        ['$routeProvider',
-            function ($routeProvider) {
+  .config(
+  ['$routeProvider',
+    function ($routeProvider)
+    {
 
-            }
-        ]);
+    }
+  ]);

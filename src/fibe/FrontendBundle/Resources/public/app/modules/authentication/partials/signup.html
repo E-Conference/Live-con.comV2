@@ -1,27 +1,28 @@
+<form name="signupForm" role="form" ng-submit="signupAction(user)" novalidate="">
+  <div class="form-group">
+    <label for="inputUsername">Login</label>
+    <input type="text" required="" name="username" class="form-control" id="inputUsername" placeholder="Username" ng-model="user.username" ng-minlength="3"
+           ng-maxlength="20"/>
 
+    <div class="alert alert-danger" role="alert" ng-show="signupForm.username.$error.minlength">Your login is required to be at least 3 characters</div>
+    <div class="alert alert-danger" role="alert" ng-show="signupForm.username.$error.maxlength">Your login cannot be longer than 20 characters</div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword">Password</label>
+    <input type="password" required="" name="password" id="inputPassword" class="form-control" placeholder="Password" ng-model="user.password" ng-minlength="3"
+           ng-maxlength="20"/>
 
-<form  name="signupForm"  role="form" ng-submit="signupAction(user)" novalidate="">
-    <div class="form-group">
-        <label for="inputUsername">Login</label>
-        <input type="text" required="" name="username" class="form-control"  id="inputUsername" placeholder="Username" ng-model="user.username"   ng-minlength="3"
-               ng-maxlength="20" />
-        <div class="alert alert-danger" role="alert" ng-show="signupForm.username.$error.minlength">Your login is required to be at least 3 characters</div>
-        <div class="alert alert-danger" role="alert" ng-show="signupForm.username.$error.maxlength">Your login cannot be longer than 20 characters</div>
-    </div>
-    <div class="form-group">
-        <label for="inputPassword">Password</label>
-        <input type="password" required="" name="password" id="inputPassword" class="form-control" placeholder="Password" ng-model="user.password"  ng-minlength="3"
-               ng-maxlength="20"/>
-        <div class="alert alert-danger" role="alert" ng-show="signupForm.password.$error.minlength">Your password is required to be at least 3 characters</div>
-        <div class="alert alert-danger" role="alert" ng-show="signupForm.password.$error.maxlength">Your password cannot be longer than 20 characters</div>
-    </div>
-    <div class="form-group">
-        <label for="inputPasswordConfirm">Password check</label>
-        <input required="" type="password" name="confirmpassword" id="inputPasswordConfirm" class="form-control"  placeholder="Password check" ng-model="user.confirmpassword"  />
-        <div class="alert alert-danger" role="alert" ng-show="signupForm.confirmpassword.$dirty && user.password != user.confirmpassword">Passwords must match</div>
-    </div>
+    <div class="alert alert-danger" role="alert" ng-show="signupForm.password.$error.minlength">Your password is required to be at least 3 characters</div>
+    <div class="alert alert-danger" role="alert" ng-show="signupForm.password.$error.maxlength">Your password cannot be longer than 20 characters</div>
+  </div>
+  <div class="form-group">
+    <label for="inputPasswordConfirm">Password check</label>
+    <input required="" type="password" name="confirmpassword" id="inputPasswordConfirm" class="form-control" placeholder="Password check" ng-model="user.confirmpassword"/>
 
-    <div class="form-group">
-        <button  ng-disabled="signupForm.$invalid" type="submit" class="btn btn-default">Register</button>
-    </div>
+    <div class="alert alert-danger" role="alert" ng-show="signupForm.confirmpassword.$dirty && user.password != user.confirmpassword">Passwords must match</div>
+  </div>
+
+  <div class="form-group">
+    <button ng-disabled="signupForm.$invalid" type="submit" class="btn btn-default">Register</button>
+  </div>
 </form>

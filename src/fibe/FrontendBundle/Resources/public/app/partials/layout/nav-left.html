@@ -1,175 +1,175 @@
 <div id="sidebar-left-wrapper" class="sidebar-nav-wrapper ">
 
-    <div class="sidebar-nav">
-        <a class="btn btn-primary" style="width:100%" href="#conferences/new">New conference</a>
-        <div class="panel-group" id="communityAccordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#communityAccordion" href="#/#collapseCommunity"><i class="fa fa-home fa-2x"></i>  {{ 'Home' | translate }}</a>
-                    </h4>
-                </div>
-                <div id="collapseCommunity" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <ul class="sidebar-nav-list">
-                            <li><a href="#conferences/list"><i class="fa fa-calendar fa-2x"></i>  {{ 'Search_conference' | translate }}</a>
-                            </li>
-                            <li>
-                                <a href="#search/organization"><i class="fa fa-users fa-2x"></i>  {{ 'Search_organization' | translate }}</a>
-                            </li>
-                            <li >
-                                <a href="#search/person"><i class="fa fa-user fa-2x"></i> {{ 'Search_person' | translate }}</a>
-                            </li>
-                            <li>
-                                <a href="#resource"><i class="fa fa-folder-open-o fa-2x"></i>  Search a resources</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+  <div class="sidebar-nav">
+    <a class="btn btn-primary" style="width:100%" href="#conferences/new">New conference</a>
+
+    <div class="panel-group" id="communityAccordion">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#communityAccordion" href="#/#collapseCommunity"><i class="fa fa-home fa-2x"></i> {{ 'Home' | translate }}</a>
+          </h4>
         </div>
-
-
-
-        <div class="panel-group" id="myspaceAccordion" ng-if="currentUser.id">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#collapseMySpace" href="#dashboard/overview#collapseMySpace"><i class="fa fa-user fa-2x"></i>  My space</a>
-                    </h4>
-                </div>
-                <div id="collapseMySpace" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <ul class="sidebar-nav-list">
-                            <li><a href="#schedule"><i class="fa-calendar"></i> My events</a>
-                            </li>
-                            <li>
-                                <a href="#attendees"><i class="fa fa-bookmark fa-2x"></i> My bookmarks</a>
-                            </li>
-                            <li><a href="#locations"><i class="fa fa-ticket fa-2x"></i> My tickets</a>
-                            </li>
-                            <li><a href="#schedule"><i class="fa fa-thumbs-o-up fa-2x"></i> My recommandation</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <div id="collapseCommunity" class="panel-collapse collapse in">
+          <div class="panel-body">
+            <ul class="sidebar-nav-list">
+              <li><a href="#conferences/list"><i class="fa fa-calendar fa-2x"></i> {{ 'Search_conference' | translate }}</a>
+              </li>
+              <li>
+                <a href="#search/organization"><i class="fa fa-users fa-2x"></i> {{ 'Search_organization' | translate }}</a>
+              </li>
+              <li>
+                <a href="#search/person"><i class="fa fa-user fa-2x"></i> {{ 'Search_person' | translate }}</a>
+              </li>
+              <li>
+                <a href="#resource"><i class="fa fa-folder-open-o fa-2x"></i> Search a resources</a>
+              </li>
+            </ul>
+          </div>
         </div>
-
-        <div class="panel-group" id="conferenceAccordion" ng-if="currentConference.id">
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#conferenceAccordion" href="#dashboard/overview#collapseConference"><i class="fa fa-th fa-2x"></i> {{currentConference.label}}</a>
-                    </h4>
-                </div>
-                <div id="collapseConference" class="panel-collapse collapse in">
-                    <div class="panel-body">
-
-                        <div class="panel-group" id="accordion">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#dashboard/overview#collapseOne"><i class="fa fa-th fa-2x"></i>  Overview</a>
-                                    </h4>
-                                </div>
-                                <div id="collapseOne" class="panel-collapse collapse in">
-                                    <div class="panel-body">
-                                        <ul class="sidebar-nav-list">
-                                            <li>
-                                                <a href="#conferences/edit/{{currentConference.id}}"><i class="fa fa-cogs fa-2x"></i>  Settings</a>
-                                            </li>
-                                            <li>
-                                                <a href="#papers/list"><i class="fa fa-book fa-2x"></i>  Publications</a>
-                                            </li>
-                                            <li>
-                                                <a href="#categories/list"><i class="fa fa-tag fa-2x"></i>  Categories</a>
-                                            </li>
-                                            <li>
-                                                <a href="#organizations/list"><i class="fa fa-users fa-2x"></i>  Organizations</a>
-                                            </li>
-                                            <li>
-                                                <a href="#persons/list"><i class="fa fa-user fa-2x"></i>  Persons</a>
-                                            </li>
-                                            <li>
-                                                <a href="#resource"><i class="fa fa-folder-open-o fa-2x"></i>  Resources</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#dashboard/schedule#collapseTwo"><i class="fa fa-calendar fa-2x"></i>  Schedule</a>
-                                    </h4>
-                                </div>
-                                <div id="collapseTwo" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <ul class="sidebar-nav-list">
-                                            <li><a href="#conference/1/events/list"><i class="fa fa-clock-o fa-2x"></i>  Calendar</a>
-                                            </li>
-                                            <li>
-                                                <a href="#locations/list"><i class="fa fa-map-marker fa-2x"></i>  Locations</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#dashboard/widget#collapseThree"><i class="fa fa-bullhorn fa-2x"></i>  Widgets</a>
-                                    </h4>
-                                </div>
-                                <div id="collapseThree" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <ul class="sidebar-nav-list">
-                                            <li><a href="#conference"><i class="fa fa-mobile fa-2x"></i>  Mobile app'</a>
-                                            </li>
-                                            <li>
-                                                <a href="#publications"><i class="fa fa-ticket fa-2x"></i>  Ticket page</a>
-                                            </li>
-                                            <li>
-                                                <a href="#publications"><i class="fa fa-calendar fa-2x"></i>  embedded calendar</a>
-                                            </li>
-                                            <li>
-                                                <a href="#publications"><i class="fa fa-desktop fa-2x"></i>  Highlight</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#dashboard/widget#collapseFour"><i class="fa fa-download fa-2x"></i>  Import</a>
-                                    </h4>
-                                </div>
-                                <div id="collapseFour" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <ul class="sidebar-nav-list">
-                                            <li><a href="#conference"><i class="fa fa-download fa-2x"></i>  Import</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr/>
-        <ul class="sidebar-nav-list">
-            <li><a href="#infos"><i class="fa fa-info fa-2x"></i> Infos</a>
-            </li>
-            <li><a href="#help"><i class="fa fa-magic fa-2x"></i> Help</a>
-            </li>
-            <li><p style="text-align:center;">Powered by live-con.com</p>
-                <img src="{{liveconLogoPath}}" style="margin-left:55px;height:30px;width:auto;"/>
-            </li>
-        </ul>
+      </div>
     </div>
+
+
+    <div class="panel-group" id="myspaceAccordion" ng-if="currentUser.id">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#collapseMySpace" href="#dashboard/overview#collapseMySpace"><i class="fa fa-user fa-2x"></i> My space</a>
+          </h4>
+        </div>
+        <div id="collapseMySpace" class="panel-collapse collapse in">
+          <div class="panel-body">
+            <ul class="sidebar-nav-list">
+              <li><a href="#schedule"><i class="fa-calendar"></i> My events</a>
+              </li>
+              <li>
+                <a href="#attendees"><i class="fa fa-bookmark fa-2x"></i> My bookmarks</a>
+              </li>
+              <li><a href="#locations"><i class="fa fa-ticket fa-2x"></i> My tickets</a>
+              </li>
+              <li><a href="#schedule"><i class="fa fa-thumbs-o-up fa-2x"></i> My recommandation</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-group" id="conferenceAccordion" ng-if="currentConference.id">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#conferenceAccordion" href="#dashboard/overview#collapseConference"><i class="fa fa-th fa-2x"></i> {{currentConference.label}}</a>
+          </h4>
+        </div>
+        <div id="collapseConference" class="panel-collapse collapse in">
+          <div class="panel-body">
+
+            <div class="panel-group" id="accordion">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#dashboard/overview#collapseOne"><i class="fa fa-th fa-2x"></i> Overview</a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                  <div class="panel-body">
+                    <ul class="sidebar-nav-list">
+                      <li>
+                        <a href="#conferences/edit/{{currentConference.id}}"><i class="fa fa-cogs fa-2x"></i> Settings</a>
+                      </li>
+                      <li>
+                        <a href="#papers/list"><i class="fa fa-book fa-2x"></i> Publications</a>
+                      </li>
+                      <li>
+                        <a href="#categories/list"><i class="fa fa-tag fa-2x"></i> Categories</a>
+                      </li>
+                      <li>
+                        <a href="#organizations/list"><i class="fa fa-users fa-2x"></i> Organizations</a>
+                      </li>
+                      <li>
+                        <a href="#persons/list"><i class="fa fa-user fa-2x"></i> Persons</a>
+                      </li>
+                      <li>
+                        <a href="#resource"><i class="fa fa-folder-open-o fa-2x"></i> Resources</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#dashboard/schedule#collapseTwo"><i class="fa fa-calendar fa-2x"></i> Schedule</a>
+                  </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <ul class="sidebar-nav-list">
+                      <li><a href="#conference/1/events/list"><i class="fa fa-clock-o fa-2x"></i> Calendar</a>
+                      </li>
+                      <li>
+                        <a href="#locations/list"><i class="fa fa-map-marker fa-2x"></i> Locations</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#dashboard/widget#collapseThree"><i class="fa fa-bullhorn fa-2x"></i> Widgets</a>
+                  </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <ul class="sidebar-nav-list">
+                      <li><a href="#conference"><i class="fa fa-mobile fa-2x"></i> Mobile app'</a>
+                      </li>
+                      <li>
+                        <a href="#publications"><i class="fa fa-ticket fa-2x"></i> Ticket page</a>
+                      </li>
+                      <li>
+                        <a href="#publications"><i class="fa fa-calendar fa-2x"></i> embedded calendar</a>
+                      </li>
+                      <li>
+                        <a href="#publications"><i class="fa fa-desktop fa-2x"></i> Highlight</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#dashboard/widget#collapseFour"><i class="fa fa-download fa-2x"></i> Import</a>
+                  </h4>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <ul class="sidebar-nav-list">
+                      <li><a href="#conference"><i class="fa fa-download fa-2x"></i> Import</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr/>
+    <ul class="sidebar-nav-list">
+      <li><a href="#infos"><i class="fa fa-info fa-2x"></i> Infos</a>
+      </li>
+      <li><a href="#help"><i class="fa fa-magic fa-2x"></i> Help</a>
+      </li>
+      <li><p style="text-align:center;">Powered by live-con.com</p>
+        <img src="{{liveconLogoPath}}" style="margin-left:55px;height:30px;width:auto;"/>
+      </li>
+    </ul>
+  </div>
 </div>
