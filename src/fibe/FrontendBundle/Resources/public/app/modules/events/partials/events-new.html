@@ -37,6 +37,14 @@
       <label for="inputUrl">Url</label>
       <input type="text" class="form-control" id="inputUrl" placeholder="Url" ng-model="event.url">
   </div>
+  <div>
+    <select
+    type="select"
+        ng-model="category.label"
+        ng-options="foreach category in categories use category.label as label">
+        <option>--</option>
+    </select>
+ </div>
   <div class="form-group">
       <button type="submit" class="btn btn-success">Save</button>
   </div>

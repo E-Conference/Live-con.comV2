@@ -8,7 +8,7 @@ angular.module('rolesApp', ['fundoo.services']);
 angular.module('categoriesApp', ['fundoo.services']);
 angular.module('personsApp', ['fundoo.services']);
 angular.module('locationsApp', ['fundoo.services']);
-angular.module('eventsApp', ['fundoo.services']);
+angular.module('eventsApp', ['fundoo.services', 'categoriesApp']);
 angular.module('conferencesApp', ['fundoo.services']);
 angular.module('angularTranslateApp', ['pascalprecht.translate']);
 angular.module('authenticationApp',['ngCookies']);

@@ -105,6 +105,7 @@ angular.module('categoriesApp').controller('categoriesListCtrl', ['$scope', 'GLO
 
 
 angular.module('categoriesApp').controller('categoriesNewCtrl', [ '$scope', '$rootScope', '$location', 'categoriesFact', function ($scope, $rootScope, $location, categoriesFact) {
+
     $scope.category = new categoriesFact;
 
     var error = function(response, args){

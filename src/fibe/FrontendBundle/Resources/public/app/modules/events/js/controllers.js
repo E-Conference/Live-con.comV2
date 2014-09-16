@@ -3,8 +3,8 @@ angular.module('eventsApp').controller('eventsMainCtrl', [function ($scope) {
 }]);
 
 
+
 angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'EventsFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, EventsFact, $cachedResource) {
-    $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
     //Changement de contexte
     $rootScope.$broadcast('contextCtrl:changeContext', {confId:$routeParams.confId});
@@ -73,7 +73,7 @@ angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', 
             backdrop: true,
             controller: 'categoriesNewCtrl',
             success: {label: 'Ok', fn: function() {
-                GLOBAL_CONFIG.app.modules.categories.urls.js.categoriesFact.create();
+                categoriesFact.create();
                 $scope.categories.splice(index,1);
             }}
             });
@@ -137,8 +137,9 @@ angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', 
 }]);
 
 
-angular.module('eventsApp').controller('eventsNewCtrl', [ '$scope', '$rootScope', '$location', 'EventsFact', function ($scope, $rootScope, $location, EventsFact) {
+angular.module('eventsApp').controller('eventsNewCtrl', [ '$scope', '$rootScope', '$location', 'EventsFact', 'categoriesFact', function ($scope, $rootScope, $location, EventsFact, categoriesFact) {
     $scope.event = new EventsFact;
+    $scope.categories = categoriesFact.all();
 
     var error = function(response, args){
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'the event has not been created', type:'danger'});
