@@ -70,7 +70,7 @@ class Event extends VEvent
 
   /**
    * Locations for the event
-   *
+   * @Expose
    * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Location", inversedBy="events", cascade={"persist"})
    * @ORM\JoinTable(name="event_location",
    *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
@@ -139,7 +139,20 @@ class Event extends VEvent
 //      $this->setIsInstant(false);
 //    }
   }
-
+    /**
+     * auto persist of embedded data
+     * @ORM\PreFlush
+     */
+    public function updateSomething(PreFlushEventArgs $eventArgs)
+    {
+        if(!$this->getId()) return;
+        $em = $eventArgs->getEntityManager();
+        $uow = $em->getUnitOfWork();
+        $uow->recomputeSingleEntityChangeSet(
+            $em->getClassMetadata(get_class($this->getLocations())),
+            $this->getLocations()
+        );
+    }
   /**
    * Set slug
    *

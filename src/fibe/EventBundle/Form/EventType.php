@@ -2,6 +2,7 @@
 
 namespace fibe\EventBundle\Form;
 
+use fibe\ContentBundle\Form\LocationType;
 use fibe\EventBundle\Form\VEventType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,7 +26,11 @@ class EventType extends VEventType
     {
         parent::buildForm($builder, $options);
         $builder
-            ->add('locations')
+            ->add('locations', 'entity', array(
+                'class'    => 'fibeContentBundle:Location',
+                'multiple' => true,
+                'required' => false
+            ))
             ->add('papers', 'entity', array(
                     'class'    => 'fibeContentBundle:Paper',
                     'label'    => 'Papers',

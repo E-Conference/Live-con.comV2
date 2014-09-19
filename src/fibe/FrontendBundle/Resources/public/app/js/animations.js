@@ -1,9 +1,27 @@
+/**
+ * Angular animations
+ */
+
+
+/**
+ * Animation module
+ *
+ * @type {module}
+ */
 var liveconAnimations = angular.module('liveconAnimations', ['ngAnimate']);
 
-liveconAnimations.animation('.pageChange', function() {
+/**
+ * Animation on page change
+ *
+ * @TODO Florian : comment
+ */
+liveconAnimations.animation('.pageChange', function ()
+{
 
-  var animateUp = function(element, className, done) {
-    if(className != 'active') {
+  var animateUp = function (element, className, done)
+  {
+    if (className != 'active')
+    {
       return;
     }
     element.css({
@@ -17,15 +35,19 @@ liveconAnimations.animation('.pageChange', function() {
       top: 0
     }, done);
 
-    return function(cancel) {
-      if(cancel) {
+    return function (cancel)
+    {
+      if (cancel)
+      {
         element.stop();
       }
     };
   }
 
-  var animateDown = function(element, className, done) {
-    if(className != 'active') {
+  var animateDown = function (element, className, done)
+  {
+    if (className != 'active')
+    {
       return;
     }
     element.css({
@@ -38,8 +60,10 @@ liveconAnimations.animation('.pageChange', function() {
       top: -500
     }, done);
 
-    return function(cancel) {
-      if(cancel) {
+    return function (cancel)
+    {
+      if (cancel)
+      {
         element.stop();
       }
     };

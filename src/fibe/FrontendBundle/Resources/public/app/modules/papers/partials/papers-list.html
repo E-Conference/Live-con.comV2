@@ -2,28 +2,29 @@
 <input type="text" class="form-control" placeholder="Search" ng-change="load(query)" ng-model="query">
 <table class="table table-striped">
   <thead>
-    <tr>
-      <th>Label</th>
-      <th>Abstract</th>
-      <th>Url</th>
-      <th>Publisher</th>
-      <th>Publish Date</th>
-    </tr>
+  <tr>
+    <th>Label</th>
+    <th>Abstract</th>
+    <th>Url</th>
+    <th>Publisher</th>
+    <th>Publish Date</th>
+  </tr>
   </thead>
   <tbody infinite-scroll='load(query)' infinite-scroll-disabled='busy' infinite-scroll-distance='0.5'>
-      <tr ng-repeat="paper in papers  track by $index">
-          <td>{{ paper.label }}</td>
-          <td>{{ paper.abstract }}</td>
-          <td>{{ paper.url }}</td>
-          <td>{{ paper.publisher }}</td>
-          <td>{{ paper.publishDate }}</td>
-          <td>
-              <a class="btn btn-warning" href="#papers/edit/{{ paper.id }}" role="button"><i class="fa fa-edit fa-1x"></i></a>
-              <a class="btn btn-default" href="#papers/show/{{ paper.id }}" role="button"><i class="fa fa-eye fa-1x"></i></a>
-              <a class="btn btn-primary" href="" data-ng-click="clone(paper)" role="button"><i class="fa fa-files-o fa-1x"></i></a>
-              <button class="btn btn-danger" data-ng-click="deleteModal($index, paper)" role="button"><i class="fa fa-trash-o fa-1x"></i></button>
-          </td>
-      </tr>
+  <tr ng-repeat="paper in papers  track by $index">
+    <td>{{ paper.label }}</td>
+    <td>{{ paper.abstract }}</td>
+    <td>{{ paper.url }}</td>
+    <td>{{ paper.publisher }}</td>
+    <td>{{ paper.publishDate }}</td>
+    <td>
+      <a class="btn btn-warning" href="#papers/edit/{{ paper.id }}" role="button"><i class="fa fa-edit fa-1x"></i></a>
+      <a class="btn btn-default" href="#papers/show/{{ paper.id }}" role="button"><i class="fa fa-eye fa-1x"></i></a>
+      <a class="btn btn-primary" href="" data-ng-click="clone(paper)" role="button"><i class="fa fa-files-o fa-1x"></i></a>
+      <button class="btn btn-danger" data-ng-click="deleteModal($index, paper)" role="button">
+        <i class="fa fa-trash-o fa-1x"></i></button>
+    </td>
+  </tr>
   </tbody>
 </table>
 
