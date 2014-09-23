@@ -1,0 +1,6 @@
+services:
+    fibe.content.get_or_create_topics:
+        class: fibe\ContentBundle\Form\TopicsType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: fibe_contentbundle_topicstype}
