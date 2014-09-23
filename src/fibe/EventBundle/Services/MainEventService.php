@@ -232,7 +232,6 @@
       foreach ($topics as $topic)
       {
         $mainEvent->removeTopic($topic);
-        $this->entityManager->remove($topic);
       }
 
       //  organizations
@@ -240,7 +239,6 @@
       foreach ($organizations as $organization)
       {
         $mainEvent->removeCompany($organization);
-        $this->entityManager->remove($organization);
       }
 
       //  papers
@@ -248,7 +246,6 @@
       foreach ($papers as $paper)
       {
         $mainEvent->removePaper($paper);
-        $this->entityManager->remove($paper);
       }
 
       //  locations
@@ -256,7 +253,6 @@
       foreach ($locations as $location)
       {
         $mainEvent->removeLocation($location);
-        $this->entityManager->remove($location);
       }
 
       //  persons
@@ -264,7 +260,6 @@
       foreach ($persons as $person)
       {
         $mainEvent->removePerson($person);
-        $this->entityManager->remove($person);
       }
 
       //  events
