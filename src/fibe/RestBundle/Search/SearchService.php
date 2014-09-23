@@ -17,6 +17,11 @@ class SearchService implements SearchServiceInterface
 
   private $annotationClass = 'Doctrine\\ORM\\Mapping\\Column';
 
+  /**
+   * @var array of classname having a case sensitive sql collation that need to be ignored
+   */
+  private $forceCIon = array('fibe\\ContentBundle\\Entity\\Topic');
+
   public function __construct(EntityManager $em,Reader $reader)
   {
     $this->reader = $reader;
@@ -33,10 +38,18 @@ class SearchService implements SearchServiceInterface
     ->setMaxResults($limit)
     ->setFirstResult($offset);
 
+    $forceCI = in_array($entityClassName, $this->forceCIon);
     foreach($searchFields as $searchField)
     {
-      $qb->orWhere('qb.'.$searchField.' LIKE :string')
-        ->setParameter('string', '%'.$query.'%');
+      if($forceCI)
+      {
+        $qb->orWhere('UPPER(qb.'.$searchField.') LIKE UPPER(:string)');
+      }
+      else
+      {
+        $qb->orWhere('qb.'.$searchField.' LIKE :string');
+      }
+      $qb->setParameter('string', '%'.$query.'%');
     }
 
     if(count($orders) > 0)
