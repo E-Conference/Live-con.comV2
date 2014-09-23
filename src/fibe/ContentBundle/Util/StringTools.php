@@ -15,10 +15,11 @@ class StringTools
    * Modifies a string to remove all non ASCII characters and spaces
    *
    * @param string $text
+   * @param bool $lowerCase
    *
    * @return string
    */
-  static public function slugify($text)
+  static public function slugify($text, $lowerCase = true)
   {
     // replace non letter or digits by -
     $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
@@ -30,7 +31,7 @@ class StringTools
       $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
     }
     // lowercase
-    $text = strtolower($text);
+    if($lowerCase) $text = strtolower($text);
     // remove unwanted characters
     $text = preg_replace('~[^-\w]+~', '', $text);
 
