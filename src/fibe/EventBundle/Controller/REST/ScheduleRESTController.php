@@ -25,7 +25,7 @@ class ScheduleRESTController extends FOSRestController
    * @Rest\View
    * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
    * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
-   * @Rest\QueryParam(name="query", requirements=".{2,128}", nullable=true, description="the query to search.")
+   * @Rest\QueryParam(name="query", requirements=".{1,128}", nullable=true, description="the query to search.")
    */
   public function getSchedulesAction(Request $request, ParamFetcherInterface $paramFetcher)
   {
