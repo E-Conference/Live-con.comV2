@@ -14,6 +14,9 @@
   'bundles/frontend/app/css/animations.css'
   'bundles/frontend/app/css/leaflet.css'
   'bundles/frontend/app/css/datetimepicker.css'
+  'bundles/frontend/app/css/select.css'
+  'bundles/frontend/app/css/select2.css'
+  'bundles/frontend/app/css/bootstrap-tag.css'
   output='css/compiled/vendors.css' %}
   <link rel="stylesheet" href="{{ asset_url }}"/>
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -29,6 +32,8 @@
   'bundles/frontend/vendors/angular-animate.min.js'
   'bundles/frontend/vendors/bootstrap.min.js'
   'bundles/frontend/vendors/angular-ui-router.min.js'
+  'bundles/frontend/vendors/select.js'
+  'bundles/frontend/vendors/angular-sanitize.js'
   'bundles/frontend/vendors/draganddrop.js'
   'bundles/frontend/vendors/loading-bar.js'
   'bundles/frontend/vendors/angular-cached-resource.min.js'
@@ -65,6 +70,10 @@
   'bundles/frontend/app/modules/papers/js/services.js'
   'bundles/frontend/app/modules/papers/js/controllers.js'
   'bundles/frontend/app/modules/papers/js/routes.js'
+
+  'bundles/frontend/app/modules/topics/js/services.js'
+  'bundles/frontend/app/modules/topics/js/controllers.js'
+  'bundles/frontend/app/modules/topics/js/routes.js'
 
   'bundles/frontend/app/modules/categories/js/services.js'
   'bundles/frontend/app/modules/categories/js/controllers.js'
@@ -111,6 +120,7 @@
           get_locations: "{{ path('content_locations_post') }}",
           get_events: "{{ path('schedule_events_post') }}",
           get_papers: "{{ path('content_papers_post') }}",
+          get_topics: "{{ path('content_topics_post') }}",
           get_categories: "{{ path('schedule_categories_post') }}",
           get_conferences: "{{ path('schedule_conferences_post') }}",
           login: "{{ path('login_check', {_format: 'json'}) }}",
@@ -171,6 +181,13 @@
               base: "{{ asset('bundles/frontend/app/modules/persons/') }}",
               partials: "{{ asset('bundles/frontend/app/modules/persons/partials/') }}",
               img: "{{ asset('bundles/frontend/app/modules/persons/img') }}"
+            }
+          },
+          topics: {
+            urls: {
+              base: "{{ asset('bundles/frontend/app/modules/topics/') }}",
+              partials: "{{ asset('bundles/frontend/app/modules/topics/partials/') }}",
+              img: "{{ asset('bundles/frontend/app/modules/topics/img') }}"
             }
           },
           authentication: {
