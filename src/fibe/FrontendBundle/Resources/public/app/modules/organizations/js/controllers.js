@@ -47,7 +47,6 @@ angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope'
 
     cloneOrganization = angular.copy(organization);
     cloneOrganization.id = null;
-    cloneOrganization.additionalInformation.id = null;
 
     var error = function (response, args)
     {

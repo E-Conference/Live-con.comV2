@@ -134,7 +134,7 @@ class MainEvent extends VEvent
    * @ORM\PostPersist()
    * @ORM\PreUpdate()
    */
-  public function onUpdate()
+  public function slugifyOnUpdate()
   {
     $this->slugify();
   }
@@ -161,16 +161,6 @@ class MainEvent extends VEvent
   public function getSlug()
   {
     return $this->slug;
-  }
-
-  /**
-   * Return the id of the conference
-   *
-   * @return int
-   */
-  public function getId()
-  {
-    return $this->id;
   }
 
   /**

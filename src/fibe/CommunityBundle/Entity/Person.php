@@ -30,22 +30,21 @@ class Person extends AdditionalInformations
 {
 
   /**
+   * label
+   *
+   * @ORM\Column(type="string")
+   * @Expose
+   */
+  protected $label;
+
+  /**
    * technical user
    *
    * @ORM\OneToOne(targetEntity="fibe\SecurityBundle\Entity\User", cascade={"persist", "remove"})
    * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
    *
    */
-  private $user;
-
-  /**
-   * label
-   * Full name of the person (Family Name + FirstName)
-   * 
-   * @ORM\Column(type="string")
-   * @Expose
-   */
-  private $label;
+  protected $user;
 
   /**
    * familyName
@@ -54,7 +53,7 @@ class Person extends AdditionalInformations
    * @Expose
    * @SerializedName("familyName")
    */
-  private $familyName;
+  protected $familyName;
 
   /**
    * firstName
@@ -63,7 +62,7 @@ class Person extends AdditionalInformations
    * @Expose
    * @SerializedName("firstName")
    */
-  private $firstName;
+  protected $firstName;
 
   /**
    * description
@@ -71,7 +70,7 @@ class Person extends AdditionalInformations
    * @ORM\Column(type="string", length=1024, nullable=true, name="description")
    * @Expose
    */
-  private $description;
+  protected $description;
 
   /**
    * age
@@ -79,7 +78,7 @@ class Person extends AdditionalInformations
    * @ORM\Column(type="integer", nullable=true,  name="age")
    * @Expose
    */
-  private $age;
+  protected $age;
 
   /**
    * Paper
@@ -87,7 +86,7 @@ class Person extends AdditionalInformations
    *
    * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Paper",  mappedBy="authors", cascade={"remove","persist","merge"})
    */
-  private $papers;
+  protected $papers;
 
   /**
    * Organization
@@ -97,7 +96,7 @@ class Person extends AdditionalInformations
    *     joinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id", onDelete="Cascade")})
    *     inverseJoinColumns={@ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="Cascade")},
    * @Expose
-   * 
+   *
    */
   private $organizations;
 
@@ -107,7 +106,7 @@ class Person extends AdditionalInformations
    *
    * @ORM\Column(type="string", nullable=true,  name="openId")
    */
-  private $openId;
+  protected $openId;
 
   /**
    *
@@ -115,7 +114,7 @@ class Person extends AdditionalInformations
    * @ORM\JoinColumn(onDelete="CASCADE")
    *
    */
-  private $roles;
+  protected $roles;
 
   /**
    * @TODO : Difference avec un utilisateur Livecon ? Peut appartenir a plusieurs main events
@@ -125,19 +124,19 @@ class Person extends AdditionalInformations
    *     joinColumns={@ORM\JoinColumn(name="mainevent_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")})
    */
-  private $mainEvents;
+  protected $mainEvents;
 
   /**
    *
    * @ORM\OneToMany(targetEntity="SocialServiceAccount",  mappedBy="owner", cascade={"persist", "remove"})
    *
    */
-  private $accounts;
+  protected $accounts;
 
   /**
    * @ORM\Column(type="string", length=256, nullable=true)
    */
-  private $slug;
+  protected $slug;
 
   /**
    * Constructor
@@ -426,7 +425,7 @@ class Person extends AdditionalInformations
    *
    * @return \Doctrine\Common\Collections\Collection
    */
-  public function getOrganization()
+  public function getOrganizations()
   {
     return $this->organizations;
   }
@@ -536,21 +535,5 @@ class Person extends AdditionalInformations
   public function setUser(UserInterface $user)
   {
     $this->user = $user;
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getOrganizations()
-  {
-    return $this->organizations;
-  }
-
-  /**
-   * @param mixed $organizations
-   */
-  public function setOrganizations($organizations)
-  {
-    $this->organizations = $organizations;
   }
 }

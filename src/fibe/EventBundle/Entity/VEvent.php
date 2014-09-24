@@ -289,7 +289,7 @@ abstract class VEvent
     $this->topics = new ArrayCollection();
     $this->createdAt = new \DateTime();
     $this->lastModifiedAt = new \DateTime();
-    $this->status = "CONFIRMED";
+    $this->status = self::STATUS_EVENT_CONFIRMED;
     $this->setRevisionSequence($this->getRevisionSequence() + 1);
   }
 

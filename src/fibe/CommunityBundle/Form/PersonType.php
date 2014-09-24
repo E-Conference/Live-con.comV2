@@ -11,7 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @package fibe\CommunityBundle\Form
  */
-class PersonType extends AbstractType
+class PersonType extends AdditionalInformationsType
 {
 //  private $user;
 //
@@ -30,15 +30,14 @@ class PersonType extends AbstractType
    */
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
+    parent::buildForm($builder, $options);
     $builder
-        ->add('label')
-        ->add('firstName')
-        ->add('familyName')
-        ->add('additionalInformation', new AdditionalInformationsType())
-        ->add('organizations', 'fibe_contentbundle_selecttype', array(
-          'type' => new OrganizationType(),
-          'uniqField' => 'label',
-        ))
+      ->add('firstName')
+      ->add('familyName')
+      ->add('organizations', 'fibe_contentbundle_selecttype', array(
+        'type' => new OrganizationType(),
+        'uniqField' => 'label',
+      ))
 //      ->add('firstName', 'text', array('label' => "First name"))
 //      ->add('familyName', 'text', array('label' => "Family Name"))
 //      ->add('email', 'text', array('required' => false))

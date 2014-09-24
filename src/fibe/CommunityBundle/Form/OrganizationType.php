@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class OrganizationType extends AbstractType
+class OrganizationType extends AdditionalInformationsType
 {
   /**
    * @param FormBuilderInterface $builder
@@ -15,11 +15,10 @@ class OrganizationType extends AbstractType
    */
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
+    parent::buildForm($builder, $options);
     $builder
-        ->add('id')
+      ->add('id')
       ->add('label')
-      ->add('additionalInformation', new AdditionalInformationsType())
-//      ->add('additional_information', new AdditionalInformationsType())
       ->add('members', 'entity', array(
         'class'    => 'fibeCommunityBundle:Person',
         'label'    => 'Members',
