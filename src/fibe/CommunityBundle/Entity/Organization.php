@@ -25,15 +25,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ExclusionPolicy("all")
  *
  */
-class Organization
+class Organization extends AdditionalInformations
 {
-  /**
-   * @ORM\Id
-   * @ORM\Column(type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
-   * @Expose
-   */
-  private $id;
 
   /**
    * label
@@ -50,16 +43,6 @@ class Organization
    * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Sponsor", mappedBy="organization", cascade={"all"})
    */
   private $sponsors;
-
-  /**
-   * Additional Infomations of the organization
-   *
-   * @ORM\OneToOne(targetEntity="AdditionalInformations", mappedBy="organization", cascade={"all"}, fetch="EAGER")
-   * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id", onDelete="CASCADE")
-   * @Expose
-   * @SerializedName("additionalInformation")
-   */
-  private $additionalInformation;
 
   /**
    * @ORM\ManyToMany(targetEntity="Person",  mappedBy="organizations", cascade={"all"})
@@ -118,21 +101,6 @@ class Organization
     $this->slugify();
   }
 
-  /**
-   * auto persist of embedded data
-   * @ORM\PreFlush
-   */
-  public function updateSomething(PreFlushEventArgs $eventArgs)
-  {
-    if(!$this->getId()) return;
-    $em = $eventArgs->getEntityManager();
-    $uow = $em->getUnitOfWork();
-    $uow->recomputeSingleEntityChangeSet(
-      $em->getClassMetadata(get_class($this->getAdditionalInformation())),
-      $this->getAdditionalInformation()
-    );
-  }
-
 
   /**
    * Set slug
@@ -159,27 +127,6 @@ class Organization
 
     return $this->slug;
   }
-
-  /**
-   * Get id
-   *
-   * @return integer
-   */
-  public function getId()
-  {
-    return $this->id;
-  }
-
-    /**
-     * Set id
-     * @param string $id
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
 
   /**
    * Set label
@@ -260,21 +207,5 @@ class Organization
   public function getMainEvent()
   {
     return $this->mainEvent;
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getAdditionalInformation()
-  {
-    return $this->additionalInformation;
-  }
-
-  /**
-   * @param mixed $additionalInformation
-   */
-  public function setAdditionalInformation(AdditionalInformations $additionalInformation)
-  {
-    $this->additionalInformation = $additionalInformation;
   }
 }

@@ -13,6 +13,11 @@ angular.module('eventsApp').controller('eventsMainCtrl', [function ($scope)
 }]);
 
 
+/**
+ * List events controller
+ *
+ * @type {controller}
+ */
 angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'EventsFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, EventsFact, $cachedResource) {
 
     //Changement de contexte
@@ -55,6 +60,20 @@ angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', 
         cloneEvent.$create({}, success, error);
     }
 
+    createDialogService(GLOBAL_CONFIG.app.modules.events.urls.partials + 'events-delete.html', {
+      id: 'complexDialog',
+      title: 'Event deletion',
+      backdrop: true,
+      controller: 'eventsDeleteCtrl',
+      success: {label: 'Ok', fn: function ()
+      {
+        eventsFact.delete({id: event.id});
+        $scope.events.splice(index, 1);
+      }}
+    }, {
+      eventModel: event
+    });
+  }
 
     $scope.deleteModal = function(index, event) {
         $scope.index = index;
@@ -129,7 +148,7 @@ angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', 
     }
 
     $scope.busy = true;
-    EventsFact.all(filters, function (data)
+    eventsFact.all(filters, function (data)
     {
       var items = data;
 
@@ -161,9 +180,14 @@ angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', 
   //$scope.events = $cachedResource();
 }]);
 
+/**
+ * New event controller
+ *
+ * @type {controller}
+ */
 
 angular.module('eventsApp').controller('eventsNewCtrl', [ '$scope', '$rootScope', '$location', 'EventsFact', 'categoriesFact', function ($scope, $rootScope, $location, EventsFact, categoriesFact) {
-    $scope.event = new EventsFact;
+    $scope.event = new eventsFact;
     $scope.categories = categoriesFact.all();
 
     var error = function(response, args){
@@ -188,9 +212,9 @@ angular.module('eventsApp').controller('eventsNewCtrl', [ '$scope', '$rootScope'
  *
  * @type {controller}
  */
-angular.module('eventsApp').controller('eventsEditCtrl', [ '$scope', '$rootScope', 'GLOBAL_CONFIG', '$routeParams', '$location', 'EventsFact', 'createDialog', function ($scope, $rootScope, GLOBAL_CONFIG, $routeParams, $location, EventsFact, createDialogService)
+angular.module('eventsApp').controller('eventsEditCtrl', [ '$scope', '$rootScope', 'GLOBAL_CONFIG', '$routeParams', '$location', 'eventsFact', 'createDialog', function ($scope, $rootScope, GLOBAL_CONFIG, $routeParams, $location, eventsFact, createDialogService)
 {
-  $scope.event = EventsFact.get({id: $routeParams.eventId});
+  $scope.event = eventsFact.get({id: $routeParams.eventId});
 
   var error = function (response, args)
   {
@@ -242,9 +266,9 @@ angular.module('eventsApp').controller('eventsEditCtrl', [ '$scope', '$rootScope
  *
  * @type {controller}
  */
-angular.module('eventsApp').controller('eventsShowCtrl', [ '$scope', '$routeParams', 'EventsFact', function ($scope, $routeParams, EventsFact)
+angular.module('eventsApp').controller('eventsShowCtrl', [ '$scope', '$routeParams', 'eventsFact', function ($scope, $routeParams, eventsFact)
 {
-  $scope.event = EventsFact.get({id: $routeParams.eventId});
+  $scope.event = eventsFact.get({id: $routeParams.eventId});
 
 }]);
 

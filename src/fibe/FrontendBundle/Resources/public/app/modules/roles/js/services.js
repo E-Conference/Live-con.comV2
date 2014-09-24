@@ -9,7 +9,7 @@
  *
  * @type {factory}
  */
-angular.module('rolesApp').factory('rolesLabelFact', ['$resource', '$cachedResource',
+angular.module('rolesApp').factory('roleLabelsFact', ['$resource', '$cachedResource',
   function ($cachedResource)
   {
     return $cachedResource(

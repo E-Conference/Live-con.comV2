@@ -1,11 +1,7 @@
 <div ng-include="GLOBAL_CONFIG.app.modules.persons.urls.partials+'persons-actions.html'" ng-controller="personsMainCtrl"></div>
 <form name="personEditForm" class="form" role="form" ng-submit="update(personEditForm)">
   <div>
-    <label for="inputName">Label</label>
-    <input type="text" class="form-control" id="label" required placeholder="{{person.label}}" ng-model="person.label">
-  </div>
-  <div>
-    <label for="inputHomepage">Website</label>
+    <label for="inputWebsite">Website</label>
     <input type="text" class="form-control" id="inputWebsite" placeholder="{{person.additionalInformation.website}}" ng-model="person.additionalInformation.website">
   </div>
   <div>
@@ -22,7 +18,7 @@
   </div>
   <div>
     <label for="inputImg">Image</label>
-    <input type="text" class="form-control" id="inputCountry" placeholder="{{person.additionalInformation.img}}" ng-model="person.additionalInformation.img">
+    <input type="text" class="form-control" id="inputImg" placeholder="{{person.additionalInformation.img}}" ng-model="person.additionalInformation.img">
   </div>
   <div get-or-create parent-entity="person" entity="organization"></div>
   <div>

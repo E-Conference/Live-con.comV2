@@ -1,10 +1,6 @@
 <div ng-include="GLOBAL_CONFIG.app.modules.persons.urls.partials+'persons-actions.html'" ng-controller="personsMainCtrl"></div>
 <form name="personNewForm" class="form" role="form" ng-submit="create(personNewForm)">
   <div>
-    <label for="inputName">Label</label>
-    <input type="text" class="form-control" id="label" required placeholder="Label" ng-model="person.label">
-  </div>
-  <div>
     <label for="inputFirstname">First name</label>
     <input type="text" class="form-control" id="inputFirstname" placeholder="Firstname" ng-model="person.firstName">
   </div>
@@ -13,7 +9,7 @@
     <input type="text" class="form-control" id="inputFamilyname" placeholder="Firstname" ng-model="person.familyName">
   </div>
   <div>
-    <label for="inputHomepage">Website</label>
+    <label for="inputWebsite">Website</label>
     <input type="text" class="form-control" id="inputWebsite" placeholder="Website" ng-model="person.additionalInformation.website">
   </div>
   <div class="form-group">

@@ -10,7 +10,11 @@
     <ui-select-match >Add an author...</ui-select-match>
     <ui-select-choices repeat="entity in entities">
     <!--<ui-select-choices repeat="entity.email as entity in people | propsFilter: {label: $select.search, age: $select.search}">-->
-        <div ng-bind-html="entity.label | highlight: $select.search"></div>
+        <img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="http://blog.getjobber.com/wp-content/uploads/2013/01/Users-Image.png" style="width: 70px; height: 70px;"/>
+        <b ng-bind-html="entity.label | highlight: $select.search"></b>
+        <div ng-bind-html="entity.email | highlight: $select.search"></div>
+        <div ng-bind-html="entity.description | highlight: $select.search"></div>
+        <div ng-bind-html="entity.website | highlight: $select.search"></div>
     </ui-select-choices>
 </ui-select>
 <br/>

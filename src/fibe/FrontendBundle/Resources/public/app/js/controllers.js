@@ -141,9 +141,9 @@ liveconControllers.controller('dashboardCtrl', ['$scope', '$rootScope', '$routeP
 /**
  * Main event controller (conference controller)
  */
-liveconControllers.controller('conferenceCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG', 'ConferencesFact',
-  function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, ConferencesFact)
+liveconControllers.controller('conferenceCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG', 'conferencesFact',
+  function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, conferencesFact)
   {
-    $scope.conferences = ConferencesFact.all({offset: 0, limit: 20});
+    $scope.conferences = conferencesFact.all({offset: 0, limit: 20});
 
   }]);

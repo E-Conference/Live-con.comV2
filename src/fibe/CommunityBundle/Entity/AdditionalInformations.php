@@ -15,14 +15,22 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="additional_informations")
  * @ORM\Entity(repositoryClass="fibe\CommunityBundle\Repository\AdditionalInformationsRepository")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorMap({
+ *     "Organization"="Organization",
+ *     "Person"="Person"
+ * })
  * @ExclusionPolicy("all")
+ *
+ *
+ *
  */
 class AdditionalInformations
 {
   /**
    * @ORM\Id
    * @ORM\Column(type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
+   * @ORM\GeneratedValue()
    * @Expose
    */
   private $id;
@@ -57,18 +65,6 @@ private $website;
    * @Expose
    */
   private $email;
-
-  /**
-   * organization
-   * @ORM\OneToOne(targetEntity="fibe\CommunityBundle\Entity\Organization", inversedBy="additionalInformation", cascade={"all"})
-   */
-  private $organization;
-
-  /**
-   * person
-   * @ORM\OneToOne(targetEntity="fibe\CommunityBundle\Entity\Person",cascade={"all"})
-   */
-  private $person;
 
 
   public function __toString()
@@ -150,37 +146,4 @@ private $website;
   {
     $this->email = $email;
   }
-
-  /**
-   * @return mixed
-   */
-  public function getOrganization()
-  {
-    return $this->organization;
-  }
-
-  /**
-   * @param mixed $organization
-   */
-  public function setOrganization($organization)
-  {
-    $this->organization = $organization;
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getPerson()
-  {
-    return $this->person;
-  }
-
-  /**
-   * @param mixed $person
-   */
-  public function setPerson($person)
-  {
-    $this->person = $person;
-  }
-
 }

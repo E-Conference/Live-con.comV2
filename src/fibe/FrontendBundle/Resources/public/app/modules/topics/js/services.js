@@ -5,7 +5,7 @@
  *
  * @type {factory}
  */
-angular.module('topicsApp').factory('TopicsFact', ['$resource', '$cachedResource',
+angular.module('topicsApp').factory('topicsFact', ['$resource', '$cachedResource',
   function ($cachedResource)
   {
     return $cachedResource(

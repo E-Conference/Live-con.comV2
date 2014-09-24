@@ -28,7 +28,7 @@ class SerializeExceptionListener
              return;
          }
          $error = $event->getException();
-         $data = array('error' => $error->getMessage());
+         $data = array('error' => $error->getMessage(),'stack_trace' => $error->getTrace());
 //         $data[] = array('stacktrace' => $error->getTrace());
          $content = $this->getSerializer()->serialize($data, $format);
          $response = new Response($content, 400);

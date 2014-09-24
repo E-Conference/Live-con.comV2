@@ -17,7 +17,7 @@ angular.module('organizationsApp').controller('organizationsMainCtrl', [function
  *
  * @type {controller}
  */
-angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'OrganizationsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, OrganizationsFact, $cachedResource)
+angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'organizationsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, organizationsFact, $cachedResource)
 {
   $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
@@ -76,7 +76,7 @@ angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope'
       controller: 'organizationsDeleteCtrl',
       success: {label: 'Ok', fn: function ()
       {
-        OrganizationsFact.delete({id: organization.id});
+        organizationsFact.delete({id: organization.id});
         $scope.organizations.splice(index, 1);
       }}
     }, {
@@ -125,7 +125,7 @@ angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope'
     }
 
     $scope.busy = true;
-    OrganizationsFact.all(filters, function (data)
+    organizationsFact.all(filters, function (data)
     {
       var items = data;
 
@@ -162,9 +162,9 @@ angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope'
  *
  * @type {controller}
  */
-angular.module('organizationsApp').controller('organizationsNewCtrl', [ '$scope', '$rootScope', '$location', 'OrganizationsFact', function ($scope, $rootScope, $location, OrganizationsFact)
+angular.module('organizationsApp').controller('organizationsNewCtrl', [ '$scope', '$rootScope', '$location', 'organizationsFact', function ($scope, $rootScope, $location, organizationsFact)
 {
-  $scope.organization = new OrganizationsFact;
+  $scope.organization = new organizationsFact;
 
   var error = function (response, args)
   {
@@ -191,9 +191,9 @@ angular.module('organizationsApp').controller('organizationsNewCtrl', [ '$scope'
  *
  * @type {controller}
  */
-angular.module('organizationsApp').controller('organizationsEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'OrganizationsFact', function ($scope, $rootScope, $routeParams, $location, OrganizationsFact)
+angular.module('organizationsApp').controller('organizationsEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'organizationsFact', function ($scope, $rootScope, $routeParams, $location, organizationsFact)
 {
-  $scope.organization = OrganizationsFact.get({id: $routeParams.organizationId});
+  $scope.organization = organizationsFact.get({id: $routeParams.organizationId});
 
   var error = function (response, args)
   {
@@ -220,9 +220,9 @@ angular.module('organizationsApp').controller('organizationsEditCtrl', [ '$scope
  *
  * @type {controller}
  */
-angular.module('organizationsApp').controller('organizationsShowCtrl', [ '$scope', '$routeParams', 'OrganizationsFact', function ($scope, $routeParams, OrganizationsFact)
+angular.module('organizationsApp').controller('organizationsShowCtrl', [ '$scope', '$routeParams', 'organizationsFact', function ($scope, $routeParams, organizationsFact)
 {
-  $scope.organization = OrganizationsFact.get({id: $routeParams.organizationId});
+  $scope.organization = organizationsFact.get({id: $routeParams.organizationId});
 
 }]);
 

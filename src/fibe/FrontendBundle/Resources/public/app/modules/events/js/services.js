@@ -5,7 +5,7 @@
  *
  * @type {factory}
  */
-angular.module('eventsApp').factory('EventsFact', ['$resource', '$cachedResource',
+angular.module('eventsApp').factory('eventsFact', ['$resource', '$cachedResource',
   function ($cachedResource)
   {
     return $cachedResource(
