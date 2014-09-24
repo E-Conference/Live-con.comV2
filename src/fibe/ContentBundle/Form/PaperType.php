@@ -32,7 +32,7 @@ class PaperType extends AbstractType
       ))
       ->add('authors', 'fibe_contentbundle_selecttype', array(
         'type' => new PersonType(),
-        'uniqField' => 'additionalInformation.email',
+        'uniqField' => 'email',
       ))
     ;
   }

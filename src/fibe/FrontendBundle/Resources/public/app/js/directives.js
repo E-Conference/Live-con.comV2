@@ -117,7 +117,7 @@ angular.module('liveconApp').directive('infiniteScroll', [
 
           entitiesLbl         = getPlural(entityLbl),
           entityCamelCaseLbl  = entityLbl.charAt(0).toUpperCase() + entityLbl.slice(1),
-          entityFact          = $injector.get(getPlural(entityCamelCaseLbl) + 'Fact'),
+          entityFact          = $injector.get(entitiesLbl + 'Fact'),
 
           limit               = 10
       ;

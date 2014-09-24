@@ -17,10 +17,10 @@ angular.module('personsApp').controller('personsMainCtrl', [function ($scope)
  *
  * @type {controller}
  */
-angular.module('personsApp').controller('personsListByEventCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'PersonsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, PersonsFact, $cachedResource)
+angular.module('personsApp').controller('personsListByEventCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'personsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, personsFact, $cachedResource)
 {
   $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
-  $scope.person = PersonsFact.get({idEvent: $routeParams.eventId});
+  $scope.person = personsFact.get({idEvent: $routeParams.eventId});
 }]);
 
 /**
@@ -28,7 +28,7 @@ angular.module('personsApp').controller('personsListByEventCtrl', ['$scope', 'GL
  *
  * @type {controller}
  */
-angular.module('personsApp').controller('personsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'PersonsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, PersonsFact, $cachedResource)
+angular.module('personsApp').controller('personsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'personsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, personsFact, $cachedResource)
 {
   $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
@@ -82,7 +82,7 @@ angular.module('personsApp').controller('personsListCtrl', ['$scope', 'GLOBAL_CO
       controller: 'personsDeleteCtrl',
       success: {label: 'Ok', fn: function ()
       {
-        PersonsFact.delete({id: person.id});
+        personsFact.delete({id: person.id});
         $scope.persons.splice(index, 1);
       }}
     }, {
@@ -108,7 +108,7 @@ angular.module('personsApp').controller('personsListCtrl', ['$scope', 'GLOBAL_CO
     }
 
     $scope.busy = true;
-    PersonsFact.all({offset: offset, limit: limit, query: query}, function (data)
+    personsFact.all({offset: offset, limit: limit, query: query}, function (data)
     {
       var items = data;
 
@@ -152,9 +152,9 @@ angular.module('personsApp').controller('personsListCtrl', ['$scope', 'GLOBAL_CO
  *
  * @type {controller}
  */
-angular.module('personsApp').controller('personsNewCtrl', [ '$scope', '$rootScope', '$location', 'PersonsFact', function ($scope, $rootScope, $location, PersonsFact)
+angular.module('personsApp').controller('personsNewCtrl', [ '$scope', '$rootScope', '$location', 'personsFact', function ($scope, $rootScope, $location, personsFact)
 {
-  $scope.person = new PersonsFact;
+  $scope.person = new personsFact;
 
   var error = function (response, args)
   {
@@ -181,9 +181,9 @@ angular.module('personsApp').controller('personsNewCtrl', [ '$scope', '$rootScop
  *
  * @type {controller}
  */
-angular.module('personsApp').controller('personsEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'PersonsFact', function ($scope, $rootScope, $routeParams, $location, PersonsFact)
+angular.module('personsApp').controller('personsEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'personsFact', function ($scope, $rootScope, $routeParams, $location, personsFact)
 {
-  $scope.person = PersonsFact.get({id: $routeParams.personId});
+  $scope.person = personsFact.get({id: $routeParams.personId});
 
   var error = function (response, args)
   {
@@ -210,9 +210,9 @@ angular.module('personsApp').controller('personsEditCtrl', [ '$scope', '$rootSco
  *
  * @type {controller}
  */
-angular.module('personsApp').controller('personsShowCtrl', [ '$scope', '$routeParams', 'PersonsFact', function ($scope, $routeParams, PersonsFact)
+angular.module('personsApp').controller('personsShowCtrl', [ '$scope', '$routeParams', 'personsFact', function ($scope, $routeParams, personsFact)
 {
-  $scope.person = PersonsFact.get({id: $routeParams.personId});
+  $scope.person = personsFact.get({id: $routeParams.personId});
 
 }]);
 

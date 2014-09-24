@@ -26,25 +26,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ExclusionPolicy("all") 
  *
  */
-class Person
+class Person extends AdditionalInformations
 {
-  /**
-   * @ORM\Id
-   * @ORM\Column(type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
-   * @Expose
-   */
-  private $id;
-
-  /**
-   * Additional Infomations of the organization
-   *
-   * @ORM\OneToOne(targetEntity="AdditionalInformations", cascade={"persist", "remove"})
-   * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id", onDelete="CASCADE")
-   * @Expose
-   * @SerializedName("additionalInformation")
-   */
-  private $additionalInformation;
 
   /**
    * technical user
@@ -234,26 +217,6 @@ class Person
     $this->slugify();
 
     return $this->slug;
-  }
-
-  /**
-   * Get id
-   *
-   * @return integer
-   */
-  public function getId()
-  {
-    return $this->id;
-  }
-
-  /**
-   * Get email
-   *
-   * @return string
-   */
-  public function getEmail()
-  {
-    return $this->getAdditionalInformation()->getEmail();
   }
 
   /**
@@ -573,23 +536,6 @@ class Person
   public function setUser(UserInterface $user)
   {
     $this->user = $user;
-  }
-
-
-/**
-   * @return AdditionalInformations
-   */
-  public function getAdditionalInformation()
-  {
-    return $this->additionalInformation;
-  }
-
-  /**
-   * @param AdditionalInformations $additionalInformation
-   */
-  public function setAdditionalInformation(AdditionalInformations $additionalInformation)
-  {
-    $this->additionalInformation = $additionalInformation;
   }
 
   /**

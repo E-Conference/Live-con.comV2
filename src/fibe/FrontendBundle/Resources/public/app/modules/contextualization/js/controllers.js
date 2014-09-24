@@ -5,7 +5,7 @@
  *
  * @type {controller}
  */
-angular.module('contextualizationApp').controller('contextCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG', 'ConferencesFact', '$location',
+angular.module('contextualizationApp').controller('contextCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG', 'conferencesFact', '$location',
   function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, conferencesFact, $location)
   {
 

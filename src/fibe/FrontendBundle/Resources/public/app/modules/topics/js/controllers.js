@@ -18,10 +18,10 @@
 //*
 //* @type {controller}
 //*/
-//angular.module('topicsApp').controller('topicsListByEventCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'TopicsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, TopicsFact, $cachedResource)
+//angular.module('topicsApp').controller('topicsListByEventCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'topicsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, topicsFact, $cachedResource)
 //{
 //  $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
-//  $scope.topic = TopicsFact.get({idEvent: $routeParams.eventId});
+//  $scope.topic = topicsFact.get({idEvent: $routeParams.eventId});
 //}]);
 //
 ///**
@@ -29,7 +29,7 @@
 //*
 //* @type {controller}
 //*/
-//angular.module('topicsApp').controller('topicsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'TopicsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, TopicsFact, $cachedResource)
+//angular.module('topicsApp').controller('topicsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'topicsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, topicsFact, $cachedResource)
 //{
 //  $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 //
@@ -83,7 +83,7 @@
 //      controller: 'topicsDeleteCtrl',
 //      success: {label: 'Ok', fn: function ()
 //      {
-//        TopicsFact.delete({id: topic.id});
+//        topicsFact.delete({id: topic.id});
 //        $scope.topics.splice(index, 1);
 //      }}
 //    }, {
@@ -109,7 +109,7 @@
 //    }
 //
 //    $scope.busy = true;
-//    TopicsFact.all({offset: offset, limit: limit, query: query}, function (data)
+//    topicsFact.all({offset: offset, limit: limit, query: query}, function (data)
 //    {
 //      var items = data;
 //
@@ -153,9 +153,9 @@
 //*
 //* @type {controller}
 //*/
-//angular.module('topicsApp').controller('topicsNewCtrl', [ '$scope', '$rootScope', '$topic', 'TopicsFact', function ($scope, $rootScope, $topic, TopicsFact)
+//angular.module('topicsApp').controller('topicsNewCtrl', [ '$scope', '$rootScope', '$topic', 'topicsFact', function ($scope, $rootScope, $topic, topicsFact)
 //{
-//  $scope.topic = new TopicsFact;
+//  $scope.topic = new topicsFact;
 //
 //  var error = function (response, args)
 //  {
@@ -182,9 +182,9 @@
 //*
 //* @type {controller}
 //*/
-//angular.module('topicsApp').controller('topicsEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$topic', 'TopicsFact', function ($scope, $rootScope, $routeParams, $topic, TopicsFact)
+//angular.module('topicsApp').controller('topicsEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$topic', 'topicsFact', function ($scope, $rootScope, $routeParams, $topic, topicsFact)
 //{
-//  $scope.topic = TopicsFact.get({id: $routeParams.topicId});
+//  $scope.topic = topicsFact.get({id: $routeParams.topicId});
 //
 //  var error = function (response, args)
 //  {
@@ -211,9 +211,9 @@
 //*
 //* @type {controller}
 //*/
-//angular.module('topicsApp').controller('topicsShowCtrl', [ '$scope', '$routeParams', 'TopicsFact', function ($scope, $routeParams, TopicsFact)
+//angular.module('topicsApp').controller('topicsShowCtrl', [ '$scope', '$routeParams', 'topicsFact', function ($scope, $routeParams, topicsFact)
 //{
-//  $scope.topic = TopicsFact.get({id: $routeParams.topicId});
+//  $scope.topic = topicsFact.get({id: $routeParams.topicId});
 //
 //}]);
 //

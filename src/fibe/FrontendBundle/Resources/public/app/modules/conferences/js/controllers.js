@@ -17,7 +17,7 @@ angular.module('conferencesApp').controller('conferencesMainCtrl', [function ($s
  *
  * @type {controller}
  */
-angular.module('conferencesApp').controller('conferencesListCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'ConferencesFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, ConferencesFact, $cachedResource)
+angular.module('conferencesApp').controller('conferencesListCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'conferencesFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, conferencesFact, $cachedResource)
 {
   $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
@@ -66,7 +66,7 @@ angular.module('conferencesApp').controller('conferencesListCtrl', ['$scope', '$
       controller: 'conferencesDeleteCtrl',
       success: {label: 'Ok', fn: function ()
       {
-        ConferencesFact.delete({id: conference.id});
+        conferencesFact.delete({id: conference.id});
         $scope.conferences.splice(index, 1);
       }}
     }, {
@@ -115,7 +115,7 @@ angular.module('conferencesApp').controller('conferencesListCtrl', ['$scope', '$
     }
 
     $scope.busy = true;
-    ConferencesFact.all(filters, function (data)
+    conferencesFact.all(filters, function (data)
     {
       var items = data;
 
@@ -138,9 +138,9 @@ angular.module('conferencesApp').controller('conferencesListCtrl', ['$scope', '$
  *
  * @type {controller}
  */
-angular.module('conferencesApp').controller('conferencesNewCtrl', [ '$scope', '$rootScope', '$location', 'ConferencesFact', function ($scope, $rootScope, $location, ConferencesFact)
+angular.module('conferencesApp').controller('conferencesNewCtrl', [ '$scope', '$rootScope', '$location', 'conferencesFact', function ($scope, $rootScope, $location, conferencesFact)
 {
-  $scope.conference = new ConferencesFact;
+  $scope.conference = new conferencesFact;
 
   var error = function (response, args)
   {
@@ -167,9 +167,9 @@ angular.module('conferencesApp').controller('conferencesNewCtrl', [ '$scope', '$
  *
  * @type {controller}
  */
-angular.module('conferencesApp').controller('conferencesEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'ConferencesFact', function ($scope, $rootScope, $routeParams, $location, ConferencesFact)
+angular.module('conferencesApp').controller('conferencesEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'conferencesFact', function ($scope, $rootScope, $routeParams, $location, conferencesFact)
 {
-  $scope.conference = ConferencesFact.get({id: $routeParams.confId});
+  $scope.conference = conferencesFact.get({id: $routeParams.confId});
 
   var error = function (response, args)
   {
@@ -228,9 +228,9 @@ angular.module('conferencesApp').controller('conferencesEditCtrl', [ '$scope', '
  *
  * @type {controller}
  */
-angular.module('conferencesApp').controller('conferencesShowCtrl', [ '$scope', '$rootScope', '$routeParams', 'ConferencesFact', function ($scope, $rootScope, $routeParams, ConferencesFact)
+angular.module('conferencesApp').controller('conferencesShowCtrl', [ '$scope', '$rootScope', '$routeParams', 'conferencesFact', function ($scope, $rootScope, $routeParams, conferencesFact)
 {
-  $scope.conference = ConferencesFact.get({id: $routeParams.confId});
+  $scope.conference = conferencesFact.get({id: $routeParams.confId});
 
   //Context change
   $rootScope.$broadcast('contextCtrl:changeContext', {confId: $routeParams.confId});
