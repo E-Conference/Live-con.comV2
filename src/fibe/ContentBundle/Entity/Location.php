@@ -62,6 +62,14 @@ class Location
    */
   private $description;
 
+    /**
+   * Accesibility of the location
+   *
+   * @ORM\Column(type="text", nullable=true)
+   * @Expose
+   */
+  private $accesibility;
+
   /**
    * @ORM\Column(type="decimal", precision=10, scale=6, nullable=true)
    *

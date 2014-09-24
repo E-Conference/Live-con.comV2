@@ -77,6 +77,10 @@
                     'bundles/frontend/app/modules/locations/js/controllers.js'
                     'bundles/frontend/app/modules/locations/js/routes.js'
 
+                    'bundles/frontend/app/modules/equipments/js/services.js'
+                    'bundles/frontend/app/modules/equipments/js/controllers.js'
+                    'bundles/frontend/app/modules/equipments/js/routes.js'
+
                     'bundles/frontend/app/modules/events/js/services.js'
                     'bundles/frontend/app/modules/events/js/controllers.js'
                     'bundles/frontend/app/modules/events/js/routes.js'
@@ -135,6 +139,13 @@
                             base: "{{ asset('bundles/frontend/app/modules/locations/') }}",
                             partials: "{{ asset('bundles/frontend/app/modules/locations/partials/') }}",
                             img: "{{ asset('bundles/frontend/app/modules/locations/img') }}"
+                        }
+                    },
+                    equipments: {
+                        urls: {
+                            base: "{{ asset('bundles/frontend/app/modules/equipments/') }}",
+                            partials: "{{ asset('bundles/frontend/app/modules/equipments/partials/') }}",
+                            img: "{{ asset('bundles/frontend/app/modules/equipments/img') }}"
                         }
                     },
                     events: {
@@ -196,36 +207,38 @@
     {% endjavascripts %}
 </head>
 
+<!-- Main View -->
 <body ng-controller="mainCtrl">
 
-    <div class="navTop" ng-include="GLOBAL_CONFIG.app.urls.partials+'layout/nav-top.html'"
-         ng-controller="navTopCtrl">
-    </div>
+<div class="navTop" ng-include="GLOBAL_CONFIG.app.urls.partials+'layout/nav-top.html'"
+     ng-controller="navTopCtrl">
+</div>
 
-    <div id="alertBox" ng-include="GLOBAL_CONFIG.app.urls.partials+'layout/alert-box.html'"
-         ng-controller="AlertCtrl"></div>
+<div id="alertBox" ng-include="GLOBAL_CONFIG.app.urls.partials+'layout/alert-box.html'"
+     ng-controller="AlertCtrl"></div>
 
-    <div id="wrapper" >
+<div id="wrapper">
 
-        <div class="navLeft" ng-include="GLOBAL_CONFIG.app.urls.partials+'layout/nav-left.html'"
-             ng-controller="navLeftCtrl"></div>
+  <div class="navLeft" ng-include="GLOBAL_CONFIG.app.urls.partials+'layout/nav-left.html'"
+       ng-controller="navLeftCtrl"></div>
 
-        <!-- Page content -->
-        <div id="page-content-wrapper">
+  <!-- Page content -->
+  <div id="page-content-wrapper">
 
-            <div class="page-content inset view-container">
+    <div class="page-content inset view-container">
 
-                <div class="row view-frame" ng-class="view-frame" data-ng-view="">
-                </div>
-
-            </div>
-            <div id="scrollTopBtn">
-                <button class="btn btn-default" ng-click="scrollTop()" role="button"><i class="fa  fa-arrows-v fa-3x"></i></button>
-            </div>
-        </div>
+      <div class="row view-frame" ng-class="view-frame" data-ng-view="">
+      </div>
 
     </div>
-    <div ng-controller="contextCtrl"></div>
+    <div id="scrollTopBtn">
+      <button class="btn btn-default" ng-click="scrollTop()" role="button"><i class="fa  fa-arrows-v fa-3x"></i>
+      </button>
+    </div>
+  </div>
+
+</div>
+<div ng-controller="contextCtrl"></div>
 </body>
 
 </html>
