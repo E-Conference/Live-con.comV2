@@ -2,7 +2,8 @@
  * animations css stylesheet
  */
 
-.list.ng-enter,
+
+/*.list.ng-enter,
 .list.ng-leave,
 .list.ng-move
 {
@@ -77,7 +78,7 @@
   -moz-animation-name: slideouttoleft;
   transform: translateX(-100%);
   animation-name: slideouttoleft;
-}
+}*/
 
 /* keyframes for slidein from sides */
 /*@-webkit-keyframes slideinfromright {

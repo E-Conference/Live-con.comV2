@@ -105,11 +105,12 @@ class FOSUBUserProvider extends BaseFOSUBUserProvider
     private function create($serviceName,UserResponseInterface $response,$socialServiceId)
     {
 
-      // check no-mail 
-      if(empty($response->getEmail()))
+      // check no-mail
+      $mail = $response->getEmail();
+      if(empty($mail))
         throw new ORMException("Couldn't have got an email address from ".$serviceName);
       // check duplicated mail 
-      if($this->userManager->findUserByEmail($response->getEmail()) instanceof UserInterface)
+      if($this->userManager->findUserByEmail($mail) instanceof UserInterface)
         throw new ORMException("Duplicated e-mail address constraint violation");
 
       $user = $this->userManager->createUser();
@@ -121,7 +122,7 @@ class FOSUBUserProvider extends BaseFOSUBUserProvider
       $user->$setter_token($response->getAccessToken());
 
 
-      $user->setUsername($response->getEmail()); 
+      $user->setUsername($mail);
       $user->setPlainPassword(substr(base_convert(bin2hex(hash('sha256', uniqid(mt_rand(), true), true)), 16, 36), 0, 12)); 
       $user->setEnabled(true);
 
@@ -129,19 +130,25 @@ class FOSUBUserProvider extends BaseFOSUBUserProvider
 
       $this->mailer->sendRandomPwdEmailMessage($user,$serviceName);
       $this->userManager->updateUser($user);
-      $this->session->getFlashBag()->add('success', 'Welcome <b>'.$response->getEmail().'</b><br/>'
+      $this->session->getFlashBag()->add('success', 'Welcome <b>'.$mail.'</b><br/>'
                                           .'<br/>An email has been sent to you with a summary!');
       return $user;
     } 
 
     private function enrichUserDatas(User $user,$serviceName,UserResponseInterface $response)
     {
-      if(!empty($response->getEmail()))
-          $user->setEmail($response->getEmail());
-      if(!empty($response->getRealName()))
-          $user->setName($response->getRealName());
-      if(!empty($response->getProfilePicture()))
-          $user->setPicture($response->getProfilePicture());
+      $mail = $response->getEmail();
+      if(!empty($mail))
+          $user->setEmail($mail);
+
+      $realName = $response->getRealName();
+      if(!empty($realName))
+          $user->setName($realName);
+
+      $profilePicture = $response->getProfilePicture();
+      if(!empty($profilePicture))
+          $user->setPicture($profilePicture);
+
       if($serviceName == "twitter"){
         $user->setTwitterScreenName($response->getNickName());
 
@@ -155,7 +162,6 @@ class FOSUBUserProvider extends BaseFOSUBUserProvider
      */
     public function connect(UserInterface $user, UserResponseInterface $response)
     {
-      echo "connect";die; 
       $property = $this->getProperty($response);
       $username = $response->getUsername();
 

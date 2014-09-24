@@ -25,7 +25,8 @@ class TopicRESTController extends FOSRestController
    * @Rest\View
    * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
    * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
-   * @Rest\QueryParam(name="query", requirements=".{2,128}", nullable=true, description="the query to search.")
+   * @Rest\QueryParam(name="query", requirements=".{1,128}", nullable=true, description="the query to search.")
+   * @Rest\QueryParam(name="order", nullable=true, array=true, description="an array of order.")
    */
   public function getTopicsAction(Request $request, ParamFetcherInterface $paramFetcher)
   {
@@ -52,7 +53,7 @@ class TopicRESTController extends FOSRestController
   /**
    * Creates a new Topic from the submitted data.
    *
-   * @Rest\Post("/topics",name="api_topic_post")
+   * @Rest\Post("/topics",name="content_topics_post")
    *
    * @param Request $request the request object
    *

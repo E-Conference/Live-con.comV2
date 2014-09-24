@@ -10,6 +10,7 @@
 angular.module('communityApp', []);
 angular.module('organizationsApp', ['fundoo.services']);
 angular.module('papersApp', ['fundoo.services']);
+angular.module('topicsApp', []);
 angular.module('rolesApp', ['fundoo.services']);
 angular.module('categoriesApp', ['fundoo.services']);
 angular.module('personsApp', ['fundoo.services']);
@@ -41,6 +42,7 @@ var liveconApp = angular.module('liveconApp', [
   'authenticationApp',
   'organizationsApp',
   'personsApp',
+  'topicsApp',
   'locationsApp',
   'equipmentsApp',
   'eventsApp',
@@ -51,7 +53,9 @@ var liveconApp = angular.module('liveconApp', [
   'papersApp',
   'angularMoment',
   'leaflet-directive',
-  'ui.bootstrap.datetimepicker'
+  'ui.bootstrap.datetimepicker',
+  'ngSanitize',
+  'ui.select'
 ]);
 
 /**

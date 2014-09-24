@@ -1,0 +1,6 @@
+services:
+    fibe.content.select:
+        class: fibe\ContentBundle\Form\GetOrCreateType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: fibe_contentbundle_selecttype}

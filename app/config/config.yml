@@ -17,6 +17,9 @@ hwi_oauth:
         properties:
     resource_owners: %social_networks%
 
+assetic:
+    node: %path_to_node%
+
 
 framework:
     #esi:             ~

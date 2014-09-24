@@ -4,7 +4,7 @@ namespace fibe\EventBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-use fibe\CommunityBundle\Entity\Company;
+use fibe\CommunityBundle\Entity\Organization;
 use fibe\CommunityBundle\Entity\Person;
 use fibe\ContentBundle\Entity\Location;
 use fibe\ContentBundle\Entity\Paper;
@@ -59,11 +59,11 @@ class MainEvent extends VEvent
   private $roles;
 
   /**
-   * Companies
+   * Organizations
    *
-   * @ORM\OneToMany(targetEntity="fibe\CommunityBundle\Entity\Company", mappedBy="mainEvent",cascade={"persist", "remove"})
+   * @ORM\OneToMany(targetEntity="fibe\CommunityBundle\Entity\Organization", mappedBy="mainEvent",cascade={"persist", "remove"})
    */
-  private $companies;
+  private $organizations;
 
   /**
    *
@@ -236,7 +236,7 @@ class MainEvent extends VEvent
     $this->persons = new ArrayCollection();
     $this->topics = new ArrayCollection();
     $this->sponsors = new ArrayCollection();
-    $this->companies = new ArrayCollection();
+    $this->organizations = new ArrayCollection();
   }
 
   /**
@@ -436,35 +436,35 @@ class MainEvent extends VEvent
   /**
    * Add organizations
    *
-   * @param Company $companies
+   * @param Organization $organizations
    *
    * @return $this
    */
-  public function addCompany(Company $companies)
+  public function addOrganization(Organization $organizations)
   {
-    $this->companies[] = $companies;
+    $this->organizations[] = $organizations;
 
     return $this;
   }
 
   /**
-   * Remove companies
+   * Remove organizations
    *
-   * @param Company $companies
+   * @param Organization $organizations
    */
-  public function removeCompany(Company $companies)
+  public function removeOrganization(Organization $organizations)
   {
-    $this->companies->removeElement($companies);
+    $this->organizations->removeElement($organizations);
   }
 
   /**
-   * Get companies
+   * Get organizations
    *
    * @return \Doctrine\Common\Collections\Collection
    */
-  public function getCompanies()
+  public function getOrganizations()
   {
-    return $this->companies;
+    return $this->organizations;
   }
 
   /**
@@ -583,7 +583,7 @@ class MainEvent extends VEvent
     and (count($this->locations) <= 1)
     and (count($this->papers) == 0)
     and (count($this->persons) == 0)
-    and (count($this->companies) == 0)
+    and (count($this->organizations) == 0)
     and (count($this->topics) == 0);
 
   }

@@ -10,25 +10,25 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Util\Codes;
 
 /**
- * Company rest controller.
+ * Organization rest controller.
  */
-class CompanyRESTController extends FOSRestController
+class OrganizationRESTController extends FOSRestController
 {
 
-  const ENTITY_CLASSNAME = "fibe\\CommunityBundle\\Entity\\Company";
-  const FORM_CLASSNAME = "fibe\\CommunityBundle\\Form\\CompanyType";
+  const ENTITY_CLASSNAME = "fibe\\CommunityBundle\\Entity\\Organization";
+  const FORM_CLASSNAME = "fibe\\CommunityBundle\\Form\\OrganizationType";
 
 
   /**
-   * Lists all Company entities.
-   * @Rest\Get("/companies", name="community_companies_all")
+   * Lists all Organization entities.
+   * @Rest\Get("/organizations", name="community_organizations_all")
    * @Rest\View
    * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
    * @Rest\QueryParam(name="limit", requirements="\d+", default="70", description="How many entity to return.")
-   * @Rest\QueryParam(name="query", requirements=".{2,64}", nullable=true, description="the query to search.")
-   * @Rest\QueryParam(name="order", nullable=true, array=true, description="the query to search.")
+   * @Rest\QueryParam(name="query", requirements=".{1,64}", nullable=true, description="the query to search.")
+   * @Rest\QueryParam(name="order", nullable=true, array=true, description="an array of order.")
    */
-  public function getCompaniesAction(Request $request, ParamFetcherInterface $paramFetcher)
+  public function getOrganizationsAction(Request $request, ParamFetcherInterface $paramFetcher)
   {
     return $this->get('fibe.rest.crudhandler')->getAll(
       $this::ENTITY_CLASSNAME,
@@ -37,9 +37,9 @@ class CompanyRESTController extends FOSRestController
   }
 
   /**
-   * @Rest\Get("/companies/{id}", name="community_companies_get")
+   * @Rest\Get("/organizations/{id}", name="community_organizations_get")
    **/
-  public function getCompanyAction($id)
+  public function getOrganizationAction($id)
   {
 
     return $this->get('fibe.rest.crudhandler')->get(
@@ -50,15 +50,15 @@ class CompanyRESTController extends FOSRestController
 
 
   /**
-   * Creates a new company from the submitted data.
+   * Creates a new organization from the submitted data.
    *
-   * @Rest\Post("/companies",name="community_companies_post")
+   * @Rest\Post("/organizations",name="community_organizations_post")
    *
    * @param Request $request the request object
    *
    * @return array|\FOS\RestBundle\View\View
    */
-  public function postCompanyAction(Request $request)
+  public function postOrganizationAction(Request $request)
   {
 
     return $this->get('fibe.rest.crudhandler')->processForm(
@@ -72,12 +72,12 @@ class CompanyRESTController extends FOSRestController
 
   /**
    * Put action
-   * @Rest\Put("/companies/{id}", name="community_companies_put")
+   * @Rest\Put("/organizations/{id}", name="community_organizations_put")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
    */
-  public function putCompanyAction(Request $request, $id)
+  public function putOrganizationAction(Request $request, $id)
   {
 
     return $this->get('fibe.rest.crudhandler')->processForm(
@@ -91,12 +91,12 @@ class CompanyRESTController extends FOSRestController
 
   /**
    * Patch action
-   * @Rest\Patch("/companies/{id}", name="community_companies_patch")
+   * @Rest\Patch("/organizations/{id}", name="community_organizations_patch")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
    */
-  public function patchCompanyAction(Request $request, $id)
+  public function patchOrganizationAction(Request $request, $id)
   {
     return $this->get('fibe.rest.crudhandler')->processForm(
       $request,
@@ -111,11 +111,11 @@ class CompanyRESTController extends FOSRestController
 
   /**
    * Delete action
-   * @Rest\Delete("/companies/{id}", name="community_companies_delete")
+   * @Rest\Delete("/organizations/{id}", name="community_organizations_delete")
    *
    * @var integer $id Id of the entity
    */
-  public function deleteCompanyAction($id)
+  public function deleteOrganizationAction($id)
   {
 
     return $this->get('fibe.rest.crudhandler')->delete(

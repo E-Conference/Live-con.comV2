@@ -69,6 +69,7 @@ class Paper
    * @ORM\JoinTable(
    *     joinColumns={@ORM\JoinColumn(name="paper_id", referencedColumnName="id", onDelete="Cascade")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id", onDelete="Cascade")})
+   * @Expose
    */
   private $authors;
 
@@ -92,10 +93,11 @@ class Paper
   /**
    * The topics of the paper
    *
-   * @ORM\ManyToMany(targetEntity="Topic", inversedBy="papers", cascade={"persist", "remove"})
+   * @ORM\ManyToMany(targetEntity="Topic", inversedBy="papers", cascade={"persist", "merge", "remove"})
    * @ORM\JoinTable(name="paper_topic",
    *     joinColumns={@ORM\JoinColumn(name="paper_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="topic_id", referencedColumnName="id")})
+   * @Expose
    */
   private $topics;
 
@@ -358,9 +360,10 @@ class Paper
    *
    * @return Paper
    */
-  public function addTopic(Topic $topics)
+  public function addTopic(Topic $topic)
   {
-    $this->topics[] = $topics;
+
+    $this->topics[] = $topic;
 
     return $this;
   }
@@ -370,9 +373,9 @@ class Paper
    *
    * @param Topic $topics
    */
-  public function removeTopic(Topic $topics)
+  public function removeTopic(Topic $topic)
   {
-    $this->topics->removeElement($topics);
+    $this->topics->removeElement($topic);
   }
 
   /**

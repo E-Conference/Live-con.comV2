@@ -34,7 +34,11 @@ class PersonType extends AbstractType
         ->add('label')
         ->add('firstName')
         ->add('familyName')
-        ->add('additionalInformation', new AdditionalInformationsType());
+        ->add('additionalInformation', new AdditionalInformationsType())
+        ->add('organizations', 'fibe_contentbundle_selecttype', array(
+          'type' => new OrganizationType(),
+          'uniqField' => 'label',
+        ))
 //      ->add('firstName', 'text', array('label' => "First name"))
 //      ->add('familyName', 'text', array('label' => "Family Name"))
 //      ->add('email', 'text', array('required' => false))
@@ -60,7 +64,8 @@ class PersonType extends AbstractType
 //      ))
 //      ->add('accounts', 'collection', array('type'         => new SocialServiceAccountType(),
 //                                            'allow_add'    => true,
-//                                            'allow_delete' => true));
+//                                            'allow_delete' => true))
+    ;
   }
 
   /**
