@@ -235,10 +235,10 @@
       }
 
       //  organizations
-      $organizations = $mainEvent->getCompanies();
+      $organizations = $mainEvent->getOrganizations();
       foreach ($organizations as $organization)
       {
-        $mainEvent->removeCompany($organization);
+        $mainEvent->removeOrganization($organization);
       }
 
       //  papers

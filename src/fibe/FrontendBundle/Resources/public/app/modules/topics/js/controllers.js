@@ -1,23 +1,23 @@
-/**
- * Topics controllers
-*/
-
+///**
+// * Topics controllers
+//*/
+//
 //
 ///**
-// * Main topics controller
-// *
-// * @type {controller}
-// */
+//* Main topics controller
+//*
+//* @type {controller}
+//*/
 //angular.module('topicsApp').controller('topicsMainCtrl', [function ($scope)
 //{
 //
 //}]);
 //
 ///**
-// * List topics by event controller
-// *
-// * @type {controller}
-// */
+//* List topics by event controller
+//*
+//* @type {controller}
+//*/
 //angular.module('topicsApp').controller('topicsListByEventCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'TopicsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, TopicsFact, $cachedResource)
 //{
 //  $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
@@ -25,10 +25,10 @@
 //}]);
 //
 ///**
-// * List (all) topics controller
-// *
-// * @type {controller}
-// */
+//* List (all) topics controller
+//*
+//* @type {controller}
+//*/
 //angular.module('topicsApp').controller('topicsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'TopicsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, TopicsFact, $cachedResource)
 //{
 //  $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
@@ -149,10 +149,10 @@
 //}]);
 //
 ///**
-// * New topic controller
-// *
-// * @type {controller}
-// */
+//* New topic controller
+//*
+//* @type {controller}
+//*/
 //angular.module('topicsApp').controller('topicsNewCtrl', [ '$scope', '$rootScope', '$topic', 'TopicsFact', function ($scope, $rootScope, $topic, TopicsFact)
 //{
 //  $scope.topic = new TopicsFact;
@@ -178,10 +178,10 @@
 //}]);
 //
 ///**
-// * Edit topic controller
-// *
-// * @type {controller}
-// */
+//* Edit topic controller
+//*
+//* @type {controller}
+//*/
 //angular.module('topicsApp').controller('topicsEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$topic', 'TopicsFact', function ($scope, $rootScope, $routeParams, $topic, TopicsFact)
 //{
 //  $scope.topic = TopicsFact.get({id: $routeParams.topicId});
@@ -207,10 +207,10 @@
 //}]);
 //
 ///**
-// * Show topic controller
-// *
-// * @type {controller}
-// */
+//* Show topic controller
+//*
+//* @type {controller}
+//*/
 //angular.module('topicsApp').controller('topicsShowCtrl', [ '$scope', '$routeParams', 'TopicsFact', function ($scope, $routeParams, TopicsFact)
 //{
 //  $scope.topic = TopicsFact.get({id: $routeParams.topicId});
@@ -218,10 +218,10 @@
 //}]);
 //
 ///**
-// * Delete topic controller
-// *
-// * @type {controller}
-// */
+//* Delete topic controller
+//*
+//* @type {controller}
+//*/
 //angular.module('topicsApp').controller('topicsDeleteCtrl', [ '$scope', 'topicModel', function ($scope, topicModel)
 //{
 //  $scope.topic = topicModel;

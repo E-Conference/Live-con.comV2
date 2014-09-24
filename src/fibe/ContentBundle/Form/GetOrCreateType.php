@@ -3,17 +3,17 @@
 namespace fibe\ContentBundle\Form;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use fibe\ContentBundle\Form\DataTransformer\GetOrCreateTopicTransformer;
+use fibe\ContentBundle\Form\DataTransformer\GetOrCreateTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class TopicType
+ * Class GetOrCreateType
  *
  * @package fibe\ContentBundle\Form
  */
-class TopicsType extends AbstractType
+class GetOrCreateType extends AbstractType
 {
   /**
    * @var ObjectManager
@@ -30,7 +30,7 @@ class TopicsType extends AbstractType
 
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
-    $transformer = new GetOrCreateTopicTransformer($this->om);
+    $transformer = new GetOrCreateTransformer($this->om,$options['uniqField']);
     $builder->addModelTransformer($transformer);
   }
 
@@ -41,12 +41,13 @@ class TopicsType extends AbstractType
   {
     $resolver
       ->setDefaults(array(
-        'type' => new TopicType(),
-        'by_reference' => 'true',
         'allow_add' => true,
         'allow_delete' => true
       ))
     ;
+    $resolver->setRequired(array(
+      'uniqField',
+    ));
   }
 
   public function getParent()
@@ -61,6 +62,6 @@ class TopicsType extends AbstractType
    */
   public function getName()
   {
-    return 'fibe_contentbundle_topicstype';
+    return 'fibe_contentbundle_selecttype';
   }
 }

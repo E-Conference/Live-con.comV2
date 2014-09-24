@@ -10,7 +10,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Util\Codes;
 
 /**
- * Company rest controller.
+ * Organization rest controller.
  */
 class EquipmentRESTController extends FOSRestController
 {

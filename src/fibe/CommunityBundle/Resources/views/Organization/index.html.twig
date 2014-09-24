@@ -17,7 +17,7 @@
     </div>
     {% if is_granted('CREATE', app.user.getCurrentMainEvent()) %}
       <div class="page-btn-list  col-xs-5  col-sm-4 col-md-3 col-lg-2">
-        <a class="btn btn-info btn-create create" href="{{ path('community_company_new') }}"
+        <a class="btn btn-info btn-create create" href="{{ path('community_organization_new') }}"
            title="Add an organization">
           <i class="fa fa-plus"></i> New organization
         </a>
@@ -45,7 +45,7 @@
       $datas = $("#filter_form").serialize();
 
       //start send the post request
-      $.post("{{path('community_company_filter')}}",
+      $.post("{{path('community_organization_filter')}}",
           $datas,
           function (response)
           {

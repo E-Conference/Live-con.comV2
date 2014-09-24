@@ -19,13 +19,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  *
- * @ORM\Table(name="company")
- * @ORM\Entity(repositoryClass="fibe\CommunityBundle\Repository\CompanyRepository")
+ * @ORM\Table(name="organization")
+ * @ORM\Entity(repositoryClass="fibe\CommunityBundle\Repository\OrganizationRepository")
  * @ORM\HasLifecycleCallbacks
  * @ExclusionPolicy("all")
  *
  */
-class Company
+class Organization
 {
   /**
    * @ORM\Id
@@ -47,14 +47,14 @@ class Company
   /**
    * Sponsors
    *
-   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Sponsor", mappedBy="company", cascade={"all"})
+   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Sponsor", mappedBy="organization", cascade={"all"})
    */
   private $sponsors;
 
   /**
-   * Additional Infomations of the company
+   * Additional Infomations of the organization
    *
-   * @ORM\OneToOne(targetEntity="AdditionalInformations", mappedBy="company", cascade={"all"}, fetch="EAGER")
+   * @ORM\OneToOne(targetEntity="AdditionalInformations", mappedBy="organization", cascade={"all"}, fetch="EAGER")
    * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id", onDelete="CASCADE")
    * @Expose
    * @SerializedName("additionalInformation")
@@ -62,7 +62,7 @@ class Company
   private $additionalInformation;
 
   /**
-   * @ORM\ManyToMany(targetEntity="Person",  mappedBy="companies", cascade={"all"})
+   * @ORM\ManyToMany(targetEntity="Person",  mappedBy="organizations", cascade={"all"})
    */
   private $members;
 
@@ -74,7 +74,7 @@ class Company
   /**
    * The mainEvent associated
    *
-   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="companies", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="organizations", cascade={"persist"})
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    */
   private $mainEvent;

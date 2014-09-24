@@ -1,4 +1,4 @@
-<label>Topics</label>
+<label>Authors</label>
 <div>
   <span ng-repeat="entity in resource[parentField]  track by $index" class="tag label label-info">
     <span>{{ entity.label }}</span>
@@ -7,7 +7,7 @@
 </div>
 
 <ui-select ng-model="addedEntity" on-select="change($model)" ng-keyup="keyup($event)" theme="select2" style="width: 100%;">
-    <ui-select-match >Add a topics...</ui-select-match>
+    <ui-select-match >Add an author...</ui-select-match>
     <ui-select-choices repeat="entity in entities">
     <!--<ui-select-choices repeat="entity.email as entity in people | propsFilter: {label: $select.search, age: $select.search}">-->
         <div ng-bind-html="entity.label | highlight: $select.search"></div>

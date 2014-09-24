@@ -92,14 +92,17 @@ angular.module('liveconApp').directive('infiniteScroll', [
    * angular directive used to show a form inside a parent form for a collection of global entities such as topics
    *
    * use it like :
-   *  <div get-or-create parent-entity="paper" entity="topic" uniq-field="label"></div>
+   *  <div get-or-create parent-entity="paper" entity="person" uniq-field="email" parent-field="author"></div>
+   *
+   *  the template is loaded dynamicaly like :
+   *  GLOBAL_CONFIG.app.modules[entity].urls.partials + entity + '-select.html';
    *
    *
-   *
-   *    @param parent-entity string   : the name of the parent entity that owns entities
-   *    @param entity string          : the name of the entity that belongs to its parent
-   *    @param entity uniq-field      : (default='label') a uniq field identifying the object
+   *    @param parent-entity        : the name of the parent entity that owns entities
+   *    @param entity string        : the name of the entity that belongs to its parent
+   *    @param uniq-field           : (default='label') a unique field identifying the object
    *                                            (mustn't be the id because it's not known til persisted server-side)
+   *    @param entity parent-field  : (default=entity) the key of the parent entity refering to the entity
    */
   return {
     template: '<div ng-include="templateUrl"></div>',
@@ -110,27 +113,25 @@ angular.module('liveconApp').directive('infiniteScroll', [
       var entityLbl           = attrs.entity,
           parentEntityLbl     = attrs.parentEntity,
           uniqField           = attrs.uniqField || 'label',
+          parentField         = attrs.parentField || entityLbl,
 
-          entitiesLbl         = entityLbl+'s',
+          entitiesLbl         = getPlural(entityLbl),
           entityCamelCaseLbl  = entityLbl.charAt(0).toUpperCase() + entityLbl.slice(1),
-          entityFact          = $injector.get(entityCamelCaseLbl + 'sFact'),
+          entityFact          = $injector.get(getPlural(entityCamelCaseLbl) + 'Fact'),
 
           limit               = 10
       ;
 
       scope.templateUrl = GLOBAL_CONFIG.app.modules[entitiesLbl].urls.partials + entitiesLbl + '-select.html';
       //the entity binded with ng-model to the input
-      scope.addedEntity = {label:""};
-      //available entitiess
+      scope.addedEntity = {};
+      scope.addedEntity[uniqField] = "";
+      //available entities
       scope.entities = [];
       //the parent resource given by attrs.entity
       scope.resource = scope.$parent[parentEntityLbl];
-      if(!scope.resource[entitiesLbl]) scope.resource[entitiesLbl] = [];
 
-      //view label
-      scope.entityLbl = entityLbl;
-      scope.entitiesLbl = entitiesLbl;
-      scope.entityCamelCaseLbl = entityCamelCaseLbl;
+      scope.parentField = parentField = parentField + 's';
 
       scope.keyup = function($event)
       {
@@ -165,28 +166,47 @@ angular.module('liveconApp').directive('infiniteScroll', [
         if(!$model[uniqField])return;
         if(hasEntity($model))
         {
-          scope.$root.$broadcast('AlertCtrl:addAlert', {code: entityCamelCaseLbl + ' already registered', type: 'warning'});
+          scope.$root.$broadcast('AlertCtrl:addAlert', {code: entityCamelCaseLbl + ' already registered', type: 'info'});
           return;
         }
-        scope.resource[entitiesLbl].push({id:$model.id, label:$model[uniqField]});
+        if(!scope.resource[parentField])
+        {
+          scope.resource[parentField] = [];
+        }
+        var newEntity = {id:$model.id};
+        newEntity[uniqField] = $model[uniqField];
+        scope.resource[parentField].push(newEntity);
         $model[uniqField] = "";
         scope.entities = [];
       };
 
       scope.deleteEntity = function(index, entity)
       {
-        scope.resource[entitiesLbl].splice(index, 1);
+        scope.resource[parentField].splice(index, 1);
       };
-      var hasEntity = function(entity)
+
+      function hasEntity(entity)
       {
-        for(var i in scope.resource[entitiesLbl])
+        for(var i in scope.resource[parentField])
         {
-          if(scope.resource[entitiesLbl][i][uniqField] === entity[uniqField])
+          if(scope.resource[parentField][i][uniqField] === entity[uniqField])
           {
             return true;
           }
         }
-      };
+      }
+
+      function getPlural(entityLbl)
+      {
+        if(entityLbl.slice(-1) === 'y')
+        {
+          return entityLbl.substring(0,entityLbl.length - 1) + "ies";
+        }
+        else
+        {
+          return entityLbl + "s";
+        }
+      }
     }
   };
 }]);

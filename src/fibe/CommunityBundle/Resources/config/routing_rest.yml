@@ -1,6 +1,6 @@
 organization:
     type: rest
-    resource: fibe\CommunityBundle\Controller\REST\CompanyRESTController
+    resource: fibe\CommunityBundle\Controller\REST\OrganizationRESTController
     name_prefix: api_
 
 person:

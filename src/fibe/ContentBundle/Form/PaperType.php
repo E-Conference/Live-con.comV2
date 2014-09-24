@@ -2,6 +2,7 @@
 
 namespace fibe\ContentBundle\Form;
 
+use fibe\CommunityBundle\Form\PersonType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -25,7 +26,14 @@ class PaperType extends AbstractType
       ->add('publisher', 'text', array('label' => 'Publisheur', 'required' => false))
       ->add('publishDate', 'text', array('label' => 'Published date', 'required' => false))
       ->add('url')
-      ->add('topics', 'fibe_contentbundle_topicstype')
+      ->add('topics', 'fibe_contentbundle_selecttype', array(
+        'type' => new TopicType(),
+        'uniqField' => 'label',
+      ))
+      ->add('authors', 'fibe_contentbundle_selecttype', array(
+        'type' => new PersonType(),
+        'uniqField' => 'additionalInformation.email',
+      ))
     ;
   }
 

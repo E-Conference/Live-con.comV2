@@ -37,7 +37,7 @@ class Person
   private $id;
 
   /**
-   * Additional Infomations of the company
+   * Additional Infomations of the organization
    *
    * @ORM\OneToOne(targetEntity="AdditionalInformations", cascade={"persist", "remove"})
    * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id", onDelete="CASCADE")
@@ -107,15 +107,16 @@ class Person
   private $papers;
 
   /**
-   * Company
+   * Organization
    *
-   * @ORM\ManyToMany(targetEntity="Company", inversedBy="members", cascade={"remove","persist","merge"})
+   * @ORM\ManyToMany(targetEntity="Organization", inversedBy="members", cascade={"remove","persist","merge"})
    * @ORM\JoinTable(name="member",
    *     joinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id", onDelete="Cascade")})
-   *     inverseJoinColumns={@ORM\JoinColumn(name="company_id", referencedColumnName="id", onDelete="Cascade")},
+   *     inverseJoinColumns={@ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="Cascade")},
+   * @Expose
    * 
    */
-  private $companies;
+  private $organizations;
 
   /**
    * openId
@@ -161,7 +162,7 @@ class Person
   public function __construct()
   {
     $this->papers = new ArrayCollection();
-    $this->companies = new ArrayCollection();
+    $this->organizations = new ArrayCollection();
     $this->roles = new ArrayCollection();
     $this->accounts = new ArrayCollection();
     $this->mainEvents = new ArrayCollection();
@@ -243,6 +244,16 @@ class Person
   public function getId()
   {
     return $this->id;
+  }
+
+  /**
+   * Get email
+   *
+   * @return string
+   */
+  public function getEmail()
+  {
+    return $this->getAdditionalInformation()->getEmail();
   }
 
   /**
@@ -424,37 +435,37 @@ class Person
   }
 
   /**
-   * Add company
+   * Add organization
    *
-   * @param Company $company
+   * @param Organization $organization
    *
    * @return $this
    */
-  public function addCompany(Company $company)
+  public function addOrganization(Organization $organization)
   {
-    $this->companies[] = $company;
+    $this->organizations[] = $organization;
 
     return $this;
   }
 
   /**
-   * Remove company
+   * Remove organization
    *
-   * @param Company $company
+   * @param Organization $organization
    */
-  public function removeCompany(Company $company)
+  public function removeOrganization(Organization $organization)
   {
-    $this->companies->removeElement($company);
+    $this->organizations->removeElement($organization);
   }
 
   /**
-   * Get company
+   * Get organization
    *
    * @return \Doctrine\Common\Collections\Collection
    */
-  public function getCompany()
+  public function getOrganization()
   {
-    return $this->companies;
+    return $this->organizations;
   }
 
   /**
@@ -584,16 +595,16 @@ class Person
   /**
    * @return mixed
    */
-  public function getCompanies()
+  public function getOrganizations()
   {
-    return $this->companies;
+    return $this->organizations;
   }
 
   /**
-   * @param mixed $companies
+   * @param mixed $organizations
    */
-  public function setCompanies($companies)
+  public function setOrganizations($organizations)
   {
-    $this->companies = $companies;
+    $this->organizations = $organizations;
   }
 }

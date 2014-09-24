@@ -59,10 +59,10 @@ private $website;
   private $email;
 
   /**
-   * company
-   * @ORM\OneToOne(targetEntity="fibe\CommunityBundle\Entity\Company", inversedBy="additionalInformation", cascade={"all"})
+   * organization
+   * @ORM\OneToOne(targetEntity="fibe\CommunityBundle\Entity\Organization", inversedBy="additionalInformation", cascade={"all"})
    */
-  private $company;
+  private $organization;
 
   /**
    * person
@@ -154,17 +154,17 @@ private $website;
   /**
    * @return mixed
    */
-  public function getCompany()
+  public function getOrganization()
   {
-    return $this->company;
+    return $this->organization;
   }
 
   /**
-   * @param mixed $company
+   * @param mixed $organization
    */
-  public function setCompany($company)
+  public function setOrganization($organization)
   {
-    $this->company = $company;
+    $this->organization = $organization;
   }
 
   /**

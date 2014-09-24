@@ -761,8 +761,8 @@ function parseSheet(data) {
 }
 
 function parseProps(data) {
-	var p = { Company:'' }, q = {};
-	var strings = ["Application", "DocSecurity", "Company", "AppVersion"];
+	var p = { Organization:'' }, q = {};
+	var strings = ["Application", "DocSecurity", "Organization", "AppVersion"];
 	var bools = ["HyperlinksChanged","SharedDoc","LinksUpToDate","ScaleCrop"];
 	var xtra = ["HeadingPairs", "TitlesOfParts"];
 	var xtracp = ["category", "contentStatus", "lastModifiedBy", "lastPrinted", "revision", "version"];

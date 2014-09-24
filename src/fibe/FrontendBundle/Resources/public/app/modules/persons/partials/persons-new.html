@@ -24,6 +24,7 @@
     <label for="inputImg">Image</label>
     <input type="text" class="form-control" id="inputImg" placeholder="Image link" ng-model="person.additionalInformation.img">
   </div>
+  <div get-or-create parent-entity="person" entity="organization"></div>
   <div class="form-group">
     <button type="submit" class="btn btn-success">Save</button>
   </div>

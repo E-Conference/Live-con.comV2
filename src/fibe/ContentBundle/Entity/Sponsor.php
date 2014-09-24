@@ -57,12 +57,12 @@ class Sponsor
   protected $slug;
 
   /**
-   * Company who is the sponsor
+   * Organization who is the sponsor
    *
-   * @ORM\ManyToOne(targetEntity="fibe\CommunityBundle\Entity\Company", inversedBy="sponsors")
-   * @ORM\JoinColumn(name="company_id", referencedColumnName="id", onDelete="Set Null")
+   * @ORM\ManyToOne(targetEntity="fibe\CommunityBundle\Entity\Organization", inversedBy="sponsors")
+   * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="Set Null")
    */
-  protected $company;
+  protected $organization;
 
   /**
    * Events related to a sponsor
@@ -241,17 +241,17 @@ class Sponsor
   /**
    * @return mixed
    */
-  public function getCompany()
+  public function getOrganization()
   {
-    return $this->company;
+    return $this->organization;
   }
 
   /**
-   * @param mixed $company
+   * @param mixed $organization
    */
-  public function setCompany($company)
+  public function setOrganization($organization)
   {
-    $this->company = $company;
+    $this->organization = $organization;
   }
 
   /**
