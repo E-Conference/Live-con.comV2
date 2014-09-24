@@ -23,26 +23,16 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="fibe\CommunityBundle\Repository\OrganizationRepository")
  * @ORM\HasLifecycleCallbacks
  * @ExclusionPolicy("all")
- *
  */
 class Organization extends AdditionalInformations
 {
-
-  /**
-   * label
-   *
-   * @ORM\Column(type="string")
-   * @Expose
-   */
-  private $label;
-
 
   /**
    * Sponsors
    *
    * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Sponsor", mappedBy="organization", cascade={"all"})
    */
-  private $sponsors;
+  protected $sponsors;
 
   /**
    * @ORM\ManyToMany(targetEntity="Person",  mappedBy="organizations", cascade={"all"})
@@ -52,7 +42,7 @@ class Organization extends AdditionalInformations
   /**
    * @ORM\Column(type="string", length=256, nullable=true)
    */
-  private $slug;
+  protected $slug;
 
   /**
    * The mainEvent associated
@@ -60,7 +50,7 @@ class Organization extends AdditionalInformations
    * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="organizations", cascade={"persist"})
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    */
-  private $mainEvent;
+  protected $mainEvent;
 
   /**
    * Constructor

@@ -2,7 +2,7 @@
 <form name="personEditForm" class="form" role="form" ng-submit="update(personEditForm)">
   <div>
     <label for="inputWebsite">Website</label>
-    <input type="text" class="form-control" id="inputWebsite" placeholder="{{person.additionalInformation.website}}" ng-model="person.additionalInformation.website">
+    <input type="text" class="form-control" id="inputWebsite" placeholder="{{person.website}}" ng-model="person.website">
   </div>
   <div>
     <label for="inputFirstname">First name</label>
@@ -14,11 +14,11 @@
   </div>
   <div>
     <label for="inputCountry">Country</label>
-    <input type="text" class="form-control" id="inputCountry" placeholder="{{person.additionalInformation.country}}" ng-model="person.additionalInformation.country">
+    <input type="text" class="form-control" id="inputCountry" placeholder="{{person.country}}" ng-model="person.country">
   </div>
   <div>
     <label for="inputImg">Image</label>
-    <input type="text" class="form-control" id="inputImg" placeholder="{{person.additionalInformation.img}}" ng-model="person.additionalInformation.img">
+    <input type="text" class="form-control" id="inputImg" placeholder="{{person.img}}" ng-model="person.img">
   </div>
   <div get-or-create parent-entity="person" entity="organization"></div>
   <div>

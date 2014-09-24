@@ -10,7 +10,7 @@ use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * This entity define relation between a paper and a person
+ * This entity complete informations on a person or on an organization as well
  *
  *
  * @ORM\Table(name="additional_informations")
@@ -21,9 +21,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     "Person"="Person"
  * })
  * @ExclusionPolicy("all")
- *
- *
- *
  */
 class AdditionalInformations
 {
@@ -33,7 +30,15 @@ class AdditionalInformations
    * @ORM\GeneratedValue()
    * @Expose
    */
-  private $id;
+  protected $id;
+
+  /**
+  * label
+  *
+  * @ORM\Column(type="string")
+  * @Expose
+  */
+  protected $label;
 
   /**
    * Url of the website
@@ -41,7 +46,7 @@ class AdditionalInformations
    * @ORM\Column(type="string", nullable=true)
    * @Expose
    */
-private $website;
+  protected $website;
 
   /**
    * @TODO Enum : I18N (CodeInfo/JS/...)
@@ -50,21 +55,21 @@ private $website;
    * @ORM\Column(type="string", nullable=true)
    * @Expose
    */
-  private $country;
+  protected $country;
 
   /**
    * img
    * @ORM\Column(type="string", nullable=true,  name="img")
    * @Expose
    */
-  private $img;
+  protected $img;
 
   /**
    * email
    * @ORM\Column(type="string", nullable=true,  name="email")
    * @Expose
    */
-  private $email;
+  protected $email;
 
 
   public function __toString()
@@ -81,6 +86,14 @@ private $website;
   public function getId()
   {
     return $this->id;
+  }
+
+  /**
+   * @param mixed $id
+   */
+  public function setId($id)
+  {
+    $this->id = $id;
   }
 
   /**

@@ -12,8 +12,8 @@
   <tbody infinite-scroll='load(query)' infinite-scroll-disabled='busy' infinite-scroll-distance='0.5'>
   <tr ng-repeat="person in persons  track by $index">
     <td>{{ person.label }}</td>
-    <td>{{ person.additionalInformation.website }}</td>
-    <td>{{ person.additionalInformation.country }}</td>
+    <td>{{ person.website }}</td>
+    <td>{{ person.country }}</td>
     <td>
       <a class="btn btn-warning" href="#persons/edit/{{ person.id }}" role="button"><i class="fa fa-edit fa-1x"></i></a>
       <a class="btn btn-default" href="#persons/show/{{ person.id }}" role="button"><i class="fa fa-eye fa-1x"></i></a>
