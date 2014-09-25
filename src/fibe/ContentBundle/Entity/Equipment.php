@@ -16,6 +16,7 @@ use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
 
 
+
 /**
  * This class define an Equipment for a location.
  *

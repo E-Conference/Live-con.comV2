@@ -60,21 +60,6 @@ angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', 
         cloneEvent.$create({}, success, error);
     }
 
-    createDialogService(GLOBAL_CONFIG.app.modules.events.urls.partials + 'events-delete.html', {
-      id: 'complexDialog',
-      title: 'Event deletion',
-      backdrop: true,
-      controller: 'eventsDeleteCtrl',
-      success: {label: 'Ok', fn: function ()
-      {
-        eventsFact.delete({id: event.id});
-        $scope.events.splice(index, 1);
-      }}
-    }, {
-      eventModel: event
-    });
-  }
-
     $scope.deleteModal = function(index, event) {
         $scope.index = index;
 
