@@ -98,8 +98,8 @@ angular.module('liveconApp').directive('infiniteScroll', [
    *  GLOBAL_CONFIG.app.modules[entity].urls.partials + entity + '-select.html';
    *
    *
+   *    @param get-or-create        : the name of the entity that belongs to its parent
    *    @param parent-entity        : the name of the parent entity that owns entities
-   *    @param entity               : the name of the entity that belongs to its parent
    *    @param uniq-field           : (default='label') a unique field identifying the object
    *                                            (mustn't be the id because it's not known til persisted server-side)
    *    @param parent-field         : (default=%entity%) the key of the parent entity refering to the entity
@@ -110,7 +110,7 @@ angular.module('liveconApp').directive('infiniteScroll', [
     scope:true,
     link: function(scope, element, attrs) {
       if(!attrs.getOrCreate || !attrs.parentEntity)
-        return console.error('missing mandatory field in "getOrCreate" directive (see doc above)');
+        return console.error('missing mandatory field in "get-or-create" directive (see doc above)');
       if(attrs.newPolitic && ["none","modal","create"].indexOf(attrs.newPolitic)<0)
         return console.error('wrong value for parameter "new-politic" in "getOrCreate" directive (see doc above)');
 
