@@ -2,15 +2,10 @@
 
 namespace fibe\RestBundle\Handler;
 
-use Doctrine\ORM\EntityManager;
-use fibe\RestBundle\Search\SearchServiceInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use JMS\Serializer\SerializerInterface;
-use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class CrudHandler
@@ -56,14 +51,16 @@ class CrudHandler
 
   /**
    * Processes the form.
+   * try to call a business service method having the same name the http method
+   * the business service is conventionally named fibe.{entityNme}Service  (i.e. : fibe.mainEventService)
    *
-   * @param string $entityClassName
-   * @param string $formClassName
+   * @param string  $entityClassName
+   * @param string  $formClassName
    * @param Request $request
-   * @param String $method
-   * @param String $id
+   * @param String  $method
+   * @param String  $id
    *
-   * @return mixed $entity|form validation errors
+   * @return mixed  $entity|form validation errors
    */
   public function processForm(Request $request, $entityClassName, $formClassName, $method, $id = null)
   {
@@ -79,12 +76,12 @@ class CrudHandler
     }
     $form = $this->container->get('form.factory')->create(new $formClassName(), $entity, array('method' => $method));
     unset($formData['id']);//remove id to avoid form validation error with this unnecessary id
-    unset($formData['dtype']);//remove dtype to avoid form validation error with this unnecessary dtype (TODO remove dtype from serialization)
+//    unset($formData['dtype']);//remove dtype to avoid form validation error with this unnecessary dtype (TODO remove dtype from serialization)
     $form->submit($formData, 'PATCH' !== $method);
     if ($form->isValid())
     {
       $entity = $form->getData();
-      //get the service of the entity conventionally named fibe.{entityNme}Service
+      //get the service of the entity conventionally named fibe.{entityName}Service
       try
       {
         if($entityService = $this->container->get('fibe.'.substr($entityClassName, strrpos($entityClassName,'\\') + 1).'Service'))

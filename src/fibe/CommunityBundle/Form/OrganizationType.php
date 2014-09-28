@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class CompanyType extends AbstractType
+class OrganizationType extends AdditionalInformationsType
 {
   /**
    * @param FormBuilderInterface $builder
@@ -15,11 +15,10 @@ class CompanyType extends AbstractType
    */
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
+    parent::buildForm($builder, $options);
     $builder
-        ->add('id')
+      ->add('id')
       ->add('label')
-      ->add('additionalInformation', new AdditionalInformationsType())
-//      ->add('additional_information', new AdditionalInformationsType())
       ->add('members', 'entity', array(
         'class'    => 'fibeCommunityBundle:Person',
         'label'    => 'Members',
@@ -35,7 +34,7 @@ class CompanyType extends AbstractType
   public function setDefaultOptions(OptionsResolverInterface $resolver)
   {
     $resolver->setDefaults(array(
-      'data_class' => 'fibe\CommunityBundle\Entity\Company',
+      'data_class' => 'fibe\CommunityBundle\Entity\Organization',
       'csrf_protection' => false,
       'cascade_validation' => true,
     ));
@@ -46,6 +45,6 @@ class CompanyType extends AbstractType
    */
   public function getName()
   {
-    return 'fibe_bundle_communitybundle_company';
+    return 'fibe_bundle_communitybundle_organization';
   }
 }

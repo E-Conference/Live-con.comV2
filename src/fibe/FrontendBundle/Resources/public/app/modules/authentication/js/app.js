@@ -1,5 +1,11 @@
-angular.module('authenticationApp').config(['$provide','$httpProvider',
-    function ($provide, $httpProvider) {
-        $httpProvider.interceptors.push('globalHttpInterceptor');
+/**
+ * Authentication module configuration
+ *
+ * @type {config}
+ */
+angular.module('authenticationApp').config(['$provide', '$httpProvider',
+  function ($provide, $httpProvider)
+  {
+    $httpProvider.interceptors.push('globalHttpInterceptor');
 
-}]);
+  }]);

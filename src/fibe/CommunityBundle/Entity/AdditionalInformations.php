@@ -5,16 +5,24 @@ namespace fibe\CommunityBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Discriminator;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
+
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * This entity define relation between a paper and a person
+ * This entity complete informations on a person or on an organization as well
  *
  *
  * @ORM\Table(name="additional_informations")
  * @ORM\Entity(repositoryClass="fibe\CommunityBundle\Repository\AdditionalInformationsRepository")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorMap({
+ *     "Organization"="Organization",
+ *     "Person"="Person"
+ * })
  * @ExclusionPolicy("all")
  */
 class AdditionalInformations
@@ -22,10 +30,18 @@ class AdditionalInformations
   /**
    * @ORM\Id
    * @ORM\Column(type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
+   * @ORM\GeneratedValue()
    * @Expose
    */
-  private $id;
+  protected $id;
+
+  /**
+  * label
+  *
+  * @ORM\Column(type="string")
+  * @Expose
+  */
+  protected $label;
 
   /**
    * Url of the website
@@ -33,7 +49,7 @@ class AdditionalInformations
    * @ORM\Column(type="string", nullable=true)
    * @Expose
    */
-private $website;
+  protected $website;
 
   /**
    * @TODO Enum : I18N (CodeInfo/JS/...)
@@ -42,33 +58,26 @@ private $website;
    * @ORM\Column(type="string", nullable=true)
    * @Expose
    */
-  private $country;
+  protected $country;
 
   /**
    * img
    * @ORM\Column(type="string", nullable=true,  name="img")
    * @Expose
    */
-  private $img;
+  protected $img;
 
   /**
    * email
    * @ORM\Column(type="string", nullable=true,  name="email")
    * @Expose
    */
-  private $email;
+  protected $email;
 
   /**
-   * company
-   * @ORM\OneToOne(targetEntity="fibe\CommunityBundle\Entity\Company", inversedBy="additionalInformation", cascade={"all"})
+   * fix an issue with jms-serializer and form validation when applied to a doctrine InheritanceType("SINGLE_TABLE")
    */
-  private $company;
-
-  /**
-   * person
-   * @ORM\OneToOne(targetEntity="fibe\CommunityBundle\Entity\Person",cascade={"all"})
-   */
-  private $person;
+  public $dtype;
 
 
   public function __toString()
@@ -85,6 +94,14 @@ private $website;
   public function getId()
   {
     return $this->id;
+  }
+
+  /**
+   * @param mixed $id
+   */
+  public function setId($id)
+  {
+    $this->id = $id;
   }
 
   /**
@@ -150,37 +167,4 @@ private $website;
   {
     $this->email = $email;
   }
-
-  /**
-   * @return mixed
-   */
-  public function getCompany()
-  {
-    return $this->company;
-  }
-
-  /**
-   * @param mixed $company
-   */
-  public function setCompany($company)
-  {
-    $this->company = $company;
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getPerson()
-  {
-    return $this->person;
-  }
-
-  /**
-   * @param mixed $person
-   */
-  public function setPerson($person)
-  {
-    $this->person = $person;
-  }
-
 }

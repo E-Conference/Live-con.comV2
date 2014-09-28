@@ -3,6 +3,7 @@
 namespace fibe\EventBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Mapping as ORM;
 use fibe\ContentBundle\Entity\Paper;
 use fibe\ContentBundle\Entity\Location;
@@ -20,8 +21,6 @@ use JMS\Serializer\Annotation\VirtualProperty;
  *
  * @package fibe\EventBundle\Entity
  *
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity
  * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="fibe\EventBundle\Repository\EventRepository")
  * @ORM\HasLifecycleCallbacks
@@ -158,7 +157,7 @@ class Event extends VEvent
    *
    * @param string $slug
    *
-   * @return VEvent
+   * @return Event
    */
   public function setSlug($slug)
   {
@@ -184,7 +183,7 @@ class Event extends VEvent
    *
    * @param string $url
    *
-   * @return VEvent
+   * @return Event
    */
   public function setUrl($url)
   {
@@ -210,7 +209,7 @@ class Event extends VEvent
    *
    * @internal param \fibe\EventBundle\Entity\MainEvent $conference
    *
-   * @return VEvent
+   * @return Event
    */
   public function setMainEvent(MainEvent $mainEvent)
   {
@@ -234,7 +233,7 @@ class Event extends VEvent
    *
    * @param Paper $papers
    *
-   * @return VEvent
+   * @return Event
    */
   public function addPaper(Paper $papers)
   {
@@ -268,7 +267,7 @@ class Event extends VEvent
    *
    * @param VEvent $parent
    *
-   * @return VEvent
+   * @return Event
    */
   public function setParent(VEvent $parent = null)
   {
@@ -280,7 +279,7 @@ class Event extends VEvent
   /**
    * Get parent
    *
-   * @return VEvent
+   * @return Event
    */
   public function getParent()
   {
@@ -292,9 +291,9 @@ class Event extends VEvent
    *
    * @param VEvent $children
    *
-   * @return VEvent
+   * @return Event
    */
-  public function addChildren(VEvent $children)
+  public function addChildren(Event $children)
   {
     $this->children[] = $children;
 

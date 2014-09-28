@@ -19,65 +19,38 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  *
- * @ORM\Table(name="company")
- * @ORM\Entity(repositoryClass="fibe\CommunityBundle\Repository\CompanyRepository")
+ * @ORM\Table(name="organization")
+ * @ORM\Entity(repositoryClass="fibe\CommunityBundle\Repository\OrganizationRepository")
  * @ORM\HasLifecycleCallbacks
  * @ExclusionPolicy("all")
- *
  */
-class Company
+class Organization extends AdditionalInformations
 {
-  /**
-   * @ORM\Id
-   * @ORM\Column(type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
-   * @Expose
-   */
-  private $id;
-
-  /**
-   * label
-   *
-   * @ORM\Column(type="string")
-   * @Expose
-   */
-  private $label;
-
 
   /**
    * Sponsors
    *
-   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Sponsor", mappedBy="company", cascade={"all"})
+   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Sponsor", mappedBy="organization", cascade={"all"})
    */
-  private $sponsors;
+  protected $sponsors;
 
   /**
-   * Additional Infomations of the company
-   *
-   * @ORM\OneToOne(targetEntity="AdditionalInformations", mappedBy="company", cascade={"all"}, fetch="EAGER")
-   * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id", onDelete="CASCADE")
-   * @Expose
-   * @SerializedName("additionalInformation")
-   */
-  private $additionalInformation;
-
-  /**
-   * @ORM\ManyToMany(targetEntity="Person",  mappedBy="companies", cascade={"all"})
+   * @ORM\ManyToMany(targetEntity="Person",  mappedBy="organizations", cascade={"all"})
    */
   private $members;
 
   /**
    * @ORM\Column(type="string", length=256, nullable=true)
    */
-  private $slug;
+  protected $slug;
 
   /**
    * The mainEvent associated
    *
-   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="companies", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="organizations", cascade={"persist"})
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    */
-  private $mainEvent;
+  protected $mainEvent;
 
   /**
    * Constructor
@@ -118,21 +91,6 @@ class Company
     $this->slugify();
   }
 
-  /**
-   * auto persist of embedded data
-   * @ORM\PreFlush
-   */
-  public function updateSomething(PreFlushEventArgs $eventArgs)
-  {
-    if(!$this->getId()) return;
-    $em = $eventArgs->getEntityManager();
-    $uow = $em->getUnitOfWork();
-    $uow->recomputeSingleEntityChangeSet(
-      $em->getClassMetadata(get_class($this->getAdditionalInformation())),
-      $this->getAdditionalInformation()
-    );
-  }
-
 
   /**
    * Set slug
@@ -159,27 +117,6 @@ class Company
 
     return $this->slug;
   }
-
-  /**
-   * Get id
-   *
-   * @return integer
-   */
-  public function getId()
-  {
-    return $this->id;
-  }
-
-    /**
-     * Set id
-     * @param string $id
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
 
   /**
    * Set label
@@ -260,21 +197,5 @@ class Company
   public function getMainEvent()
   {
     return $this->mainEvent;
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getAdditionalInformation()
-  {
-    return $this->additionalInformation;
-  }
-
-  /**
-   * @param mixed $additionalInformation
-   */
-  public function setAdditionalInformation(AdditionalInformations $additionalInformation)
-  {
-    $this->additionalInformation = $additionalInformation;
   }
 }

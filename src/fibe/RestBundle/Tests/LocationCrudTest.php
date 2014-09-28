@@ -210,7 +210,6 @@ class LocationCrudTest extends WebTestCase
     $this->assertTrue(isset($decoded['id']));
     $this->assertEquals($decoded['label'], $entity->getLabel(), $response);
     $this->assertEquals($decoded['description'], $newDesc, $response);
-
   }
 
     public function testSort()
@@ -233,6 +232,31 @@ class LocationCrudTest extends WebTestCase
       $this->assertEquals(
         $entities[count($entities)-1]->getId(),
         $decoded[0]['id'],
+        $this->client->getResponse()
+      );
+    }
+
+    public function testSearch()
+    {
+      $fixtures = array(static::LOCATION_CLASS);
+      $this->loadFixtures($fixtures);
+      $entities = LocationFixture::$entities;
+
+      $expectedLabel = "label-test-search";
+      $testSearch = "st-se";
+
+      $this->client->request(
+        'GET',
+        sprintf(static::API_URL.'?query=%s', $testSearch),
+        array(),
+        array(),
+        array('HTTP_ACCEPT' => 'application/json')
+      );
+      $this->assertJsonResponse($this->client->getResponse());
+      $decoded = json_decode($this->client->getResponse()->getContent(), true);
+      $this->assertEquals(
+        $entities[count($entities)-1]->getLabel(),
+        $decoded[0]['label'],
         $this->client->getResponse()
       );
     }

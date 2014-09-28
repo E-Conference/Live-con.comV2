@@ -1,30 +1,27 @@
 <div ng-include="GLOBAL_CONFIG.app.modules.locations.urls.partials+'locations-actions.html'" ng-controller="locationsMainCtrl"></div>
-<form name="locationEditForm"  class="form" role="form" ng-submit="update(locationEditForm)">
-    <div>
-        <label for="inputLabel">Label</label>
-        <input type="text" class="form-control" id="inputLabel" required placeholder="{{location.label}}" ng-model="location.label">
-    </div>
-    <div>
-        <label for="inputLabel">Label</label>
-        <input type="text" class="form-control" id="inputLabel" required placeholder="{{location.label}}" ng-model="location.label">
-    </div>
-    <div >
-        <label for="inputCapacity">Capacity</label>
-        <input type="number" class="form-control" id="inputCapacity" placeholder="{{location.capacity}}" ng-model="location.capacity">
-    </div>
-    <div >
-        <label for="inputDescription">Description</label>
-        <input type="text" class="form-control" id="inputDescription" placeholder="{{location.description}}" ng-model="location.description">
-    </div>
-    <div >
-        <label for="inputLatitude">Latitude</label>
-        <input type="text" class="form-control" id="inputLatitude" placeholder="{{location.latitude}}" ng-model="location.latitude">
-    </div>
-    <div >
-        <label for="inputLongitude">Longitude</label>
-        <input type="text" class="form-control" id="inputLongitude" placeholder="{{location.longitude}}" ng-model="location.longitude">
-    </div>
-    <div>
-        <button type="submit" class="btn btn-success">Save</button>
-    </div>
+<form name="locationEditForm" class="form" role="form" ng-submit="update(locationEditForm)">
+  <div>
+    <label for="inputLabel">Label</label>
+    <input type="text" class="form-control" id="inputLabel" required placeholder="{{location.label}}" ng-model="location.label">
+  </div>
+  <div>
+    <label for="inputCapacity">Capacity</label>
+    <input type="number" class="form-control" id="inputCapacity" placeholder="{{location.capacity}}" ng-model="location.capacity">
+  </div>
+  <div>
+    <label for="inputDescription">Description</label>
+    <input type="text" class="form-control" id="inputDescription" placeholder="{{location.description}}" ng-model="location.description">
+  </div>
+  <div>
+    <label for="inputLatitude">Latitude</label>
+    <input type="text" class="form-control" id="inputLatitude" placeholder="{{location.latitude}}" ng-model="location.latitude">
+  </div>
+  <div>
+    <label for="inputLongitude">Longitude</label>
+    <input type="text" class="form-control" id="inputLongitude" placeholder="{{location.longitude}}" ng-model="location.longitude">
+  </div>
+  <div get-or-create="equipment" parent-entity="location"></div>
+  <div>
+    <button type="submit" class="btn btn-success">Save</button>
+  </div>
 </form>

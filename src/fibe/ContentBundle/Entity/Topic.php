@@ -3,10 +3,13 @@
 namespace fibe\ContentBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Mapping as ORM;
 use fibe\ContentBundle\Entity\Paper;
 use fibe\EventBundle\Entity\MainEvent;
 use fibe\EventBundle\Entity\VEvent;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use fibe\ContentBundle\Util\StringTools;
@@ -15,9 +18,10 @@ use fibe\ContentBundle\Util\StringTools;
 /**
  * This entity define a topic
  *
- * @ORM\Table(name="topic")
+ * @ORM\Table(name="topic", options={"collate"="utf8_bin"})
  * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\TopicRepository")
  * @ORM\HasLifecycleCallbacks
+ * @ExclusionPolicy("all")
  */
 class Topic
 {
@@ -25,27 +29,29 @@ class Topic
    * @ORM\Id
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
+   * @Expose
    */
   private $id;
 
   /**
    * label
    *
-   * @ORM\Column(type="string")
+   * @ORM\Column(type="string", unique=true)
+   * @Expose
    */
   private $label;
 
   /**
    * Papers related to thise topic
    *
-   * @ORM\ManyToMany(targetEntity="Paper", mappedBy="topics", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="Paper", mappedBy="topics" , cascade={"persist","merge","remove"})
    */
   private $papers;
 
   /**
    * Events related to this topic
    *
-   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\VEvent", mappedBy="topics", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\VEvent", mappedBy="topics", cascade={"persist","merge","remove"})
    */
   private $vEvents;
 
@@ -80,13 +86,13 @@ class Topic
    */
   public function slugify()
   {
-    $this->setSlug(StringTools::slugify($this->getId() . $this->getLabel()));
+    $this->setSlug(StringTools::slugify($this->getLabel(),false));
   }
 
   /**
    * onUpdate
    *
-   * @ORM\PostPersist()
+   * @ORM\PrePersist()
    * @ORM\PreUpdate()
    */
   public function onUpdate()
@@ -126,6 +132,20 @@ class Topic
   public function getId()
   {
     return $this->id;
+  }
+
+  /**
+   * Set id
+   *
+   * @param string $id
+   *
+   * @return $this
+   */
+  public function setId($id)
+  {
+    $this->id = $id;
+
+    return $this;
   }
 
   /**

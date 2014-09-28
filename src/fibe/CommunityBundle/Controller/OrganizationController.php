@@ -10,27 +10,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use fibe\CommunityBundle\Entity\Company;
-use fibe\CommunityBundle\Form\CompanyType;
+use fibe\CommunityBundle\Entity\Organization;
+use fibe\CommunityBundle\Form\OrganizationType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Company controller.
+ * Organization controller.
  *
- * @Route("/company")
+ * @Route("/organization")
  */
-class CompanyController extends Controller
+class OrganizationController extends Controller
 {
   /**
    * Lists all Organization entities.
    *
-   * @Route("/", name="community_company_index")
+   * @Route("/", name="community_organization_index")
    * @Method("GET")
    * @Template()
    */
   public function indexAction(Request $request)
   {
-    $entities = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('VIEW', 'Company');
+    $entities = $this->get('fibe_security.acl_entity_helper')->getEntitiesACL('VIEW', 'Organization');
     // $entities = $this->getUser()->getCurrentMainEvent()->getOrganizations()->toArray();
 
     $adapter = new ArrayAdapter($entities);
@@ -56,7 +56,7 @@ class CompanyController extends Controller
 
   /**
    * Filter organization index list
-   * @Route("/filter", name="community_company_filter")
+   * @Route("/filter", name="community_organization_filter")
    */
   public function filterAction(Request $request)
   {
@@ -72,7 +72,7 @@ class CompanyController extends Controller
     {
       // bind values from the request
 
-      $entities = $em->getRepository('fibeCommunityBundle:Company')->filtering($filters->getData(), $conf);
+      $entities = $em->getRepository('fibeCommunityBundle:Organization')->filtering($filters->getData(), $conf);
       $nbResult = count($entities);
 
       //Pager
@@ -88,7 +88,7 @@ class CompanyController extends Controller
       }
 
       return $this->render(
-        'ibeCommunityBundle:Company:list.html.twig',
+        'ibeCommunityBundle:Organization:list.html.twig',
         array(
           'pager'    => $pager,
           'nbResult' => $nbResult,
@@ -99,16 +99,16 @@ class CompanyController extends Controller
   }
 
   /**
-   * Creates a new Company entity.
+   * Creates a new Organization entity.
    *
-   * @Route("/create", name="community_company_create")
+   * @Route("/create", name="community_organization_create")
    * @Method("POST")
-   * @Template("fibeCommunityBundle:Company:new.html.twig")
+   * @Template("fibeCommunityBundle:Organization:new.html.twig")
    */
   public function createAction(Request $request)
   {
-    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Company');
-    $form = $this->createForm(new CompanyType($this->getUser()), $entity);
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Organization');
+    $form = $this->createForm(new OrganizationType($this->getUser()), $entity);
     $form->bind($request);
 
     if ($form->isValid())
@@ -120,7 +120,7 @@ class CompanyController extends Controller
                as
                $person)
       {
-        $person->addCompany($entity);
+        $person->addOrganization($entity);
         //$entity->addMember($person);
         $em->persist($person);
       }
@@ -130,7 +130,7 @@ class CompanyController extends Controller
 
       //$this->get('fibe_security.acl_entity_helper')->createACL($entity,MaskBuilder::MASK_OWNER);
 
-      return $this->redirect($this->generateUrl('community_company_index'));
+      return $this->redirect($this->generateUrl('community_organization_index'));
     }
 
     return array(
@@ -142,14 +142,14 @@ class CompanyController extends Controller
   /**
    * Displays a form to create a new Organization entity.
    *
-   * @Route("/new", name="community_company_new")
+   * @Route("/new", name="community_organization_new")
    * @Method("GET")
    * @Template()
    */
   public function newAction()
   {
-    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Company');
-    $form = $this->createForm(new CompanyType($this->getUser()), $entity);
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Organization');
+    $form = $this->createForm(new OrganizationType($this->getUser()), $entity);
 
     return array(
       'entity' => $entity,
@@ -160,13 +160,13 @@ class CompanyController extends Controller
   /**
    * Finds and displays a Organization entity.
    *
-   * @Route("/{id}/show", name="community_company_show")
+   * @Route("/{id}/show", name="community_organization_show")
    * @Method("GET")
    * @Template()
    */
   public function showAction($id)
   {
-    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'Company', $id);
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'Organization', $id);
 
     $deleteForm = $this->createDeleteForm($id);
 
@@ -179,15 +179,15 @@ class CompanyController extends Controller
   /**
    * Displays a form to edit an existing Organization entity.
    *
-   * @Route("/{id}/edit", name="community_company_edit")
+   * @Route("/{id}/edit", name="community_organization_edit")
    * @Method("GET")
    * @Template()
    */
   public function editAction($id)
   {
-    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT', 'Company', $id);
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT', 'Organization', $id);
 
-    $editForm = $this->createForm(new CompanyType($this->getUser()), $entity);
+    $editForm = $this->createForm(new OrganizationType($this->getUser()), $entity);
     $deleteForm = $this->createDeleteForm($id);
 
     return array(
@@ -200,16 +200,16 @@ class CompanyController extends Controller
   /**
    * Edits an existing Organization entity.
    *
-   * @Route("/{id}/update", name="community_company_update")
+   * @Route("/{id}/update", name="community_organization_update")
    * @Method("PUT")
    * @Template("fibeCommunityBundle:Organization:edit.html.twig")
    */
   public function updateAction(Request $request, $id)
   {
-    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT', 'Company', $id);
+    $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT', 'Organization', $id);
 
     $deleteForm = $this->createDeleteForm($id);
-    $editForm = $this->createForm(new CompanyType($this->getUser()), $entity);
+    $editForm = $this->createForm(new OrganizationType($this->getUser()), $entity);
 
     $em = $this->getDoctrine()->getManager();
 
@@ -218,7 +218,7 @@ class CompanyController extends Controller
              as
              $person)
     {
-      $person->removeCompany($entity);
+      $person->removeOrganization($entity);
       $entity->removeMember($person);
       $em->persist($person);
     }
@@ -233,7 +233,7 @@ class CompanyController extends Controller
                as
                $person)
       {
-        $person->addCompany($entity);
+        $person->addOrganization($entity);
         //$entity->addMember($person);
         $em->persist($person);
       }
@@ -241,7 +241,7 @@ class CompanyController extends Controller
       $em->persist($entity);
       $em->flush();
 
-      return $this->redirect($this->generateUrl('community_company_index'));
+      return $this->redirect($this->generateUrl('community_organization_index'));
     }
 
     return array(
@@ -254,7 +254,7 @@ class CompanyController extends Controller
   /**
    * Deletes a Organization entity.
    *
-   * @Route("/{id}/delete", name="community_company_delete")
+   * @Route("/{id}/delete", name="community_organization_delete")
    * @Method({"POST", "DELETE"})
    */
   public function deleteAction(Request $request, $id)
@@ -264,7 +264,7 @@ class CompanyController extends Controller
 
     if ($form->isValid())
     {
-      $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('DELETE', 'Company', $id);
+      $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('DELETE', 'Organization', $id);
       $em = $this->getDoctrine()->getManager();
       //The object must belong to the current conf
       $currentMainEvent = $this->getUser()->getCurrentMainEvent();
@@ -276,7 +276,7 @@ class CompanyController extends Controller
       );
     }
 
-    return $this->redirect($this->generateUrl('community_company_index'));
+    return $this->redirect($this->generateUrl('community_organization_index'));
   }
 
   /**

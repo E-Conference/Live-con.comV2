@@ -24,6 +24,10 @@ class LocationType extends AbstractType
       ->add('description')
       ->add('latitude')
       ->add('longitude')
+      ->add('equipments', 'fibe_contentbundle_selecttype', array(
+        'type' => new EquipmentType(),
+        'uniqField' => 'label',
+      ))
       /*->add(
         'equipments',
         'entity',

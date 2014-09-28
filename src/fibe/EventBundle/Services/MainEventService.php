@@ -5,11 +5,11 @@
   use Doctrine\ORM\EntityManager;
 
   use fibe\ContentBundle\Entity\Location;
-  use fibe\EventBundle\Entity\Category;
   use fibe\EventBundle\Entity\MainEvent;
   use fibe\SecurityBundle\Entity\Team;
   use fibe\SecurityBundle\Entity\User;
-  use Symfony\Component\Security\Core\SecurityContext;
+  use FOS\UserBundle\Model\UserInterface;
+  use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
   use Symfony\Component\Security\Core\SecurityContextInterface;
 
   /**
@@ -32,8 +32,12 @@
 
     public function post(MainEvent $mainEvent = null)
     {
+      /** @var $user User */
       $user = $this->securityContext->getToken()->getUser();
-
+      if(! $user instanceof UserInterface)
+      {
+        throw new UnauthorizedHttpException('negotiate','You must be logged in to create a new event');
+      }
       if(null == $mainEvent)
       {
         $mainEvent = new MainEvent();
@@ -153,7 +157,7 @@
 
       //Team
       $defaultTeam = new Team();
-      $defaultTeam->addConfManager($user);
+      $defaultTeam->addTeammate($user);
       $user->addTeam($defaultTeam);
       $defaultTeam->setMainEvent($mainEvent);
       $mainEvent->setTeam($defaultTeam);
@@ -232,15 +236,13 @@
       foreach ($topics as $topic)
       {
         $mainEvent->removeTopic($topic);
-        $this->entityManager->remove($topic);
       }
 
       //  organizations
-      $organizations = $mainEvent->getCompanies();
+      $organizations = $mainEvent->getOrganizations();
       foreach ($organizations as $organization)
       {
-        $mainEvent->removeCompany($organization);
-        $this->entityManager->remove($organization);
+        $mainEvent->removeOrganization($organization);
       }
 
       //  papers
@@ -248,7 +250,6 @@
       foreach ($papers as $paper)
       {
         $mainEvent->removePaper($paper);
-        $this->entityManager->remove($paper);
       }
 
       //  locations
@@ -256,7 +257,6 @@
       foreach ($locations as $location)
       {
         $mainEvent->removeLocation($location);
-        $this->entityManager->remove($location);
       }
 
       //  persons
@@ -264,7 +264,6 @@
       foreach ($persons as $person)
       {
         $mainEvent->removePerson($person);
-        $this->entityManager->remove($person);
       }
 
       //  events

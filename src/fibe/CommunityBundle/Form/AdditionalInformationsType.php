@@ -16,6 +16,8 @@ class AdditionalInformationsType extends AbstractType
   {
     $builder
       ->add('id')
+      ->add('dtype')
+      ->add('label')
       ->add('website')
       ->add('country')
       ->add('img')

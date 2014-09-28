@@ -1,22 +1,22 @@
-
-
-<form name="signinForm" class="form" role="form" ng-submit="signinAction(user)"  novalidate="">
+<form name="signinForm" class="form" role="form" ng-submit="signinAction(user)" novalidate="">
   <div class="form-group">
     <label for="inputUsername">Login</label>
-    <input  required="" type="text" name="_username" class="form-control" id="inputUsername" placeholder="Username" ng-model="user.username"   ng-minlength=3
-            ng-maxlength=20 />
+    <input required="" type="text" name="_username" class="form-control" id="inputUsername" placeholder="Username" ng-model="user.username" ng-minlength=3
+           ng-maxlength=20/>
+
     <div class="alert alert-danger" role="alert" ng-show="signinForm._username.$error.minlength">Your login is required to be at least 3 characters</div>
     <div class="alert alert-danger" role="alert" ng-show="signinForm._username.$error.maxlength">Your login cannot be longer than 20 characters</div>
   </div>
   <div class="form-group">
     <label for="inputPassword">Password</label>
-    <input required="" type="password" name="_password" class="form-control" id="inputPassword" placeholder="Password" ng-model="user.password"  ng-minlength=3
+    <input required="" type="password" name="_password" class="form-control" id="inputPassword" placeholder="Password" ng-model="user.password" ng-minlength=3
            ng-maxlength=20/>
-      <div class="alert alert-danger" role="alert" ng-show="signinForm._password.$error.minlength">Your password is required to be at least 3 characters</div>
-      <div class="alert alert-danger" role="alert" ng-show="signinForm._password.$error.maxlength">Your password cannot be longer than 20 characters</div>
+
+    <div class="alert alert-danger" role="alert" ng-show="signinForm._password.$error.minlength">Your password is required to be at least 3 characters</div>
+    <div class="alert alert-danger" role="alert" ng-show="signinForm._password.$error.maxlength">Your password cannot be longer than 20 characters</div>
   </div>
   <div class="form-group">
-      <button ng-disabled="signinForm.$invalid" type="submit" class="btn btn-default">Sign in</button>
-      <span><a href="">{{ 'Forgotten_password' | translate }}</a></span>
+    <button ng-disabled="signinForm.$invalid" type="submit" class="btn btn-default">Sign in</button>
+    <span><a href="">{{ 'Forgotten_password' | translate }}</a></span>
   </div>
 </form>

@@ -28,8 +28,9 @@ class SerializeExceptionListener
              return;
          }
          $error = $event->getException();
-         $data = array('error' => $error->getMessage());
-//         $data[] = array('stacktrace' => $error->getTrace());
+         $data = array('error' => $error->getMessage(),'stack_trace' => $error->getTraceAsString());
+         // NEVER DO THIS! it's causing awkward errors of dotrin annotation not imported o_O
+         // $data[] = array('stacktrace' => $error->getTrace());
          $content = $this->getSerializer()->serialize($data, $format);
          $response = new Response($content, 400);
          if(method_exists($error,'getStatusCode')){

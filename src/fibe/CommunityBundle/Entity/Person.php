@@ -23,28 +23,19 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="person")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="fibe\CommunityBundle\Repository\PersonRepository")
- * @ExclusionPolicy("all") 
+ * @ExclusionPolicy("ALL")
  *
  */
-class Person
+class Person extends AdditionalInformations
 {
-  /**
-   * @ORM\Id
-   * @ORM\Column(type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
-   * @Expose
-   */
-  private $id;
 
   /**
-   * Additional Infomations of the company
+   * label
    *
-   * @ORM\OneToOne(targetEntity="AdditionalInformations", cascade={"persist", "remove"})
-   * @ORM\JoinColumn(name="additional_information_id", referencedColumnName="id", onDelete="CASCADE")
+   * @ORM\Column(type="string")
    * @Expose
-   * @SerializedName("additionalInformation")
    */
-  private $additionalInformation;
+  protected $label;
 
   /**
    * technical user
@@ -53,16 +44,7 @@ class Person
    * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
    *
    */
-  private $user;
-
-  /**
-   * label
-   * Full name of the person (Family Name + FirstName)
-   * 
-   * @ORM\Column(type="string")
-   * @Expose
-   */
-  private $label;
+  protected $user;
 
   /**
    * familyName
@@ -71,7 +53,7 @@ class Person
    * @Expose
    * @SerializedName("familyName")
    */
-  private $familyName;
+  protected $familyName;
 
   /**
    * firstName
@@ -80,7 +62,7 @@ class Person
    * @Expose
    * @SerializedName("firstName")
    */
-  private $firstName;
+  protected $firstName;
 
   /**
    * description
@@ -88,7 +70,7 @@ class Person
    * @ORM\Column(type="string", length=1024, nullable=true, name="description")
    * @Expose
    */
-  private $description;
+  protected $description;
 
   /**
    * age
@@ -96,7 +78,7 @@ class Person
    * @ORM\Column(type="integer", nullable=true,  name="age")
    * @Expose
    */
-  private $age;
+  protected $age;
 
   /**
    * Paper
@@ -104,18 +86,19 @@ class Person
    *
    * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Paper",  mappedBy="authors", cascade={"remove","persist","merge"})
    */
-  private $papers;
+  protected $papers;
 
   /**
-   * Company
+   * Organization
    *
-   * @ORM\ManyToMany(targetEntity="Company", inversedBy="members", cascade={"remove","persist","merge"})
+   * @ORM\ManyToMany(targetEntity="Organization", inversedBy="members", cascade={"remove","persist","merge"})
    * @ORM\JoinTable(name="member",
    *     joinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id", onDelete="Cascade")})
-   *     inverseJoinColumns={@ORM\JoinColumn(name="company_id", referencedColumnName="id", onDelete="Cascade")},
-   * 
+   *     inverseJoinColumns={@ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="Cascade")},
+   * @Expose
+   *
    */
-  private $companies;
+  private $organizations;
 
   /**
    * openId
@@ -123,7 +106,7 @@ class Person
    *
    * @ORM\Column(type="string", nullable=true,  name="openId")
    */
-  private $openId;
+  protected $openId;
 
   /**
    *
@@ -131,7 +114,7 @@ class Person
    * @ORM\JoinColumn(onDelete="CASCADE")
    *
    */
-  private $roles;
+  protected $roles;
 
   /**
    * @TODO : Difference avec un utilisateur Livecon ? Peut appartenir a plusieurs main events
@@ -141,19 +124,19 @@ class Person
    *     joinColumns={@ORM\JoinColumn(name="mainevent_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")})
    */
-  private $mainEvents;
+  protected $mainEvents;
 
   /**
    *
    * @ORM\OneToMany(targetEntity="SocialServiceAccount",  mappedBy="owner", cascade={"persist", "remove"})
    *
    */
-  private $accounts;
+  protected $accounts;
 
   /**
    * @ORM\Column(type="string", length=256, nullable=true)
    */
-  private $slug;
+  protected $slug;
 
   /**
    * Constructor
@@ -161,7 +144,7 @@ class Person
   public function __construct()
   {
     $this->papers = new ArrayCollection();
-    $this->companies = new ArrayCollection();
+    $this->organizations = new ArrayCollection();
     $this->roles = new ArrayCollection();
     $this->accounts = new ArrayCollection();
     $this->mainEvents = new ArrayCollection();
@@ -233,16 +216,6 @@ class Person
     $this->slugify();
 
     return $this->slug;
-  }
-
-  /**
-   * Get id
-   *
-   * @return integer
-   */
-  public function getId()
-  {
-    return $this->id;
   }
 
   /**
@@ -424,37 +397,37 @@ class Person
   }
 
   /**
-   * Add company
+   * Add organization
    *
-   * @param Company $company
+   * @param Organization $organization
    *
    * @return $this
    */
-  public function addCompany(Company $company)
+  public function addOrganization(Organization $organization)
   {
-    $this->companies[] = $company;
+    $this->organizations[] = $organization;
 
     return $this;
   }
 
   /**
-   * Remove company
+   * Remove organization
    *
-   * @param Company $company
+   * @param Organization $organization
    */
-  public function removeCompany(Company $company)
+  public function removeOrganization(Organization $organization)
   {
-    $this->companies->removeElement($company);
+    $this->organizations->removeElement($organization);
   }
 
   /**
-   * Get company
+   * Get organization
    *
    * @return \Doctrine\Common\Collections\Collection
    */
-  public function getCompany()
+  public function getOrganizations()
   {
-    return $this->companies;
+    return $this->organizations;
   }
 
   /**
@@ -562,38 +535,5 @@ class Person
   public function setUser(UserInterface $user)
   {
     $this->user = $user;
-  }
-
-
-/**
-   * @return AdditionalInformations
-   */
-  public function getAdditionalInformation()
-  {
-    return $this->additionalInformation;
-  }
-
-  /**
-   * @param AdditionalInformations $additionalInformation
-   */
-  public function setAdditionalInformation(AdditionalInformations $additionalInformation)
-  {
-    $this->additionalInformation = $additionalInformation;
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getCompanies()
-  {
-    return $this->companies;
-  }
-
-  /**
-   * @param mixed $companies
-   */
-  public function setCompanies($companies)
-  {
-    $this->companies = $companies;
   }
 }

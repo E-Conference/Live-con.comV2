@@ -18,7 +18,7 @@
   /**
    * @ORM\Entity(repositoryClass="fibe\SecurityBundle\Repository\UserRepository")
    * @ORM\Table(name="user")
-   * @ExclusionPolicy("all")
+   * @ExclusionPolicy("ALL")
    */
   class User extends BaseUser
   {
@@ -39,19 +39,6 @@
     protected $username;
 
     /**
-    * @var string
-    * @Type("string")
-    * @Exclude
-    */
-    protected $salt;
-
-    /**
-     * @var string
-     * @Type("string")
-     */
-    protected $password;
-
-    /**
      * Person
      *
      * @ORM\OneToOne(targetEntity="fibe\CommunityBundle\Entity\Person",cascade={"persist"})
@@ -68,9 +55,8 @@
     protected $currentMainEvent;
 
     /**
-     * @TODO : put it in person with a technical role
-     *  
-     * @ORM\ManyToMany(targetEntity="Team", inversedBy="confManagers", cascade={"persist","remove"})
+     *
+     * @ORM\ManyToMany(targetEntity="Team", inversedBy="teammates", cascade={"persist","remove"})
      * @ORM\JoinTable(name="manager_team",
      *     joinColumns={@ORM\JoinColumn(name="manager_id", referencedColumnName="id", onDelete="Cascade")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="team_id", referencedColumnName="id", onDelete="Cascade")})
@@ -78,12 +64,16 @@
     protected $teams;
  
  
-    /** @ORM\Column(name="name", type="string", length=255, nullable=true) */
-    protected $name;
- 
     /**
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
      * @Expose
+     */
+    protected $name;
+
+    /**
      * @ORM\Column(name="picture", type="string", length=255, nullable=true)
+     * @Expose
      */
     protected $picture;
 
@@ -93,7 +83,7 @@
      * SOCIAL NETWORK ID
      * @TODO : put it in the table social_service_account
      ************************************/
- 
+
     /** @ORM\Column(name="google_id", type="string", length=255, nullable=true) */
     protected $google_id;
  
@@ -129,17 +119,6 @@
       parent::__construct();
       $this->teams = new ArrayCollection();
       $this->conferences = new ArrayCollection();
-    }
-
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-      return $this->id;
     }
 
     /**

@@ -1,0 +1,25 @@
+  <div>
+    <label for="inputFirstname">First name</label>
+    <input type="text" class="form-control" id="inputFirstname" placeholder="Firstname" ng-model="person.firstName" required>
+  </div>
+  <div>
+    <label for="inputFamilyname">Family name</label>
+    <input type="text" class="form-control" id="inputFamilyname" placeholder="Firstname" ng-model="person.familyName" required>
+  </div>
+  <div>
+    <label for="inputEmail">Email</label>
+    <input type="email" class="form-control" id="inputEmail" name="mail" placeholder="Email" ng-model="person.email" required>
+  </div>
+  <div>
+    <label for="inputWebsite">Website</label>
+    <input type="text" class="form-control" id="inputWebsite" placeholder="Website" ng-model="person.website">
+  </div>
+  <div class="form-group">
+    <label for="inputCountry">Country</label>
+    <input type="text" class="form-control" id="inputCountry" placeholder="Country" ng-model="person.country">
+  </div>
+  <div class="form-group">
+    <label for="inputImg">Image</label>
+    <input type="text" class="form-control" id="inputImg" placeholder="Image link" ng-model="person.img">
+  </div>
+  <div get-or-create="organization" parent-entity="person" new-politic="modal"></div>
