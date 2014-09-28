@@ -282,6 +282,11 @@ abstract class VEvent
   protected $lastModifiedAt;
 
   /**
+   * fix an issue with jms-serializer and form validation when applied to a doctrine InheritanceType("SINGLE_TABLE")
+   */
+  public $dtype;
+
+  /**
    * constructor
    */
   public function __construct()

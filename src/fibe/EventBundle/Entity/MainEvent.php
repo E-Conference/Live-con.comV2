@@ -23,10 +23,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Main Event entity
  *
- * @ORM\Entity
  * @ORM\Table(name="main_event")
  * @ORM\Entity(repositoryClass="fibe\EventBundle\Repository\MainEventRepository")
  * @ORM\HasLifecycleCallbacks
+ * @ExclusionPolicy("ALL")
  */
 class MainEvent extends VEvent
 {
@@ -48,6 +48,7 @@ class MainEvent extends VEvent
    * Papers
    *
    * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Paper", mappedBy="mainEvent",cascade={"persist", "remove"})
+   * @Expose
    */
   private $papers;
 
@@ -76,6 +77,7 @@ class MainEvent extends VEvent
    * Team
    *
    * @ORM\OneToOne(targetEntity="fibe\SecurityBundle\Entity\Team",cascade={"persist", "remove"})
+   * @Expose
    */
   private $team;
 
@@ -219,7 +221,6 @@ class MainEvent extends VEvent
     parent::__construct();
     $this->setIsAllDay(true);
     $this->events = new ArrayCollection();
-    $this->confManagers = new ArrayCollection();
     $this->roles = new ArrayCollection();
     $this->locations = new ArrayCollection();
     $this->papers = new ArrayCollection();

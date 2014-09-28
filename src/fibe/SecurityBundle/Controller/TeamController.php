@@ -39,7 +39,7 @@ class TeamController extends Controller
     //here the access control is on the team and not on the teamate himself
     $team = $ACLService->getEntityACL('VIEW', 'Team', $currentMainEvent->getTeam());
 
-    $managers = $team->getConfManagers();
+    $managers = $team->getTeammates();
 
     $delete_forms = array();
     $managerConfAuthorizations = array();
@@ -96,7 +96,7 @@ class TeamController extends Controller
     {
       $em = $this->getDoctrine()->getManager();
       $teamate = $userConfPermission->getUser();
-      $team->addConfManager($teamate);
+      $team->addTeammate($teamate);
       $teamate->addTeam($team);
       $em->persist($teamate);
       $em->persist($team);
@@ -218,7 +218,7 @@ class TeamController extends Controller
         {
           throw $this->createNotFoundException('Unable to find User entity.');
         }
-        $team->removeConfManager($manager);
+        $team->removeTeammate($manager);
         $manager->removeTeam($team);
         $em->persist($team);
         $em->persist($manager);

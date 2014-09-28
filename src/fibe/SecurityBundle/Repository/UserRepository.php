@@ -30,7 +30,7 @@ class UserRepository extends EntityRepository
 
     //Init array with all id of managers actually in the team.
     $managers_ids = array();
-    foreach ($team->getConfManagers() as $manager_id)
+    foreach ($team->getTeammates() as $manager_id)
     {
       $managers_ids[] = $manager_id;
     }

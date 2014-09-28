@@ -27,8 +27,6 @@ class UserService
   {
     $person = new Person();
     $person->setUser($user);
-    $person = new Person();
-    $person->setUser($user);
     $this->entityManager->persist($person);
     return $user;
   }

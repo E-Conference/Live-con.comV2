@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="person")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="fibe\CommunityBundle\Repository\PersonRepository")
- * @ExclusionPolicy("all") 
+ * @ExclusionPolicy("ALL")
  *
  */
 class Person extends AdditionalInformations

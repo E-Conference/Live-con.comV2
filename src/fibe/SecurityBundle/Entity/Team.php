@@ -5,6 +5,8 @@ namespace fibe\SecurityBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use fibe\EventBundle\Entity\MainEvent;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * This entity define a team
@@ -12,6 +14,7 @@ use fibe\EventBundle\Entity\MainEvent;
  * @ORM\Table(name="team")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
+ * @ExclusionPolicy("ALL")
  */
 class Team
 {
@@ -36,15 +39,16 @@ class Team
 
 
   /**
-   * confManager
+   * teammate
    *
    * @ORM\ManyToMany(targetEntity="fibe\SecurityBundle\Entity\User", mappedBy="teams",cascade={"persist"})
+   * @Expose
    */
-  private $confManagers;
+  private $teammates;
 
   public function __construct()
   {
-    $this->confManagers = new ArrayCollection();
+    $this->teammates = new ArrayCollection();
   }
 
   /**
@@ -72,13 +76,13 @@ class Team
   /**
    * Add a conference manager
    *
-   * @param User $confManager
+   * @param User $teammate
    *
    * @return $this
    */
-  public function addConfManager(User $confManager)
+  public function addTeammate(User $teammate)
   {
-    $this->confManagers[] = $confManager;
+    $this->teammates[] = $teammate;
 
     return $this;
   }
@@ -86,11 +90,11 @@ class Team
   /**
    * Remove a conference manager
    *
-   * @param User $confManager
+   * @param User $teammate
    */
-  public function removeConfManager(User $confManager)
+  public function removeTeammate(User $teammate)
   {
-    $this->confManagers->removeElement($confManager);
+    $this->teammates->removeElement($teammate);
   }
 
 
@@ -99,8 +103,8 @@ class Team
    *
    * @return ArrayCollection
    */
-  public function getConfManagers()
+  public function getTeammates()
   {
-    return $this->confManagers;
+    return $this->teammates;
   }
 }

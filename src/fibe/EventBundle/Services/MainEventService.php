@@ -5,11 +5,11 @@
   use Doctrine\ORM\EntityManager;
 
   use fibe\ContentBundle\Entity\Location;
-  use fibe\EventBundle\Entity\Category;
   use fibe\EventBundle\Entity\MainEvent;
   use fibe\SecurityBundle\Entity\Team;
   use fibe\SecurityBundle\Entity\User;
-  use Symfony\Component\Security\Core\SecurityContext;
+  use FOS\UserBundle\Model\UserInterface;
+  use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
   use Symfony\Component\Security\Core\SecurityContextInterface;
 
   /**
@@ -32,8 +32,12 @@
 
     public function post(MainEvent $mainEvent = null)
     {
+      /** @var $user User */
       $user = $this->securityContext->getToken()->getUser();
-
+      if(! $user instanceof UserInterface)
+      {
+        throw new UnauthorizedHttpException('negotiate','You must be logged in to create a new event');
+      }
       if(null == $mainEvent)
       {
         $mainEvent = new MainEvent();
@@ -153,7 +157,7 @@
 
       //Team
       $defaultTeam = new Team();
-      $defaultTeam->addConfManager($user);
+      $defaultTeam->addTeammate($user);
       $user->addTeam($defaultTeam);
       $defaultTeam->setMainEvent($mainEvent);
       $mainEvent->setTeam($defaultTeam);

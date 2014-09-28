@@ -74,6 +74,11 @@ class AdditionalInformations
    */
   protected $email;
 
+  /**
+   * fix an issue with jms-serializer and form validation when applied to a doctrine InheritanceType("SINGLE_TABLE")
+   */
+  public $dtype;
+
 
   public function __toString()
   {

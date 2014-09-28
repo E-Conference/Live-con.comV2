@@ -86,11 +86,11 @@
 	private $sponsors;
 
 	/**
-	 * confManager
+	 * teammate
 	 *
 	 * @ORM\ManyToMany(targetEntity="fibe\SecurityBundle\Entity\User", mappedBy="conferences",cascade={"persist"})
 	 */
-	private $confManagers; 
+	private $teammates;
 
 
 	/**
@@ -232,13 +232,13 @@
 	/**
 	 * Add a conference manager
 	 *
-	 * @param User $confManager
+	 * @param User $teammate
 	 *
 	 * @return $this
 	 */
-	public function addConfManager(\fibe\SecurityBundle\Entity\User $confManager = null)
+	public function addTeammate(User $teammate = null)
 	{
-	  $this->confManagers[] = $confManager;
+	  $this->teammates[] = $teammate;
 
 	  return $this;
 	}
@@ -246,11 +246,11 @@
 	/**
 	 * Remove a conference manager
 	 *
-	 * @param User $confManager
+	 * @param User $teammate
 	 */
-	public function removeConfManager(\fibe\SecurityBundle\Entity\User $confManager)
+	public function removeTeammate(User $teammate)
 	{
-	  $this->confManagers->removeElement($confManager);
+	  $this->teammates->removeElement($teammate);
 	}
 
 
@@ -259,9 +259,9 @@
 	 *
 	 * @return \Doctrine\Common\Collections\ArrayCollection
 	 */
-	public function getConfManagers()
+	public function getTeammates()
 	{
-	  return $this->confManagers;
+	  return $this->teammates;
 	}
 
 
@@ -318,7 +318,7 @@
 	public function __construct()
 	{
 	  $this->events = new \Doctrine\Common\Collections\ArrayCollection();
-	  $this->confManagers = new \Doctrine\Common\Collections\ArrayCollection();
+	  $this->teammates = new \Doctrine\Common\Collections\ArrayCollection();
 	  $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
