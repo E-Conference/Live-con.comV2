@@ -73,7 +73,7 @@ angular.module('authenticationApp').controller('signoutCtrl', ['$scope', '$rootS
 
     $rootScope.signout = function ()
     {
-      $cookieStore.remove('currentUser');
+      localStorage.removeItem('currentUser');
       $rootScope.currentUser = {};
       $window.history.back();
       $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'signout_success', type: 'success'});

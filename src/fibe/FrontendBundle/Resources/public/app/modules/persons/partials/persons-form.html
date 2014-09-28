@@ -1,18 +1,14 @@
-<div ng-include="GLOBAL_CONFIG.app.modules.persons.urls.partials+'persons-actions.html'" ng-controller="personsMainCtrl"></div>
-<form name="personNewForm" class="form" role="form" ng-submit="create(personNewForm)">
   <div>
     <label for="inputFirstname">First name</label>
-    <input type="text" class="form-control" id="inputFirstname" placeholder="Firstname" ng-model="person.firstName">
+    <input type="text" class="form-control" id="inputFirstname" placeholder="Firstname" ng-model="person.firstName" required>
   </div>
   <div>
     <label for="inputFamilyname">Family name</label>
-    <input type="text" class="form-control" id="inputFamilyname" placeholder="Firstname" ng-model="person.familyName">
+    <input type="text" class="form-control" id="inputFamilyname" placeholder="Firstname" ng-model="person.familyName" required>
   </div>
   <div>
     <label for="inputEmail">Email</label>
     <input type="email" class="form-control" id="inputEmail" name="mail" placeholder="Email" ng-model="person.email" required>
-    <div class="alert alert-danger" role="alert" ng-show="personNewForm.mail.$error.required">This field is required</div>
-    <div class="alert alert-danger" role="alert" ng-show="personNewForm.mail.$error.email">This email isn't valid</div>
   </div>
   <div>
     <label for="inputWebsite">Website</label>
@@ -26,8 +22,4 @@
     <label for="inputImg">Image</label>
     <input type="text" class="form-control" id="inputImg" placeholder="Image link" ng-model="person.img">
   </div>
-  <div get-or-create parent-entity="person" entity="organization"></div>
-  <div class="form-group">
-    <button type="submit" class="btn btn-success">Save</button>
-  </div>
-</form>
+  <div get-or-create="organization" parent-entity="person" new-politic="modal"></div>

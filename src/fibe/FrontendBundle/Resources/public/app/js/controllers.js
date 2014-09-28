@@ -147,3 +147,43 @@ liveconControllers.controller('conferenceCtrl', ['$scope', '$rootScope', '$route
     $scope.conferences = conferencesFact.all({offset: 0, limit: 20});
 
   }]);
+
+
+/**
+ * generic ctrl handling entity creation inside a modal
+ */
+liveconControllers.controller('dialogNewEntityCtrl', [ '$scope', '$rootScope', '$entityLbl', '$entity', '$formDialogTemplateUrl', '$timeout', '$location', '$injector',
+  function ($scope, $rootScope, $entityLbl, $entity, $formDialogTemplateUrl, $timeout, $location, $injector)
+  {
+    $scope[$entityLbl] = $entity;
+    $scope.formId = "new-" + $entityLbl + "-form";
+    $scope.formDialogTemplateUrl = $formDialogTemplateUrl;
+    var modalSuccessFn = $scope.$modalSuccess;
+
+    var error = function (response, args)
+    {
+      $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the ' + $entityLbl + ' has not been created', type: 'danger'});
+    };
+
+    var success = function (response, args)
+    {
+      $rootScope.$broadcast('AlertCtrl:addAlert', {code: $entityLbl + ' created', type: 'success'});
+      modalSuccessFn();
+    };
+
+    $scope.submit = function ()
+    {
+      if (this[$scope.formId].$valid)
+      {
+        $scope[$entityLbl].$create({}, success, error);
+      }
+    };
+    //validate form from a button placed outside
+    $scope.$modalSuccess  = function()
+    {
+      //change this value asynchoneously as said in https://docs.angularjs.org/error/$rootScope/inprog
+      $timeout(function() {
+        $("#" + $scope.formId + " > input[type='submit']").click();
+      }, 0);
+    }
+}]);

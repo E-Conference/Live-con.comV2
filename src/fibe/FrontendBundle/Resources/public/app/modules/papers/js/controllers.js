@@ -142,7 +142,7 @@ angular.module('papersApp').controller('papersListCtrl', ['$scope', 'GLOBAL_CONF
  */
 angular.module('papersApp').controller('papersNewCtrl', [ '$scope', '$rootScope', '$location', 'papersFact', function ($scope, $rootScope, $location, papersFact)
 {
-  $scope.paper = new papersFact;
+  $scope.paper = new papersFact(papersFact.current);
 
   var error = function (response, args)
   {

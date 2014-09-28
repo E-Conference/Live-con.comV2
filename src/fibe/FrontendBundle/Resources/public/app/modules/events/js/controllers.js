@@ -18,7 +18,7 @@ angular.module('eventsApp').controller('eventsMainCtrl', [function ($scope)
  *
  * @type {controller}
  */
-angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'EventsFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, EventsFact, $cachedResource) {
+angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'eventsFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, eventsFact, $cachedResource) {
 
     //Changement de contexte
     $rootScope.$broadcast('contextCtrl:changeContext', {confId:$routeParams.confId});
@@ -69,7 +69,7 @@ angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', 
             backdrop: true,
             controller: 'eventsDeleteCtrl',
             success: {label: 'Ok', fn: function() {
-                EventsFact.delete({id:event.id});
+                eventsFact.delete({id:event.id});
                 $scope.events.splice(index,1);
             }}
             }, {
@@ -171,7 +171,7 @@ angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', 
  * @type {controller}
  */
 
-angular.module('eventsApp').controller('eventsNewCtrl', [ '$scope', '$rootScope', '$location', 'EventsFact', 'categoriesFact', function ($scope, $rootScope, $location, EventsFact, categoriesFact) {
+angular.module('eventsApp').controller('eventsNewCtrl', [ '$scope', '$rootScope', '$location', 'eventsFact', 'categoriesFact', function ($scope, $rootScope, $location, eventsFact, categoriesFact) {
     $scope.event = new eventsFact;
     $scope.categories = categoriesFact.all();
 

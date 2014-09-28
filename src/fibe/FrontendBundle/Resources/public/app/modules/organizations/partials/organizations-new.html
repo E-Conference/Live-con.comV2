@@ -2,28 +2,9 @@
 <form name="organizationNewForm" class="form" role="form" ng-submit="create(organizationNewForm)">
   <div>
     <h2>Informations</h2>
-    <hr>
   </div>
-  <div>
-    <label for="inputName">Label</label>
-    <input type="text" class="form-control" id="label" required placeholder="Label" ng-model="organization.label">
-  </div>
-  <div>
-    <label for="inputHomepage">Website</label>
-    <input type="text" class="form-control" id="inputWebsite" placeholder="Website" ng-model="organization.website">
-  </div>
-  <div class="form-group">
-    <label for="inputCountry">Country</label>
-    <input type="text" class="form-control" id="inputCountry" placeholder="Country" ng-model="organization.country">
-  </div>
-  <div class="form-group">
-    <label for="inputImg">Image</label>
-    <input type="text" class="form-control" id="inputCountry" placeholder="Image link" ng-model="organization.img">
-  </div>
-  <div>
-    <h2>Members</h2>
-    </hr
-  </div>
+  <hr>
+  <div ng-include="GLOBAL_CONFIG.app.modules.papers.urls.partials+'organizations-form.html'"></div>
   <div class="form-group">
     <button type="submit" class="btn btn-success">Save</button>
   </div>

@@ -153,7 +153,7 @@ angular.module('personsApp').controller('personsListCtrl', ['$scope', 'GLOBAL_CO
  */
 angular.module('personsApp').controller('personsNewCtrl', [ '$scope', '$rootScope', '$location', 'personsFact', function ($scope, $rootScope, $location, personsFact)
 {
-  $scope.person = new personsFact;
+  $scope.person = $scope.person || new personsFact();
 
   var error = function (response, args)
   {

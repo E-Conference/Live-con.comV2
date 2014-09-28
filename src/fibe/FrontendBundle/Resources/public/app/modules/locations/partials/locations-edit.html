@@ -20,7 +20,7 @@
     <label for="inputLongitude">Longitude</label>
     <input type="text" class="form-control" id="inputLongitude" placeholder="{{location.longitude}}" ng-model="location.longitude">
   </div>
-  <div get-or-create parent-entity="location" entity="equipment"></div>
+  <div get-or-create="equipment" parent-entity="location"></div>
   <div>
     <button type="submit" class="btn btn-success">Save</button>
   </div>

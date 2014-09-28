@@ -87,39 +87,46 @@ angular.module('liveconApp').directive('infiniteScroll', [
       }
     };
   }
-]).directive('getOrCreate', ['GLOBAL_CONFIG', '$injector', function(GLOBAL_CONFIG, $injector) {
+]).directive('getOrCreate', ['GLOBAL_CONFIG', 'createDialog', '$injector', function(GLOBAL_CONFIG, createDialogService, $injector) {
   /**
    * angular directive used to show a form inside a parent form for a collection of global entities such as topics
    *
    * use it like :
-   *  <div get-or-create parent-entity="paper" entity="person" uniq-field="email" parent-field="author"></div>
+   *  <div get-or-create="person" parent-entity="paper" parent-field="author" uniq-field="email" new-politic="modal"></div>
    *
    *  the template is loaded dynamicaly like :
    *  GLOBAL_CONFIG.app.modules[entity].urls.partials + entity + '-select.html';
    *
    *
    *    @param parent-entity        : the name of the parent entity that owns entities
-   *    @param entity string        : the name of the entity that belongs to its parent
+   *    @param entity               : the name of the entity that belongs to its parent
    *    @param uniq-field           : (default='label') a unique field identifying the object
    *                                            (mustn't be the id because it's not known til persisted server-side)
-   *    @param entity parent-field  : (default=entity) the key of the parent entity refering to the entity
+   *    @param parent-field         : (default=%entity%) the key of the parent entity refering to the entity
+   *    @param new-politic          : (default='create') none|modal|create the politic when an unknown entity is added
    */
   return {
     template: '<div ng-include="templateUrl"></div>',
     scope:true,
     link: function(scope, element, attrs) {
-      if(!attrs.entity || !attrs.parentEntity)return console.error('missing mandatory field for "getOrCreate" directive (see doc above)');
+      if(!attrs.getOrCreate || !attrs.parentEntity)
+        return console.error('missing mandatory field in "getOrCreate" directive (see doc above)');
+      if(attrs.newPolitic && ["none","modal","create"].indexOf(attrs.newPolitic)<0)
+        return console.error('wrong value for parameter "new-politic" in "getOrCreate" directive (see doc above)');
 
-      var entityLbl           = attrs.entity,
-          parentEntityLbl     = attrs.parentEntity,
-          uniqField           = attrs.uniqField || 'label',
-          parentField         = attrs.parentField || entityLbl,
+      var entityLbl               = attrs.getOrCreate,
+          parentEntityLbl         = attrs.parentEntity,
+          uniqField               = attrs.uniqField || 'label',
+          parentField             = attrs.parentField || entityLbl,
+          newPolitic              = attrs.newPolitic || "create",
 
-          entitiesLbl         = getPlural(entityLbl),
-          entityCamelCaseLbl  = entityLbl.charAt(0).toUpperCase() + entityLbl.slice(1),
-          entityFact          = $injector.get(entitiesLbl + 'Fact'),
+          entitiesLbl             = getPlural(entityLbl),
+          entityCamelCaseLbl      = entityLbl.charAt(0).toUpperCase() + entityLbl.slice(1),
+          entityFact              = $injector.get(entitiesLbl + 'Fact'),
+          dialogTemplateUrl       = GLOBAL_CONFIG.app.urls.partials+'layout/dialog-new-entity-form.html',
+          formDialogTemplateUrl   = GLOBAL_CONFIG.app.modules[entitiesLbl].urls.partials + entitiesLbl + '-form.html',
 
-          limit               = 10
+          limit                   = 10
       ;
 
       scope.templateUrl = GLOBAL_CONFIG.app.modules[entitiesLbl].urls.partials + entitiesLbl + '-select.html';
@@ -131,7 +138,7 @@ angular.module('liveconApp').directive('infiniteScroll', [
       //the parent resource given by attrs.entity
       scope.resource = scope.$parent[parentEntityLbl];
 
-      scope.parentField = parentField = parentField + 's';
+      scope.parentField = parentField = getPlural(parentField);
 
       scope.keyup = function($event)
       {
@@ -140,42 +147,83 @@ angular.module('liveconApp').directive('infiniteScroll', [
           return;
         }
 
+        scope.addedEntity[uniqField] = $event.target.value;
+
         if($event.target.value === "")
         {
-          scope.entities = [];
           return;
         }
-
-        scope.addedEntity[uniqField] = $event.target.value;
 
         scope.busy = true;
         entityFact.all({limit: limit, query: scope.addedEntity[uniqField]}, function (data)
         {
-          scope.entities = [scope.addedEntity];
+          scope.entities = [];
+
           for (var i = 0; i < data.length; i++)
           {
-            if(data[i][uniqField] === scope.addedEntity[uniqField] || hasEntity(data[i]))continue;
+
+            if(containsEntity(scope.resource[parentField],data[i]))
+            {
+              continue;
+            }
+
             scope.entities.push(data[i]);
           }
+
+          if(newPolitic !== "none" && !containsEntity(scope.entities,scope.addedEntity) && !containsEntity(scope.resource[parentField],scope.addedEntity))
+          {
+            scope.entities.push(scope.addedEntity);
+          }
+
           scope.busy = false;
         });
       };
 
       scope.change = function($model)
       {
-        if(!$model[uniqField])return;
-        if(hasEntity($model))
+        if(!$model[uniqField])
         {
-          scope.$root.$broadcast('AlertCtrl:addAlert', {code: entityCamelCaseLbl + ' already registered', type: 'info'});
           return;
         }
+
         if(!scope.resource[parentField])
         {
           scope.resource[parentField] = [];
         }
-        var newEntity = {id:$model.id};
-        newEntity[uniqField] = $model[uniqField];
-        scope.resource[parentField].push(newEntity);
+
+        var newEntity = new entityFact($model);
+        if ($model.id) {
+          scope.resource[parentField].push(newEntity);
+        } else {
+          switch (newPolitic) {
+            case "create":
+              scope.resource[parentField].push(newEntity);
+            break;
+            case "modal":
+              var dialogCtrlArgs = {
+                $entityLbl: entityLbl,
+                $entity: newEntity,
+                $formDialogTemplateUrl: formDialogTemplateUrl
+              };
+              var dialogOptions = {
+                id: 'complexDialog',
+                title: entityCamelCaseLbl + ' creation',
+                backdrop: true,
+                controller: 'dialogNewEntityCtrl',
+                success: {label: 'Ok', fn: function ()
+                {
+                  console.log("validated", newEntity);
+                  scope.resource[parentField].push(newEntity);
+                }},
+                cancel: {label: 'Cancel', fn: function ()
+                {
+                  console.log("cancelled", newEntity);
+                }}
+              };
+              createDialogService(dialogTemplateUrl, dialogOptions, dialogCtrlArgs);
+            break;
+          }
+        }
         $model[uniqField] = "";
         scope.entities = [];
       };
@@ -185,19 +233,25 @@ angular.module('liveconApp').directive('infiniteScroll', [
         scope.resource[parentField].splice(index, 1);
       };
 
-      function hasEntity(entity)
+      function containsEntity(entities,entity)
       {
-        for(var i in scope.resource[parentField])
+
+        for(var i in entities)
         {
-          if(scope.resource[parentField][i][uniqField] === entity[uniqField])
+
+          if(entities[i][uniqField] === entity[uniqField])
           {
             return true;
           }
+
         }
+
+        return false;
       }
 
       function getPlural(entityLbl)
       {
+
         if(entityLbl.slice(-1) === 'y')
         {
           return entityLbl.substring(0,entityLbl.length - 1) + "ies";
@@ -206,6 +260,7 @@ angular.module('liveconApp').directive('infiniteScroll', [
         {
           return entityLbl + "s";
         }
+
       }
     }
   };
