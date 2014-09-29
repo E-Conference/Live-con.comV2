@@ -5,10 +5,10 @@
  *
  * @type {factory}
  */
-angular.module('eventsApp').factory('eventsFact', ['$resource', '$cachedResource',
-  function ($cachedResource)
+angular.module('eventsApp').factory('eventsFact', ['$resource', '$cachedResource', '$rootScope',
+  function ($resource, $cachedResource, $rootScope)
   {
-    return $cachedResource(
+    return $resource(
       globalConfig.api.urls.get_events,
       {},
       {
@@ -16,7 +16,8 @@ angular.module('eventsApp').factory('eventsFact', ['$resource', '$cachedResource
         create: {method: 'POST', params: {}, isArray: false},
         update: {method: 'PUT', url: globalConfig.api.urls.get_events + '/:id', params: {'id': '@id'}, isArray: false},
         delete: {method: 'DELETE', url: globalConfig.api.urls.get_events + '/:id', params: {'id': '@id'}, isArray: false},
-        all: {method: 'GET', params: {}, isArray: true}
+        all: {method: 'GET', params: {}, isArray: true},
+        allByConference: {method: 'GET', url: globalConfig.api.urls.get_conferences + '/:confId/events', params: {'confId': '@confId'}, isArray: true}
       }
     );
   }]);

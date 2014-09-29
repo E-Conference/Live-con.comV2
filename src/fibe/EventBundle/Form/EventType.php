@@ -36,7 +36,12 @@ class EventType extends VEventType
                     'label'    => 'Papers',
                     //'choices'  => $this->user->getCurrentMainEvent()->getPapers()->toArray(),
                     'multiple' => true,
-                    'required' => false
+                    'required' => false))
+            ->add('mainEvent', 'entity', array(
+                'class'    => 'fibeEventBundle:MainEvent',
+                //'choices'  => $this->user->getCurrentMainEvent()->getPapers()->toArray(),
+                'multiple' => false,
+                'required' => false
       ))
         ;
     }

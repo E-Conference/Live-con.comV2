@@ -248,7 +248,7 @@
       $em = $this->getContainer()->get('doctrine')->getManager('default');
       //Create the default conference
       $conference = new MainEvent();
-      $conference->setLogoPath("livecon.png");
+      $conference->setLogoPath("sympozer-.png");
       $em->persist($conference);
 
       //Module

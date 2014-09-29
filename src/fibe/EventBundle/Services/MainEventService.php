@@ -41,9 +41,9 @@
       if(null == $mainEvent)
       {
         $mainEvent = new MainEvent();
-        $mainEvent->setLabel("Livecon Conference");
+        $mainEvent->setLabel("Sympozer New Conference");
       }
-      $mainEvent->setLogoPath("livecon.png");
+      $mainEvent->setLogoPath("sympozer-logo.png");
       $mainEvent->setStartAt(new \DateTime('now'));
       $mainEvent->setEndAt(clone $mainEvent->getStartAt()->add(new \DateInterval('P2D')));
       $this->entityManager->persist($mainEvent);

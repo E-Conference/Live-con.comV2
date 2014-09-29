@@ -20,7 +20,7 @@ angular.module('eventsApp').controller('eventsMainCtrl', [function ($scope)
  */
 angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'eventsFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, eventsFact, $cachedResource) {
 
-    //Changement de contexte
+    //Context change
     $rootScope.$broadcast('contextCtrl:changeContext', {confId:$routeParams.confId});
 
     var offset = -20;
@@ -133,7 +133,7 @@ angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', 
     }
 
     $scope.busy = true;
-    eventsFact.all(filters, function (data)
+    eventsFact.allByConference(filters, {confId: $routeParams.confId},  function (data)
     {
       var items = data;
 
@@ -171,9 +171,8 @@ angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', 
  * @type {controller}
  */
 
-angular.module('eventsApp').controller('eventsNewCtrl', [ '$scope', '$rootScope', '$location', 'eventsFact', 'categoriesFact', function ($scope, $rootScope, $location, eventsFact, categoriesFact) {
+angular.module('eventsApp').controller('eventsNewCtrl', [ '$scope', '$rootScope', '$location', 'eventsFact', function ($scope, $rootScope, $location, eventsFact) {
     $scope.event = new eventsFact;
-    $scope.categories = categoriesFact.all();
 
     var error = function(response, args){
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'the event has not been created', type:'danger'});
@@ -181,10 +180,11 @@ angular.module('eventsApp').controller('eventsNewCtrl', [ '$scope', '$rootScope'
 
     var success = function(response, args){
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'event created', type:'success'});
-        $location.path('/events/list');
+        $location.path('/conference/'+$rootScope.currentConference.id+'/events/list');
     }
 
     $scope.create = function(form){
+        $scope.event.mainEvent = $rootScope.currentConference.id;
         if ( form.$valid ) {
             $scope.event.$create({}, success, error);
         }
