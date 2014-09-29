@@ -8,7 +8,7 @@ namespace fibe\RestBundle\Search;
 interface SearchServiceInterface
 {
   /**
-   *  Search with "LIKE %query%" for fields annoted with 'Doctrine\ORM\Column(type="string")'
+   *  Search with "LIKE %query%" for fields annotated with '@Doctrine\ORM\Column(type="string")'
    * @param string $entityClassName
    * @param string $query the query to search
    * @param int $limit max number of result

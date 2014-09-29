@@ -162,11 +162,13 @@ liveconControllers.controller('dialogNewEntityCtrl', [ '$scope', '$rootScope', '
 
     var error = function (response, args)
     {
+      $scope.busy = false;
       $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the ' + $entityLbl + ' has not been created', type: 'danger'});
     };
 
     var success = function (response, args)
     {
+      $scope.busy = false;
       $rootScope.$broadcast('AlertCtrl:addAlert', {code: $entityLbl + ' created', type: 'success'});
       modalSuccessFn();
     };
@@ -175,6 +177,7 @@ liveconControllers.controller('dialogNewEntityCtrl', [ '$scope', '$rootScope', '
     {
       if (this[$scope.formId].$valid)
       {
+        $scope.busy = true;
         $scope[$entityLbl].$create({}, success, error);
       }
     };

@@ -7,8 +7,8 @@
  *
  * @type {controller}
  */
-angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG', 'userFactory', '$location',
-  function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, userFactory, $location)
+angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG', 'usersFact', '$location',
+  function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, usersFact, $location)
   {
 
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
@@ -27,7 +27,7 @@ angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootSc
     }
     $scope.signinAction = function (user)
     {
-      userFactory.signin({}, {"_username": $scope.user.username, "_password": $scope.user.password}, success, error);
+      usersFact.signin({}, {"_username": $scope.user.username, "_password": $scope.user.password}, success, error);
     }
   }]);
 
@@ -36,14 +36,14 @@ angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootSc
  *
  * @type {controller}
  */
-angular.module('authenticationApp').controller('signupCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'GLOBAL_CONFIG', 'userFactory',
-  function ($scope, $rootScope, $location, $routeParams, GLOBAL_CONFIG, userFactory)
+angular.module('authenticationApp').controller('signupCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'GLOBAL_CONFIG', 'usersFact',
+  function ($scope, $rootScope, $location, $routeParams, GLOBAL_CONFIG, usersFact)
   {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
     var error = function (response, args)
     {
-      $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Register_error', type: 'danger'});
+      $rootScope.$broadcast('AlertCtrl:addAlert', {code: response.data.error, type: 'danger'});
     }
     var success = function (response, args)
     {
@@ -52,9 +52,9 @@ angular.module('authenticationApp').controller('signupCtrl', ['$scope', '$rootSc
       $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Register_success', type: 'success'});
       $location.path('/');
     }
-    $scope.signupAction = function ()
+    $scope.signupAction = function (user)
     {
-      userFactory.signup({}, {"_username": $scope.user.username, "_password": $scope.user.password}, success, error);
+      usersFact.signup({}, {fos_user_registration_form:user}, success, error);
     }
 
   }]);
@@ -78,6 +78,27 @@ angular.module('authenticationApp').controller('signoutCtrl', ['$scope', '$rootS
       $window.history.back();
       $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'signout_success', type: 'success'});
     }
+  }]);
+
+/**
+ * confirm email controller
+ *
+ * @type {controller}
+ */
+angular.module('authenticationApp').controller('confirmCtrl', [ '$scope', '$rootScope', '$routeParams', 'usersFact',
+  function ($scope, $rootScope, $routeParams, usersFact)
+  {
+    var error = function (response, args)
+    {
+      $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Register_confirm_error', type: 'danger'});
+    }
+
+    var success = function (response, args)
+    {
+      $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Register_confirm_success', type: 'success'});
+    }
+
+    var user = usersFact.confirm({token: $routeParams.token}, success, error);
   }]);
 
 /**

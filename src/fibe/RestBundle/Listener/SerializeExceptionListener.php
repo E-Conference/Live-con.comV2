@@ -29,7 +29,7 @@ class SerializeExceptionListener
          }
          $error = $event->getException();
          $data = array('error' => $error->getMessage(),'stack_trace' => $error->getTraceAsString());
-         // NEVER DO THIS! it's causing awkward errors of dotrin annotation not imported o_O
+         // NEVER DO THIS! it's causing awkward errors like doctrine annotation not imported o_O
          // $data[] = array('stacktrace' => $error->getTrace());
          $content = $this->getSerializer()->serialize($data, $format);
          $response = new Response($content, 400);

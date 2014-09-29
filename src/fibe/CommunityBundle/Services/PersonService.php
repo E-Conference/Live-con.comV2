@@ -5,11 +5,8 @@
   use Doctrine\ORM\EntityManager;
   use fibe\CommunityBundle\Entity\Person;
   use FOS\UserBundle\Mailer\MailerInterface;
-  use FOS\UserBundle\Mailer\TwigSwiftMailer;
-  use FOS\UserBundle\Model\UserInterface;
   use FOS\UserBundle\Model\UserManagerInterface;
   use FOS\UserBundle\Util\TokenGeneratorInterface;
-  use FOS\UserBundle\Util\UserManipulator;
 
   /**
    * Class MainEventService
@@ -34,7 +31,7 @@
     /**
      * @param Person $person
      *
-     * @throws DBALException when email or username is already in use
+     * @throws \Doctrine\DBAL\DBALException when email or username is already in use
      */
     public function post(Person $person = null)
     {
@@ -46,11 +43,10 @@
       $newUser->setEmail($email);
       $newUser->setPlainPassword($randomPwd);
       $newUser->setEnabled(false);
-
       $newUser->setConfirmationToken($this->tokenGenerator->generateToken());
-      $this->mailer->sendConfirmationEmailMessage($newUser);
       $person->setUser($newUser);
-
       $this->userManager->updateUser($newUser);
+
+      $this->mailer->sendConfirmationEmailMessage($newUser);
     }
   }

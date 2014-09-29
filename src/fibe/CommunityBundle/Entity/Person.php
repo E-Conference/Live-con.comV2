@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use fibe\ContentBundle\Entity\Paper;
 use fibe\ContentBundle\Entity\Role;
 use fibe\ContentBundle\Util\StringTools;
+use fibe\SecurityBundle\Entity\User;
 use FOS\UserBundle\Model\UserInterface;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
@@ -532,8 +533,9 @@ class Person extends AdditionalInformations
   /**
    * @param UserInterface $user
    */
-  public function setUser(UserInterface $user)
+  public function setUser(User $user)
   {
+    $user->setPerson($this);
     $this->user = $user;
   }
 }

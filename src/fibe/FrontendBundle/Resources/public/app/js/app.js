@@ -72,10 +72,16 @@ liveconApp.config(['$translateProvider', function ($translateProvider)
     'Search_publication': 'Search an publication',
     'Search_person': 'Search a person',
     'Search_organization': 'Search an organization',
-    'Login_success': 'Welcome to live-con.com',
+    'Login_success': 'Welcome to Sympozer',
     'Login_error': 'Bad credentials',
     'Forgotten_password': 'Forgotten password',
-    'signout_success': 'Thanks for coming, see you soon'
+    'signout_success': 'Thanks for coming, see you soon',
+    'Register_success': 'Thanks for registering, You will receive an email to complete your registration',
+    'Register_confirm_success': 'You account is now activated',
+    'Register_error': 'Cannot register the user. Please contact the support.',
+    'Register_email_in_use_error': 'Email already in use',
+    'Register_username_in_use_error': 'Login already in use',
+    'Register_confirm_error': 'Invalid confirmation token.'
   });
 
   // Simply register translation table as object hash
@@ -89,7 +95,13 @@ liveconApp.config(['$translateProvider', function ($translateProvider)
     'Login_success': 'Bienvenue sur live-con.com',
     'Login_error': 'Login impossible',
     'Forgotten_password': 'Mot de passe oublié ?',
-    'signout_success': 'Merci d\'utiliser Live-con.com, à bientôt'
+    'signout_success': 'Merci d\'utiliser Sympozer, à bientôt',
+    'Register_success': 'Merci de vous être enregistré. Vous recevrez un e-mail pour terminer votre inscription',
+    'Register_activated_success': 'Votre compte est maintenant activé',
+    'Register_error': 'L\'utilisateur n\'a pas pu etre enregistré. Veuillez contacter le support.',
+    'Register_email_in_use_error': 'Adresse mail déjà utilisée',
+    'Register_username_in_use_error': 'Login déjà utilisé',
+    'Register_confirm_error': 'Jeton de confirmation invalide.'
   });
 
   $translateProvider.preferredLanguage('en_US');
