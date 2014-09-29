@@ -109,8 +109,6 @@
 
   <!-- <script src="{{ asset('bundles/frontend/app/js/animations.js') }}"></script> -->
 
-  <!-- OpenStreetMap  -->
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css">
 
 
   <!-- basic client app context definition -->
@@ -121,6 +119,8 @@
           get_organizations: "{{ path('community_organizations_post') }}",
           get_persons: "{{ path('community_persons_post') }}",
           get_locations: "{{ path('content_locations_post') }}",
+          get_equipments: "{{ path('content_equipments_post') }}",
+          get_events: "{{ path('schedule_events_post') }}",
           get_events: "{{ path('schedule_events_post') }}",
           get_papers: "{{ path('content_papers_post') }}",
           get_topics: "{{ path('content_topics_post') }}",

@@ -31,27 +31,34 @@ class SearchService implements SearchServiceInterface
   /**
    * {@inheritdoc}
    */
-  public function doSearch($entityClassName, $query, $limit, $offset, $orders = null)
+  public function doSearch($entityClassName, $limit, $offset, $query = null, $orders = null, $confId = null)
   {
     $searchFields = $this->getSearchFields($entityClassName);
     $qb = $this->em->getRepository($entityClassName)->createQueryBuilder('qb')  //add select and array for JSON
     ->setMaxResults($limit)
     ->setFirstResult($offset);
 
-    $forceCI = in_array($entityClassName, $this->forceCIon);
-    foreach($searchFields as $searchField)
-    {
-      if($forceCI)
-      {
-        $qb->orWhere('UPPER(qb.'.$searchField.') LIKE UPPER(:string)');
+    //Add filter from input query
+    if($query != null) {
+
+      $forceCI = in_array($entityClassName, $this->forceCIon);
+      foreach ($searchFields as $searchField) {
+          if ($forceCI) {
+              $qb->orWhere('UPPER(qb.' . $searchField . ') LIKE UPPER(:string)');
+          } else {
+              $qb->orWhere('qb.' . $searchField . ' LIKE :string');
+          }
+          $qb->setParameter('string', '%' . $query . '%');
       }
-      else
-      {
-        $qb->orWhere('qb.'.$searchField.' LIKE :string');
-      }
-      $qb->setParameter('string', '%'.$query.'%');
     }
 
+    //Filter by conference
+    if($confId != null) {
+        $qb->where('qb.mainEvent = (:confId)' );
+        $qb->setParameter('confId',  $confId);
+    }
+
+    //Build order by
     if(count($orders) > 0)
     {
       foreach($orders as $field => $order)

@@ -19,7 +19,9 @@ class EquipmentType extends AbstractType
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
     $builder
+      ->add('id')
       ->add('label')
+      ->add('description')
       ->add('icon');
   }
 
@@ -29,7 +31,8 @@ class EquipmentType extends AbstractType
   public function setDefaultOptions(OptionsResolverInterface $resolver)
   {
     $resolver->setDefaults(array(
-      'data_class' => 'fibe\ContentBundle\Entity\Equipment'
+      'data_class' => 'fibe\ContentBundle\Entity\Equipment',
+      'csrf_protection' => false
     ));
   }
 
@@ -40,6 +43,6 @@ class EquipmentType extends AbstractType
    */
   public function getName()
   {
-    return 'fibe_contentbundle_equipmenttype';
+    return 'fibe_contentbundle_equipment';
   }
 }

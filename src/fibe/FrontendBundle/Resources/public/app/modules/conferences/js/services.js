@@ -6,9 +6,9 @@
  * @type {factory}
  */
 angular.module('conferencesApp').factory('conferencesFact', ['$resource', '$cachedResource',
-  function ($cachedResource)
+  function ($resource, $cachedResource)
   {
-    return $cachedResource(
+    return $resource(
       globalConfig.api.urls.get_conferences,
       {},
       {

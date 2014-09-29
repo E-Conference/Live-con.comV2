@@ -81,7 +81,7 @@ liveconControllers.controller('AlertCtrl', ['$scope', '$routeParams', 'GLOBAL_CO
 liveconControllers.controller('navLeftCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG',
   function ($scope, $routeParams, GLOBAL_CONFIG)
   {
-    $scope.liveconLogoPath = GLOBAL_CONFIG.liveconLogoPath;
+    $scope.sympozerLogoPath = GLOBAL_CONFIG.sympozerLogoPath;
     $scope.status = {
       isFirstOpen: true,
       isFirstDisabled: false
