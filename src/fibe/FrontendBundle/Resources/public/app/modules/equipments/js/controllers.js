@@ -153,7 +153,6 @@ angular.module('equipmentsApp').controller('equipmentsNewCtrl', [ '$scope', '$ro
   var success = function (response, args)
   {
     $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'equipment created', type: 'success'});
-    $location.path('/equipments/list');
   }
 
   $scope.create = function (form)

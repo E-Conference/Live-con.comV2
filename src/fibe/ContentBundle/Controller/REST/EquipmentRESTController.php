@@ -16,7 +16,7 @@ class EquipmentRESTController extends FOSRestController
 {
 
   const ENTITY_CLASSNAME = "fibe\\ContentBundle\\Entity\\Equipment";
-  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\Equipment";
+  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\EquipmentType";
 
 
   /**
@@ -53,7 +53,7 @@ class EquipmentRESTController extends FOSRestController
   /**
    * Creates a new equipment from the submitted data.
    *
-   * @Rest\Post("/equipments",name="api_equipment_post")
+   * @Rest\Post("/equipments",name="content_equipments_post")
    *
    * @param Request $request the request object
    *

@@ -102,6 +102,30 @@ class Equipment
   }
 
   /**
+   * Set description
+   *
+   * @param string $description
+   *
+   * @return Equipment
+   */
+  public function setDescription($description)
+  {
+    $this->description = $description;
+
+    return $this;
+  }
+
+  /**
+   * Get description
+   *
+   * @return string
+   */
+  public function getDescription()
+  {
+    return $this->description;
+  }
+
+  /**
    * Set icon
    *
    * @param string $icon
