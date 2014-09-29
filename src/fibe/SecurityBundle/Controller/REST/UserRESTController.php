@@ -5,7 +5,6 @@
  */
 namespace fibe\SecurityBundle\Controller\REST;
 
-//TODO edit username mail and pwd,
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\UserBundle\Model\UserInterface;
@@ -36,6 +35,8 @@ class UserRESTController extends Controller
     $process = $formHandler->process($confirmationEnabled);
     if ($process) {
       $user = $form->getData();
+      $this->container->get('fibe.UserService')->post($user);
+      $this->getDoctrine()->getManager()->flush();
 
       $response = new Response('Register_success');
 
@@ -44,7 +45,9 @@ class UserRESTController extends Controller
       }
 
       return $response;
-    }else{
+    }else
+    {
+      //investigate on failure...
       $userManager = $this->container->get('fos_user.user_manager');
       if(null != $userManager->findUserByUsername($form->getData()->getUsername()))
       {
@@ -69,7 +72,7 @@ class UserRESTController extends Controller
   }
 
   /**
-   * Receive the confirmation token from user email provider, login the user.
+   * Receive the confirmation token from user email provider,enable login the user and .
    * @Rest\Post("/user/confirm", name="security_confirm")
    * @Rest\View
    */
@@ -77,20 +80,33 @@ class UserRESTController extends Controller
   {
     $token = $request->request->get('token');
     $userManager = $this->container->get('fos_user.user_manager');
+    /** @var \fibe\SecurityBundle\Entity\User $user */
     $user = $userManager->findUserByConfirmationToken($token);
 
-    if (null === $user || strlen($token) == 0) {
+    if (null === $user || strlen($token) == 0)
+    {
       throw new NotFoundHttpException(sprintf('The user with confirmation token "%s" does not exist', $token));
     }
-    $user->setConfirmationToken(null);
+    //let the user a way to login if he doesn't change his password
+    if(!$user->isRandomPwd())
+    {
+      $user->setConfirmationToken(null);
+    }
     $user->setEnabled(true);
     $user->setLastLogin(new \DateTime());
     $userManager->updateUser($user);
+
     $response = new Response($this->container->get('jms_serializer')->serialize( $user, $request->getRequestFormat()));
     $response->headers->set('Content-Type', 'application/json');
     $this->authenticateUser($user, $response);
     return $response;
   }
+
+  //TODO : change password action that set $user->isRandomPwd(false)
+  //TODO : change password action that set $user->isRandomPwd(false)
+  //TODO : change password action that set $user->isRandomPwd(false)
+  //TODO : change password action that set $user->isRandomPwd(false)
+  //TODO : change password action that set $user->isRandomPwd(false)
 
   /**
    * Authenticate a user with Symfony Security

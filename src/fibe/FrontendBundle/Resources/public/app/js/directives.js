@@ -108,9 +108,8 @@ angular.module('liveconApp').directive('infiniteScroll', [
   return {
     template: '<div ng-include="templateUrl"></div>',
     scope:true,
-    require:"parentEntity",
     link: function(scope, element, attrs) {
-      if(!attrs.getOrCreate)
+      if(!attrs.getOrCreate || !attrs.parentEntity)
         return console.error('missing mandatory field in "get-or-create" directive (see doc above)');
       if(attrs.newPolitic && ["none","modal","create"].indexOf(attrs.newPolitic)<0)
         return console.error('wrong value for parameter "new-politic" in "getOrCreate" directive (see doc above)');

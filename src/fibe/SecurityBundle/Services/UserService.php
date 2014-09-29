@@ -13,7 +13,6 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
  */
 class UserService
 {
-
   protected $entityManager;
   protected $securityContext;
 
@@ -27,6 +26,7 @@ class UserService
   {
     $person = new Person();
     $person->setUser($user);
+    $person->setEmail($user->getEmail());
     $this->entityManager->persist($person);
     return $user;
   }

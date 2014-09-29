@@ -95,6 +95,9 @@ angular.module('authenticationApp').controller('confirmCtrl', [ '$scope', '$root
 
     var success = function (response, args)
     {
+      $rootScope.currentUser = response;
+      localStorage.setItem('currentUser', JSON.stringify(response));
+      $scope.user = response;
       $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Register_confirm_success', type: 'success'});
     }
 

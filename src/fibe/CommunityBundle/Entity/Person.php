@@ -41,8 +41,8 @@ class Person extends AdditionalInformations
   /**
    * technical user
    *
-   * @ORM\OneToOne(targetEntity="fibe\SecurityBundle\Entity\User", cascade={"persist", "remove"})
-   * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
+   * @ORM\OneToOne(targetEntity="fibe\SecurityBundle\Entity\User", cascade={"all"})
+   * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="cascade")
    *
    */
   protected $user;
@@ -523,7 +523,7 @@ class Person extends AdditionalInformations
   }
 
   /**
-   * @return mixed
+   * @return \fibe\SecurityBundle\Entity\User
    */
   public function getUser()
   {
@@ -533,9 +533,12 @@ class Person extends AdditionalInformations
   /**
    * @param UserInterface $user
    */
-  public function setUser(User $user)
+  public function setUser(User $user = null)
   {
-    $user->setPerson($this);
+    if($user != null)
+    {
+      $user->setPerson($this);
+    }
     $this->user = $user;
   }
 }

@@ -39,9 +39,17 @@
     protected $username;
 
     /**
+     * has the user set his own password yet ?
+     *
+     * @ORM\Column(type="boolean")
+     * @Expose
+     */
+    protected $randomPwd;
+
+    /**
      * Person
      *
-     * @ORM\OneToOne(targetEntity="fibe\CommunityBundle\Entity\Person",cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="fibe\CommunityBundle\Entity\Person", cascade={"all"})
      * @Expose
      */
     private $person;
@@ -119,6 +127,7 @@
       parent::__construct();
       $this->teams = new ArrayCollection();
       $this->conferences = new ArrayCollection();
+      $this->setRandomPwd(false);
     }
 
     /**
@@ -212,6 +221,27 @@
     public function getCurrentMainEvent()
     {
       return $this->currentMainEvent;
+    }
+
+    /**
+     * has the user set his own password yet ?
+     * @return boolean
+     */
+    public function isRandomPwd()
+    {
+      return $this->randomPwd;
+    }
+
+    /**
+     * @param boolean $randomPwd
+     *
+     * @return $this
+     */
+    public function setRandomPwd($randomPwd)
+    {
+      $this->randomPwd = $randomPwd;
+
+      return $this;
     }
 
     public function getName()
@@ -364,7 +394,7 @@
     /**
      * @param Person $person
      */
-    public function setPerson(Person $person)
+    public function setPerson(Person $person = null)
     {
       $this->person = $person;
     }
