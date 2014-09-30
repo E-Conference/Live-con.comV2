@@ -27,7 +27,7 @@ angular.module('contextualizationApp', ['conferencesApp']);
  *
  * @type {module}
  */
-var liveconApp = angular.module('liveconApp', [
+var sympozerApp = angular.module('sympozerApp', [
   'ngRoute',
   'ngAnimate',
   'ngResource',
@@ -61,7 +61,7 @@ var liveconApp = angular.module('liveconApp', [
 /**
  * Configuring $translateProvider
  */
-liveconApp.config(['$translateProvider', function ($translateProvider)
+sympozerApp.config(['$translateProvider', function ($translateProvider)
 {
 
   // Simply register translation table as object hash
@@ -112,7 +112,7 @@ liveconApp.config(['$translateProvider', function ($translateProvider)
  *
  * (execute after injection)
  */
-liveconApp.run(function (amMoment)
+sympozerApp.run(function (amMoment)
 {
   amMoment.changeLanguage('de');
 });

@@ -6,7 +6,7 @@
  *
  * @type {config}
  */
-liveconApp.config(['$routeProvider',
+sympozerApp.config(['$routeProvider',
   function ($routeProvider)
   {
     $routeProvider.
