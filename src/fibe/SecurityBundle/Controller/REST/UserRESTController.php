@@ -7,6 +7,7 @@ namespace fibe\SecurityBundle\Controller\REST;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
+use FOS\UserBundle\Form\Model\ChangePassword;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -14,7 +15,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\AccountStatusException;
+use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
 /**
  * Class UserRESTController
@@ -61,6 +64,52 @@ class UserRESTController extends Controller
   }
 
   /**
+   * change the password of an user.
+   * If the password is still random, don't ask for it.
+   * @Route("/user/changepwd", name="security_changepwd")
+   */
+  public function changePwdAction(Request $request)
+  {
+    /** @var \fibe\SecurityBundle\Entity\User $user */
+    $user = $this->getUser();
+    if (!is_object($user) || !$user instanceof UserInterface) {
+      throw new AccessDeniedException('This user does not have access to this section.');
+    }
+
+    //TODO : find a better way to do this ?
+    $changePasswordForm = json_decode($request->getContent(),true);
+    if($changePasswordForm['new_password_first'] !== $changePasswordForm['new_password_second'])
+    {
+      throw new \Exception('Changepwd_mismatch_error');
+    }
+    $newPassword = $changePasswordForm['new_password_first'];
+
+    if(!$user->isRandomPwd())
+    {
+      $oldPassword = $changePasswordForm['current_password'];
+      if ($oldPassword === $newPassword){
+        throw new \Exception('Changepwd_nochange_error');
+      }
+      $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+      $passwordSecure = $encoder->encodePassword($oldPassword, $user->getSalt());
+      if ($passwordSecure !== $user->getPassword()){
+        throw new \Exception('Changepwd_currentpwd_error');
+      }
+    }
+
+    $userManager = $this->container->get('fos_user.user_manager');
+    $user->setPlainPassword($newPassword);
+    $user->setRandomPwd(false);
+    $user->setConfirmationToken(null);
+    $userManager->updateUser($user);
+
+    $response = new Response($this->container->get('jms_serializer')->serialize( $user, $request->getRequestFormat()));
+    $response->headers->set('Content-Type', 'application/json');
+    $this->authenticateUser($user, $response);
+    return $response;
+  }
+
+  /**
    * Redirect to the frontend api confirmation page.
    * @Rest\Get("/confirm", name="fos_user_registration_confirm")
    * @Rest\QueryParam(name="token", requirements=".{32,64}", description="The confirmation token from user email provider.")
@@ -101,12 +150,6 @@ class UserRESTController extends Controller
     $this->authenticateUser($user, $response);
     return $response;
   }
-
-  //TODO : change password action that set $user->isRandomPwd(false)
-  //TODO : change password action that set $user->isRandomPwd(false)
-  //TODO : change password action that set $user->isRandomPwd(false)
-  //TODO : change password action that set $user->isRandomPwd(false)
-  //TODO : change password action that set $user->isRandomPwd(false)
 
   /**
    * Authenticate a user with Symfony Security

@@ -22,6 +22,10 @@ angular.module('authenticationApp')
           templateUrl: globalConfig.app.modules.authentication.urls.partials + 'signout.html',
           controller: 'signoutCtrl'
         })
+        .when('/profile', {
+          templateUrl: globalConfig.app.modules.authentication.urls.partials + 'profile.html',
+          controller: 'profileCtrl'
+        })
         .when('/confirm/:token', {
           templateUrl: globalConfig.app.modules.authentication.urls.partials + 'confirm.html',
           controller: 'confirmCtrl'

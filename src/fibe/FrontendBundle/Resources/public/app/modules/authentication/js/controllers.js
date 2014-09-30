@@ -15,10 +15,12 @@ angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootSc
     $rootScope.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     var error = function (response, args)
     {
+      $scope.busy = false;
       $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Login_error', type: 'danger'});
     }
     var success = function (response, args)
     {
+      $scope.busy = false;
       $scope.user = response;
       $rootScope.currentUser = response;
       localStorage.setItem('currentUser', JSON.stringify(response));
@@ -27,6 +29,7 @@ angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootSc
     }
     $scope.signinAction = function (user)
     {
+      $scope.busy = true;
       usersFact.signin({}, {"_username": $scope.user.username, "_password": $scope.user.password}, success, error);
     }
   }]);
@@ -43,10 +46,12 @@ angular.module('authenticationApp').controller('signupCtrl', ['$scope', '$rootSc
 
     var error = function (response, args)
     {
+      $scope.busy = false;
       $rootScope.$broadcast('AlertCtrl:addAlert', {code: response.data.error, type: 'danger'});
     }
     var success = function (response, args)
     {
+      $scope.busy = false;
       $scope.user = response;
       $rootScope.currentUser = response;
       $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Register_success', type: 'success'});
@@ -54,6 +59,7 @@ angular.module('authenticationApp').controller('signupCtrl', ['$scope', '$rootSc
     }
     $scope.signupAction = function (user)
     {
+      $scope.busy = true;
       usersFact.signup({}, {fos_user_registration_form:user}, success, error);
     }
 
@@ -85,23 +91,70 @@ angular.module('authenticationApp').controller('signoutCtrl', ['$scope', '$rootS
  *
  * @type {controller}
  */
-angular.module('authenticationApp').controller('confirmCtrl', [ '$scope', '$rootScope', '$routeParams', 'usersFact',
-  function ($scope, $rootScope, $routeParams, usersFact)
+angular.module('authenticationApp').controller('confirmCtrl', [ '$scope', '$rootScope', '$routeParams', 'usersFact', '$location',
+  function ($scope, $rootScope, $routeParams, usersFact, $location)
   {
     var error = function (response, args)
     {
+      $scope.busy = false;
       $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Register_confirm_error', type: 'danger'});
     }
 
     var success = function (response, args)
     {
+      $scope.busy = false;
+      //login
       $rootScope.currentUser = response;
       localStorage.setItem('currentUser', JSON.stringify(response));
       $scope.user = response;
+
       $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Register_confirm_success', type: 'success'});
+      if(!$rootScope.currentUser.random_pwd)$location.path('/persons/show/' + $scope.$root.currentUser.id);
     }
 
+    $scope.busy = true;
     var user = usersFact.confirm({token: $routeParams.token}, success, error);
+  }]);
+
+/**
+ * confirm email controller
+ *
+ * @type {controller}
+ */
+angular.module('authenticationApp').controller('profileCtrl', [ '$scope', '$routeParams', 'usersFact', '$location',
+  function ($scope, $routeParams, usersFact, $location)
+  {
+
+  }]);
+
+/**
+ * confirm email controller
+ *
+ * @type {controller}
+ */
+angular.module('authenticationApp').controller('changePwdCtrl', [ '$scope', '$routeParams', 'usersFact', '$location',
+  function ($scope, $routeParams, usersFact, $location)
+  {
+    var error = function (response, args)
+    {
+      $scope.busy = false;
+      $scope.$root.$broadcast('AlertCtrl:addAlert', {code: response.data.error, type: 'danger'});
+    }
+
+    var success = function (response, args)
+    {
+      $scope.busy = false;
+      $scope.$root.$broadcast('AlertCtrl:addAlert', {code: 'Changepwd_success', type: 'success'});
+      $scope.$root.currentUser = response;
+      localStorage.setItem('currentUser', JSON.stringify(response));
+      $location.path('/persons/show/' + $scope.$root.currentUser.id);
+    }
+
+    $scope.changePwdAction = function (changePwdForm)
+    {
+      $scope.busy = true;
+      usersFact.changepwd(changePwdForm, success, error);
+    }
   }]);
 
 /**

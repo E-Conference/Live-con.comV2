@@ -9,6 +9,7 @@ namespace fibe\CommunityBundle\Services;
   use FOS\UserBundle\Util\TokenGeneratorInterface;
   use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
   use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+  use Symfony\Component\Security\Core\SecurityContextInterface;
 
   /**
    * Class MainEventService
@@ -18,13 +19,15 @@ namespace fibe\CommunityBundle\Services;
   {
 
     protected $entityManager;
+    protected $securityContext;
     protected $userManager;
     protected $tokenGenerator;
     protected $mailer;
 
-    public function __construct(EntityManager $entityManager, UserManagerInterface $userManager, TokenGeneratorInterface $tokenGenerator, MailerInterface $mailer)
+    public function __construct(EntityManager $entityManager, SecurityContextInterface $securityContext, UserManagerInterface $userManager, TokenGeneratorInterface $tokenGenerator, MailerInterface $mailer)
     {
       $this->entityManager = $entityManager;
+      $this->securityContext= $securityContext;
       $this->userManager = $userManager;
       $this->tokenGenerator = $tokenGenerator;
       $this->mailer = $mailer;
@@ -66,8 +69,7 @@ namespace fibe\CommunityBundle\Services;
       $user = $person->getUser();
 
       //nobody but the user himself can change his profile while his account is enabled
-      //TODO check if this isn't the user modifying his profile
-      if($user->isEnabled())
+      if($user->isEnabled() && $user->getId() !== $this->securityContext->getToken()->getUser()->getId())
       {
         throw new AccessDeniedException('This person is linked to a real user account');
       }else
