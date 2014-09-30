@@ -19,12 +19,13 @@
         {% if attribute(app.user , owner ~ 'Id') == null %}
           <a class="btn btn-info btn-lg btn-connect btn-connect-{{ owner }}" href="{{ path('enrich_account', { 'socialService': owner }) }}">
             enrich with {{ owner | trans({}, 'HWIOAuthBundle') }}
+          </a>
         {% else %}
           <a class="btn btn-success btn-lg btn-connect btn-connect-{{ owner }} " href="{{ path('enrich_account', { 'socialService': owner }) }}">
           <i class="fa fa-check"></i>
             synchronize with {{ owner | trans({}, 'HWIOAuthBundle') }}
+          </a>
         {% endif %}
-          </a> 
         {% endfor %}
   </div>
 

@@ -10,7 +10,7 @@
  *
  * @type {factory}
  */
-angular.module('authenticationApp').factory('userFactory', ['$resource',
+angular.module('authenticationApp').factory('usersFact', ['$resource',
   function ($resource)
   {
     return $resource(
@@ -18,8 +18,9 @@ angular.module('authenticationApp').factory('userFactory', ['$resource',
       {'id': '@id'},
       {
         get: {method: 'GET', params: {}, isArray: false},
-        signin: {method: 'POST', url: globalConfig.api.urls.login, isArray: false},
-        signup: {method: 'POST', url: globalConfig.api.urls.login, isArray: false},
+        signin: {method: 'POST', params: {}, isArray: false},
+        signup: {method: 'POST', url: globalConfig.api.urls.registration, isArray: false},
+        confirm: {method: 'POST', url: globalConfig.api.urls.confirm, isArray: false},
         show: {method: 'GET', isArray: false},
         list: {method: 'GET', url: globalConfig.api.urls.organizations + '.json', params: {}, isArray: true}
       }

@@ -157,11 +157,12 @@ class FOSUBUserProvider extends BaseFOSUBUserProvider
 
 
     /**
-     * actually, don't what does this function...
+     * actually, don't when this function is called...
      * {@inheritDoc}
      */
     public function connect(UserInterface $user, UserResponseInterface $response)
     {
+      throw new \Exception('FOSUBUserProvider:connect()');
       $property = $this->getProperty($response);
       $username = $response->getUsername();
 

@@ -192,13 +192,17 @@ angular.module('sympozerApp').directive('infiniteScroll', [
         }
 
         var newEntity = new entityFact($model);
-        if ($model.id) {
+        if ($model.id)
+        {
           scope.resource[parentField].push(newEntity);
-        } else {
-          switch (newPolitic) {
+        } else
+        {
+          switch (newPolitic)
+          {
             case "create":
               scope.resource[parentField].push(newEntity);
             break;
+
             case "modal":
               var dialogCtrlArgs = {
                 $entityLbl: entityLbl,
@@ -222,6 +226,7 @@ angular.module('sympozerApp').directive('infiniteScroll', [
               };
               createDialogService(dialogTemplateUrl, dialogOptions, dialogCtrlArgs);
             break;
+
           }
         }
         $model[uniqField] = "";

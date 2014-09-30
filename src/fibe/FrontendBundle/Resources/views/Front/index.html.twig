@@ -127,7 +127,8 @@
           get_categories: "{{ path('schedule_categories_post') }}",
           get_conferences: "{{ path('schedule_conferences_post') }}",
           login: "{{ path('login_check', {_format: 'json'}) }}",
-          {#registration: "{{ path('') }}"#}
+          registration: "{{ path('security_signup') }}",
+          confirm: "{{ path('security_confirm') }}"
         }
       },
       app: {

@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CrudHandler
 {
+  /** @var \Doctrine\ORM\EntityManager em */
   protected $em;
   protected $container;
 
@@ -32,6 +33,7 @@ class CrudHandler
   /**
    * @param string $entityClassName
    * @param ParamFetcherInterface $paramFetcher
+   * @param null $confId
    * @return array of Entities
    */
   public function getAll($entityClassName, ParamFetcherInterface $paramFetcher = null, $confId = null)
@@ -78,27 +80,11 @@ class CrudHandler
     }
     $form = $this->container->get('form.factory')->create(new $formClassName(), $entity, array('method' => $method));
     unset($formData['id']);//remove id to avoid form validation error with this unnecessary id
-//    unset($formData['dtype']);//remove dtype to avoid form validation error with this unnecessary dtype (TODO remove dtype from serialization)
     $form->submit($formData, 'PATCH' !== $method);
     if ($form->isValid())
     {
       $entity = $form->getData();
-      //get the service of the entity conventionally named fibe.{entityName}Service
-      try
-      {
-        if($entityService = $this->container->get('fibe.'.substr($entityClassName, strrpos($entityClassName,'\\') + 1).'Service'))
-        {
-          if(method_exists($entityService,strtolower($method)))
-          {
-            call_user_func_array(array($entityService, strtolower($method)), array($entity));
-          }
-        }
-      }
-      catch(ServiceNotFoundException $e)
-      {
-        //no business service defined
-      }
-
+      $this->callBusinessService($entity, $entityClassName, $method);
       $this->em->persist($entity);
       $this->em->flush($entity);
       return $entity;
@@ -109,11 +95,36 @@ class CrudHandler
     );
   }
 
+  //
   public function delete($entityClassName, $id)
   {
     $entity = $this->em->getRepository($entityClassName)->find($id);
+    $this->callBusinessService($entity, $entityClassName, 'delete');
     $this->em->remove($entity);
     $this->em->flush($entity);
   }
 
+  /**
+   * get the service of the entity conventionally named fibe.{entityName}Service
+   * @param $entity
+   * @param $entityClassName
+   * @param $method
+   */
+  protected function callBusinessService($entity, $entityClassName, $method)
+  {
+    try
+    {
+      if($entityService = $this->container->get('fibe.'.substr($entityClassName, strrpos($entityClassName,'\\') + 1).'Service'))
+      {
+        if(method_exists($entityService,strtolower($method)))
+        {
+          call_user_func_array(array($entityService, strtolower($method)), array($entity));
+        }
+      }
+    }
+    catch(ServiceNotFoundException $e)
+    {
+      //no business service defined, just do nothing
+    }
+  }
 }

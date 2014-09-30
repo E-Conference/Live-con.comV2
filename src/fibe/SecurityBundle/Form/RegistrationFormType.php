@@ -22,8 +22,8 @@ class RegistrationFormType extends BaseType
     parent::buildForm($builder, $options);
 
     // add your custom field
-    $builder
-      ->add('captcha', 'captcha', array('required' => true));;
+//    $builder
+//      ->add('captcha', 'captcha', array('required' => true));
   }
 
   /**

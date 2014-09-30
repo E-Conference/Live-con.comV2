@@ -81,8 +81,9 @@ angular.module('personsApp').controller('personsListCtrl', ['$scope', 'GLOBAL_CO
       controller: 'personsDeleteCtrl',
       success: {label: 'Ok', fn: function ()
       {
-        personsFact.delete({id: person.id});
-        $scope.persons.splice(index, 1);
+        personsFact.delete({id: person.id},function(data){
+          $scope.persons.splice(index, 1);
+        });
       }}
     }, {
       personModel: person
