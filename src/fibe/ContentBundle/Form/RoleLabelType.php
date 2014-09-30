@@ -19,7 +19,8 @@ class RoleLabelType extends AbstractType
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
     $builder
-      ->add('name');
+      ->add('label')
+      ->add('roles');
   }
 
   /**
@@ -28,7 +29,8 @@ class RoleLabelType extends AbstractType
   public function setDefaultOptions(OptionsResolverInterface $resolver)
   {
     $resolver->setDefaults(array(
-      'data_class' => 'fibe\ContentBundle\Entity\RoleType'
+      'data_class' => 'fibe\ContentBundle\Entity\RoleLabel',
+      'csrf_protection' => false
     ));
   }
 
@@ -39,6 +41,6 @@ class RoleLabelType extends AbstractType
    */
   public function getName()
   {
-    return 'fibe_contentbundle_roletypetype';
+    return 'fibe_contentbundle_rolelabeltype';
   }
 }

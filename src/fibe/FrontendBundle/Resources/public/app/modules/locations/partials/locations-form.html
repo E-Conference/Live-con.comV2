@@ -1,0 +1,21 @@
+<div>
+    <label for="inputLabel">Label</label>
+    <input type="text" class="form-control" id="inputLabel" required placeholder="label" ng-model="location.label">
+</div>
+<div>
+    <label for="inputCapacity">Capacity</label>
+    <input type="number" class="form-control" id="inputCapacity" placeholder="Capacity" ng-model="location.capacity">
+</div>
+<div>
+    <label for="inputDescription">Description</label>
+    <input type="text" class="form-control" id="inputDescription" placeholder="Description" ng-model="location.description">
+</div>
+<div>
+    <label for="inputLatitude">Latitude</label>
+    <input type="text" class="form-control" id="inputLatitude" placeholder="Latitude" ng-model="location.latitude">
+</div>
+<div>
+    <label for="inputLongitude">Longitude</label>
+    <input type="text" class="form-control" id="inputLongitude" placeholder="Longitude" ng-model="location.longitude">
+</div>
+<div get-or-create="equipment" parent-entity="location"></div>

@@ -3,6 +3,8 @@
 namespace fibe\EventBundle\Form;
 
 use fibe\ContentBundle\Form\LocationType;
+use fibe\ContentBundle\Form\PaperType;
+use fibe\ContentBundle\Form\TopicType;
 use fibe\EventBundle\Form\VEventType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,22 +28,24 @@ class EventType extends VEventType
     {
         parent::buildForm($builder, $options);
         $builder
-            ->add('locations', 'entity', array(
-                'class'    => 'fibeContentBundle:Location',
-                'multiple' => true,
-                'required' => false
-            ))
-            ->add('papers', 'entity', array(
-                    'class'    => 'fibeContentBundle:Paper',
-                    'label'    => 'Papers',
-                    //'choices'  => $this->user->getCurrentMainEvent()->getPapers()->toArray(),
-                    'multiple' => true,
-                    'required' => false))
-            ->add('mainEvent', 'entity', array(
+            ->add('locations', 'fibe_restbundle_collection_type', array(
+                'type' => new LocationType(),
+                'uniqField' => 'label',))
+
+            ->add('papers', 'fibe_restbundle_collection_type', array(
+                'type' => new PaperType(),
+                'uniqField' => 'label',))
+
+            ->add('mainEvent', 'fibe_restbundle_entity_type', array(
                 'class'    => 'fibeEventBundle:MainEvent',
-                //'choices'  => $this->user->getCurrentMainEvent()->getPapers()->toArray(),
+                'uniqField' => 'label',
+                'required' => false,
                 'multiple' => false,
-                'required' => false
+            ))
+            ->add('topics', 'fibe_restbundle_collection_type', array(
+                'type' => new TopicType(),
+                'uniqField' => 'label',
+
       ))
         ;
     }

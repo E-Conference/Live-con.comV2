@@ -98,6 +98,10 @@
   'bundles/frontend/app/modules/conferences/js/controllers.js'
   'bundles/frontend/app/modules/conferences/js/routes.js'
 
+  'bundles/frontend/app/modules/roles/js/services.js'
+  'bundles/frontend/app/modules/roles/js/controllers.js'
+  'bundles/frontend/app/modules/roles/js/routes.js'
+
   'bundles/frontend/app/modules/authentication/js/services.js'
   'bundles/frontend/app/modules/authentication/js/controllers.js'
   'bundles/frontend/app/modules/authentication/js/routes.js'
@@ -121,7 +125,8 @@
           get_locations: "{{ path('content_locations_post') }}",
           get_equipments: "{{ path('content_equipments_post') }}",
           get_events: "{{ path('schedule_events_post') }}",
-          get_events: "{{ path('schedule_events_post') }}",
+          get_roles: "{{ path('content_roles_post') }}",
+          get_roleLabels: "{{ path('content_roleLabels_post') }}",
           get_papers: "{{ path('content_papers_post') }}",
           get_topics: "{{ path('content_topics_post') }}",
           get_categories: "{{ path('schedule_categories_post') }}",
@@ -193,6 +198,20 @@
               partials: "{{ asset('bundles/frontend/app/modules/persons/partials/') }}",
               img: "{{ asset('bundles/frontend/app/modules/persons/img') }}"
             }
+          },
+          roles: {
+            urls: {
+                base: "{{ asset('bundles/frontend/app/modules/roles/') }}",
+                partials: "{{ asset('bundles/frontend/app/modules/roles/partials/') }}",
+                img: "{{ asset('bundles/frontend/app/modules/roles/img') }}"
+            }
+          },
+          roleLabels: {
+                urls: {
+                    base: "{{ asset('bundles/frontend/app/modules/roles/') }}",
+                    partials: "{{ asset('bundles/frontend/app/modules/roles/partials/') }}",
+                    img: "{{ asset('bundles/frontend/app/modules/roles/img') }}"
+                }
           },
           topics: {
             urls: {

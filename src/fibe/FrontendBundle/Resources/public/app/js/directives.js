@@ -117,6 +117,7 @@ angular.module('sympozerApp').directive('infiniteScroll', [
       var entityLbl               = attrs.getOrCreate,
           parentEntityLbl         = attrs.parentEntity,
           uniqField               = attrs.uniqField || 'label',
+          singleChoice            = attrs.singlechoice || null,
           parentField             = attrs.parentField || entityLbl,
           newPolitic              = attrs.newPolitic || "create",
 
@@ -135,10 +136,11 @@ angular.module('sympozerApp').directive('infiniteScroll', [
       scope.addedEntity[uniqField] = "";
       //available entities
       scope.entities = [];
+      scope.singleChoice = singleChoice;
       //the parent resource given by attrs.entity
       scope.resource = scope.$parent[parentEntityLbl];
 
-      scope.parentField = parentField = getPlural(parentField);
+      scope.parentField = parentField = !singleChoice ? getPlural(parentField) : parentField;
 
       scope.keyup = function($event)
       {
@@ -186,7 +188,7 @@ angular.module('sympozerApp').directive('infiniteScroll', [
           return;
         }
 
-        if(!scope.resource[parentField])
+        if(!scope.resource[parentField] && !singleChoice)
         {
           scope.resource[parentField] = [];
         }
@@ -194,13 +196,23 @@ angular.module('sympozerApp').directive('infiniteScroll', [
         var newEntity = new entityFact($model);
         if ($model.id)
         {
-          scope.resource[parentField].push(newEntity);
+            //Check if an array or object is to be added according to the singleChoice parameter
+            if(!singleChoice) {
+                scope.resource[parentField].push(newEntity);
+            }else{
+                scope.resource[parentField]= newEntity;
+            }
         } else
         {
           switch (newPolitic)
           {
             case "create":
-              scope.resource[parentField].push(newEntity);
+              //Check if an array or object is to be added according to the singleChoice parameter
+              if(singleChoice) {
+                  scope.resource[parentField]= newEntity;
+              }else{
+                  scope.resource[parentField].push(newEntity);
+              }
             break;
 
             case "modal":

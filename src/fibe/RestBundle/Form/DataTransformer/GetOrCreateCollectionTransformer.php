@@ -1,13 +1,12 @@
 <?php
-namespace fibe\ContentBundle\Form\DataTransformer;
+namespace fibe\RestBundle\Form\DataTransformer;
 
-use Doctrine\ORM\PersistentCollection;
+
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 use Doctrine\Common\Persistence\ObjectManager;
-use fibe\ContentBundle\Entity\Topic;
 
-class GetOrCreateTransformer implements DataTransformerInterface
+
+class GetOrCreateCollectionTransformer implements DataTransformerInterface
 {
   /**
    * @var ObjectManager

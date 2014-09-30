@@ -34,7 +34,7 @@ class PersonType extends AdditionalInformationsType
     $builder
       ->add('firstName')
       ->add('familyName')
-      ->add('organizations', 'fibe_contentbundle_selecttype', array(
+      ->add('organizations', 'fibe_restbundle_collection_type', array(
         'type' => new OrganizationType(),
         'uniqField' => 'label',
       ))

@@ -7,7 +7,8 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Util\Codes;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * RoleLabel rest controller.
@@ -16,12 +17,12 @@ class RoleLabelRESTController extends FOSRestController
 {
 
   const ENTITY_CLASSNAME = "fibe\\ContentBundle\\Entity\\RoleLabel";
-  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\RoleLabel";
+  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\RoleLabelType";
 
 
   /**
    * Lists all RoleLabel entities.
-   * @Rest\Get("/roleLabels")
+   * @Rest\Get("/roleLabels", name="content_roleLabels_all")
    * @Rest\View
    * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
    * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
@@ -38,7 +39,7 @@ class RoleLabelRESTController extends FOSRestController
   }
 
   /**
-   * @Rest\Get("/roleLabels/{id}")
+   * @Rest\Get("/roleLabels/{id}", name="content_roleLabels_get")
    **/
   public function getRoleLabelAction($id)
   {
@@ -53,7 +54,7 @@ class RoleLabelRESTController extends FOSRestController
   /**
    * Creates a new RoleLabel from the submitted data.
    *
-   * @Rest\Post("/roleLabels",name="api_roleLabel_post")
+   * @Rest\Post("/roleLabels", name="content_roleLabels_post")
    *
    * @param Request $request the request object
    *
@@ -74,7 +75,7 @@ class RoleLabelRESTController extends FOSRestController
 
   /**
    * Put action
-   * @Rest\Put("/roleLabels/{id}")
+   * @Rest\Put("/roleLabels/{id}", name="content_roleLabels_put")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
@@ -94,7 +95,7 @@ class RoleLabelRESTController extends FOSRestController
 
   /**
    * Patch action
-   * @Rest\Patch("/roleLabels/{id}")
+   * @Rest\Patch("/roleLabels/{id}", name="content_roleLabels_patch")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
@@ -114,7 +115,7 @@ class RoleLabelRESTController extends FOSRestController
 
   /**
    * Delete action
-   * @Rest\Delete("/roleLabels/{id}")
+   * @Rest\Delete("/roleLabels/{id}", name="content_roleLabels_delete")
    *
    * @var integer $id Id of the entity
    */

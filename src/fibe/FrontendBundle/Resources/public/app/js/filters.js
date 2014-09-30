@@ -13,7 +13,7 @@
  *
  * @type {filter}
  */
-angular.module('liveconFilters', []).filter('checkmark', function ()
+angular.module('sympozerFilters', []).filter('checkmark', function ()
 {
   return function (input)
   {

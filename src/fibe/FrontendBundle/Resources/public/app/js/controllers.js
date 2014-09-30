@@ -9,14 +9,14 @@
  *
  * @type {module}
  */
-var liveconControllers = angular.module('liveconControllers', []);
+var sympozerControllers = angular.module('sympozerControllers', []);
 
 /**
  * Main controller
  *
  * @type {controller}
  */
-liveconControllers.controller('mainCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG',
+sympozerControllers.controller('mainCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG',
   function ($scope, $routeParams, GLOBAL_CONFIG)
   {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
@@ -33,7 +33,7 @@ liveconControllers.controller('mainCtrl', ['$scope', '$routeParams', 'GLOBAL_CON
  *
  * @type {controller}
  */
-liveconControllers.controller('AlertCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', '$timeout',
+sympozerControllers.controller('AlertCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', '$timeout',
   function ($scope, $routeParams, GLOBAL_CONFIG, $timeout)
   {
     $scope.alerts = [];
@@ -78,7 +78,7 @@ liveconControllers.controller('AlertCtrl', ['$scope', '$routeParams', 'GLOBAL_CO
  *
  * @type {controller}
  */
-liveconControllers.controller('navLeftCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG',
+sympozerControllers.controller('navLeftCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG',
   function ($scope, $routeParams, GLOBAL_CONFIG)
   {
     $scope.sympozerLogoPath = GLOBAL_CONFIG.sympozerLogoPath;
@@ -93,7 +93,7 @@ liveconControllers.controller('navLeftCtrl', ['$scope', '$routeParams', 'GLOBAL_
  *
  * @type {controller}
  */
-liveconControllers.controller('navRightCtrl', ['$scope', '$routeParams',
+sympozerControllers.controller('navRightCtrl', ['$scope', '$routeParams',
   function ($scope, $routeParams)
   {
   }]);
@@ -103,7 +103,7 @@ liveconControllers.controller('navRightCtrl', ['$scope', '$routeParams',
  *
  * @type {controller}
  */
-liveconControllers.controller('navTopCtrl', ['$translate', '$scope', '$routeParams', 'GLOBAL_CONFIG',
+sympozerControllers.controller('navTopCtrl', ['$translate', '$scope', '$routeParams', 'GLOBAL_CONFIG',
   function ($translate, $scope, $routeParams, GLOBAL_CONFIG)
   {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
@@ -132,7 +132,7 @@ liveconControllers.controller('navTopCtrl', ['$translate', '$scope', '$routePara
  *
  * @type {controller}
  */
-liveconControllers.controller('dashboardCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG',
+sympozerControllers.controller('dashboardCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG',
   function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG)
   {
 
@@ -141,7 +141,7 @@ liveconControllers.controller('dashboardCtrl', ['$scope', '$rootScope', '$routeP
 /**
  * Main event controller (conference controller)
  */
-liveconControllers.controller('conferenceCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG', 'conferencesFact',
+sympozerControllers.controller('conferenceCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG', 'conferencesFact',
   function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, conferencesFact)
   {
     $scope.conferences = conferencesFact.all({offset: 0, limit: 20});
@@ -152,7 +152,7 @@ liveconControllers.controller('conferenceCtrl', ['$scope', '$rootScope', '$route
 /**
  * generic ctrl handling entity creation inside a modal
  */
-liveconControllers.controller('dialogNewEntityCtrl', [ '$scope', '$rootScope', '$entityLbl', '$entity', '$formDialogTemplateUrl', '$timeout', '$location', '$injector',
+sympozerControllers.controller('dialogNewEntityCtrl', [ '$scope', '$rootScope', '$entityLbl', '$entity', '$formDialogTemplateUrl', '$timeout', '$location', '$injector',
   function ($scope, $rootScope, $entityLbl, $entity, $formDialogTemplateUrl, $timeout, $location, $injector)
   {
     $scope[$entityLbl] = $entity;
