@@ -1,2 +1,4 @@
-confirmation page
-<div ng-if="currentUser.random_pwd">CHANGE YOUR PASSWORD D-:</div>
+<div ng-if="currentUser.random_pwd">
+    <p>To finish activating your account, please choose a password</p>
+    <div ng-include="GLOBAL_CONFIG.app.modules.authentication.urls.partials+'changepwd.html'" ng-controller="changePwdCtrl"></div>
+</div>
