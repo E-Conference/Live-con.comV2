@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en" ng-app="liveconApp">
+<html lang="en" ng-app="sympozerApp">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>livecon app'</title>
+  <title>Sympozer</title>
 
   {% stylesheets 'bundles/frontend/app/css/bootstrap.min.css'
   'bundles/frontend/app/css/loading-bar.css'
@@ -212,7 +212,7 @@
       language: 'EN',
       severTime: "{{ 'now'|date('m/d/Y') }}"
     };
-    angular.module('liveconApp').value('GLOBAL_CONFIG', globalConfig);
+    angular.module('sympozerApp').value('GLOBAL_CONFIG', globalConfig);
   </script>
   {% endjavascripts %}
 </head>

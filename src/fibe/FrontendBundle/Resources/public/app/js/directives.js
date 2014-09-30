@@ -12,7 +12,7 @@
  *
  * @type {directive}
  */
-angular.module('liveconApp').directive('infiniteScroll', [
+angular.module('sympozerApp').directive('infiniteScroll', [
   '$rootScope', '$window', '$timeout', function ($rootScope, $window, $timeout)
   {
     return {
