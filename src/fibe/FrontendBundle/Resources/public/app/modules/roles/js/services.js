@@ -9,10 +9,10 @@
  *
  * @type {factory}
  */
-angular.module('rolesApp').factory('roleLabelsFact', ['$resource', '$cachedResource',
-  function ($cachedResource)
+angular.module('roleLabelsApp').factory('roleLabelsFact', ['$resource', '$cachedResource',
+  function ($resource, $cachedResource)
   {
-    return $cachedResource(
+    return $resource(
       globalConfig.api.urls.get_roleLabels,
       {},
       {
@@ -33,9 +33,9 @@ angular.module('rolesApp').factory('roleLabelsFact', ['$resource', '$cachedResou
  * @type {factory}
  */
 angular.module('rolesApp').factory('rolesFact', ['$resource', '$cachedResource',
-  function ($cachedResource)
+  function ($resource, $cachedResource)
   {
-    return $cachedResource(
+    return $resource(
       globalConfig.api.urls.get_roles,
       {},
       {

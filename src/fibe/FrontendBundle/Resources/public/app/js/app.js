@@ -12,6 +12,7 @@ angular.module('organizationsApp', ['fundoo.services']);
 angular.module('papersApp', ['fundoo.services']);
 angular.module('topicsApp', []);
 angular.module('rolesApp', ['fundoo.services']);
+angular.module('roleLabelsApp', ['fundoo.services']);
 angular.module('categoriesApp', ['fundoo.services']);
 angular.module('personsApp', ['fundoo.services']);
 angular.module('locationsApp', ['fundoo.services', 'equipmentsApp']);
@@ -35,9 +36,9 @@ var sympozerApp = angular.module('sympozerApp', [
   'ngDragDrop',
   'angular-loading-bar',
   'ngCachedResource',
-  'liveconControllers',
-  'liveconFilters',
-  'liveconServices',
+  'sympozerControllers',
+  'sympozerFilters',
+  'sympozerServices',
   'pascalprecht.translate',
   'authenticationApp',
   'organizationsApp',
@@ -47,6 +48,7 @@ var sympozerApp = angular.module('sympozerApp', [
   'equipmentsApp',
   'eventsApp',
   'rolesApp',
+  'roleLabelsApp',
   'categoriesApp',
   'conferencesApp',
   'contextualizationApp',

@@ -4,6 +4,8 @@ namespace fibe\ContentBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -12,6 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="role_type")
  * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\RoleLabelRepository")
+ * @ORM\HasLifecycleCallbacks
+ * @ExclusionPolicy("all")
  *
  */
 class RoleLabel
@@ -25,8 +29,8 @@ class RoleLabel
 
   /**
    * label
-   *
    * @ORM\Column(type="string", name="label", nullable=false)
+   * @Expose
    */
   protected $label;
 
@@ -38,8 +42,8 @@ class RoleLabel
   /**
    * role
    * Role who have this type
-   *
-   * @ORM\OneToMany(targetEntity="Role", mappedBy="label")
+   * @ORM\OneToMany(targetEntity="Role", mappedBy="roleLabel")
+   * @Expose
    */
   private $roles;
 

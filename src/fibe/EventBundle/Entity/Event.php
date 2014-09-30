@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use fibe\ContentBundle\Entity\Paper;
 use fibe\ContentBundle\Entity\Location;
 use fibe\ContentBundle\Util\StringTools;
+use JMS\Serializer\Annotation\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use JMS\Serializer\Annotation\ExclusionPolicy;
@@ -50,6 +51,7 @@ class Event extends VEvent
    * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="events", cascade={"persist"})
    * @ORM\JoinColumn(name="mainevent_id", referencedColumnName="id")
    * @Expose
+   * @SerializedName("mainEvent")
    */
   private $mainEvent;
 
@@ -85,6 +87,7 @@ class Event extends VEvent
    * @ORM\JoinTable(name="event_role",
    *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")})
+   * @expose
    */
   private $roles;
 

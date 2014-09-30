@@ -1,7 +1,7 @@
 /**
  * Roles controllers
  *
- * Contains controllers for both roles and roleslabels
+ * Contains controllers for both roles and rolelabels
  */
 
 /**
@@ -14,6 +14,11 @@ angular.module('rolesApp').controller('rolesMainCtrl', [function ($scope)
 
 }]);
 
+angular.module('roleLabelsApp').controller('roleLabelsMainCtrl', [function ($scope)
+{
+
+}]);
+
 /** Roles labels controllers **/
 
 /**
@@ -21,7 +26,7 @@ angular.module('rolesApp').controller('rolesMainCtrl', [function ($scope)
  *
  * @type {controller}
  */
-angular.module('rolesApp').controller('rolesLabelsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'roleLabelsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, roleLabelsFact, $cachedResource)
+angular.module('roleLabelsApp').controller('roleLabelsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'roleLabelsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, roleLabelsFact, $cachedResource)
 {
   $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
@@ -304,7 +309,7 @@ angular.module('rolesApp').controller('rolesListCtrl', ['$scope', 'GLOBAL_CONFIG
     }
 
     $scope.busy = true;
-    roles.all({offset: offset, limit: limit, query: query}, function (data)
+    rolesFact.all({offset: offset, limit: limit, query: query}, function (data)
     {
       var items = data;
 
@@ -326,21 +331,6 @@ angular.module('rolesApp').controller('rolesListCtrl', ['$scope', 'GLOBAL_CONFIG
       }
     })
   };
-
-//    $scope.search = function(query) {
-//        role.all({offset: 0, limit: 20, query: query}, function (data) {
-//            $scope.roles = data;
-//        })
-//    };
-
-  /*
-   var Org = $cachedResource('org', globalConfig.api.urls.roles+'/:roleId.json', {id: "@id"});
-   $scope.roles = Org.query();
-   $scope.roles.$promise.then(function(data) {
-   console.log($scope.roles);
-   console.log($scope.roles.length);
-   });*/
-  //$scope.roles = $cachedResource();
 }]);
 
 /**
@@ -350,11 +340,12 @@ angular.module('rolesApp').controller('rolesListCtrl', ['$scope', 'GLOBAL_CONFIG
  */
 angular.module('rolesApp').controller('rolesNewCtrl', [ '$scope', '$rootScope', '$location', 'rolesFact', function ($scope, $rootScope, $location, rolesFact)
 {
-  $scope.roleLabel = new roleLabelsFact;
+  $scope.role = new rolesFact;
+  $scope.role.mainEvent = $rootScope.currentConference;
 
   var error = function (response, args)
   {
-    $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the rolehas not been created', type: 'danger'});
+    $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the role has not been created', type: 'danger'});
   }
 
   var success = function (response, args)
@@ -419,6 +410,6 @@ angular.module('rolesApp').controller('rolesShowCtrl', [ '$scope', '$routeParams
  */
 angular.module('rolesApp').controller('rolesDeleteCtrl', [ '$scope', 'roleModel', function ($scope, roleModel)
 {
-  $scope.roleLabel = roleLabelModel;
+  $scope.role = roleModel;
 }]);
 

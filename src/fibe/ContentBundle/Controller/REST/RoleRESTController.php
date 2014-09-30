@@ -16,12 +16,12 @@ class RoleRESTController extends FOSRestController
 {
 
   const ENTITY_CLASSNAME = "fibe\\ContentBundle\\Entity\\Role";
-  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\Role";
+  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\RoleType";
 
 
   /**
    * Lists all Role entities.
-   * @Rest\Get("/roles")
+   * @Rest\Get("/roles", name="content_roles_all")
    * @Rest\View
    * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
    * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
@@ -38,7 +38,7 @@ class RoleRESTController extends FOSRestController
   }
 
   /**
-   * @Rest\Get("/roles/{id}")
+   * @Rest\Get("/roles/{id}", name="content_roles_get")
    **/
   public function getRoleAction($id)
   {
@@ -53,7 +53,7 @@ class RoleRESTController extends FOSRestController
   /**
    * Creates a new Role from the submitted data.
    *
-   * @Rest\Post("/roles",name="api_role_post")
+   * @Rest\Post("/roles", name="content_roles_post")
    *
    * @param Request $request the request object
    *
@@ -74,7 +74,7 @@ class RoleRESTController extends FOSRestController
 
   /**
    * Put action
-   * @Rest\Put("/roles/{id}")
+   * @Rest\Put("/roles/{id}", name="content_roles_put")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
@@ -94,7 +94,7 @@ class RoleRESTController extends FOSRestController
 
   /**
    * Patch action
-   * @Rest\Patch("/roles/{id}")
+   * @Rest\Patch("/roles/{id}", name="content_roles_patch")
    * @var Request $request
    * @var integer $id Id of the entity
    * @return mixed
@@ -114,7 +114,7 @@ class RoleRESTController extends FOSRestController
 
   /**
    * Delete action
-   * @Rest\Delete("/roles/{id}")
+   * @Rest\Delete("/roles/{id}", name="content_roles_delete")
    *
    * @var integer $id Id of the entity
    */

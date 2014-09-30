@@ -2,6 +2,8 @@
 namespace fibe\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use fibe\EventBundle\Entity\MainEvent;
@@ -22,7 +24,8 @@ use fibe\CommunityBundle\Entity\Person;
  *     errorPath="role",
  *     message="This person has already this role at this event"
  * )
- *
+ * @ORM\HasLifecycleCallbacks
+ * @ExclusionPolicy("all")
  */
 class Role
 {
@@ -33,38 +36,63 @@ class Role
    */
   private $id;
 
+    /**
+     * label
+     * @ORM\Column(type="string", name="label", nullable=false)
+     * @Expose
+     */
+    protected $label;
+
   /**
    * Person : the person who has this role
    *
    * @ORM\ManyToOne(targetEntity="fibe\CommunityBundle\Entity\Person", inversedBy="roles")
    * @Assert\NotBlank(message="You have to choose a Person")
-   *
+   * @Expose
    */
   private $person;
 
   /**
    *
-   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\Event", mappedBy="roles")
+   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\Event", inversedBy="roles")
    * @Assert\NotBlank(message="You have to choose an event")
-   *
+   * @Expose
    */
-  private $events;
+  private $event;
 
-  /**
-   * The RoleType associated
-   *
-   * @ORM\ManyToOne(targetEntity="RoleLabel", inversedBy="roles")
-   * @Assert\NotBlank(message="You have to choose a type")
-   */
-  private $label;
 
   /**
    * The mainEvent associated
    *
    * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="roles", cascade={"persist"})
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
+   * @Expose
    */
   private $mainEvent;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="fibe\ContentBundle\Entity\RoleLabel", inversedBy="roles")
+     * @ORM\JoinColumn(name="role_label_id", referencedColumnName="id")
+     * @Assert\NotBlank(message="You have to choose a role type")
+     */
+    private $roleLabel;
+
+    /**
+     * @return mixed
+     */
+    public function getRoleLabel()
+    {
+        return $this->roleLabel;
+    }
+
+    /**
+     * @param mixed $roleLabel
+     */
+    public function setRoleLabel($roleLabel)
+    {
+        $this->roleLabel = $roleLabel;
+    }
+
 
   /**
    * Get id
@@ -103,15 +131,15 @@ class Role
   /**
    * Set event
    *
-   * @param \fibe\EventBundle\Entity\VEvent $events
+   * @param \fibe\EventBundle\Entity\VEvent $event
    *
    * @internal param \fibe\EventBundle\Entity\VEvent $event
    *
    * @return Role
    */
-  public function setEvents(VEvent $events = null)
+  public function setEvent(VEvent $event = null)
   {
-    $this->events = $events;
+    $this->event = $event;
 
     return $this;
   }
@@ -121,9 +149,9 @@ class Role
    *
    * @return VEvent
    */
-  public function getEvents()
+  public function getEvent()
   {
-    return $this->events;
+    return $this->event;
   }
 
   /**

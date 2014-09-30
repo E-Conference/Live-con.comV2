@@ -33,7 +33,7 @@ class MainEventType extends AbstractType
           ))
           ->add('description')
           ->add('comment')
-          ->add('url');;
+          ->add('url');
 //        ->add('logo', 'file', array('required' => false,
 //          'label'    => 'Logo (jpeg - png - 2MO)',
 //          'attr'     => array('placeholder' => 'logoPath')))

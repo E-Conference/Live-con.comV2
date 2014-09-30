@@ -1,19 +1,19 @@
 <?php
 
-namespace fibe\ContentBundle\Form;
+namespace fibe\RestBundle\Form;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use fibe\ContentBundle\Form\DataTransformer\GetOrCreateTransformer;
+use fibe\RestBundle\Form\DataTransformer\GetOrCreateCollectionTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class GetOrCreateType
- *
- * @package fibe\ContentBundle\Form
+ * Form type used to tweak find or create when validating a form rest style on a specific collection
+ * @package fibe\RestBundle\Form
  */
-class GetOrCreateType extends AbstractType
+class GetOrCreateCollectionType extends AbstractType
 {
   /**
    * @var ObjectManager
@@ -30,7 +30,7 @@ class GetOrCreateType extends AbstractType
 
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
-    $transformer = new GetOrCreateTransformer($this->om,$options['uniqField']);
+    $transformer = new GetOrCreateCollectionTransformer($this->om,$options['uniqField']);
     $builder->addModelTransformer($transformer);
   }
 
@@ -62,6 +62,6 @@ class GetOrCreateType extends AbstractType
    */
   public function getName()
   {
-    return 'fibe_contentbundle_selecttype';
+    return 'fibe_restbundle_collection_type';
   }
 }

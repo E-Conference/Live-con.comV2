@@ -2,6 +2,9 @@
 
 namespace fibe\ContentBundle\Form;
 
+use fibe\CommunityBundle\Form\PersonType;
+use fibe\EventBundle\Form\EventType;
+use fibe\EventBundle\Form\MainEventType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -13,17 +16,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class RoleType extends AbstractType
 {
-  private $user;
-
-  /**
-   * Constructor
-   *
-   * @param $user
-   */
-  public function __construct($user)
-  {
-    $this->user = $user;
-  }
 
   /**
    * {@inheritdoc}
@@ -31,17 +23,28 @@ class RoleType extends AbstractType
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
     $builder
-      ->add('person', 'entity', array(
-        'class'       => 'fibeCommunityBundle:Person',
-        'label'       => 'Select Person',
-        'choices'     => $this->user->getCurrentMainEvent()->getPersons()->toArray(),
-        'required'    => true,
-        'empty_value' => '',
+      ->add('person', 'fibe_restbundle_entity_type', array(
+      'class'    => 'fibeCommunityBundle:Person',
+      'uniqField' => 'email',
+      'multiple' => false,
       ))
-      ->add('label', null, array(
-        'required'    => true,
-        'label'       => 'Select role',
-        'empty_value' => '',
+      ->add('event', 'fibe_restbundle_entity_type', array(
+          'class'    => 'fibeEventBundle:Event',
+          'uniqField' => 'label',
+          'required' => false,
+          'multiple' => false,
+      ))
+      ->add('roleLabel', 'fibe_restbundle_entity_type', array(
+          'class'    => 'fibeContentBundle:RoleLabel',
+          'uniqField' => 'label',
+          'required' => false,
+          'multiple' => false,
+      ))
+      ->add('mainEvent', 'fibe_restbundle_entity_type', array(
+          'class'    => 'fibeEventBundle:MainEvent',
+          'uniqField' => 'label',
+          'required' => false,
+          'multiple' => false,
       ));
   }
 
@@ -51,7 +54,8 @@ class RoleType extends AbstractType
   public function setDefaultOptions(OptionsResolverInterface $resolver)
   {
     $resolver->setDefaults(array(
-      'data_class' => 'fibe\ContentBundle\Entity\Role'
+      'data_class' => 'fibe\ContentBundle\Entity\Role',
+      'csrf_protection' => false
     ));
   }
 
