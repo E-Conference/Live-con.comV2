@@ -121,6 +121,17 @@ angular.module('authenticationApp').controller('confirmCtrl', [ '$scope', '$root
  *
  * @type {controller}
  */
+angular.module('authenticationApp').controller('profileCtrl', [ '$scope', '$routeParams', 'usersFact', '$location',
+  function ($scope, $routeParams, usersFact, $location)
+  {
+
+  }]);
+
+/**
+ * confirm email controller
+ *
+ * @type {controller}
+ */
 angular.module('authenticationApp').controller('changePwdCtrl', [ '$scope', '$routeParams', 'usersFact', '$location',
   function ($scope, $routeParams, usersFact, $location)
   {
@@ -142,7 +153,7 @@ angular.module('authenticationApp').controller('changePwdCtrl', [ '$scope', '$ro
     $scope.changePwdAction = function (changePwdForm)
     {
       $scope.busy = true;
-      usersFact.changepwd({fos_user_change_password : changePwdForm}, success, error);
+      usersFact.changepwd(changePwdForm, success, error);
     }
   }]);
 

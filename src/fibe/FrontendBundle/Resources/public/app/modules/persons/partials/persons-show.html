@@ -4,6 +4,9 @@
   <a ng-if="currentUser.id === person.id" class="btn btn-info" href="#persons/edit/{{currentUser.id}}" role="button">
     <i class="fa fa-edit fa-1x"></i> Edit my profile
   </a>
+  <a ng-if="currentUser.id === person.id" class="btn btn-info" href="#profile" role="button">
+    <i class="fa fa-edit fa-1x"></i> Edit my account
+  </a>
   <h3>{{person.label}}</h3>
 
   <p>{{person.country}}</p>

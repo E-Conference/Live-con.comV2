@@ -72,43 +72,41 @@ class UserRESTController extends Controller
   {
     /** @var \fibe\SecurityBundle\Entity\User $user */
     $user = $this->getUser();
-    echo $user->getPlainPassword();
     if (!is_object($user) || !$user instanceof UserInterface) {
       throw new AccessDeniedException('This user does not have access to this section.');
     }
 
-    $form = $this->container->get('fos_user.change_password.form');
-    $formHandler = $this->container->get('fos_user.change_password.form.handler');
-
-    if($user->isRandomPwd())
+    //TODO : find a better way to do this ?
+    $changePasswordForm = json_decode($request->getContent(),true);
+    if($changePasswordForm['new_password_first'] !== $changePasswordForm['new_password_second'])
     {
-      //TODO : find a better way to do this ?
-      $plainPassword = json_decode($request->getContent(),true)['fos_user_change_password']['plainPassword'];
-      if($plainPassword['first'] !== $plainPassword['second'])
-      {
-        throw new \Exception('Changepwd_mismatch_error');
-      }
-      $userManager = $this->container->get('fos_user.user_manager');
-      $user->setPlainPassword($plainPassword['first']);
-      $user->setRandomPwd(false);
-      $user->setConfirmationToken(null);
-      $userManager->updateUser($user);
-
-      $response = new Response($this->container->get('jms_serializer')->serialize( $user, $request->getRequestFormat()));
-      $response->headers->set('Content-Type', 'application/json');
-      $this->authenticateUser($user, $response);
-      return $response;
+      throw new \Exception('Changepwd_mismatch_error');
     }
-    else
-    {
-      $process = $formHandler->process($user);
-      if ($process) {
+    $newPassword = $changePasswordForm['new_password_first'];
 
-        return new Response('Changepwd_success');
+    if(!$user->isRandomPwd())
+    {
+      $oldPassword = $changePasswordForm['current_password'];
+      if ($oldPassword === $newPassword){
+        throw new \Exception('Changepwd_nochange_error');
+      }
+      $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+      $passwordSecure = $encoder->encodePassword($oldPassword, $user->getSalt());
+      if ($passwordSecure !== $user->getPassword()){
+        throw new \Exception('Changepwd_currentpwd_error');
       }
     }
 
-    throw new \Exception('Changepwd_error');
+    $userManager = $this->container->get('fos_user.user_manager');
+    $user->setPlainPassword($newPassword);
+    $user->setRandomPwd(false);
+    $user->setConfirmationToken(null);
+    $userManager->updateUser($user);
+
+    $response = new Response($this->container->get('jms_serializer')->serialize( $user, $request->getRequestFormat()));
+    $response->headers->set('Content-Type', 'application/json');
+    $this->authenticateUser($user, $response);
+    return $response;
   }
 
   /**
