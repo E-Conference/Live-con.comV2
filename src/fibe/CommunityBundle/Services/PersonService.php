@@ -4,7 +4,6 @@ namespace fibe\CommunityBundle\Services;
 
   use Doctrine\ORM\EntityManager;
   use fibe\CommunityBundle\Entity\Person;
-  use FOS\UserBundle\Mailer\MailerInterface;
   use FOS\UserBundle\Model\UserManagerInterface;
   use FOS\UserBundle\Util\TokenGeneratorInterface;
   use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
@@ -24,7 +23,7 @@ namespace fibe\CommunityBundle\Services;
     protected $tokenGenerator;
     protected $mailer;
 
-    public function __construct(EntityManager $entityManager, SecurityContextInterface $securityContext, UserManagerInterface $userManager, TokenGeneratorInterface $tokenGenerator, MailerInterface $mailer)
+    public function __construct(EntityManager $entityManager, SecurityContextInterface $securityContext, UserManagerInterface $userManager, TokenGeneratorInterface $tokenGenerator, MailManager $mailer)
     {
       $this->entityManager = $entityManager;
       $this->securityContext= $securityContext;
