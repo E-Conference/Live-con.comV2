@@ -9,6 +9,8 @@ parameters:
     bootstrap_source:  http://twitter.github.com/bootstrap/assets/bootstrap.zip
     max_per_page:      20
 
+    path_to_node:      /usr/local/bin/node
+
     session.storage.filesystem.class: fibe\RestBundle\Session\Storage
 
 
