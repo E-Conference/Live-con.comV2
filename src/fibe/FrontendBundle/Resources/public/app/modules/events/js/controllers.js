@@ -214,6 +214,7 @@ angular.module('eventsApp').controller('eventsEditCtrl', [ '$scope', '$rootScope
 
   $scope.update = function (form)
   {
+     //$scope.event.mainEvent = $rootScope.currentConference;
     if (form.$valid)
     {
       $scope.event.$update({}, success, error);

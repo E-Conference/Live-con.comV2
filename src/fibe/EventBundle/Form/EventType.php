@@ -36,12 +36,12 @@ class EventType extends VEventType
                 'type' => new PaperType(),
                 'uniqField' => 'label',))
 
-            ->add('mainEvent', 'fibe_restbundle_entity_type', array(
-                'class'    => 'fibeEventBundle:MainEvent',
-                'uniqField' => 'label',
-                'required' => false,
-                'multiple' => false,
-            ))
+//            ->add('mainEvent', 'fibe_restbundle_entity_type', array(
+//                'class'    => 'fibeEventBundle:MainEvent',
+//                'uniqField' => 'label',
+//                'required' => false,
+//                'multiple' => false,
+//            ))
             ->add('topics', 'fibe_restbundle_collection_type', array(
                 'type' => new TopicType(),
                 'uniqField' => 'label',

@@ -15,7 +15,9 @@ class CategoryType extends AbstractType
             ->add('label')
             ->add('description')
             ->add('color')
-            ->add('level')
+            ->add('level', 'integer', array(
+                'empty_data' => '3'
+            ))
         ;
     }
 

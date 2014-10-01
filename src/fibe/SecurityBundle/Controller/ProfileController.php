@@ -18,7 +18,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 /**
  * Override edit and show action of FOS\UserBundle\Controller\ProfileController
  */
-class ProfileController extends BaseController
+class ProfileController extends ContainerAware
 {
  
   /**
