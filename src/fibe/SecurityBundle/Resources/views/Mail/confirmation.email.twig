@@ -1,0 +1,13 @@
+{% block subject %}Welcome {{ user.username }}{% endblock %}
+
+{% block body_text %}
+  {% autoescape false %}
+  Hello {{ user.username }} !
+
+  To finish activating your account - please visit {{ confirmationUrl }}
+
+  Regards,
+  the Symposer team
+  {% endautoescape %}
+{% endblock %}
+{% block body_html %}{# include a html template #}{% endblock %}

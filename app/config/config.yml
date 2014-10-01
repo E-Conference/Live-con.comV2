@@ -30,7 +30,7 @@ framework:
         strict_requirements: %kernel.debug%
     form:            ~
     csrf_protection:
-        enabled: false
+        enabled: false # globally disable csrf protection
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
@@ -95,20 +95,21 @@ fos_user:
     resetting:
         # Permet de définir le template de l'email à envoyer (en html)
         email:
-              template: fibeSecurityBundle:Registration:registration.email.twig
+              template: fibeSecurityBundle:Mail:resetting_password.email.twig
     registration:
         form:
             type: fibe_user_registration
         confirmation:
-             enabled:   true # change to true for required email confirmation
+            enabled:   true # change to true for required email confirmation
+            template:   fibeSecurityBundle:Mail:confirmation.email.twig
     profile:
         form:
             type:  fibe_user_profile
     from_email:
          # Adresse de l'expediteur
-         address:      noreply@live-con.com
+         address:      noreply@sympozer.com
          # Nom de l'expediteur
-         sender_name:  Admin Livecon Manager
+         sender_name:  Sympozer
 
 sensio_framework_extra:
     view:
