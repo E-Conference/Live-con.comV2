@@ -20,27 +20,18 @@ angular.module('equipmentsApp').controller('equipmentsMainCtrl', [function ($sco
 angular.module('equipmentsApp').controller('equipmentsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'equipmentsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, equipmentsFact, $cachedResource)
 {
   $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
-
-  var offset = -20;
-  var limit = 20;
-  $scope.busy = false;
-
-  $scope.equipments = [];
+  $scope.entities = [];
 
   $scope.reload = function ()
   {
-    // $scope.equipments = equipment.list();
-    $scope.equipments.$promise.then(function ()
+    $scope.entities.$promise.then(function ()
     {
       console.log('From cache:', $scope.equipments);
     });
-    //console.log($scope.equipments);
   }
 
   $scope.clone = function (equipment)
   {
-    // $scope.equipments = equipment.list();
-
     cloneequipment = angular.copy(equipment);
     cloneequipment.id = null;
 
@@ -52,7 +43,7 @@ angular.module('equipmentsApp').controller('equipmentsListCtrl', ['$scope', 'GLO
     var success = function (response, args)
     {
       $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'equipment saved', type: 'success'});
-      $scope.equipments.push(response);
+      $scope.entities.push(response);
     }
 
     cloneequipment.$create({}, success, error);
@@ -71,68 +62,12 @@ angular.module('equipmentsApp').controller('equipmentsListCtrl', ['$scope', 'GLO
       success: {label: 'Ok', fn: function ()
       {
         equipmentsFact.delete({id: equipment.id});
-        $scope.equipments.splice(index, 1);
+        $scope.entities.splice(index, 1);
       }}
     }, {
       equipmentModel: equipment
     });
   }
-
-
-  $scope.load = function (query)
-  {
-    offset = offset + limit;
-
-    if (query)
-    {
-      offset = 0;
-      limit = 20;
-      $scope.busy = false;
-    }
-
-    if (this.busy)
-    {
-      return;
-    }
-
-    $scope.busy = true;
-    equipmentsFact.all({offset: offset, limit: limit, query: query}, function (data)
-    {
-      var items = data;
-
-      if (query)
-      {
-        $scope.equipments = data;
-      }
-      else
-      {
-        for (var i = 0; i < items.length; i++)
-        {
-          $scope.equipments.push(items[i]);
-        }
-      }
-
-      if (items.length > 1)
-      {
-        $scope.busy = false;
-      }
-    })
-  };
-
-//    $scope.search = function(query) {
-//        equipment.all({offset: 0, limit: 20, query: query}, function (data) {
-//            $scope.equipments = data;
-//        })
-//    };
-
-  /*
-   var Org = $cachedResource('org', globalConfig.api.urls.equipments+'/:equipmentId.json', {id: "@id"});
-   $scope.equipments = Org.query();
-   $scope.equipments.$promise.then(function(data) {
-   console.log($scope.equipments);
-   console.log($scope.equipments.length);
-   });*/
-  //$scope.equipments = $cachedResource();
 }]);
 
 

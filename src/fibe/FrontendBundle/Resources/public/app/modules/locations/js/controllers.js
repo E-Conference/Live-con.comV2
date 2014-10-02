@@ -21,26 +21,18 @@ angular.module('locationsApp').controller('locationsListCtrl', ['$scope', 'GLOBA
 {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
-    var offset = -20;
-    var limit = 20;
-    $scope.busy = false;
-
-    $scope.locations = [];
+    $scope.entities = [];
 
     $scope.reload = function ()
     {
-        // $scope.locations = location.list();
-        $scope.locations.$promise.then(function ()
+        $scope.entities.$promise.then(function ()
         {
-            console.log('From cache:', $scope.locations);
+            console.log('From cache:', $scope.entities);
         });
-        //console.log($scope.locations);
     }
 
     $scope.clone = function (location)
     {
-        // $scope.locations = location.list();
-
         clonelocation = angular.copy(location);
         clonelocation.id = null;
 
@@ -52,7 +44,7 @@ angular.module('locationsApp').controller('locationsListCtrl', ['$scope', 'GLOBA
         var success = function (response, args)
         {
             $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'location saved', type: 'success'});
-            $scope.locations.push(response);
+            $scope.entities.push(response);
         }
 
         clonelocation.$create({}, success, error);
@@ -70,85 +62,14 @@ angular.module('locationsApp').controller('locationsListCtrl', ['$scope', 'GLOBA
             controller: 'locationsDeleteCtrl',
             success: {label: 'Ok', fn: function ()
             {
-                LocationsFact.delete({id: location.id});
-                $scope.locations.splice(index, 1);
+                locationsFact.delete({id: location.id});
+                $scope.entities.splice(index, 1);
             }}
         }, {
             locationModel: location
         });
     }
 
-    $scope.createEquipmentModal = function(index) {
-        $scope.index = index;
-
-        createDialogService(GLOBAL_CONFIG.app.modules.equipments.urls.partials+'equipments-new.html', {
-            id: 'complexDialog',
-            title: 'Equipment creation',
-            backdrop: true,
-            controller: 'equipmentsNewCtrl',
-            success: {label: 'Ok', fn: function() {
-                equipmentsFact.create();
-                $scope.equipments.splice(index,1);
-            }}
-
-        });
-    }
-
-
-    $scope.load = function (query)
-    {
-        offset = offset + limit;
-
-        if (query)
-        {
-            offset = 0;
-            limit = 20;
-            $scope.busy = false;
-        }
-
-        if (this.busy)
-        {
-            return;
-        }
-
-        $scope.busy = true;
-        locationsFact.all({offset: offset, limit: limit, query: query}, function (data)
-        {
-            var items = data;
-
-            if (query)
-            {
-                $scope.locations = data;
-            }
-            else
-            {
-                for (var i = 0; i < items.length; i++)
-                {
-                    $scope.locations.push(items[i]);
-                }
-            }
-
-            if (items.length > 1)
-            {
-                $scope.busy = false;
-            }
-        })
-    };
-
-//    $scope.search = function(query) {
-//        location.all({offset: 0, limit: 20, query: query}, function (data) {
-//            $scope.locations = data;
-//        })
-//    };
-
-    /*
-     var Org = $cachedResource('org', globalConfig.api.urls.locations+'/:locationId.json', {id: "@id"});
-     $scope.locations = Org.query();
-     $scope.locations.$promise.then(function(data) {
-     console.log($scope.locations);
-     console.log($scope.locations.length);
-     });*/
-    //$scope.locations = $cachedResource();
 }]);
 
 /**
