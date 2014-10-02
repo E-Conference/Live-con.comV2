@@ -1,21 +1,6 @@
 <div ng-include="GLOBAL_CONFIG.app.modules.categories.urls.partials+'categories-actions.html'" ng-controller="categoriesMainCtrl"></div>
 <form name="categoryEditForm" class="form" role="form" ng-submit="update(categoryEditForm)">
-  <div>
-    <label for="inputLabel">Label</label>
-    <input type="text" class="form-control" id="inputLabel" required placeholder="{{category.label}}" ng-model="category.label">
-  </div>
-  <div>
-    <label for="inputDescription">Description</label>
-    <input type="text" class="form-control" id="inputDescription" placeholder="{{category.description}}" ng-model="category.description">
-  </div>
-  <div>
-    <label for="inputColor">Color</label>
-    <input type="text" class="form-control" id="inputColor" placeholder="{{category.color}}" ng-model="category.color">
-  </div>
-  <div>
-    <label for="inputLevel"></label>
-    <input type="hidden" class="form-control" id="inputLevel" placeholder="3" ng-model="category.level">
-  </div>
+  <div ng-include="GLOBAL_CONFIG.app.modules.categories.urls.partials+'categories-form.html'"></div>
   <div>
     <button type="submit" class="btn btn-success">Save</button>
   </div>

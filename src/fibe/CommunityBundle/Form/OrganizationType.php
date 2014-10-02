@@ -17,7 +17,6 @@ class OrganizationType extends AdditionalInformationsType
   {
     parent::buildForm($builder, $options);
     $builder
-      ->add('id')
       ->add('label')
       ->add('members', 'entity', array(
         'class'    => 'fibeCommunityBundle:Person',
@@ -25,6 +24,11 @@ class OrganizationType extends AdditionalInformationsType
         'multiple' => true,
         'required' => false
       ))
+//        ->add('members', 'fibe_restbundle_collection_type', array(
+//            'type' => new PersonType(),
+//            'uniqField' => 'email',
+//        ))
+
     ;
   }
 

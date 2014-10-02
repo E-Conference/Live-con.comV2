@@ -19,11 +19,11 @@ class SocialServiceAccountType extends AbstractType
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
     $builder
-      ->add('accountName')
-      ->add('socialService', 'entity', array(
-        'class'    => 'fibecommunityBundle:SocialService',
-        'label'    => 'Social service',
-        'required' => true));
+      ->add('accountName');
+//      ->add('socialService', 'entity', array(
+//        'class'    => 'fibecommunityBundle:SocialService',
+//        'label'    => 'Social service',
+//        'required' => true));
   }
 
   /**

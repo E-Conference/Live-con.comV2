@@ -47,7 +47,7 @@ documentation:
 fibe_home_page:
     resource: "@fibeHomePageBundle/Controller/"
     type:     annotation
-    prefix:   / 
+    prefix:   /
 
 fibe_security_www_conf:
     resource: "@fibeSecurityBundle/Controller/"

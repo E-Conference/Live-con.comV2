@@ -57,7 +57,8 @@ var sympozerApp = angular.module('sympozerApp', [
   'leaflet-directive',
   'ui.bootstrap.datetimepicker',
   'ngSanitize',
-  'ui.select'
+  'ui.select',
+  'colorpicker.module'
 ]);
 
 /**

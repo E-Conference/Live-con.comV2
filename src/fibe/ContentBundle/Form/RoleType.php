@@ -2,6 +2,7 @@
 
 namespace fibe\ContentBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use fibe\CommunityBundle\Form\PersonType;
 use fibe\EventBundle\Form\EventType;
 use fibe\EventBundle\Form\MainEventType;
@@ -23,29 +24,43 @@ class RoleType extends AbstractType
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
     $builder
-      ->add('person', 'fibe_restbundle_entity_type', array(
+      ->add('person', 'entity', array(
       'class'    => 'fibeCommunityBundle:Person',
-      'uniqField' => 'email',
       'multiple' => false,
+      'query_builder' => function(EntityRepository $er) {
+              return $er->createQueryBuilder('u')
+                  ->orderBy('u.id', 'ASC');
+          }
       ))
-      ->add('event', 'fibe_restbundle_entity_type', array(
-          'class'    => 'fibeEventBundle:Event',
-          'uniqField' => 'label',
-          'required' => false,
-          'multiple' => false,
+      ->add('event', 'entity', array(
+//          'class'    => 'fibeEventBundle:Event',
+//          'required' => false,
+//          'multiple' => false,
+//          'query_builder' => function(EntityRepository $er) {
+//                  return $er->createQueryBuilder('u')
+//                      ->orderBy('u.id', 'ASC');
+//          }
+
+            'class'    => 'fibeEventBundle:Event',
+            'required' => false,
+            'multiple' => false,
       ))
-      ->add('roleLabel', 'fibe_restbundle_entity_type', array(
+      ->add('roleLabel', 'entity', array(
           'class'    => 'fibeContentBundle:RoleLabel',
-          'uniqField' => 'label',
           'required' => false,
           'multiple' => false,
       ))
-      ->add('mainEvent', 'fibe_restbundle_entity_type', array(
+      ->add('mainEvent', 'entity', array(
           'class'    => 'fibeEventBundle:MainEvent',
-          'uniqField' => 'label',
           'required' => false,
           'multiple' => false,
+          'query_builder' => function(EntityRepository $er) {
+                  return $er->createQueryBuilder('u')
+                      ->orderBy('u.id', 'ASC');
+          }
       ));
+
+
   }
 
   /**

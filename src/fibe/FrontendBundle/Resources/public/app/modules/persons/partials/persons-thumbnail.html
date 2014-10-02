@@ -1,22 +1,22 @@
 <div ng-include="GLOBAL_CONFIG.app.modules.persons.urls.partials+'persons-actions.html'" ng-controller="personsMainCtrl"></div>
 
-<input type="text" class="form-control" placeholder="Search" ng-change="load(query)" ng-model="query">
+<input type="text" class="form-control" placeholder="Search" ng-change="search()" ng-model="query">
 
-<div class="row" infinite-scroll='load(query)' infinite-scroll-disabled='busy' infinite-scroll-distance='0.5'>
-  <div ng-repeat="person in persons  track by $index" class="col-sm-6 col-md-6 col-lg-4 well">
-    <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+<div class="row" entity-list-handler="persons" infinite-scroll='load()' infinite-scroll-disabled='busy' infinite-scroll-distance='0.5'>
+    <div ng-repeat="person in entities  track by $index" class="col-sm-6 col-md-6 col-lg-4 well">
+        <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
 
-    <h2>{{ person.label }}</h2>
+        <h2>{{ person.label }}</h2>
 
-    <p>{{ person.website }}</p>
+        <p>{{ person.website }}</p>
 
-    <p>{{ person.country }}</p>
-    <a class="btn btn-warning" href="#persons/edit/{{ person.id }}" role="button"><i class="fa fa-edit fa-1x"></i></a>
-    <a class="btn btn-default" href="#persons/show/{{ person.id }}" role="button"><i class="fa fa-eye fa-1x"></i></a>
-    <a class="btn btn-primary" href="" data-ng-click="clone(person)" role="button"><i class="fa fa-files-o fa-1x"></i></a>
-    <button class="btn btn-danger" data-ng-click="deleteModal($index, person)" role="button">
-      <i class="fa fa-trash-o fa-1x"></i></button>
-  </div>
+        <p>{{ person.country }}</p>
+        <a class="btn btn-warning" href="#persons/edit/{{ person.id }}" role="button"><i class="fa fa-edit fa-1x"></i></a>
+        <a class="btn btn-default" href="#persons/show/{{ person.id }}" role="button"><i class="fa fa-eye fa-1x"></i></a>
+        <a class="btn btn-primary" href="" data-ng-click="clone(person)" role="button"><i class="fa fa-files-o fa-1x"></i></a>
+        <button class="btn btn-danger" data-ng-click="deleteModal($index, person)" role="button">
+            <i class="fa fa-trash-o fa-1x"></i></button>
+    </div>
 </div>
 
 

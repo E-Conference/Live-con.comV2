@@ -50,7 +50,7 @@ class Event extends VEvent
    *
    * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="events", cascade={"persist"})
    * @ORM\JoinColumn(name="mainevent_id", referencedColumnName="id")
-   * @Expose
+   *
    * @SerializedName("mainEvent")
    */
   private $mainEvent;
@@ -87,7 +87,7 @@ class Event extends VEvent
    * @ORM\JoinTable(name="event_role",
    *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")})
-   * @expose
+   *
    */
   private $roles;
 

@@ -14,8 +14,8 @@
     <th>Actions</th>
   </tr>
   </thead>
-  <tbody infinite-scroll='load()' infinite-scroll-disabled='busy' infinite-scroll-distance='0.5'>
-  <tr ng-repeat="event in events  track by $index">
+  <tbody entity-list-handler="events" offset="-20" limit="20" orderBy="label" orderSide="ASC"  query="" entitties="entities" infinite-scroll='load()' infinite-scroll-disabled='busy' infinite-scroll-distance='0.5'>
+  <tr ng-repeat="event in entities  track by $index">
     <td>{{ event.label }}</td>
     <td>{{ event.startAt }}</td>
     <td>{{ event.endAt }}</td>

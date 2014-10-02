@@ -55,8 +55,7 @@ class Equipment
 
   /**
    * @var string $icon
-   * @Assert\File( maxSize = "1024k", mimeTypesMessage = "Please upload a valid Image")
-   * @ORM\Column(name="icon", type="string", length=255)
+   * @ORM\Column(name="icon", type="string", length=255, nullable=true)
    * @Expose
    */
   private $icon;
