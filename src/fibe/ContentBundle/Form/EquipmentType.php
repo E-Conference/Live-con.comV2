@@ -22,7 +22,7 @@ class EquipmentType extends AbstractType
       ->add('id')
       ->add('label')
       ->add('description')
-      ->add('icon');
+      ->add('icon', 'text', array('required' => false));
   }
 
   /**

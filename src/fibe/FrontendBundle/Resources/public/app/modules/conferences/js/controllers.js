@@ -200,22 +200,7 @@ angular.module('conferencesApp').controller('conferencesEditCtrl', [ '$scope', '
     }
   }
 
-  $scope.markers = new Array();
 
-  $scope.$on("leafletDirectiveMap.click", function (event, args)
-  {
-    var leafEvent = args.leafletEvent;
-
-    $scope.markers.push({
-      lat: leafEvent.latlng.lat,
-      lng: leafEvent.latlng.lng,
-      message: "My Added Marker"
-    });
-
-    $scope.conference.latitude = leafEvent.latlng.lat;
-    $scope.conference.latitude = leafEvent.latlng.longitude;
-
-  });
 
   //Context change
   $rootScope.$broadcast('contextCtrl:changeContext', {confId: $routeParams.confId});
