@@ -13,17 +13,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class PersonType extends AdditionalInformationsType
 {
-//  private $user;
-//
-//  /**
-//   * Constructor
-//   *
-//   * @param $user
-//   */
-//  public function __construct($user)
-//  {
-//    $this->user = $user;
-//  }
 
   /**
    * {@inheritdoc}
@@ -34,10 +23,12 @@ class PersonType extends AdditionalInformationsType
     $builder
       ->add('firstName')
       ->add('familyName')
-      ->add('organizations', 'fibe_restbundle_collection_type', array(
-        'type' => new OrganizationType(),
-        'uniqField' => 'label',
-      ))
+      ->add('email', 'text', array('required' => false))
+//      ->add('organizations', 'collection', array(
+//        'type' => new OrganizationType(),
+//        'required' => 'false',
+//         'allow_add' => true,
+//      ))
 //      ->add('firstName', 'text', array('label' => "First name"))
 //      ->add('familyName', 'text', array('label' => "Family Name"))
 //      ->add('email', 'text', array('required' => false))

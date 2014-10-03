@@ -25,7 +25,11 @@ class GetOrCreateEntityTransformer implements DataTransformerInterface
 
   public function transform($entities)
   {
-    return $entities;
+      if (null === $entities) {
+          return "";
+      }
+
+      return $entities->getId();
   }
 
 
@@ -34,7 +38,6 @@ class GetOrCreateEntityTransformer implements DataTransformerInterface
     if (!$entity) {
       return $entity;
     }
-    $results = array();
 
 
     $uniqFieldGetter = 'get' . ucwords($this->uniqField);
@@ -43,17 +46,17 @@ class GetOrCreateEntityTransformer implements DataTransformerInterface
     ->getRepository(get_class($entity))
     ->findOneBy(array($this->uniqField => $uniqFieldValue))
     ;
-
-    if (null === $result)
-    {
-    $result = $entity;
-    }
-    else
-    {
-    $result = $this->om->merge($entity);
-    }
-    $results[] = $result;
-
-    return $results ;
+     return $result;
+//    if (null === $result)
+//    {
+//    $result = $entity;
+//    }
+//    else
+//    {
+//    $result = $this->om->merge($entity);
+//    }
+//    $results[] = $result;
+//
+//    return $results ;
   }
 }

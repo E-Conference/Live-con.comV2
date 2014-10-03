@@ -49,7 +49,7 @@ class Location
 
   /**
    * Equipments who are in the location
-   * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Equipment",  cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Equipment",  cascade={"all"})
    * @Expose
    */
   private $equipments;

@@ -5,6 +5,7 @@ namespace fibe\ContentBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use fibe\EventBundle\Entity\Event;
+use JMS\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use fibe\EventBundle\Entity\MainEvent;
@@ -70,6 +71,7 @@ class Paper
    *     joinColumns={@ORM\JoinColumn(name="paper_id", referencedColumnName="id", onDelete="Cascade")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id", onDelete="Cascade")})
    * @Expose
+   * @MaxDepth(1)
    */
   private $authors;
 

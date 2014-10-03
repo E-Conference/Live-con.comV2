@@ -26,13 +26,17 @@ class PaperType extends AbstractType
       ->add('publisher', 'text', array('label' => 'Publisheur', 'required' => false))
       ->add('publishDate', 'text', array('label' => 'Published date', 'required' => false))
       ->add('url')
-      ->add('topics', 'fibe_restbundle_collection_type', array(
+      ->add('topics', 'collection', array(
         'type' => new TopicType(),
-        'uniqField' => 'label',
+        'required' => 'false',
+        'allow_add' => true,
+        'allow_delete' => true,
       ))
-      ->add('authors', 'fibe_restbundle_collection_type', array(
+      ->add('authors', 'collection', array(
         'type' => new PersonType(),
-        'uniqField' => 'email',
+         'required' => 'false',
+        'allow_add' => true,
+          'allow_delete' => true,
       ))
     ;
   }

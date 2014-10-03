@@ -24,6 +24,7 @@ class RoleLabel
    * @ORM\Id
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
+   * @Expose
    */
   protected $id;
 
@@ -43,7 +44,7 @@ class RoleLabel
    * role
    * Role who have this type
    * @ORM\OneToMany(targetEntity="Role", mappedBy="roleLabel")
-   * @Expose
+   *
    */
   private $roles;
 
