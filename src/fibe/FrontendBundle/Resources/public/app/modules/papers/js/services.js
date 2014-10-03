@@ -6,9 +6,9 @@
  * @type {factory}
  */
 angular.module('papersApp').factory('papersFact', ['$resource', '$cachedResource',
-  function ($cachedResource)
+  function ($resource, $cachedResource)
   {
-    return $cachedResource(
+    return $resource(
       globalConfig.api.urls.get_papers,
       {},
       {

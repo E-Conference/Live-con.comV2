@@ -16,7 +16,7 @@ class TopicRESTController extends FOSRestController
 {
 
   const ENTITY_CLASSNAME = "fibe\\ContentBundle\\Entity\\Topic";
-  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\Topic";
+  const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\TopicType";
 
 
   /**

@@ -19,11 +19,12 @@ class RoleLabelType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('label')
-            ->add('roles', 'fibe_restbundle_collection_type', array(
-                'type' => new RoleType(),
-                'uniqField' => 'label',
-            ));
+            ->add('label');
+//            ->add('roles', 'collection', array(
+//                'type' => new RoleType(),
+//                'required' => 'false',
+//                'allow_add' => true
+//            ));
     }
 
     /**

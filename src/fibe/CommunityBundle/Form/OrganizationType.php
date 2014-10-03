@@ -3,6 +3,7 @@
 namespace fibe\CommunityBundle\Form;
 
 use fibe\CommunityBundle\Entity\AdditionalInformations;
+use JMS\Serializer\Tests\Fixtures\Person;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -18,18 +19,12 @@ class OrganizationType extends AdditionalInformationsType
     parent::buildForm($builder, $options);
     $builder
       ->add('label')
-      ->add('members', 'entity', array(
-        'class'    => 'fibeCommunityBundle:Person',
-        'label'    => 'Members',
-        'multiple' => true,
-        'required' => false
-      ))
-//        ->add('members', 'fibe_restbundle_collection_type', array(
-//            'type' => new PersonType(),
-//            'uniqField' => 'email',
-//        ))
-
-    ;
+      ->add('members', 'collection', array(
+      'type' => new PersonType(),
+      'required' => 'false',
+      'allow_add' => true,
+        'allow_delete' => true
+      ));
   }
 
   /**

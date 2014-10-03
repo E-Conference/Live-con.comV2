@@ -76,6 +76,21 @@ class Equipment
     return $this->id;
   }
 
+
+  /**
+   * Set id
+   *
+   * @param string $id
+   *
+   * @return Equipment
+   */
+  public function setId($id)
+  {
+    $this->id = $id;
+
+    return $this;
+  }
+
   /**
    * Set label
    *

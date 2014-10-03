@@ -201,23 +201,36 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
                 var newEntity = new entityFact($model);
                 if ($model.id)
                 {
+
                     //Check if an array or object is to be added according to the singleChoice parameter
                     if(!singleChoice) {
                         scope.resource[parentField].push(newEntity);
                     }else{
                         scope.resource[parentField]= newEntity;
                     }
+
                 } else
                 {
                     switch (newPolitic)
                     {
                         case "create":
-                            //Check if an array or object is to be added according to the singleChoice parameter
+                            //Creation of the new entity
                             if(singleChoice) {
                                 scope.resource[parentField]= newEntity;
                             }else{
                                 scope.resource[parentField].push(newEntity);
                             }
+//                            newEntity.$create({}, function(newEntity){
+//                                if(singleChoice) {
+//                                    scope.resource[parentField]= newEntity;
+//                                }else{
+//                                    scope.resource[parentField].push(newEntity);
+//                                }
+//                            }, function(error){
+//
+//                                console.log(error);
+//                            });
+
                             break;
 
                         case "modal":

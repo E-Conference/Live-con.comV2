@@ -97,8 +97,8 @@ class Person extends AdditionalInformations
    * @ORM\JoinTable(name="member",
    *     joinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id", onDelete="Cascade")})
    *     inverseJoinColumns={@ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="Cascade")},
-   * @Expose
-   * @MaxDepth(2)
+   *
+   * @MaxDepth(1)
    */
   private $organizations;
 
