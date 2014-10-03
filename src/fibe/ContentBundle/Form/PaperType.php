@@ -34,9 +34,9 @@ class PaperType extends AbstractType
       ))
       ->add('authors', 'collection', array(
         'type' => new PersonType(),
-         'required' => 'false',
+        'required' => 'false',
         'allow_add' => true,
-          'allow_delete' => true,
+        'allow_delete' => true,
       ))
     ;
   }

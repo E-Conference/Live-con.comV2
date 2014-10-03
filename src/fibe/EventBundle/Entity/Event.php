@@ -73,7 +73,7 @@ class Event extends VEvent
   /**
    * Locations for the event
    * @Expose
-   * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Location", inversedBy="events", cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Location", inversedBy="events", cascade={"all"})
    * @ORM\JoinTable(name="event_location",
    *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="location_id", referencedColumnName="id")})
@@ -148,11 +148,11 @@ class Event extends VEvent
      */
     public function updateSomething(PreFlushEventArgs $eventArgs)
     {
-        if(!$this->getId()) return;
+        if(!$this->getId() || !$this->getLocations()->first()) return;
         $em = $eventArgs->getEntityManager();
         $uow = $em->getUnitOfWork();
         $uow->recomputeSingleEntityChangeSet(
-            $em->getClassMetadata(get_class($this->getLocations())),
+            $em->getClassMetadata(get_class($this->getLocations()->first())),
             $this->getLocations()
         );
     }

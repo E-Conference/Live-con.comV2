@@ -67,7 +67,7 @@ class Paper
    * Authors : Persons related to an event
    *
    * @ORM\ManyToMany(targetEntity="fibe\CommunityBundle\Entity\Person", inversedBy="papers", cascade={"persist", "merge", "remove"})
-   * @ORM\JoinTable(
+   * @ORM\JoinTable(name="paper_person",
    *     joinColumns={@ORM\JoinColumn(name="paper_id", referencedColumnName="id", onDelete="Cascade")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id", onDelete="Cascade")})
    * @Expose
@@ -97,8 +97,8 @@ class Paper
    *
    * @ORM\ManyToMany(targetEntity="Topic", inversedBy="papers", cascade={"persist", "merge", "remove"})
    * @ORM\JoinTable(name="paper_topic",
-   *     joinColumns={@ORM\JoinColumn(name="paper_id", referencedColumnName="id")},
-   *     inverseJoinColumns={@ORM\JoinColumn(name="topic_id", referencedColumnName="id")})
+   *     joinColumns={@ORM\JoinColumn(name="paper_id", referencedColumnName="id", onDelete="Cascade")},
+   *     inverseJoinColumns={@ORM\JoinColumn(name="topic_id", referencedColumnName="id", onDelete="Cascade")})
    * @Expose
    */
   private $topics;

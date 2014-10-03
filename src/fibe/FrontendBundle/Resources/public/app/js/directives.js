@@ -215,21 +215,18 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
                     {
                         case "create":
                             //Creation of the new entity
-                            if(singleChoice) {
-                                scope.resource[parentField]= newEntity;
-                            }else{
-                                scope.resource[parentField].push(newEntity);
-                            }
-//                            newEntity.$create({}, function(newEntity){
-//                                if(singleChoice) {
-//                                    scope.resource[parentField]= newEntity;
-//                                }else{
-//                                    scope.resource[parentField].push(newEntity);
-//                                }
-//                            }, function(error){
-//
-//                                console.log(error);
-//                            });
+                            scope.busy = true;
+                            newEntity.$create({}, function(newEntity){
+                                scope.busy = false;
+                                if(singleChoice) {
+                                    scope.resource[parentField]= newEntity;
+                                }else{
+                                    scope.resource[parentField].push(newEntity);
+                                }
+                            }, function(error){
+                                scope.busy = false;
+                                console.log(error);
+                            });
 
                             break;
 
