@@ -36,18 +36,6 @@ class PaperType extends AbstractType
         'required' => 'false',
         'multiple' => true,
       ))
-//      ->add('authors', 'collection', array(
-//        'type' => new PersonType(),
-//        'required' => 'false',
-//        'allow_add' => true,
-//        'allow_delete' => true,
-//      ))
-//      ->add('topics', 'collection', array(
-//        'type' => new TopicType(),
-//        'required' => 'false',
-//        'allow_add' => true,
-//        'allow_delete' => true,
-//      ))
     ;
   }
 

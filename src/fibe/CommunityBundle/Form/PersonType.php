@@ -29,6 +29,11 @@ class PersonType extends AdditionalInformationsType
         'required' => false,
         'multiple' => true
       ))
+      ->add('papers', 'entity', array(
+        'class'    => 'fibeCommunityBundle:Paper',
+        'required' => false,
+        'multiple' => true
+      ))
 //      ->add('firstName', 'text', array('label' => "First name"))
 //      ->add('familyName', 'text', array('label' => "Family Name"))
 //      ->add('email', 'text', array('required' => false))
