@@ -19,12 +19,12 @@ class OrganizationType extends AdditionalInformationsType
     parent::buildForm($builder, $options);
     $builder
       ->add('label')
-      ->add('members', 'collection', array(
-      'type' => new PersonType(),
-      'required' => 'false',
-      'allow_add' => true,
-        'allow_delete' => true
-      ));
+      ->add('members', 'entity', array(
+        'class' => 'fibeCommunityBundle:Person',
+        'required' => 'false',
+        'multiple' => true,
+      ))
+      ;
   }
 
   /**
