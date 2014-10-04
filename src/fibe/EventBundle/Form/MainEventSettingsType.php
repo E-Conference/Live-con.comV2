@@ -22,7 +22,7 @@ class MainEventSettingsType extends AbstractType
             ->add('mainEvent')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

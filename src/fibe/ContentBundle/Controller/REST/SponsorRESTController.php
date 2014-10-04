@@ -109,7 +109,7 @@ class SponsorRESTController extends FOSRestController
     );
   }
 
-  
+
 
 
   /**

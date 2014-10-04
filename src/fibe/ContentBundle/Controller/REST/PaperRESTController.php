@@ -113,7 +113,7 @@ class PaperRESTController extends FOSRestController
     );
   }
 
-  
+
 
 
   /**

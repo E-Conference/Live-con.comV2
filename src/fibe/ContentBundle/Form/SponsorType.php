@@ -19,11 +19,20 @@ class SponsorType extends AbstractType
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
     $builder
-      ->add('name')
+      ->add('label')
       ->add('logo', 'file', ['required' => false,
                              'label'    => 'Logo (jpeg - png - 2MO)',
                              'attr'     => ['placeholder' => 'logoPath']])
-      ->add('url', 'url', ['required' => false])
+      ->add('organization', 'entity', array(
+        'class' => 'fibeCommunityBundle:Organization',
+        'required' => 'false',
+        'multiple' => true,
+      ))
+      ->add('vEvent', 'entity', array(
+        'class' => 'fibeEventBundle:VEvent',
+        'required' => 'false',
+        'multiple' => true,
+      ))
       ->add('description', 'textarea', ['required' => false]);
   }
 

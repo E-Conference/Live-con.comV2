@@ -139,7 +139,7 @@
       $SocialEvent = new Category();
       $SocialEvent->setLabel("Social Event")
                   ->setColor("#B186D7")
-                  ->setLevel(3);                  
+                  ->setLevel(3);
       $em->persist($SocialEvent);
 
       $MealEvent = new Category();

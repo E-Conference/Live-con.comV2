@@ -201,4 +201,20 @@ class Organization extends AdditionalInformations
   {
     return $this->mainEvent;
   }
+
+  /**
+   * @return mixed
+   */
+  public function getSponsors()
+  {
+    return $this->sponsors;
+  }
+
+  /**
+   * @param mixed $sponsors
+   */
+  public function setSponsors($sponsors)
+  {
+    $this->sponsors = $sponsors;
+  }
 }

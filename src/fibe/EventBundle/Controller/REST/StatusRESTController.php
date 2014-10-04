@@ -109,7 +109,7 @@ class StatusRESTController extends FOSRestController
     );
   }
 
-  
+
 
 
   /**

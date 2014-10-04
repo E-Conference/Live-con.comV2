@@ -4,7 +4,7 @@ use FOS\UserBundle\Mailer\TwigSwiftMailer;
 use FOS\UserBundle\Model\UserInterface;
 
 /**
- * 
+ *
  * @author benoitddlp
  */
   class MailManager extends TwigSwiftMailer

@@ -36,6 +36,11 @@ class PaperType extends AbstractType
         'required' => 'false',
         'multiple' => true,
       ))
+      ->add('events', 'entity', array(
+        'class' => 'fibeEventBundle:Event',
+        'required' => 'false',
+        'multiple' => true,
+      ))
     ;
   }
 

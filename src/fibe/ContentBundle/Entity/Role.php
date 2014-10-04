@@ -36,12 +36,12 @@ class Role
    */
   private $id;
 
-    /**
-     * label
-     * @ORM\Column(type="string", name="label", nullable=false)
-     * @Expose
-     */
-    protected $label;
+  /**
+   * label
+   * @ORM\Column(type="string", name="label", nullable=false)
+   * @Expose
+   */
+  protected $label;
 
   /**
    * Person : the person who has this role
@@ -59,7 +59,6 @@ class Role
    * @Expose
    */
   private $event;
-
 
   /**
    * The mainEvent associated

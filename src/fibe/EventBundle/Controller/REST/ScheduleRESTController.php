@@ -109,7 +109,7 @@ class ScheduleRESTController extends FOSRestController
     );
   }
 
-  
+
 
 
   /**

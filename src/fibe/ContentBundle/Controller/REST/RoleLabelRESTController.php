@@ -110,7 +110,7 @@ class RoleLabelRESTController extends FOSRestController
     );
   }
 
-  
+
 
 
   /**

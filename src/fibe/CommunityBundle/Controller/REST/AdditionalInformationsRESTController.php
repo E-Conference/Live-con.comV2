@@ -109,7 +109,7 @@ class AdditionalInformationsRESTController extends FOSRestController
     );
   }
 
-  
+
 
 
   /**

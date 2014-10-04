@@ -109,7 +109,7 @@ class TopicRESTController extends FOSRestController
     );
   }
 
-  
+
 
 
   /**

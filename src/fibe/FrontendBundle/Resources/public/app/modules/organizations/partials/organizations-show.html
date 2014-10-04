@@ -4,6 +4,7 @@
 
   <h3>{{organization.label}}</h3>
 
-  <p>{{organization.country}}</p>
+  <p ng-if="organization.country">{{organization.country}}</p>
+  <p ng-if="organization.website"><a href="{{organization.website}}">{{organization.website}}</a></p>
 </div>
 

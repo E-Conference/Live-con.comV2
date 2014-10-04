@@ -12,7 +12,7 @@
    * @package fibe\EventBundle\Form
    */
   class ConfEventType extends EventType
-  { 
+  {
 
 
     /**

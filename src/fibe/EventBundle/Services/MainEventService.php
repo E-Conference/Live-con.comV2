@@ -216,7 +216,7 @@
       //team
       $team = $mainEvent->getTeam();
       if($team)
-      { 
+      {
         $mainEvent->setTeam(null);
         $this->entityManager->flush();
         $this->entityManager->remove($team);

@@ -12,11 +12,11 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class EventType extends VEventType
 {
-       
+
     protected $categoriesLevels;
 
     public function __construct()
-    { 
+    {
 //        $this->categoriesLevels = $cat;
     }
 
@@ -47,7 +47,7 @@ class EventType extends VEventType
             ));
 
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

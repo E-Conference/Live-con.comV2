@@ -127,7 +127,7 @@ class EventRESTController extends FOSRestController
     );
   }
 
-  
+
 
 
   /**

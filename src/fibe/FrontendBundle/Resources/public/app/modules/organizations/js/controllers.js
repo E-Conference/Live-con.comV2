@@ -138,6 +138,7 @@ angular.module('organizationsApp').controller('organizationsShowCtrl', [ '$scope
 {
   $scope.organization = organizationsFact.get({id: $routeParams.organizationId});
 
+  console.log($scope.organization);
 }]);
 
 /**

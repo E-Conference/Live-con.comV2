@@ -109,7 +109,7 @@ class SocialServiceRESTController extends FOSRestController
     );
   }
 
-  
+
 
 
   /**

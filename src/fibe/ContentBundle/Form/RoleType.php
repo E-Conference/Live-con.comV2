@@ -24,6 +24,7 @@ class RoleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('label')
             ->add('person', 'entity', array(
               'class' => 'fibeCommunityBundle:Person',
               'property' => 'id',
@@ -48,43 +49,7 @@ class RoleType extends AbstractType
               'required' => 'false',
               'multiple' => false,
             ))
-//            ->add('person', new PersonType())
-//            ->add('event', new EventType())
-//            ->add('roleLabel', new RoleLabelType())
-//            ->add('mainEvent', new MainEventType())
         ;
-
-
-
-
-//        ->add('person', 'entity', array(
-//        'class'    => 'fibeCommunityBundle:Person',
-//        'required' => false,
-//        'multiple' => false
-//         ))
-//        ->add('event', 'entity', array(
-//            'class'    => 'fibeEventBundle:Event',
-//            'required' => false,
-//            'multiple' => false,
-//            'query_builder' => function(EntityRepository $er) {
-//                    return $er->createQueryBuilder('u')
-//                        ->orderBy('u.id', 'ASC');
-//                }
-//        ))
-//        ->add('roleLabel', 'entity', array(
-//            'class'    => 'fibeContentBundle:RoleLabel',
-//            'required' => false,
-//            'multiple' => false,
-//        ))
-//
-//        ->add('mainEvent', 'entity', array(
-//            'class'    => 'fibeEventBundle:MainEvent',
-//            'required' => false,
-//            'multiple' => false,
-//
-//        ));
-
-
     }
 
     /**

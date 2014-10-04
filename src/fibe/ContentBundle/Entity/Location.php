@@ -21,7 +21,7 @@ use JMS\Serializer\Annotation\VirtualProperty;
  *
  * @ORM\Table(name="location")
  * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\LocationRepository")
- * @ExclusionPolicy("all") 
+ * @ExclusionPolicy("all")
  */
 class Location
 {

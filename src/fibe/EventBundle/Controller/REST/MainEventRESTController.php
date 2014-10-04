@@ -109,7 +109,7 @@ class MainEventRESTController extends FOSRestController
     );
   }
 
-  
+
 
 
   /**

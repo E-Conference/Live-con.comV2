@@ -40,7 +40,7 @@ class MainEventType extends VEventType
 
       ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

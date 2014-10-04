@@ -114,7 +114,7 @@ class LocationRESTController extends FOSRestController
     );
   }
 
-  
+
 
 
   /**

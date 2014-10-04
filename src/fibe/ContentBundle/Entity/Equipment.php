@@ -23,7 +23,7 @@ use JMS\Serializer\Annotation\VirtualProperty;
  * @ORM\Table(name="equipment")
  * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\EquipmentRepository")
  * @ORM\HasLifecycleCallbacks
- * @ExclusionPolicy("all") 
+ * @ExclusionPolicy("all")
  */
 class Equipment
 {

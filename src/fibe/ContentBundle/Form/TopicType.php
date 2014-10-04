@@ -19,8 +19,23 @@ class TopicType extends AbstractType
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
     $builder
-      ->add('label')
       ->add('id')
+      ->add('label')
+      ->add('papers', 'entity', array(
+        'class' => 'fibeContentBundle:Paper',
+        'required' => 'false',
+        'multiple' => true,
+      ))
+      ->add('papers', 'entity', array(
+        'class' => 'fibeContentBundle:Paper',
+        'required' => 'false',
+        'multiple' => true,
+      ))
+      ->add('vEvent', 'entity', array(
+        'class' => 'fibeEventBundle:VEvent',
+        'required' => 'false',
+        'multiple' => true,
+      ))
     ;
   }
 

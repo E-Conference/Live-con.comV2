@@ -31,6 +31,6 @@ class CategoryType extends AbstractType
 
     public function getName()
     {
-        return 'fibe_eventbundle_category_type'; 
+        return 'fibe_eventbundle_category_type';
     }
 }

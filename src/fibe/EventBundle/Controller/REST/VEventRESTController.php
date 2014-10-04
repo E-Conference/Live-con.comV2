@@ -109,7 +109,7 @@ class VEventRESTController extends FOSRestController
     );
   }
 
-  
+
 
 
   /**

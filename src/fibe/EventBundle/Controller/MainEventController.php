@@ -63,7 +63,7 @@
 
       );
 
-    } 
+    }
 
 
     /**
@@ -76,9 +76,9 @@
       $conference = $this->get('fibe_security.acl_entity_helper')->getEntityACL('DELETE','MainEvent',$this->getUser()->getCurrentMainEvent());
 
       //TODO CSRF TOKEN
-      // $csrf = $this->get('form.csrf_provider'); //Symfony\Component\Form\Extension\Csrf\CsrfProvider\SessionCsrfProvider 
+      // $csrf = $this->get('form.csrf_provider'); //Symfony\Component\Form\Extension\Csrf\CsrfProvider\SessionCsrfProvider
       // $token = $csrf->generateCsrfToken($intention); //Intention should be empty string, if you did not define it in parameters
-      // BOOLEAN $csrf->isCsrfTokenValid($intention, $token); 
+      // BOOLEAN $csrf->isCsrfTokenValid($intention, $token);
 
       $this->get('fibe.event.MainEventService')->reset($conference);
 
@@ -135,12 +135,12 @@
      * @Template()
      */
     public function moduleAction(Request $request)
-    { 
+    {
       $module = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT','Module',$this->getUser()->getCurrentMainEvent()->getModule());
 
       $moduleForm = $this->createForm(new ModuleType(), $module);
 
-      return array( 
+      return array(
         'module'      => $module,
         'module_form' => $moduleForm->createView(),
       );
@@ -161,7 +161,7 @@
   {
 
     $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('EDIT','Module',$this->getUser()->getCurrentMainEvent()->getModule());
- 
+
     $editForm = $this->createForm(new ModuleType(), $entity);
     $editForm->bind($request);
 

@@ -109,7 +109,7 @@ class EquipmentRESTController extends FOSRestController
     );
   }
 
-  
+
 
 
   /**

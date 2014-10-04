@@ -4,7 +4,7 @@
 {% endif %}
 <table class="table table-hover .table-responsive records_list">
     <thead>
-        <tr> 
+        <tr>
             <th>Name</th>
             <th>Description</th>
             <th>Color</th>
@@ -26,8 +26,8 @@
                 <a class="btn btn-default" href="{{ path('event_category_show', { 'id': entity.id }) }}">
                     <i class="fa fa-eye"></i>
                 </a>
-               
-                {% if is_granted('EDIT', entity) %} 
+
+                {% if is_granted('EDIT', entity) %}
                     <a class="btn btn-warning edit" href="{{ path('event_category_edit', { 'id': entity.id }) }}">
                          <i class="fa fa-pencil"></i>
                     </a>
