@@ -26,6 +26,11 @@ class OrganizationType extends AdditionalInformationsType
         'required' => 'false',
         'multiple' => true,
       ))
+      ->add('sponsors', 'entity', array(
+        'class' => 'fibeContentBundle:Sponsor',
+        'required' => 'false',
+        'multiple' => true,
+      ))
       ;
   }
 
