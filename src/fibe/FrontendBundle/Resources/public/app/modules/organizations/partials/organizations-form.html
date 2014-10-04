@@ -1,5 +1,5 @@
 <div>
-    <label for="inputName">Label</label>
+    <label for="inputName">Organization name</label>
     <input type="text" class="form-control" id="label" required placeholder="{{organization.label}}" ng-model="organization.label">
 </div>
 <div>
@@ -15,3 +15,4 @@
     <input type="text" class="form-control" id="inputCountry" placeholder="{{organization.img}}" ng-model="organization.img">
 </div>
 <div get-or-create="person" parent-entity="organization" parent-field="member" uniq-field="email" new-politic="modal"></div>
+<div get-or-create="sponsor" parent-entity="organization" parent-field="sponsor" uniq-field="email" new-politic="modal"></div>

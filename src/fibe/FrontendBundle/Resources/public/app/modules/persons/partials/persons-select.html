@@ -15,7 +15,7 @@
 </div>
 
 <ui-select ng-model="addedEntity" on-select="change($model)" ng-keyup="keyup($event)" theme="select2" style="width: 100%;">
-    <ui-select-match>Add an author...</ui-select-match>
+    <ui-select-match>Associate a Person...</ui-select-match>
     <ui-select-choices repeat="entity in entities">
         <!--<ui-select-choices repeat="entity.email as entity in people | propsFilter: {label: $select.search, age: $select.search}">-->
         <div ng-if="!entity.id ">

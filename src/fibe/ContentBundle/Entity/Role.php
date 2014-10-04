@@ -36,12 +36,12 @@ class Role
    */
   private $id;
 
-    /**
-     * label
-     * @ORM\Column(type="string", name="label", nullable=false)
-     * @Expose
-     */
-    protected $label;
+  /**
+   * label
+   * @ORM\Column(type="string", name="label", nullable=false)
+   * @Expose
+   */
+  protected $label;
 
   /**
    * Person : the person who has this role
@@ -59,7 +59,6 @@ class Role
    * @Expose
    */
   private $event;
-
 
   /**
    * The mainEvent associated
@@ -82,7 +81,7 @@ class Role
    */
   public function getRoleLabel()
   {
-      return $this->roleLabel;
+    return $this->roleLabel;
   }
 
   /**
@@ -90,7 +89,7 @@ class Role
    */
   public function setRoleLabel($roleLabel)
   {
-      $this->roleLabel = $roleLabel;
+    $this->roleLabel = $roleLabel;
   }
 
   /**
@@ -103,7 +102,7 @@ class Role
    */
   public function computeEndAt()
   {
-    $this->setLabel( sprintf("%s is %s at %s",
+    $this->setLabel(sprintf("%s is %s at %s",
       $this->getPerson()->getlabel(),
       $this->getRoleLabel()->getlabel(),
       $this->getEvent()->getLabel()

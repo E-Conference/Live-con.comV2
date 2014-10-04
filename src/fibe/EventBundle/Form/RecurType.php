@@ -9,8 +9,8 @@ use fibe\EventBundle\Entity\Recur;
 
 class RecurType extends AbstractType
 {
-     public function buildForm(FormBuilderInterface $builder, array $options)
-     {
+  public function buildForm(FormBuilderInterface $builder, array $options)
+  {
     //     $builder
     //         ->add('frequency', 'choice', array(
     //             'choices'  => Recur::getFrequencies()
@@ -43,17 +43,17 @@ class RecurType extends AbstractType
     //         ))
     //         ->add('until')
     //     ;
-     }
+  }
 
-     public function setDefaultOptions(OptionsResolverInterface $resolver)
-     {
+  public function setDefaultOptions(OptionsResolverInterface $resolver)
+  {
     //     $resolver->setDefaults(array(
     //         'data_class' => 'fibe\EventBundle\Entity\Recur'
     //     ));
-     }
+  }
 
-     public function getName()
-     {
+  public function getName()
+  {
     //     return 'fibe_eventbundle_recurtype';
-     }
+  }
 }

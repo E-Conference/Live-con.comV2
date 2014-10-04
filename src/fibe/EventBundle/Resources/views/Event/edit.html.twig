@@ -23,9 +23,9 @@
         <i class="fa fa-list"></i>
       </a>
       {% if entity.category.level == 2 %}
-      <a type="button" href="{{ path('event_addeventensession', { 'id': entity.id }) }}" class="btn btn-warning">
-        <i class="fa fa-plus"></i>Add Event To This Session
-      </a>
+        <a type="button" href="{{ path('event_addeventensession', { 'id': entity.id }) }}" class="btn btn-warning">
+          <i class="fa fa-plus"></i>Add Event To This Session
+        </a>
       {% endif %}
       {% if is_granted('DELETE', entity) %}
         <form action="{{ path('event_event_delete', { 'id': entity.id }) }}" method="post">

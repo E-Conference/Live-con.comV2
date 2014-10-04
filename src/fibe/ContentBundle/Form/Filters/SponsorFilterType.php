@@ -32,11 +32,11 @@ class SponsorFilterType extends AbstractType
   {
     $builder
       ->add('id', 'entity', [
-        'class'    => 'fibeContentBundle:Sponsor',
-        'label'    => 'Name',
-        'choices'  => $this->user->getCurrentMainEvent()->getSponsors()->toArray(),
+        'class' => 'fibeContentBundle:Sponsor',
+        'label' => 'Name',
+        'choices' => $this->user->getCurrentMainEvent()->getSponsors()->toArray(),
         'required' => false,
-        'attr'     => ['placeholder' => 'Label']
+        'attr' => ['placeholder' => 'Label']
       ]);
   }
 
@@ -47,7 +47,7 @@ class SponsorFilterType extends AbstractType
   public function setDefaultOptions(OptionsResolverInterface $resolver)
   {
     $resolver->setDefaults([
-      'csrf_protection'   => false,
+      'csrf_protection' => false,
       'validation_groups' => array('filtering') // avoid NotBlank() constraint-related message
     ]);
   }

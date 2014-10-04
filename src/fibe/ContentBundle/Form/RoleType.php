@@ -18,93 +18,57 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class RoleType extends AbstractType
 {
 
-    /**
-     * {@inheritdoc}
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder
-            ->add('person', 'entity', array(
-              'class' => 'fibeCommunityBundle:Person',
-              'property' => 'id',
-              'required' => 'false',
-              'multiple' => false,
-            ))
-            ->add('event', 'entity', array(
-              'class' => 'fibeEventBundle:Event',
-              'property' => 'id',
-              'required' => 'false',
-              'multiple' => false,
-            ))
-            ->add('roleLabel', 'entity', array(
-              'class' => 'fibeContentBundle:RoleLabel',
-              'property' => 'id',
-              'required' => 'false',
-              'multiple' => false,
-            ))
-            ->add('mainEvent', 'entity', array(
-              'class' => 'fibeEventBundle:MainEvent',
-              'property' => 'id',
-              'required' => 'false',
-              'multiple' => false,
-            ))
-//            ->add('person', new PersonType())
-//            ->add('event', new EventType())
-//            ->add('roleLabel', new RoleLabelType())
-//            ->add('mainEvent', new MainEventType())
-        ;
+  /**
+   * {@inheritdoc}
+   */
+  public function buildForm(FormBuilderInterface $builder, array $options)
+  {
+    $builder
+      ->add('label')
+      ->add('person', 'entity', array(
+        'class' => 'fibeCommunityBundle:Person',
+        'property' => 'id',
+        'required' => 'false',
+        'multiple' => false,
+      ))
+      ->add('event', 'entity', array(
+        'class' => 'fibeEventBundle:Event',
+        'property' => 'id',
+        'required' => 'false',
+        'multiple' => false,
+      ))
+      ->add('roleLabel', 'entity', array(
+        'class' => 'fibeContentBundle:RoleLabel',
+        'property' => 'id',
+        'required' => 'false',
+        'multiple' => false,
+      ))
+      ->add('mainEvent', 'entity', array(
+        'class' => 'fibeEventBundle:MainEvent',
+        'property' => 'id',
+        'required' => 'false',
+        'multiple' => false,
+      ));
+  }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function setDefaultOptions(OptionsResolverInterface $resolver)
+  {
+    $resolver->setDefaults(array(
+      'data_class' => 'fibe\ContentBundle\Entity\Role',
+      'csrf_protection' => false
+    ));
+  }
 
-
-
-//        ->add('person', 'entity', array(
-//        'class'    => 'fibeCommunityBundle:Person',
-//        'required' => false,
-//        'multiple' => false
-//         ))
-//        ->add('event', 'entity', array(
-//            'class'    => 'fibeEventBundle:Event',
-//            'required' => false,
-//            'multiple' => false,
-//            'query_builder' => function(EntityRepository $er) {
-//                    return $er->createQueryBuilder('u')
-//                        ->orderBy('u.id', 'ASC');
-//                }
-//        ))
-//        ->add('roleLabel', 'entity', array(
-//            'class'    => 'fibeContentBundle:RoleLabel',
-//            'required' => false,
-//            'multiple' => false,
-//        ))
-//
-//        ->add('mainEvent', 'entity', array(
-//            'class'    => 'fibeEventBundle:MainEvent',
-//            'required' => false,
-//            'multiple' => false,
-//
-//        ));
-
-
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'fibe\ContentBundle\Entity\Role',
-            'csrf_protection' => false
-        ));
-    }
-
-    /**
-     * Returns the name of this type.
-     *
-     * @return string The name of this type
-     */
-    public function getName()
-    {
-        return 'fibe_contentbundle_roletype';
-    }
+  /**
+   * Returns the name of this type.
+   *
+   * @return string The name of this type
+   */
+  public function getName()
+  {
+    return 'fibe_contentbundle_roletype';
+  }
 }

@@ -32,25 +32,25 @@ class PaperFilterType extends AbstractType
   {
     $builder
       ->add('id', 'entity', array(
-        'class'    => 'fibeContentBundle:Paper',
-        'label'    => 'Title',
-        'choices'  => $this->user->getCurrentMainEvent()->getPapers()->toArray(),
+        'class' => 'fibeContentBundle:Paper',
+        'label' => 'Title',
+        'choices' => $this->user->getCurrentMainEvent()->getPapers()->toArray(),
         'required' => false,
-        'attr'     => array('placeholder' => 'Title')
+        'attr' => array('placeholder' => 'Title')
       ))
       ->add('author', 'entity', array(
-        'class'    => 'fibeCommunityBundle:Person',
-        'label'    => 'Author',
-        'choices'  => $this->user->getCurrentMainEvent()->getPersons()->toArray(),
+        'class' => 'fibeCommunityBundle:Person',
+        'label' => 'Author',
+        'choices' => $this->user->getCurrentMainEvent()->getPersons()->toArray(),
         'required' => false,
-        'attr'     => array('placeholder' => 'Author')
+        'attr' => array('placeholder' => 'Author')
       ))
       ->add('topic', 'entity', array(
-        'class'    => 'fibeContentBundle:Topic',
-        'label'    => 'Subject',
-        'choices'  => $this->user->getCurrentMainEvent()->getTopics()->toArray(),
+        'class' => 'fibeContentBundle:Topic',
+        'label' => 'Subject',
+        'choices' => $this->user->getCurrentMainEvent()->getTopics()->toArray(),
         'required' => false,
-        'attr'     => array('placeholder' => 'Topic')
+        'attr' => array('placeholder' => 'Topic')
 
       ));
   }
@@ -62,7 +62,7 @@ class PaperFilterType extends AbstractType
   public function setDefaultOptions(OptionsResolverInterface $resolver)
   {
     $resolver->setDefaults(array(
-      'csrf_protection'   => false,
+      'csrf_protection' => false,
       'validation_groups' => array('filtering') // avoid NotBlank() constraint-related message
     ));
   }

@@ -32,21 +32,21 @@ class TopicFilterType extends AbstractType
   {
     $builder
       ->add('id', 'entity', array(
-        'class'    => 'fibeContentBundle:Topic',
-        'label'    => 'Name',
-        'choices'  => $this->user->getCurrentMainEvent()->getTopics()->toArray(),
+        'class' => 'fibeContentBundle:Topic',
+        'label' => 'Name',
+        'choices' => $this->user->getCurrentMainEvent()->getTopics()->toArray(),
         'required' => false,
-        'attr'     => array('placeholder' => 'Label')
+        'attr' => array('placeholder' => 'Label')
       ));
     if ($this->user->getCurrentMainEvent()->getModule()->getPaperModule() == 1)
     {
       $builder
         ->add('paper', 'entity', array(
-          'class'    => 'fibeContentBundle:Paper',
-          'label'    => 'Paper',
-          'choices'  => $this->user->getCurrentMainEvent()->getPapers()->toArray(),
+          'class' => 'fibeContentBundle:Paper',
+          'label' => 'Paper',
+          'choices' => $this->user->getCurrentMainEvent()->getPapers()->toArray(),
           'required' => false,
-          'attr'     => array('placeholder' => 'Publication')
+          'attr' => array('placeholder' => 'Publication')
         ));
     }
 
@@ -59,7 +59,7 @@ class TopicFilterType extends AbstractType
   public function setDefaultOptions(OptionsResolverInterface $resolver)
   {
     $resolver->setDefaults(array(
-      'csrf_protection'   => false,
+      'csrf_protection' => false,
       'validation_groups' => array('filtering') // avoid NotBlank() constraint-related message
     ));
   }

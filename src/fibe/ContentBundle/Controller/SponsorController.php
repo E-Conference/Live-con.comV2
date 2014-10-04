@@ -1,6 +1,7 @@
 <?php
 
 namespace fibe\ContentBundle\Controller;
+
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -53,7 +54,7 @@ class SponsorController extends Controller
     $filters = $this->createForm(new SponsorFilterType($this->getUser()));
 
     return [
-      'pager'        => $pager,
+      'pager' => $pager,
       'filters_form' => $filters->createView(),
     ];
   }
@@ -95,7 +96,7 @@ class SponsorController extends Controller
       return $this->render(
         'fibeContentBundle:Sponsor:list.html.twig',
         [
-          'pager'    => $pager,
+          'pager' => $pager,
           'nbResult' => $nbResult,
         ]
       );
@@ -129,7 +130,7 @@ class SponsorController extends Controller
 
     return [
       'entity' => $entity,
-      'form'   => $form->createView()
+      'form' => $form->createView()
     ];
   }
 
@@ -147,7 +148,7 @@ class SponsorController extends Controller
 
     return [
       'entity' => $entity,
-      'form'   => $form->createView()
+      'form' => $form->createView()
     ];
   }
 
@@ -170,7 +171,7 @@ class SponsorController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return [
-      'entity'      => $entity,
+      'entity' => $entity,
       'delete_form' => $deleteForm->createView()
     ];
   }
@@ -194,8 +195,8 @@ class SponsorController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return [
-      'entity'      => $entity,
-      'edit_form'   => $editForm->createView(),
+      'entity' => $entity,
+      'edit_form' => $editForm->createView(),
       'delete_form' => $deleteForm->createView()
     ];
   }
@@ -231,8 +232,8 @@ class SponsorController extends Controller
     }
 
     return [
-      'entity'      => $entity,
-      'edit_form'   => $editForm->createView(),
+      'entity' => $entity,
+      'edit_form' => $editForm->createView(),
       'delete_form' => $deleteForm->createView()
     ];
   }

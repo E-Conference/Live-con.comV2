@@ -32,28 +32,28 @@ class LocationFilterType extends AbstractType
   {
     $builder
       ->add('id', 'entity', array(
-        'class'    => 'fibeContentBundle:Location',
-        'label'    => 'Name',
-        'choices'  => $this->user->getCurrentMainEvent()->getLocations()->toArray(),
+        'class' => 'fibeContentBundle:Location',
+        'label' => 'Name',
+        'choices' => $this->user->getCurrentMainEvent()->getLocations()->toArray(),
         'required' => false,
-        'attr'     => array('placeholder' => 'Label')
+        'attr' => array('placeholder' => 'Label')
       ))
       ->add('equipment', 'entity', array(
-        'class'    => 'fibeContentBundle:Equipment',
-        'label'    => 'Equipment',
+        'class' => 'fibeContentBundle:Equipment',
+        'label' => 'Equipment',
         'required' => false,
-        'attr'     => array('placeholder' => 'Equipment')
+        'attr' => array('placeholder' => 'Equipment')
 
       ))
       ->add('cap_min', 'number', array(
-        'label'    => 'Cap. min',
+        'label' => 'Cap. min',
         'required' => false,
-        'attr'     => array('placeholder' => 'min capacity')
+        'attr' => array('placeholder' => 'min capacity')
       ))
       ->add('cap_max', 'number', array(
-        'label'    => 'Cap. max',
+        'label' => 'Cap. max',
         'required' => false,
-        'attr'     => array('placeholder' => 'max capacity')
+        'attr' => array('placeholder' => 'max capacity')
       ));
   }
 
@@ -63,7 +63,7 @@ class LocationFilterType extends AbstractType
   public function setDefaultOptions(OptionsResolverInterface $resolver)
   {
     $resolver->setDefaults(array(
-      'csrf_protection'   => false,
+      'csrf_protection' => false,
       'validation_groups' => array('filtering') // avoid NotBlank() constraint-related message
     ));
   }

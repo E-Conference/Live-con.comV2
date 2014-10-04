@@ -63,7 +63,7 @@ class DBImportController extends Controller
     $this->defaultCategory = $this->getDoctrine()
       ->getRepository('fibeEventBundle:Category')
       ->findOneBy(array('name' => 'TalkEvent'));
- 
+
 
     //////////////////////  topics  //////////////////////
     if (isset($JSONFile['topics']))
@@ -265,7 +265,7 @@ class DBImportController extends Controller
         {
           array_push($this->categoryEntities, $existsTest);
           continue; //skip existing category
-        }  
+        }
 
         $entity = new Category();
         foreach ($current as $setter => $value)
@@ -277,7 +277,7 @@ class DBImportController extends Controller
         $em->persist($entity);
         array_push($this->categoryEntities, $entity);
 
-      } 
+      }
       $entities = null;
     }
 

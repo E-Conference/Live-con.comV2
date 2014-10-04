@@ -146,7 +146,6 @@ class Organization extends AdditionalInformations
   }
 
 
-
   /**
    * Add members
    *
@@ -200,5 +199,21 @@ class Organization extends AdditionalInformations
   public function getMainEvent()
   {
     return $this->mainEvent;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getSponsors()
+  {
+    return $this->sponsors;
+  }
+
+  /**
+   * @param mixed $sponsors
+   */
+  public function setSponsors($sponsors)
+  {
+    $this->sponsors = $sponsors;
   }
 }

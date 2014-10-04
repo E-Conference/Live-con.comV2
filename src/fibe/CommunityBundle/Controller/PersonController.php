@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 use fibe\CommunityBundle\Entity\Person;
 use fibe\CommunityBundle\Form\PersonType;
+
 //Filter type form
 //use fibe\CommunityBundle\Form\Filters\PersonFilterType;
 
@@ -56,7 +57,7 @@ class PersonController extends Controller
     $filters = $this->createForm(new PersonFilterType($this->getUser()));
 
     return array(
-      'pager'        => $pager,
+      'pager' => $pager,
       'filters_form' => $filters->createView(),
     );
   }
@@ -97,7 +98,7 @@ class PersonController extends Controller
       return $this->render(
         'fibeCommunityBundle:Person:list.html.twig',
         array(
-          'pager'    => $pager,
+          'pager' => $pager,
           'nbResult' => $nbResult,
         )
       );
@@ -143,7 +144,7 @@ class PersonController extends Controller
       'fibeCommunityBundle:Person:new.html.twig',
       array(
         'entity' => $entity,
-        'form'   => $form->createView()
+        'form' => $form->createView()
       )
     );
   }
@@ -162,7 +163,7 @@ class PersonController extends Controller
       'fibeCommunityBundle:Person:new.html.twig',
       array(
         'entity' => $entity,
-        'form'   => $form->createView(),
+        'form' => $form->createView(),
       )
     );
   }
@@ -181,7 +182,7 @@ class PersonController extends Controller
     return $this->render(
       'fibeCommunityBundle:Person:show.html.twig',
       array(
-        'entity'      => $entity,
+        'entity' => $entity,
         'delete_form' => $deleteForm->createView()
       )
     );
@@ -202,8 +203,8 @@ class PersonController extends Controller
     return $this->render(
       'fibeCommunityBundle:Person:edit.html.twig',
       array(
-        'entity'      => $entity,
-        'edit_form'   => $editForm->createView(),
+        'entity' => $entity,
+        'edit_form' => $editForm->createView(),
         'delete_form' => $deleteForm->createView()
       )
     );

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 
+ *
  * @author:  Gabriel BONDAZ <gabriel.bondaz@idci-consulting.fr>
  * @licence: GPL
  *
@@ -16,22 +16,22 @@ use Symfony\Component\Form\FormEvents;
 
 class RecurFieldSubscriber implements EventSubscriberInterface
 {
-    // private $factory;
+  // private $factory;
 
-     public function __construct(FormFactoryInterface $factory)
-     {
+  public function __construct(FormFactoryInterface $factory)
+  {
     //     $this->factory = $factory;
-     }
+  }
 
-     public static function getSubscribedEvents()
-     {
+  public static function getSubscribedEvents()
+  {
     //     return array(
     //         FormEvents::POST_BIND => 'fixRecurRelation'
     //     );
-     }
+  }
 
-     public function fixRecurRelation(FormEvent $event)
-     {
+  public function fixRecurRelation(FormEvent $event)
+  {
     //     $data = $event->getData();
 
     //     $options = $data->getOptions();
@@ -40,5 +40,5 @@ class RecurFieldSubscriber implements EventSubscriberInterface
     //     } else {
     //         //TODO
     //     }
-     }
+  }
 }

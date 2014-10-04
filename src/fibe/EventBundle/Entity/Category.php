@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation\VirtualProperty;
  * @ORM\Table(name="category")
  * @ORM\Entity(repositoryClass="fibe\EventBundle\Repository\CategoryRepository")
  * @ORM\HasLifecycleCallbacks
- * @ExclusionPolicy("all") 
+ * @ExclusionPolicy("all")
  */
 class Category
 {

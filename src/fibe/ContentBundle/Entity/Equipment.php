@@ -16,14 +16,13 @@ use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
 
 
-
 /**
  * This class define an Equipment for a location.
  *
  * @ORM\Table(name="equipment")
  * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\EquipmentRepository")
  * @ORM\HasLifecycleCallbacks
- * @ExclusionPolicy("all") 
+ * @ExclusionPolicy("all")
  */
 class Equipment
 {
@@ -45,7 +44,7 @@ class Equipment
    */
   private $label;
 
-    /**
+  /**
    * Description of the equipment
    *
    * @ORM\Column(type="text", nullable=true)

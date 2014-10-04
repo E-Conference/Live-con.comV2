@@ -66,7 +66,7 @@ class EquipmentController extends Controller
       'fibeContentBundle:Equipment:new.html.twig',
       array(
         'entity' => $entity,
-        'form'   => $form->createView()
+        'form' => $form->createView()
       )
     );
   }
@@ -89,7 +89,7 @@ class EquipmentController extends Controller
       'fibeContentBundle:Equipment:new.html.twig',
       array(
         'entity' => $entity,
-        'form'   => $form->createView()
+        'form' => $form->createView()
       )
     );
   }
@@ -119,7 +119,7 @@ class EquipmentController extends Controller
     return $this->render(
       'fibeContentBundle:Equipment:show.html.twig',
       array(
-        'entity'      => $entity,
+        'entity' => $entity,
         'delete_form' => $deleteForm->createView()
       )
     );
@@ -155,8 +155,8 @@ class EquipmentController extends Controller
     return $this->render(
       'fibeContentBundle:Equipment:edit.html.twig',
       array(
-        'entity'      => $entity,
-        'edit_form'   => $editForm->createView(),
+        'entity' => $entity,
+        'edit_form' => $editForm->createView(),
         'delete_form' => $deleteForm->createView()
       )
     );
@@ -199,8 +199,8 @@ class EquipmentController extends Controller
     return $this->render(
       'fibeContentBundle:Equipment:edit.html.twig',
       array(
-        'entity'      => $entity,
-        'edit_form'   => $editForm->createView(),
+        'entity' => $entity,
+        'edit_form' => $editForm->createView(),
         'delete_form' => $deleteForm->createView()
       )
     );

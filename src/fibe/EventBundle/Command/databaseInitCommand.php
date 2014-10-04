@@ -1,207 +1,206 @@
 <?php
-  namespace fibe\EventBundle\Command;
+namespace fibe\EventBundle\Command;
 
-  use fibe\ContentBundle\Entity\Equipment;
-  use fibe\ContentBundle\Entity\RoleLabel;
-  use fibe\EventBundle\Entity\Category;
-  use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-  use Symfony\Component\Console\Input\InputInterface;
-  use Symfony\Component\Console\Output\OutputInterface;
+use fibe\ContentBundle\Entity\Equipment;
+use fibe\ContentBundle\Entity\RoleLabel;
+use fibe\EventBundle\Entity\Category;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+/**
+ * Initialization command for the DataBase
+ *
+ * Class databaseInitCommand
+ * @package fibe\EventBundle\Command
+ */
+class databaseInitCommand extends ContainerAwareCommand
+{
+
+  protected function configure()
+  {
+    $this
+      ->setName('livecon:database:init')
+      ->setDescription('Insert data for conference managment');
+  }
 
   /**
-   * Initialization command for the DataBase
+   * Executes the current command.
    *
-   * Class databaseInitCommand
-   * @package fibe\EventBundle\Command
+   * This method is not abstract because you can use this class
+   * as a concrete class. In this case, instead of defining the
+   * execute() method, you set the code to execute by passing
+   * a Closure to the setCode() method.
+   *
+   * @param InputInterface $input An InputInterface instance
+   * @param OutputInterface $output An OutputInterface instance
+   *
+   * @return null|integer null or 0 if everything went fine, or an error code
+   *
+   * @throws \LogicException When this abstract method is not implemented
+   * @see    setCode()
    */
-  class databaseInitCommand extends ContainerAwareCommand
+  protected function execute(InputInterface $input, OutputInterface $output)
   {
 
-    protected function configure()
-    {
-      $this
-        ->setName('livecon:database:init')
-        ->setDescription('Insert data for conference managment');
-    }
+    $em = $this->getContainer()->get('doctrine')->getManager('default');
 
-    /**
-     * Executes the current command.
-     *
-     * This method is not abstract because you can use this class
-     * as a concrete class. In this case, instead of defining the
-     * execute() method, you set the code to execute by passing
-     * a Closure to the setCode() method.
-     *
-     * @param InputInterface  $input  An InputInterface instance
-     * @param OutputInterface $output An OutputInterface instance
-     *
-     * @return null|integer null or 0 if everything went fine, or an error code
-     *
-     * @throws \LogicException When this abstract method is not implemented
-     * @see    setCode()
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
+    //RoleType
+    $roleType = new RoleLabel();
+    $roleType->setLabel("Delegate");
+    $roleType->setLabel("Delegate");
+    $em->persist($roleType);
 
-      $em = $this->getContainer()->get('doctrine')->getManager('default');
+    $roleType = new RoleLabel();
+    $roleType->setLabel("Chair");
+    $roleType->setLabel("Chair");
+    $em->persist($roleType);
 
-      //RoleType
-      $roleType = new RoleLabel();
-      $roleType->setLabel("Delegate");
-      $roleType->setLabel("Delegate");
-      $em->persist($roleType);
+    $roleType = new RoleLabel();
+    $roleType->setLabel("Presenter");
+    $roleType->setLabel("Presenter");
+    $em->persist($roleType);
 
-      $roleType = new RoleLabel();
-      $roleType->setLabel("Chair");
-      $roleType->setLabel("Chair");
-      $em->persist($roleType);
+    $roleType = new RoleLabel();
+    $roleType->setLabel("ProgrammeCommitteeMember");
+    $roleType->setLabel("Programme Committee Member");
+    $em->persist($roleType);
 
-      $roleType = new RoleLabel();
-      $roleType->setLabel("Presenter");
-      $roleType->setLabel("Presenter");
-      $em->persist($roleType);
+    //Equipments
+    $equipment = new Equipment();
+    $equipment->setLabel("Computer")
+      ->setIcon("laptop");
+    $em->persist($equipment);
 
-      $roleType = new RoleLabel();
-      $roleType->setLabel("ProgrammeCommitteeMember");
-      $roleType->setLabel("Programme Committee Member");
-      $em->persist($roleType);
+    $equipment = new Equipment();
+    $equipment->setLabel("Speaker")
+      ->setIcon("volume-up");
+    $em->persist($equipment);
 
-      //Equipments
-      $equipment = new Equipment();
-      $equipment->setLabel("Computer")
-        ->setIcon("laptop");
-      $em->persist($equipment);
+    $equipment = new Equipment();
+    $equipment->setLabel("Wifi")
+      ->setIcon("rss");
+    $em->persist($equipment);
 
-      $equipment = new Equipment();
-      $equipment->setLabel("Speaker")
-        ->setIcon("volume-up");
-      $em->persist($equipment);
+    $equipment = new Equipment();
+    $equipment->setLabel("Screen")
+      ->setIcon("film");
+    $em->persist($equipment);
 
-      $equipment = new Equipment();
-      $equipment->setLabel("Wifi")
-        ->setIcon("rss");
-      $em->persist($equipment);
+    $equipment = new Equipment();
+    $equipment->setLabel("OHP")
+      ->setIcon("video-camera");
+    $em->persist($equipment);
 
-      $equipment = new Equipment();
-      $equipment->setLabel("Screen")
-        ->setIcon("film");
-      $em->persist($equipment);
+    $equipment = new Equipment();
+    $equipment->setLabel("Microphone")
+      ->setIcon("microphone");
+    $em->persist($equipment);
 
-      $equipment = new Equipment();
-      $equipment->setLabel("OHP")
-        ->setIcon("video-camera");
-      $em->persist($equipment);
+    //Topic
+    /* $topic = new Topic();
+     $topic->setName("Business");
+     $em->persist($topic);
 
-      $equipment = new Equipment();
-      $equipment->setLabel("Microphone")
-        ->setIcon("microphone");
-      $em->persist($equipment);
+     $topic = new Topic();
+     $topic->setName("Design");
+     $em->persist($topic);
 
-      //Topic
-      /* $topic = new Topic();
-       $topic->setName("Business");
-       $em->persist($topic);
+     $topic = new Topic();
+     $topic->setName("Marketing");
+     $em->persist($topic);
 
-       $topic = new Topic();
-       $topic->setName("Design");
-       $em->persist($topic);
+     $topic = new Topic();
+     $topic->setName("Recherche");
+     $em->persist($topic);
 
-       $topic = new Topic();
-       $topic->setName("Marketing");
-       $em->persist($topic);
+     $topic = new Topic();
+     $topic->setName("Tech");
+     $em->persist($topic);*/
 
-       $topic = new Topic();
-       $topic->setName("Recherche");
-       $em->persist($topic);
+    $OrganisedEvent = new Category();
+    $OrganisedEvent->setLabel("Organized Event")
+      ->setColor("#0EFF74")
+      ->setLevel(3);
+    $em->persist($OrganisedEvent);
 
-       $topic = new Topic();
-       $topic->setName("Tech");
-       $em->persist($topic);*/
+    $NonAcademicEvent = new Category();
+    $NonAcademicEvent->setLabel("Non Academic Event")
+      ->setColor("#A6FF88")
+      ->setLevel(3);
+    $em->persist($NonAcademicEvent);
 
-       $OrganisedEvent = new Category();
-      $OrganisedEvent->setLabel("Organized Event")
-                     ->setColor("#0EFF74")
-                     ->setLevel(3);
-      $em->persist($OrganisedEvent);
+    $AcademicEvent = new Category();
+    $AcademicEvent->setLabel("Academic Event")
+      ->setColor("#57A5C9")
+      ->setLevel(3);
+    $em->persist($AcademicEvent);
 
-      $NonAcademicEvent = new Category();
-      $NonAcademicEvent->setLabel("Non Academic Event")
-                       ->setColor("#A6FF88")
-                       ->setLevel(3);
-      $em->persist($NonAcademicEvent);
+    $SocialEvent = new Category();
+    $SocialEvent->setLabel("Social Event")
+      ->setColor("#B186D7")
+      ->setLevel(3);
+    $em->persist($SocialEvent);
 
-      $AcademicEvent = new Category();
-      $AcademicEvent->setLabel("Academic Event")
-                    ->setColor("#57A5C9")
-                    ->setLevel(3);
-      $em->persist($AcademicEvent);
+    $MealEvent = new Category();
+    $MealEvent->setLabel("Meal Event")
+      ->setColor("#00a2e0")
+      ->setLevel(3);
+    $em->persist($MealEvent);
 
-      $SocialEvent = new Category();
-      $SocialEvent->setLabel("Social Event")
-                  ->setColor("#B186D7")
-                  ->setLevel(3);                  
-      $em->persist($SocialEvent);
+    $BreakEvent = new Category();
+    $BreakEvent->setLabel("Break event")
+      ->setColor("#00a2e0")
+      ->setLevel(3);
+    $em->persist($BreakEvent);
 
-      $MealEvent = new Category();
-      $MealEvent->setLabel("Meal Event")
-                ->setColor("#00a2e0")
-                ->setLevel(3);
-      $em->persist($MealEvent);
+    $KeynoteEvent = new Category();
+    $KeynoteEvent->setLabel("Keynote event")
+      ->setColor("#afcbe0")
+      ->setLevel(3);
+    $em->persist($KeynoteEvent);
 
-      $BreakEvent = new Category();
-      $BreakEvent->setLabel("Break event")
-                 ->setColor("#00a2e0")
-                 ->setLevel(3);
-      $em->persist($BreakEvent);
+    $TrackEvent = new Category();
+    $TrackEvent->setLabel("Track event")
+      ->setColor("#afcbe0")
+      ->setLevel(1);
+    $em->persist($TrackEvent);
 
-      $KeynoteEvent = new Category();
-      $KeynoteEvent->setLabel("Keynote event")
-                   ->setColor("#afcbe0")
-                   ->setLevel(3);
-      $em->persist($KeynoteEvent);
+    $PanelEvent = new Category();
+    $PanelEvent->setLabel("Panel Event")
+      ->setColor("#e7431e")
+      ->setLevel(3);
+    $em->persist($PanelEvent);
 
-      $TrackEvent = new Category();
-      $TrackEvent->setLabel("Track event")
-                ->setColor("#afcbe0")
-                ->setLevel(1);
-      $em->persist($TrackEvent);
+    $ConferenceEvent = new Category();
+    $ConferenceEvent->setLabel("Conference Event")
+      ->setColor("#b0ca0f")
+      ->setLevel(0);
+    $em->persist($ConferenceEvent);
 
-      $PanelEvent = new Category();
-      $PanelEvent->setLabel("Panel Event")
-                 ->setColor("#e7431e")
-                 ->setLevel(3);
-      $em->persist($PanelEvent);
+    $WorkshopEvent = new Category();
+    $WorkshopEvent->setLabel("Workshop event")
+      ->setColor("#EBD94E")
+      ->setLevel(3);
+    $em->persist($WorkshopEvent);
 
-      $ConferenceEvent = new Category();
-      $ConferenceEvent->setLabel("Conference Event")
-                      ->setColor("#b0ca0f")
-                      ->setLevel(0);
-      $em->persist($ConferenceEvent);
+    $SessionEvent = new Category();
+    $SessionEvent->setLabel("Session event")
+      ->setColor("#8F00FF")
+      ->setLevel(2);
+    $em->persist($SessionEvent);
 
-      $WorkshopEvent = new Category();
-       $WorkshopEvent->setLabel("Workshop event")
-                ->setColor("#EBD94E")
-                ->setLevel(3);
-      $em->persist($WorkshopEvent);
+    $TalkEvent = new Category();
+    $TalkEvent->setLabel("Talk event")
+      ->setColor("#FF5A45")
+      ->setLevel(0);
+    $em->persist($TalkEvent);
 
-      $SessionEvent = new Category();
-       $SessionEvent->setLabel("Session event")
-                ->setColor("#8F00FF")
-                ->setLevel(2);
-      $em->persist($SessionEvent);
-
-      $TalkEvent = new Category();
-      $TalkEvent->setLabel("Talk event")
-                ->setColor("#FF5A45")
-                ->setLevel(0);
-      $em->persist($TalkEvent);
-
-      $em->flush();
+    $em->flush();
 
 
+    $em->flush();
 
-      $em->flush();
-
-      $output->writeln("rows inserted successfully");
-    }
+    $output->writeln("rows inserted successfully");
   }
+}

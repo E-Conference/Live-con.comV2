@@ -91,18 +91,18 @@ class CategoryRepository extends EntityRepository
         ->andWhere($qb->expr()->in('cat.id', $params['ids']));
     }
 
-   /* if (isset($params['parent_category_id']))
-    {
-      $qb
-        ->andWhere('cat.parent = :parent_id')
-        ->setParameter('parent_id', $params['parent_category_id']);
-    }
+    /* if (isset($params['parent_category_id']))
+     {
+       $qb
+         ->andWhere('cat.parent = :parent_id')
+         ->setParameter('parent_id', $params['parent_category_id']);
+     }
 
-    if (isset($params['parent_category_ids']))
-    {
-      $qb
-        ->andWhere($qb->expr()->in('cat.parent', $params['parent_category_ids']));
-    }*/
+     if (isset($params['parent_category_ids']))
+     {
+       $qb
+         ->andWhere($qb->expr()->in('cat.parent', $params['parent_category_ids']));
+     }*/
 
 //    if (isset($params['ancestor_category_id']))
 //    {

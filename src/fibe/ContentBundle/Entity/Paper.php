@@ -25,7 +25,7 @@ use JMS\Serializer\Annotation\VirtualProperty;
  * @ORM\Table(name="paper")
  * @ORM\Entity(repositoryClass="fibe\ContentBundle\Repository\PaperRepository")
  * @ORM\HasLifecycleCallbacks
- * @ExclusionPolicy("all") 
+ * @ExclusionPolicy("all")
  *
  */
 class Paper

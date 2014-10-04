@@ -54,7 +54,7 @@ class TopicController extends Controller
     $filters = $this->createForm(new TopicFilterType($this->getUser()));
 
     return array(
-      'pager'        => $pager,
+      'pager' => $pager,
       'filters_form' => $filters->createView(),
     );
   }
@@ -93,7 +93,7 @@ class TopicController extends Controller
       return $this->render(
         'fibeContentBundle:Topic:list.html.twig',
         array(
-          'pager'    => $pager,
+          'pager' => $pager,
           'nbResult' => $nbResult,
         )
       );
@@ -127,7 +127,7 @@ class TopicController extends Controller
 
     return array(
       'entity' => $entity,
-      'form'   => $form->createView()
+      'form' => $form->createView()
     );
   }
 
@@ -145,7 +145,7 @@ class TopicController extends Controller
 
     return array(
       'entity' => $entity,
-      'form'   => $form->createView()
+      'form' => $form->createView()
     );
   }
 
@@ -163,7 +163,7 @@ class TopicController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return array(
-      'entity'      => $entity,
+      'entity' => $entity,
       'delete_form' => $deleteForm->createView()
     );
   }
@@ -183,8 +183,8 @@ class TopicController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return array(
-      'entity'      => $entity,
-      'edit_form'   => $editForm->createView(),
+      'entity' => $entity,
+      'edit_form' => $editForm->createView(),
       'delete_form' => $deleteForm->createView()
     );
   }

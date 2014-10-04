@@ -1,44 +1,44 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>MainEventSetting</h1>
+  <h1>MainEventSetting</h1>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Label</th>
-                <td>{{ entity.label }}</td>
-            </tr>
-            <tr>
-                <th>Papermodule</th>
-                <td>{{ entity.paperModule }}</td>
-            </tr>
-            <tr>
-                <th>Organizationmodule</th>
-                <td>{{ entity.organizationModule }}</td>
-            </tr>
-            <tr>
-                <th>Sponsormodule</th>
-                <td>{{ entity.sponsorModule }}</td>
-            </tr>
-        </tbody>
-    </table>
+  <table class="record_properties">
+    <tbody>
+    <tr>
+      <th>Id</th>
+      <td>{{ entity.id }}</td>
+    </tr>
+    <tr>
+      <th>Label</th>
+      <td>{{ entity.label }}</td>
+    </tr>
+    <tr>
+      <th>Papermodule</th>
+      <td>{{ entity.paperModule }}</td>
+    </tr>
+    <tr>
+      <th>Organizationmodule</th>
+      <td>{{ entity.organizationModule }}</td>
+    </tr>
+    <tr>
+      <th>Sponsormodule</th>
+      <td>{{ entity.sponsorModule }}</td>
+    </tr>
+    </tbody>
+  </table>
 
-        <ul class="record_actions">
+  <ul class="record_actions">
     <li>
-        <a href="{{ path('maineventsettings') }}">
-            Back to the list
-        </a>
+      <a href="{{ path('maineventsettings') }}">
+        Back to the list
+      </a>
     </li>
     <li>
-        <a href="{{ path('maineventsettings_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
+      <a href="{{ path('maineventsettings_edit', { 'id': entity.id }) }}">
+        Edit
+      </a>
     </li>
     <li>{{ form(delete_form) }}</li>
-</ul>
+  </ul>
 {% endblock %}
