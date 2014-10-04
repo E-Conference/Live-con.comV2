@@ -21,22 +21,23 @@ angular.module('sympozerApp').factory('globalHttpInterceptor', ['$q', '$rootScop
         var cleanEntity = function(entity){
 
             for(var property in entity) {
-                switch (typeof property) {
-                    case "Object":
-                        if(property instanceof Array){
-                            for(var object in property) {
-                                entity[property][object] = $scope.replaceObjectById(object);
+                switch (typeof entity[property]) {
+                    case "object":
+                        if((entity[property])instanceof Array){
+                            for(var object in entity[property]) {
+                                entity[property][object] = replaceObjectById(entity[property][object]);
                             }
                         }else{
-                            entity[property] = $scope.replaceObjectById(property);
+                            entity[property] = replaceObjectById(entity[property]);
                         }
+                    break;
                 }
             }
             return entity;
         }
 
         var replaceObjectById = function(object) {
-            if (property.hasOwnProperty(id)) {
+            if (object.hasOwnProperty('id')) {
                 return object.id;
             }
             return object;
@@ -47,9 +48,8 @@ angular.module('sympozerApp').factory('globalHttpInterceptor', ['$q', '$rootScop
 
             'request': function (config)
             {
-                debugger;
-                if(config.method === "POST"){
-                    cleanEntity();
+                if(["POST","PUT"].indexOf(config.method) >= 0){
+                  config.data = cleanEntity(config.data);
                 }
                 return config;
             },
