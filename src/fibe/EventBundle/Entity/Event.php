@@ -9,7 +9,6 @@ use fibe\ContentBundle\Entity\Paper;
 use fibe\ContentBundle\Entity\Location;
 use fibe\ContentBundle\Util\StringTools;
 use JMS\Serializer\Annotation\SerializedName;
-use Symfony\Component\Validator\Constraints as Assert;
 
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;

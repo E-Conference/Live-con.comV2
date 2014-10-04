@@ -84,7 +84,7 @@ class MainEvent extends VEvent
   /**
    * mappingFiles
    *
-   * @ORM\OneToOne(targetEntity="fibe\EventBundle\Entity\MainEventSettings", mappedBy="mainEvent", cascade={"persist", "remove"})
+   * @ORM\OneToOne(targetEntity="fibe\EventBundle\Entity\MainEventSettings", mappedBy="mainEvent", cascade={"all"})
    */
   private $setting;
 
@@ -113,14 +113,6 @@ class MainEvent extends VEvent
    * @ORM\Column(type="string", length=128, nullable=true)
    */
   private $acronym;
-
-  /**
-   * @return string
-   */
-  public function __toString()
-  {
-    return $this->getLabel();
-  }
 
   /**
    * Slugify

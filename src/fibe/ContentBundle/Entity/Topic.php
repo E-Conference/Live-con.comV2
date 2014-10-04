@@ -28,7 +28,7 @@ class Topic
   /**
    * @ORM\Id
    * @ORM\Column(type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
+   * @ORM\GeneratedValue()
    * @Expose
    */
   private $id;

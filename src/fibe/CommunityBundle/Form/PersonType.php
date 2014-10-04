@@ -23,7 +23,7 @@ class PersonType extends AdditionalInformationsType
     $builder
       ->add('firstName')
       ->add('familyName')
-      ->add('email', 'text', array('required' => false))
+      ->add('email', 'email')
 //      ->add('organizations', 'collection', array(
 //        'type' => new OrganizationType(),
 //        'required' => 'false',

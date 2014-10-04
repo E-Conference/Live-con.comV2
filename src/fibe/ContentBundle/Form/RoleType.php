@@ -24,10 +24,35 @@ class RoleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('person', new PersonType())
-            ->add('event', new EventType())
-            ->add('roleLabel', new RoleLabelType())
-            ->add('mainEvent', new MainEventType());
+            ->add('person', 'entity', array(
+              'class' => 'fibeCommunityBundle:Person',
+              'property' => 'id',
+              'required' => 'false',
+              'multiple' => false,
+            ))
+            ->add('event', 'entity', array(
+              'class' => 'fibeEventBundle:Event',
+              'property' => 'id',
+              'required' => 'false',
+              'multiple' => false,
+            ))
+            ->add('roleLabel', 'entity', array(
+              'class' => 'fibeContentBundle:RoleLabel',
+              'property' => 'id',
+              'required' => 'false',
+              'multiple' => false,
+            ))
+            ->add('mainEvent', 'entity', array(
+              'class' => 'fibeEventBundle:MainEvent',
+              'property' => 'id',
+              'required' => 'false',
+              'multiple' => false,
+            ))
+//            ->add('person', new PersonType())
+//            ->add('event', new EventType())
+//            ->add('roleLabel', new RoleLabelType())
+//            ->add('mainEvent', new MainEventType())
+        ;
 
 
 
