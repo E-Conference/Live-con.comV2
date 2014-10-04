@@ -19,28 +19,30 @@ angular.module('sympozerApp').factory('globalHttpInterceptor', ['$q', '$rootScop
     {
         //Function used to keep only IDs of the POSTED entities
         var cleanEntity = function(entity){
-
+            var entityClone = {};
             for(var property in entity) {
                 switch (typeof entity[property]) {
                     case "object":
                         if((entity[property])instanceof Array){
+                            entityClone[property] = {};
                             for(var object in entity[property]) {
-                                entity[property][object] = replaceObjectById(entity[property][object]);
+                              entityClone[property][object] = getObjectId(entity[property][object]);
                             }
                         }else{
-                            entity[property] = replaceObjectById(entity[property]);
+                          entityClone[property] = getObjectId(entity[property]);
                         }
+                    break;
+                    case "string":
+                        entityClone[property] = entity[property];
                     break;
                 }
             }
-            return entity;
+            return entityClone;
         }
 
-        var replaceObjectById = function(object) {
-            if (object.hasOwnProperty('id')) {
-                return object.id;
-            }
-            return object;
+        var getObjectId = function(object)
+        {
+          return object.id;
         }
 
 

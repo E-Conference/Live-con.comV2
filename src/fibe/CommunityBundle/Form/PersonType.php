@@ -30,7 +30,7 @@ class PersonType extends AdditionalInformationsType
         'multiple' => true
       ))
       ->add('papers', 'entity', array(
-        'class'    => 'fibeCommunityBundle:Paper',
+        'class'    => 'fibeContentBundle:Paper',
         'required' => false,
         'multiple' => true
       ))
