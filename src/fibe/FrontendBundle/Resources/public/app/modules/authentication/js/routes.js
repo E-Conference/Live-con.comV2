@@ -30,6 +30,14 @@ angular.module('authenticationApp')
           templateUrl: globalConfig.app.modules.authentication.urls.partials + 'confirm.html',
           controller: 'confirmCtrl'
         })
+        .when('/forgotten_password', {
+          templateUrl: globalConfig.app.modules.authentication.urls.partials + 'resetpwdrequest.html',
+          controller: 'resetPwdRequestCtrl'
+        })
+        .when('/reset/:token', {
+          templateUrl: globalConfig.app.modules.authentication.urls.partials + 'confirm.html',
+          controller: 'resetPwdCtrl'
+        })
         .otherwise({
           redirectTo: '/login'
         });

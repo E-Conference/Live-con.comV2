@@ -22,6 +22,8 @@ angular.module('authenticationApp').factory('usersFact', ['$resource',
         signup: {method: 'POST', url: globalConfig.api.urls.registration, isArray: false},
         confirm: {method: 'POST', url: globalConfig.api.urls.confirm, isArray: false},
         changepwd: {method: 'POST', url: globalConfig.api.urls.changepwd, isArray: false},
+        resetpwdrequest: {method: 'POST', url: globalConfig.api.urls.reset_pwd_request, isArray: false},
+        resetpwd: {method: 'POST', url: globalConfig.api.urls.reset_pwd, isArray: false},
         show: {method: 'GET', isArray: false},
         list: {method: 'GET', url: globalConfig.api.urls.organizations + '.json', params: {}, isArray: true}
       }

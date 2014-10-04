@@ -91,6 +91,36 @@ angular.module('authenticationApp').controller('signoutCtrl', ['$scope', '$rootS
  *
  * @type {controller}
  */
+angular.module('authenticationApp').controller('changePwdCtrl', [ '$scope', '$routeParams', 'usersFact', '$location',
+  function ($scope, $routeParams, usersFact, $location)
+  {
+    var error = function (response, args)
+    {
+      $scope.busy = false;
+      $scope.$root.$broadcast('AlertCtrl:addAlert', {code: response.data.error, type: 'danger'});
+    }
+
+    var success = function (response, args)
+    {
+      $scope.busy = false;
+      $scope.$root.$broadcast('AlertCtrl:addAlert', {code: 'Changepwd_success', type: 'success'});
+      $scope.$root.currentUser = response;
+      localStorage.setItem('currentUser', JSON.stringify(response));
+      $location.path('/persons/show/' + $scope.$root.currentUser.id);
+    }
+
+    $scope.changePwdAction = function (changePwdForm)
+    {
+      $scope.busy = true;
+      usersFact.changepwd(changePwdForm, success, error);
+    }
+  }]);
+
+/**
+ * confirm email controller
+ *
+ * @type {controller}
+ */
 angular.module('authenticationApp').controller('confirmCtrl', [ '$scope', '$rootScope', '$routeParams', 'usersFact', '$location',
   function ($scope, $rootScope, $routeParams, usersFact, $location)
   {
@@ -117,22 +147,43 @@ angular.module('authenticationApp').controller('confirmCtrl', [ '$scope', '$root
   }]);
 
 /**
- * confirm email controller
+ * reset password request controller
  *
  * @type {controller}
  */
-angular.module('authenticationApp').controller('profileCtrl', [ '$scope', '$routeParams', 'usersFact', '$location',
-  function ($scope, $routeParams, usersFact, $location)
+angular.module('authenticationApp').controller('resetPwdRequestCtrl', [ '$scope', '$window', '$routeParams', 'usersFact', '$location',
+  function ($scope, $window, $routeParams, usersFact, $location)
   {
+    var error = function (response, args)
+    {
+      $scope.busy = false;
+      $scope.$root.$broadcast('AlertCtrl:addAlert', {code: response.data.error, type: 'danger'});
+    }
 
+    var success = function (response, args)
+    {
+      $scope.busy = false;
+      $scope.$root.$broadcast('AlertCtrl:addAlert', {code: 'ResetPwdRequest_success', type: 'success'});
+      $window.history.back();
+      $window.history.back();
+    }
+
+    $scope.resetPwdRequestAction = function (resetPwdRequestForm)
+    {
+      if (resetPwdRequestForm.$valid)
+      {
+        $scope.busy = true;
+        usersFact.resetpwdrequest({"username": $scope.user.username}, success, error);
+      }
+    }
   }]);
 
 /**
- * confirm email controller
+ * reset password controller
  *
  * @type {controller}
  */
-angular.module('authenticationApp').controller('changePwdCtrl', [ '$scope', '$routeParams', 'usersFact', '$location',
+angular.module('authenticationApp').controller('resetPwdCtrl', [ '$scope', '$routeParams', 'usersFact', '$location',
   function ($scope, $routeParams, usersFact, $location)
   {
     var error = function (response, args)
@@ -144,17 +195,25 @@ angular.module('authenticationApp').controller('changePwdCtrl', [ '$scope', '$ro
     var success = function (response, args)
     {
       $scope.busy = false;
-      $scope.$root.$broadcast('AlertCtrl:addAlert', {code: 'Changepwd_success', type: 'success'});
+      $scope.$root.$broadcast('AlertCtrl:addAlert', {code: 'Login_success', type: 'success'});
       $scope.$root.currentUser = response;
       localStorage.setItem('currentUser', JSON.stringify(response));
-      $location.path('/persons/show/' + $scope.$root.currentUser.id);
     }
 
-    $scope.changePwdAction = function (changePwdForm)
-    {
-      $scope.busy = true;
-      usersFact.changepwd(changePwdForm, success, error);
-    }
+    $scope.busy = true;
+    var user = usersFact.resetpwd({token: $routeParams.token}, success, error);
+
+  }]);
+
+/**
+ * confirm email controller
+ *
+ * @type {controller}
+ */
+angular.module('authenticationApp').controller('profileCtrl', [ '$scope', '$routeParams', 'usersFact', '$location',
+  function ($scope, $routeParams, usersFact, $location)
+  {
+
   }]);
 
 /**

@@ -1,4 +1,2 @@
-<div ng-if="currentUser.random_pwd">
-    <p>To finish activating your account, please choose a password</p>
-    <div ng-include="GLOBAL_CONFIG.app.modules.authentication.urls.partials+'changepwd.html'" ng-controller="changePwdCtrl"></div>
-</div>
+<h4>Please choose a new password</h4>
+<div ng-include="GLOBAL_CONFIG.app.modules.authentication.urls.partials+'changepwd.html'" ng-controller="changePwdCtrl"></div>
