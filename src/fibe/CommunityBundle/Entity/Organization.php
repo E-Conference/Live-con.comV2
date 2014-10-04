@@ -38,6 +38,7 @@ class Organization extends AdditionalInformations
   /**
    * @ORM\ManyToMany(targetEntity="Person",  mappedBy="organizations", cascade={"all"})
    * @MaxDepth(1)
+   * @Expose
    */
   private $members;
 

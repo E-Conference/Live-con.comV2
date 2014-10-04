@@ -187,7 +187,7 @@
     {
       $this->removeObjects($mainEvent);
 
-      $mainEvent->setLabel("Livecon Conference");
+      $mainEvent->setLabel("New Sympozer Conference");
       $mainEvent->setStartAt(new \DateTime('now'));
       $end = new \DateTime('now');
       $mainEvent->setEndAt($end->add(new \DateInterval('P2D')));

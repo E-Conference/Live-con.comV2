@@ -10,40 +10,47 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class OrganizationType extends AdditionalInformationsType
 {
-  /**
-   * @param FormBuilderInterface $builder
-   * @param array                $options
-   */
-  public function buildForm(FormBuilderInterface $builder, array $options)
-  {
-    parent::buildForm($builder, $options);
-    $builder
-      ->add('label')
-      ->add('members', 'collection', array(
-      'type' => new PersonType(),
-      'required' => 'false',
-      'allow_add' => true,
-        'allow_delete' => true
-      ));
-  }
 
-  /**
-   * @param OptionsResolverInterface $resolver
-   */
-  public function setDefaultOptions(OptionsResolverInterface $resolver)
-  {
-    $resolver->setDefaults(array(
-      'data_class' => 'fibe\CommunityBundle\Entity\Organization',
-      'csrf_protection' => false,
-      'cascade_validation' => true,
-    ));
-  }
 
-  /**
-   * @return string
-   */
-  public function getName()
-  {
-    return 'fibe_bundle_communitybundle_organization';
-  }
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array                $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        parent::buildForm($builder, $options);
+        $builder
+            ->add('label')
+
+        ->add('members', 'collection', array(
+        'type' => new PersonType(),
+        'required' => 'false',
+        'allow_add' => true,
+        'allow_delete' => true,
+        'by_reference' => false,
+        'empty_data' => null,
+        'mapped' => false
+        ));
+
+    }
+
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'fibe\CommunityBundle\Entity\Organization',
+            'csrf_protection' => false,
+            'cascade_validation' => false,
+        ));
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'fibe_bundle_communitybundle_organization';
+    }
 }

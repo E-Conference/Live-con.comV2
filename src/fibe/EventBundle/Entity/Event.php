@@ -152,8 +152,8 @@ class Event extends VEvent
         $em = $eventArgs->getEntityManager();
         $uow = $em->getUnitOfWork();
         $uow->recomputeSingleEntityChangeSet(
-            $em->getClassMetadata(get_class($this->getLocations()->first())),
-            $this->getLocations()
+        $em->getClassMetadata(get_class($this->getLocations()->first())),
+        $this->getLocations()
         );
     }
   /**

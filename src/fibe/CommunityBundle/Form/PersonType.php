@@ -14,21 +14,27 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class PersonType extends AdditionalInformationsType
 {
 
-  /**
-   * {@inheritdoc}
-   */
-  public function buildForm(FormBuilderInterface $builder, array $options)
-  {
-    parent::buildForm($builder, $options);
-    $builder
-      ->add('firstName')
-      ->add('familyName')
-      ->add('email', 'text', array('required' => false))
-//      ->add('organizations', 'collection', array(
-//        'type' => new OrganizationType(),
-//        'required' => 'false',
-//         'allow_add' => true,
-//      ))
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        parent::buildForm($builder, $options);
+        $builder
+            ->add('firstName')
+            ->add('familyName')
+            ->add('email', 'text', array('required' => false))
+            ->add('organizations', 'collection', array(
+                'type' => new OrganizationType(),
+                'required' => 'false',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => true,
+                'empty_data' => null,
+                'mapped' => false
+            ));
+
 //      ->add('firstName', 'text', array('label' => "First name"))
 //      ->add('familyName', 'text', array('label' => "Family Name"))
 //      ->add('email', 'text', array('required' => false))
@@ -55,27 +61,28 @@ class PersonType extends AdditionalInformationsType
 //      ->add('accounts', 'collection', array('type'         => new SocialServiceAccountType(),
 //                                            'allow_add'    => true,
 //                                            'allow_delete' => true))
-    ;
-  }
+        ;
+    }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setDefaultOptions(OptionsResolverInterface $resolver)
-  {
-    $resolver->setDefaults(array(
-      'data_class' => 'fibe\CommunityBundle\Entity\Person',
-      'csrf_protection' => false
-    ));
-  }
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'fibe\CommunityBundle\Entity\Person',
+            'csrf_protection' => false,
+            'cascade_validation' => false
+        ));
+    }
 
-  /**
-   * Returns the name of this type.
-   *
-   * @return string The name of this type
-   */
-  public function getName()
-  {
-    return 'fibe_communitybundle_persontype';
-  }
+    /**
+     * Returns the name of this type.
+     *
+     * @return string The name of this type
+     */
+    public function getName()
+    {
+        return 'fibe_communitybundle_persontype';
+    }
 }
