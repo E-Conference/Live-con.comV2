@@ -107,7 +107,7 @@ class Location
   /**
    * Events
    *
-   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\Event", mappedBy="locations",cascade={"persist"})
+   * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\VEvent", mappedBy="locations",cascade={"persist"})
    */
   private $events;
 

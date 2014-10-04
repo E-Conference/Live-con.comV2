@@ -91,6 +91,16 @@ abstract class VEvent
   protected $endAt;
 
   /**
+   * Locations for the event
+   * @Expose
+   * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Location", inversedBy="events", cascade={"all"})
+   * @ORM\JoinTable(name="event_location",
+   *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
+   *     inverseJoinColumns={@ORM\JoinColumn(name="location_id", referencedColumnName="id")})
+   */
+  private $locations;
+
+  /**
    * description
    *
    * This property provides a more complete description of the

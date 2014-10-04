@@ -34,7 +34,12 @@ class VEventType extends AbstractType
             ->add('description')
             ->add('comment')
             ->add('url')
-            ->add('dtype');
+            ->add('dtype')
+            ->add('locations', 'entity', array(
+              'class' => 'fibeContentBundle:Location',
+              'required' => 'false',
+              'multiple' => true,
+            ));
 //            ->add('category', 'entity', array(
 //                'class' => 'fibeEventBundle:Category',
 //                'query_builder' => function(EntityRepository $er) {
