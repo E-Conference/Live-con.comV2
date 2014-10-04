@@ -221,6 +221,31 @@ class Location
     return $this->description;
   }
 
+
+  /**
+   * Set accesibility
+   *
+   * @param string $accesibility
+   *
+   * @return Location
+   */
+  public function setAccesibility($accesibility)
+  {
+    $this->accesibility = $accesibility;
+
+    return $this;
+  }
+
+  /**
+   * Get accesibility
+   *
+   * @return string
+   */
+  public function getAccesibility()
+  {
+    return $this->accesibility;
+  }
+
   /**
    * Set latitude
    *

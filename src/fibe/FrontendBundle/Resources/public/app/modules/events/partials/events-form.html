@@ -6,6 +6,11 @@
         <input type="text" class="form-control" id="label" required placeholder="{{event.label}}" ng-model="event.label">
     </div>
     <div>
+    <label for="inputPriority">Priority</label>
+     <input type="radio" class="form-control" id="inputPriority" placeholder="Priority" ng-model="event.priority" ng-value="{{event.priority}}" value="1">
+   </div>
+  
+    <div>
         <label for="inputDescription">Description</label>
         <input type="text " class="form-control" id="inputDescription" placeholder="{{event.description}}" ng-model="event.description">
     </div>
@@ -14,6 +19,8 @@
         <input type="text " class="form-control" id="inputUrl" placeholder="{{event.url}}" ng-model="event.url">
     </div>
     <div get-or-create="topic" parent-entity="event"></div>
+    <div get-or-create="category" parent-entity="event" new-politic="modal"></div>
+    <div get-or-create="paper" parent-entity="event"  new-politic="modal"></div>
 </div>
 <h2>Time & localization</h2>
 

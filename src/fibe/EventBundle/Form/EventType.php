@@ -39,7 +39,16 @@ class EventType extends VEventType
         'required' => 'true',
         'multiple' => false,
       ))
-
+      ->add('papers', 'entity', array(
+        'class' => 'fibeContentBundle:Paper',
+        'required' => 'false',
+        'multiple' => true,
+      ))
+      ->add('roles', 'entity', array(
+        'class' => 'fibeContentBundle:Role',
+        'required' => 'false',
+        'multiple' => true,
+      ))
       ->add('topics', 'entity', array(
         'class' => 'fibeContentBundle:Topic',
         'required' => 'false',

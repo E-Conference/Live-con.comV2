@@ -25,6 +25,7 @@ class VEventType extends AbstractType
   {
     $builder
       ->add('label')
+      ->add('priority')
       ->add('startAt', 'datetime', array(
         'widget' => 'single_text',
       ))
@@ -39,13 +40,17 @@ class VEventType extends AbstractType
         'class' => 'fibeContentBundle:Location',
         'required' => 'false',
         'multiple' => true,
+      ))
+      ->add('sponsors', 'entity', array(
+        'class' => 'fibeContentBundle:Sponsor',
+        'required' => 'false',
+        'multiple' => true,
+      ))
+      ->add('category', 'entity', array(
+        'class' => 'fibeEventBundle:Category',
+        'required' => 'false',
       ));
-//            ->add('category', 'entity', array(
-//                'class' => 'fibeEventBundle:Category',
-//                'query_builder' => function(EntityRepository $er) {
-//             return $er->extractQueryBuilder($this->categoriesLevels);
-//            },
-//              ));
+
   }
 
   /**
