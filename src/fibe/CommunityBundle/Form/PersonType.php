@@ -35,6 +35,11 @@ class PersonType extends AdditionalInformationsType
                 'mapped' => false
             ));
 
+//      ->add('organizations', 'collection', array(
+//        'type' => new OrganizationType(),
+//        'required' => 'false',
+//         'allow_add' => true,
+//      ))
 //      ->add('firstName', 'text', array('label' => "First name"))
 //      ->add('familyName', 'text', array('label' => "Family Name"))
 //      ->add('email', 'text', array('required' => false))
@@ -61,7 +66,7 @@ class PersonType extends AdditionalInformationsType
 //      ->add('accounts', 'collection', array('type'         => new SocialServiceAccountType(),
 //                                            'allow_add'    => true,
 //                                            'allow_delete' => true))
-        ;
+
     }
 
     /**

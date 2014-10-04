@@ -62,7 +62,7 @@ abstract class VEvent
    *
    * This property defines a short summary or subject for the
    * calendar component.
-   * @ORM\Column(type="string", length=255, nullable=true)
+   * @ORM\Column(type="string", length=255)
    * @Expose
    */
   protected $label;

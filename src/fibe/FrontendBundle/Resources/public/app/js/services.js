@@ -14,11 +14,11 @@ var sympozerServices = angular.module('sympozerServices', ['ngResource']);
  * @TODO Florian : Comment
  *
  */
-angular.module('authenticationApp').factory('globalHttpInterceptor', ['$q', '$scope', '$rootScope',
-    function ($q, $scope, $rootScope)
+angular.module('sympozerApp').factory('globalHttpInterceptor', ['$q', '$rootScope',
+    function ($q, $rootScope)
     {
         //Function used to keep only IDs of the POSTED entities
-        $scope.cleanEntity = function(entity){
+        var cleanEntity = function(entity){
 
             for(var property in entity) {
                 switch (typeof property) {
@@ -35,7 +35,7 @@ angular.module('authenticationApp').factory('globalHttpInterceptor', ['$q', '$sc
             return entity;
         }
 
-        $scope.replaceObjectById = function(object) {
+        var replaceObjectById = function(object) {
             if (property.hasOwnProperty(id)) {
                 return object.id;
             }
@@ -49,7 +49,7 @@ angular.module('authenticationApp').factory('globalHttpInterceptor', ['$q', '$sc
             {
                 debugger;
                 if(config.method === "POST"){
-                    $scope.cleanEntity();
+                    cleanEntity();
                 }
                 return config;
             },

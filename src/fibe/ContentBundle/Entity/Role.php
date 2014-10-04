@@ -20,7 +20,7 @@ use fibe\CommunityBundle\Entity\Person;
  *
  *  Don't seem to work with ajax form
  * @UniqueEntity(
- *     fields={"person", "event","type"},
+ *     fields={"person", "event","roleLabel"},
  *     errorPath="role",
  *     message="This person has already this role at this event"
  * )
@@ -70,28 +70,45 @@ class Role
    */
   private $mainEvent;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="fibe\ContentBundle\Entity\RoleLabel", inversedBy="roles")
-     * @ORM\JoinColumn(name="role_label_id", referencedColumnName="id")
-     * @Assert\NotBlank(message="You have to choose a role type")
-     */
-    private $roleLabel;
+  /**
+   * @ORM\ManyToOne(targetEntity="fibe\ContentBundle\Entity\RoleLabel", inversedBy="roles")
+   * @ORM\JoinColumn(name="role_label_id", referencedColumnName="id")
+   * @Assert\NotBlank(message="You have to choose a role type")
+   */
+  private $roleLabel;
 
-    /**
-     * @return mixed
-     */
-    public function getRoleLabel()
-    {
-        return $this->roleLabel;
-    }
+  /**
+   * @return mixed
+   */
+  public function getRoleLabel()
+  {
+      return $this->roleLabel;
+  }
 
-    /**
-     * @param mixed $roleLabel
-     */
-    public function setRoleLabel($roleLabel)
-    {
-        $this->roleLabel = $roleLabel;
-    }
+  /**
+   * @param mixed $roleLabel
+   */
+  public function setRoleLabel($roleLabel)
+  {
+      $this->roleLabel = $roleLabel;
+  }
+
+  /**
+   * computeEndAt
+   *
+   * @TODO EVENT : à corriger
+   *
+   * @ORM\PrePersist()
+   * @ORM\PreUpdate()
+   */
+  public function computeEndAt()
+  {
+    $this->setLabel( sprintf("%s is %s at %s",
+      $this->getPerson()->getlabel(),
+      $this->getRoleLabel()->getlabel(),
+      $this->getEvent()->getLabel()
+    ));
+  }
 
 
   /**
@@ -157,13 +174,13 @@ class Role
   /**
    * Set type
    *
-   * @param RoleLabel $type
+   * @param String $label
    *
-   * @return Role
+   * @return String
    */
-  public function setLabel(RoleLabel $type = null)
+  public function setLabel($label)
   {
-    $this->label = $type;
+    $this->label = $label;
 
     return $this;
   }
@@ -171,7 +188,7 @@ class Role
   /**
    * Get type
    *
-   * @return RoleLabel
+   * @return String
    */
   public function getLabel()
   {

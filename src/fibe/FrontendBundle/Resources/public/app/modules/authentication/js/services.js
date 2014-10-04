@@ -28,6 +28,3 @@ angular.module('authenticationApp').factory('usersFact', ['$resource',
     );
   }]);
 
-
-
-
