@@ -2,7 +2,6 @@
 
 namespace fibe\CommunityBundle\Form;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -24,11 +23,11 @@ class PersonType extends AdditionalInformationsType
       ->add('firstName')
       ->add('familyName')
       ->add('email', 'email')
-//      ->add('organizations', 'collection', array(
-//        'type' => new OrganizationType(),
-//        'required' => 'false',
-//         'allow_add' => true,
-//      ))
+      ->add('organizations', 'entity', array(
+        'class'    => 'fibeCommunityBundle:Organization',
+        'required' => false,
+        'multiple' => true
+      ))
 //      ->add('firstName', 'text', array('label' => "First name"))
 //      ->add('familyName', 'text', array('label' => "Family Name"))
 //      ->add('email', 'text', array('required' => false))

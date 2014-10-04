@@ -10,14 +10,12 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\AccountStatusException;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
 /**
  * Class UserRESTController
@@ -66,7 +64,7 @@ class UserRESTController extends Controller
   /**
    * change the password of an user.
    * If the password is still random, don't ask for it.
-   * @Route("/user/changepwd", name="security_changepwd")
+   * @Route("/user/change_pwd", name="security_changepwd")
    */
   public function changePwdAction(Request $request)
   {
@@ -107,6 +105,14 @@ class UserRESTController extends Controller
     $response->headers->set('Content-Type', 'application/json');
     $this->authenticateUser($user, $response);
     return $response;
+  }
+
+  /**
+   * Redirect to the frontend api confirmation page.
+   * @Rest\Get("/reset_pwd", name="fos_user_registration_confirm")
+   */
+  public function resetPwdAction(Request $request, ParamFetcherInterface $paramFetcher)
+  {
   }
 
   /**
