@@ -28,23 +28,28 @@ class EventType extends VEventType
     {
         parent::buildForm($builder, $options);
         $builder
-            ->add('locations', 'collection', array(
-                'type' => new LocationType(),
-                'required' => 'false',
-                'allow_add' => true
+            ->add('locations', 'entity', array(
+              'class' => 'fibeContentBundle:Location',
+              'required' => 'false',
+              'multiple' => true,
             ))
 
-            ->add('papers', 'collection', array(
-                'type' => new PaperType(),
-                'required' => 'false',
-                'allow_add' => true
+            ->add('papers', 'entity', array(
+              'class' => 'fibeContentBundle:Paper',
+              'required' => 'false',
+              'multiple' => true,
             ))
 
-            ->add('mainEvent', new MainEventType())
-            ->add('topics', 'collection', array(
-                'type' => new TopicType(),
-                'required' => 'false',
-                'allow_add' => true
+            ->add('mainEvent', 'entity', array(
+              'class' => 'fibeEventBundle:MainEvent',
+              'required' => 'true',
+              'multiple' => false,
+            ))
+
+            ->add('topics', 'entity', array(
+              'class' => 'fibeContentBundle:Topic',
+              'required' => 'false',
+              'multiple' => true,
             ));
 
     }

@@ -24,12 +24,10 @@ class LocationType extends AbstractType
       ->add('description')
       ->add('latitude')
       ->add('longitude')
-      ->add('equipments', 'collection', array(
-        'type' => new EquipmentType(),
+      ->add('equipments', 'entity', array(
+        'class' => 'fibeContentBundle:Equipment',
         'required' => 'false',
-        'allow_add' => true,
-        'allow_delete' => true
-
+        'multiple' => true,
       ));
   }
 
