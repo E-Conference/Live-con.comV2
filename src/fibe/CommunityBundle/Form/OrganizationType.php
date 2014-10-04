@@ -10,6 +10,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class OrganizationType extends AdditionalInformationsType
 {
+
+
   /**
    * @param FormBuilderInterface $builder
    * @param array                $options
@@ -46,4 +48,5 @@ class OrganizationType extends AdditionalInformationsType
   {
     return 'fibe_bundle_communitybundle_organization';
   }
+
 }

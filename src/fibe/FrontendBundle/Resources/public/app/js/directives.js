@@ -216,8 +216,8 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
                         case "create":
                             //Creation of the new entity
                             scope.busy = true;
+
                             newEntity.$create({}, function(newEntity){
-                                scope.busy = false;
                                 if(singleChoice) {
                                     scope.resource[parentField]= newEntity;
                                 }else{
