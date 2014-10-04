@@ -26,6 +26,7 @@ class UserService
   {
     $person = new Person();
     $person->setUser($user);
+    $person->setFirstName($user->getEmail());
     $person->setEmail($user->getEmail());
     $this->entityManager->persist($person);
     return $user;
