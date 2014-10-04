@@ -9,5 +9,7 @@
   </a>
   <h3>{{person.label}}</h3>
 
-  <p>{{person.country}}</p>
+  <p ng-if="person.country">{{person.country}}</p>
+  <p ng-if="person.email">{{person.email}}</p>
+  <p ng-if="person.website">{{person.website}}</p>
 </div>
