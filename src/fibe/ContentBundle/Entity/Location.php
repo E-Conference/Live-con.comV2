@@ -62,7 +62,7 @@ class Location
    */
   private $description;
 
-    /**
+  /**
    * Accesibility of the location
    *
    * @ORM\Column(type="text", nullable=true)
@@ -110,7 +110,6 @@ class Location
    * @ORM\ManyToMany(targetEntity="fibe\EventBundle\Entity\VEvent", mappedBy="locations",cascade={"persist"})
    */
   private $events;
-
 
 
   /**
@@ -269,6 +268,7 @@ class Location
   {
     return $this->longitude;
   }
+
   /**
    * Add event
    *

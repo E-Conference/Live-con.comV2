@@ -50,7 +50,7 @@ class EventController extends Controller
 
 
     return array(
-      'pager'        => $pager,
+      'pager' => $pager,
       'filters_form' => $filters->createView()
     );
   }
@@ -91,7 +91,7 @@ class EventController extends Controller
       return $this->render(
         'fibeEventBundle:Event:list.html.twig',
         array(
-          'pager'    => $pager,
+          'pager' => $pager,
           'nbResult' => $nbResult,
         )
       );
@@ -127,7 +127,7 @@ class EventController extends Controller
       'fibeEventBundle:Event:new.html.twig',
       array(
         'entity' => $entity,
-        'form'   => $form->createView(),
+        'form' => $form->createView(),
       )
     );
   }
@@ -142,7 +142,7 @@ class EventController extends Controller
     $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Event');
 
     //From the index I can create event with all categories
-    $categoriesLevel = array("levels" => array(1, 2,3));
+    $categoriesLevel = array("levels" => array(1, 2, 3));
 
     $form = $this->createForm(new EventType($categoriesLevel), $entity);
 
@@ -150,8 +150,8 @@ class EventController extends Controller
     return $this->render(
       'fibeEventBundle:Event:new.html.twig',
       array(
-        'entity'          => $entity,
-        'form'            => $form->createView(),
+        'entity' => $entity,
+        'form' => $form->createView(),
         'categoriesLevel' => $categoriesLevel,
       )
     );
@@ -162,7 +162,7 @@ class EventController extends Controller
    * @Route("session/{id}/addEvent",name="event_addeventensession")
    * @Template()
    */
-  public function addEventInSessionAction(Request $request,$id)
+  public function addEventInSessionAction(Request $request, $id)
   {
     $entity = $this->get('fibe_security.acl_entity_helper')->getEntityACL('CREATE', 'Event');
     $em = $this->getDoctrine()->getManager();
@@ -190,8 +190,8 @@ class EventController extends Controller
     return $this->render(
       'fibeEventBundle:Event:new.html.twig',
       array(
-        'entity'          => $entity,
-        'form'            => $form->createView(),
+        'entity' => $entity,
+        'form' => $form->createView(),
         'categoriesLevel' => $categoriesLevel,
       )
     );
@@ -212,7 +212,7 @@ class EventController extends Controller
     return $this->render(
       'fibeEventBundle:Event:show.html.twig',
       array(
-        'entity'      => $entity,
+        'entity' => $entity,
         'delete_form' => $deleteForm->createView(),
 
       )
@@ -239,12 +239,12 @@ class EventController extends Controller
         'papers',
         'entity',
         array(
-          'class'    => 'fibeContentBundle:Paper',
+          'class' => 'fibeContentBundle:Paper',
           'property' => 'title',
           'required' => false,
           'multiple' => false,
-          'choices'  => $papersForSelect,
-          'label'    => "Select paper"
+          'choices' => $papersForSelect,
+          'label' => "Select paper"
         )
       )
       ->getForm();
@@ -255,12 +255,12 @@ class EventController extends Controller
         'topics',
         'entity',
         array(
-          'class'    => 'fibeContentBundle:Topic',
+          'class' => 'fibeContentBundle:Topic',
           'required' => false,
           'property' => 'name',
           'multiple' => false,
-          'choices'  => $topicsForSelect,
-          'label'    => "Select topic"
+          'choices' => $topicsForSelect,
+          'label' => "Select topic"
         )
       )
       ->getForm();
@@ -268,12 +268,12 @@ class EventController extends Controller
     return $this->render(
       'fibeEventBundle:Event:edit.html.twig',
       array(
-        'entity'      => $entity,
-        'edit_form'   => $editForm->createView(),
+        'entity' => $entity,
+        'edit_form' => $editForm->createView(),
         'delete_form' => $deleteForm->createView(),
-        'role_form'   => $form_role->createView(),
-        'paper_form'  => $form_paper->createView(),
-        'topic_form'  => $form_topic->createView(),
+        'role_form' => $form_role->createView(),
+        'paper_form' => $form_paper->createView(),
+        'topic_form' => $form_topic->createView(),
       )
     );
   }

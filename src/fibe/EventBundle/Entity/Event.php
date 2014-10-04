@@ -131,20 +131,25 @@ class Event extends VEvent
 //      $this->setIsInstant(false);
 //    }
   }
-    /**
-     * auto persist of embedded data
-     * @ORM\PreFlush
-     */
-    public function updateSomething(PreFlushEventArgs $eventArgs)
+
+  /**
+   * auto persist of embedded data
+   * @ORM\PreFlush
+   */
+  public function updateSomething(PreFlushEventArgs $eventArgs)
+  {
+    if (!$this->getId() || !$this->getLocations()->first())
     {
-        if(!$this->getId() || !$this->getLocations()->first()) return;
-        $em = $eventArgs->getEntityManager();
-        $uow = $em->getUnitOfWork();
-        $uow->recomputeSingleEntityChangeSet(
-        $em->getClassMetadata(get_class($this->getLocations()->first())),
-        $this->getLocations()
-        );
+      return;
     }
+    $em = $eventArgs->getEntityManager();
+    $uow = $em->getUnitOfWork();
+    $uow->recomputeSingleEntityChangeSet(
+      $em->getClassMetadata(get_class($this->getLocations()->first())),
+      $this->getLocations()
+    );
+  }
+
   /**
    * Set slug
    *

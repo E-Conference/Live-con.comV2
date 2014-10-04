@@ -90,7 +90,7 @@ class PaperRESTController extends FOSRestController
       $request,
       $this::ENTITY_CLASSNAME,
       $this::FORM_CLASSNAME,
-      'PUT',$id
+      'PUT', $id
     );
 
   }
@@ -109,11 +109,9 @@ class PaperRESTController extends FOSRestController
       $request,
       $this::ENTITY_CLASSNAME,
       $this::FORM_CLASSNAME,
-      'PATCH',$id
+      'PATCH', $id
     );
   }
-
-
 
 
   /**
@@ -128,8 +126,7 @@ class PaperRESTController extends FOSRestController
     return $this->get('fibe.rest.crudhandler')->delete(
       $this::ENTITY_CLASSNAME,
       $id
-    );
-;
+    );;
   }
 
 }

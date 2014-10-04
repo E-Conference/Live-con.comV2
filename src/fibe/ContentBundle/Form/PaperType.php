@@ -40,8 +40,7 @@ class PaperType extends AbstractType
         'class' => 'fibeEventBundle:Event',
         'required' => 'false',
         'multiple' => true,
-      ))
-    ;
+      ));
   }
 
 

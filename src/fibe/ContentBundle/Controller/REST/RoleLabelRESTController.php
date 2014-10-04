@@ -87,7 +87,7 @@ class RoleLabelRESTController extends FOSRestController
       $request,
       $this::ENTITY_CLASSNAME,
       $this::FORM_CLASSNAME,
-      'PUT',$id
+      'PUT', $id
     );
 
   }
@@ -106,11 +106,9 @@ class RoleLabelRESTController extends FOSRestController
       $request,
       $this::ENTITY_CLASSNAME,
       $this::FORM_CLASSNAME,
-      'PATCH',$id
+      'PATCH', $id
     );
   }
-
-
 
 
   /**
@@ -125,8 +123,7 @@ class RoleLabelRESTController extends FOSRestController
     return $this->get('fibe.rest.crudhandler')->delete(
       $this::ENTITY_CLASSNAME,
       $id
-    );
-;
+    );;
   }
 
 }

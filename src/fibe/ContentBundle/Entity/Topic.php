@@ -86,7 +86,7 @@ class Topic
    */
   public function slugify()
   {
-    $this->setSlug(StringTools::slugify($this->getLabel(),false));
+    $this->setSlug(StringTools::slugify($this->getLabel(), false));
   }
 
   /**

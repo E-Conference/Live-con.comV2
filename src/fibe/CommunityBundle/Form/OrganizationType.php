@@ -14,7 +14,7 @@ class OrganizationType extends AdditionalInformationsType
 
   /**
    * @param FormBuilderInterface $builder
-   * @param array                $options
+   * @param array $options
    */
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
@@ -30,8 +30,7 @@ class OrganizationType extends AdditionalInformationsType
         'class' => 'fibeContentBundle:Sponsor',
         'required' => 'false',
         'multiple' => true,
-      ))
-      ;
+      ));
   }
 
   /**

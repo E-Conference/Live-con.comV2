@@ -29,14 +29,14 @@ class ExportController extends Controller
   public function indexAction()
   {
     $wwwConf = $this->getUser()->getCurrentMainEvent();
-    $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'MainEvent',$wwwConf);
+    $this->get('fibe_security.acl_entity_helper')->getEntityACL('VIEW', 'MainEvent', $wwwConf);
 
     $export_form = $this->createFormBuilder()
       ->add(
         'export_format',
         'choice',
         array(
-          'choices'  => array('xml' => 'SWC', 'csv' => 'CSV'),
+          'choices' => array('xml' => 'SWC', 'csv' => 'CSV'),
           'required' => true,
         )
       )
@@ -46,7 +46,7 @@ class ExportController extends Controller
     $user = $this->getUser();
 
     return array(
-      'wwwConf'     => $wwwConf,
+      'wwwConf' => $wwwConf,
       'export_form' => $export_form->createView()
     );
   }
@@ -67,7 +67,7 @@ class ExportController extends Controller
         'export_format',
         'choice',
         array(
-          'choices'  => array('xml' => 'SWC', 'csv' => 'CSV'),
+          'choices' => array('xml' => 'SWC', 'csv' => 'CSV'),
           'required' => true,
         )
       )

@@ -81,7 +81,7 @@ class Role
    */
   public function getRoleLabel()
   {
-      return $this->roleLabel;
+    return $this->roleLabel;
   }
 
   /**
@@ -89,7 +89,7 @@ class Role
    */
   public function setRoleLabel($roleLabel)
   {
-      $this->roleLabel = $roleLabel;
+    $this->roleLabel = $roleLabel;
   }
 
   /**
@@ -102,7 +102,7 @@ class Role
    */
   public function computeEndAt()
   {
-    $this->setLabel( sprintf("%s is %s at %s",
+    $this->setLabel(sprintf("%s is %s at %s",
       $this->getPerson()->getlabel(),
       $this->getRoleLabel()->getlabel(),
       $this->getEvent()->getLabel()

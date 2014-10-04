@@ -52,7 +52,7 @@ class PaperController extends Controller
     $filters = $this->createForm(new PaperFilterType($this->getUser()));
 
     return array(
-      'pager'        => $pager,
+      'pager' => $pager,
       'filters_form' => $filters->createView(),
     );
   }
@@ -94,7 +94,7 @@ class PaperController extends Controller
       return $this->render(
         'fibeContentBundle:Paper:list.html.twig',
         array(
-          'pager'    => $pager,
+          'pager' => $pager,
           'nbResult' => $nbResult,
         )
       );
@@ -129,7 +129,7 @@ class PaperController extends Controller
       'fibeContentBundle:Paper:new.html.twig',
       array(
         'entity' => $entity,
-        'form'   => $form->createView()
+        'form' => $form->createView()
       )
     );
   }
@@ -150,7 +150,7 @@ class PaperController extends Controller
       'fibeContentBundle:Paper:new.html.twig',
       array(
         'entity' => $entity,
-        'form'   => $form->createView(),
+        'form' => $form->createView(),
       )
     );
   }
@@ -169,7 +169,7 @@ class PaperController extends Controller
     return $this->render(
       'fibeContentBundle:Paper:show.html.twig',
       array(
-        'entity'      => $entity,
+        'entity' => $entity,
         'delete_form' => $deleteForm->createView()
       )
     );
@@ -191,8 +191,8 @@ class PaperController extends Controller
     return $this->render(
       'fibeContentBundle:Paper:edit.html.twig',
       array(
-        'entity'      => $entity,
-        'edit_form'   => $editForm->createView(),
+        'entity' => $entity,
+        'edit_form' => $editForm->createView(),
         'delete_form' => $deleteForm->createView()
       )
     );

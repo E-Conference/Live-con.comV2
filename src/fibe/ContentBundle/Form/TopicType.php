@@ -35,8 +35,7 @@ class TopicType extends AbstractType
         'class' => 'fibeEventBundle:VEvent',
         'required' => 'false',
         'multiple' => true,
-      ))
-    ;
+      ));
   }
 
   /**

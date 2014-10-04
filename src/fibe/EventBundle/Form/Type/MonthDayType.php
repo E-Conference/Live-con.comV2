@@ -10,27 +10,27 @@ use fibe\EventBundle\Form\DataTransformer\ArrayToStringTransformer;
 
 class MonthDayType extends AbstractType
 {
-     public function buildForm(FormBuilderInterface $builder, array $options)
-     {
-     }
+  public function buildForm(FormBuilderInterface $builder, array $options)
+  {
+  }
 
-     public function setDefaultOptions(OptionsResolverInterface $resolver)
-     {
+  public function setDefaultOptions(OptionsResolverInterface $resolver)
+  {
     //     $resolver->setDefaults(array(
     //         'choices'         => Recur::getMonthDay(),
     //         'multiple'        => true,
     //         'expanded'        => false,
     //         'invalid_message' => 'The selected month days does not exist',
     //     ));
-     }
+  }
 
-     public function getParent()
-     {
+  public function getParent()
+  {
     //     return 'choice';
-     }
+  }
 
-     public function getName()
-     {
+  public function getName()
+  {
     //     return 'month_day';
-     }
+  }
 }

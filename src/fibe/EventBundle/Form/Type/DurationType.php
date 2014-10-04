@@ -10,42 +10,41 @@ use fibe\EventBundle\Form\DataTransformer\DurationToStringTransformer;
 
 class DurationType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder
-            ->add('week', 'choice', array(
-                'choices' => range(0, 52)
-            ))
-            ->add('day', 'choice', array(
-                'choices' => range(0, 6)
-            ))
-            ->add('hour', 'choice', array(
-                'choices' => range(0, 23)
-            ))
-            ->add('minute', 'choice', array(
-                'choices' => range(0, 59)
-            ))
-            ->add('second', 'choice', array(
-                'choices' => range(0, 59)
-            ))
-        ;
+  public function buildForm(FormBuilderInterface $builder, array $options)
+  {
+    $builder
+      ->add('week', 'choice', array(
+        'choices' => range(0, 52)
+      ))
+      ->add('day', 'choice', array(
+        'choices' => range(0, 6)
+      ))
+      ->add('hour', 'choice', array(
+        'choices' => range(0, 23)
+      ))
+      ->add('minute', 'choice', array(
+        'choices' => range(0, 59)
+      ))
+      ->add('second', 'choice', array(
+        'choices' => range(0, 59)
+      ));
 
-        $transformer = new DurationToStringTransformer();
-        $builder->addModelTransformer($transformer);
-    }
+    $transformer = new DurationToStringTransformer();
+    $builder->addModelTransformer($transformer);
+  }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        //$resolver->setDefaults();
-    }
+  public function setDefaultOptions(OptionsResolverInterface $resolver)
+  {
+    //$resolver->setDefaults();
+  }
 
-    public function getParent()
-    {
-        return 'field';
-    }
+  public function getParent()
+  {
+    return 'field';
+  }
 
-    public function getName()
-    {
-        return 'duration';
-    }
+  public function getName()
+  {
+    return 'duration';
+  }
 }

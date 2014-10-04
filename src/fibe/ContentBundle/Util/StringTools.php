@@ -31,7 +31,10 @@ class StringTools
       $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
     }
     // lowercase
-    if($lowerCase) $text = strtolower($text);
+    if ($lowerCase)
+    {
+      $text = strtolower($text);
+    }
     // remove unwanted characters
     $text = preg_replace('~[^-\w]+~', '', $text);
 

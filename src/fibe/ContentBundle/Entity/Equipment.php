@@ -16,7 +16,6 @@ use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
 
 
-
 /**
  * This class define an Equipment for a location.
  *
@@ -45,7 +44,7 @@ class Equipment
    */
   private $label;
 
-    /**
+  /**
    * Description of the equipment
    *
    * @ORM\Column(type="text", nullable=true)

@@ -94,7 +94,7 @@ class StatusController extends Controller
 
     return array(
       'entity' => $entity,
-      'form'   => $form->createView(),
+      'form' => $form->createView(),
     );
   }
 
@@ -124,7 +124,7 @@ class StatusController extends Controller
           '%entity%[%id%] has been created',
           array(
             '%entity%' => 'Status',
-            '%id%'     => $entity->getId()
+            '%id%' => $entity->getId()
           )
         )
       );
@@ -134,7 +134,7 @@ class StatusController extends Controller
 
     return array(
       'entity' => $entity,
-      'form'   => $form->createView(),
+      'form' => $form->createView(),
     );
   }
 
@@ -159,8 +159,8 @@ class StatusController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return array(
-      'entity'      => $entity,
-      'edit_form'   => $editForm->createView(),
+      'entity' => $entity,
+      'edit_form' => $editForm->createView(),
       'delete_form' => $deleteForm->createView(),
     );
   }
@@ -197,7 +197,7 @@ class StatusController extends Controller
           '%entity%[%id%] has been updated',
           array(
             '%entity%' => 'Status',
-            '%id%'     => $entity->getId()
+            '%id%' => $entity->getId()
           )
         )
       );
@@ -207,7 +207,7 @@ class StatusController extends Controller
     }
 
     return array(
-      'entity'    => $entity,
+      'entity' => $entity,
       'edit_form' => $editForm->createView(),
     );
   }
@@ -243,7 +243,7 @@ class StatusController extends Controller
           '%entity%[%id%] has been deleted',
           array(
             '%entity%' => 'Status',
-            '%id%'     => $id
+            '%id%' => $id
           )
         )
       );
@@ -271,7 +271,7 @@ class StatusController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return array(
-      'entity'      => $entity,
+      'entity' => $entity,
       'delete_form' => $deleteForm->createView(),
     );
   }

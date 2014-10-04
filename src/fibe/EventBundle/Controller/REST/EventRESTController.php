@@ -1,6 +1,6 @@
 <?php
 
-namespace fibe\EventBundle\Controller\REST ;
+namespace fibe\EventBundle\Controller\REST;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
@@ -36,23 +36,23 @@ class EventRESTController extends FOSRestController
 
   }
 
-    /**
-    * Lists all Event entities filtered by conference.
-    * @Rest\Get("/mainEvents/{confId}/events", name="schedule_events_all_by_conference")
-    * @Rest\View
-    * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
-    * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
-    * @Rest\QueryParam(name="query", requirements=".{1,128}", nullable=true, description="the query to search.")
-    * @Rest\QueryParam(name="order", nullable=true, array=true, description="an array of order.")
-    */
-    public function getEventsByConferenceAction(Request $request, ParamFetcherInterface $paramFetcher, $confId)
-    {
-        return $this->get('fibe.rest.crudhandler')->getAll(
-            $this::ENTITY_CLASSNAME,
-            $paramFetcher,
-            $confId
-        );
-    }
+  /**
+   * Lists all Event entities filtered by conference.
+   * @Rest\Get("/mainEvents/{confId}/events", name="schedule_events_all_by_conference")
+   * @Rest\View
+   * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
+   * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
+   * @Rest\QueryParam(name="query", requirements=".{1,128}", nullable=true, description="the query to search.")
+   * @Rest\QueryParam(name="order", nullable=true, array=true, description="an array of order.")
+   */
+  public function getEventsByConferenceAction(Request $request, ParamFetcherInterface $paramFetcher, $confId)
+  {
+    return $this->get('fibe.rest.crudhandler')->getAll(
+      $this::ENTITY_CLASSNAME,
+      $paramFetcher,
+      $confId
+    );
+  }
 
   /**
    * @Rest\Get("/events/{id}", name="schedule_events_get")
@@ -104,7 +104,7 @@ class EventRESTController extends FOSRestController
       $request,
       $this::ENTITY_CLASSNAME,
       $this::FORM_CLASSNAME,
-      'PUT',$id
+      'PUT', $id
     );
 
   }
@@ -123,11 +123,9 @@ class EventRESTController extends FOSRestController
       $request,
       $this::ENTITY_CLASSNAME,
       $this::FORM_CLASSNAME,
-      'PATCH',$id
+      'PATCH', $id
     );
   }
-
-
 
 
   /**
@@ -142,8 +140,7 @@ class EventRESTController extends FOSRestController
     return $this->get('fibe.rest.crudhandler')->delete(
       $this::ENTITY_CLASSNAME,
       $id
-    );
-;
+    );;
   }
 
 }

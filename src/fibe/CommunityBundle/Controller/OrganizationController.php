@@ -49,7 +49,7 @@ class OrganizationController extends Controller
     $filters = $this->createForm(new OrganizationFilterType($this->getUser()));
 
     return array(
-      'pager'        => $pager,
+      'pager' => $pager,
       'filters_form' => $filters->createView(),
     );
   }
@@ -90,7 +90,7 @@ class OrganizationController extends Controller
       return $this->render(
         'ibeCommunityBundle:Organization:list.html.twig',
         array(
-          'pager'    => $pager,
+          'pager' => $pager,
           'nbResult' => $nbResult,
         )
       );
@@ -135,7 +135,7 @@ class OrganizationController extends Controller
 
     return array(
       'entity' => $entity,
-      'form'   => $form->createView()
+      'form' => $form->createView()
     );
   }
 
@@ -153,7 +153,7 @@ class OrganizationController extends Controller
 
     return array(
       'entity' => $entity,
-      'form'   => $form->createView()
+      'form' => $form->createView()
     );
   }
 
@@ -171,7 +171,7 @@ class OrganizationController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return array(
-      'entity'      => $entity,
+      'entity' => $entity,
       'delete_form' => $deleteForm->createView()
     );
   }
@@ -191,8 +191,8 @@ class OrganizationController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return array(
-      'entity'      => $entity,
-      'edit_form'   => $editForm->createView(),
+      'entity' => $entity,
+      'edit_form' => $editForm->createView(),
       'delete_form' => $deleteForm->createView()
     );
   }
@@ -245,8 +245,8 @@ class OrganizationController extends Controller
     }
 
     return array(
-      'entity'      => $entity,
-      'edit_form'   => $editForm->createView(),
+      'entity' => $entity,
+      'edit_form' => $editForm->createView(),
       'delete_form' => $deleteForm->createView()
     );
   }

@@ -21,8 +21,8 @@ class SponsorType extends AbstractType
     $builder
       ->add('label')
       ->add('logo', 'file', ['required' => false,
-                             'label'    => 'Logo (jpeg - png - 2MO)',
-                             'attr'     => ['placeholder' => 'logoPath']])
+        'label' => 'Logo (jpeg - png - 2MO)',
+        'attr' => ['placeholder' => 'logoPath']])
       ->add('organization', 'entity', array(
         'class' => 'fibeCommunityBundle:Organization',
         'required' => 'false',

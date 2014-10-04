@@ -44,7 +44,8 @@
     </div>
 
     <div class="row">
-     <input type="text" id="tree-structure-search">
+      <input type="text" id="tree-structure-search">
+
       <div id="tree-structure" class="col-sm-12 col-md-2 col-lg-2">
 
       </div>
@@ -63,7 +64,8 @@
             mn
           </span>
           <br/><br/>
-          <span class="fc-header-space"></span><button id="refetchBtn" class="btn btn-block btn-default"><span class="fa fa-refresh"></span></button>
+          <span class="fc-header-space"></span>
+          <button id="refetchBtn" class="btn btn-block btn-default"><span class="fa fa-refresh"></span></button>
           <br/>
         </div>
       </div>
@@ -159,11 +161,11 @@
 {% block stylesheets_page %}
   {#<link href="{{ asset('bundles/fibewwwconf/js/fullcalendar/fullcalendar.css') }}" rel='stylesheet'/>#}
   {#<link href="{{ asset('bundles/fibewwwconf/js/fullcalendar/fullcalendar.print.css') }}" rel='stylesheet'#}
-        {#media='print'/>#}
+  {#media='print'/>#}
   {#<link href="{{ asset('bundles/fibewwwconf/css/fullcalendarAddedUI.css') }}" rel='stylesheet'/>#}
   {#<link href="{{ asset('bundles/fibewwwconf/css/jquery.mCustomScrollbar.css') }}" rel='stylesheet'/>#}
   {#<link href="{{ asset('css/slider.css') }}" rel='stylesheet'/>#}
-   {#<link rel='stylesheet' type='text/css' href="{{ asset('bundles/fibewwwconf/js/treestructure/style.css') }}">#}
+  {#<link rel='stylesheet' type='text/css' href="{{ asset('bundles/fibewwwconf/js/treestructure/style.css') }}">#}
 {% endblock stylesheets_page %}
 
 
@@ -171,7 +173,7 @@
 
 {% block javascripts_page %}
   {#<script src="{{ asset('bundles/fibewwwconf/js/treestructure/jstree.js') }}" type="text/javascript"></script>#}
-    {#<script src="{{ asset('bundles/fibewwwconf/js/treestructure/TreeRenderer.js') }}" type="text/javascript"></script>#}
+  {#<script src="{{ asset('bundles/fibewwwconf/js/treestructure/TreeRenderer.js') }}" type="text/javascript"></script>#}
   {#<script src="{{ asset('bundles/fibewwwconf/js/treestructure/jstree.checkbox.js') }}" type="text/javascript"></script>#}
   {#<script src="{{ asset('bundles/fibewwwconf/js/treestructure/jstree.search.js') }}" type="text/javascript"></script>#}
   {#<script src="{{ asset('bundles/fibewwwconf/js/treestructure/jstree.types.js') }}" type="text/javascript"></script>#}
@@ -242,27 +244,28 @@
     var eventManager = new EventManager(),
         fullCalendarView = new FullCalendarView(),
         treeStructure = new TreeRendererView()
-    ;
+        ;
     eventManager.addView(fullCalendarView);
     eventManager.addView(treeStructure);
 
 
     eventManager.fetch();
 
-    $refetchBtn.on("click",function(){
+    $refetchBtn.on("click", function ()
+    {
       eventManager.fetch();
     });
 
     //slider
     $('.slider').slider().css("width", "100%")
-      .on('slide', function (slideEvt)
-      {
-        $("#" + $(this).data("sliderId") + "Val").text(slideEvt.value);
-      })
-      .on('slideStop', function (slideEvt)
-      {
-        $('#calendar').fullCalendar('setOptions', {'slotMinutes': slideEvt.value});
-      });
+        .on('slide', function (slideEvt)
+        {
+          $("#" + $(this).data("sliderId") + "Val").text(slideEvt.value);
+        })
+        .on('slideStop', function (slideEvt)
+        {
+          $('#calendar').fullCalendar('setOptions', {'slotMinutes': slideEvt.value});
+        });
     //requires changes made by christian on https://code.google.com/p/fullcalendar/issues/detail?id=293&can=4
     // TO REPRODUCE WHEN FULLCALENDAR.JS IS UPDATED
     //    original post is :
@@ -306,147 +309,151 @@
     /*------------------------------------- fullcalendar options ------------------------------------------*/
     /*-----------------------------------------------------------------------------------------------------*/
     /*calendarOption = {
-      header: {
-        left: 'prev,next',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay' // computed in resource view
-      },
-      aspectRatio: 1.6,
-      firstDay: firstWeekDay,
-      year: firstDay.year(),
-      month: firstDay.month(),
-      date: firstDay.date(),
-      events: EventCollection.events, //fetch event
-      eventAfterAllRender: EventCollection.eventAfterAllRender,
-      eventCalculateWidth: EventCollection.eventCalculateWidth,
-      eventAfterRender: EventCollection.eventAfterRender,
+     header: {
+     left: 'prev,next',
+     center: 'title',
+     right: 'month,agendaWeek,agendaDay' // computed in resource view
+     },
+     aspectRatio: 1.6,
+     firstDay: firstWeekDay,
+     year: firstDay.year(),
+     month: firstDay.month(),
+     date: firstDay.date(),
+     events: EventCollection.events, //fetch event
+     eventAfterAllRender: EventCollection.eventAfterAllRender,
+     eventCalculateWidth: EventCollection.eventCalculateWidth,
+     eventAfterRender: EventCollection.eventAfterRender,
 
-      {% if authorized == 1 %} //editing function that require schedule flag
-      editable: true,
-      eventClick: EventCollection.eventClick,
-      selectable: true,
-      selectHelper: true,
-      select: EventCollection.eventCreate,
-      //resizing events in calendar (only the end date is changed)
-      eventResize: EventCollection.eventResize,
+    {% if authorized == 1 %} //editing function that require schedule flag
+   editable: true,
+   eventClick: EventCollection.eventClick,
+   selectable: true,
+   selectHelper: true,
+   select: EventCollection.eventCreate,
+   //resizing events in calendar (only the end date is changed)
+   eventResize: EventCollection.eventResize,
 
-      droppable: true, // allows things to be dropped into the calendar
-      drop: EventCollection.eventSidebarDrop,
+   droppable: true, // allows things to be dropped into the calendar
+   drop: EventCollection.eventSidebarDrop,
 
-      eventDragStart: EventCollection.eventDragStart,
-      eventDragStop: EventCollection.eventDragStop,
-      eventDrop: EventCollection.eventDrop,
-      {% endif %}
-    };*/
+   eventDragStart: EventCollection.eventDragStart,
+   eventDragStop: EventCollection.eventDragStop,
+   eventDrop: EventCollection.eventDrop,
+    {% endif %}
+     };*/
 
     /*----------------------------------------------------------------------------------------*/
     /*------------------------------------- resources ----------------------------------------*/
     /*----------------------------------------------------------------------------------------*/
     /*var resConfig = {
-      location: {
-        url: "{{ path('exporter_api', { 'entityReference': 'content_location','_format': 'json' }) }}?conference_id={{currentMainEvent.id}}",
-        parse: function (e)
-        {
-          if (e.location && e.location.id != "")
-          {
-            return e.location.id;
-          }
-          else
-          {
-            return "other";
-          }
-        }
-      }, category: {
-        url: "{{ path('exporter_api', { 'entityReference': 'event_category','_format': 'json' }) }}?conference_id={{currentMainEvent.id}}",
-        parse: function (e)
-        {
-          console.log(e)
-          if (e.categories && e.categories.length < 1)
-          {
-            return "other";
-          }
-          for (var i in e.categories)
-          {
-            var c = e.categories[i];
-            rtn.push(c.id);
-          }
-          return rtn;
-        }
-      }
-    };
-    currentRes = "location";
-    var res,
-      allRes,
-      unknownRes = {
-        name: "Not defined",
-        id: "0"
-      };
+     location: {
+     url: "
+    {{ path('exporter_api', { 'entityReference': 'content_location','_format': 'json' }) }}?conference_id=
+    {{currentMainEvent.id}}",
+   parse: function (e)
+   {
+   if (e.location && e.location.id != "")
+   {
+   return e.location.id;
+   }
+   else
+   {
+   return "other";
+   }
+   }
+   }, category: {
+   url: "
+    {{ path('exporter_api', { 'entityReference': 'event_category','_format': 'json' }) }}?conference_id=
+    {{currentMainEvent.id}}",
+   parse: function (e)
+   {
+   console.log(e)
+   if (e.categories && e.categories.length < 1)
+   {
+   return "other";
+   }
+   for (var i in e.categories)
+   {
+   var c = e.categories[i];
+   rtn.push(c.id);
+   }
+   return rtn;
+   }
+   }
+   };
+   currentRes = "location";
+   var res,
+   allRes,
+   unknownRes = {
+   name: "Not defined",
+   id: "0"
+   };
 
 
-    function fetchAllResources(callback)
-    {
-      $.ajax({
-        url: resConfig[currentRes].url,
-        data: op.data,
-        success: function (events)
-        {
-          events.push(unknownRes);
+   function fetchAllResources(callback)
+   {
+   $.ajax({
+   url: resConfig[currentRes].url,
+   data: op.data,
+   success: function (events)
+   {
+   events.push(unknownRes);
 
-          allRes = events.slice(0);
-          res = events;
-          if (callback)
-          {
-            callback(res);
-          }
-        }
-      });
-    }
+   allRes = events.slice(0);
+   res = events;
+   if (callback)
+   {
+   callback(res);
+   }
+   }
+   });
+   }
 
-    function filterResourcesByIds(ids)
-    {
-      if (!ids || ids.length == 0)
-      {
-        return $calendar.fullCalendar('setResources', allRes);
-      }
-      var filteredRes = [];
-      for (var i = 0; i < res.length; i++)
-      {
-        if ($.inArray(res[i].id, ids) !== -1)
-        {
-          filteredRes.push(res[i])
-        }
-      }
-      filteredRes.push(unknownRes)
-      $calendar.fullCalendar('setResources', filteredRes);
-    }
+   function filterResourcesByIds(ids)
+   {
+   if (!ids || ids.length == 0)
+   {
+   return $calendar.fullCalendar('setResources', allRes);
+   }
+   var filteredRes = [];
+   for (var i = 0; i < res.length; i++)
+   {
+   if ($.inArray(res[i].id, ids) !== -1)
+   {
+   filteredRes.push(res[i])
+   }
+   }
+   filteredRes.push(unknownRes)
+   $calendar.fullCalendar('setResources', filteredRes);
+   }
 
-    calendarOption.header.right = "month agendaWeek agendaDay,resourceDay";
-    calendarOption["buttonText"] = {resourceDay: currentRes};
+   calendarOption.header.right = "month agendaWeek agendaDay,resourceDay";
+   calendarOption["buttonText"] = {resourceDay: currentRes};
 
-    fetchAllResources(function ()
-    {
-      calendarOption["eventResources"] = res;
-      //launch calendar
-      $calendar.fullCalendar(calendarOption);
-      $calendar.fullCalendar('changeView', startView);
+   fetchAllResources(function ()
+   {
+   calendarOption["eventResources"] = res;
+   //launch calendar
+   $calendar.fullCalendar(calendarOption);
+   $calendar.fullCalendar('changeView', startView);
 
-      //additional schedule controls : first day and refresh
-      $('.fc-header-left')
-          .append(
-          $('<span class="fc-header-space"></span><button class="fc-button fc-state-default fc-corner-left fc-corner-right"> First day</button>')
-              .click(function (e)
-              {
-                $calendar.fullCalendar('gotoDate', firstDay.year(), firstDay.month(), firstDay.date())
-                EventCollection.refetchEvents();
-              })
-      ).append(
-          $('<span class="fc-header-space"></span><button class="fc-button fc-state-default fc-corner-left fc-corner-right"><span class="fa fa-refresh"></span></button>')
-              .click(function (e)
-              {
-                EventCollection.resetEvents();
-              })
-      );
-    });*/
+   //additional schedule controls : first day and refresh
+   $('.fc-header-left')
+   .append(
+   $('<span class="fc-header-space"></span><button class="fc-button fc-state-default fc-corner-left fc-corner-right"> First day</button>')
+   .click(function (e)
+   {
+   $calendar.fullCalendar('gotoDate', firstDay.year(), firstDay.month(), firstDay.date())
+   EventCollection.refetchEvents();
+   })
+   ).append(
+   $('<span class="fc-header-space"></span><button class="fc-button fc-state-default fc-corner-left fc-corner-right"><span class="fa fa-refresh"></span></button>')
+   .click(function (e)
+   {
+   EventCollection.resetEvents();
+   })
+   );
+   });*/
 
 
     /*----------------------------------------------------------------------------------------*/
@@ -454,24 +461,23 @@
     /*----------------------------------------------------------------------------------------*/
 
 
-
     /*-------------------------------------------------------------------------------------------------*/
     /*------------------------------------- initialize sidebar ----------------------------------------*/
     /*-------------------------------------------------------------------------------------------------*/
 
     /*sidebar = new Sidebar(!authorized);
-    sidebar.populate(op.getDatalessUrl);
+     sidebar.populate(op.getDatalessUrl);
 
     {% if authorized == 1 %}
-    //dropped from calendar to sidebar;
-    $(sidebar).on("dropped", function (ev, calEvent)
-    {
-      console.log("dropped", calEvent)
-      Events[calEvent.id].dropFromSidebar();
-    }).on("drag", function (ev, event)
-    {
-//      event.dragChildren();
-    });*/
+     //dropped from calendar to sidebar;
+     $(sidebar).on("dropped", function (ev, calEvent)
+     {
+     console.log("dropped", calEvent)
+     Events[calEvent.id].dropFromSidebar();
+     }).on("drag", function (ev, event)
+     {
+     //      event.dragChildren();
+     });*/
     {% endif %}
 
     /*-----------------------------------------------------------------------------------------------------*/
@@ -481,23 +487,23 @@
 
     //init filters
     /*filter = new initFilter(op.getOrderedUrl);
-    $(filter).on("change", function (ev, key, val, res)
-    {
-      bootstrapAlert("info", "event request sent", "", "<i class='fa-2x fa fa-spinner fa-spin'></i>");
-      if (res == currentRes)
-      {push
-        filterResourcesByIds(val);
-      }
-    }).on("changed", function (ev, data, ids)
-    {
-      bootstrapAlert("success", ids.length + " events have been well fetched");
-      EventCollection.filterIds(ids);
-    });*/
+     $(filter).on("change", function (ev, key, val, res)
+     {
+     bootstrapAlert("info", "event request sent", "", "<i class='fa-2x fa fa-spinner fa-spin'></i>");
+     if (res == currentRes)
+     {push
+     filterResourcesByIds(val);
+     }
+     }).on("changed", function (ev, data, ids)
+     {
+     bootstrapAlert("success", ids.length + " events have been well fetched");
+     EventCollection.filterIds(ids);
+     });*/
 
   });//end $document.ready()
   </script>
 
-<!-- *************************************************   TREE STRUCTURE ***************************************************-->
+  <!-- *************************************************   TREE STRUCTURE ***************************************************-->
 
 {% endblock javascripts_page %}
 

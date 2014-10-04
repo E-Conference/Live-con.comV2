@@ -146,7 +146,6 @@ class Organization extends AdditionalInformations
   }
 
 
-
   /**
    * Add members
    *

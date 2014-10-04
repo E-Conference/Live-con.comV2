@@ -536,7 +536,7 @@ class Person extends AdditionalInformations
    */
   public function setUser(User $user = null)
   {
-    if($user != null)
+    if ($user != null)
     {
       $user->setPerson($this);
     }

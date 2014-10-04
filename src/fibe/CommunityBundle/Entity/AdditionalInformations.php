@@ -36,11 +36,11 @@ class AdditionalInformations
   protected $id;
 
   /**
-  * label
-  *
-  * @ORM\Column(type="string")
-  * @Expose
-  */
+   * label
+   *
+   * @ORM\Column(type="string")
+   * @Expose
+   */
   protected $label;
 
   /**

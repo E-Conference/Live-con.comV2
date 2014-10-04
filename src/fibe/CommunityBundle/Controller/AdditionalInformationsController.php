@@ -59,7 +59,7 @@ class AdditionalInformationsController extends Controller
 
     return array(
       'entity' => $entity,
-      'form'   => $form->createView(),
+      'form' => $form->createView(),
     );
   }
 
@@ -96,7 +96,7 @@ class AdditionalInformationsController extends Controller
 
     return array(
       'entity' => $entity,
-      'form'   => $form->createView(),
+      'form' => $form->createView(),
     );
   }
 
@@ -121,7 +121,7 @@ class AdditionalInformationsController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return array(
-      'entity'      => $entity,
+      'entity' => $entity,
       'delete_form' => $deleteForm->createView(),
     );
   }
@@ -148,8 +148,8 @@ class AdditionalInformationsController extends Controller
     $deleteForm = $this->createDeleteForm($id);
 
     return array(
-      'entity'      => $entity,
-      'edit_form'   => $editForm->createView(),
+      'entity' => $entity,
+      'edit_form' => $editForm->createView(),
       'delete_form' => $deleteForm->createView(),
     );
   }
@@ -203,8 +203,8 @@ class AdditionalInformationsController extends Controller
     }
 
     return array(
-      'entity'      => $entity,
-      'edit_form'   => $editForm->createView(),
+      'entity' => $entity,
+      'edit_form' => $editForm->createView(),
       'delete_form' => $deleteForm->createView(),
     );
   }

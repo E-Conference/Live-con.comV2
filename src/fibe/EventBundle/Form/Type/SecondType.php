@@ -10,27 +10,27 @@ use fibe\EventBundle\Form\DataTransformer\ArrayToStringTransformer;
 
 class SecondType extends AbstractType
 {
-     public function buildForm(FormBuilderInterface $builder, array $options)
-     {
-     }
+  public function buildForm(FormBuilderInterface $builder, array $options)
+  {
+  }
 
-     public function setDefaultOptions(OptionsResolverInterface $resolver)
-     {
+  public function setDefaultOptions(OptionsResolverInterface $resolver)
+  {
     //     $resolver->setDefaults(array(
     //         'choices'         => Recur::getSecond(),
     //         'multiple'        => true,
     //         'expanded'        => false,
     //         'invalid_message' => 'The selected second does not exist',
     //     ));
-     }
+  }
 
-     public function getParent()
-     {
+  public function getParent()
+  {
     //     return 'choice';
-     }
+  }
 
-     public function getName()
-     {
+  public function getName()
+  {
     //     return 'second';
-     }
+  }
 }
