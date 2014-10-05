@@ -2,14 +2,14 @@
 
 <div class="sidebar-nav">
 <!-- @button : New conference button -->
-<a class="btn btn-primary btn-lg" style="width:100%" href="#conferences/new">New conference</a>
+<a class="btn btn-primary btn-lg noBorder" style="width:100%" href="#conferences/new">New conference</a>
 
 <!-- @panel Community / Home panel -->
 <div class="panel-group" id="communityAccordion">
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading noPadding">
             <!-- @button : collapse panel Community / Home -->
-            <a data-toggle="collapse" data-parent="#communityAccordion" href="#/#collapseCommunity" class="panel-heading-href btn btn-default">
+            <a data-toggle="collapse" data-parent="#communityAccordion" href="#/#collapseCommunity" class="panel-heading-href btn btn-default noBorder">
                 <h4 class="panel-title">
                     <i class="fa fa-home fa-3x"></i>{{ 'Home' | translate }}
                 </h4>
@@ -43,9 +43,9 @@
 <!-- @panel My space -->
 <div class="panel-group" id="myspaceAccordion" ng-if="currentUser.id">
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading noPadding">
             <!-- @button : collapse panel My space -->
-            <a data-toggle="collapse" data-parent="#collapseMySpace" href="#dashboard/overview#collapseMySpace" class="panel-heading-href btn btn-default">
+            <a data-toggle="collapse" data-parent="#collapseMySpace" href="#dashboard/overview#collapseMySpace" class="panel-heading-href btn btn-default noBorder">
                 <h4 class="panel-title">
                     <i class="fa fa-user fa-3x"></i> My space
                 </h4>
@@ -80,9 +80,9 @@
 <div class="panel-group" id="conferenceAccordion" ng-if="currentConference.id">
 
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading noPadding">
             <!-- @button : collapse panel Current conference -->
-            <a data-toggle="collapse" data-parent="#conferenceAccordion" href="#dashboard/overview#collapseConference" class="panel-heading-href btn btn-default">
+            <a data-toggle="collapse" data-parent="#conferenceAccordion" href="#dashboard/overview#collapseConference" class="panel-heading-href btn btn-default noBorder">
                 <h4 class="panel-title">
                     <i class="fa fa-th fa-3x"></i> {{currentConference.label}}
                 </h4>
@@ -94,9 +94,9 @@
                 <div class="panel-group" id="accordion">
                     <!-- @panel Overview -->
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading noPadding">
                             <!-- @button : collapse panel Curent Conference : Overview -->
-                            <a data-toggle="collapse" data-parent="#accordion" href="#dashboard/overview#collapseOne" class="panel-heading-href btn btn-default">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#dashboard/overview#collapseOne" class="panel-heading-href btn btn-default noBorder">
                                 <h4 class="panel-title">
                                     <i class="fa fa-th fa-2x"></i> Overview
                                 </h4>
@@ -143,9 +143,9 @@
                     </div>
                     <!-- @panel Schedule -->
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading noPadding">
                             <!-- @button : collapse panel Curent Conference : Schedule -->
-                            <a data-toggle="collapse" data-parent="#accordion" href="#dashboard/schedule#collapseTwo" class="panel-heading-href btn btn-default">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#dashboard/schedule#collapseTwo" class="panel-heading-href btn btn-default noBorder">
                                 <h4 class="panel-title">
                                     <i class="fa fa-calendar fa-2x"></i> Schedule
                                 </h4>
@@ -168,9 +168,9 @@
                     </div>
                     <!-- @panel Widgets -->
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading noPadding">
                             <!-- @button : collapse panel Curent Conference : Widgets -->
-                            <a data-toggle="collapse" data-parent="#accordion" href="#dashboard/widget#collapseThree" class="panel-heading-href btn btn-default">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#dashboard/widget#collapseThree" class="panel-heading-href btn btn-default noBorder">
                                 <h4 class="panel-title">
                                     <i class="fa fa-bullhorn fa-2x"></i> Widgets
                                 </h4>
@@ -201,9 +201,9 @@
                     </div>
                     <!-- @panel Import -->
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading noPadding">
                             <!-- @button : collapse panel Curent Conference : Import -->
-                            <a data-toggle="collapse" data-parent="#accordion" href="#dashboard/widget#collapseFour" class="panel-heading-href btn btn-default">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#dashboard/widget#collapseFour" class="panel-heading-href btn btn-default noBorder">
                                 <h4 class="panel-title">
                                     <i class="fa fa-download fa-2x"></i> Import
                                 </h4>
