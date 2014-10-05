@@ -6,11 +6,6 @@
         <input type="text" class="form-control" id="label" required placeholder="{{event.label}}" ng-model="event.label">
     </div>
     <div>
-    <label for="inputPriority">Priority</label>
-     <input type="radio" class="form-control" id="inputPriority" placeholder="Priority" ng-model="event.priority" ng-value="{{event.priority}}" value="1">
-   </div>
-
-    <div>
         <label for="inputDescription">Description</label>
         <input type="text " class="form-control" id="inputDescription" placeholder="{{event.description}}" ng-model="event.description">
     </div>
@@ -20,9 +15,10 @@
     </div>
     <div get-or-create="topic" parent-entity="event"></div>
     <div get-or-create="category" parent-entity="event" new-politic="modal" singlechoice="true"></div>
-    <div get-or-create="paper" parent-entity="event"  new-politic="modal"></div>
+    
 </div>
-<!--<h2>Time & localization</h2>-->
+
+<h2>Time & localization</h2>
 
 <div class="well">
     <div>
@@ -56,11 +52,40 @@
         </div>
     </div>
 
-    <div get-or-create="location" parent-entity="event" parent-field="location" uniq-field="label" new-politic="modal"></div>
+    <div get-or-create="location" child-field="locations" parent-entity="event" parent-field="location" uniq-field="label" new-politic="modal"></div>
 
 </div>
 
-<!--<h2>Participants</h2>-->
+
+<h2>Content</h2>
+
+<div class="well">
+
+    <div get-or-create="paper" parent-entity="event"  new-politic="modal"></div>  
+
+    <label>Participants</label>
+
+    <div ng-repeat="role in event.roles">
+     <div class="col-sm-3">
+        <div class="panel panel-primary" style="margin-top: 10px;">
+          <div class="panel-heading clearfix">
+            <div class="panel-title pull-left text-center">{{ role.person.label }}</div>
+            <a ng-click="deleteEntity($index,entity)" class="btn btn-danger btn-xs fa fa-times pull-right"></a>
+          </div>
+          <div class="panel-body">
+            <img class="img-circle" src="http://blog.getjobber.com/wp-content/uploads/2013/01/Users-Image.png" alt="{{ role.person.label }} picture" style="width: 50px; height: 50px;">
+            {{ role.roleLabel.label }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div get-or-create="role" child-field="event" parent-entity="event" new-politic="modal"></div>
+
+
+<div>
+
+</div>
 
 <!--<div class="well">-->
     <!--<div get-or-create="person" parent-entity="event" parent-field="person" uniq-field="email" new-politic="modal"></div>-->
