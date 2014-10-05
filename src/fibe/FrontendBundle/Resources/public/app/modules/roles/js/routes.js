@@ -22,11 +22,11 @@ angular.module('rolesApp')
           templateUrl: globalConfig.app.modules.roles.urls.partials + 'roles-new.html',
           controller: 'rolesNewCtrl'
         })
-        .when('/roles/edit/:roleLabelId', {
+        .when('/roles/edit/:roleId', {
           templateUrl: globalConfig.app.modules.roles.urls.partials + 'roles-edit.html',
           controller: 'rolesEditCtrl'
         })
-        .when('/roles/show/:roleLabelId', {
+        .when('/roles/show/:roleId', {
           templateUrl: globalConfig.app.modules.roles.urls.partials + 'roles-show.html',
           controller: 'rolesShowCtrl'
         })

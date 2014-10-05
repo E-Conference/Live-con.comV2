@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\MaxDepth;
 use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -85,6 +86,8 @@ class Person
    * Paper made by this person
    *
    * @ORM\ManyToMany(targetEntity="Paper",  mappedBy="authors", cascade={"remove","persist","merge"})
+   * @Expose
+   * @MaxDepth(2)
    */
   private $papers;
 
@@ -119,7 +122,8 @@ class Person
    *
    * @ORM\OneToMany(targetEntity="Role",  mappedBy="person",cascade={"persist","remove"})
    * @ORM\JoinColumn(onDelete="CASCADE")
-   *
+   * @Expose
+   * @MaxDepth(2)
    */
   private $roles;
 

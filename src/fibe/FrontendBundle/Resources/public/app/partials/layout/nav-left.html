@@ -56,19 +56,19 @@
                 <ul class="sidebar-nav-list">
                     <li>
                         <!-- @hlink : My events -->
-                        <a href="#schedule"><i class="fa-calendar"></i> My events</a>
+                        <a href="#schedule"><i class="fa-calendar"></i> My events ({{currentUser.}})</a>
                     </li>
                     <li>
                         <!-- @hlink : My bookmarks -->
-                        <a href="#attendees"><i class="fa fa-bookmark fa-2x"></i> My bookmarks</a>
+                        <a href="#attendees" disabled="disabled"><i class="fa fa-bookmark fa-2x"></i> My bookmarks</a>
                     </li>
                     <li>
                         <!-- @hlink : My tickets -->
-                        <a href="#locations"><i class="fa fa-ticket fa-2x"></i> My tickets</a>
+                        <a href="#locations" disabled="disabled"><i class="fa fa-ticket fa-2x"></i> My tickets</a>
                     </li>
                     <li>
                         <!-- @hlink : My recommandation -->
-                        <a href="#schedule"><i class="fa fa-thumbs-o-up fa-2x"></i> My recommandation</a>
+                        <a href="#schedule" disabled="disabled"><i class="fa fa-thumbs-o-up fa-2x"></i> My recommandation</a>
                     </li>
                 </ul>
             </div>
@@ -185,7 +185,7 @@
                                     </li>
                                     <li>
                                         <!-- @hlink : Ticket page -->
-                                        <a href="#publications"><i class="fa fa-ticket fa-2x"></i> Ticket page</a>
+                                        <a href="#ticketPage"><i class="fa fa-ticket fa-2x"></i> Ticket page</a>
                                     </li>
                                     <li>
                                         <!-- @hlink : Embedded calendar -->
