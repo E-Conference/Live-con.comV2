@@ -1,4 +1,4 @@
-<form name="signinForm" class="form" role="form" ng-submit="signinAction(user)" novalidate="">
+<form name="signinForm" class="form" role="form" ng-submit="$parent.signinAction(user)" novalidate="">
   <div class="form-group">
     <label for="inputUsername">Login</label>
     <input required="" type="text" name="_username" class="form-control" id="inputUsername" placeholder="Username" ng-model="user.username" ng-minlength=3
@@ -16,7 +16,6 @@
     <div class="alert alert-danger" role="alert" ng-show="signinForm._password.$error.maxlength">Your password cannot be longer than 20 characters</div>
   </div>
   <div class="form-group">
-    <button ng-disabled="signinForm.$invalid" type="submit" class="btn btn-default">Sign in</button>
     <span><a href="#/forgotten_password">{{ 'Forgotten_password' | translate }}</a></span>
   </div>
   <a ng-repeat="socialnetwork in GLOBAL_CONFIG.api.urls.socialnetworks track by $index"

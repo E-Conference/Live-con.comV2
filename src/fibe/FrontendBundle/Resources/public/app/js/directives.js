@@ -123,17 +123,16 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
             var entityLbl               = attrs.getOrCreate,
                 parentEntityLbl         = attrs.parentEntity,
                 uniqField               = attrs.uniqField || 'label',
-                singleChoice            = attrs.singlechoice || null,
+                singleChoice            = attrs.singlechoice,
                 parentField             = attrs.parentField || entityLbl,
-                childField              = attrs.childField || null,
-                newField                = attrs.newField || null,
+                childField              = attrs.childField,
+                newField                = attrs.newField,
 
                 newPolitic              = attrs.newPolitic || "create",
 
                 entitiesLbl             = getPlural(entityLbl),
                 entityCamelCaseLbl      = entityLbl.charAt(0).toUpperCase() + entityLbl.slice(1),
                 entityFact              = $injector.get(entitiesLbl + 'Fact'),
-                dialogTemplateUrl       = GLOBAL_CONFIG.app.urls.partials+'layout/dialog-new-entity-form.html',
                 formDialogTemplateUrl   = GLOBAL_CONFIG.app.modules[entitiesLbl].urls.partials + entitiesLbl + '-form.html',
 
                 limit                   = 10
@@ -146,8 +145,11 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
             //available entities
             scope.entities = [];
             scope.singleChoice = singleChoice;
-            //the parent resource given by attrs.entity
-            scope.resource = scope.$parent[parentEntityLbl];
+            //resolve the parent resource given by attrs.entity
+            scope.resource = scope.$parent[parentEntityLbl] || scope.$parent.$parent.$parent.$entity;
+            if(!scope.resource)
+                return console.error('Could not have resolved scope of entity' + parentEntityLbl);
+
 
             scope.parentField = parentField = !singleChoice ? getPlural(parentField) : parentField;
 
@@ -211,8 +213,8 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
                 }
 
                 if(childField) {
-                    $model[childField] = new Array();
-                    $model[childField].push(scope.$parent[parentEntityLbl]);
+                    $model[childField] = [];
+                    $model[childField].push(scope.resource);
                 }
 
                 var newEntity = new entityFact($model);
@@ -248,32 +250,52 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
                             break;
 
                         case "modal":
-                            var dialogCtrlArgs = {
-                                $entityLbl: entityLbl,
-                                $entity: newEntity,
-                                $formDialogTemplateUrl: formDialogTemplateUrl
-                            };
-                            var dialogOptions = {
-                                id: 'complexDialog',
-                                title: entityCamelCaseLbl + ' creation',
-                                backdrop: true,
-                                controller: 'dialogNewEntityCtrl',
-                                success: {label: 'Ok', fn: function ()
+                            var successFn = function()
+                            {
+                                var success = function (response, args)
                                 {
+                                    scope.busy = false;
+                                    scope.$root.$broadcast('AlertCtrl:addAlert', {code: entityLbl + ' created', type: 'success'});
+
                                     console.log("validated", newEntity);
                                     if(singleChoice) {
                                         scope.resource[parentField]= newEntity;
                                     }else{
                                         scope.resource[parentField].push(newEntity);
                                     }
-                                }},
+                                };
+
+                                var error = function (response, args)
+                                {
+                                    scope.busy = false;
+                                    scope.$root.$broadcast('AlertCtrl:addAlert', {code: 'the ' + entityLbl + ' has not been created', type: 'danger'});
+                                };
+
+                                newEntity.$create({}, success, error);
+                            };
+
+                            var dialogCtrlArgs = {
+                                scope : {
+                                  $entityLbl: entityLbl,
+                                  formId: scope.$entityLbl + "-form",
+                                  $entity: newEntity,
+                                },
+                                formDialogTemplateUrl: formDialogTemplateUrl
+                            };
+                            dialogCtrlArgs.scope[entityLbl] = newEntity;
+                            var dialogOptions = {
+                                id: 'complexDialog',
+                                title: entityCamelCaseLbl + ' creation',
+                                backdrop: true,
+                                controller: 'genericDialogCtrl',
+                                success: {label: 'Ok', fn: successFn},
                                 cancel: {label: 'Cancel', fn: function ()
                                 {
                                     console.log("cancelled", newEntity);
                                 }}
                             };
-                            createDialogService(dialogTemplateUrl, dialogOptions, dialogCtrlArgs);
-                            break;
+                            createDialogService(GLOBAL_CONFIG.app.urls.partials+'layout/generic-dialog.html', dialogOptions, dialogCtrlArgs);
+                        break;
 
                     }
                 }

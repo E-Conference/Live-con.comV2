@@ -152,33 +152,20 @@ sympozerControllers.controller('conferenceCtrl', ['$scope', '$rootScope', '$rout
 /**
  * generic ctrl handling entity creation inside a modal
  */
-sympozerControllers.controller('dialogNewEntityCtrl', [ '$scope', '$rootScope', '$entityLbl', '$entity', '$formDialogTemplateUrl', '$timeout', '$location', '$injector',
-  function ($scope, $rootScope, $entityLbl, $entity, $formDialogTemplateUrl, $timeout, $location, $injector)
+sympozerControllers.controller('genericDialogCtrl', [ '$scope', '$rootScope', 'scope', 'formDialogTemplateUrl', '$timeout', '$location', '$injector',
+  function ($scope, $rootScope, scope, $formDialogTemplateUrl, $timeout, $location, $injector)
   {
-    $scope[$entityLbl] = $entity;
-    $scope.formId = "new-" + $entityLbl + "-form";
+    $scope = $.extend($scope,scope);
+
     $scope.formDialogTemplateUrl = $formDialogTemplateUrl;
     var modalSuccessFn = $scope.$modalSuccess;
-
-    var error = function (response, args)
-    {
-      $scope.busy = false;
-      $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the ' + $entityLbl + ' has not been created', type: 'danger'});
-    };
-
-    var success = function (response, args)
-    {
-      $scope.busy = false;
-      $rootScope.$broadcast('AlertCtrl:addAlert', {code: $entityLbl + ' created', type: 'success'});
-      modalSuccessFn();
-    };
 
     $scope.submit = function ()
     {
       if (this[$scope.formId].$valid)
       {
         $scope.busy = true;
-        $scope[$entityLbl].$create({}, success, error);
+        modalSuccessFn();
       }
     };
     //validate form from a button placed outside
@@ -186,7 +173,15 @@ sympozerControllers.controller('dialogNewEntityCtrl', [ '$scope', '$rootScope', 
     {
       //modify dom asynchoneously : in https://docs.angularjs.org/error/$rootScope/inprog
       $timeout(function() {
-        $("#" + $scope.formId + " > input[type='submit']").click();
+        var submitHiddenBtn = $("#" + $scope.formId + " > input[type='submit']");
+        if(submitHiddenBtn.length > 0)
+        {
+          submitHiddenBtn.click();
+        }
+        else
+        {
+          modalSuccessFn();
+        }
       }, 0);
     }
 }]);

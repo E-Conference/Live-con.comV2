@@ -50,9 +50,11 @@ angular.module('sympozerApp').factory('globalHttpInterceptor', ['$q', '$rootScop
 
             'request': function (config)
             {
-  
-                if(["POST","PUT"].indexOf(config.method) >= 0 && !config.params.no_clean){
-                  config.data = cleanEntity(config.data);
+                //post or put & no "no_clean" arg set to true
+                if(["POST","PUT"].indexOf(config.method) >= 0 && !(config.params && config.params.no_clean)){
+                  {
+                    config.data = cleanEntity(config.data);
+                  }
                 }
                 return config;
             },
@@ -77,4 +79,29 @@ angular.module('sympozerApp').factory('globalHttpInterceptor', ['$q', '$rootScop
 
 
 ]);
+
+/**
+ * HACK Do not reload the current template if it is not needed.
+ *
+ * See AngularJS: Change hash and route without completely reloading controller http://stackoverflow.com/questions/12115259/angularjs-change-hash-and-route-without-completely-reloading-controller
+ *
+ * use it like :
+ *
+ * .controller('MyCtrl',
+ * ['$scope', 'DoNotReloadCurrentTemplate',
+ *  function($scope, DoNotReloadCurrentTemplate) {
+ *    DoNotReloadCurrentTemplate($scope);
+ * }]);
+ **/
+angular.module('sympozerApp').factory('DoNotReloadCurrentTemplate', ['$route', function($route) {
+  return function(scope) {
+    var lastRoute = $route.current;
+    scope.$on('$locationChangeSuccess', function() {
+      if (lastRoute.$$route.templateUrl === $route.current.$$route.templateUrl) {
+        console.log('DoNotReloadCurrentTemplate not reloading template: ' + $route.current.$$route.templateUrl);
+        $route.current = lastRoute;
+      }
+    });
+  };
+}]);
 

@@ -350,8 +350,8 @@ input.ng-dirty.ng-valid
     max-height: 95%;
 }
 
-.modal-dialog{
-    overflow: scroll;
+.modal-body{
+    overflow: auto;
     height: 100%;
 }
 
@@ -362,9 +362,4 @@ input.ng-dirty.ng-valid
 .btn.btn-social{
     border-radius: 6px !important;
     margin: 0.5em;
-}
-
-.modal-dialog{
-    overflow: scroll;
-    height: 100%;
 }
