@@ -50,7 +50,6 @@ class Person extends AdditionalInformations
 
   /**
    * familyName
-   * @Assert\NotBlank(message ="Please give a family name")
    * @ORM\Column(type="string", nullable=true,  name="familyName")
    * @Expose
    * @SerializedName("familyName")

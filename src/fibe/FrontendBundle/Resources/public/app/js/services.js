@@ -50,6 +50,7 @@ angular.module('sympozerApp').factory('globalHttpInterceptor', ['$q', '$rootScop
 
             'request': function (config)
             {
+  
                 if(["POST","PUT"].indexOf(config.method) >= 0){
                   config.data = cleanEntity(config.data);
                 }

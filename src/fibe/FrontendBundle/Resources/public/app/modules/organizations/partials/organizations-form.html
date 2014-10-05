@@ -14,5 +14,5 @@
     <label for="inputImg">Image</label>
     <input type="text" class="form-control" id="inputCountry" placeholder="{{organization.img}}" ng-model="organization.img">
 </div>
-<div get-or-create="person" parent-entity="organization" parent-field="member" uniq-field="email" new-politic="modal"></div>
-<div get-or-create="sponsor" parent-entity="organization" parent-field="sponsor" uniq-field="email" new-politic="modal"></div>
+<div get-or-create="person" parent-entity="organizations" parent-field="member" uniq-field="label" new-politic="modal"></div>
+<!--<div get-or-create="sponsor" parent-entity="organization" parent-field="sponsor" uniq-field="email" new-politic="modal"></div>-->
