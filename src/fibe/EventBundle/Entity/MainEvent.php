@@ -38,13 +38,6 @@ class MainEvent extends VEvent
   private $events;
 
   /**
-   * Locations
-   *
-   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Location", mappedBy="mainEvent",cascade={"persist", "remove"})
-   */
-  private $locations;
-
-  /**
    * Papers
    *
    * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Paper", mappedBy="mainEvent",cascade={"persist", "remove"})

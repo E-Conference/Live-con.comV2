@@ -39,11 +39,6 @@ class EventType extends VEventType
         'required' => 'true',
         'multiple' => false,
       ))
-      ->add('papers', 'entity', array(
-        'class' => 'fibeContentBundle:Paper',
-        'required' => 'false',
-        'multiple' => true,
-      ))
       ->add('roles', 'entity', array(
         'class' => 'fibeContentBundle:Role',
         'required' => 'false',
@@ -54,7 +49,6 @@ class EventType extends VEventType
         'required' => 'false',
         'multiple' => true,
       ));
-
   }
 
   /**

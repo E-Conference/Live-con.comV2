@@ -49,8 +49,8 @@ class VEventType extends AbstractType
       ->add('category', 'entity', array(
         'class' => 'fibeEventBundle:Category',
         'required' => 'false',
+        'multiple' => false,
       ));
-
   }
 
   /**
