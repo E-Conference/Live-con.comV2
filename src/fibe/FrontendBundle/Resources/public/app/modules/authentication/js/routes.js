@@ -27,7 +27,7 @@ angular.module('authenticationApp')
           controller: 'profileCtrl'
         })
         .when('/confirm/:token', {
-          templateUrl: globalConfig.app.modules.authentication.urls.partials + 'confirm.html',
+          templateUrl: globalConfig.app.urls.partials + 'home/home.html',
           controller: 'confirmCtrl'
         })
         .when('/forgotten_password', {
@@ -35,7 +35,7 @@ angular.module('authenticationApp')
           controller: 'resetPwdRequestCtrl'
         })
         .when('/reset/:token', {
-          templateUrl: globalConfig.app.modules.authentication.urls.partials + 'confirm.html',
+          templateUrl: globalConfig.app.urls.partials + 'home/home.html',
           controller: 'resetPwdCtrl'
         })
         .otherwise({

@@ -99,22 +99,33 @@ class FOSUBUserProvider extends BaseFOSUBUserProvider
       return $user; 
     } 
 
-    //no user with this social service Id and not logged
-    // => creating a new user with userName = email && random password   
-    private function create($serviceName,UserResponseInterface $response,$socialServiceId)
+  /**
+   *  No user with this social service Id and not logged
+   *  try to get the existing email user
+   *      if none found create a new user with userName = email && random password
+   *
+   * @param $serviceName
+   * @param UserResponseInterface $response
+   * @param $socialServiceId
+   * @return User
+   * @throws \Doctrine\ORM\ORMException
+   */
+  private function create($serviceName,UserResponseInterface $response,$socialServiceId)
     {
 
       // check no-mail
       $mail = $response->getEmail();
       if(empty($mail))
         throw new ORMException("Couldn't have got an email address from ".$serviceName);
-      // check duplicated mail 
-      if($this->userManager->findUserByEmail($mail) instanceof UserInterface)
-        throw new ORMException("Duplicated e-mail address constraint violation");
-
       /** @var User $user */
-      $user = $this->userManager->createUser();
-      
+      $user = $this->userManager->findUserByEmail($mail);
+      $newUser = false;
+      if(! $user instanceof UserInterface)
+      {
+        $newUser =true;
+        $user = $this->userManager->createUser();
+      }
+
       $setter = 'set'.ucfirst($serviceName);
       $setter_id = $setter.'Id';
       $setter_token = $setter.'AccessToken';
@@ -122,11 +133,14 @@ class FOSUBUserProvider extends BaseFOSUBUserProvider
       $user->$setter_token($response->getAccessToken());
 
 
-      $user->setUsername($mail);
-      $user->setEmail($mail);
-      $user->setPlainPassword(substr(base_convert(bin2hex(hash('sha256', uniqid(mt_rand(), true), true)), 16, 36), 0, 12));
-      $user->setRandomPwd(true);
-      $user->setEnabled(true);
+      if($newUser)
+      {
+        $user->setUsername($mail);
+        $user->setEmail($mail);
+        $user->setPlainPassword(substr(base_convert(bin2hex(hash('sha256', uniqid(mt_rand(), true), true)), 16, 36), 0, 12));
+        $user->setRandomPwd(true);
+        $user->setEnabled(true);
+      }
 
       $this->userService->post($user);
       $this->enrichUserDatas($user,$serviceName,$response);

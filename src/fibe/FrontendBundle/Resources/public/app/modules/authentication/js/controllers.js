@@ -43,6 +43,7 @@ angular.module('authenticationApp').controller('signupCtrl', ['$scope', '$rootSc
   function ($scope, $rootScope, $location, $routeParams, GLOBAL_CONFIG, usersFact)
   {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
+    $scope.user = {};
 
     var error = function (response, args)
     {
@@ -57,10 +58,10 @@ angular.module('authenticationApp').controller('signupCtrl', ['$scope', '$rootSc
       $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Register_success', type: 'success'});
       $location.path('/');
     }
-    $scope.signupAction = function (user)
+    $scope.signupAction = function (signupForm)
     {
       $scope.busy = true;
-      usersFact.signup({}, {fos_user_registration_form:user}, success, error);
+      usersFact.signup({fos_user_registration_form: $scope.user}, success, error);
     }
 
   }]);
@@ -117,7 +118,7 @@ angular.module('authenticationApp').controller('changePwdCtrl', [ '$scope', '$ro
       $scope.$root.$broadcast('AlertCtrl:addAlert', {code: 'Changepwd_success', type: 'success'});
       $scope.$root.currentUser = response;
       localStorage.setItem('currentUser', JSON.stringify(response));
-      $location.path('/persons/show/' + $scope.$root.currentUser.id);
+      $location.path('/profile');
     }
 
     $scope.changePwdAction = function (changePwdForm)
@@ -150,7 +151,7 @@ angular.module('authenticationApp').controller('confirmCtrl', [ '$scope', '$root
       $scope.user = response;
 
       $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Register_confirm_success', type: 'success'});
-      if(!$rootScope.currentUser.random_pwd)$location.path('/persons/show/' + $scope.$root.currentUser.id);
+      $location.path('/profile');
     }
 
     $scope.busy = true;
@@ -175,8 +176,7 @@ angular.module('authenticationApp').controller('resetPwdRequestCtrl', [ '$scope'
     {
       $scope.busy = false;
       $scope.$root.$broadcast('AlertCtrl:addAlert', {code: 'ResetPwdRequest_success', type: 'success'});
-      $window.history.back();
-      $window.history.back();
+      $location.path('/');
     }
 
     $scope.resetPwdRequestAction = function (resetPwdRequestForm)
@@ -209,6 +209,7 @@ angular.module('authenticationApp').controller('resetPwdCtrl', [ '$scope', '$rou
       $scope.$root.$broadcast('AlertCtrl:addAlert', {code: 'Login_success', type: 'success'});
       $scope.$root.currentUser = response;
       localStorage.setItem('currentUser', JSON.stringify(response));
+      $location.path('/profile');
     }
 
     $scope.busy = true;
@@ -224,7 +225,12 @@ angular.module('authenticationApp').controller('resetPwdCtrl', [ '$scope', '$rou
 angular.module('authenticationApp').controller('profileCtrl', [ '$scope', '$routeParams', 'usersFact', '$location',
   function ($scope, $routeParams, usersFact, $location)
   {
+    if(!$scope.$root.currentUser)
+    {
+      $location.path('/');
+    }
 
+    $scope.person = $scope.$root.currentUser.person;
   }]);
 
 /**

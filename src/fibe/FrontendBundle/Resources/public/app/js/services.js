@@ -17,7 +17,7 @@ var sympozerServices = angular.module('sympozerServices', ['ngResource']);
 angular.module('sympozerApp').factory('globalHttpInterceptor', ['$q', '$rootScope',
     function ($q, $rootScope)
     {
-        //Function used to keep only IDs of the POSTED entities
+        //Function used to keep only IDs of POST & PUT request
         var cleanEntity = function(entity){
             var entityClone = {};
             for(var property in entity) {
@@ -51,7 +51,7 @@ angular.module('sympozerApp').factory('globalHttpInterceptor', ['$q', '$rootScop
             'request': function (config)
             {
   
-                if(["POST","PUT"].indexOf(config.method) >= 0){
+                if(["POST","PUT"].indexOf(config.method) >= 0 && !config.params.no_clean){
                   config.data = cleanEntity(config.data);
                 }
                 return config;

@@ -9,6 +9,10 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 
 use FOS\UserBundle\Controller\ResettingController;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,29 +37,52 @@ class UserRESTController extends Controller
    * handle the signup form and sends a confirmation mail.
    * @Route("/signup", name="security_signup")
    */
-  public function signupAction()
+  public function signupAction(Request $request)
   {
-    $form = $this->container->get('fos_user.registration.form');
-    $formHandler = $this->container->get('fos_user.registration.form.handler');
-    $confirmationEnabled = $this->container->getParameter('fos_user.registration.confirmation.enabled');
 
-    $process = $formHandler->process($confirmationEnabled);
-    if ($process) {
-      $user = $form->getData();
+    /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+    $formFactory = $this->container->get('fos_user.registration.form.factory');
+    /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+    $userManager = $this->container->get('fos_user.user_manager');
+    /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+    $dispatcher = $this->container->get('event_dispatcher');
+
+    $user = $userManager->createUser();
+    $user->setEnabled(true);
+
+    $event = new GetResponseUserEvent($user, $request);
+    $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
+
+    if (null !== $event->getResponse()) {
+      return $event->getResponse();
+    }
+
+    $form = $formFactory->createForm();
+    $form->setData($user);
+
+    $form->bind($request);
+
+    if ($form->isValid()) {
+      $event = new FormEvent($form, $request);
+      $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+
       $this->container->get('fibe.UserService')->post($user);
-      $this->getDoctrine()->getManager()->flush();
+      $userManager->updateUser($user);
 
-      $response = new Response('Register_success');
+      $successResponse = new Response('Register_success');
 
-      if ($confirmationEnabled) {
-        $this->authenticateUser($user, $response);
+      //confirmation not enabled
+      if (null === $response = $event->getResponse()) {
+        $this->authenticateUser($user, $successResponse);
       }
-
-      return $response;
+      else
+      {
+        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+      }
+      return $successResponse;
     }else
     {
       //investigate on failure...
-      $userManager = $this->container->get('fos_user.user_manager');
       if(null != $userManager->findUserByUsername($form->getData()->getUsername()))
       {
         throw new \Exception('Register_username_in_use_error');

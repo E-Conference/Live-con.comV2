@@ -1,4 +1,4 @@
-<form name="changePwdForm" class="form" role="form" ng-submit="changePwdAction(changePwd)" novalidate="">
+<form ng-controller="changePwdCtrl" name="changePwdForm" class="form" role="form" ng-submit="changePwdAction(changePwd)" novalidate="">
     <div ng-show="!currentUser.random_pwd">
         <div class="form-group">
             <label for="inputPassword">Current password</label>

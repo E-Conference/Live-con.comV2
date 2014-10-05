@@ -33,13 +33,32 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
     $this->translator = $translator;
     $this->jms_serializer = $jms_serializer;
   }
+
+  /**
+   * if html asked :
+   *  Redirect to the front end at :
+   *    - the profile page in case the password hasn't been set yet
+   *    - otherwise to the homepage
+   * else:
+   *  return the json user
+   *
+   * @param Request $request
+   * @param TokenInterface $token
+   * @return RedirectResponse|Response
+   */
   public function onAuthenticationSuccess(Request $request, TokenInterface $token) {
+    /** @var \fibe\SecurityBundle\Entity\User $user */
     $user = $token->getUser();
     $user->setLastLogin(new \DateTime());
     $this->userManager->updateUser($user);
     if('html' == $request->getRequestFormat())
     {
-      $response = new RedirectResponse($this->router->generate('fibe_frontend_front_index'));
+      $redirectUrl = $this->router->generate('fibe_frontend_front_index');
+      if($user->isRandomPwd())
+      {
+        $redirectUrl .= '#/profile';
+      }
+      $response = new RedirectResponse($redirectUrl);
     }else
     {
       $response = new Response($this->jms_serializer->serialize( $user, 'json'));
