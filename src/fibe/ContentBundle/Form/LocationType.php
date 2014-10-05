@@ -24,6 +24,7 @@ class LocationType extends AbstractType
       ->add('description')
       ->add('latitude')
       ->add('longitude')
+      ->add('accesibility')
       ->add('equipments', 'entity', array(
         'class' => 'fibeContentBundle:Equipment',
         'required' => 'false',
