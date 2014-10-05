@@ -98,7 +98,7 @@ abstract class VEvent
    *     joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
    *     inverseJoinColumns={@ORM\JoinColumn(name="location_id", referencedColumnName="id")})
    */
-  private $locations;
+  protected $locations;
 
   /**
    * description

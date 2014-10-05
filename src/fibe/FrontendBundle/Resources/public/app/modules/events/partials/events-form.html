@@ -9,7 +9,7 @@
     <label for="inputPriority">Priority</label>
      <input type="radio" class="form-control" id="inputPriority" placeholder="Priority" ng-model="event.priority" ng-value="{{event.priority}}" value="1">
    </div>
-  
+
     <div>
         <label for="inputDescription">Description</label>
         <input type="text " class="form-control" id="inputDescription" placeholder="{{event.description}}" ng-model="event.description">
@@ -19,14 +19,14 @@
         <input type="text " class="form-control" id="inputUrl" placeholder="{{event.url}}" ng-model="event.url">
     </div>
     <div get-or-create="topic" parent-entity="event"></div>
-    <div get-or-create="category" parent-entity="event" new-politic="modal"></div>
+    <div get-or-create="category" parent-entity="event" new-politic="modal" singlechoice="true"></div>
     <div get-or-create="paper" parent-entity="event"  new-politic="modal"></div>
 </div>
-<h2>Time & localization</h2>
+<!--<h2>Time & localization</h2>-->
 
 <div class="well">
     <div>
-        <label for="inputEnd">End at</label>
+        <label for="inputEnd">Start at</label>
 
         <div class="dropdown">
             <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0)">

@@ -230,7 +230,7 @@ angular.module('rolesApp').controller('rolesListCtrl', ['$scope', 'GLOBAL_CONFIG
 angular.module('rolesApp').controller('rolesNewCtrl', [ '$scope', '$rootScope', '$location', 'rolesFact', function ($scope, $rootScope, $location, rolesFact)
 {
     $scope.role = new rolesFact;
-    $scope.role.mainEvent = $rootScope.currentConference;
+    $scope.role.mainEvent = $rootScope.currentConference.id;
 
     var error = function (response, args)
     {

@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class LocationType
- *
  * @package fibe\ContentBundle\Form
  */
 class LocationType extends AbstractType

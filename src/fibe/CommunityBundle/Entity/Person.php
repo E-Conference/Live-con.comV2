@@ -50,7 +50,6 @@ class Person extends AdditionalInformations
 
   /**
    * familyName
-   * @Assert\NotBlank(message ="Please give a family name")
    * @ORM\Column(type="string", nullable=true,  name="familyName")
    * @Expose
    * @SerializedName("familyName")
@@ -85,7 +84,7 @@ class Person extends AdditionalInformations
   /**
    * Paper
    * Paper made by this person
-   *
+   * @Expose
    * @ORM\ManyToMany(targetEntity="fibe\ContentBundle\Entity\Paper",  mappedBy="authors", cascade={"remove","persist","merge"})
    */
   protected $papers;
@@ -97,7 +96,7 @@ class Person extends AdditionalInformations
    * @ORM\JoinTable(name="member",
    *     joinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id", onDelete="Cascade")})
    *     inverseJoinColumns={@ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="Cascade")},
-   *
+   * @Expose
    * @MaxDepth(1)
    */
   private $organizations;
