@@ -19,4 +19,11 @@
     <button ng-disabled="signinForm.$invalid" type="submit" class="btn btn-default">Sign in</button>
     <span><a href="#/forgotten_password">{{ 'Forgotten_password' | translate }}</a></span>
   </div>
+  <a ng-repeat="socialnetwork in GLOBAL_CONFIG.api.urls.socialnetworks track by $index"
+     ng-if="socialnetwork.can_register"
+     class="btn btn-social btn-{{ socialnetwork.name }}{{ socialnetwork.name == 'google' ? '-plus' : '' }}"
+     href="{{ socialnetwork.url }}">
+  <!--ng-click="socialSignInAction(socialnetwork.url)">-->
+       <i class="fa fa-{{ socialnetwork.name }}{{ socialnetwork.name == 'google' ? '-plus' : '' }}"></i> Sign in with {{ socialnetwork.name | titleize }}
+  </a>
 </form>

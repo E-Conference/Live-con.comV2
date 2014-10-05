@@ -20,22 +20,7 @@ class TopicType extends AbstractType
   {
     $builder
       ->add('id')
-      ->add('label')
-      ->add('papers', 'entity', array(
-        'class' => 'fibeContentBundle:Paper',
-        'required' => 'false',
-        'multiple' => true,
-      ))
-      ->add('papers', 'entity', array(
-        'class' => 'fibeContentBundle:Paper',
-        'required' => 'false',
-        'multiple' => true,
-      ))
-      ->add('vEvent', 'entity', array(
-        'class' => 'fibeEventBundle:VEvent',
-        'required' => 'false',
-        'multiple' => true,
-      ));
+      ->add('label');
   }
 
   /**

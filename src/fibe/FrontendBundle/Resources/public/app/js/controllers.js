@@ -184,7 +184,7 @@ sympozerControllers.controller('dialogNewEntityCtrl', [ '$scope', '$rootScope', 
     //validate form from a button placed outside
     $scope.$modalSuccess  = function()
     {
-      //change this value asynchoneously as said in https://docs.angularjs.org/error/$rootScope/inprog
+      //modify dom asynchoneously : in https://docs.angularjs.org/error/$rootScope/inprog
       $timeout(function() {
         $("#" + $scope.formId + " > input[type='submit']").click();
       }, 0);

@@ -147,6 +147,18 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
 
             scope.parentField = parentField = !singleChoice ? getPlural(parentField) : parentField;
 
+            if(!scope.resource[parentField])
+            {
+                if(!singleChoice)
+                {
+                    scope.resource[parentField] = [];
+                }
+                else
+                {
+                    scope.resource[parentField] = {};
+                }
+            }
+
             scope.keyup = function($event)
             {
                 if($event.target.value == scope.addedEntity[uniqField])
@@ -169,8 +181,9 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
                     for (var i = 0; i < data.length; i++)
                     {
 
-                        if(containsEntity(scope.resource[parentField],data[i]))
-                        {
+                        if(singleChoice && containsEntity([scope.resource[parentField]],data[i])) {
+                            continue;
+                        }else if(containsEntity(scope.resource[parentField],data[i])) {
                             continue;
                         }
 
@@ -191,11 +204,6 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
                 if(!$model[uniqField])
                 {
                     return;
-                }
-
-                if(!scope.resource[parentField] && !singleChoice)
-                {
-                    scope.resource[parentField] = [];
                 }
 
                 var newEntity = new entityFact($model);
@@ -244,7 +252,11 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
                                 success: {label: 'Ok', fn: function ()
                                 {
                                     console.log("validated", newEntity);
-                                    scope.resource[parentField].push(newEntity);
+                                    if(singleChoice) {
+                                        scope.resource[parentField]= newEntity;
+                                    }else{
+                                        scope.resource[parentField].push(newEntity);
+                                    }
                                 }},
                                 cancel: {label: 'Cancel', fn: function ()
                                 {

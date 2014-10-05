@@ -334,3 +334,17 @@ input.ng-dirty.ng-valid
     overflow: scroll;
     height: 100%;
 }
+
+
+
+/*************** SOCIAL BUTTON*****************/
+
+.btn.btn-social{
+    border-radius: 6px !important;
+    margin: 0.5em;
+}
+
+.modal-dialog{
+    overflow: scroll;
+    height: 100%;
+}

@@ -38,8 +38,7 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
     $user = $token->getUser();
     $user->setLastLogin(new \DateTime());
     $this->userManager->updateUser($user);
-
-    $response = new Response($this->jms_serializer->serialize( $user, $request->getRequestFormat()));
+    $response = new Response($this->jms_serializer->serialize( $user, 'json'));
     $response->headers->set('Content-Type', 'application/json');
     return $response;
   }

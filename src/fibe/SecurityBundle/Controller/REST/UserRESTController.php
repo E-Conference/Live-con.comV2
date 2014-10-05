@@ -186,7 +186,6 @@ class UserRESTController extends Controller
       $user->setConfirmationToken($tokenGenerator->generateToken());
     }
 
-    $this->container->get('session')->set(ResettingController::SESSION_EMAIL, $this->getObfuscatedEmail($user));
     $this->container->get('fos_user.mailer')->sendResettingEmailMessage($user);
     $user->setPasswordRequestedAt(new \DateTime());
     $this->container->get('fos_user.user_manager')->updateUser($user);
@@ -222,7 +221,7 @@ class UserRESTController extends Controller
     }
 
     if (!$user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
-      throw new Exception('Resetpwd_pwdresetexpired_error');
+      throw new \Exception('Resetpwd_pwdresetexpired_error');
     }
 
     $userManager = $this->container->get('fos_user.user_manager');
@@ -263,24 +262,5 @@ class UserRESTController extends Controller
       // We simply do not authenticate users which do not pass the user
       // checker (not enabled, expired, etc.).
     }
-  }
-
-  /**
-   * Get the truncated email displayed when requesting the resetting.
-   *
-   * The default implementation only keeps the part following @ in the address.
-   *
-   * @param \FOS\UserBundle\Model\UserInterface $user
-   *
-   * @return string
-   */
-  protected function getObfuscatedEmail(UserInterface $user)
-  {
-    $email = $user->getEmail();
-    if (false !== $pos = strpos($email, '@')) {
-      $email = '...' . substr($email, $pos);
-    }
-
-    return $email;
   }
 }

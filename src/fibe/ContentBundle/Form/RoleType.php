@@ -27,25 +27,21 @@ class RoleType extends AbstractType
       ->add('label')
       ->add('person', 'entity', array(
         'class' => 'fibeCommunityBundle:Person',
-        'property' => 'id',
         'required' => 'false',
         'multiple' => false,
       ))
       ->add('event', 'entity', array(
         'class' => 'fibeEventBundle:Event',
-        'property' => 'id',
         'required' => 'false',
         'multiple' => false,
       ))
       ->add('roleLabel', 'entity', array(
         'class' => 'fibeContentBundle:RoleLabel',
-        'property' => 'id',
         'required' => 'false',
         'multiple' => false,
       ))
       ->add('mainEvent', 'entity', array(
         'class' => 'fibeEventBundle:MainEvent',
-        'property' => 'id',
         'required' => 'false',
         'multiple' => false,
       ));

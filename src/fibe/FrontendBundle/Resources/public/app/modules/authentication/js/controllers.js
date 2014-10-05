@@ -7,8 +7,8 @@
  *
  * @type {controller}
  */
-angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG', 'usersFact', '$location',
-  function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, usersFact, $location)
+angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG', 'usersFact', '$location', '$http',
+  function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, usersFact, $location, $http)
   {
 
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
@@ -31,6 +31,26 @@ angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootSc
     {
       $scope.busy = true;
       usersFact.signin({}, {"_username": $scope.user.username, "_password": $scope.user.password}, success, error);
+    }
+
+    $scope.socialSignInAction = function (url)
+    {
+      $scope.busy = true;
+      $http({method: 'GET', url: url,headers:{
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With'
+      }}).
+        success(function(data, status, headers, config) {
+          debugger;
+          // this callback will be called asynchronously
+          // when the response is available
+        }).
+        error(function(data, status, headers, config) {
+          debugger;
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
     }
   }]);
 
