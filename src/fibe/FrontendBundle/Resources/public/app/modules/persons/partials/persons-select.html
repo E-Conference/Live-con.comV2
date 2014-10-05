@@ -18,13 +18,18 @@
   <div ng-if="!singleChoice">
     <div ng-repeat="entity in resource[parentField]  track by $index">
       <div class="col-sm-3">
-        <div class="panel panel-primary" style="margin-top: 10px;">
-          <div class="panel-heading clearfix">
-            <div class="panel-title pull-left text-center">{{ entity.label }}</div>
-            <a ng-click="deleteEntity($index,entity)" class="btn btn-danger btn-xs fa fa-times pull-right"></a>
+        <div class="panel panel-success" style="margin-top: 10px;">
+          <div class="panel-heading perso clearfix text-center">
+            <h3 class="panel-title pull-left text-center">{{ entity.label }}</h3>
+            <div class="btn-group pull-right">
+            <a ng-click="deleteEntity($index,entity)" class="btn btn-default btn-xs fa fa-chevron-up"></a>
+            <a ng-click="deleteEntity($index,entity)" class="btn btn-danger btn-xs fa fa-times"></a>
+            </div>
           </div>
           <div class="panel-body">
             <img class="img-circle" src="http://blog.getjobber.com/wp-content/uploads/2013/01/Users-Image.png" alt="{{ entity.label }} picture" style="width: 50px; height: 50px;">
+            <a href="mailto:{{ entity.email }}">{{ entity.email }}</a>
+
             {{ entity.website }}
 
             {{ entity.country }}
