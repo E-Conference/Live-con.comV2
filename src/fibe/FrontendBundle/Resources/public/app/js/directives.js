@@ -126,6 +126,7 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
                 singleChoice            = attrs.singlechoice || null,
                 parentField             = attrs.parentField || entityLbl,
                 childField              = attrs.childField || null,
+                newField                = attrs.newField || null,
 
                 newPolitic              = attrs.newPolitic || "create",
 
