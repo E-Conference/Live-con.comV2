@@ -107,7 +107,7 @@ angular.module('sympozerApp').directive('infiniteScroll', [
  *    @param uniq-field           : (default='label') a unique field identifying the object
  *                                            (mustn't be the id because it's not known til persisted server-side)
  *    @param parent-field         : (default=%entity%) the key of the parent entity refering to the entity
- *    @param child-field         : (default=%entity%) the key of the child entity refering to the parent entity
+ *    @param child-field         : (default=%entity%) the name of the child entity relation to the parent entity
  *    @param new-politic          : (default='create') none|modal|create the politic when an unknown entity is added
  */
 angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'createDialog', '$injector', function(GLOBAL_CONFIG, createDialogService, $injector) {
@@ -210,7 +210,8 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
                 }
 
                 if(childField) {
-                    $model[childField] = scope.$parent[parentEntityLbl] || null;
+                    $model[childField] = new Array();
+                    $model[childField].push(scope.$parent[parentEntityLbl]);
                 }
 
                 var newEntity = new entityFact($model);
