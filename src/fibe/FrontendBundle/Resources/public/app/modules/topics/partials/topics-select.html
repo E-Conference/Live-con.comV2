@@ -6,7 +6,7 @@
   </span>
 </div>
 
-<ui-select ng-model="addedEntity" on-select="change($model)" ng-keyup="keyup($event)" theme="select2" style="width: 100%;">
+<ui-select ng-model="addedEntity" on-select="change($model)" ng-keyup="keyup($event)" theme="select2" style="width: 100%;" class="form-group">
     <ui-select-match >Add a topics...</ui-select-match>
     <ui-select-choices repeat="entity in entities">
     <!--<ui-select-choices repeat="entity.email as entity in people | propsFilter: {label: $select.search, age: $select.search}">-->

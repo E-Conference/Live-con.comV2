@@ -16,11 +16,9 @@ class FOSUBUserProvider extends BaseFOSUBUserProvider
 {
 
     protected $session;
-    protected $securityContext;
     protected $mailer;
+    protected $userService;
 
-    protected $serviceName;
-    protected $response;
 
   /**
    * Constructor.
@@ -30,11 +28,12 @@ class FOSUBUserProvider extends BaseFOSUBUserProvider
    * @param \Symfony\Component\HttpFoundation\Session\Session $session
    * @param $mailer
    */
-    public function __construct(UserManagerInterface $userManager, array $properties, Session $session,$mailer)
+    public function __construct(UserManagerInterface $userManager, array $properties, Session $session,$mailer,UserService $userService)
     {
       parent::__construct($userManager, $properties); 
       $this->session = $session;
       $this->mailer = $mailer;
+      $this->userService = $userService;
     }
  
     /**
@@ -113,6 +112,7 @@ class FOSUBUserProvider extends BaseFOSUBUserProvider
       if($this->userManager->findUserByEmail($mail) instanceof UserInterface)
         throw new ORMException("Duplicated e-mail address constraint violation");
 
+      /** @var User $user */
       $user = $this->userManager->createUser();
       
       $setter = 'set'.ucfirst($serviceName);
@@ -123,15 +123,17 @@ class FOSUBUserProvider extends BaseFOSUBUserProvider
 
 
       $user->setUsername($mail);
-      $user->setPlainPassword(substr(base_convert(bin2hex(hash('sha256', uniqid(mt_rand(), true), true)), 16, 36), 0, 12)); 
+      $user->setEmail($mail);
+      $user->setPlainPassword(substr(base_convert(bin2hex(hash('sha256', uniqid(mt_rand(), true), true)), 16, 36), 0, 12));
+      $user->setRandomPwd(true);
       $user->setEnabled(true);
 
+      $this->userService->post($user);
       $this->enrichUserDatas($user,$serviceName,$response);
-
-      $this->mailer->sendRandomPwdEmailMessage($user,$serviceName);
       $this->userManager->updateUser($user);
-      $this->session->getFlashBag()->add('success', 'Welcome <b>'.$mail.'</b><br/>'
-                                          .'<br/>An email has been sent to you with a summary!');
+      $this->mailer->sendRandomPwdEmailMessage($user,$serviceName);
+
+
       return $user;
     } 
 
@@ -151,8 +153,8 @@ class FOSUBUserProvider extends BaseFOSUBUserProvider
 
       if($serviceName == "twitter"){
         $user->setTwitterScreenName($response->getNickName());
-
       }
+      $this->userService->put($user);
     }
 
 

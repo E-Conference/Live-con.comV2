@@ -14,6 +14,8 @@ class FrontController extends Controller
    */
   public function indexAction()
   {
-    return array();
+    return array(
+      'user' => $this->get('jms_serializer')->serialize( $this->getUser(), 'json')
+    );
   }
 }

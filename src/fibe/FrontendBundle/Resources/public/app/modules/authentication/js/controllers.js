@@ -22,8 +22,8 @@ angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootSc
     {
       $scope.busy = false;
       $scope.user = response;
-      $rootScope.currentUser = response;
-      localStorage.setItem('currentUser', JSON.stringify(response));
+        $rootScope.currentUser = response;
+        localStorage.setItem('currentUser', JSON.stringify(response));
       $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Login_success', type: 'success'});
       $location.path('/');
     }
@@ -31,26 +31,6 @@ angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootSc
     {
       $scope.busy = true;
       usersFact.signin({}, {"_username": $scope.user.username, "_password": $scope.user.password}, success, error);
-    }
-
-    $scope.socialSignInAction = function (url)
-    {
-      $scope.busy = true;
-      $http({method: 'GET', url: url,headers:{
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With'
-      }}).
-        success(function(data, status, headers, config) {
-          debugger;
-          // this callback will be called asynchronously
-          // when the response is available
-        }).
-        error(function(data, status, headers, config) {
-          debugger;
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-        });
     }
   }]);
 
@@ -90,19 +70,30 @@ angular.module('authenticationApp').controller('signupCtrl', ['$scope', '$rootSc
  *
  * @type {controller}
  */
-angular.module('authenticationApp').controller('signoutCtrl', ['$scope', '$rootScope', '$window', '$routeParams', 'GLOBAL_CONFIG', '$cookieStore', '$location',
-  function ($scope, $rootScope, $window, $routeParams, GLOBAL_CONFIG, $cookieStore, $location)
+angular.module('authenticationApp').controller('signoutCtrl', ['$scope', '$rootScope', '$window', '$routeParams', 'GLOBAL_CONFIG', '$cookieStore', '$location', 'usersFact',
+  function ($scope, $rootScope, $window, $routeParams, GLOBAL_CONFIG, $cookieStore, $location, usersFact)
   {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
     $scope.$on('globalHttpInterceptor:401', $rootScope.logout);
-
-    $rootScope.signout = function ()
+    var error = function (response, args)
     {
+      $scope.busy = false;
+      $scope.$root.$broadcast('AlertCtrl:addAlert', {code: response.data.error, type: 'danger'});
+    }
+
+    var success = function (response, args)
+    {
+      $scope.busy = false;
       localStorage.removeItem('currentUser');
       $rootScope.currentUser = {};
       $window.history.back();
       $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'signout_success', type: 'success'});
+    }
+
+    $rootScope.signout = function ()
+    {
+      usersFact.signout({}, success, error);
     }
   }]);
 

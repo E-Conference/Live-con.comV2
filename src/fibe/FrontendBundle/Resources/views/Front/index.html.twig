@@ -116,8 +116,11 @@
 
 
   <!-- <script src="{{ asset('bundles/frontend/app/js/animations.js') }}"></script> -->
-
-
+  {% if app.user %}
+    <script>
+      localStorage.setItem('currentUser', {{ user | json_encode | raw() }});
+    </script>
+  {% endif %}
 
   <!-- basic client app context definition -->
   <script>
@@ -138,6 +141,7 @@
           get_categories: "{{ path('schedule_categories_post') }}",
           get_conferences: "{{ path('schedule_conferences_post') }}",
           login: "{{ path('login_check', {_format: 'json'}) }}",
+          logout: "{{ path('logout') }}",
           registration: "{{ path('security_signup') }}",
           confirm: "{{ path('security_confirm') }}",
           changepwd: "{{ path('security_changepwd') }}",
@@ -147,7 +151,10 @@
             {% for owner in hwi_oauth_resource_owners() %}{% if loop.first %}{% else %},{% endif %}
             {
               name : "{{ owner }}",
-              url : "{{ hwi_oauth_login_url(owner) }}",
+              urls: {
+                login: "{{ hwi_oauth_login_url(owner) }}",
+                enrich: "{{ path('enrich_account', { 'socialService': owner }) }}"
+              },
               {# can't register with twitter as long as they chose to not return user's mail :( #}
               can_register: {% if owner == 'twitter' %}false{% else %}true{% endif %}
             }

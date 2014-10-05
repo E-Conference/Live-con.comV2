@@ -36,10 +36,11 @@ services:
                 linkedin:       linkedin_id
             - @session
             - @fibe_security.mailer
+            - @fibe.UserService
 
     fibe.UserService:
         class:  fibe\SecurityBundle\Services\UserService
-        arguments: ["@doctrine.orm.entity_manager","@security.context"]
+        arguments: ["@doctrine.orm.entity_manager"]
 
     fibe_user.registration.form.type:
         class: fibe\SecurityBundle\Form\RegistrationFormType

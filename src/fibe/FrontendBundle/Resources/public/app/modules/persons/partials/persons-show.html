@@ -1,10 +1,8 @@
 <div ng-include="GLOBAL_CONFIG.app.modules.persons.urls.partials+'persons-actions.html'" ng-controller="personsMainCtrl"></div>
 <div class="well">
-  <img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="http://blog.getjobber.com/wp-content/uploads/2013/01/Users-Image.png" style="width: 70px; height: 70px;"/>
-  <a ng-if="currentUser.id === person.id" class="btn btn-info" href="#persons/edit/{{currentUser.id}}" role="button">
-    <i class="fa fa-edit fa-1x"></i> Edit my profile
-  </a>
-  <a ng-if="currentUser.id === person.id" class="btn btn-info" href="#profile" role="button">
+  <img class="img-circle" data-src="holder.js/140x140" alt="140x140"
+       src="{{ person.img ? person.img : 'http://blog.getjobber.com/wp-content/uploads/2013/01/Users-Image.png' }}" style="width: 70px; height: 70px;"/>
+  <a ng-if="currentUser.person.id === person.id" class="btn btn-info" href="#profile" role="button">
     <i class="fa fa-edit fa-1x"></i> Edit my account
   </a>
 

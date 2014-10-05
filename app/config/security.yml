@@ -31,10 +31,6 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        main_app:
-            pattern:   ^/$
-            anonymous: true # On autorise les anonymes sur ce pare-feu
-
         main_login:
             pattern:   /login$
             anonymous: true # On autorise les anonymes sur ce pare-feu

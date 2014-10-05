@@ -4,9 +4,9 @@ namespace fibe\CommunityBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use fibe\CommunityBundle\Entity\Person;
+use fibe\RestBundle\Services\AbstractBusinessService;
 use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
  * Class MainEventService
  * @package fibe\EventBundle\Services
  */
-class PersonService
+class PersonService extends AbstractBusinessService
 {
 
   protected $entityManager;
@@ -62,6 +62,7 @@ class PersonService
    * @param Person $person
    *
    * @throws \Doctrine\DBAL\DBALException when email or username is already in use
+   * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
    */
   public function put(Person $person)
   {
@@ -74,7 +75,7 @@ class PersonService
     }
     else
     {
-      if ($oldMail = $this->isDirty($person, 'email'))
+      if ($oldMail = $this->isDirty($this->entityManager, $person, 'email'))
       {
         $user->setEmail($person->getEmail());
         $this->userManager->updateUser($user);
@@ -92,6 +93,7 @@ class PersonService
    * @param Person $person
    *
    * @throws \Doctrine\DBAL\DBALException when email or username is already in use
+   * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
    */
   public function delete(Person $person)
   {
@@ -103,20 +105,5 @@ class PersonService
     $user->setPerson(null);
     $person->setUser(null);
     $this->userManager->deleteUser($user);
-  }
-
-  /**
-   * check if an attribute has been changed, if so, return the old value
-   * @param $entity
-   * @param $attribute
-   * @return bool
-   */
-  protected function isDirty($entity, $attribute)
-  {
-    $uow = $this->entityManager->getUnitOfWork();
-    $metaData = $this->entityManager->getClassMetadata(get_class($entity));
-    $uow->computeChangeSet($metaData, $entity);
-    $changeset = $uow->getEntityChangeSet($entity);
-    return isset($changeset[$attribute]) ? $changeset[$attribute][0] : false;
   }
 }

@@ -32,14 +32,19 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
     $this->userManager = $userManager;
     $this->translator = $translator;
     $this->jms_serializer = $jms_serializer;
-
   }
   public function onAuthenticationSuccess(Request $request, TokenInterface $token) {
     $user = $token->getUser();
     $user->setLastLogin(new \DateTime());
     $this->userManager->updateUser($user);
-    $response = new Response($this->jms_serializer->serialize( $user, 'json'));
-    $response->headers->set('Content-Type', 'application/json');
+    if('html' == $request->getRequestFormat())
+    {
+      $response = new RedirectResponse($this->router->generate('fibe_frontend_front_index'));
+    }else
+    {
+      $response = new Response($this->jms_serializer->serialize( $user, 'json'));
+      $response->headers->set('Content-Type', 'application/json');
+    }
     return $response;
   }
   public function onAuthenticationFailure(Request $request, AuthenticationException $exception) {
