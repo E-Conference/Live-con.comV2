@@ -1,5 +1,5 @@
 
-<label>Category</label>
+<label>{{ !singleChoice ? "Categories" : "Category" }}</label>
 <div>
     <div ng-if="!singleChoice">
     <span ng-repeat="entity in resource[parentField]  track by $index" class="tag label label-info">

@@ -104,11 +104,14 @@ angular.module('sympozerApp').directive('infiniteScroll', [
  *
  *    @param get-or-create        : the name of the entity that belongs to its parent
  *    @param parent-entity        : the name of the parent entity that owns entities
+ *
  *    @param uniq-field           : (default='label') a unique field identifying the object
  *                                            (mustn't be the id because it's not known til persisted server-side)
- *    @param parent-field         : (default=%entity%) the key of the parent entity refering to the entity
- *    @param child-field         : (default=%entity%) the name of the child entity relation to the parent entity
  *    @param new-politic          : (default='create') none|modal|create the politic when an unknown entity is added
+ *    @param parent-field         : (default=%entity%) the key of the parent entity refering to the entity
+ *    @param child-field          : (default=%entity%) the name of the child entity relation to the parent entity
+ *    @param single-choice        : (default=false) Does the parent own only one child ?
+ *    @param single-choice-child  : (default=false) Does the child own only one parent ?
  */
 angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'createDialog', '$injector', function(GLOBAL_CONFIG, createDialogService, $injector) {
     return {
@@ -120,39 +123,39 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
             if(attrs.newPolitic && ["none","modal","create"].indexOf(attrs.newPolitic)<0)
                 return console.error('wrong value for parameter "new-politic" in "getOrCreate" directive (see doc above)');
 
-            var entityLbl               = attrs.getOrCreate,
+            var uniqField               = attrs.uniqField || 'label',
+                childEntityLbl          = attrs.getOrCreate,
                 parentEntityLbl         = attrs.parentEntity,
-                uniqField               = attrs.uniqField || 'label',
-                singleChoice            = attrs.singlechoice,
-                parentField             = attrs.parentField || entityLbl,
-                childField              = attrs.childField,
+                singleChoice            = attrs.singleChoice,
                 singleChoiceChild       = attrs.singleChoiceChild,
+                parentField             = attrs.parentField || (!singleChoice ? getPlural(childEntityLbl) : childEntityLbl),
+                childField              = attrs.childField || (!singleChoiceChild ? getPlural(parentEntityLbl) : parentEntityLbl),
 
                 newPolitic              = attrs.newPolitic || "create",
 
-                entitiesLbl             = getPlural(entityLbl),
-                entityCamelCaseLbl      = entityLbl.charAt(0).toUpperCase() + entityLbl.slice(1),
-                entityFact              = $injector.get(entitiesLbl + 'Fact'),
-                formDialogTemplateUrl   = GLOBAL_CONFIG.app.modules[entitiesLbl].urls.partials + entitiesLbl + '-form.html',
+                childEntitiesLbl        = getPlural(childEntityLbl),
+                childEntityLblCamelCase = childEntityLbl.charAt(0).toUpperCase() + childEntityLbl.slice(1),
+                entityFact              = $injector.get(childEntitiesLbl + 'Fact'),
+                formDialogTemplateUrl   = GLOBAL_CONFIG.app.modules[childEntitiesLbl].urls.partials + childEntitiesLbl + '-form.html',
 
-                limit                   = 10
+                limit                   = 10,
+                resetChoices            = true
                 ;
 
-            scope.templateUrl = GLOBAL_CONFIG.app.modules[entitiesLbl].urls.partials + entitiesLbl + '-select.html';
+            scope.templateUrl = GLOBAL_CONFIG.app.modules[childEntitiesLbl].urls.partials + childEntitiesLbl + '-select.html';
             //the entity binded with ng-model to the input
             scope.addedEntity = {};
             scope.addedEntity[uniqField] = "";
             //available entities
             scope.entities = [];
             scope.singleChoice = singleChoice;
-            scope.singleChoiceChild = singleChoiceChild;
-            //resolve the parent resource given by attrs.entity
+            scope.parentField = parentField;
+
+            //resolve the parent resource given by attrs.entity. The second test is for an embedded modal
             scope.resource = scope.$parent[parentEntityLbl] || scope.$parent.$parent.$parent.$entity;
             if(!scope.resource)
                 return console.error('Could not have resolved scope of entity' + parentEntityLbl);
 
-
-            scope.parentField = parentField = !singleChoice ? getPlural(parentField) : parentField;
 
             if(!scope.resource[parentField])
             {
@@ -166,6 +169,10 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
                 }
             }
 
+            /**
+             * fired when the keyboard is hit
+             * @param $event
+             */
             scope.keyup = function($event)
             {
                 if($event.target.value == scope.addedEntity[uniqField])
@@ -173,7 +180,7 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
                     return;
                 }
 
-                scope.addedEntity[uniqField] = $event.target.value;
+                var query = scope.addedEntity[uniqField] = $event.target.value;
 
                 if($event.target.value === "")
                 {
@@ -181,31 +188,30 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
                 }
 
                 scope.busy = true;
-                entityFact.all({limit: limit, query: scope.addedEntity[uniqField]}, function (data)
-                {
-                    scope.entities = [];
+                resetChoices = true;
+                //closure to copy by value
+                (function(query) {
+                  entityFact.all({limit: limit, query: query}, function(data){
+                    addChoices(data,query);
+                  });
+                })(query);
 
-                    for (var i = 0; i < data.length; i++)
-                    {
+                (function(query) {
+                  console.log("get by conference");
+                  if(entityFact.allByConference){
+                    entityFact.allByConference({limit: limit, query: query}, function(data){
+                      addChoices(data,query);
+                    });
+                  }
+                })(query);
 
-                        if(singleChoice && containsEntity([scope.resource[parentField]],data[i])) {
-                            continue;
-                        }else if(containsEntity(scope.resource[parentField],data[i])) {
-                            continue;
-                        }
-
-                        scope.entities.push(data[i]);
-                    }
-
-                    if(newPolitic !== "none" && !containsEntity(scope.entities,scope.addedEntity) && !containsEntity(scope.resource[parentField],scope.addedEntity))
-                    {
-                        scope.entities.push(scope.addedEntity);
-                    }
-
-                    scope.busy = false;
-                });
             };
 
+          /**
+           * fired when a choice is selected
+           * -  auto fill the child's field referring to its parent
+           * @param $model
+           */
             scope.change = function($model)
             {
                 if(!$model[uniqField])
@@ -213,27 +219,10 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
                     return;
                 }
 
-                if(childField) {
-                    if(scope.singleChoiceChild){
-                        $model[childField] = scope.resource;
-                    }else{
-                        $model[childField] = [];
-                        $model[childField].push(scope.resource);
-                    }
-
-                }
-
                 var newEntity = new entityFact($model);
                 if ($model.id)
                 {
-
-                    //Check if an array or object is to be added according to the singleChoice parameter
-                    if(!singleChoice) {
-                        scope.resource[parentField].push(newEntity);
-                    }else{
-                        scope.resource[parentField]= newEntity;
-                    }
-
+                    addChildEntity(newEntity);
                 } else
                 {
                     switch (newPolitic)
@@ -241,57 +230,35 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
                         case "create":
                             //Creation of the new entity
                             scope.busy = true;
+                            createChildEntity(newEntity);
 
-                            newEntity.$create({}, function(newEntity){
-                                if(singleChoice) {
-                                    scope.resource[parentField]= newEntity;
-                                }else{
-                                    scope.resource[parentField].push(newEntity);
-                                }
-                            }, function(error){
-                                scope.busy = false;
-                                console.log(error);
-                            });
-
-                            break;
+                        break;
 
                         case "modal":
+
+                            if(singleChoiceChild){
+                                $model[childField] = scope.resource;
+                            }else{
+                                $model[childField] = [];
+                                $model[childField].push(scope.resource);
+                            }
                             var successFn = function()
                             {
-                                var success = function (response, args)
-                                {
-                                    scope.busy = false;
-                                    scope.$root.$broadcast('AlertCtrl:addAlert', {code: entityLbl + ' created', type: 'success'});
-
-                                    console.log("validated", newEntity);
-                                    if(singleChoice) {
-                                        scope.resource[parentField]= newEntity;
-                                    }else{
-                                        scope.resource[parentField].push(newEntity);
-                                    }
-                                };
-
-                                var error = function (response, args)
-                                {
-                                    scope.busy = false;
-                                    scope.$root.$broadcast('AlertCtrl:addAlert', {code: 'the ' + entityLbl + ' has not been created', type: 'danger'});
-                                };
-
-                                newEntity.$create({}, success, error);
+                                createChildEntity(newEntity);
                             };
 
                             var dialogCtrlArgs = {
                                 scope : {
-                                  $entityLbl: entityLbl,
+                                  $entityLbl: childEntityLbl,
                                   formId: scope.$entityLbl + "-form",
                                   $entity: newEntity,
                                 },
                                 formDialogTemplateUrl: formDialogTemplateUrl
                             };
-                            dialogCtrlArgs.scope[entityLbl] = newEntity;
+                            dialogCtrlArgs.scope[childEntityLbl] = newEntity;
                             var dialogOptions = {
                                 id: 'complexDialog',
-                                title: entityCamelCaseLbl + ' creation',
+                                title: childEntityLblCamelCase + ' creation',
                                 backdrop: true,
                                 controller: 'genericDialogCtrl',
                                 success: {label: 'Ok', fn: successFn},
@@ -311,35 +278,123 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
 
             scope.deleteEntity = function(index, entity)
             {
+              if(!singleChoice)
+              {
                 scope.resource[parentField].splice(index, 1);
+              }
+              else
+              {
+                scope.resource[parentField] = {};
+              }
             };
+
+          /**
+           * make the request to post createdEntity and add a link to it from the parent
+           * @param createdEntity
+           */
+            function createChildEntity(createdEntity)
+            {
+
+              var success = function (createdEntity)
+              {
+                scope.busy = false;
+                scope.$root.$broadcast('AlertCtrl:addAlert', {code: childEntityLbl + ' created', type: 'success'});
+                addChildEntity(createdEntity)
+              };
+
+              var error = function (response, args)
+              {
+                scope.busy = false;
+                scope.$root.$broadcast('AlertCtrl:addAlert', {code: 'the ' + childEntityLbl + ' has not been created', type: 'danger'});
+              };
+
+              createdEntity.$create({}, success, error);
+            }
+
+            function addChildEntity(childEntity)
+            {
+              console.log("validated", childEntity);
+              if(singleChoice) {
+                scope.resource[parentField]= childEntity;
+              }else{
+                scope.resource[parentField].push(childEntity);
+              }
+            }
+
+          /**
+           * add fetch results to the select menu
+           * -  prevent duplicates thanks to uniqField
+           * -  reset select list if resetChoices = true
+           *
+           * @param data  results
+           * @param q     the original query
+           */
+            function addChoices(data,q)
+            {
+                // prevent old request
+                if(q != scope.addedEntity[uniqField])
+                {
+                    return;
+                }
+
+                if(resetChoices)
+                {
+                    scope.entities = [];
+                }
+
+                for (var i = 0; i < data.length; i++)
+                {
+
+                    if(singleChoice && containsEntity([scope.resource[parentField]],data[i])) {
+                        continue;
+                    }else if(containsEntity(scope.resource[parentField],data[i])) {
+                        continue;
+                    }
+
+                    scope.entities.push(data[i]);
+                }
+
+                if(newPolitic !== "none"
+                  && !containsEntity(scope.entities,scope.addedEntity)
+                  && !containsEntity(scope.resource[parentField],scope.addedEntity)
+                  && resetChoices)
+                {
+                  scope.entities.push(scope.addedEntity);
+                }
+
+                resetChoices=false;
+                scope.busy = false;
+            }
 
             function containsEntity(entities,entity)
             {
-
-                for(var i in entities)
+                if(entities instanceof Array)
                 {
-
-                    if(entities[i][uniqField] === entity[uniqField])
+                    for(var i in entities)
                     {
+                      if(entities[i][uniqField] === entity[uniqField])
+                      {
                         return true;
+                      }
                     }
-
+                }else if(entities[uniqField] === entity[uniqField])
+                {
+                    return true;
                 }
 
                 return false;
             }
 
-            function getPlural(entityLbl)
+            function getPlural(childEntityLbl)
             {
 
-                if(entityLbl.slice(-1) === 'y')
+                if(childEntityLbl.slice(-1) === 'y')
                 {
-                    return entityLbl.substring(0,entityLbl.length - 1) + "ies";
+                    return childEntityLbl.substring(0,childEntityLbl.length - 1) + "ies";
                 }
                 else
                 {
-                    return entityLbl + "s";
+                    return childEntityLbl + "s";
                 }
 
             }
@@ -370,8 +425,8 @@ angular.module('sympozerApp').directive('entityListHandler', ['GLOBAL_CONFIG', '
             if(!attrs.entityListHandler)
                 return console.error('missing mandatory field in "entity-list-handler" directive (see doc above)');
 
-            var entityLbl               = attrs.entityListHandler,
-                entityFact              = $injector.get(entityLbl + 'Fact'),
+            var childEntityLbl               = attrs.entityListHandler,
+                entityFact              = $injector.get(childEntityLbl + 'Fact'),
                 offsetConfig            = parseInt(attrs.offset) || -20, 
                 limitConfig             = parseInt(attrs.limit) || 20
                 ;
@@ -443,16 +498,16 @@ angular.module('sympozerApp').directive('entityListHandler', ['GLOBAL_CONFIG', '
                 })
             };
 
-            function getPlural(entityLbl)
+            function getPlural(childEntityLbl)
             {
 
-                if(entityLbl.slice(-1) === 'y')
+                if(childEntityLbl.slice(-1) === 'y')
                 {
-                    return entityLbl.substring(0,entityLbl.length - 1) + "ies";
+                    return childEntityLbl.substring(0,childEntityLbl.length - 1) + "ies";
                 }
                 else
                 {
-                    return entityLbl + "s";
+                    return childEntityLbl + "s";
                 }
 
             }

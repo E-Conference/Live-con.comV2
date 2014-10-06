@@ -13,7 +13,7 @@ abstract class AbstractBusinessService {
 
 
   /**
-   * check if an attribute has been changed, if so, return the old value
+   * check if an attribute has been changed, if so : return the old value
    * @param EntityManagerInterface $em
    * @param mixed $entity
    * @param string $attribute

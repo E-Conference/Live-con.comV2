@@ -36,7 +36,7 @@ class CrudHandler
    * @param null $confId
    * @return array of Entities
    */
-  public function getAll($entityClassName, ParamFetcherInterface $paramFetcher = null, $confId = null)
+  public function getAll($entityClassName, ParamFetcherInterface $paramFetcher, $confId = null)
   {
     $offset = $paramFetcher->get('offset');
 //    $offset = null == $offset ? 0 : $offset;
@@ -96,7 +96,6 @@ class CrudHandler
     );
   }
 
-  //
   public function delete($entityClassName, $id)
   {
     $entity = $this->em->getRepository($entityClassName)->find($id);
