@@ -24,7 +24,7 @@ class PaperRESTController extends FOSRestController
 
     /**
      * Lists all Papers entities filtered by conference.
-     * @Rest\Get("/mainEvents/{confId}/papers", name="schedule_papers_all_by_conference")
+     * @Rest\Get("/mainEvents/{confId}/papers", name="content_papers_all_by_conference")
      * @Rest\View
      * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
      * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")

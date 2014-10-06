@@ -25,7 +25,7 @@ class LocationRESTController extends FOSRestController
 
     /**
      * Lists all Location entities filtered by conference.
-     * @Rest\Get("/mainEvents/{confId}/locations", name="schedule_locations_all_by_conference")
+     * @Rest\Get("/mainEvents/{confId}/locations", name="content_locations_all_by_conference")
      * @Rest\View
      * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
      * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")

@@ -17,14 +17,20 @@ angular.module('locationsApp').controller('locationsMainCtrl', [function ($scope
  *
  * @type {controller}
  */
-angular.module('locationsApp').controller('locationsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'locationsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, locationsFact, $cachedResource)
+angular.module('locationsApp').controller('locationsListCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'locationsFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, locationsFact, $cachedResource)
 {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
     $scope.entities = [];
 
     $scope.fetch = function(filters, success, error){
-        locationsFact.all(filters, success, error);
+        if($routeParams.confId)
+        {
+            filters.confId = $routeParams.confId;
+            locationsFact.allByConference(filters, success, error);
+        }else{
+            locationsFact.all(filters, success, error);
+        }
     }
 
     $scope.reload = function ()
@@ -95,7 +101,7 @@ angular.module('locationsApp').controller('locationsNewCtrl', [ '$scope', '$root
     var success = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'location created', type: 'success'});
-        $location.path('/locations/list');
+        $location.path('/conference/'+$rootScope.currentConference.id+'/locations/list');
     }
 
     $scope.create = function (form)
@@ -151,7 +157,7 @@ angular.module('locationsApp').controller('locationsEditCtrl', [ '$scope', '$roo
     var success = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'location saved', type: 'success'});
-        $location.path('/locations/list');
+        $location.path('/conference/'+$rootScope.currentConference.id+'/locations/list');
     }
 
     $scope.update = function (form)
