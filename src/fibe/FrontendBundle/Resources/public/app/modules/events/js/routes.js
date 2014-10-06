@@ -12,11 +12,11 @@ angular.module('eventsApp')
       $routeProvider
         .when('/conference/:confId/events/list', {
           templateUrl: globalConfig.app.modules.events.urls.partials + 'events-list.html',
-          controller: 'eventsListByConferenceCtrl'
+          controller: 'eventsListCtrl'
         })
         .when('/conference/:confId/events/thumbnail', {
           templateUrl: globalConfig.app.modules.events.urls.partials + 'events-thumbnail.html',
-          controller: 'eventsListByConferenceCtrl'
+          controller: 'eventsListCtrl'
         })
         .when('/conference/:confId/events/new', {
           templateUrl: globalConfig.app.modules.events.urls.partials + 'events-new.html',

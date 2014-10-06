@@ -19,6 +19,7 @@ class AdditionalInformationsRESTController extends FOSRestController
   const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\AdditionalInformationsControl";
 
 
+
   /**
    * Lists all AdditionalInformationsControl entities.
    * @Rest\Get("/additionalInformationsControls")

@@ -19,6 +19,23 @@ class PersonRESTController extends FOSRestController
   const FORM_CLASSNAME = "fibe\\CommunityBundle\\Form\\PersonType";
 
 
+    /**
+     * Lists all Persons entities filtered by conference.
+     * @Rest\Get("/mainEvents/{confId}/persons", name="community_persons_all_by_conference")
+     * @Rest\View
+     * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
+     * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
+     * @Rest\QueryParam(name="query", requirements=".{1,128}", nullable=true, description="the query to search.")
+     * @Rest\QueryParam(name="order", nullable=true, array=true, description="an array of order.")
+     */
+    public function getOrganizationsByConferenceAction(Request $request, ParamFetcherInterface $paramFetcher, $confId)
+    {
+        return $this->get('fibe.rest.crudhandler')->getAll(
+            $this::ENTITY_CLASSNAME,
+            $paramFetcher,
+            $confId
+        );
+    }
   /**
    * Lists all Person entities.
    * @Rest\Get("/persons", name="community_persons_all")

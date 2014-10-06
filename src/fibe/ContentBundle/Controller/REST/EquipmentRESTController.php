@@ -19,6 +19,7 @@ class EquipmentRESTController extends FOSRestController
   const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\EquipmentType";
 
 
+
   /**
    * Lists all Equipment entities.
    * @Rest\Get("/equipments")

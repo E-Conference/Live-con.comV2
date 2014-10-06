@@ -18,7 +18,7 @@ angular.module('eventsApp').controller('eventsMainCtrl', [function ($scope)
  *
  * @type {controller}
  */
-angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'eventsFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, eventsFact, $cachedResource) {
+angular.module('eventsApp').controller('eventsListCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'eventsFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, eventsFact, $cachedResource) {
 
     //Context change
     $rootScope.$broadcast('contextCtrl:changeContext', {confId:$routeParams.confId});
@@ -26,7 +26,13 @@ angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', 
     $scope.entities = [];
 
     $scope.fetch = function(filters, success, error){
-        eventsFact.allByConference(filters, success, error);
+        if($routeParams.confId)
+        {
+            filters.confId = $routeParams.confId;
+            eventsFact.allByConference(filters, success, error);
+        }else{
+            eventsFact.all(filters, success, error);
+        }
     }
 
 
