@@ -32,7 +32,7 @@ angular.module('sympozerApp').factory('globalHttpInterceptor', ['$q', '$rootScop
                           entityClone[property] = getObjectId(entity[property]);
                         }
                     break;
-                    case "string":
+                    default:
                         entityClone[property] = entity[property];
                     break;
                 }

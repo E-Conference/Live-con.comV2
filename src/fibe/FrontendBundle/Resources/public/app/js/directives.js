@@ -126,7 +126,7 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
                 singleChoice            = attrs.singlechoice,
                 parentField             = attrs.parentField || entityLbl,
                 childField              = attrs.childField,
-                newField                = attrs.newField,
+                singleChoiceChild       = attrs.singleChoiceChild,
 
                 newPolitic              = attrs.newPolitic || "create",
 
@@ -145,6 +145,7 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
             //available entities
             scope.entities = [];
             scope.singleChoice = singleChoice;
+            scope.singleChoiceChild = singleChoiceChild;
             //resolve the parent resource given by attrs.entity
             scope.resource = scope.$parent[parentEntityLbl] || scope.$parent.$parent.$parent.$entity;
             if(!scope.resource)
@@ -213,8 +214,13 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
                 }
 
                 if(childField) {
-                    $model[childField] = [];
-                    $model[childField].push(scope.resource);
+                    if(scope.singleChoiceChild){
+                        $model[childField] = scope.resource;
+                    }else{
+                        $model[childField] = [];
+                        $model[childField].push(scope.resource);
+                    }
+
                 }
 
                 var newEntity = new entityFact($model);

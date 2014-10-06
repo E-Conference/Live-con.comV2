@@ -38,15 +38,12 @@
       </div>
     </div>
   </div>
-  <div ng-if="singleChoice">
-    <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-    <a ng-click="deleteEntity($index,entity)" class="btn btn-danger"><span class="fa fa-times"></span></a>
 
-    <h2>{{ entity.label }}</h2>
-
-    <p>{{ entity.website }}</p>
-
-    <p>{{ entity.country }}</p>
-  </div>
-</div>
+      <div ng-if="singleChoice && resource[parentField].label">
+        <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+        <!--<a ng-click="deleteEntity($index,resource[parentField])" class="btn btn-danger"><span class="fa fa-times"></span></a>-->
+        <h2>{{ resource[parentField].label }}</h2>
+        <p>{{ resource.country }}</p>
+      </div>
+    </div>
 

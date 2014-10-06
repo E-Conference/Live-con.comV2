@@ -63,8 +63,6 @@
 
     <div get-or-create="paper" parent-entity="event"  new-politic="modal"></div>  
 
-    <label>Participants</label>
-
     <div ng-repeat="role in event.roles">
      <div class="col-sm-3">
         <div class="panel panel-primary" style="margin-top: 10px;">
@@ -80,7 +78,7 @@
       </div>
     </div>
 
-    <div get-or-create="role" child-field="event" parent-entity="event" new-politic="modal"></div>
+    <div get-or-create="role" child-field="event" single-choice-child="true" parent-entity="event" new-politic="modal"></div>
 
 
 <div>
