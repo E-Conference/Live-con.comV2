@@ -32,6 +32,10 @@ angular.module('roleLabelsApp').controller('roleLabelsListCtrl', ['$scope', 'GLO
 
     $scope.entities = [];
 
+    $scope.fetch = function(filters, success, error){
+        roleLabelsFact.all(filters, success, error);
+    }
+
     $scope.reload = function ()
     {
         $scope.entities.$promise.then(function ()
@@ -172,6 +176,10 @@ angular.module('rolesApp').controller('rolesListCtrl', ['$scope', 'GLOBAL_CONFIG
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
     $scope.entities = [];
+
+    $scope.fetch = function(filters, success, error){
+        rolesFact.all(filters, success, error);
+    }
 
     $scope.reload = function ()
     {

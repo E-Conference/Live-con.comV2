@@ -19,55 +19,59 @@ angular.module('organizationsApp').controller('organizationsMainCtrl', [function
  */
 angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'organizationsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, organizationsFact, $cachedResource)
 {
-  $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
-  $scope.entities = [];
+    $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
+    $scope.entities = [];
 
-  $scope.reload = function ()
-  {
-    $scope.entities.$promise.then(function ()
-    {
-      console.log('From cache:', $scope.entities);
-    });
-  }
-
-  $scope.clone = function (organization, index)
-  {
-    cloneOrganization = angular.copy(organization);
-    cloneOrganization.id = null;
-
-    var error = function (response, args)
-    {
-      $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Clone not completed', type: 'danger'});
+    $scope.fetch = function(filters, success, error){
+        organizationsFact.all(filters, success, error);
     }
 
-    var success = function (response, args)
+    $scope.reload = function ()
     {
-      $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Organization saved', type: 'success'});
-      $scope.entities.splice(index + 1, 0, response);
+        $scope.entities.$promise.then(function ()
+        {
+            console.log('From cache:', $scope.entities);
+        });
     }
 
-    cloneOrganization.$create({}, success, error);
-  }
+    $scope.clone = function (organization, index)
+    {
+        cloneOrganization = angular.copy(organization);
+        cloneOrganization.id = null;
+
+        var error = function (response, args)
+        {
+            $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Clone not completed', type: 'danger'});
+        }
+
+        var success = function (response, args)
+        {
+            $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Organization saved', type: 'success'});
+            $scope.entities.splice(index + 1, 0, response);
+        }
+
+        cloneOrganization.$create({}, success, error);
+    }
 
 
-  $scope.deleteModal = function (index, organization)
-  {
-    $scope.index = index;
+    $scope.deleteModal = function (index, organization)
+    {
+        $scope.index = index;
 
-    createDialogService(GLOBAL_CONFIG.app.modules.organizations.urls.partials + 'organizations-delete.html', {
-      id: 'complexDialog',
-      title: 'Organization deletion',
-      backdrop: true,
-      controller: 'organizationsDeleteCtrl',
-      success: {label: 'Ok', fn: function ()
-      {
-        organizationsFact.delete({id: organization.id});
-        $scope.entities.splice(index, 1);
-      }}
-    }, {
-      organizationModel: organization
-    });
-  }
+        createDialogService(GLOBAL_CONFIG.app.modules.organizations.urls.partials + 'organizations-delete.html', {
+            id: 'complexDialog',
+            title: 'Organization deletion',
+            backdrop: true,
+            controller: 'organizationsDeleteCtrl',
+            success: {label: 'Ok', fn: function ()
+            {
+                organizationsFact.delete({id: organization.id});
+                $scope.entities.splice(index, 1);
+            }}
+        }, {
+            organizationModel: organization
+        });
+    }
 
 }]);
 
@@ -78,26 +82,26 @@ angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope'
  */
 angular.module('organizationsApp').controller('organizationsNewCtrl', [ '$scope', '$rootScope', '$location', 'organizationsFact', function ($scope, $rootScope, $location, organizationsFact)
 {
-  $scope.organization = new organizationsFact;
+    $scope.organization = new organizationsFact;
 
-  var error = function (response, args)
-  {
-    $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the organization has not been created', type: 'danger'});
-  }
-
-  var success = function (response, args)
-  {
-    $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'organization created', type: 'success'});
-    $location.path('/organizations/list');
-  }
-
-  $scope.create = function (form)
-  {
-    if (form.$valid)
+    var error = function (response, args)
     {
-      $scope.organization.$create({}, success, error);
+        $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the organization has not been created', type: 'danger'});
     }
-  }
+
+    var success = function (response, args)
+    {
+        $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'organization created', type: 'success'});
+        $location.path('/organizations/list');
+    }
+
+    $scope.create = function (form)
+    {
+        if (form.$valid)
+        {
+            $scope.organization.$create({}, success, error);
+        }
+    }
 }]);
 
 /**
@@ -107,26 +111,26 @@ angular.module('organizationsApp').controller('organizationsNewCtrl', [ '$scope'
  */
 angular.module('organizationsApp').controller('organizationsEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'organizationsFact', function ($scope, $rootScope, $routeParams, $location, organizationsFact)
 {
-  $scope.organization = organizationsFact.get({id: $routeParams.organizationId});
+    $scope.organization = organizationsFact.get({id: $routeParams.organizationId});
 
-  var error = function (response, args)
-  {
-    $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the organization has not been saved', type: 'danger'});
-  }
-
-  var success = function (response, args)
-  {
-    $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'organization saved', type: 'success'});
-    $location.path('/organizations/list');
-  }
-
-  $scope.update = function (form)
-  {
-    if (form.$valid)
+    var error = function (response, args)
     {
-      $scope.organization.$update({}, success, error);
+        $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the organization has not been saved', type: 'danger'});
     }
-  }
+
+    var success = function (response, args)
+    {
+        $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'organization saved', type: 'success'});
+        $location.path('/organizations/list');
+    }
+
+    $scope.update = function (form)
+    {
+        if (form.$valid)
+        {
+            $scope.organization.$update({}, success, error);
+        }
+    }
 }]);
 
 /**
@@ -136,9 +140,9 @@ angular.module('organizationsApp').controller('organizationsEditCtrl', [ '$scope
  */
 angular.module('organizationsApp').controller('organizationsShowCtrl', [ '$scope', '$routeParams', 'organizationsFact', function ($scope, $routeParams, organizationsFact)
 {
-  $scope.organization = organizationsFact.get({id: $routeParams.organizationId});
+    $scope.organization = organizationsFact.get({id: $routeParams.organizationId});
 
-  console.log($scope.organization);
+    console.log($scope.organization);
 }]);
 
 /**
@@ -148,5 +152,5 @@ angular.module('organizationsApp').controller('organizationsShowCtrl', [ '$scope
  */
 angular.module('organizationsApp').controller('organizationsDeleteCtrl', [ '$scope', 'organizationModel', function ($scope, organizationModel)
 {
-  $scope.organization = organizationModel;
+    $scope.organization = organizationModel;
 }]);

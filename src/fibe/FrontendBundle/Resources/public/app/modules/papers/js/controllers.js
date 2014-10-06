@@ -22,9 +22,13 @@ angular.module('papersApp').controller('papersListCtrl', ['$scope', 'GLOBAL_CONF
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
     $scope.entities = [];
 
+    $scope.fetch = function(filters, success, error){
+        papersFact.all(filters, success, error);
+    }
+
     $scope.reload = function ()
     {
-       $scope.entities.$promise.then(function ()
+        $scope.entities.$promise.then(function ()
         {
             console.log('From cache:', $scope.papers);
         });

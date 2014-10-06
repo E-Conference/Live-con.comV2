@@ -25,6 +25,11 @@ angular.module('eventsApp').controller('eventsListByConferenceCtrl', ['$scope', 
 
     $scope.entities = [];
 
+    $scope.fetch = function(filters, success, error){
+        eventsFact.allByConference(filters, success, error);
+    }
+
+
     $scope.reload = function(){
         $scope.events.$promise.then(function() {
             console.log('From cache:', $scope.events);

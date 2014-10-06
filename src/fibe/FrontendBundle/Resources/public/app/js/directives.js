@@ -427,7 +427,7 @@ angular.module('sympozerApp').directive('entityListHandler', ['GLOBAL_CONFIG', '
                 }
 
                 scope.busy = true;
-                entityFact.all(filters,  function (data)
+                scope.fetch(filters,  function (data)
                 {
                     var items = data;
 

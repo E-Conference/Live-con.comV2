@@ -23,6 +23,10 @@ angular.module('locationsApp').controller('locationsListCtrl', ['$scope', 'GLOBA
 
     $scope.entities = [];
 
+    $scope.fetch = function(filters, success, error){
+        locationsFact.all(filters, success, error);
+    }
+
     $scope.reload = function ()
     {
         $scope.entities.$promise.then(function ()

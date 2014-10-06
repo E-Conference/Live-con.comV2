@@ -34,6 +34,10 @@ angular.module('personsApp').controller('personsListCtrl', ['$scope', 'GLOBAL_CO
 
     $scope.entities = [];
 
+    $scope.fetch = function(filters, success, error){
+        personsFact.all(filters, success, error);
+    }
+
     $scope.reload = function ()
     {
         $scope.entities.$promise.then(function ()

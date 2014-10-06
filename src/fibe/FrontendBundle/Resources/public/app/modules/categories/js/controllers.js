@@ -24,6 +24,10 @@ angular.module('categoriesApp').controller('categoriesListCtrl', ['$scope', 'GLO
 
     $scope.entities = [];
 
+    $scope.fetch = function(filters, success, error){
+        categoriesFact.all(filters, success, error);
+    }
+
     $scope.reload = function ()
     {
         // $scope.categories = category.list();

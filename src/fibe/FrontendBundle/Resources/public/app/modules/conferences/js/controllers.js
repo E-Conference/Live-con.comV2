@@ -23,6 +23,10 @@ angular.module('conferencesApp').controller('conferencesListCtrl', ['$scope', '$
 
     $scope.entities = [];
 
+    $scope.fetch = function(filters, success, error){
+        conferencesFact.all(filters, success, error);
+    }
+
     $scope.clone = function (conference, index)
     {
 
