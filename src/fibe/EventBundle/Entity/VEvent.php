@@ -239,7 +239,7 @@ abstract class VEvent
    * Sponsors related to a VEvent
    *
    * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Sponsor", mappedBy="vEvent", cascade={"persist"})
-   * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="cascade")
+   * @ORM\JoinColumn(name="sponsor_id", referencedColumnName="id", onDelete="cascade")
    */
   protected $sponsors;
 

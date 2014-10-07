@@ -24,15 +24,27 @@
                     </li>
                     <li>
                         <!-- @hlink : Search an organization -->
-                        <a href="#search/organization"><i class="fa fa-users fa-2x"></i> {{ 'Search_organization' | translate }}</a>
+                        <a href="#organization/list"><i class="fa fa-users fa-2x"></i> {{ 'Search_organization' | translate }}</a>
                     </li>
                     <li>
                         <!-- @hlink : Search a person -->
-                        <a href="#search/person"><i class="fa fa-user fa-2x"></i> {{ 'Search_person' | translate }}</a>
+                        <a href="#persons/list"><i class="fa fa-user fa-2x"></i> {{ 'Search_person' | translate }}</a>
+                    </li>
+                    <li>
+                        <!-- @hlink : Publications -->
+                        <a href="#papers/list"><i class="fa fa-book fa-2x"></i> Publications</a>
                     </li>
                     <li>
                         <!-- @hlink : Search a ressource -->
                         <a href="#resource"><i class="fa fa-folder-open-o fa-2x"></i> Search a resources</a>
+                    </li>
+                    <li>
+                        <!-- @hlink : Roles -->
+                        <a href="#/roles/list"><i class="fa fa-sitemap fa-2x"></i> Roles</a>
+                    </li>
+                    <li>
+                        <!-- @hlink : Roles Labels -->
+                        <a href="#roleLabels/list"><i class="fa fa-sitemap fa-2x"></i> Role labels</a>
                     </li>
                 </ul>
             </div>
@@ -111,11 +123,7 @@
                                     </li>
                                     <li>
                                         <!-- @hlink : Publications -->
-                                        <a href="#papers/list"><i class="fa fa-book fa-2x"></i> Publications</a>
-                                    </li>
-                                    <li>
-                                        <!-- @hlink : Categories -->
-                                        <a href="#categories/list"><i class="fa fa-tag fa-2x"></i> Categories</a>
+                                        <a href="#conference/{{currentConference.id}}/papers/list"><i class="fa fa-book fa-2x"></i> Publications</a>
                                     </li>
                                     <li>
                                         <!-- @hlink : Organizations -->
@@ -123,15 +131,15 @@
                                     </li>
                                     <li>
                                         <!-- @hlink : Persons -->
-                                        <a href="#persons/list"><i class="fa fa-user fa-2x"></i> Persons</a>
+                                        <a href="#conference/{{currentConference.id}}/persons/list"><i class="fa fa-user fa-2x"></i> Persons</a>
                                     </li>
                                     <li>
                                         <!-- @hlink : Roles Labels -->
-                                        <a href="#roleLabels/list"><i class="fa fa-sitemap fa-2x"></i> Role labels</a>
+                                        <a href="#conference/{{currentConference.id}}/roleLabels/list"><i class="fa fa-sitemap fa-2x"></i> Role labels</a>
                                     </li>
                                     <li>
                                         <!-- @hlink : Roles -->
-                                        <a href="#roles/list"><i class="fa fa-sitemap fa-2x"></i> Roles</a>
+                                        <a href="#conference/{{currentConference.id}}/roles/list"><i class="fa fa-sitemap fa-2x"></i> Roles</a>
                                     </li>
                                     <li>
                                         <!-- @hlink : Resources -->
@@ -161,6 +169,10 @@
                                     <li>
                                         <!-- @hlink : Locations -->
                                         <a href="#conference/{{currentConference.id}}/locations/list"><i class="fa fa-map-marker fa-2x"></i> Locations</a>
+                                    </li>
+                                    <li>
+                                        <!-- @hlink : Categories -->
+                                        <a href="#categories/list"><i class="fa fa-tag fa-2x"></i> Categories</a>
                                     </li>
                                 </ul>
                             </div>

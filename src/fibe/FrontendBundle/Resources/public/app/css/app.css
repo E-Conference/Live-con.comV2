@@ -346,13 +346,12 @@ input.ng-dirty.ng-valid
 /*************** MODAL *******************/
 
 .modal{
-
-    max-height: 95%;
+    max-height: 90%;
 }
 
 .modal-body{
     overflow: auto;
-    height: 500px;
+    max-height: 500px;
 }
 
 

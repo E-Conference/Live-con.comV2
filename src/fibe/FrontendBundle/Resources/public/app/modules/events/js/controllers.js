@@ -21,7 +21,7 @@ angular.module('eventsApp').controller('eventsMainCtrl', [function ($scope)
 angular.module('eventsApp').controller('eventsListCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'eventsFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, eventsFact, $cachedResource) {
 
     //Context change
-    $rootScope.$broadcast('contextCtrl:changeContext', {confId:$routeParams.confId});
+    //$rootScope.$broadcast('contextCtrl:changeContext', {confId:$routeParams.confId});
 
     $scope.entities = [];
 
@@ -122,7 +122,7 @@ angular.module('eventsApp').controller('eventsEditCtrl', [ '$scope', '$rootScope
     var success = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'event saved', type: 'success'});
-        $location.path('/events/list');
+        $location.path('/conference/'+$rootScope.currentConference.id+'/events/list');
     }
 
     $scope.update = function (form)

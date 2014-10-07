@@ -17,13 +17,19 @@ angular.module('papersApp').controller('papersMainCtrl', [function ($scope)
  *
  * @type {controller}
  */
-angular.module('papersApp').controller('papersListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'papersFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, papersFact, $cachedResource)
+angular.module('papersApp').controller('papersListCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'papersFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, papersFact, $cachedResource)
 {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
     $scope.entities = [];
 
     $scope.fetch = function(filters, success, error){
-        papersFact.all(filters, success, error);
+        if($routeParams.confId)
+        {
+            filters.confId = $routeParams.confId;
+            papersFact.allByConference(filters, success, error);
+        }else{
+            papersFact.all(filters, success, error);
+        }
     }
 
     $scope.reload = function ()
@@ -92,11 +98,13 @@ angular.module('papersApp').controller('papersNewCtrl', [ '$scope', '$rootScope'
     var success = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'paper created', type: 'success'});
-        $location.path('/papers/list');
+        $location.path('/conference/'+$rootScope.currentConference.id+'/papers/list');
+
     }
 
     $scope.create = function (form)
     {
+        $scope.paper.mainEvent = $rootScope.currentConference.id;
         if (form.$valid)
         {
             $scope.paper.$create({}, success, error);
@@ -121,7 +129,7 @@ angular.module('papersApp').controller('papersEditCtrl', [ '$scope', '$rootScope
     var success = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'paper saved', type: 'success'});
-        $location.path('/papers/list');
+        $location.path('/conference/'+$rootScope.currentConference.id+'/papers/list');
     }
 
     $scope.update = function (form)

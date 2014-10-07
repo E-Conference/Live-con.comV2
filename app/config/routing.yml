@@ -22,7 +22,7 @@ fibe_community:
 fibe_rest_test:
     resource: "@fibeCommunityBundle/Controller/REST"
     type:     annotation
-    prefix:   /api/
+    prefix:   /
 
 fibe_content:
     resource: "@fibeContentBundle/Controller/"

@@ -28,16 +28,21 @@ angular.module('personsApp').controller('personsListByEventCtrl', ['$scope', 'GL
  *
  * @type {controller}
  */
-angular.module('personsApp').controller('personsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'personsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, personsFact, $cachedResource)
+angular.module('personsApp').controller('personsListCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'personsFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, personsFact, $cachedResource)
 {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
     $scope.entities = [];
 
     $scope.fetch = function(filters, success, error){
-        personsFact.all(filters, success, error);
+        if($routeParams.confId)
+        {
+            filters.confId = $routeParams.confId;
+            personsFact.allByConference(filters, success, error);
+        }else{
+            personsFact.all(filters, success, error);
+        }
     }
-
     $scope.reload = function ()
     {
         $scope.entities.$promise.then(function ()

@@ -26,14 +26,20 @@ angular.module('roleLabelsApp').controller('roleLabelsMainCtrl', [function ($sco
  *
  * @type {controller}
  */
-angular.module('roleLabelsApp').controller('roleLabelsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'roleLabelsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, roleLabelsFact, $cachedResource)
+angular.module('roleLabelsApp').controller('roleLabelsListCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'roleLabelsFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, roleLabelsFact, $cachedResource)
 {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
     $scope.entities = [];
 
     $scope.fetch = function(filters, success, error){
-        roleLabelsFact.all(filters, success, error);
+        if($routeParams.confId)
+        {
+            filters.confId = $routeParams.confId;
+            roleLabelsFact.allByConference(filters, success, error);
+        }else{
+            roleLabelsFact.all(filters, success, error);
+        }
     }
 
     $scope.reload = function ()
@@ -171,14 +177,20 @@ angular.module('roleLabelsApp').controller('roleLabelsDeleteCtrl', [ '$scope', '
  *
  * @type {controller}
  */
-angular.module('rolesApp').controller('rolesListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'rolesFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, rolesFact, $cachedResource)
+angular.module('rolesApp').controller('rolesListCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'rolesFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, rolesFact, $cachedResource)
 {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
     $scope.entities = [];
 
     $scope.fetch = function(filters, success, error){
-        rolesFact.all(filters, success, error);
+        if($routeParams.confId)
+        {
+            filters.confId = $routeParams.confId;
+            rolesFact.allByConference(filters, success, error);
+        }else{
+            rolesFact.all(filters, success, error);
+        }
     }
 
     $scope.reload = function ()

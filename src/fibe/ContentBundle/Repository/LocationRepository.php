@@ -19,95 +19,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class LocationRepository extends EntityRepository
 {
-  /**
-   * getOrderedQueryBuilder
-   *
-   * @return \Doctrine\ORM\QueryBuilder
-   */
-  public function getOrderedQueryBuilder()
-  {
-    $qb = $this->createQueryBuilder('loc');
-    $qb->orderBy('loc.name', 'ASC');
-
-    return $qb;
-  }
-
-  /**
-   * getOrderedQuery
-   *
-   * @return \Doctrine\ORM\Query|\Doctrine\ORM\QueryBuilder
-   */
-  public function getOrderedQuery()
-  {
-    $qb = $this->getOrderedQueryBuilder();
-
-    return is_null($qb) ? $qb : $qb->getQuery();
-  }
-
-  /**
-   * getOrdered
-   *
-   * @return array
-   */
-  public function getOrdered()
-  {
-    $q = $this->getOrderedQuery();
-
-    return is_null($q) ? array() : $q->getResult();
-  }
-
-  /**
-   * extractQueryBuilder
-   *
-   * @param array $params
-   *
-   * @return \Doctrine\ORM\QueryBuilder
-   */
-  public function extractQueryBuilder($params)
-  {
-    $qb = $this->getOrderedQueryBuilder();
-
-    if (isset($params['id']))
+    /**
+     * filtering by main event
+     * @param $qb , query builder to add the filter to
+     * @param $MainEventId , the main event to filter on
+     * @return $qb, modified query builder
+     */
+    public function findAllByMainEventId($qb, $MainEventId)
     {
-      $qb
-        ->andWhere('loc.id = :id')
-        ->setParameter('id', $params['id']);
+        if (isset($MainEventId)) {
+            $qb->leftJoin('qb.mainEvent', 'ev');
+            $qb->andWhere('ev.id = (:MainEventId)');
+            $qb->setParameter('MainEventId', $MainEventId);
+        }
+        return $qb;
     }
-
-    if (isset($params['ids']))
-    {
-      $qb
-        ->andWhere($qb->expr()->in('loc.id', $params['ids']));
-    }
-
-    return $qb;
-  }
-
-  /**
-   * extractQuery
-   *
-   * @param array $params
-   *
-   * @return \Doctrine\ORM\Query|\Doctrine\ORM\QueryBuilder
-   */
-  public function extractQuery($params)
-  {
-    $qb = $this->extractQueryBuilder($params);
-
-    return is_null($qb) ? $qb : $qb->getQuery();
-  }
-
-  /**
-   * extract
-   *
-   * @param array $params
-   *
-   * @return array
-   */
-  public function extract($params)
-  {
-    $q = $this->extractQuery($params);
-
-    return is_null($q) ? array() : $q->getResult();
-  }
 }

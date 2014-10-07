@@ -55,7 +55,7 @@ class Role
   /**
    *
    * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\Event", inversedBy="roles")
-   * @Assert\NotBlank(message="You have to choose an event")
+   *
    * @Expose
    */
   private $event;
