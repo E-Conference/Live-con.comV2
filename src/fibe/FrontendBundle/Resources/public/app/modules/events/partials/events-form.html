@@ -14,7 +14,7 @@
         <input type="text " class="form-control" id="inputUrl" placeholder="{{event.url}}" ng-model="event.url">
     </div>
     <div get-or-create="topic" parent-entity="event"></div>
-    <div get-or-create="category" parent-entity="event" new-politic="modal" single-choice="true"></div>
+    <div get-or-create="category" parent-entity="event" new-politic="modal" singlechoice="true" uniq-field="label"></div>
     
 </div>
 

@@ -115,6 +115,7 @@ class Paper
    *
    * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="papers", cascade={"persist"})
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
+   * @SerializedName("mainEvent")
    * @Expose
    */
   private $mainEvent;
