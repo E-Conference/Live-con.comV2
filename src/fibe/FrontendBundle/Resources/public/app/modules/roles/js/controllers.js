@@ -247,10 +247,9 @@ angular.module('rolesApp').controller('rolesListCtrl', ['$scope', '$routeParams'
  *
  * @type {controller}
  */
-angular.module('rolesApp').controller('rolesNewCtrl', [ '$scope', '$rootScope', '$location', 'rolesFact', function ($scope, $rootScope, $location, rolesFact)
+angular.module('rolesApp').controller('rolesNewCtrl', [ '$scope', '$routeParams', '$rootScope', '$location', 'rolesFact', function ($scope, $routeParams, $rootScope, $location, rolesFact)
 {
     $scope.role = new rolesFact;
-    $scope.role.mainEvent = $rootScope.currentConference.id;
 
     var error = function (response, args)
     {
@@ -260,13 +259,14 @@ angular.module('rolesApp').controller('rolesNewCtrl', [ '$scope', '$rootScope', 
     var success = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'role created', type: 'success'});
-        $location.path('/roles/list');
+        $location.path('/conference/'+$routeParams.confId+'/roles/list');
     }
 
     $scope.create = function (form)
     {
         if (form.$valid)
         {
+            $scope.role.mainEvent = $routeParams.confId;
             $scope.role.$create({}, success, error);
         }
     }

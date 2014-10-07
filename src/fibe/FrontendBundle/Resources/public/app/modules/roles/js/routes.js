@@ -26,20 +26,20 @@ angular.module('rolesApp')
                     templateUrl: globalConfig.app.modules.roles.urls.partials + 'roles-thumbnail.html',
                     controller: 'rolesListCtrl'
                 })
-                .when('/roles/new', {
+                .when('/conference/:confId/roles/new', {
                     templateUrl: globalConfig.app.modules.roles.urls.partials + 'roles-new.html',
                     controller: 'rolesNewCtrl'
                 })
-                .when('/roles/edit/:roleId', {
+                .when('/conference/:confId/roles/edit/:roleId', {
                     templateUrl: globalConfig.app.modules.roles.urls.partials + 'roles-edit.html',
                     controller: 'rolesEditCtrl'
                 })
-                .when('/roles/show/:roleId', {
+                .when('/conference/:confId/roles/show/:roleId', {
                     templateUrl: globalConfig.app.modules.roles.urls.partials + 'roles-show.html',
                     controller: 'rolesShowCtrl'
                 })
                 .otherwise({
-                    redirectTo: '/roles/list'
+                    redirectTo: '/conference/:confId/roles/list'
                 });
         }
     ]);

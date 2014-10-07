@@ -4,6 +4,7 @@ namespace fibe\ContentBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use fibe\EventBundle\Entity\MainEvent;
@@ -33,6 +34,7 @@ class Role
    * @ORM\Id
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
+   * @Expose
    */
   private $id;
 
@@ -66,6 +68,7 @@ class Role
    * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="roles", cascade={"persist"})
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
    * @Expose
+   * @SerializedName("mainEvent")
    */
   private $mainEvent;
 
@@ -73,6 +76,8 @@ class Role
    * @ORM\ManyToOne(targetEntity="fibe\ContentBundle\Entity\RoleLabel", inversedBy="roles")
    * @ORM\JoinColumn(name="role_label_id", referencedColumnName="id")
    * @Assert\NotBlank(message="You have to choose a role type")
+   * @SerializedName("roleLabel")
+   * @Expose
    */
   private $roleLabel;
 

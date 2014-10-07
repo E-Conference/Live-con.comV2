@@ -126,7 +126,7 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
             var uniqField               = attrs.uniqField || 'label',
                 childEntityLbl          = attrs.getOrCreate,
                 parentEntityLbl         = attrs.parentEntity,
-                singleChoice            = attrs.singleChoice,
+                singleChoice            = attrs.singlechoice,
                 singleChoiceChild       = attrs.singleChoiceChild,
                 parentField             = attrs.parentField || (!singleChoice ? getPlural(childEntityLbl) : childEntityLbl),
                 childField              = attrs.childField || (!singleChoiceChild ? getPlural(parentEntityLbl) : parentEntityLbl),

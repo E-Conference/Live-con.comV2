@@ -101,6 +101,8 @@ class Location
    *
    * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="locations", cascade={"persist"})
    * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
+   * @Expose
+   * @SerializedName("mainEvent")
    */
   private $mainEvent;
 

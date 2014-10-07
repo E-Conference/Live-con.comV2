@@ -24,7 +24,7 @@
                     </li>
                     <li>
                         <!-- @hlink : Search an organization -->
-                        <a href="#organization/list"><i class="fa fa-users fa-2x"></i> {{ 'Search_organization' | translate }}</a>
+                        <a href="#organizations/list"><i class="fa fa-users fa-2x"></i> {{ 'Search_organization' | translate }}</a>
                     </li>
                     <li>
                         <!-- @hlink : Search a person -->
@@ -32,7 +32,7 @@
                     </li>
                     <li>
                         <!-- @hlink : Publications -->
-                        <a href="#papers/list"><i class="fa fa-book fa-2x"></i> Publications</a>
+                        <a href="#papers/list"><i class="fa fa-book fa-2x"></i> Search a publication</a>
                     </li>
                     <li>
                         <!-- @hlink : Search a ressource -->
@@ -45,6 +45,10 @@
                     <li>
                         <!-- @hlink : Roles Labels -->
                         <a href="#roleLabels/list"><i class="fa fa-sitemap fa-2x"></i> Role labels</a>
+                    </li>
+                    <li>
+                        <!-- @hlink : Calendar -->
+                        <a href="#/events/list"><i class="fa fa-clock-o fa-2x"></i> Search an event</a>
                     </li>
                 </ul>
             </div>
@@ -131,7 +135,7 @@
                                     </li>
                                     <li>
                                         <!-- @hlink : Persons -->
-                                        <a href="#conference/{{currentConference.id}}/persons/list"><i class="fa fa-user fa-2x"></i> Persons</a>
+                                        <a href="#conference/{{currentConference.id}}/roles/list"><i class="fa fa-user fa-2x"></i> Persons</a>
                                     </li>
                                     <li>
                                         <!-- @hlink : Roles Labels -->

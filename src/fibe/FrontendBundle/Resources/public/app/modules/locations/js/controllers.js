@@ -87,7 +87,7 @@ angular.module('locationsApp').controller('locationsListCtrl', ['$scope', '$rout
  *
  * @type {controller}
  */
-angular.module('locationsApp').controller('locationsNewCtrl', [ '$scope', '$rootScope', '$location', 'locationsFact', function ($scope, $rootScope, $location, locationsFact)
+angular.module('locationsApp').controller('locationsNewCtrl', [ '$scope', '$routeParams', '$rootScope', '$location', 'locationsFact', function ($scope, $routeParams, $rootScope, $location, locationsFact)
 {
     $scope.location = new locationsFact;
 
@@ -101,13 +101,14 @@ angular.module('locationsApp').controller('locationsNewCtrl', [ '$scope', '$root
     var success = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'location created', type: 'success'});
-        $location.path('/conference/'+$rootScope.currentConference.id+'/locations/list');
+        $location.path('/conference/'+$routeParams.confId+'/locations/list');
     }
 
     $scope.create = function (form)
     {
         if (form.$valid)
         {
+            $scope.location.mainEvent = $routeParams.confId;
             $scope.location.$create({}, success, error);
         }
     }

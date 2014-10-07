@@ -20,8 +20,8 @@
     <td>{{ event.startAt }}</td>
     <td>{{ event.endAt }}</td>
     <td>
-      <a class="btn btn-warning" href="#conference/{{ currentConference.id }}/events/edit/{{ event.id }}" role="button"><i class="fa fa-edit fa-1x"></i></a>
-      <a class="btn btn-default" href="#conference/{{ currentConference.id }}/events/show/{{ event.id }}" role="button"><i class="fa fa-eye fa-1x"></i></a>
+      <a class="btn btn-warning" href="#conference/{{ event.mainEvent.id }}/events/edit/{{ event.id }}" role="button"><i class="fa fa-edit fa-1x"></i></a>
+      <a class="btn btn-default" href="#conference/{{ event.mainEvent.id }}/events/show/{{ event.id }}" role="button"><i class="fa fa-eye fa-1x"></i></a>
       <a class="btn btn-primary" href="" data-ng-click="clone(event, $index)" role="button"><i class="fa fa-files-o fa-1x"></i></a>
       <button class="btn btn-danger" data-ng-click="deleteModal($index, event)" role="button">
         <i class="fa fa-trash-o fa-1x"></i></button>

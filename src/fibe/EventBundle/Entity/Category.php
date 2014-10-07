@@ -63,6 +63,8 @@ class Category
    *
    * @ORM\OneToMany(targetEntity="VEvent", mappedBy="category",cascade={"persist","remove"})
    * @ORM\JoinColumn( onDelete="CASCADE")
+   * @Expose
+   * @SerializedName("vEvents")
    */
   private $vEvents;
 

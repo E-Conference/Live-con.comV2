@@ -28,7 +28,7 @@ class RoleType extends AbstractType
       ->add('person', 'entity', array(
         'class' => 'fibeCommunityBundle:Person',
         'required' => 'false',
-        'multiple' => true,
+        'multiple' => false,
       ))
       ->add('event', 'entity', array(
         'class' => 'fibeEventBundle:Event',
@@ -38,7 +38,7 @@ class RoleType extends AbstractType
       ->add('roleLabel', 'entity', array(
         'class' => 'fibeContentBundle:RoleLabel',
         'required' => 'false',
-        'multiple' => true,
+        'multiple' => false,
       ))
       ->add('mainEvent', 'entity', array(
         'class' => 'fibeEventBundle:MainEvent',

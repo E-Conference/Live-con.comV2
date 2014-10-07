@@ -84,7 +84,7 @@ angular.module('eventsApp').controller('eventsListCtrl', ['$scope', '$routeParam
  * @type {controller}
  */
 
-angular.module('eventsApp').controller('eventsNewCtrl', [ '$scope', '$rootScope', '$location', 'eventsFact', function ($scope, $rootScope, $location, eventsFact) {
+angular.module('eventsApp').controller('eventsNewCtrl', [ '$scope', '$routeParams', '$rootScope', '$location', 'eventsFact', function ($scope, $routeParams, $rootScope, $location, eventsFact) {
     $scope.event = new eventsFact;
 
     var error = function(response, args){
@@ -93,11 +93,11 @@ angular.module('eventsApp').controller('eventsNewCtrl', [ '$scope', '$rootScope'
 
     var success = function(response, args){
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'event created', type:'success'});
-        $location.path('/conference/'+$rootScope.currentConference.id+'/events/list');
+        $location.path('/conference/'+$routeParams.confId+'/events/list');
     }
 
     $scope.create = function(form){
-        $scope.event.mainEvent = $rootScope.currentConference.id;
+        $scope.event.mainEvent = $routeParams.confId;
         if ( form.$valid ) {
             $scope.event.$create({}, success, error);
         }
