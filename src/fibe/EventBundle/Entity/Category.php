@@ -9,6 +9,7 @@ use fibe\ContentBundle\Util\StringTools;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\MaxDepth;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
 
@@ -62,6 +63,7 @@ class Category
      * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="categories", cascade={"persist"})
      * @ORM\JoinColumn(name="mainevent_id", referencedColumnName="id")
      * @Expose
+     * @MaxDepth(1)
      * @SerializedName("mainEvent")
      */
     private $mainEvent;
@@ -71,8 +73,6 @@ class Category
      *
      * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\CategoryGlobal", inversedBy="categories", cascade={"persist"})
      * @ORM\JoinColumn(name="categoryglobal_id", referencedColumnName="id")
-     * @Expose
-     * @SerializedName("categoryGlobal")
      */
     private $categoryGlobal;
 

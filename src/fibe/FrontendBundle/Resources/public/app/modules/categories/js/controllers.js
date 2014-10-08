@@ -85,7 +85,7 @@ angular.module('categoriesApp').controller('categoriesListCtrl', ['$scope', '$ro
 }]);
 
 
-angular.module('categoriesApp').controller('categoriesNewCtrl', [ '$scope', '$rootScope', '$location', 'categoriesFact', function ($scope, $rootScope, $location, categoriesFact) {
+angular.module('categoriesApp').controller('categoriesNewCtrl', [ '$scope', '$routeParams', '$rootScope', '$location', 'categoriesFact', function ($scope, $routeParams, $rootScope, $location, categoriesFact) {
 
     $scope.category = new categoriesFact;
 
@@ -95,10 +95,11 @@ angular.module('categoriesApp').controller('categoriesNewCtrl', [ '$scope', '$ro
 
     var success = function(response, args){
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'category created', type:'success'});
-        $location.path('/categories/list');
+        $location.path('/conference/'+$routeParams.confId+'/categories/list');
     }
 
     $scope.create = function(form){
+        $scope.category.mainEvent = $routeParams.confId;
         if ( form.$valid ) {
             $scope.category.$create({}, success, error);
         }

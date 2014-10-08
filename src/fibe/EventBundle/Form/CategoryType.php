@@ -25,6 +25,7 @@ class CategoryType extends AbstractType
                 'required' => 'false',
                 'multiple' => true,
             ));
+
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

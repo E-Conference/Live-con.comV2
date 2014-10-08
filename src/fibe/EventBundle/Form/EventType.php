@@ -36,7 +36,7 @@ class EventType extends VEventType
             ->add('category', 'entity', array(
                 'class' => 'fibeEventBundle:Category',
                 'required' => 'true',
-                'multiple' => true,
+                'multiple' => false,
             ))
 
             ->add('mainEvent', 'entity', array(

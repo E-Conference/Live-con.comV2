@@ -66,6 +66,7 @@ class MainEvent extends VEvent
      */
     protected $categories;
 
+
     /**
      *
      * @ORM\ManyToMany(targetEntity="fibe\CommunityBundle\Entity\Person",  mappedBy="mainEvents", cascade={"persist","merge","remove"})
@@ -482,6 +483,23 @@ class MainEvent extends VEvent
     public function getEvents()
     {
         return $this->events;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @param mixed $categories
+     */
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
     }
 
     /**
