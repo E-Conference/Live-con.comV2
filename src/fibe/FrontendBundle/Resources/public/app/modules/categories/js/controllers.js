@@ -85,7 +85,7 @@ angular.module('categoriesApp').controller('categoriesListCtrl', ['$scope', '$ro
 }]);
 
 
-angular.module('categoriesApp').controller('categoriesNewCtrl', [ '$scope', '$routeParams', '$rootScope', '$location', 'categoriesFact', function ($scope, $routeParams, $rootScope, $location, categoriesFact) {
+angular.module('categoriesApp').controller('categoriesNewCtrl', [ '$scope', '$window', '$routeParams', '$rootScope', '$location', 'categoriesFact', function ($scope, $window, $routeParams, $rootScope, $location, categoriesFact) {
 
     $scope.category = new categoriesFact;
 
@@ -95,7 +95,8 @@ angular.module('categoriesApp').controller('categoriesNewCtrl', [ '$scope', '$ro
 
     var success = function(response, args){
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'category created', type:'success'});
-        $location.path('/conference/'+$routeParams.confId+'/categories/list');
+        $window.history.back();
+        //$location.path('/conference/'+$routeParams.confId+'/categories/list');
     }
 
     $scope.create = function(form){
@@ -112,7 +113,7 @@ angular.module('categoriesApp').controller('categoriesNewCtrl', [ '$scope', '$ro
  *
  * @type {controller}
  */
-angular.module('categoriesApp').controller('categoriesEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'categoriesFact', function ($scope, $rootScope, $routeParams, $location, categoriesFact)
+angular.module('categoriesApp').controller('categoriesEditCtrl', [ '$scope', '$window', '$rootScope', '$routeParams', '$location', 'categoriesFact', function ($scope, $window,  $rootScope, $routeParams, $location, categoriesFact)
 {
     $scope.category = categoriesFact.get({id: $routeParams.categoryId});
 
@@ -124,7 +125,7 @@ angular.module('categoriesApp').controller('categoriesEditCtrl', [ '$scope', '$r
     var success = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'category saved', type: 'success'});
-        $location.path('/categories/list');
+        $window.history.back();
     }
 
     $scope.update = function (form)
