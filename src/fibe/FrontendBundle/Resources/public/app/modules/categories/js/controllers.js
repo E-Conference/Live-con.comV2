@@ -17,7 +17,7 @@ angular.module('categoriesApp').controller('categoriesMainCtrl', [function ($sco
  *
  * @type {controller}
  */
-angular.module('categoriesApp').controller('categoriesListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'categoriesFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, categoriesFact, $cachedResource)
+angular.module('categoriesApp').controller('categoriesListCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'categoriesFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, categoriesFact, $cachedResource)
 {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
@@ -25,7 +25,13 @@ angular.module('categoriesApp').controller('categoriesListCtrl', ['$scope', 'GLO
     $scope.entities = [];
 
     $scope.fetch = function(filters, success, error){
-        categoriesFact.all(filters, success, error);
+        if($routeParams.confId)
+        {
+            filters.confId = $routeParams.confId;
+            categoriesFact.allByConference(filters, success, error);
+        }else{
+            categoriesFact.all(filters, success, error);
+        }
     }
 
     $scope.reload = function ()

@@ -20,265 +20,240 @@ use JMS\Serializer\Annotation\VirtualProperty;
  */
 class Category
 {
-  const DEFAULT_LEVEL = 3;
-  /**
-   * @ORM\Id
-   * @ORM\Column(type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
-   * @Expose
-   */
-  private $id;
 
-  /**
-   * @ORM\Column(type="string", length=128)
-   * @Expose
-   */
-  private $label;
-
-  /**
-   * @ORM\Column(type="integer", options={"default" = 3})
-   * @Expose
-   */
-  private $level;
-
-  /**
-   * @ORM\Column(type="string", length=128)
-   */
-  private $slug;
-
-  /**
-   * @ORM\Column(type="text", nullable=true)
-   * @Expose
-   */
-  private $description;
-
-  /**
-   * @ORM\Column(type="string", nullable=true)
-   * @Expose
-   */
-  private $color;
-
-  /**
-   * VEvents related to an category
-   *
-   * @ORM\OneToMany(targetEntity="VEvent", mappedBy="category",cascade={"persist","remove"})
-   * @ORM\JoinColumn( onDelete="CASCADE")
-   * @Expose
-   * @SerializedName("vEvents")
-   */
-  private $vEvents;
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
+     */
+    private $id;
 
 
-  /**
-   * toString
-   *
-   * @return string
-   */
-  public function __toString()
-  {
-    return $this->getLabel();
-  }
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
+    private $slug;
 
-  /**
-   * Constructor
-   */
-  public function __construct()
-  {
-    $this->childs = new ArrayCollection();
-    $this->VEvent = new ArrayCollection();
-    $this->level = self::DEFAULT_LEVEL;
-  }
+    /**
+     * @ORM\Column(type="string", length=128)
+     * @Expose
+     */
+    private $label;
 
-  /**
-   * Slugify
-   */
-  public function slugify()
-  {
-    $this->setSlug(StringTools::slugify($this->getLabel()));
-  }
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Expose
+     */
+    private $color;
 
-  /**
-   * onUpdate
-   *
-   * @ORM\PrePersist()
-   * @ORM\PreUpdate()
-   */
-  public function onUpdate()
-  {
-    $this->slugify();
-  }
+    /**
+     * Events related to an category
+     *
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="category",cascade={"persist"})
+     * @ORM\JoinColumn( onDelete="CASCADE")
+     * @Expose
+     */
+    private $events;
 
-  /**
-   * Get id
-   *
-   * @return integer
-   */
-  public function getId()
-  {
-    return $this->id;
-  }
+    /**
+     * Main Event
+     *
+     * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="categories", cascade={"persist"})
+     * @ORM\JoinColumn(name="mainevent_id", referencedColumnName="id")
+     * @Expose
+     * @SerializedName("mainEvent")
+     */
+    private $mainEvent;
 
-  /**
-   * Set label
-   *
-   * @param $label
-   *
-   * @return $this
-   */
-  public function setLabel($label)
-  {
-    $this->label = $label;
+    /**
+     * Main Event
+     *
+     * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\CategoryGlobal", inversedBy="categories", cascade={"persist"})
+     * @ORM\JoinColumn(name="categoryglobal_id", referencedColumnName="id")
+     * @Expose
+     * @SerializedName("categoryGlobal")
+     */
+    private $categoryGlobal;
 
-    return $this;
-  }
 
-  /**
-   * Get name
-   *
-   * @return string
-   */
-  public function getLabel()
-  {
-    return $this->label;
-  }
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Expose
+     */
+    private $description;
 
-  /**
-   * Set slug
-   *
-   * @param string $slug
-   *
-   * @return $this
-   */
-  public function setSlug($slug)
-  {
-    $this->slug = $slug;
 
-    return $this;
-  }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+    }
 
-  /**
-   * Get slug
-   *
-   * @return string
-   */
-  public function getSlug()
-  {
-    return $this->slug;
-  }
 
-  /**
-   * Set description
-   *
-   * @param string $description
-   *
-   * @return $this
-   */
-  public function setDescription($description)
-  {
-    $this->description = $description;
+    /**
+     * Slugify
+     */
+    public function slugify()
+    {
+        $this->setSlug(StringTools::slugify($this->getLabel()));
+    }
 
-    return $this;
-  }
+    /**
+     * onUpdate
+     *
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function onUpdate()
+    {
+        $this->slugify();
+    }
 
-  /**
-   * Get description
-   *
-   * @return string
-   */
-  public function getDescription()
-  {
-    return $this->description;
-  }
 
-  /**
-   * Set color
-   *
-   * @param string $color
-   *
-   * @return $this
-   */
-  public function setColor($color)
-  {
-    $this->color = $color;
+    /**
+     * toString
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getLabel();
+    }
 
-    return $this;
-  }
 
-  /**
-   * Get color
-   *
-   * @return string
-   */
-  public function getColor()
-  {
-    return $this->color;
-  }
+    /**
+     * @return mixed
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
 
-  /**
-   * Set level
-   *
-   * @param integer $level
-   *
-   * @return $this
-   */
-  public function setLevel($level)
-  {
-    $this->level = $level;
+    /**
+     * @param mixed $color
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+    }
 
-    return $this;
-  }
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 
-  /**
-   * Get level
-   *
-   * @return integer
-   */
-  public function getLevel()
-  {
-    return $this->level;
-  }
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
 
-  /**
-   * Add VEvent
-   *
-   * @param VEvent $VEvent
-   *
-   * @return $this
-   */
-  public function addVEvent(VEvent $VEvent)
-  {
-    $this->VEvent[] = $VEvent;
+    /**
+     * @return mixed
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
 
-    return $this;
-  }
+    /**
+     * @param mixed $events
+     */
+    public function setEvents($events)
+    {
+        $this->events = $events;
+    }
 
-  /**
-   * Remove VEvent
-   *
-   * @param VEvent $VEvent
-   */
-  public function removeVEvent(VEvent $VEvent)
-  {
-    $this->VEvent->removeElement($VEvent);
-  }
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-  /**
-   * Get VEvent
-   *
-   * @return \Doctrine\Common\Collections\Collection
-   */
-  public function getVEvents()
-  {
-    return $this->vEvents;
-  }
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
-  /**
-   * @param mixed $vEvents
-   */
-  public function setVEvents($vEvents)
-  {
-    $this->vEvents = $vEvents;
-  }
+    /**
+     * @return mixed
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * @param mixed $label
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMainEvent()
+    {
+        return $this->mainEvent;
+    }
+
+    /**
+     * @param mixed $mainEvent
+     */
+    public function setMainEvent($mainEvent)
+    {
+        $this->mainEvent = $mainEvent;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategoryGlobal()
+    {
+        return $this->categoryGlobal;
+    }
+
+    /**
+     * @param mixed $categoryGlobal
+     */
+    public function setCategoryGlobal($categoryGlobal)
+    {
+        $this->categoryGlobal = $categoryGlobal;
+    }
+
+
+
 
 
 }

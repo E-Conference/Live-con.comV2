@@ -118,7 +118,7 @@ class CrudHandler
       {
         if(method_exists($entityService,strtolower($method)))
         {
-          call_user_func_array(array($entityService, strtolower($method)), array($entity));
+          call_user_func_array(array($entityService, strtolower($method)), array($entity, $entityClassName));
         }
       }
     }

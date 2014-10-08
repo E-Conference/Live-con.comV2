@@ -25,8 +25,7 @@ class CategoryRepository extends EntityRepository
     public function findAllByMainEventId($qb, $MainEventId)
     {
         if (isset($MainEventId)) {
-            $qb->leftJoin('qb.vEvent', 'ev');
-            $qb->andWhere('r.mainEvent = (:MainEventId)');
+            $qb->andWhere('qb.mainEvent = (:MainEventId)');
             $qb->setParameter('MainEventId', $MainEventId);
         }
         return $qb;

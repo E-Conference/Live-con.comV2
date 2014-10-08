@@ -30,577 +30,584 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class MainEvent extends VEvent
 {
-  /**
-   * Events
-   *
-   * @ORM\OneToMany(targetEntity="fibe\EventBundle\Entity\Event", mappedBy="mainEvent",cascade={"persist", "remove"})
-   */
-  private $events;
+    /**
+     * Events
+     *
+     * @ORM\OneToMany(targetEntity="fibe\EventBundle\Entity\Event", mappedBy="mainEvent",cascade={"persist", "remove"})
+     */
+    private $events;
 
-  /**
-   * Papers
-   *
-   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Paper", mappedBy="mainEvent",cascade={"persist", "remove"})
-   * @Expose
-   */
-  private $papers;
+    /**
+     * Papers
+     *
+     * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Paper", mappedBy="mainEvent",cascade={"persist", "remove"})
+     * @Expose
+     */
+    private $papers;
 
-  /**
-   * Roles
-   *
-   * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Role", mappedBy="mainEvent",cascade={"persist", "remove"})
-   */
-  private $roles;
+    /**
+     * Roles
+     *
+     * @ORM\OneToMany(targetEntity="fibe\ContentBundle\Entity\Role", mappedBy="mainEvent",cascade={"persist", "remove"})
+     */
+    private $roles;
 
-  /**
-   * Organizations
-   *
-   * @ORM\OneToMany(targetEntity="fibe\CommunityBundle\Entity\Organization", mappedBy="mainEvent",cascade={"persist", "remove"})
-   */
-  private $organizations;
+    /**
+     * Organizations
+     *
+     * @ORM\OneToMany(targetEntity="fibe\CommunityBundle\Entity\Organization", mappedBy="mainEvent",cascade={"persist", "remove"})
+     */
+    private $organizations;
 
-  /**
-   *
-   * @ORM\ManyToMany(targetEntity="fibe\CommunityBundle\Entity\Person",  mappedBy="mainEvents", cascade={"persist","merge","remove"})
-   * @Expose
-   */
-  private $persons;
+    /**
+     * Categories
+     *
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="mainEvent",cascade={"persist", "remove"})
+     */
+    protected $categories;
 
-  /**
-   * Team
-   *
-   * @ORM\OneToOne(targetEntity="fibe\SecurityBundle\Entity\Team",cascade={"persist", "remove"})
-   * @Expose
-   */
-  private $team;
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="fibe\CommunityBundle\Entity\Person",  mappedBy="mainEvents", cascade={"persist","merge","remove"})
+     * @Expose
+     */
+    private $persons;
 
-  /**
-   * mappingFiles
-   *
-   * @ORM\OneToOne(targetEntity="fibe\EventBundle\Entity\MainEventSettings", mappedBy="mainEvent", cascade={"all"})
-   */
-  private $setting;
+    /**
+     * Team
+     *
+     * @ORM\OneToOne(targetEntity="fibe\SecurityBundle\Entity\Team",cascade={"persist", "remove"})
+     * @Expose
+     */
+    private $team;
 
-  /**
-   * @var UploadedFile
-   * @Assert\File(maxSize="2M",
-   *   mimeTypes = {"image/jpeg", "image/png", "image/gif", "image/jpg"},
-   *   mimeTypesMessage = "The file must be an image"
-   * )
-   */
-  private $logo;
+    /**
+     * mappingFiles
+     *
+     * @ORM\OneToOne(targetEntity="fibe\EventBundle\Entity\MainEventSettings", mappedBy="mainEvent", cascade={"all"})
+     */
+    private $setting;
 
-  /**
-   * @var String
-   * @ORM\Column(name="logoPath", type="string", length=255,nullable=true)
-   */
-  private $logoPath;
+    /**
+     * @var UploadedFile
+     * @Assert\File(maxSize="2M",
+     *   mimeTypes = {"image/jpeg", "image/png", "image/gif", "image/jpg"},
+     *   mimeTypesMessage = "The file must be an image"
+     * )
+     */
+    private $logo;
 
-  /**
-   * @ORM\Column(type="string", length=256, nullable=true)
-   */
-  private $slug;
+    /**
+     * @var String
+     * @ORM\Column(name="logoPath", type="string", length=255,nullable=true)
+     */
+    private $logoPath;
 
-  /**
-   *
-   * @ORM\Column(type="string", length=128, nullable=true)
-   */
-  private $acronym;
+    /**
+     * @ORM\Column(type="string", length=256, nullable=true)
+     */
+    private $slug;
 
-  /**
-   * Slugify
-   */
-  public function slugify()
-  {
-    $this->setSlug(StringTools::slugify($this->getId() . $this->getLabel()));
-  }
+    /**
+     *
+     * @ORM\Column(type="string", length=128, nullable=true)
+     */
+    private $acronym;
 
-  /**
-   * onUpdate
-   *
-   * @ORM\PostPersist()
-   * @ORM\PreUpdate()
-   */
-  public function slugifyOnUpdate()
-  {
-    $this->slugify();
-  }
+    /**
+     * Slugify
+     */
+    public function slugify()
+    {
+        $this->setSlug(StringTools::slugify($this->getId() . $this->getLabel()));
+    }
 
-  /**
-   * Set slug
-   *
-   * @param string $slug
-   *
-   * @return $this
-   */
-  public function setSlug($slug)
-  {
-    $this->slug = $slug;
+    /**
+     * onUpdate
+     *
+     * @ORM\PostPersist()
+     * @ORM\PreUpdate()
+     */
+    public function slugifyOnUpdate()
+    {
+        $this->slugify();
+    }
 
-    return $this;
-  }
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return $this
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
 
-  /**
-   * Get slug
-   *
-   * @return string
-   */
-  public function getSlug()
-  {
-    return $this->slug;
-  }
+        return $this;
+    }
 
-  /**
-   * Sets file.
-   *
-   * @param \Symfony\Component\HttpFoundation\File\UploadedFile $logo
-   *
-   * @return $this
-   */
-  public function setLogo(UploadedFile $logo = null)
-  {
-    $this->logo = $logo;
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
 
-    return $this;
-  }
+    /**
+     * Sets file.
+     *
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $logo
+     *
+     * @return $this
+     */
+    public function setLogo(UploadedFile $logo = null)
+    {
+        $this->logo = $logo;
 
-  /**
-   * Get file.
-   *
-   * @return UploadedFile
-   */
-  public function getLogo()
-  {
-    return $this->logo;
-  }
+        return $this;
+    }
 
-  /**
-   * Set the path of the confgerence's logo
-   *
-   * @param $logoPath
-   *
-   * @return $this
-   */
-  public function setLogoPath($logoPath)
-  {
-    $this->logoPath = $logoPath;
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getLogo()
+    {
+        return $this->logo;
+    }
 
-    return $this;
-  }
+    /**
+     * Set the path of the confgerence's logo
+     *
+     * @param $logoPath
+     *
+     * @return $this
+     */
+    public function setLogoPath($logoPath)
+    {
+        $this->logoPath = $logoPath;
 
-  /**
-   * Return the path of the confgerence's logo
-   *
-   * @return String
-   */
-  public function LogoPath()
-  {
-    return $this->logoPath;
-  }
+        return $this;
+    }
 
-  /**
-   * Constructor
-   */
-  public function __construct()
-  {
-    parent::__construct();
-    $this->setIsAllDay(true);
-    $this->events = new ArrayCollection();
-    $this->roles = new ArrayCollection();
-    $this->locations = new ArrayCollection();
-    $this->papers = new ArrayCollection();
-    $this->persons = new ArrayCollection();
-    $this->topics = new ArrayCollection();
-    $this->sponsors = new ArrayCollection();
-    $this->organizations = new ArrayCollection();
-  }
+    /**
+     * Return the path of the confgerence's logo
+     *
+     * @return String
+     */
+    public function LogoPath()
+    {
+        return $this->logoPath;
+    }
 
-  /**
-   * Add locations
-   *
-   * @param Location $locations
-   *
-   * @return $this
-   */
-  public function addLocation(Location $locations)
-  {
-    $this->locations[] = $locations;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setIsAllDay(true);
+        $this->events = new ArrayCollection();
+        $this->roles = new ArrayCollection();
+        $this->locations = new ArrayCollection();
+        $this->papers = new ArrayCollection();
+        $this->persons = new ArrayCollection();
+        $this->topics = new ArrayCollection();
+        $this->sponsors = new ArrayCollection();
+        $this->organizations = new ArrayCollection();
+    }
 
-    return $this;
-  }
+    /**
+     * Add locations
+     *
+     * @param Location $locations
+     *
+     * @return $this
+     */
+    public function addLocation(Location $locations)
+    {
+        $this->locations[] = $locations;
 
-  /**
-   * Remove locations
-   *
-   * @param Location $locations
-   */
-  public function removeLocation(Location $locations)
-  {
-    $this->locations->removeElement($locations);
-  }
+        return $this;
+    }
 
-  /**
-   * Get locations
-   *
-   * @return \Doctrine\Common\Collections\Collection
-   */
-  public function getLocations()
-  {
-    return $this->locations;
-  }
+    /**
+     * Remove locations
+     *
+     * @param Location $locations
+     */
+    public function removeLocation(Location $locations)
+    {
+        $this->locations->removeElement($locations);
+    }
 
-  /**
-   * Add papers
-   *
-   * @param Paper $papers
-   *
-   * @return $this
-   */
-  public function addPaper(Paper $papers)
-  {
-    $this->papers[] = $papers;
+    /**
+     * Get locations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLocations()
+    {
+        return $this->locations;
+    }
 
-    return $this;
-  }
+    /**
+     * Add papers
+     *
+     * @param Paper $papers
+     *
+     * @return $this
+     */
+    public function addPaper(Paper $papers)
+    {
+        $this->papers[] = $papers;
 
-  /**
-   * Remove papers
-   *
-   * @param Paper $papers
-   */
-  public function removePaper(Paper $papers)
-  {
-    $this->papers->removeElement($papers);
-  }
+        return $this;
+    }
 
-  /**
-   * Get papers
-   *
-   * @return \Doctrine\Common\Collections\Collection
-   */
-  public function getPapers()
-  {
-    return $this->papers;
-  }
+    /**
+     * Remove papers
+     *
+     * @param Paper $papers
+     */
+    public function removePaper(Paper $papers)
+    {
+        $this->papers->removeElement($papers);
+    }
 
-  /**
-   * Add role
-   *
-   * @param Role $role
-   *
-   * @return $this
-   */
-  public function addRole(Role $role)
-  {
-    $this->roles[] = $role;
+    /**
+     * Get papers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPapers()
+    {
+        return $this->papers;
+    }
 
-    return $this;
-  }
+    /**
+     * Add role
+     *
+     * @param Role $role
+     *
+     * @return $this
+     */
+    public function addRole(Role $role)
+    {
+        $this->roles[] = $role;
 
-  /**
-   * Remove role
-   *
-   * @param Role $role
-   */
-  public function removeRole(Role $role)
-  {
-    $this->roles->removeElement($role);
-  }
+        return $this;
+    }
 
-  /**
-   * Get papers
-   *
-   * @return \Doctrine\Common\Collections\Collection
-   */
-  public function getRoles()
-  {
-    return $this->roles;
-  }
+    /**
+     * Remove role
+     *
+     * @param Role $role
+     */
+    public function removeRole(Role $role)
+    {
+        $this->roles->removeElement($role);
+    }
 
-  /**
-   * Add persons
-   *
-   * @param Person $persons
-   *
-   * @return $this
-   */
-  public function addPerson(Person $persons)
-  {
-    $this->persons[] = $persons;
+    /**
+     * Get papers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
 
-    return $this;
-  }
+    /**
+     * Add persons
+     *
+     * @param Person $persons
+     *
+     * @return $this
+     */
+    public function addPerson(Person $persons)
+    {
+        $this->persons[] = $persons;
 
-  /**
-   * Remove persons
-   *
-   * @param Person $persons
-   */
-  public function removePerson(Person $persons)
-  {
-    $this->persons->removeElement($persons);
-  }
+        return $this;
+    }
 
-  /**
-   * Get persons
-   *
-   * @return \Doctrine\Common\Collections\Collection
-   */
-  public function getPersons()
-  {
-    return $this->persons;
-  }
+    /**
+     * Remove persons
+     *
+     * @param Person $persons
+     */
+    public function removePerson(Person $persons)
+    {
+        $this->persons->removeElement($persons);
+    }
 
-  /**
-   *
-   * @param \fibe\SecurityBundle\Entity\Team $team
-   *
-   * @return $this
-   */
-  public function setTeam($team)
-  {
-    $this->team = $team;
+    /**
+     * Get persons
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPersons()
+    {
+        return $this->persons;
+    }
 
-    return $this;
-  }
+    /**
+     *
+     * @param \fibe\SecurityBundle\Entity\Team $team
+     *
+     * @return $this
+     */
+    public function setTeam($team)
+    {
+        $this->team = $team;
 
-  /**
-   *
-   * @return \fibe\SecurityBundle\Entity\Team
-   */
-  public function getTeam()
-  {
-    return $this->team;
-  }
+        return $this;
+    }
 
-  /**
-   * Add sponsors
-   *
-   * @param Sponsor $sponsor
-   *
-   * @internal param \fibe\EventBundle\Entity\Sponsor $sponsors
-   *
-   * @return $this
-   */
-  public function addSponsor(Sponsor $sponsor)
-  {
-    $this->sponsors[] = $sponsor;
+    /**
+     *
+     * @return \fibe\SecurityBundle\Entity\Team
+     */
+    public function getTeam()
+    {
+        return $this->team;
+    }
 
-    return $this;
-  }
+    /**
+     * Add sponsors
+     *
+     * @param Sponsor $sponsor
+     *
+     * @internal param \fibe\EventBundle\Entity\Sponsor $sponsors
+     *
+     * @return $this
+     */
+    public function addSponsor(Sponsor $sponsor)
+    {
+        $this->sponsors[] = $sponsor;
 
-  /**
-   * Remove sponsors
-   *
-   * @param \fibe\ContentBundle\Entity\Sponsor $sponsor
-   */
-  public function removeSponsor(Sponsor $sponsor)
-  {
-    $this->sponsors->removeElement($sponsor);
-  }
+        return $this;
+    }
 
-  /**
-   * Get sponsors
-   *
-   * @return \Doctrine\Common\Collections\Collection
-   */
-  public function getSponsors()
-  {
-    return $this->sponsors;
-  }
+    /**
+     * Remove sponsors
+     *
+     * @param \fibe\ContentBundle\Entity\Sponsor $sponsor
+     */
+    public function removeSponsor(Sponsor $sponsor)
+    {
+        $this->sponsors->removeElement($sponsor);
+    }
 
-  /**
-   * Add organizations
-   *
-   * @param Organization $organizations
-   *
-   * @return $this
-   */
-  public function addOrganization(Organization $organizations)
-  {
-    $this->organizations[] = $organizations;
+    /**
+     * Get sponsors
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSponsors()
+    {
+        return $this->sponsors;
+    }
 
-    return $this;
-  }
+    /**
+     * Add organizations
+     *
+     * @param Organization $organizations
+     *
+     * @return $this
+     */
+    public function addOrganization(Organization $organizations)
+    {
+        $this->organizations[] = $organizations;
 
-  /**
-   * Remove organizations
-   *
-   * @param Organization $organizations
-   */
-  public function removeOrganization(Organization $organizations)
-  {
-    $this->organizations->removeElement($organizations);
-  }
+        return $this;
+    }
 
-  /**
-   * Get organizations
-   *
-   * @return \Doctrine\Common\Collections\Collection
-   */
-  public function getOrganizations()
-  {
-    return $this->organizations;
-  }
+    /**
+     * Remove organizations
+     *
+     * @param Organization $organizations
+     */
+    public function removeOrganization(Organization $organizations)
+    {
+        $this->organizations->removeElement($organizations);
+    }
 
-  /**
-   * Add events
-   *
-   * @param VEvent $events
-   *
-   * @return $this
-   */
-  public function addEvent(VEvent $events)
-  {
-    $this->events[] = $events;
+    /**
+     * Get organizations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrganizations()
+    {
+        return $this->organizations;
+    }
 
-    return $this;
-  }
+    /**
+     * Add events
+     *
+     * @param VEvent $events
+     *
+     * @return $this
+     */
+    public function addEvent(VEvent $events)
+    {
+        $this->events[] = $events;
 
-  /**
-   * Remove events
-   *
-   * @param VEvent $events
-   */
-  public function removeEvent(VEvent $events)
-  {
-    $this->events->removeElement($events);
-  }
+        return $this;
+    }
 
-  /**
-   * Get events
-   *
-   * @return \Doctrine\Common\Collections\Collection
-   */
-  public function getEvents()
-  {
-    return $this->events;
-  }
+    /**
+     * Remove events
+     *
+     * @param VEvent $events
+     */
+    public function removeEvent(VEvent $events)
+    {
+        $this->events->removeElement($events);
+    }
 
-  /**
-   * Get sub-events
-   *
-   * @return \Doctrine\Common\Collections\Collection
-   */
-  public function getSubEvents()
-  {
-    return $this->events;
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * Get sub-events
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSubEvents()
+    {
+        return $this->events;
 //	  $sub_events[] = $this->events;
 //	  $sub_events->removeElement($this->mainEvent);
 //	  return $sub_events;
-  }
-
-  /**
-   * Upload method for the logo of the main event
-   */
-  public function uploadLogo()
-  {
-    // the file property can be empty if the field is not required
-    if (null === $this->getLogo())
-    {
-      return;
     }
 
-
-    // générer un nom aléatoire et essayer de deviner l'extension (plus sécurisé)
-    $extension = $this->getLogo()->guessExtension();
-    if (!$extension)
+    /**
+     * Upload method for the logo of the main event
+     */
+    public function uploadLogo()
     {
-      // l'extension n'a pas été trouvée
-      $extension = 'bin';
+        // the file property can be empty if the field is not required
+        if (null === $this->getLogo())
+        {
+            return;
+        }
+
+
+        // générer un nom aléatoire et essayer de deviner l'extension (plus sécurisé)
+        $extension = $this->getLogo()->guessExtension();
+        if (!$extension)
+        {
+            // l'extension n'a pas été trouvée
+            $extension = 'bin';
+        }
+        $name = $this->getId() . '.' . $extension;
+        $this->getLogo()->move($this->getUploadRootDir(), $name);
+        $this->setLogoPath($name);
     }
-    $name = $this->getId() . '.' . $extension;
-    $this->getLogo()->move($this->getUploadRootDir(), $name);
-    $this->setLogoPath($name);
-  }
 
-  /**
-   * @TODO comment
-   *
-   * @return string
-   */
-  protected function getUploadRootDir()
-  {
-    // the absolute directory path where uploaded
-    // documents should be saved
-    return __DIR__ . '/../../../../../web/' . $this->getUploadDir();
-  }
+    /**
+     * @TODO comment
+     *
+     * @return string
+     */
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__ . '/../../../../../web/' . $this->getUploadDir();
+    }
 
-  /**
-   * @TODO comment
-   *
-   * @return string
-   */
-  protected function getUploadDir()
-  {
-    // get rid of the __DIR__ so it doesn't screw up
-    // when displaying uploaded doc/image in the view.
-    return 'uploads/';
-  }
+    /**
+     * @TODO comment
+     *
+     * @return string
+     */
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads/';
+    }
 
-  /**
-   * Get logoPath
-   *
-   * @return string
-   */
-  public function getLogoPath()
-  {
-    return $this->logoPath;
-  }
+    /**
+     * Get logoPath
+     *
+     * @return string
+     */
+    public function getLogoPath()
+    {
+        return $this->logoPath;
+    }
 
-  /**
-   * @TODO comment
-   *
-   * @return bool
-   */
-  public function isEmpty()
-  {
-    return (count($this->events) <= 1)
-    and (count($this->locations) <= 1)
-    and (count($this->papers) == 0)
-    and (count($this->persons) == 0)
-    and (count($this->organizations) == 0)
-    and (count($this->topics) == 0);
+    /**
+     * @TODO comment
+     *
+     * @return bool
+     */
+    public function isEmpty()
+    {
+        return (count($this->events) <= 1)
+        and (count($this->locations) <= 1)
+        and (count($this->papers) == 0)
+        and (count($this->persons) == 0)
+        and (count($this->organizations) == 0)
+        and (count($this->topics) == 0);
 
-  }
+    }
 
-  /**
-   * Set acronym
-   *
-   * @param string $acronym
-   *
-   * @return MainEvent
-   */
-  public function setAcronym($acronym)
-  {
-    $this->acronym = $acronym;
+    /**
+     * Set acronym
+     *
+     * @param string $acronym
+     *
+     * @return MainEvent
+     */
+    public function setAcronym($acronym)
+    {
+        $this->acronym = $acronym;
 
-    return $this;
-  }
+        return $this;
+    }
 
-  /**
-   * Get acronym
-   *
-   * @return string
-   */
-  public function getAcronym()
-  {
-    return $this->acronym;
-  }
+    /**
+     * Get acronym
+     *
+     * @return string
+     */
+    public function getAcronym()
+    {
+        return $this->acronym;
+    }
 
-  /**
-   * @return mixed
-   */
-  public function getSetting()
-  {
-    return $this->setting;
-  }
+    /**
+     * @return mixed
+     */
+    public function getSetting()
+    {
+        return $this->setting;
+    }
 
-  /**
-   * @param mixed $setting
-   */
-  public function setSetting($setting)
-  {
-    $this->setting = $setting;
-  }
+    /**
+     * @param mixed $setting
+     */
+    public function setSetting($setting)
+    {
+        $this->setting = $setting;
+    }
 }

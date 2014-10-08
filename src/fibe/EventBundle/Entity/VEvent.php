@@ -227,13 +227,6 @@ abstract class VEvent
    */
   protected $topics;
 
-  /**
-   * Category
-   *
-   * @ORM\ManyToOne(targetEntity="Category", inversedBy="vEvents")
-   * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="Set Null")
-   */
-  protected $category;
 
   /**
    * Sponsors related to a VEvent
@@ -759,33 +752,6 @@ abstract class VEvent
 //  {
 //    return $this->location;
 //  }
-
-
-  /**
-   * Set category
-   *
-   * @param Category $category
-   *
-   * @return $this
-   */
-  public function setCategory(Category $category = null)
-  {
-    $this->category = $category;
-
-    return $this;
-  }
-
-  /**
-   * Get category
-   *
-   * @return Category
-   */
-  public function getCategory()
-  {
-    return $this->category;
-  }
-
-
 //  /**
 //   * Add roles
 //   *

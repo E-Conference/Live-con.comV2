@@ -3,3 +3,7 @@ services:
         class:  fibe\EventBundle\Services\MainEventService
         arguments: ["@doctrine.orm.entity_manager","@security.context"]
 
+    fibe.CategoryService:
+            class:  fibe\EventBundle\Services\CategoryService
+            arguments: ["@doctrine.orm.entity_manager","@security.context"]
+
