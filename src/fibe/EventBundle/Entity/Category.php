@@ -1,17 +1,11 @@
 <?php
 
 namespace fibe\EventBundle\Entity;
-
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
 use fibe\ContentBundle\Util\StringTools;
-
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
-use JMS\Serializer\Annotation\Groups;
-use JMS\Serializer\Annotation\MaxDepth;
-use JMS\Serializer\Annotation\SerializedName;
-use JMS\Serializer\Annotation\VirtualProperty;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="category")
@@ -21,7 +15,6 @@ use JMS\Serializer\Annotation\VirtualProperty;
  */
 class Category
 {
-
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -30,6 +23,12 @@ class Category
      */
     private $id;
 
+    /**
+     * @ORM\Column(type="string", length=128,  unique=true)
+     * @Expose
+     */
+    private $label;
+
 
     /**
      * @ORM\Column(type="string", length=128)
@@ -37,10 +36,10 @@ class Category
     private $slug;
 
     /**
-     * @ORM\Column(type="string", length=128)
+     * @ORM\Column(type="text", nullable=true)
      * @Expose
      */
-    private $label;
+    private $description;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -48,40 +47,15 @@ class Category
      */
     private $color;
 
+
     /**
-     * Events related to an category
+     * Category versions related to the global category
      *
-     * @ORM\OneToMany(targetEntity="Event", mappedBy="category",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="CategoryVersion", mappedBy="category",cascade={"persist"})
      * @ORM\JoinColumn( onDelete="CASCADE")
      * @Expose
      */
-    private $events;
-
-    /**
-     * Main Event
-     *
-     * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="categories", cascade={"persist"})
-     * @ORM\JoinColumn(name="mainevent_id", referencedColumnName="id")
-     * @Expose
-     * @MaxDepth(1)
-     * @SerializedName("mainEvent")
-     */
-    private $mainEvent;
-
-    /**
-     * Main Event
-     *
-     * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\CategoryGlobal", inversedBy="categories", cascade={"persist"})
-     * @ORM\JoinColumn(name="categoryglobal_id", referencedColumnName="id")
-     */
-    private $categoryGlobal;
-
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     * @Expose
-     */
-    private $description;
+    private $categoryVersions;
 
 
     /**
@@ -89,9 +63,8 @@ class Category
      */
     public function __construct()
     {
-        $this->events = new ArrayCollection();
+       // $this->$categoryVersions = new ArrayCollection();
     }
-
 
     /**
      * Slugify
@@ -127,17 +100,17 @@ class Category
     /**
      * @return mixed
      */
-    public function getColor()
+    public function getId()
     {
-        return $this->color;
+        return $this->id;
     }
 
     /**
-     * @param mixed $color
+     * @param mixed $id
      */
-    public function setColor($color)
+    public function setId($id)
     {
-        $this->color = $color;
+        $this->id = $id;
     }
 
     /**
@@ -159,38 +132,6 @@ class Category
     /**
      * @return mixed
      */
-    public function getEvents()
-    {
-        return $this->events;
-    }
-
-    /**
-     * @param mixed $events
-     */
-    public function setEvents($events)
-    {
-        $this->events = $events;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getLabel()
     {
         return $this->label;
@@ -202,22 +143,6 @@ class Category
     public function setLabel($label)
     {
         $this->label = $label;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMainEvent()
-    {
-        return $this->mainEvent;
-    }
-
-    /**
-     * @param mixed $mainEvent
-     */
-    public function setMainEvent($mainEvent)
-    {
-        $this->mainEvent = $mainEvent;
     }
 
     /**
@@ -236,24 +161,39 @@ class Category
         $this->slug = $slug;
     }
 
+
+
     /**
      * @return mixed
      */
-    public function getCategoryGlobal()
+    public function getColor()
     {
-        return $this->categoryGlobal;
+        return $this->color;
     }
 
     /**
-     * @param mixed $categoryGlobal
+     * @param mixed $color
      */
-    public function setCategoryGlobal($categoryGlobal)
+    public function setColor($color)
     {
-        $this->categoryGlobal = $categoryGlobal;
+        $this->color = $color;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCategoryVersions()
+    {
+        return $this->categoryVersions;
+    }
 
-
-
+    /**
+     * @param mixed $categoryVersions
+     */
+    public function setCategoryVersions($categoryVersions)
+    {
+        $this->categoryVersions = $categoryVersions;
+    }
 
 }
+

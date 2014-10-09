@@ -17,7 +17,7 @@ angular.module('categoriesApp').factory('categoriesFact', ['$resource', '$cached
                 update: {method: 'PUT', url: globalConfig.api.urls.get_categories + '/:id', params: {'id': '@id'}, isArray: false},
                 delete: {method: 'DELETE', url: globalConfig.api.urls.get_categories + '/:id', params: {'id': '@id'}, isArray: false},
                 all: {method: 'GET', params: {}, isArray: true},
-                allByConference: {method: 'GET', url: globalConfig.api.urls.get_conferences + '/:confId/categories', params: {'confId': '@confId'}, isArray: true}
+                allByConference: {method: 'GET', url: globalConfig.api.urls.get_conferences + '/:confId/categoryVersions', params: {'confId': '@confId'}, isArray: true}
             }
         );
     }]);

@@ -62,7 +62,7 @@ class MainEvent extends VEvent
     /**
      * Categories
      *
-     * @ORM\OneToMany(targetEntity="Category", mappedBy="mainEvent",cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="CategoryVersion", mappedBy="mainEvent",cascade={"persist", "remove"})
      */
     protected $categories;
 

@@ -72,7 +72,7 @@ class Event extends VEvent
     /**
      * Category
      *
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="events", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="CategoryVersion", inversedBy="events", cascade={"persist"})
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
      * @Expose
      */

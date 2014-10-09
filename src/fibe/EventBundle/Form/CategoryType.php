@@ -15,17 +15,11 @@ class CategoryType extends AbstractType
             ->add('label')
             ->add('description')
             ->add('color')
-            ->add('mainEvent', 'entity', array(
-                'class' => 'fibeEventBundle:MainEvent',
-                'required' => 'true',
-                'multiple' => false,
-            ))
-            ->add('events', 'entity', array(
-                'class' => 'fibeEventBundle:Event',
+            ->add('categoryVersions', 'entity', array(
+                'class' => 'fibeEventBundle:CategoryVersion',
                 'required' => 'false',
                 'multiple' => true,
             ));
-
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

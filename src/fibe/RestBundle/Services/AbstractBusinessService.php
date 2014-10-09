@@ -2,7 +2,10 @@
 namespace fibe\RestBundle\Services;
 
 
+use Doctrine\Common\Annotations\Reader;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  *
@@ -11,6 +14,18 @@ use Doctrine\ORM\EntityManagerInterface;
 
 abstract class AbstractBusinessService {
 
+
+    protected $reader;
+    protected $entityManager;
+    protected $securityContext;
+    private $annotationClass = 'Doctrine\\ORM\\Mapping\\Column';
+
+    public function __construct(EntityManager $entityManager, SecurityContextInterface $securityContext, Reader $reader)
+    {
+        $this->entityManager   = $entityManager;
+        $this->reader          = $reader;
+        $this->securityContext = $securityContext;
+    }
 
     /**
      * check if an attribute has been changed, if so : return the old value
@@ -33,6 +48,7 @@ abstract class AbstractBusinessService {
      * @param EntityManagerInterface $em
      * @param mixed $entity
      * @param mixed $entityClassName
+     * @param String $setterFct
      * @return false | mixed the old attribute
      */
     protected function createGlobalEntity(EntityManagerInterface $em, $entity, $entityClassName, $setterFct)
@@ -41,14 +57,11 @@ abstract class AbstractBusinessService {
             return false;
         }
 
-        $globalEntityClassName = $entityClassName."Global";
-
+        $globalEntityClassName = str_replace('Version', '', $entityClassName);
         $globalEntity = $em->getRepository($globalEntityClassName)->findOneByLabel($entity->getLabel());
 
         if($globalEntity == null){
-            $globalEntity = new $globalEntityClassName();
-            $globalEntity->setDescription($entity->getDescription());
-            $globalEntity->setLabel($entity->getLabel());
+            $globalEntity = $this->copyVersionObject($globalEntityClassName, $entityClassName, $entity );
         }
 
         $entity->$setterFct($globalEntity);
@@ -59,6 +72,37 @@ abstract class AbstractBusinessService {
 
         return true;
     }
+
+
+    /**
+     * Produce a global object copied from a version object
+     * @param String $globalEntityClassName, classname of the global object to produce
+     * @param String $entityClassName, classname of the version object to make a copy from
+     * @param mixed $versionObject, The object to copy
+     * @return mixed | The global object produce from the version object
+     */
+    protected function copyVersionObject($globalEntityClassName, $entityClassName, $versionObject){
+        $globalEntity = new $globalEntityClassName();
+
+        $reflectionEntityObject = new \ReflectionObject(new $entityClassName());
+
+        foreach ($reflectionEntityObject->getProperties() as $reflectionProperty) {
+            $annotation = $this->reader->getPropertyAnnotation($reflectionProperty, $this->annotationClass);
+            if (null !== $annotation) {
+                if($annotation->type == 'string' || $annotation->type == 'text') {
+                    $fieldName = $annotation->name ? $annotation->name : $reflectionProperty->getName();
+                    $fieldNameUpperFirst = ucfirst($fieldName);
+
+                    $getter = "get" . $fieldNameUpperFirst;
+                    $setter = "set" . $fieldNameUpperFirst;
+
+                    $globalEntity->$setter($versionObject->$getter());
+                }
+            }
+        }
+        return $globalEntity;
+    }
+
 
 
 } 
