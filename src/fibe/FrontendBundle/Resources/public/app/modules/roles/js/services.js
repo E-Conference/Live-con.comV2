@@ -21,7 +21,7 @@ angular.module('roleLabelsApp').factory('roleLabelsFact', ['$resource', '$cached
                 update: {method: 'PUT', url: globalConfig.api.urls.get_roleLabels + '/:id', params: {'id': '@id'}, isArray: false},
                 delete: {method: 'DELETE', url: globalConfig.api.urls.get_roleLabels + '/:id', params: {'id': '@id'}, isArray: false},
                 all: {method: 'GET', params: {}, isArray: true},
-                allByConference: {method: 'GET', url: globalConfig.api.urls.get_conferences + '/:confId/roleLabels', params: {'confId': '@confId'}, isArray: true}
+                allByConference: {method: 'GET', url: globalConfig.api.urls.get_conferences + '/:confId/roleLabelVersions', params: {'confId': '@confId'}, isArray: true}
 
             }
         );

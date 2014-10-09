@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -20,133 +21,120 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class RoleLabel
 {
-  /**
-   * @ORM\Id
-   * @ORM\Column(type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
-   * @Expose
-   */
-  protected $id;
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
+     */
+    protected $id;
 
-  /**
-   * label
-   * @ORM\Column(type="string", name="label", nullable=false)
-   * @Expose
-   */
-  protected $label;
+    /**
+     * label
+     * @ORM\Column(type="string", name="label", nullable=false)
+     * @Expose
+     */
+    protected $label;
 
-  /**
-   * @ORM\Column(type="string", name="context", nullable=false)
-   */
-  protected $context = 'CONFERENCE';
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Expose
+     */
+    private $description;
 
-  /**
-   * role
-   * Role who have this type
-   * @ORM\OneToMany(targetEntity="Role", mappedBy="roleLabel")
-   *
-   */
-  private $roles;
+    /**
+     * Category versions related to the global roleLabel
+     *
+     * @ORM\OneToMany(targetEntity="RoleLabelVersion", mappedBy="roleLabel",cascade={"persist"})
+     * @ORM\JoinColumn( onDelete="CASCADE")
+     * @Expose
+     * @SerializedName("roleLabelVersions")
+     */
+    private $roleLabelVersions;
 
-  /**
-   * Constructor
-   */
-  public function __construct()
-  {
-    $this->role = new ArrayCollection();
-  }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+    }
 
-  /**
-   * Get id
-   *
-   * @return integer
-   */
-  public function getId()
-  {
-    return $this->id;
-  }
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-  /**
-   * Add role
-   *
-   * @param Role $role
-   *
-   * @return Role
-   */
-  public function addRole(Role $role)
-  {
-    $this->role[] = $role;
 
-    return $this;
-  }
+    /**
+     * __toString method
+     *
+     * @return mixed
+     */
+    public function __toString()
+    {
+        return $this->label;
+    }
 
-  /**
-   * Remove role
-   *
-   * @param Role $role
-   */
-  public function removeRole(Role $role)
-  {
-    $this->role->removeElement($role);
-  }
+    /**
+     * Set label
+     *
+     * @param string $label
+     *
+     * @return String
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
 
-  /**
-   * Get role
-   *
-   * @return \Doctrine\Common\Collections\Collection
-   */
-  public function getRoles()
-  {
-    return $this->roles;
-  }
+        return $this;
+    }
 
-  /**
-   * __toString method
-   *
-   * @return mixed
-   */
-  public function __toString()
-  {
-    return $this->label;
-  }
+    /**
+     * Get label
+     *
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
 
-  /**
-   * Set label
-   *
-   * @param string $label
-   *
-   * @return String
-   */
-  public function setLabel($label)
-  {
-    $this->label = $label;
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 
-    return $this;
-  }
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
 
-  /**
-   * Get label
-   *
-   * @return string
-   */
-  public function getLabel()
-  {
-    return $this->label;
-  }
+    /**
+     * @return mixed
+     */
+    public function getRoleLabelVersions()
+    {
+        return $this->roleLabelVersions;
+    }
 
-  /**
-   * @return mixed
-   */
-  public function getContext()
-  {
-    return $this->context;
-  }
+    /**
+     * @param mixed $roleLabelVersions
+     */
+    public function setRoleLabelVersions($roleLabelVersions)
+    {
+        $this->roleLabelVersions = $roleLabelVersions;
+    }
 
-  /**
-   * @param mixed $context
-   */
-  public function setContext($context)
-  {
-    $this->context = $context;
-  }
+
 }

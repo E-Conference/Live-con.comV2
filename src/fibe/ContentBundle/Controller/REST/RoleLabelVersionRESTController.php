@@ -13,35 +13,51 @@ use JMS\Serializer\Annotation\Expose;
 /**
  * RoleLabel rest controller.
  */
-class RoleLabelRESTController extends FOSRestController
+class RoleLabelVersionRESTController extends FOSRestController
 {
 
-    const ENTITY_CLASSNAME = "fibe\\ContentBundle\\Entity\\RoleLabel";
-    const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\RoleLabelType";
-
+    const ENTITY_CLASSNAME = "fibe\\ContentBundle\\Entity\\RoleLabelVersion";
+    const FORM_CLASSNAME = "fibe\\ContentBundle\\Form\\RoleLabelVersionType";
 
     /**
-     * Lists all RoleLabel entities.
-     * @Rest\Get("/roleLabels", name="content_roleLabels_all")
+     * Lists all Role Label versions entities filtered by conference.
+     * @Rest\Get("/mainEvents/{confId}/roleLabelVersions", name="content_roleLabel_versions_all_by_conference")
      * @Rest\View
      * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
      * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
      * @Rest\QueryParam(name="query", requirements=".{1,128}", nullable=true, description="the query to search.")
      * @Rest\QueryParam(name="order", nullable=true, array=true, description="an array of order.")
      */
-    public function getRoleLabelsAction(Request $request, ParamFetcherInterface $paramFetcher)
+    public function getRoleLabelVersionsByConferenceAction(Request $request, ParamFetcherInterface $paramFetcher, $confId)
+    {
+        return $this->get('fibe.rest.crudhandler')->getAll(
+            $this::ENTITY_CLASSNAME,
+            $paramFetcher,
+            $confId
+        );
+    }
+
+    /**
+     * Lists all RoleLabelVersions entities.
+     * @Rest\Get("/roleLabelVersions", name="content_roleLabel_versions_all")
+     * @Rest\View
+     * @Rest\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
+     * @Rest\QueryParam(name="limit", requirements="\d+", default="10", description="How many entity to return.")
+     * @Rest\QueryParam(name="query", requirements=".{1,128}", nullable=true, description="the query to search.")
+     * @Rest\QueryParam(name="order", nullable=true, array=true, description="an array of order.")
+     */
+    public function getRoleLabelVersionsAction(Request $request, ParamFetcherInterface $paramFetcher)
     {
         return $this->get('fibe.rest.crudhandler')->getAll(
             $this::ENTITY_CLASSNAME,
             $paramFetcher
         );
-
     }
 
     /**
-     * @Rest\Get("/roleLabels/{id}", name="content_roleLabels_get")
+     * @Rest\Get("/roleLabelVersions/{id}", name="content_roleLabel_versions_get")
      **/
-    public function getRoleLabelAction($id)
+    public function getRoleLabelVersionAction($id)
     {
 
         return $this->get('fibe.rest.crudhandler')->get(
@@ -52,15 +68,15 @@ class RoleLabelRESTController extends FOSRestController
 
 
     /**
-     * Creates a new RoleLabel from the submitted data.
+     * Creates a new RoleLabelversion from the submitted data.
      *
-     * @Rest\Post("/roleLabels", name="content_roleLabels_post")
+     * @Rest\Post("/roleLabelVersions", name="content_roleLabel_versions_post")
      *
      * @param Request $request the request object
      *
      * @return array|\FOS\RestBundle\View\View
      */
-    public function postRoleLabelAction(Request $request)
+    public function postRoleLabelVersionAction(Request $request)
     {
 
         return $this->get('fibe.rest.crudhandler')->processForm(
@@ -75,12 +91,12 @@ class RoleLabelRESTController extends FOSRestController
 
     /**
      * Put action
-     * @Rest\Put("/roleLabels/{id}", name="content_roleLabels_put")
+     * @Rest\Put("/roleLabelVersions/{id}", name="content_roleLabel_versions_put")
      * @var Request $request
      * @var integer $id Id of the entity
      * @return mixed
      */
-    public function putRoleLabelAction(Request $request, $id)
+    public function putRoleLabelVersionAction(Request $request, $id)
     {
 
         return $this->get('fibe.rest.crudhandler')->processForm(
@@ -95,12 +111,12 @@ class RoleLabelRESTController extends FOSRestController
 
     /**
      * Patch action
-     * @Rest\Patch("/roleLabels/{id}", name="content_roleLabels_patch")
+     * @Rest\Patch("/roleLabelVersions/{id}", name="content_roleLabel_versions_patch")
      * @var Request $request
      * @var integer $id Id of the entity
      * @return mixed
      */
-    public function patchRoleLabelAction(Request $request, $id)
+    public function patchRoleLabelVersionAction(Request $request, $id)
     {
         return $this->get('fibe.rest.crudhandler')->processForm(
             $request,
@@ -113,11 +129,11 @@ class RoleLabelRESTController extends FOSRestController
 
     /**
      * Delete action
-     * @Rest\Delete("/roleLabels/{id}", name="content_roleLabels_delete")
+     * @Rest\Delete("/roleLabelVersions/{id}", name="content_roleLabel_versions_delete")
      *
      * @var integer $id Id of the entity
      */
-    public function deleteRoleLabelAction($id)
+    public function deleteRoleLabelVersionAction($id)
     {
 
         return $this->get('fibe.rest.crudhandler')->delete(

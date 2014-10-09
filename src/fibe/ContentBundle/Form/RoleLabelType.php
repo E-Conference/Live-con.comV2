@@ -19,7 +19,8 @@ class RoleLabelType extends AbstractType
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
     $builder
-      ->add('label');
+      ->add('label')
+      ->add('description');
 //            ->add('roles', 'collection', array(
 //                'type' => new RoleType(),
 //                'required' => 'false',

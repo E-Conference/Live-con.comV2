@@ -70,7 +70,7 @@ class CategoryVersion
 
     /**
      * Category
-     * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\Category", inversedBy="category", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\Category", inversedBy="categoryVersions", cascade={"persist"})
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      * @Expose
      */
