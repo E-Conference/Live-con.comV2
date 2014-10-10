@@ -57,8 +57,9 @@ class RoleLabelVersion
     /**
      * role
      * Role who have this type
-     * @ORM\OneToMany(targetEntity="Role", mappedBy="roleLabel")
-     *
+     * @ORM\OneToMany(targetEntity="Role", mappedBy="roleLabelVersion")
+     *  @Expose
+     * @MaxDepth(1)
      */
     private $roles;
 

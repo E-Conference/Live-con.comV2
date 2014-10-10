@@ -5,7 +5,6 @@
     <tr>
         <th>Label<i class="fa fa-sort-asc" ng-click="order('label','ASC')"></i><i class="fa fa-sort-desc" ng-click="order('label','DESC')"></i></th>
         <th>Description</th>
-        <th>Level</th>
         <th>Color</th>
     </tr>
     </thead>
@@ -13,7 +12,6 @@
     <tr ng-repeat="category in entities  track by $index">
         <td>{{ category.label }}</td>
         <td>{{ category.description }}</td>
-        <td>{{ category.level }}</td>
         <td>
             <div style="width:28px;height:28px;border:1px solid #222;background:{{ category.color }}" title="{{ category.color }}">
             </div>

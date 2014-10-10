@@ -7,3 +7,7 @@ services:
     fibe.mail_manager:
         class:  "%mail_manager.class%"
         parent: fos_user.mailer.twig_swift
+
+    fibe.OrganizationVersionService:
+        class:  fibe\CommunityBundle\Services\OrganizationVersionService
+        arguments: ["@doctrine.orm.entity_manager","@security.context", "@annotations.reader"]

@@ -1,5 +1,6 @@
-<div ng-include="GLOBAL_CONFIG.app.modules.roles.urls.partials+'roles-actions.html'" ng-controller="rolesMainCtrl"></div>
-<input type="text" class="form-control" placeholder="Search" ng-change="search()" ng-model="query">
+<div ng-include="GLOBAL_CONFIG.app.modules.roles.urls.partials+'roles-actions.html'"></div>
+<div ng-include="GLOBAL_CONFIG.app.modules.roleLabels.urls.partials+'roleLabels-filter.html'" ></div>
+
 <table class="table table-striped">
     <thead>
     <tr>
@@ -11,7 +12,7 @@
     <tbody entity-list-handler="roles" infinite-scroll='load()' infinite-scroll-disabled='busy' infinite-scroll-distance='0.5'>
     <tr ng-repeat="role in entities  track by $index">
         <td>{{ role.person.label }}</td>
-        <td>{{ role.roleLabel.label }}</td>
+        <td>{{ role.roleLabelVersion.label }}</td>
         <td>{{ role.event.label }}</td>
 
         <td>

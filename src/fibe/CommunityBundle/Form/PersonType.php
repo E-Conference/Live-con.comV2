@@ -25,7 +25,7 @@ class PersonType extends AdditionalInformationsType
             ->add('familyName')
             ->add('email', 'email')
             ->add('organizations', 'entity', array(
-                'class' => 'fibeCommunityBundle:Organization',
+                'class' => 'fibeCommunityBundle:OrganizationVersion',
                 'required' => false,
                 'multiple' => true
             ))

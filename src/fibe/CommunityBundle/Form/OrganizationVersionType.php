@@ -2,27 +2,33 @@
 
 namespace fibe\CommunityBundle\Form;
 
-use Symfony\Component\Form\AbstractType;
+
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class AdditionalInformationsType extends AbstractType
+class OrganizationVersionType extends AdditionalInformationsType
 {
+
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
         $builder
-            ->add('id')
-            ->add('dtype')
             ->add('label')
-            ->add('website')
-            ->add('country')
-            ->add('country')
-            ->add('img')
-            ->add('description');
+            ->add('sponsors', 'entity', array(
+                'class' => 'fibeContentBundle:Sponsor',
+                'required' => 'false',
+                'multiple' => true,
+            ))
+            ->add('organization', 'entity', array(
+                'class' => 'fibeCommunityBundle:Organization',
+                'required' => 'false',
+                'multiple' => false,
+            ));
     }
 
     /**
@@ -31,8 +37,9 @@ class AdditionalInformationsType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'fibe\CommunityBundle\Entity\AdditionalInformations',
+            'data_class' => 'fibe\CommunityBundle\Entity\OrganizationVersion',
             'csrf_protection' => false,
+            'cascade_validation' => true,
         ));
     }
 
@@ -41,6 +48,7 @@ class AdditionalInformationsType extends AbstractType
      */
     public function getName()
     {
-        return 'fibe_communitybundle_additionalinformations';
+        return 'fibe_bundle_communitybundle_organizationversion';
     }
+
 }

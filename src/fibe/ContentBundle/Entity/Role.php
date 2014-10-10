@@ -21,7 +21,7 @@ use fibe\CommunityBundle\Entity\Person;
  *
  *  Don't seem to work with ajax form
  * @UniqueEntity(
- *     fields={"person", "event","roleLabel"},
+ *     fields={"person", "event","roleLabelVersion"},
  *     errorPath="role",
  *     message="This person has already this role at this event"
  * )
@@ -30,196 +30,200 @@ use fibe\CommunityBundle\Entity\Person;
  */
 class Role
 {
-  /**
-   * @ORM\Id
-   * @ORM\Column(type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
-   * @Expose
-   */
-  private $id;
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
+     */
+    private $id;
 
-  /**
-   * label
-   * @ORM\Column(type="string", name="label", nullable=false)
-   * @Expose
-   */
-  protected $label;
+    /**
+     * label
+     * @ORM\Column(type="string", name="label", nullable=false)
+     * @Expose
+     */
+    private $label;
 
-  /**
-   * Person : the person who has this role
-   *
-   * @ORM\ManyToOne(targetEntity="fibe\CommunityBundle\Entity\Person", inversedBy="roles")
-   * @Assert\NotBlank(message="You have to choose a Person")
-   * @Expose
-   */
-  private $person;
+    /**
+     * Person : the person who has this role
+     *
+     * @ORM\ManyToOne(targetEntity="fibe\CommunityBundle\Entity\Person", inversedBy="roles")
+     * @Assert\NotBlank(message="You have to choose a Person")
+     * @Expose
+     */
+    private $person;
 
-  /**
-   *
-   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\Event", inversedBy="roles")
-   *
-   * @Expose
-   */
-  private $event;
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\Event", inversedBy="roles")
+     *
+     * @Expose
+     */
+    private $event;
 
-  /**
-   * The mainEvent associated
-   *
-   * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="roles", cascade={"persist"})
-   * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
-   * @Expose
-   * @SerializedName("mainEvent")
-   */
-  private $mainEvent;
+    /**
+     * The mainEvent associated
+     *
+     * @ORM\ManyToOne(targetEntity="fibe\EventBundle\Entity\MainEvent", inversedBy="roles", cascade={"persist"})
+     * @ORM\JoinColumn(name="main_event_id", referencedColumnName="id")
+     * @Expose
+     * @SerializedName("mainEvent")
+     */
+    private $mainEvent;
 
-  /**
-   * @ORM\ManyToOne(targetEntity="fibe\ContentBundle\Entity\RoleLabel", inversedBy="roles")
-   * @ORM\JoinColumn(name="role_label_id", referencedColumnName="id")
-   * @Assert\NotBlank(message="You have to choose a role type")
-   * @SerializedName("roleLabel")
-   * @Expose
-   */
-  private $roleLabel;
-
-  /**
-   * @return mixed
-   */
-  public function getRoleLabel()
-  {
-    return $this->roleLabel;
-  }
-
-  /**
-   * @param mixed $roleLabel
-   */
-  public function setRoleLabel($roleLabel)
-  {
-    $this->roleLabel = $roleLabel;
-  }
-
-  /**
-   * computeEndAt
-   *
-   * @TODO EVENT : à corriger
-   *
-   * @ORM\PrePersist()
-   * @ORM\PreUpdate()
-   */
-  public function computeEndAt()
-  {
-    $this->setLabel(sprintf("%s is %s at %s",
-      $this->getPerson()->getlabel(),
-      $this->getRoleLabel()->getlabel(),
-      $this->getEvent()->getLabel()
-    ));
-  }
+    /**
+     * @ORM\ManyToOne(targetEntity="fibe\ContentBundle\Entity\RoleLabelVersion", inversedBy="roles")
+     * @ORM\JoinColumn(name="role_label_id", referencedColumnName="id")
+     * @Assert\NotBlank(message="You have to choose a role type")
+     * @SerializedName("roleLabelVersion")
+     * @Expose
+     */
+    private $roleLabelVersion;
 
 
-  /**
-   * Get id
-   *
-   * @return integer
-   */
-  public function getId()
-  {
-    return $this->id;
-  }
 
-  /**
-   * Set person
-   *
-   * @param Person $person
-   *
-   * @return Role
-   */
-  public function setPerson(Person $person = null)
-  {
-    $this->person = $person;
+    /**
+     * computeEndAt
+     *
+     * @TODO EVENT : à corriger
+     *
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function computeEndAt()
+    {
+        $eventLabel = $this->getEvent() ? $this->getEvent()->getlabel(): $this->getMainEvent()->getlabel();
+        $this->setLabel(sprintf("%s is %s at %s",
+            $this->getPerson()->getlabel(),
+            $this->getRoleLabelVersion()->getlabel(),
+            $eventLabel
 
-    return $this;
-  }
+        ));
+    }
 
-  /**
-   * Get person
-   *
-   * @return Person
-   */
-  public function getPerson()
-  {
-    return $this->person;
-  }
 
-  /**
-   * Set event
-   *
-   * @param \fibe\EventBundle\Entity\VEvent $event
-   *
-   * @internal param \fibe\EventBundle\Entity\VEvent $event
-   *
-   * @return Role
-   */
-  public function setEvent(VEvent $event = null)
-  {
-    $this->event = $event;
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-    return $this;
-  }
+    /**
+     * Set person
+     *
+     * @param Person $person
+     *
+     * @return Role
+     */
+    public function setPerson(Person $person = null)
+    {
+        $this->person = $person;
 
-  /**
-   * Get event
-   *
-   * @return VEvent
-   */
-  public function getEvent()
-  {
-    return $this->event;
-  }
+        return $this;
+    }
 
-  /**
-   * Set type
-   *
-   * @param String $label
-   *
-   * @return String
-   */
-  public function setLabel($label)
-  {
-    $this->label = $label;
+    /**
+     * Get person
+     *
+     * @return Person
+     */
+    public function getPerson()
+    {
+        return $this->person;
+    }
 
-    return $this;
-  }
+    /**
+     * Set event
+     *
+     * @param \fibe\EventBundle\Entity\VEvent $event
+     *
+     * @internal param \fibe\EventBundle\Entity\VEvent $event
+     *
+     * @return Role
+     */
+    public function setEvent(VEvent $event = null)
+    {
+        $this->event = $event;
 
-  /**
-   * Get type
-   *
-   * @return String
-   */
-  public function getLabel()
-  {
-    return $this->label;
-  }
+        return $this;
+    }
 
-  /**
-   * Set mainEvent
-   *
-   * @param MainEvent $mainEvent
-   *
-   * @return Role
-   */
-  public function setMainEvent(MainEvent $mainEvent)
-  {
-    $this->mainEvent = $mainEvent;
+    /**
+     * Get event
+     *
+     * @return VEvent
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
 
-    return $this;
-  }
+    /**
+     * Set type
+     *
+     * @param String $label
+     *
+     * @return String
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
 
-  /**
-   * Get mainEvent
-   *
-   * @return MainEvent
-   */
-  public function getMainEvent()
-  {
-    return $this->mainEvent;
-  }
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return String
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * Set mainEvent
+     *
+     * @param MainEvent $mainEvent
+     *
+     * @return Role
+     */
+    public function setMainEvent(MainEvent $mainEvent)
+    {
+        $this->mainEvent = $mainEvent;
+
+        return $this;
+    }
+
+    /**
+     * Get mainEvent
+     *
+     * @return MainEvent
+     */
+    public function getMainEvent()
+    {
+        return $this->mainEvent;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRoleLabelVersion()
+    {
+        return $this->roleLabelVersion;
+    }
+
+    /**
+     * @param mixed $roleLabelVersion
+     */
+    public function setRoleLabelVersion($roleLabelVersion)
+    {
+        $this->roleLabelVersion = $roleLabelVersion;
+    }
 }

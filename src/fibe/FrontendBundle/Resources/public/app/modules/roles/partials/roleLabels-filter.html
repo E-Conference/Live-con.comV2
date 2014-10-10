@@ -1,0 +1,13 @@
+<ul class="nav nav-pills">
+    <li ng-click="filter(roleLabel)" class="active" ng-repeat="roleLabel in roleLabels  track by $index" >
+        <a href="javascript:void(0)">
+            <span class="badge pull-right">{{roleLabel.roles.length}}</span>
+            {{ roleLabel.label }}
+        </a>
+    </li>
+    <li>
+        <a class="btn" href="#conference/{{currentConference.id}}/roleLabels/new/" title="Add an role">
+            <i class="fa fa-plus"></i><span class="visible-sm-inline visible-lg-inline visible-md-inline"> New role label</span>
+        </a>
+    </li>
+</ul>

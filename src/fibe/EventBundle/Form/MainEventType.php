@@ -34,7 +34,7 @@ class MainEventType extends VEventType
             ->add('description')
             ->add('comment')
             ->add('url')
-            ->add('categories', 'entity', array(
+            ->add('categoryVersions', 'entity', array(
                 'class' => 'fibeEventBundle:CategoryVersion',
                 'required' => 'false',
                 'multiple' => true,

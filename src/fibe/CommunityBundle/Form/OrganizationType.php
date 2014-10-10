@@ -21,11 +21,6 @@ class OrganizationType extends AdditionalInformationsType
     parent::buildForm($builder, $options);
     $builder
       ->add('label')
-      ->add('members', 'entity', array(
-        'class' => 'fibeCommunityBundle:Person',
-        'required' => 'false',
-        'multiple' => true,
-      ))
       ->add('sponsors', 'entity', array(
         'class' => 'fibeContentBundle:Sponsor',
         'required' => 'false',

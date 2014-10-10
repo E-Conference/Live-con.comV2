@@ -30,6 +30,12 @@ class RoleLabelVersionType extends AbstractType
                 'class' => 'fibeContentBundle:Role',
                 'required' => 'true',
                 'multiple' => true
+            ))
+
+            ->add('mainEvent', 'entity', array(
+                'class' => 'fibeEventBundle:MainEvent',
+                'required' => 'true',
+                'multiple' => false
             ));
     }
 

@@ -8,21 +8,24 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 use fibe\ContentBundle\Util\StringTools;
-
+use fibe\EventBundle\Entity\MainEvent;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
-
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\MaxDepth;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
  *
- * @ORM\Table(name="organization")
- * @ORM\Entity(repositoryClass="fibe\CommunityBundle\Repository\OrganizationRepository")
+ * @ORM\Table(name="organization_version")
+ * @ORM\Entity(repositoryClass="fibe\CommunityBundle\Repository\OrganizationVersionRepository")
  * @ORM\HasLifecycleCallbacks
  * @ExclusionPolicy("all")
  */
-class Organization extends AdditionalInformations
+class OrganizationVersion extends AdditionalInformations
 {
 
     /**
@@ -34,18 +37,25 @@ class Organization extends AdditionalInformations
 
 
     /**
-     *
-     * @ORM\OneToMany(targetEntity="OrganizationVersion",  mappedBy="organization",cascade={"persist","remove"})
-     * @ORM\JoinColumn(onDelete="CASCADE")
-     * @Expose
-     */
-    private $organizationVersions;
-
-
-    /**
      * @ORM\Column(type="string", length=256, nullable=true)
      */
     protected $slug;
+
+    /**
+     * Category
+     * @ORM\ManyToOne(targetEntity="fibe\CommunityBundle\Entity\Organization", inversedBy="organizationPersonVersions", cascade={"persist"})
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id")
+     * @Expose
+     */
+    private $organization;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="fibe\CommunityBundle\Entity\Person",  inversedBy="person",cascade={"persist","remove"})
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     *
+     */
+    protected $organizationVersionOwner;
 
     /**
      * Constructor
@@ -156,17 +166,34 @@ class Organization extends AdditionalInformations
     /**
      * @return mixed
      */
-    public function getOrganizationVersions()
+    public function getOrganizationVersionOwner()
     {
-        return $this->organizationVersions;
+        return $this->organizationVersionOwner;
     }
 
     /**
-     * @param mixed $organizationVersions
+     * @param mixed $organizationVersionOwner
      */
-    public function setOrganizationVersions($organizationVersions)
+    public function setOrganizationVersionOwner($organizationVersionOwner)
     {
-        $this->organizationVersions = $organizationVersions;
+        $this->organizationVersionOwner = $organizationVersionOwner;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getOrganization()
+    {
+        return $this->organization;
+    }
+
+    /**
+     * @param mixed $organization
+     */
+    public function setOrganization($organization)
+    {
+        $this->organization = $organization;
+    }
+
 
 }

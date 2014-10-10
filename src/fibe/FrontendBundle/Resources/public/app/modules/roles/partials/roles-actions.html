@@ -1,7 +1,7 @@
 <div class="row well visible-on">
   <div class="col-xs-3 col-sm-5 col-md-3 col-lg-2">
-    <a class="btn btn-info" href="#conference/{{currentConference.id}}/roles/new/" title="Add a role">
-      <i class="fa fa-plus"></i><span class="visible-sm-inline visible-lg-inline visible-md-inline"> New role</span>
+    <a class="btn btn-info" href="#conference/{{currentConference.id}}/roles/new/" title="Invite people">
+      <i class="fa fa-plus"></i><span class="visible-sm-inline visible-lg-inline visible-md-inline"> Invite people</span>
     </a>
   </div>
   <div class="col-xs-3 col-sm-5 col-md-3 col-lg-2">
@@ -19,13 +19,13 @@
       <span class="visible-sm-inline visible-lg-inline visible-md-inline "> Print roles </span></a>
   </div>
   <div class="col-xs-3 col-sm-5 col-md-3 col-lg-2">
-    <a class="btn btn-info btn-create create" href title="Reload" data-ng-click="reload()">
-      <i class="fa fa-refresh"></i>
-      <span class="visible-sm-inline visible-lg-inline visible-md-inline "> Refresh </span></a>
+      <input type="text" class="form-control" placeholder="Search" ng-change="search()" ng-model="query">
   </div>
   <div class="col-xs-7 col-sm-5 col-md-4 col-lg-2">
     <a class="btn btn-default" href="#conference/{{currentConference.id}}/roles/list/" role="button"><i class="fa fa-list fa-1x"></i></a>
     <a class="btn btn-default" href="#conference/{{currentConference.id}}/roles/thumbnail/" role="button"><i class="fa fa-th fa-1x"></i></a>
   </div>
+
 </div>
+<hr/>
 

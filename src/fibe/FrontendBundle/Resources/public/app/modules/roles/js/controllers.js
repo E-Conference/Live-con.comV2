@@ -96,7 +96,7 @@ angular.module('roleLabelsApp').controller('roleLabelsListCtrl', ['$scope', '$ro
  *
  * @type {controller}
  */
-angular.module('roleLabelsApp').controller('roleLabelsNewCtrl', [ '$scope', '$rootScope', '$location', 'roleLabelsFact', function ($scope, $rootScope, $location, roleLabelsFact)
+angular.module('roleLabelsApp').controller('roleLabelsNewCtrl', [ '$scope', '$routeParams', '$window', '$rootScope', '$location', 'roleLabelsFact', function ($scope, $routeParams, $window, $rootScope, $location, roleLabelsFact)
 {
     $scope.roleLabel = new roleLabelsFact;
 
@@ -108,11 +108,13 @@ angular.module('roleLabelsApp').controller('roleLabelsNewCtrl', [ '$scope', '$ro
     var success = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'roleLabel created', type: 'success'});
-        $location.path('/roleLabels/list');
+        $window.history.back();
+
     }
 
     $scope.create = function (form)
     {
+        $scope.roleLabel.mainEvent = $routeParams.confId;
         if (form.$valid)
         {
             $scope.roleLabel.$create({}, success, error);
@@ -125,7 +127,7 @@ angular.module('roleLabelsApp').controller('roleLabelsNewCtrl', [ '$scope', '$ro
  *
  * @type {controller}
  */
-angular.module('roleLabelsApp').controller('roleLabelsEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'roleLabelsFact', function ($scope, $rootScope, $routeParams, $location, roleLabelsFact)
+angular.module('roleLabelsApp').controller('roleLabelsEditCtrl', [ '$scope', '$window', '$rootScope', '$routeParams', '$location', 'roleLabelsFact', function ($scope, $window, $rootScope, $routeParams, $location, roleLabelsFact)
 {
     $scope.roleLabel = roleLabelsFact.get({id: $routeParams.roleLabelId});
 
@@ -137,7 +139,7 @@ angular.module('roleLabelsApp').controller('roleLabelsEditCtrl', [ '$scope', '$r
     var success = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'roleLabel saved', type: 'success'});
-        $location.path('/roleLabels/list');
+        $window.history.back();
     }
 
     $scope.update = function (form)
@@ -177,11 +179,13 @@ angular.module('roleLabelsApp').controller('roleLabelsDeleteCtrl', [ '$scope', '
  *
  * @type {controller}
  */
-angular.module('rolesApp').controller('rolesListCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'rolesFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, rolesFact, $cachedResource)
+angular.module('rolesApp').controller('rolesListCtrl', ['$scope', 'roleLabelsFact', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'rolesFact', '$cachedResource',
+    function ($scope, roleLabelsFact, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, rolesFact, $cachedResource)
 {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
 
     $scope.entities = [];
+    $scope.roleLabels = roleLabelsFact.allByConference({"confId":$routeParams.confId });
 
     $scope.fetch = function(filters, success, error){
         if($routeParams.confId)

@@ -13,14 +13,14 @@ angular.module('roleLabelsApp').factory('roleLabelsFact', ['$resource', '$cached
     function ($resource, $cachedResource)
     {
         return $resource(
-            globalConfig.api.urls.get_roleLabels,
+            globalConfig.api.urls.get_roleLabel_verions,
             {},
             {
-                get: {method: 'GET', url: globalConfig.api.urls.get_roleLabels + '/:id', params: {'id': '@id', cache: true}, isArray: false},
+                get: {method: 'GET', url: globalConfig.api.urls.get_roleLabel_verions + '/:id', params: {'id': '@id', cache: true}, isArray: false},
                 create: {method: 'POST', params: {}, isArray: false},
-                update: {method: 'PUT', url: globalConfig.api.urls.get_roleLabels + '/:id', params: {'id': '@id'}, isArray: false},
-                delete: {method: 'DELETE', url: globalConfig.api.urls.get_roleLabels + '/:id', params: {'id': '@id'}, isArray: false},
-                all: {method: 'GET', params: {}, isArray: true},
+                update: {method: 'PUT', url: globalConfig.api.urls.get_roleLabel_verions + '/:id', params: {'id': '@id'}, isArray: false},
+                delete: {method: 'DELETE', url: globalConfig.api.urls.get_roleLabel_verions + '/:id', params: {'id': '@id'}, isArray: false},
+                all: {method: 'GET', url: globalConfig.api.urls.get_roleLabels, params: {}, isArray: true},
                 allByConference: {method: 'GET', url: globalConfig.api.urls.get_conferences + '/:confId/roleLabelVersions', params: {'confId': '@confId'}, isArray: true}
 
             }

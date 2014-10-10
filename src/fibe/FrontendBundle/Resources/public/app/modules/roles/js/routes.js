@@ -66,7 +66,7 @@ angular.module('roleLabelsApp')
                     templateUrl: globalConfig.app.modules.roleLabels.urls.partials + 'roleLabels-thumbnail.html',
                     controller: 'roleLabelsListCtrl'
                 })
-                .when('/roleLabels/new', {
+                .when('/conference/:confId/roleLabels/new', {
                     templateUrl: globalConfig.app.modules.roleLabels.urls.partials + 'roleLabels-new.html',
                     controller: 'roleLabelsNewCtrl'
                 })

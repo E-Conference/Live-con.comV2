@@ -111,6 +111,7 @@ angular.module('sympozerApp').directive('infiniteScroll', [
  *    @param parent-field         : (default=%entity%) the key of the parent entity refering to the entity
  *    @param child-field          : (default=%entity%) the name of the child entity relation to the parent entity
  *    @param single-choice        : (default=false) Does the parent own only one child ?
+ *    @param main-event-id        : (default=null) Define the main event id to add to created entity
  *    @param single-choice-child  : (default=false) Does the child own only one parent ?
  */
 angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'createDialog', '$injector', function(GLOBAL_CONFIG, createDialogService, $injector) {
@@ -127,6 +128,7 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
                 childEntityLbl          = attrs.getOrCreate,
                 parentEntityLbl         = attrs.parentEntity,
                 singleChoice            = attrs.singlechoice,
+                mainEventId             = attrs.mainEventId,
                 singleChoiceChild       = attrs.singleChoiceChild,
                 parentField             = attrs.parentField || (!singleChoice ? getPlural(childEntityLbl) : childEntityLbl),
                 childField              = attrs.childField || (!singleChoiceChild ? getPlural(parentEntityLbl) : parentEntityLbl),
@@ -149,6 +151,7 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
             //available entities
             scope.entities = [];
             scope.singleChoice = singleChoice;
+            scope.mainEventId = mainEventId;
             scope.parentField = parentField;
 
             //resolve the parent resource given by attrs.entity. The second test is for an embedded modal
@@ -308,6 +311,7 @@ angular.module('sympozerApp').directive('getOrCreate', ['GLOBAL_CONFIG', 'create
                 scope.$root.$broadcast('AlertCtrl:addAlert', {code: 'the ' + childEntityLbl + ' has not been created', type: 'danger'});
               };
 
+              createdEntity.mainEvent = scope.mainEventId;
               createdEntity.$create({}, success, error);
             }
 

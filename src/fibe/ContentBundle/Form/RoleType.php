@@ -35,8 +35,8 @@ class RoleType extends AbstractType
         'required' => 'false',
         'multiple' => false,
       ))
-      ->add('roleLabel', 'entity', array(
-        'class' => 'fibeContentBundle:RoleLabel',
+      ->add('roleLabelVersion', 'entity', array(
+        'class' => 'fibeContentBundle:RoleLabelVersion',
         'required' => 'false',
         'multiple' => false,
       ))

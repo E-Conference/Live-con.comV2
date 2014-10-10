@@ -64,7 +64,7 @@ class MainEvent extends VEvent
      *
      * @ORM\OneToMany(targetEntity="CategoryVersion", mappedBy="mainEvent",cascade={"persist", "remove"})
      */
-    protected $categoryVersions;
+    private $categoryVersions;
 
 
     /**
@@ -486,21 +486,7 @@ class MainEvent extends VEvent
     }
 
 
-    /**
-     * @return mixed
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
 
-    /**
-     * @param mixed $categories
-     */
-    public function setCategories($categories)
-    {
-        $this->categories = $categories;
-    }
 
     /**
      * Get sub-events
@@ -627,5 +613,21 @@ class MainEvent extends VEvent
     public function setSetting($setting)
     {
         $this->setting = $setting;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategoryVersions()
+    {
+        return $this->categoryVersions;
+    }
+
+    /**
+     * @param mixed $categoryVersions
+     */
+    public function setCategoryVersions($categoryVersions)
+    {
+        $this->categoryVersions = $categoryVersions;
     }
 }

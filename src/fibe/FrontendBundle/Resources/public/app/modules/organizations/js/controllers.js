@@ -17,13 +17,19 @@ angular.module('organizationsApp').controller('organizationsMainCtrl', [function
  *
  * @type {controller}
  */
-angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'organizationsFact', '$cachedResource', function ($scope, GLOBAL_CONFIG, createDialogService, $rootScope, organizationsFact, $cachedResource)
+angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'organizationsFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, organizationsFact, $cachedResource)
 {
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
     $scope.entities = [];
 
     $scope.fetch = function(filters, success, error){
-        organizationsFact.all(filters, success, error);
+        if($routeParams.confId)
+        {
+            filters.confId = $routeParams.confId;
+            organizationsFact.allByConference(filters, success, error);
+        }else{
+            organizationsFact.all(filters, success, error);
+        }
     }
 
     $scope.reload = function ()

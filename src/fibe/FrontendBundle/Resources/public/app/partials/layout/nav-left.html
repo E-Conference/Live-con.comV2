@@ -38,18 +38,7 @@
                         <!-- @hlink : Search a ressource -->
                         <a href="#resource"><i class="fa fa-folder-open-o fa-2x"></i> Search a resources</a>
                     </li>
-                    <li>
-                        <!-- @hlink : Roles -->
-                        <a href="#/roles/list"><i class="fa fa-sitemap fa-2x"></i> Roles</a>
-                    </li>
-                    <li>
-                        <!-- @hlink : Roles Labels -->
-                        <a href="#roleLabels/list"><i class="fa fa-sitemap fa-2x"></i> Role labels</a>
-                    </li>
-                    <li>
-                        <!-- @hlink : Calendar -->
-                        <a href="#/events/list"><i class="fa fa-clock-o fa-2x"></i> Search an event</a>
-                    </li>
+
                 </ul>
             </div>
         </div>
@@ -61,7 +50,7 @@
     <div class="panel panel-default">
         <div class="panel-heading noPadding">
             <!-- @button : collapse panel My space -->
-            <a data-toggle="collapse" data-parent="#collapseMySpace" href="#dashboard/overview#collapseMySpace" class="panel-heading-href btn btn-default noBorder">
+            <a data-toggle="collapse" data-parent="#collapseMySpace" href="#dashboard/myspace#collapseMySpace" class="panel-heading-href btn btn-default noBorder">
                 <h4 class="panel-title">
                     <i class="fa fa-user fa-3x"></i> My space
                 </h4>
@@ -131,7 +120,7 @@
                                     </li>
                                     <li>
                                         <!-- @hlink : Organizations -->
-                                        <a href="#organizations/list"><i class="fa fa-users fa-2x"></i> Organizations</a>
+                                        <a href="#conference/{{currentConference.id}}/organizations/list"><i class="fa fa-users fa-2x"></i> Organizations</a>
                                     </li>
                                     <li>
                                         <!-- @hlink : Persons -->
