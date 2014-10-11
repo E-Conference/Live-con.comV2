@@ -337,30 +337,27 @@ input.ng-dirty.ng-valid
   border-left: 5px solid #3c763d;
 }
 
-[get-or-create]:last-child {
-    margin-bottom: 15px;
+[get-or-create]:last-child
+{
+  margin-bottom: 15px;
 }
-
-
 
 /*************** MODAL *******************/
 
-.modal{
-    max-height: 90%;
+.modal
+{
+  max-height: 90%;
 }
 
-.modal-body{
-    overflow: auto;
-    max-height: 430px;
+.modal-body
+{
+  overflow: auto;
 }
-
-
-
-
 
 /*************** SOCIAL BUTTON*****************/
 
-.btn.btn-social{
-    border-radius: 6px !important;
-    margin: 0.5em;
+.btn.btn-social
+{
+  border-radius: 6px !important;
+  margin: 0.5em;
 }
