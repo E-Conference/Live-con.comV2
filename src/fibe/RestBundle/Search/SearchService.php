@@ -31,7 +31,7 @@ class SearchService implements SearchServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function doSearch($entityClassName, $limit, $offset, $query = null, $orders = null, $confId = null)
+    public function doSearch($entityClassName, $limit, $offset, $query = null, $orders = null, $filters = null)
     {
         $searchFields = $this->getSearchFields($entityClassName);
         $entityRepository = $this->em->getRepository($entityClassName);
@@ -54,8 +54,8 @@ class SearchService implements SearchServiceInterface
         }
 
         //Filter by main event
-        if($confId != null) {
-            $qb = $entityRepository->findAllByMainEventId($qb, $confId);
+        if($filters != null) {
+            $qb = $entityRepository->filter($qb, $filters);
         }
 
         //Build order by

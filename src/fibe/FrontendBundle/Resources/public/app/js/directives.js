@@ -524,10 +524,8 @@ angular.module('sympozerApp').directive('entityListHandler', ['GLOBAL_CONFIG', '
                 scope.orderSide = orderSide;
                 search();
             };
-
             function search()
             {
-
                 scope.offset = scope.offset + scope.limit;
                 searchService.doSearch({
                     entitiesLbl: childEntityLbl,
@@ -539,6 +537,7 @@ angular.module('sympozerApp').directive('entityListHandler', ['GLOBAL_CONFIG', '
                     offset   : scope.offset,
                     limit    : scope.limit,
                     orderBy  : scope.orderBy,
+                    filters  : scope.filters,
                     orderSide: scope.orderSide
                 });
             }

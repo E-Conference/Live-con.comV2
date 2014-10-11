@@ -26,15 +26,15 @@ angular.module('sympozerApp').factory('globalHttpInterceptor', ['$q', '$rootScop
                         if((entity[property])instanceof Array){
                             entityClone[property] = {};
                             for(var object in entity[property]) {
-                              entityClone[property][object] = getObjectId(entity[property][object]);
+                                entityClone[property][object] = getObjectId(entity[property][object]);
                             }
                         }else{
-                          entityClone[property] = getObjectId(entity[property]);
+                            entityClone[property] = getObjectId(entity[property]);
                         }
-                    break;
+                        break;
                     default:
                         entityClone[property] = entity[property];
-                    break;
+                        break;
                 }
             }
             return entityClone;
@@ -42,7 +42,7 @@ angular.module('sympozerApp').factory('globalHttpInterceptor', ['$q', '$rootScop
 
         var getObjectId = function(object)
         {
-          return object.id;
+            return object.id;
         }
 
 
@@ -52,9 +52,9 @@ angular.module('sympozerApp').factory('globalHttpInterceptor', ['$q', '$rootScop
             {
                 //post or put & no "no_clean" arg set to true
                 if(["POST","PUT"].indexOf(config.method) >= 0 && !(config.params && config.params.no_clean)){
-                  {
-                    config.data = cleanEntity(config.data);
-                  }
+                    {
+                        config.data = cleanEntity(config.data);
+                    }
                 }
                 return config;
             },
@@ -90,13 +90,17 @@ angular.module('sympozerApp').factory('searchService',
                 var entityFact = $injector.get(arg.entitiesLbl + 'Fact'),
                     queryDone = queryNb
                     ;
-                firstQueryNb = queryNb;
+                var firstQueryNb = queryNb;
                 arg.entities = [];
                 arg.busy = true;
 
                 if (searchConfig.orderBy)
                 {
                     searchConfig["order[" + searchConfig.orderBy + "]"] = searchConfig.orderSide;
+                }
+                if (searchConfig.filters)
+                {
+                    searchConfig["filters[" + searchConfig.filters + "]"] = searchConfig.filters;
                 }
 
                 queryNb++;
@@ -136,14 +140,14 @@ angular.module('sympozerApp').factory('searchService',
  * }]);
  **/
 angular.module('sympozerApp').factory('DoNotReloadCurrentTemplate', ['$route', function($route) {
-  return function(scope) {
-    var lastRoute = $route.current;
-    scope.$on('$locationChangeSuccess', function() {
-      if (lastRoute.$$route.templateUrl === $route.current.$$route.templateUrl) {
-        console.log('DoNotReloadCurrentTemplate not reloading template: ' + $route.current.$$route.templateUrl);
-        $route.current = lastRoute;
-      }
-    });
-  };
+    return function(scope) {
+        var lastRoute = $route.current;
+        scope.$on('$locationChangeSuccess', function() {
+            if (lastRoute.$$route.templateUrl === $route.current.$$route.templateUrl) {
+                console.log('DoNotReloadCurrentTemplate not reloading template: ' + $route.current.$$route.templateUrl);
+                $route.current = lastRoute;
+            }
+        });
+    };
 }]);
 

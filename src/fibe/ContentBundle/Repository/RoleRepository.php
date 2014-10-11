@@ -27,4 +27,32 @@ class RoleRepository extends EntityRepository
         return $qb;
     }
 
+    /**
+     * filtering with all parameters difned
+     * @param $qb , query builder to add the filter to
+     * @param $params , the field to filter on
+     * @return $qb, modified query builder
+     */
+    public function filter($qb, $params)
+    {
+        if (isset($params['mainEventId'])) {
+            $qb->andWhere('qb.mainEvent = (:MainEventId)');
+            $qb->setParameter('MainEventId', $params['mainEventId']);
+        }
+
+        if (isset($params['id']))
+        {
+            $qb
+                ->andWhere('qb.id = :id')
+                ->setParameter('id', $params['id']);
+        }
+
+        if (isset($params['roleLabel']))
+        {
+            $qb->leftJoin('qb.roleLabelVersion', 'r')
+            ->andWhere('r.label = (:roleLabel)')
+            ->setParameter('roleLabel', $params['roleLabel']);
+        }
+        return $qb;
+    }
 }

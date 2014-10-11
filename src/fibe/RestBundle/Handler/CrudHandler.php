@@ -36,20 +36,21 @@ class CrudHandler
    * @param null $confId
    * @return array of Entities
    */
-  public function getAll($entityClassName, ParamFetcherInterface $paramFetcher, $confId = null)
+  public function getAll($entityClassName, ParamFetcherInterface $paramFetcher, $filters = null)
   {
     $offset = $paramFetcher->get('offset');
 //    $offset = null == $offset ? 0 : $offset;
     $limit = $paramFetcher->get('limit');
     $order = $paramFetcher->get('order');
     $query = $paramFetcher->get('query');
+    $filters = $paramFetcher->get('filters');
 
 //    if(($query = $paramFetcher->get('query')) != null)
 //    {
 //      return $this->container->get('fibe.rest.searchservice')->doSearch($entityClassName, $query, $limit, $offset, $order);
 //    }
 
-      return $this->container->get('fibe.rest.searchservice')->doSearch($entityClassName, $limit, $offset, $query, $order, $confId);
+      return $this->container->get('fibe.rest.searchservice')->doSearch($entityClassName, $limit, $offset, $query, $order, $filters);
     //return $this->em->getRepository($entityClassName)->findBy(array(), $order, $limit, $offset);
   }
 
