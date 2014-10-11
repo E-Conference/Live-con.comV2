@@ -23,20 +23,15 @@ use fibe\ContentBundle\Entity\Location;
 class EquipmentRepository extends EntityRepository
 {
 
+
     /**
-     * filtering by main event
+     * filtering with all parameters difned
      * @param $qb , query builder to add the filter to
-     * @param $MainEventId , the main event to filter on
+     * @param $params , the field to filter on
      * @return $qb, modified query builder
      */
-    public function findAllByMainEventId($qb, $MainEventId)
+    public function filter($qb, $params)
     {
-        if (isset($MainEventId)) {
-            $qb->leftJoin('qb.locations', 'l');
-            $qb->leftJoin('l.mainEvent', 'ev');
-            $qb->andWhere('ev.id = (:MainEventId)');
-            $qb->setParameter('MainEventId', $MainEventId);
-        }
         return $qb;
     }
 }

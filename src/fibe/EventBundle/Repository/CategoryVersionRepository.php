@@ -30,4 +30,15 @@ class CategoryVersionRepository extends EntityRepository
         }
         return $qb;
     }
+
+    /**
+     * filtering with all parameters difned
+     * @param $qb , query builder to add the filter to
+     * @param $params , the field to filter on
+     * @return $qb, modified query builder
+     */
+    public function filter($qb, $params)
+    {
+        return $qb;
+    }
 }
