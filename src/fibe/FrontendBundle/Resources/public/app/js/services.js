@@ -76,20 +76,62 @@ angular.module('sympozerApp').factory('globalHttpInterceptor', ['$q', '$rootScop
             }
         };
     }
-
-
 ]);
 
+
+angular.module('sympozerApp').factory('searchService',
+    ['$injector', function ($injector)
+    {
+        return {
+
+//        mandatory args : entitiesLbl, model, callback
+            doSearch: function (arg, searchConfig)
+            {
+                var entityFact = $injector.get(arg.entitiesLbl + 'Fact'),
+                    queryDone = queryNb
+                    ;
+                firstQueryNb = queryNb;
+                arg.entities = [];
+                arg.busy = true;
+
+                if (searchConfig.orderBy)
+                {
+                    searchConfig["order[" + searchConfig.orderBy + "]"] = searchConfig.orderSide;
+                }
+
+                queryNb++;
+                entityFact.all(searchConfig, success);
+
+                console.log("get by conference");
+                if (entityFact.allByConference)
+                {
+                    queryNb++;
+                    entityFact.allByConference({limit: arg.limit, query: arg.query}, success);
+                }
+
+                function success(data)
+                {
+                    var isFirstQuery = firstQueryNb == queryDone;
+                    queryDone++;
+                    console.log("isFirstQuery ", isFirstQuery, "requete nb ", queryNb, "first query ", firstQueryNb, "queryDone ", queryDone)
+                    arg.busy = false;
+                    arg.callback(data, isFirstQuery, queryNb == queryDone);
+                }
+            }
+        };
+    }
+    ]);
+
+
 /**
- * HACK Do not reload the current template if it is not needed.
+ * Do not reload the current template if not needed.
  *
  * See AngularJS: Change hash and route without completely reloading controller http://stackoverflow.com/questions/12115259/angularjs-change-hash-and-route-without-completely-reloading-controller
  *
  * use it like :
  *
  * .controller('MyCtrl',
- * ['$scope', 'DoNotReloadCurrentTemplate',
- *  function($scope, DoNotReloadCurrentTemplate) {
+ * ['$scope', 'DoNotReloadCurrentTemplate', function($scope, DoNotReloadCurrentTemplate) {
  *    DoNotReloadCurrentTemplate($scope);
  * }]);
  **/

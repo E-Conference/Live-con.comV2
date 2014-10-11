@@ -20,7 +20,12 @@ class RoleLabelType extends AbstractType
   {
     $builder
       ->add('label')
-      ->add('description');
+      ->add('description')
+      ->add('mainEvent', 'entity', array(
+        'class' => 'fibeEventBundle:MainEvent',
+        'required' => 'true',
+        'multiple' => false,
+      ));
 //            ->add('roles', 'collection', array(
 //                'type' => new RoleType(),
 //                'required' => 'false',
