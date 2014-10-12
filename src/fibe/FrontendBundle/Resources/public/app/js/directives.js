@@ -514,9 +514,10 @@ angular.module('sympozerApp').directive('entityListHandler', ['GLOBAL_CONFIG', '
             };
 
             //Called when a query is type
-            scope.search = function ()
+            scope.sendQuery = function (query)
             {
                 initialize();
+                scope.query = query;
                 search();
             };
 
@@ -655,7 +656,7 @@ angular.module('sympozerApp').directive('filter',
                 scope.addFilter = function (value)
                 {
                     scopeOfFilters.filters[attrs.filter] = value;
-                    scopeOfFilters.load();
+                    scopeOfFilters.search();
                 };
             }
         };
