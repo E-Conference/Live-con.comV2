@@ -342,16 +342,27 @@ input.ng-dirty.ng-valid
   margin-bottom: 15px;
 }
 
+[get-or-create] .ng-hide
+{
+  display: none;
+}
+
 /*************** MODAL *******************/
 
 .modal
 {
-  max-height: 90%;
+  /*max-height: 90%;*/
 }
 
 .modal-body
 {
   overflow: auto;
+  max-height: 60vh;
+}
+
+.modal-header > *
+{
+  margin: 0;
 }
 
 /*************** SOCIAL BUTTON*****************/
@@ -361,3 +372,5 @@ input.ng-dirty.ng-valid
   border-radius: 6px !important;
   margin: 0.5em;
 }
+
+/*********************  ng-hide**********************/

@@ -9,15 +9,17 @@
  *
  * @type {controller}
  */
-angular.module('rolesApp').controller('rolesMainCtrl', [function ($scope)
-{
+angular.module('rolesApp').controller('rolesMainCtrl',
+    [function ($scope)
+     {
 
-}]);
+     }]);
 
-angular.module('roleLabelsApp').controller('roleLabelsMainCtrl', [function ($scope)
-{
+angular.module('roleLabelsApp').controller('roleLabelsMainCtrl',
+    [function ($scope)
+     {
 
-}]);
+     }]);
 
 /** Roles labels controllers **/
 
@@ -26,151 +28,159 @@ angular.module('roleLabelsApp').controller('roleLabelsMainCtrl', [function ($sco
  *
  * @type {controller}
  */
-angular.module('roleLabelsApp').controller('roleLabelsListCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'roleLabelsFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, roleLabelsFact, $cachedResource)
-{
-    $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
-
-    $scope.entities = [];
-
-    $scope.fetch = function(filters, success, error){
-        if($routeParams.confId)
-        {
-            filters.confId = $routeParams.confId;
-            roleLabelsFact.allByConference(filters, success, error);
-        }else{
-            roleLabelsFact.all(filters, success, error);
-        }
-    }
-
-    $scope.reload = function ()
+angular.module('roleLabelsApp').controller('roleLabelsListCtrl', [
+    '$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'roleLabelsFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, roleLabelsFact, $cachedResource)
     {
-        $scope.entities.$promise.then(function ()
+        $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
+
+        $scope.entities = [];
+
+        $scope.fetch = function (filters, success, error)
         {
-            console.log('From cache:', $scope.entities);
-        });
-    }
-
-    $scope.clone = function (roleLabel)
-    {
-        cloneroleLabel = angular.copy(roleLabel);
-        cloneroleLabel.id = null;
-
-        var error = function (response, args)
-        {
-            $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Clone not completed', type: 'danger'});
-        }
-
-        var success = function (response, args)
-        {
-            $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'roleLabel saved', type: 'success'});
-            $scope.entities.push(response);
-        }
-
-        cloneroleLabel.$create({}, success, error);
-    }
-
-
-    $scope.deleteModal = function (index, roleLabel)
-    {
-        $scope.index = index;
-
-        createDialogService(GLOBAL_CONFIG.app.modules.roleLabels.urls.partials + 'roleLabels-delete.html', {
-            id: 'complexDialog',
-            title: 'roleLabel deletion',
-            backdrop: true,
-            controller: 'roleLabelsDeleteCtrl',
-            success: {label: 'Ok', fn: function ()
+            if ($routeParams.confId)
             {
-                roleLabelsFact.delete({id: roleLabel.id});
-                $scope.entities.splice(index, 1);
-            }}
-        }, {
-            roleLabelModel: roleLabel
-        });
-    }
+                filters.confId = $routeParams.confId;
+                roleLabelsFact.allByConference(filters, success, error);
+            }
+            else
+            {
+                roleLabelsFact.all(filters, success, error);
+            }
+        };
 
-}]);
+        $scope.reload = function ()
+        {
+            $scope.entities.$promise.then(function ()
+            {
+                console.log('From cache:', $scope.entities);
+            });
+        };
+
+        $scope.clone = function (roleLabel)
+        {
+            cloneroleLabel = angular.copy(roleLabel);
+            cloneroleLabel.id = null;
+
+            var error = function (response, args)
+            {
+                $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Clone not completed', type: 'danger'});
+            };
+
+            var success = function (response, args)
+            {
+                $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'roleLabel saved', type: 'success'});
+                $scope.entities.push(response);
+            };
+
+            cloneroleLabel.$create({}, success, error);
+        };
+
+
+        $scope.deleteModal = function (index, roleLabel)
+        {
+            $scope.index = index;
+
+            createDialogService(GLOBAL_CONFIG.app.modules.roleLabels.urls.partials + 'roleLabels-delete.html', {
+                id        : 'complexDialog',
+                title     : 'roleLabel deletion',
+                backdrop  : true,
+                controller: 'roleLabelsDeleteCtrl',
+                success   : {label: 'Ok', fn: function ()
+                {
+                    roleLabelsFact.delete({id: roleLabel.id});
+                    $scope.entities.splice(index, 1);
+                }}
+            }, {
+                roleLabelModel: roleLabel
+            });
+        }
+
+    }]);
 
 /**
  * New label role controller
  *
  * @type {controller}
  */
-angular.module('roleLabelsApp').controller('roleLabelsNewCtrl', [ '$scope', '$routeParams', '$window', '$rootScope', '$location', 'roleLabelsFact', function ($scope, $routeParams, $window, $rootScope, $location, roleLabelsFact)
-{
-    $scope.roleLabel = new roleLabelsFact;
-
-    var error = function (response, args)
+angular.module('roleLabelsApp').controller('roleLabelsNewCtrl',
+    [ '$scope', '$routeParams', '$window', '$rootScope', '$location', 'roleLabelsFact', function ($scope, $routeParams, $window, $rootScope, $location, roleLabelsFact)
     {
-        $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the roleLabel has not been created', type: 'danger'});
-    }
+        $scope.roleLabel = new roleLabelsFact;
 
-    var success = function (response, args)
-    {
-        $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'roleLabel created', type: 'success'});
-        $window.history.back();
-
-    }
-
-    $scope.create = function (form)
-    {
-        $scope.roleLabel.mainEvent = $routeParams.confId;
-        if (form.$valid)
+        var error = function (response, args)
         {
-            $scope.roleLabel.$create({}, success, error);
+            $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the roleLabel has not been created', type: 'danger'});
+        };
+
+        var success = function (response, args)
+        {
+            $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'roleLabel created', type: 'success'});
+            $window.history.back();
+
+        };
+
+        $scope.create = function (form)
+        {
+            $scope.roleLabel.mainEvent = $routeParams.confId;
+            if (form.$valid)
+            {
+                $scope.roleLabel.$create({}, success, error);
+            }
         }
-    }
-}]);
+    }]);
 
 /**
  * Edit label role controller
  *
  * @type {controller}
  */
-angular.module('roleLabelsApp').controller('roleLabelsEditCtrl', [ '$scope', '$window', '$rootScope', '$routeParams', '$location', 'roleLabelsFact', function ($scope, $window, $rootScope, $routeParams, $location, roleLabelsFact)
-{
-    $scope.roleLabel = roleLabelsFact.get({id: $routeParams.roleLabelId});
-
-    var error = function (response, args)
+angular.module('roleLabelsApp').controller('roleLabelsEditCtrl',
+    [ '$scope', '$window', '$rootScope', '$routeParams', '$location', 'roleLabelsFact', function ($scope, $window, $rootScope, $routeParams, $location, roleLabelsFact)
     {
-        $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the roleLabel has not been saved', type: 'danger'});
-    }
+        $scope.roleLabel = roleLabelsFact.get({id: $routeParams.roleLabelId});
 
-    var success = function (response, args)
-    {
-        $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'roleLabel saved', type: 'success'});
-        $window.history.back();
-    }
-
-    $scope.update = function (form)
-    {
-        if (form.$valid)
+        var error = function (response, args)
         {
-            $scope.roleLabel.$update({}, success, error);
+            $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the roleLabel has not been saved', type: 'danger'});
+        };
+
+        var success = function (response, args)
+        {
+            $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'roleLabel saved', type: 'success'});
+            $window.history.back();
+        };
+
+        $scope.update = function (form)
+        {
+            if (form.$valid)
+            {
+                $scope.roleLabel.$update({}, success, error);
+            }
         }
-    }
-}]);
+    }]);
 
 /**
  * Show label role controller
  *
  * @type {controller}
  */
-angular.module('roleLabelsApp').controller('roleLabelsShowCtrl', [ '$scope', '$routeParams', 'roleLabelsFact', function ($scope, $routeParams, roleLabelsFact)
-{
-    $scope.roleLabel = roleLabelsFact.get({id: $routeParams.roleLabelId});
+angular.module('roleLabelsApp').controller('roleLabelsShowCtrl',
+    [ '$scope', '$routeParams', 'roleLabelsFact', function ($scope, $routeParams, roleLabelsFact)
+    {
+        $scope.roleLabel = roleLabelsFact.get({id: $routeParams.roleLabelId});
 
-}]);
+    }]);
 
 /**
  * Delete label role controller
  *
  * @type {controller}
  */
-angular.module('roleLabelsApp').controller('roleLabelsDeleteCtrl', [ '$scope', 'roleLabelModel', function ($scope, roleLabelModel)
-{
-    $scope.roleLabel = roleLabelModel;
-}]);
+angular.module('roleLabelsApp').controller('roleLabelsDeleteCtrl',
+    [ '$scope', 'roleLabelModel', function ($scope, roleLabelModel)
+    {
+        $scope.roleLabel = roleLabelModel;
+    }]);
 
 /** Roles controllers **/
 
@@ -179,150 +189,156 @@ angular.module('roleLabelsApp').controller('roleLabelsDeleteCtrl', [ '$scope', '
  *
  * @type {controller}
  */
-angular.module('rolesApp').controller('rolesListCtrl', ['$scope', 'roleLabelsFact', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'rolesFact', '$cachedResource',
-    function ($scope, roleLabelsFact, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, rolesFact, $cachedResource)
-{
-    $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
-
-    $scope.entities = [];
-    $scope.roleLabels = roleLabelsFact.allByConference({"confId":$routeParams.confId });
-
-
-    if($routeParams.confId)
+angular.module('rolesApp').controller('rolesListCtrl', [
+    '$scope', 'roleLabelsFact', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'rolesFact', '$cachedResource', function ($scope, roleLabelsFact, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, rolesFact, $cachedResource)
     {
-        $scope.filters = $routeParams.confId;
-    }
+        $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
+        $scope.entities = [];
+        $scope.roleLabels = roleLabelsFact.allByConference({"confId": $routeParams.confId });
 
-
-
-
-
-    $scope.reload = function ()
-    {
-        $scope.entities.$promise.then(function ()
+        var baseFilters;
+        if ($routeParams.confId)
         {
-            console.log('From cache:', $scope.entities);
-        });
-    }
-
-    $scope.clone = function (role)
-    {
-        clonerole = angular.copy(role);
-        clonerole.id = null;
-
-        var error = function (response, args)
+            $scope.filters = baseFilters = {
+                mainEventId: $routeParams.confId
+            };
+        }
+        $scope.addFilter = function (key, value)
         {
-            $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Clone not completed', type: 'danger'});
+            $scope.filters
         }
 
-        var success = function (response, args)
+
+        $scope.reload = function ()
         {
-            $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'role saved', type: 'success'});
-            $scope.entities.push(response);
-        }
-
-        clonerole.$create({}, success, error);
-    }
-
-
-    $scope.deleteModal = function (index, role)
-    {
-        $scope.index = index;
-
-        createDialogService(GLOBAL_CONFIG.app.modules.roles.urls.partials + 'roles-delete.html', {
-            id: 'complexDialog',
-            title: 'role deletion',
-            backdrop: true,
-            controller: 'rolesDeleteCtrl',
-            success: {label: 'Ok', fn: function ()
+            $scope.entities.$promise.then(function ()
             {
-                rolesFact.delete({id: role.id});
-                $scope.entities.splice(index, 1);
-            }}
-        }, {
-            roleModel: role
-        });
-    }
+                console.log('From cache:', $scope.entities);
+            });
+        };
 
-}]);
+        $scope.clone = function (role)
+        {
+            clonerole = angular.copy(role);
+            clonerole.id = null;
+
+            var error = function (response, args)
+            {
+                $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Clone not completed', type: 'danger'});
+            };
+
+            var success = function (response, args)
+            {
+                $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'role saved', type: 'success'});
+                $scope.entities.push(response);
+            };
+
+            clonerole.$create({}, success, error);
+        };
+
+
+        $scope.deleteModal = function (index, role)
+        {
+            $scope.index = index;
+
+            createDialogService(GLOBAL_CONFIG.app.modules.roles.urls.partials + 'roles-delete.html', {
+                id        : 'complexDialog',
+                title     : 'role deletion',
+                backdrop  : true,
+                controller: 'rolesDeleteCtrl',
+                success   : {label: 'Ok', fn: function ()
+                {
+                    rolesFact.delete({id: role.id});
+                    $scope.entities.splice(index, 1);
+                }}
+            }, {
+                roleModel: role
+            });
+        }
+
+    }]);
 
 /**
  * New role controller
  *
  * @type {controller}
  */
-angular.module('rolesApp').controller('rolesNewCtrl', [ '$scope', '$routeParams', '$rootScope', '$location', 'rolesFact', function ($scope, $routeParams, $rootScope, $location, rolesFact)
-{
-    $scope.role = new rolesFact;
-
-    var error = function (response, args)
+angular.module('rolesApp').controller('rolesNewCtrl',
+    [ '$scope', '$routeParams', '$rootScope', '$location', 'rolesFact', function ($scope, $routeParams, $rootScope, $location, rolesFact)
     {
-        $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the role has not been created', type: 'danger'});
-    }
+        $scope.role = new rolesFact;
 
-    var success = function (response, args)
-    {
-        $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'role created', type: 'success'});
-        $location.path('/conference/'+$routeParams.confId+'/roles/list');
-    }
-
-    $scope.create = function (form)
-    {
-        if (form.$valid)
+        var error = function (response, args)
         {
-            $scope.role.mainEvent = $routeParams.confId;
-            $scope.role.$create({}, success, error);
+            $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the role has not been created', type: 'danger'});
+        };
+
+        var success = function (response, args)
+        {
+            $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'role created', type: 'success'});
+            $location.path('/conference/' + $routeParams.confId + '/roles/list');
+        };
+
+        $scope.create = function (form)
+        {
+            if (form.$valid)
+            {
+                $scope.role.mainEvent = $routeParams.confId;
+                $scope.role.$create({}, success, error);
+            }
         }
-    }
-}]);
+    }]);
 
 /**
  * Edit role controller
  *
  * @type {controller}
  */
-angular.module('rolesApp').controller('rolesEditCtrl', [ '$scope', '$rootScope', '$routeParams', '$location', 'rolesFact', function ($scope, $rootScope, $routeParams, $location, rolesFact)
-{
-    $scope.role = rolesFact.get({id: $routeParams.roleId});
-
-    var error = function (response, args)
+angular.module('rolesApp').controller('rolesEditCtrl',
+    [ '$scope', '$rootScope', '$routeParams', '$location', 'rolesFact', function ($scope, $rootScope, $routeParams, $location, rolesFact)
     {
-        $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the role has not been saved', type: 'danger'});
-    }
+        $scope.role = rolesFact.get({id: $routeParams.roleId});
 
-    var success = function (response, args)
-    {
-        $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'role saved', type: 'success'});
-        $location.path('/roles/list');
-    }
-
-    $scope.update = function (form)
-    {
-        if (form.$valid)
+        var error = function (response, args)
         {
-            $scope.role.$update({}, success, error);
+            $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the role has not been saved', type: 'danger'});
+        };
+
+        var success = function (response, args)
+        {
+            $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'role saved', type: 'success'});
+            $location.path('/roles/list');
+        };
+
+        $scope.update = function (form)
+        {
+            if (form.$valid)
+            {
+                $scope.role.$update({}, success, error);
+            }
         }
-    }
-}]);
+    }]);
 
 /**
  * Show role controller
  *
  * @type {controller}
  */
-angular.module('rolesApp').controller('rolesShowCtrl', [ '$scope', '$routeParams', 'rolesFact', function ($scope, $routeParams, rolesFact)
-{
-    $scope.role = rolesFact.get({id: $routeParams.roleId});
+angular.module('rolesApp').controller('rolesShowCtrl',
+    [ '$scope', '$routeParams', 'rolesFact', function ($scope, $routeParams, rolesFact)
+    {
+        $scope.role = rolesFact.get({id: $routeParams.roleId});
 
-}]);
+    }]);
 
 /**
  * Delete role controller
  *
  * @type {controller}
  */
-angular.module('rolesApp').controller('rolesDeleteCtrl', [ '$scope', 'roleModel', function ($scope, roleModel)
-{
-    $scope.role = roleModel;
-}]);
+angular.module('rolesApp').controller('rolesDeleteCtrl',
+    [ '$scope', 'roleModel', function ($scope, roleModel)
+    {
+        $scope.role = roleModel;
+    }]);
 

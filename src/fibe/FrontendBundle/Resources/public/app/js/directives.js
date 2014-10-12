@@ -112,9 +112,10 @@ angular.module('sympozerApp').directive('infiniteScroll', [
  *    @param single-choice        : (default=false) Does the parent own only one child ?
  *    @param main-event-id        : (default=null) Define the main event id to add to created entity
  *    @param single-choice-child  : (default=false) Does the child own only one parent ?
+ *    @param required             : (default=false) must this field be required ?
  */
-angular.module('sympozerApp').directive('getOrCreate',
-    ['GLOBAL_CONFIG', 'createDialog', 'searchService', '$injector', function (GLOBAL_CONFIG, createDialogService, searchService, $injector)
+angular.module('sympozerApp').directive('getOrCreate', [
+    'GLOBAL_CONFIG', 'createDialog', 'searchService', '$injector', function (GLOBAL_CONFIG, createDialogService, searchService, $injector)
     {
         return {
             template: '<div ng-include="templateUrl"></div>',
@@ -140,6 +141,7 @@ angular.module('sympozerApp').directive('getOrCreate',
                     childField = attrs.childField || (!singleChoiceChild ? getPlural(parentEntityLbl) : parentEntityLbl),
 
                     newPolitic = attrs.newPolitic || "create",
+                    required = attrs.required,
 
                     childEntitiesLbl = getPlural(childEntityLbl),
                     childEntityLblCamelCase = childEntityLbl.charAt(0).toUpperCase() + childEntityLbl.slice(1),
@@ -154,11 +156,12 @@ angular.module('sympozerApp').directive('getOrCreate',
                 //the entity binded with ng-model to the input
                 scope.addedEntity = {};
                 scope.addedEntity[uniqField] = "";
-                //available entities
+                //available entities in the choice list
                 scope.entities = [];
                 scope.singleChoice = singleChoice;
                 scope.mainEventId = mainEventId;
                 scope.parentField = parentField;
+                scope.required = required;
 
                 //resolve the parent resource given by attrs.entity. The second test is for an embedded modal
                 scope.resource = scope.$parent[parentEntityLbl] || scope.$parent.$parent.$parent.$entity;
@@ -211,6 +214,7 @@ angular.module('sympozerApp').directive('getOrCreate',
                 {
                     if (!$model[uniqField])
                     {
+                        scope.entities = [];
                         return;
                     }
 
@@ -353,8 +357,8 @@ angular.module('sympozerApp').directive('getOrCreate',
                         busy       : scope.busy
                     }, {
                         query    : query,
-                        offset   : scope.offset,
-                        limit    : scope.limit,
+                        limit : limit,
+                        offset: -(limit),
                         orderBy  : uniqField,
                         orderSide: "ASC"
                     });
@@ -403,7 +407,7 @@ angular.module('sympozerApp').directive('getOrCreate',
                     for (var i = 0; i < data.length; i++)
                     {
 
-                        if (singleChoice && containsEntity([scope.resource[parentField]], data[i]))
+                        if (singleChoice && containsEntity(scope.resource[parentField], data[i]))
                         {
                             continue;
                         }
@@ -507,7 +511,7 @@ angular.module('sympozerApp').directive('entityListHandler', ['GLOBAL_CONFIG', '
 //                scope.limit = limitConfig;
 //                scope.busy = false;
 //                scope.entities = [];
-            }
+            };
 
             //Called when a query is type
             scope.search = function ()
@@ -578,3 +582,81 @@ angular.module('sympozerApp').directive('entityListHandler', ['GLOBAL_CONFIG', '
         }
     };
 }]);
+
+
+//angular.module('sympozerApp').directive('filters', ['GLOBAL_CONFIG', '$injector', 'searchService', function (GLOBAL_CONFIG, $injector, searchService)
+//{
+//    return {
+//        restrict: "E",
+//        link    : function (scope, element, attrs)
+//        {
+//
+//            var parentScope = scope.$parent;
+////            searchService.doSearch({
+////                entitiesLbl: childEntitiesLbl,
+////                entities   : scope.entities,
+////                callback   : addChoices,
+////                busy       : scope.busy
+////            }, {
+////                query    : query,
+////                limit    : limit,
+////                offset   : -(limit),
+////                orderBy  : uniqField,
+////                orderSide: "ASC"
+////            });
+//            var filters ={};
+//            if(!parentScope.filters)
+//            {
+//                console.warn("no var 'filters' in the ListCtrl. Creating a new one...");
+//                parentScope.filters = {};
+//            }
+//
+//            scope.addFilter = function(key,value){
+//                filters[key] = value;
+//            };
+//            scope.doFilter = function(){
+//                    parentScope.load();
+////                searchService.angular.extend(parentScope.filters, filters);
+//            };
+//
+//        }
+//    };
+//}]);
+
+
+/**
+ * angular directive used to add a filter in a *ListCtrl page
+ * must be used in a controller with a scope variable "filters" : an object like
+ *
+ * use it like :
+ * <a href="javascript:void(0)" filter="roleLabel" ng-click="addFilter(roleLabel.label)">
+ *
+ * controler var (from the responsible controller) :
+ *      @param filters : an object of filter
+ *
+ * directive param :
+ *    @param key      : the key to filter by
+ *    @param value    : the filter value
+ */
+angular.module('sympozerApp').directive('filter',
+    ['GLOBAL_CONFIG', '$injector', 'searchService', function (GLOBAL_CONFIG, $injector, searchService)
+    {
+        return {
+            restrict: 'A',
+            link    : function (scope, element, attrs)
+            {
+                var scopeOfFilters = scope.filters ? scope : scope.$parent;
+
+                if (!scopeOfFilters.filters)
+                {
+                    scopeOfFilters.filters = {};
+                }
+
+                scope.addFilter = function (value)
+                {
+                    scopeOfFilters.filters[attrs.filter] = value;
+                    scopeOfFilters.load();
+                };
+            }
+        };
+    }]);
