@@ -13,13 +13,13 @@ use Doctrine\ORM\QueryBuilder;
  */
 class RoleRepository extends EntityRepository
 {
-  /**
-   * filtering by main event
-   * @param QueryBuilder $qb : query builder to add the filter to
-   * @param $MainEventId : the main event to filter on
-   * @return QueryBuilder $qb : modified query builder
-   */
-  public function findAllByMainEventId(QueryBuilder $qb, $MainEventId)
+    /**
+     * filtering by main event
+     * @param QueryBuilder $qb : query builder to add the filter to
+     * @param $MainEventId : the main event to filter on
+     * @return QueryBuilder $qb : modified query builder
+     */
+    public function findAllByMainEventId(QueryBuilder $qb, $MainEventId)
     {
         if (isset($MainEventId)) {
             $qb->andWhere('qb.mainEvent = (:MainEventId)');
@@ -28,17 +28,17 @@ class RoleRepository extends EntityRepository
         return $qb;
     }
 
-  /**
-   * filtering with all parameters difned
-   * @param QueryBuilder $qb : query builder to add the filter to
-   * @param array $params : the field to filter on
-   * @return QueryBuilder $qb : modified query builder
-   */
-  public function filter(QueryBuilder $qb, $params)
+    /**
+     * filtering with all parameters difned
+     * @param QueryBuilder $qb : query builder to add the filter to
+     * @param array $params : the field to filter on
+     * @return QueryBuilder $qb : modified query builder
+     */
+    public function filter(QueryBuilder $qb, $params)
     {
         if (isset($params['mainEventId'])) {
-          $qb->andWhere('qb.mainEvent = :mainEventId');
-          $qb->setParameter('mainEventId', $params['mainEventId']);
+            $qb->andWhere('qb.mainEvent = :mainEventId');
+            $qb->setParameter('mainEventId', $params['mainEventId']);
         }
 
         if (isset($params['id']))
@@ -48,14 +48,13 @@ class RoleRepository extends EntityRepository
                 ->setParameter('id', $params['id']);
         }
 
-        if (isset($params['roleLabel']))
+        if (isset($params['roleLabelVersionId']))
         {
             $qb->leftJoin('qb.roleLabelVersion', 'r')
-              ->andWhere('r.label = :roleLabel')
-            ->setParameter('roleLabel', $params['roleLabel']);
+                ->andWhere('r.id = :roleLabelVersionId')
+                ->setParameter('roleLabelVersionId', $params['roleLabelVersionId']);
         }
-      print_r($qb->getDQL());
-      print_r($params);
+
         return $qb;
     }
 }

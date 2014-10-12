@@ -194,7 +194,8 @@ angular.module('rolesApp').controller('rolesListCtrl', [
     {
         $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
         $scope.entities = [];
-        $scope.roleLabels = roleLabelsFact.allByConference({"confId": $routeParams.confId });
+
+        $scope.roleLabelVersions = roleLabelsFact.all({'filters["mainEventId"]' : $routeParams.confId});
 
         var baseFilters;
         if ($routeParams.confId)
@@ -203,6 +204,7 @@ angular.module('rolesApp').controller('rolesListCtrl', [
                 mainEventId: $routeParams.confId
             };
         }
+
         $scope.addFilter = function (key, value)
         {
             $scope.filters
