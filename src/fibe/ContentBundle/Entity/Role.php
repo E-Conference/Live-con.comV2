@@ -74,7 +74,7 @@ class Role
 
     /**
      * @ORM\ManyToOne(targetEntity="fibe\ContentBundle\Entity\RoleLabelVersion", inversedBy="roles")
-     * @ORM\JoinColumn(name="role_label_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="roleLabelId", referencedColumnName="id")
      * @Assert\NotBlank(message="You have to choose a role type")
      * @SerializedName("roleLabelVersion")
      * @Expose

@@ -195,7 +195,9 @@ angular.module('rolesApp').controller('rolesListCtrl', [
         $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
         $scope.entities = [];
 
-        $scope.roleLabelVersions = roleLabelsFact.all({'filters["mainEventId"]': $routeParams.confId});
+
+        $scope.roleLabelVersions = roleLabelsFact.all({'filters[mainEventId]' : $routeParams.confId});
+
 
         var baseFilters;
         if ($routeParams.confId)
