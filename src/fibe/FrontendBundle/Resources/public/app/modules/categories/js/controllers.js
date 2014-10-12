@@ -45,7 +45,7 @@ angular.module('categoriesApp').controller('categoriesListCtrl', ['$scope', '$ro
     $scope.clone = function (category)
     {
         clonecategory = angular.copy(category);
-        clonecategory.id = null;
+        delete clonecategory.id;
 
         var error = function (response, args)
         {

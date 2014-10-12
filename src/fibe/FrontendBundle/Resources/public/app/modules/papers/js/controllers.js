@@ -41,7 +41,7 @@ angular.module('papersApp').controller('papersListCtrl', ['$scope', '$routeParam
     $scope.clone = function (paper)
     {
         clonePaper = angular.copy(paper);
-        clonePaper.id = null;
+        delete clonePaper.id;
 
         var error = function (response, args)
         {

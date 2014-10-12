@@ -43,7 +43,7 @@ angular.module('eventsApp').controller('eventsListCtrl', ['$scope', '$routeParam
     $scope.clone = function(event, index){
 
         cloneEvent = angular.copy(event);
-        cloneEvent.id = null;
+        delete cloneEvent.id;
 
         var error = function(response, args){
             $rootScope.$broadcast('AlertCtrl:addAlert', {code:'Clone not completed', type:'danger'});

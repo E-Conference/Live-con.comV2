@@ -31,7 +31,7 @@ angular.module('conferencesApp').controller('conferencesListCtrl', ['$scope', '$
     {
 
         cloneConference = angular.copy(conference);
-        cloneConference.id = null;
+        delete cloneConference.id;
 
         var error = function (response, args)
         {
