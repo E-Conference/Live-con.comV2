@@ -21,11 +21,11 @@ angular.module('contextualizationApp').controller('contextCtrl', ['$scope', '$ro
         {
           localStorage.setItem('currentConference', JSON.stringify(conference));
           $rootScope.currentConference = conference;
+          $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Welcome to ' + $rootScope.currentConference.label, type: 'success'});
         });
         $('#collapseMySpace').collapse('hide');
         $('#collapseCommunity').collapse('hide');
         $('#collapseConference').collapse('show');
-        $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Welcome to ' + $rootScope.currentConference.label, type: 'success'});
       }
 
     }
