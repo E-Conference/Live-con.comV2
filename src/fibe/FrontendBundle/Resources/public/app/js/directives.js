@@ -583,7 +583,6 @@ angular.module('sympozerApp').directive('entityListHandler', ['GLOBAL_CONFIG', '
         }
     };
 }]);
-c
 
 
 //angular.module('sympozerApp').directive('filters', ['GLOBAL_CONFIG', '$injector', 'searchService', function (GLOBAL_CONFIG, $injector, searchService)
