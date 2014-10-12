@@ -5,8 +5,8 @@
  *
  * @type {factory}
  */
-angular.module('categoriesApp').factory('categoriesFact', ['$resource', '$cachedResource',
-    function ($cachedResource)
+angular.module('categoriesApp').factory('categoriesFact',
+    ['$resource', '$cachedResource', function ($cachedResource)
     {
         return $cachedResource(
             globalConfig.api.urls.get_categories,

@@ -125,8 +125,9 @@
 
   <!-- basic client app context definition -->
   <script>
-    var queryNb = 0,
-        firstQueryNb = 0;
+    var queryNb = 0,//todo to put in serchService
+        firstQueryNb = 0
+        ;
 
     var globalConfig = {
       api: {
@@ -168,6 +169,9 @@
         }
       },
       app: {
+        options: {
+          shouldLogin: {% if shouldLogin %}true{% else %}false{% endif %}
+        },
         urls: {
           base: "{{ asset('bundles/frontend/app/') }}",
           partials: "{{ asset('bundles/frontend/app/partials/') }}",

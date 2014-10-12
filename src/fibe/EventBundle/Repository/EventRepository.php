@@ -29,15 +29,34 @@ class EventRepository extends EntityRepository
     return $qb;
   }
 
-    /**
-     * filtering with all parameters difned
-     * @param $qb , query builder to add the filter to
-     * @param $params , the field to filter on
-     * @return $qb, modified query builder
-     */
-    public function filter($qb, $params)
+  /**
+   * filtering with all parameters difned
+   * @param $qb , query builder to add the filter to
+   * @param $params , the field to filter on
+   * @return $qb, modified query builder
+   */
+  public function filter($qb, $params)
+  {
+    if (isset($params['mainEventId']))
     {
-        return $qb;
+      $qb->andWhere('qb.mainEvent = :mainEventId');
+      $qb->setParameter('mainEventId', $params['mainEventId']);
     }
+
+    if (isset($params['id']))
+    {
+      $qb
+        ->andWhere('qb.id = :id')
+        ->setParameter('id', $params['id']);
+    }
+
+    if (isset($params['categoryId']))
+    {
+      $qb->leftJoin('qb.category', 'c')
+        ->andWhere('c.id = :categoryId')
+        ->setParameter('categoryId', $params['categoryId']);
+    }
+    return $qb;
+  }
 
 }

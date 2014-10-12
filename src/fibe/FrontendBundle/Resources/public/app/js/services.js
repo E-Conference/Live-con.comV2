@@ -105,8 +105,7 @@ angular.module('sympozerApp').factory('searchService', [
                     var entityFact = $injector.get(arg.entitiesLbl + 'Fact'),
                         queryDone = queryNb,
                         firstQueryNb = queryNb;
-                    arg.entities = [];
-                    arg.busy = true;
+//                    arg.busy = true;
 
                     if (searchConfig.orderBy)
                     {
@@ -132,14 +131,14 @@ angular.module('sympozerApp').factory('searchService', [
                         var isFirstQuery = firstQueryNb == queryDone;
                         queryDone++;
 //                        console.log("isFirstQuery ", isFirstQuery, "requete nb ", queryNb, "first query ", firstQueryNb, "queryDone ", queryDone);
-                        arg.busy = false;
+//                        arg.busy = false;
                         arg.callback(data, isFirstQuery, queryNb == queryDone);
                     }
                 }
             }
         };
     }
-    ]);
+]);
 
 
 /**

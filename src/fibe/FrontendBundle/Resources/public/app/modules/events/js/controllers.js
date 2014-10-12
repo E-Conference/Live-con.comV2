@@ -8,9 +8,9 @@
  * @type {controller}
  */
 angular.module('eventsApp').controller('eventsMainCtrl', [function ($scope)
-{
+                                                          {
 
-}]);
+                                                          }]);
 
 
 /**
@@ -18,12 +18,14 @@ angular.module('eventsApp').controller('eventsMainCtrl', [function ($scope)
  *
  * @type {controller}
  */
-angular.module('eventsApp').controller('eventsListCtrl', ['$scope', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'eventsFact', '$cachedResource', function ($scope, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, eventsFact, $cachedResource) {
+angular.module('eventsApp').controller('eventsListCtrl', ['$scope', 'categoriesFact', '$routeParams', 'GLOBAL_CONFIG', 'createDialog', '$rootScope', 'eventsFact', '$cachedResource', function ($scope, categoriesFact, $routeParams, GLOBAL_CONFIG, createDialogService, $rootScope, eventsFact, $cachedResource)
+{
 
     //Context change
     //$rootScope.$broadcast('contextCtrl:changeContext', {confId:$routeParams.confId});
 
     $scope.entities = [];
+    $scope.categories = categoriesFact.all({'filters["mainEventId"]': $routeParams.confId});
 
     var baseFilters;
     if ($routeParams.confId)
@@ -34,40 +36,47 @@ angular.module('eventsApp').controller('eventsListCtrl', ['$scope', '$routeParam
     }
 
 
-    $scope.reload = function(){
-        $scope.events.$promise.then(function() {
+    $scope.reload = function ()
+    {
+        $scope.events.$promise.then(function ()
+        {
             console.log('From cache:', $scope.events);
         });
     }
 
-    $scope.clone = function(event, index){
+    $scope.clone = function (event, index)
+    {
 
         var cloneEvent = angular.copy(event);
         delete cloneEvent.id;
 
-        var error = function(response, args){
-            $rootScope.$broadcast('AlertCtrl:addAlert', {code:'Clone not completed', type:'danger'});
+        var error = function (response, args)
+        {
+            $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Clone not completed', type: 'danger'});
         }
 
-        var success = function(response, args){
-            $rootScope.$broadcast('AlertCtrl:addAlert', {code:'Event saved', type:'success'});
-            $scope.entities.splice(index+1, 0, response);
+        var success = function (response, args)
+        {
+            $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Event saved', type: 'success'});
+            $scope.entities.splice(index + 1, 0, response);
         }
 
         cloneEvent.$create({}, success, error);
     }
 
-    $scope.deleteModal = function(index, event) {
+    $scope.deleteModal = function (index, event)
+    {
         $scope.index = index;
 
-        createDialogService(GLOBAL_CONFIG.app.modules.events.urls.partials+'events-delete.html', {
-            id: 'complexDialog',
-            title: 'Event deletion',
-            backdrop: true,
+        createDialogService(GLOBAL_CONFIG.app.modules.events.urls.partials + 'events-delete.html', {
+            id        : 'complexDialog',
+            title     : 'Event deletion',
+            backdrop  : true,
             controller: 'eventsDeleteCtrl',
-            success: {label: 'Ok', fn: function() {
-                eventsFact.delete({id:event.id});
-                $scope.entities.splice(index,1);
+            success   : {label: 'Ok', fn: function ()
+            {
+                eventsFact.delete({id: event.id});
+                $scope.entities.splice(index, 1);
             }}
         }, {
             eventModel: event
@@ -82,21 +91,26 @@ angular.module('eventsApp').controller('eventsListCtrl', ['$scope', '$routeParam
  * @type {controller}
  */
 
-angular.module('eventsApp').controller('eventsNewCtrl', [ '$scope', '$routeParams', '$rootScope', '$location', 'eventsFact', function ($scope, $routeParams, $rootScope, $location, eventsFact) {
+angular.module('eventsApp').controller('eventsNewCtrl', [ '$scope', '$routeParams', '$rootScope', '$location', 'eventsFact', function ($scope, $routeParams, $rootScope, $location, eventsFact)
+{
     $scope.event = new eventsFact;
 
-    var error = function(response, args){
-        $rootScope.$broadcast('AlertCtrl:addAlert', {code:'the event has not been created', type:'danger'});
+    var error = function (response, args)
+    {
+        $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the event has not been created', type: 'danger'});
     }
 
-    var success = function(response, args){
-        $rootScope.$broadcast('AlertCtrl:addAlert', {code:'event created', type:'success'});
-        $location.path('/conference/'+$routeParams.confId+'/events/list');
+    var success = function (response, args)
+    {
+        $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'event created', type: 'success'});
+        $location.path('/conference/' + $routeParams.confId + '/events/list');
     }
 
-    $scope.create = function(form){
+    $scope.create = function (form)
+    {
         $scope.event.mainEvent = $routeParams.confId;
-        if ( form.$valid ) {
+        if (form.$valid)
+        {
             $scope.event.$create({}, success, error);
         }
     }
@@ -120,7 +134,7 @@ angular.module('eventsApp').controller('eventsEditCtrl', [ '$scope', '$rootScope
     var success = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'event saved', type: 'success'});
-        $location.path('/conference/'+$rootScope.currentConference.id+'/events/list');
+        $location.path('/conference/' + $rootScope.currentConference.id + '/events/list');
     }
 
     $scope.update = function (form)
@@ -135,11 +149,11 @@ angular.module('eventsApp').controller('eventsEditCtrl', [ '$scope', '$rootScope
     $scope.createLocationModal = function ()
     {
         createDialogService(GLOBAL_CONFIG.app.modules.locations.urls.partials + 'locations-new.html', {
-            id: 'complexDialog',
-            title: 'New location',
-            backdrop: true,
+            id        : 'complexDialog',
+            title     : 'New location',
+            backdrop  : true,
             controller: 'locationsNewCtrl',
-            success: {label: 'Save', fn: function ()
+            success   : {label: 'Save', fn: function ()
             {
             }}
         }, {

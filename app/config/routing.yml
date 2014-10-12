@@ -55,7 +55,7 @@ fibe_security_www_conf:
 
 login:
     pattern:   /login
-    defaults:  { _controller: FOSUserBundle:Security:login }
+    defaults:  { _controller: FrontendBundle:Front:login }
 
 login_check:
      pattern:   /login/login_check

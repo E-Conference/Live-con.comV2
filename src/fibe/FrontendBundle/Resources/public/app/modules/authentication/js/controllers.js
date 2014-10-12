@@ -8,18 +8,21 @@
  * @type {controller}
  */
 
-angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG', 'usersFact', '$location', 'createDialog',
-  function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, usersFact, $location, createDialogService)
+angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootScope', '$routeParams', 'GLOBAL_CONFIG', 'usersFact', '$location', 'createDialog', '$timeout',
+                                                              function ($scope, $rootScope, $routeParams, GLOBAL_CONFIG, usersFact, $location, createDialogService, $timeout)
   {
 
     $rootScope.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     $scope.user = new usersFact;
 
-    $scope.signinAction = function (user)
+      $scope.showLoginPopup = showLoginPopup;
+      $scope.signinAction = signinAction;
+
+      if (GLOBAL_CONFIG.app.options.shouldLogin)
     {
-      $scope.busy = true;
-      usersFact.signin({}, {"_username": $scope.user.username, "_password": $scope.user.password}, success, error);
-    };
+        GLOBAL_CONFIG.app.options.shouldLogin = false;
+        $timeout(showLoginPopup, 1);
+    }
 
     var error = function (response, args)
     {
@@ -37,7 +40,7 @@ angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootSc
       $location.path('/');
     };
 
-    $scope.showLoginPopup = function()
+      function showLoginPopup()
     {
       var dialogCtrlArgs = {
         scope : {
@@ -61,6 +64,11 @@ angular.module('authenticationApp').controller('signinCtrl', ['$scope', '$rootSc
       createDialogService(GLOBAL_CONFIG.app.urls.partials+'layout/generic-dialog.html', dialogOptions, dialogCtrlArgs);
     }
 
+      function signinAction(user)
+      {
+          $scope.busy = true;
+          usersFact.signin({}, {"_username": $scope.user.username, "_password": $scope.user.password}, success, error);
+      };
   }]);
 
 /**

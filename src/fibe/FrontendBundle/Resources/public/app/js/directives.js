@@ -493,7 +493,8 @@ angular.module('sympozerApp').directive('entityListHandler', ['GLOBAL_CONFIG', '
                 return console.error('missing mandatory field in "entity-list-handler" directive (see doc above)');
             }
 
-            var childEntityLbl = attrs.entityListHandler
+            var childEntityLbl = attrs.entityListHandler,
+                reset = false
                 ;
 
             //Initialize the options
@@ -502,6 +503,7 @@ angular.module('sympozerApp').directive('entityListHandler', ['GLOBAL_CONFIG', '
             scope.orderSide = attrs.orderSide || "ASC";
             scope.offset = parseInt(attrs.offset) || -20;
             scope.limit = parseInt(attrs.limit) || 20;
+            scope.busy = false;
 
             scope.load = search;
 
@@ -518,7 +520,7 @@ angular.module('sympozerApp').directive('entityListHandler', ['GLOBAL_CONFIG', '
             {
                 scope.initialize();
                 scope.query = query;
-                search();
+                search(true);
             };
 
             //Called when an order parameters is changed
@@ -527,16 +529,18 @@ angular.module('sympozerApp').directive('entityListHandler', ['GLOBAL_CONFIG', '
                 scope.initialize();
                 scope.orderBy = orderBy;
                 scope.orderSide = orderSide;
-                search();
+                search(true);
             };
-            function search()
+            function search(resetResults)
             {
+                reset = resetResults;
+                scope.busy = true;
                 scope.offset = scope.offset + scope.limit;
                 searchService.doSearch({
                     entitiesLbl: childEntityLbl,
                     entities   : scope.entities,
-                    callback   : callback,
-                    busy       : scope.busy
+                    callback   : callback
+//                    busy       : scope.busy
                 }, {
                     query    : scope.query,
                     offset   : scope.offset,
@@ -547,11 +551,16 @@ angular.module('sympozerApp').directive('entityListHandler', ['GLOBAL_CONFIG', '
                 });
             }
 
-            function callback(data, isFirstRequest)
+            function callback(data, isFirstQuery, isLastQuery)
             {
-                if (isFirstRequest)
+                if (isFirstQuery && reset)
                 {
                     scope.entities = [];
+                }
+
+                if (isLastQuery)
+                {
+                    scope.busy = false;
                 }
 
                 var items = data;
@@ -585,54 +594,14 @@ angular.module('sympozerApp').directive('entityListHandler', ['GLOBAL_CONFIG', '
 }]);
 
 
-//angular.module('sympozerApp').directive('filters', ['GLOBAL_CONFIG', '$injector', 'searchService', function (GLOBAL_CONFIG, $injector, searchService)
-//{
-//    return {
-//        restrict: "E",
-//        link    : function (scope, element, attrs)
-//        {
-//
-//            var parentScope = scope.$parent;
-////            searchService.doSearch({
-////                entitiesLbl: childEntitiesLbl,
-////                entities   : scope.entities,
-////                callback   : addChoices,
-////                busy       : scope.busy
-////            }, {
-////                query    : query,
-////                limit    : limit,
-////                offset   : -(limit),
-////                orderBy  : uniqField,
-////                orderSide: "ASC"
-////            });
-//            var filters ={};
-//            if(!parentScope.filters)
-//            {
-//                console.warn("no var 'filters' in the ListCtrl. Creating a new one...");
-//                parentScope.filters = {};
-//            }
-//
-//            scope.addFilter = function(key,value){
-//                filters[key] = value;
-//            };
-//            scope.doFilter = function(){
-//                    parentScope.load();
-////                searchService.angular.extend(parentScope.filters, filters);
-//            };
-//
-//        }
-//    };
-//}]);
-
-
 /**
  * angular directive used to add a filter in a *ListCtrl page
- * must be used in a controller with a scope variable "filters" : an object like
+ * must be used in a controller with a scope variable "filters"
  *
  * use it like :
  * <a href="javascript:void(0)" filter="roleLabel" ng-click="addFilter(roleLabel.label)">
  *
- * controler var (from the responsible controller) :
+ * controller var (from the responsible controller) :
  *      @param filters : an object of filter
  *
  * directive param :
@@ -657,7 +626,7 @@ angular.module('sympozerApp').directive('filter',
                 {
                     scopeOfFilters.filters[attrs.filter] = value;
                     scopeOfFilters.initialize();
-                    scopeOfFilters.load();
+                    scopeOfFilters.load(true);
                 };
             }
         };

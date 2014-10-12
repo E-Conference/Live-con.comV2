@@ -76,7 +76,7 @@ security:
                     service: my_user_provider
             logout:
                 path:   logout
-                target: /login
+                target: /
 
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
