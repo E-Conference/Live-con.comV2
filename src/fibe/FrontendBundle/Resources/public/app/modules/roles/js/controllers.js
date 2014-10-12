@@ -195,7 +195,7 @@ angular.module('rolesApp').controller('rolesListCtrl', [
         $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
         $scope.entities = [];
 
-        $scope.roleLabelVersions = roleLabelsFact.all({'filters["mainEventId"]' : $routeParams.confId});
+        $scope.roleLabelVersions = roleLabelsFact.all({'filters["mainEventId"]': $routeParams.confId});
 
         var baseFilters;
         if ($routeParams.confId)
@@ -215,7 +215,7 @@ angular.module('rolesApp').controller('rolesListCtrl', [
 
         $scope.clone = function (role)
         {
-            clonerole = angular.copy(role);
+            var clonerole = angular.copy(role);
             delete clonerole.id;
 
             var error = function (response, args)
