@@ -25,13 +25,13 @@ angular.module('conferencesApp').controller('conferencesListCtrl', ['$scope', '$
 
     $scope.fetch = function(filters, success, error){
         conferencesFact.all(filters, success, error);
-    }
+    };
 
     $scope.clone = function (conference, index)
     {
 
-        cloneConference = angular.copy(conference);
-        cloneConference.id = null;
+        var cloneConference = angular.copy(conference);
+        delete cloneConference.id;
 
         var error = function (response, args)
         {
@@ -42,10 +42,10 @@ angular.module('conferencesApp').controller('conferencesListCtrl', ['$scope', '$
         {
             $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Conference saved', type: 'success'});
             $scope.entities.splice(index + 1, 0, response);
-        }
+        };
 
         cloneConference.$create({}, success, error);
-    }
+    };
 
 
     $scope.deleteModal = function (index, conference)
@@ -80,13 +80,13 @@ angular.module('conferencesApp').controller('conferencesNewCtrl', [ '$scope', '$
     var error = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the conference has not been created', type: 'danger'});
-    }
+    };
 
     var success = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'conference created', type: 'success'});
         $location.path('/conferences/list');
-    }
+    };
 
     $scope.create = function (form)
     {
@@ -109,7 +109,7 @@ angular.module('conferencesApp').controller('conferencesEditCtrl', [ '$scope', '
     var error = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the conference has not been saved', type: 'danger'});
-    }
+    };
 
     //Get geolocalization of the user
 //    $.get("http://ipinfo.io", function(response) {
@@ -125,7 +125,7 @@ angular.module('conferencesApp').controller('conferencesEditCtrl', [ '$scope', '
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'conference saved', type: 'success'});
         $location.path('/conferences/list');
-    }
+    };
 
     $scope.update = function (form)
     {
@@ -133,7 +133,7 @@ angular.module('conferencesApp').controller('conferencesEditCtrl', [ '$scope', '
         {
             $scope.conference.$update({}, success, error);
         }
-    }
+    };
 
 
 

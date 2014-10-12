@@ -40,8 +40,8 @@ angular.module('equipmentsApp').controller('equipmentsListCtrl', ['$scope', 'GLO
 
     $scope.clone = function (equipment)
     {
-        cloneequipment = angular.copy(equipment);
-        cloneequipment.id = null;
+        var cloneequipment = angular.copy(equipment);
+        delete cloneequipment.id;
 
         var error = function (response, args)
         {

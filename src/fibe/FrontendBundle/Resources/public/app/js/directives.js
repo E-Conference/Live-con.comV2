@@ -357,8 +357,8 @@ angular.module('sympozerApp').directive('getOrCreate', [
                         busy       : scope.busy
                     }, {
                         query    : query,
-                        limit : limit,
-                        offset: -(limit),
+                        limit    : limit,
+                        offset   : -(limit),
                         orderBy  : uniqField,
                         orderSide: "ASC"
                     });
@@ -486,7 +486,7 @@ angular.module('sympozerApp').directive('entityListHandler', ['GLOBAL_CONFIG', '
 {
     return {
         restrict: 'A',
-        link: function (scope, element, attrs)
+        link    : function (scope, element, attrs)
         {
             if (!attrs.entityListHandler)
             {

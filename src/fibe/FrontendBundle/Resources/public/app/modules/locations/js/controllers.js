@@ -41,8 +41,8 @@ angular.module('locationsApp').controller('locationsListCtrl', ['$scope', '$rout
 
     $scope.clone = function (location)
     {
-        clonelocation = angular.copy(location);
-        clonelocation.id = null;
+        var clonelocation = angular.copy(location);
+        delete clonelocation.id;
 
         var error = function (response, args)
         {

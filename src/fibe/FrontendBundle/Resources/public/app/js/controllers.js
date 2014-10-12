@@ -60,7 +60,7 @@ sympozerControllers.controller('AlertCtrl', ['$scope', '$routeParams', 'GLOBAL_C
       $("#alertBox").children().first("span").fadeOut('500');
       $scope.closeAlert(0);
       $scope.alertTimeout = $timeout($scope.clearAlert, 3000);
-    }
+    };
 
     $scope.resetAlertTimeout = function ()
     {
@@ -117,7 +117,7 @@ sympozerControllers.controller('navTopCtrl', ['$translate', '$scope', '$routePar
     $scope.locals = [
       { label: 'EN', code: 'en_US', src: GLOBAL_CONFIG.app.urls.img + '/english-flag.png'},
       { label: 'FR', code: 'fr_FR', src: GLOBAL_CONFIG.app.urls.img + '/french-flag.png'}
-    ]
+    ];
 
     $scope.changeLocal = function (local)
     {
