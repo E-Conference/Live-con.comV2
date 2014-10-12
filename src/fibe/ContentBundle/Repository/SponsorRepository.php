@@ -21,6 +21,11 @@ class SponsorRepository extends EntityRepository
      */
     public function filter($qb, $params)
     {
+        if (isset($params['mainEventId'])) {
+            $qb->andWhere('qb.mainEvent = :mainEventId');
+            $qb->setParameter('mainEventId', $params['mainEventId']);
+        }
+
         return $qb;
     }
 }

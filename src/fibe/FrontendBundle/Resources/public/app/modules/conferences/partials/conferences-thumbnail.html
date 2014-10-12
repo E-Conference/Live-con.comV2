@@ -1,6 +1,4 @@
-<div ng-include="GLOBAL_CONFIG.app.modules.conferences.urls.partials+'conferences-actions.html'" ng-controller="conferencesMainCtrl"></div>
-
-<input type="text" class="form-control" placeholder="Search" ng-change="search()" ng-model="query">
+<div ng-include="GLOBAL_CONFIG.app.modules.conferences.urls.partials+'conferences-actions.html'"></div>
 
 <div class="row" entity-list-handler="conferences" infinite-scroll='load()' infinite-scroll-disabled='busy' infinite-scroll-distance='0.5'>
   <div ng-repeat="conference in entities  track by $index" class="col-sm-6 col-md-6 col-lg-4 well">

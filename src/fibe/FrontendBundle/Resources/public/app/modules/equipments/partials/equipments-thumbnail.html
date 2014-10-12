@@ -1,7 +1,5 @@
-<div ng-include="GLOBAL_CONFIG.app.modules.equipments.urls.partials+'equipments-actions.html'"
-     ng-controller="equipmentsMainCtrl"></div>
+<div ng-include="GLOBAL_CONFIG.app.modules.equipments.urls.partials+'equipments-actions.html'"></div>
 
-<input type="text" class="form-control" placeholder="Search" ng-change="search()" ng-model="query">
 
 <div class="row" entity-list-handler="equipments" infinite-scroll='load()' infinite-scroll-disabled='busy' infinite-scroll-distance='0.5'>
     <div ng-repeat="equipment in entities  track by $index" class="col-sm-6 col-md-6 col-lg-4 well">

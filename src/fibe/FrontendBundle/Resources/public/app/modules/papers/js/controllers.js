@@ -22,14 +22,12 @@ angular.module('papersApp').controller('papersListCtrl', ['$scope', '$routeParam
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
     $scope.entities = [];
 
-    $scope.fetch = function(filters, success, error){
-        if($routeParams.confId)
-        {
-            filters.confId = $routeParams.confId;
-            papersFact.allByConference(filters, success, error);
-        }else{
-            papersFact.all(filters, success, error);
-        }
+    var baseFilters;
+    if ($routeParams.confId)
+    {
+        $scope.filters = baseFilters = {
+            mainEventId: $routeParams.confId
+        };
     }
 
     $scope.reload = function ()

@@ -1,6 +1,4 @@
-<div ng-include="GLOBAL_CONFIG.app.modules.persons.urls.partials+'persons-actions.html'" ng-controller="personsMainCtrl"></div>
-
-<input type="text" class="form-control" placeholder="Search" ng-change="search()" ng-model="query">
+<div ng-include="GLOBAL_CONFIG.app.modules.persons.urls.partials+'persons-actions.html'"></div>
 
 <div class="row" entity-list-handler="persons" infinite-scroll='load()' infinite-scroll-disabled='busy' infinite-scroll-distance='0.5'>
     <div ng-repeat="person in entities  track by $index" class="col-sm-6 col-md-6 col-lg-4 well">

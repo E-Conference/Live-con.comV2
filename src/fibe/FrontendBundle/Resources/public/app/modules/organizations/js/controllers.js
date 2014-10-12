@@ -22,14 +22,12 @@ angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope'
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
     $scope.entities = [];
 
-    $scope.fetch = function(filters, success, error){
-        if($routeParams.confId)
-        {
-            filters.confId = $routeParams.confId;
-            organizationsFact.allByConference(filters, success, error);
-        }else{
-            organizationsFact.all(filters, success, error);
-        }
+    var baseFilters;
+    if ($routeParams.confId)
+    {
+        $scope.filters = baseFilters = {
+            mainEventId: $routeParams.confId
+        };
     }
 
     $scope.reload = function ()

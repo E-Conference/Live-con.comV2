@@ -21,6 +21,8 @@ class RoleLabelRepository extends EntityRepository
      */
     public function filter($qb, $params)
     {
+
+
         return $qb;
     }
 

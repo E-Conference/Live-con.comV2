@@ -24,14 +24,12 @@ angular.module('categoriesApp').controller('categoriesListCtrl', ['$scope', '$ro
 
     $scope.entities = [];
 
-    $scope.fetch = function(filters, success, error){
-        if($routeParams.confId)
-        {
-            filters.confId = $routeParams.confId;
-            categoriesFact.allByConference(filters, success, error);
-        }else{
-            categoriesFact.all(filters, success, error);
-        }
+    var baseFilters;
+    if ($routeParams.confId)
+    {
+        $scope.filters = baseFilters = {
+            mainEventId: $routeParams.confId
+        };
     }
 
     $scope.reload = function ()

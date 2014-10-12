@@ -34,15 +34,14 @@ angular.module('personsApp').controller('personsListCtrl', ['$scope', '$routePar
 
     $scope.entities = [];
 
-    $scope.fetch = function(filters, success, error){
-        if($routeParams.confId)
-        {
-            filters.confId = $routeParams.confId;
-            personsFact.allByConference(filters, success, error);
-        }else{
-            personsFact.all(filters, success, error);
-        }
+    var baseFilters;
+    if ($routeParams.confId)
+    {
+        $scope.filters = baseFilters = {
+            mainEventId: $routeParams.confId
+        };
     }
+
     $scope.reload = function ()
     {
         $scope.entities.$promise.then(function ()

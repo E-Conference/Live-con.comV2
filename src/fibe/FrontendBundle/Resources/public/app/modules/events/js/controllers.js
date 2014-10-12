@@ -25,14 +25,12 @@ angular.module('eventsApp').controller('eventsListCtrl', ['$scope', '$routeParam
 
     $scope.entities = [];
 
-    $scope.fetch = function(filters, success, error){
-        if($routeParams.confId)
-        {
-            filters.confId = $routeParams.confId;
-            eventsFact.allByConference(filters, success, error);
-        }else{
-            eventsFact.all(filters, success, error);
-        }
+    var baseFilters;
+    if ($routeParams.confId)
+    {
+        $scope.filters = baseFilters = {
+            mainEventId: $routeParams.confId
+        };
     }
 
 

@@ -20,22 +20,6 @@ use Doctrine\ORM\EntityRepository;
 class LocationRepository extends EntityRepository
 {
     /**
-     * filtering by main event
-     * @param $qb , query builder to add the filter to
-     * @param $MainEventId , the main event to filter on
-     * @return $qb, modified query builder
-     */
-    public function findAllByMainEventId($qb, $MainEventId)
-    {
-        if (isset($MainEventId)) {
-            $qb->leftJoin('qb.mainEvent', 'ev');
-            $qb->andWhere('ev.id = (:MainEventId)');
-            $qb->setParameter('MainEventId', $MainEventId);
-        }
-        return $qb;
-    }
-
-    /**
      * filtering with all parameters difned
      * @param $qb , query builder to add the filter to
      * @param $params , the field to filter on
@@ -43,6 +27,12 @@ class LocationRepository extends EntityRepository
      */
     public function filter($qb, $params)
     {
+        if (isset($params['mainEventId'])) {
+            $qb->leftJoin('qb.mainEvent', 'ev');
+            $qb->andWhere('ev.id = (:MainEventId)');
+            $qb->setParameter('MainEventId', $params['mainEventId']);
+
+        }
         return $qb;
     }
 }

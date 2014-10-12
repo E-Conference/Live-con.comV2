@@ -23,14 +23,12 @@ angular.module('locationsApp').controller('locationsListCtrl', ['$scope', '$rout
 
     $scope.entities = [];
 
-    $scope.fetch = function(filters, success, error){
-        if($routeParams.confId)
-        {
-            filters.confId = $routeParams.confId;
-            locationsFact.allByConference(filters, success, error);
-        }else{
-            locationsFact.all(filters, success, error);
-        }
+    var baseFilters;
+    if ($routeParams.confId)
+    {
+        $scope.filters = baseFilters = {
+            mainEventId: $routeParams.confId
+        };
     }
 
     $scope.reload = function ()

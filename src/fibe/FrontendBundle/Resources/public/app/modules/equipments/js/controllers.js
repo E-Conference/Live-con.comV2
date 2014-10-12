@@ -22,8 +22,12 @@ angular.module('equipmentsApp').controller('equipmentsListCtrl', ['$scope', 'GLO
     $scope.GLOBAL_CONFIG = GLOBAL_CONFIG;
     $scope.entities = [];
 
-    $scope.fetch = function(filters, success, error){
-        equipmentsFact.all(filters, success, error);
+    var baseFilters;
+    if ($routeParams.confId)
+    {
+        $scope.filters = baseFilters = {
+            mainEventId: $routeParams.confId
+        };
     }
 
     $scope.reload = function ()
