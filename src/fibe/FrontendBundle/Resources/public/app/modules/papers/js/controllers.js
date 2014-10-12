@@ -34,10 +34,10 @@ angular.module('papersApp').controller('papersListCtrl', ['$scope', '$routeParam
 
     $scope.reload = function ()
     {
-        $scope.entities.$promise.then(function ()
-        {
-            console.log('From cache:', $scope.papers);
-        });
+//        $scope.entities.$promise.then(function ()
+//        {
+//            console.log('From cache:', $scope.papers);
+//        });
     }
 
     $scope.clone = function (paper)

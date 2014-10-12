@@ -17,15 +17,15 @@ angular.module('contextualizationApp').controller('contextCtrl', ['$scope', '$ro
 
       if (conference.confId != $rootScope.currentConference.id)
       {
-        $rootScope.currentConference = conferencesFact.get({id: conference.confId}, function (conference)
+        conferencesFact.get({id: conference.confId}, function (conference)
         {
           localStorage.setItem('currentConference', JSON.stringify(conference));
+          $rootScope.currentConference = conference;
         });
         $('#collapseMySpace').collapse('hide');
         $('#collapseCommunity').collapse('hide');
         $('#collapseConference').collapse('show');
-
-        $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Welcome to ' + $rootScope.currentConference.slug, type: 'success'});
+        $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Welcome to ' + $rootScope.currentConference.label, type: 'success'});
       }
 
     }
