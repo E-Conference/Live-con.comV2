@@ -75,7 +75,7 @@
     angular.module('ui.select', [])
 
         .constant('uiSelectConfig', {
-            theme        : 'bootstrap',
+            theme        : '../bundles/frontend/app/partials/select2/',
             searchEnabled: true,
             placeholder  : '', // Empty by default, like HTML tag <select>
             refreshDelay : 1000 // In milliseconds

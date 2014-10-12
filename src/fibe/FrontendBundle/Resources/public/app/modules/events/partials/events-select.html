@@ -14,7 +14,7 @@
   </div>
 </div>
 
-<ui-select ng-model="addedEntity" on-select="change($model)" ng-keyup="keyup($event)" theme="../bootstrap" style="width: 100%;">
+<ui-select ng-model="addedEntity" on-select="change($model)" ng-keyup="keyup($event)" style="width: 100%;">
   <ui-select-match>Add an event...</ui-select-match>
   <ui-select-choices repeat="entity in entities">
     <div ng-if="!entity.id ">

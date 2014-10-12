@@ -13,7 +13,7 @@
   </div>
 </div>
 
-<ui-select ng-model="addedEntity" on-select="change($model)" ng-keyup="keyup($event)" theme="../bootstrap" style="width: 100%;">
+<ui-select ng-model="addedEntity" on-select="change($model)" ng-keyup="keyup($event)"  style="width: 100%;">
   <ui-select-match>Add a new event category...</ui-select-match>
   <ui-select-choices repeat="entity in entities">
     <!--<ui-select-choices repeat="entity.email as entity in people | propsFilter: {label: $select.search, age: $select.search}">-->
