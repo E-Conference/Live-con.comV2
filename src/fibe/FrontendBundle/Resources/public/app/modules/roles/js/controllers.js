@@ -216,7 +216,7 @@ angular.module('rolesApp').controller('rolesListCtrl', [
         $scope.clone = function (role)
         {
             clonerole = angular.copy(role);
-            delete clonePaper.id;
+            delete clonerole.id;
 
             var error = function (response, args)
             {
