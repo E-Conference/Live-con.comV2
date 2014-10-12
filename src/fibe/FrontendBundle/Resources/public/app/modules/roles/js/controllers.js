@@ -205,12 +205,6 @@ angular.module('rolesApp').controller('rolesListCtrl', [
             };
         }
 
-        $scope.addFilter = function (key, value)
-        {
-            $scope.filters
-        }
-
-
         $scope.reload = function ()
         {
             $scope.entities.$promise.then(function ()

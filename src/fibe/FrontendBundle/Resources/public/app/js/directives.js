@@ -505,7 +505,7 @@ angular.module('sympozerApp').directive('entityListHandler', ['GLOBAL_CONFIG', '
 
             scope.load = search;
 
-            var initialize = function ()
+            scope.initialize = function ()
             {
                 scope.offset = -(scope.limit);
 //                scope.limit = limitConfig;
@@ -516,7 +516,7 @@ angular.module('sympozerApp').directive('entityListHandler', ['GLOBAL_CONFIG', '
             //Called when a query is type
             scope.sendQuery = function (query)
             {
-                initialize();
+                scope.initialize();
                 scope.query = query;
                 search();
             };
@@ -524,7 +524,7 @@ angular.module('sympozerApp').directive('entityListHandler', ['GLOBAL_CONFIG', '
             //Called when an order parameters is changed
             scope.order = function (orderBy, orderSide)
             {
-                initialize();
+                scope.initialize();
                 scope.orderBy = orderBy;
                 scope.orderSide = orderSide;
                 search();
@@ -656,7 +656,8 @@ angular.module('sympozerApp').directive('filter',
                 scope.addFilter = function (value)
                 {
                     scopeOfFilters.filters[attrs.filter] = value;
-                    scopeOfFilters.search();
+                    scopeOfFilters.initialize();
+                    scopeOfFilters.load();
                 };
             }
         };
