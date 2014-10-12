@@ -40,7 +40,7 @@ angular.module('organizationsApp').controller('organizationsListCtrl', ['$scope'
 
     $scope.clone = function (organization, index)
     {
-        cloneOrganization = angular.copy(organization);
+        var cloneOrganization = angular.copy(organization);
         delete cloneOrganization.id;
 
         var error = function (response, args)

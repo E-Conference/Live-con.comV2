@@ -53,7 +53,7 @@ angular.module('topicsApp').controller('topicsListCtrl', ['$scope', 'GLOBAL_CONF
     {
         // $scope.topics = Topic.list();
 
-        cloneTopic = angular.copy(topic);
+        var cloneTopic = angular.copy(topic);
         delete cloneTopic.id;
 
         var error = function (response, args)

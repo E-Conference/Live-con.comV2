@@ -40,26 +40,26 @@ angular.module('categoriesApp').controller('categoriesListCtrl', ['$scope', '$ro
             console.log('From cache:', $scope.entities);
         });
         //console.log($scope.categories);
-    }
+    };
 
     $scope.clone = function (category)
     {
-        clonecategory = angular.copy(category);
+        var clonecategory = angular.copy(category);
         delete clonecategory.id;
 
         var error = function (response, args)
         {
             $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Clone not completed', type: 'danger'});
-        }
+        };
 
         var success = function (response, args)
         {
             $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'category saved', type: 'success'});
             $scope.entities.push(response);
-        }
+        };
 
         clonecategory.$create({}, success, error);
-    }
+    };
 
 
     $scope.deleteModal = function (index, category)
@@ -89,13 +89,13 @@ angular.module('categoriesApp').controller('categoriesNewCtrl', [ '$scope', '$wi
 
     var error = function(response, args){
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'the category has not been created', type:'danger'});
-    }
+    };
 
     var success = function(response, args){
         $rootScope.$broadcast('AlertCtrl:addAlert', {code:'category created', type:'success'});
         $window.history.back();
         //$location.path('/conference/'+$routeParams.confId+'/categories/list');
-    }
+    };
 
     $scope.create = function(form){
         $scope.category.mainEvent = $routeParams.confId;
@@ -118,13 +118,13 @@ angular.module('categoriesApp').controller('categoriesEditCtrl', [ '$scope', '$w
     var error = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the category has not been saved', type: 'danger'});
-    }
+    };
 
     var success = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'category saved', type: 'success'});
         $window.history.back();
-    }
+    };
 
     $scope.update = function (form)
     {

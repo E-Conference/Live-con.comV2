@@ -8,9 +8,9 @@
  * @type {controller}
  */
 angular.module('papersApp').controller('papersMainCtrl', [function ($scope)
-{
+                                                          {
 
-}]);
+                                                          }]);
 
 /**
  * List papers controller
@@ -36,25 +36,25 @@ angular.module('papersApp').controller('papersListCtrl', ['$scope', '$routeParam
 //        {
 //            console.log('From cache:', $scope.papers);
 //        });
-    }
+    };
 
     $scope.clone = function (paper)
     {
-        clonePaper = angular.copy(paper);
+        var clonePaper = angular.copy(paper);
         delete clonePaper.id;
 
         var error = function (response, args)
         {
             $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'Clone not completed', type: 'danger'});
-        }
+        };
 
         var success = function (response, args)
         {
             $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'paper saved', type: 'success'});
             $scope.entities.push(response);
-        }
+        };
         clonePaper.$create({}, success, error);
-    }
+    };
 
 
     $scope.deleteModal = function (index, paper)
@@ -62,11 +62,11 @@ angular.module('papersApp').controller('papersListCtrl', ['$scope', '$routeParam
         $scope.index = index;
 
         createDialogService(GLOBAL_CONFIG.app.modules.papers.urls.partials + 'papers-delete.html', {
-            id: 'complexDialog',
-            title: 'paper deletion',
-            backdrop: true,
+            id        : 'complexDialog',
+            title     : 'paper deletion',
+            backdrop  : true,
             controller: 'papersDeleteCtrl',
-            success: {label: 'Ok', fn: function ()
+            success   : {label: 'Ok', fn: function ()
             {
                 papersFact.delete({id: paper.id});
                 $scope.entities.splice(index, 1);
@@ -91,14 +91,14 @@ angular.module('papersApp').controller('papersNewCtrl', [ '$scope', '$rootScope'
     var error = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the paper has not been created', type: 'danger'});
-    }
+    };
 
     var success = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'paper created', type: 'success'});
-        $location.path('/conference/'+$rootScope.currentConference.id+'/papers/list');
+        $location.path('/conference/' + $rootScope.currentConference.id + '/papers/list');
 
-    }
+    };
 
     $scope.create = function (form)
     {
@@ -122,13 +122,13 @@ angular.module('papersApp').controller('papersEditCtrl', [ '$scope', '$rootScope
     var error = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'the paper has not been saved', type: 'danger'});
-    }
+    };
 
     var success = function (response, args)
     {
         $rootScope.$broadcast('AlertCtrl:addAlert', {code: 'paper saved', type: 'success'});
-        $location.path('/conference/'+$rootScope.currentConference.id+'/papers/list');
-    }
+        $location.path('/conference/' + $rootScope.currentConference.id + '/papers/list');
+    };
 
     $scope.update = function (form)
     {

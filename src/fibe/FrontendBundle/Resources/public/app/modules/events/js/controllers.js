@@ -42,7 +42,7 @@ angular.module('eventsApp').controller('eventsListCtrl', ['$scope', '$routeParam
 
     $scope.clone = function(event, index){
 
-        cloneEvent = angular.copy(event);
+        var cloneEvent = angular.copy(event);
         delete cloneEvent.id;
 
         var error = function(response, args){
